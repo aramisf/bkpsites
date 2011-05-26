@@ -1,0 +1,84 @@
+<H2>Exercícios - Aula 26</H2>
+<BR>
+<p>1. O que faz o programa abaixo:<BR>
+<PRE>
+#!/bin/bash
+for i in $(seq 1 10)
+do
+   if (( $i%2 != 1 ))
+   then
+       echo $i eh par
+   fi
+done
+</PRE>
+<p>2. Explique o programa abaixo:<BR>
+<PRE>
+#!/bin/bash
+i=10
+soma=0
+while [ $i -gt 0 ]
+do
+    soma=$((soma+i))
+    i=$((i-1))
+done
+echo soma=$soma
+</PRE>
+<p>3. Explique o programa abaixo:<BR>
+<PRE>
+#!/bin/bash
+# Programa xadrez
+for (( i =1 ; i <= 9 ; i++ ))
+do
+   for (( j = 1 ; j <= 9 ; j++ ))
+   do
+      valor=$((i+j))
+      if (( $valor%2 == 0 ))
+      then
+         echo -e -n "\033[41m "
+      else
+         echo -e -n "\033[40m "
+      fi
+   done
+   echo -e -n "\033[40m"
+   echo ""
+done
+</PRE>
+<p>4. Escreva um programa para imprimir a saída abaixo. DICA: use echo -n
+para imprimir sem pular linha:
+<PRE>
+1
+22
+333
+4444
+55555
+666666
+</PRE>
+<p>5. Explique a diferença entre as linhas de comando abaixo:
+<PRE>
+$ a=5.5;b=6;echo "($a+$b)/2" | bc -l
+5.75000000000000000000
+$  a=5.5;b=6;echo "($a+$b)/2" | bc
+5
+</PRE>
+<p>6. Explique o programa abaixo:
+<PRE>
+#!/bin/bash
+echo -n "Digite a nota da sua primeira prova: "; read p1
+echo -n "Digite a nota da sua segunda prova: "; read p2
+echo -n "Digite a nota da sua terceira prova: "; read p3
+media=$(echo "($p1+$p2*2+$p3*4)/7" | bc -l)
+echo "Sua média final = $media"
+</PRE>
+<p>7. Usando o comando bc como no programa abaixo, faça um programa para
+testar se a média entre dois valores reais passados na linha de comando é
+maior que 6.9 <BR>
+<PRE>
+#!/bin/bash
+res=$(echo "($1/$2) > 7.3" | bc -l)
+if (( $res == 1 ))
+then
+   echo "$1 / $2 é maior que 7.3"
+fi
+</PRE>
+<p>8. Anote suas dúvidas para a próxima aula.
+

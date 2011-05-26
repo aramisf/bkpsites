@@ -1,0 +1,20 @@
+<H2>Exercícios - Aula 15</H2>
+<BR>
+<p>1. Cite 3 exemplos práticos para o uso do comando awk. 
+<p>2. Explique o que faz cada parte do comando abaixo:<BR>
+$ ls -l | grep -v ^to| awk '{print "perm="$1" tamanho="$5}'
+<p>3. Crie algumas linhas de comandos usando variáveis pré-definidas do awk. Para
+isso leia a seção 7 Builtin-variables no man do awk.
+<p>4. Usando a função toupper(s) do awk mostre o nome dos usuários logados no
+sistema somente com letras maiúsculas. Para isso você pode usar a saida do comando who
+como entrada para o awk. 
+<p>5. Usando a tabela de notas da disciplina (faça um copy/paste com o mouse
+      na página, insira em um arquivo e atribua uma nota para a segunda prova), calcule a média parcial da
+      primeira com segunda prova (veja os pesos de cada prova) para cada aluno
+      e imprima a media seguido do nome do aluno. Para isso use o comando awk. 
+DICA: '{print ($3+$4*2)/3FS$1FS$2}'
+<p>6. Usando a mesma tabela do exercício anterior, mostre qual a nota que o
+      aluno deve tirar na terceira prova (que tem peso 4) desta disciplina,
+      para que sua média final seja no mínimo 7.  Use o comando awk para isso.
+<p>7. Anote suas dúvidas para a próxima aula.
+

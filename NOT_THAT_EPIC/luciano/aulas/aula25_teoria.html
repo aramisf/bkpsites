@@ -1,0 +1,250 @@
+<PRE>
+Aula 25
+
+Comandos de repetição
+
+
+- usa-se comandos de repetição para repetir determinadas operações n vezes.
+Para isso a contrução deve ter uma condição de início e um critério de parada.
+Normalmente está associada uma variável para teste de condição.
+
+
+- a sintaxe mais simples:
+
+for i in 1 2 3 4 5
+do
+   echo $i
+done
+
+
+- para usar uma sequência no for com o comando seq:
+
+for i in $(seq 10)
+do
+   echo $i
+done
+
+
+for i in $(seq 100 120)
+do
+   echo $i
+done
+
+
+
+- Na versão 3 do BASH pode usar a seguinte construção para sequências:
+
+for i in {1..10}
+do
+   echo $i
+done
+
+
+- para usar lista de strings:
+
+for str in "Joao Silva" "Maria Jose" "Antonio Carlos"
+do
+  echo $str
+done
+
+
+- para tratar os arquivos ou diretórios começados com x no /etc:
+
+for i in /etc/x*
+do
+  echo $i
+done
+
+
+- pode-se usar expressão regular para nomes de arquivos:
+
+for i in /etc/[ab]*
+do
+   echo $i
+done
+
+
+- para usar retorno de comando no for:
+
+for i in $(ls /etc | sort -r)
+do
+    echo $i
+done
+
+IFS="\\"
+for i in $(ls -l /etc)
+do
+    echo $i
+done
+
+
+- para redirecionar a saída do for:
+
+for i in /etc/*
+do
+  echo $i
+done >> /tmp/arquivo_saida.txt
+
+
+- outra sintaxe para o for, similar a linguagem C:
+
+for ((i=0; i < 10; i++))
+do
+  echo $i
+done
+
+
+
+- outro comando de repetição (while):
+
+i=0
+while (( $i < 10 ))
+do
+  echo $i
+  i=$((i+1))
+done
+
+
+i=0
+while [ $i -lt 10 ]
+do
+  echo $i
+  i=$((i+1))
+done
+
+
+- para gerar um loop infinito:
+
+while true
+do
+   comando
+done
+
+
+- outro comando de repetição é o until:
+
+i=0
+until [ $i == 10 ]
+do
+   echo $i
+    i=$((i+1))
+done
+
+
+- outro comando de repetição é o select:
+select i in /etc/*
+do
+   echo arquivo escolhido $i
+   break
+done
+
+
+*** COMANDOS de leitura, saída e interrupção em loop ***
+
+read var    -->  lê do teclado valor para var
+echo $var  --> imprime valor $var
+
+continue --> interrompe a repetição de um loop
+
+for i in 1 2 3 4 5
+do
+   if [ $((i%2)) == 0 ]
+   then
+       # elimina os números pares
+       continue
+   fi
+   echo $i
+done
+
+
+break  --> interrompe o loop
+
+for i in 1 2 3 4 5
+do
+   if [ $((i%2)) == 0 ]
+   then
+       # interrompe caso encontre um número par
+       break
+   fi
+   echo $i
+done
+
+
+break N  --> interrompe N loops aninhados (break 2)
+
+continue N  --> interrompe N vezes a repetição (continue 2)
+
+exit --> interrompe o script (shell de execução)
+
+
+- para imprimir várias linhas pode-se usar cat ao invés de echo:
+
+cat << FIM
+um
+dois
+tres
+FIM
+
+
+- uso de redirecionamento de entrada para o while:
+
+while read linha
+do
+   echo $linha
+done < /etc/passwd
+
+    
+IFS=":"
+while read login senha id resto
+do
+    echo $login $id
+done < /etc/passwd
+
+
+- outro uso de redirecionameto com PIPE e comando de repetição:
+
+IFS=" "
+ls -lt /etc | awk '{print $1,$NF}' |tail -5 | while read perm nome
+do
+  echo PERM $perm NOME $nome
+done
+
+
+- uso da construção case (com expressão regular):
+
+#!/bin/bash
+echo -n "Digite uma tecla e pressione <ENTER>" : 
+read tecla
+case "$tecla" in
+   [[:lower:]]  )  echo "$tecla = letra minúscula" ;;
+   [[:upper:]]  )  echo "$tecla = letra maiúscula" ;;
+   [0-9]  )  echo "$tecla = número" ;;
+   *  )  echo "$tecla = espaço ou caracter especial" ;;
+esac
+
+
+*** pode-se usar o operador OR no case:
+  case "$a" in X | x ) 
+
+
+EXERCÍCIOS
+
+1) Escreva um programa que recebe 3 arquivos como parâmetro.
+Cada arquivo contém 2 colunas separadadas por : (dois pontos), a primera
+coluna com o nome de um aluno e a segunda com a nota de uma prova.
+Como são 3 arquivos, o primeiro tem a nota da primeira prova,
+o segunda com a segunda prova, e o terceiro com a terceira nota.
+O programa deve gerar um arquivo de saída com 4 colunas separadas
+por :, sendo o nome seguido de cada uma das 3 notas (uma em cada coluna).
+
+2) Escreva um programa para receber o arquivo do exercício anterior
+e calcular a média das 3 provas, com os pesos equivalentes ao da
+disciplina ci066. A média deve ser colocada na quinta coluna.
+
+3) Escreva um programa para receber o arquivo do exercício anterior,
+e verificar a situação do aluno, se aprovado, reprovado ou em final.
+Ao final o programa deve escrever um arquivo com 6 colunas, a ultima
+coluna com a situacao.
+
+
+</PRE>

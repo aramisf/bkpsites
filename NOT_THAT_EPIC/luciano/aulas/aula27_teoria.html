@@ -1,0 +1,22 @@
+<PRE>
+Aula 27
+
+Scripts iterativos, leitura de dados e vetores
+
+- leitura de valores usa-se read. Ex: read a
+- para leitura sem mostrar na tela usa-se a opção -s. Ex: read -s a
+- você também pode mudar o prompt e usar outras opções de
+leitura. Leia a seção SHELL BUILTIN COMMANDS do manual do bash
+- pode ser usado para ler mais do que um valor. Ex: read a b c
+- os valores adicionais durante a leitura são colocados na última variável
+(tail)
+- declaração de vetores usa-se declare -a
+- vetores são lidos como: vetor[1]=valor
+- pode usar a seguinte inicialização:
+vetor=([0]=um [1]=dois)
+- para imprimir conteúdo de vetor: echo ${vetor[1]}
+- para saber o tamanho da string valor de uma posição do vetor
+ echo ${#vetor[0]}
+- para saber o número de elementos (não nulos) de um vetor
+ echo ${#vetor[*]}  ou  echo ${#vetor[@]}
+</PRE>

@@ -1,0 +1,100 @@
+<PRE>
+
+Aula 23
+
+Comandos simples e e redirecionamento em script
+
+- usa-se arquivos de log para saída de erros
+
+#!/bin/bash
+#
+# Script para procurar arquivos de configuração
+# 
+# diretório de saída
+DIR_LOG=/tmp/tmp_luciano
+# cria diretório temporário
+mkdir $DIR_LOG 2> /dev/null
+# arquivo de saída de erros
+ARQ_LOG=erro.log
+# comando
+find /etc -iname "*.conf" 2> $DIR_LOG/$ARQ_LOG
+
+
+- a saída padrão pode ser redirecionada dentro ou
+fora do script, dependendo da função do programa
+
+- para redirecionar as duas saídas (padrão e erros)
+para um mesmo arquivo, usa-se &>
+
+- uma maneira simples de verificar se a execução
+de um script está correta ou para verificar onde
+deu problema, pode-se usar echo
+
+#!/bin/bash
+#
+# Script teste1.sh para procurar arquivos de configuração
+# 
+# diretório de saída
+DIR_LOG=/tmp/tmp_luciano
+# cria diretório temporário
+mkdir $DIR_LOG 2> /dev/null
+# arquivo de saída de logs execução
+ARQ_LOG=teste1.log
+# arquivo de saída de erros
+ARQ_ERRO=erro.log
+# arquivo de saída padrão 
+ARQ_SAIDA=saida.log
+# comando 1
+echo -n "Executando comando 1......" >> $DIR_LOG/$ARQ_LOG 
+find /etc -iname "*.conf" 2> $DIR_LOG/$ARQ_ERRO > $DIR_LOG/$ARQ_SAIDA
+echo "[OK]" >> $DIR_LOG/$ARQ_LOG
+# comando 2
+echo -n "Executando comando 2......" >> $DIR_LOG/$ARQ_LOG
+echo -e "\nFinalizado em $(date)\n" >> $DIR_LOG/$ARQ_SAIDA
+echo "[OK]" >> $DIR_LOG/$ARQ_LOG
+
+
+- usando variáveis com saída de comandos para nome de arquivos. Por
+exemplo para criaçao de arquivos de backup com datas
+
+#!/bin/bash
+# variaveis
+DIR_BACKUP=/etc/sound
+DIR_OUT=/tmp/tmp_luciano
+ARQ_BACKUP=$DIR_OUT/backup_luciano_$(date +%Y%m%d).tgz
+# comando
+tar czf $ARQ_BACKUP $DIR_BACKUP
+
+
+- tratamento de erros através do valor de retorno do comando.
+Através do echo $? 
+Se o retorno for de erro de execução tem valores diferentes de
+zero (0). 127 -> comando não existe. 1 -> erro de opções ou
+argumentos não válidos.
+
+$ findx /etc -iname "*.conf"
+echo $?
+
+
+- modo de debugging fornece informações sobre a execução do
+script. Verificar http://bashdb.sourceforge.net
+
+$ cat > teste1.sh
+#!/bin/bash -x
+datea
+ls
+cal
+ls -z
+Ctrl-D
+
+$ chmod 755 teste1.sh; ./teste1.sh > saida.txt
+
+
+- debugar parte do script inserindo set -x e set +w.
+set -x  # ativa debugging 
+comando
+set +x  # desativa debugging
+
+
+</PRE>
+ 

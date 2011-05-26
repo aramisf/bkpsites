@@ -1,0 +1,42 @@
+<H2>Exercícios - Aula 27</H2>
+<BR>
+<p>1. Explique o script abaixo:<BR>
+<PRE>
+#!/bin/bash
+declare -a vetor
+for (( i = 0 ; i <= 4 ; i++ ))
+do
+   echo -n "Digite um valor:"
+   read vetor[$i]
+done
+for (( i = 0 ; i <= 4 ; i++ ))
+do
+   echo -n "${vetor[$i]} "
+done
+echo ""
+</PRE>
+<p>
+<p>2. Transforme o programa do exercício anterior, tornando-o genérico usando a idéia de alocação dinâmica, ou seja, o tamanho do vetor deve ser passado na linha de comando.
+<p>3. Faça um programa que recebe 5 valores inteiros e imprime-os em
+ordem crescente.
+<p>4. Faça um programa chamado urna_eletronica que recebe como parâmetro o
+      número de canditados em uma eleição. O programa deve:
+<ul>
+<li> ler o nome dos candidatos em um vetor 
+<li> em um comando de repetição, ler valores inteiros de 1 a n, onde n é o
+	  número de candidados. Se o eleitor digitar 2, o voto vai para o segundo candidato
+<li> se o eleitor digitar qualquer valor diferente de 1 a n, o voto é nulo
+<li> se o eleitor digitar enter somente, sem nenhum caracter, o voto é em
+	      branco
+<li> se o valor lido for "fim" a eleição acaba
+<li> o programa deve imprimir ao finalizar a eleição o nome do candidato
+		  vencedor
+<li> o programa deve também imprimir as estatísticas da eleição, como:
+        total de votos, porcentagens de votos para cada candidato, votos
+	nulos, em brancos.
+</ul>
+<p>5. Altere o seu programa do exercício 4 para que o eleitor confirme seu
+      voto e possa alterar o voto antes de confirmar. Avise-o se o voto vai
+      para qual canditado, se nulo ou em branco e pergunte se confirma.
+<p>6. Anote suas dúvidas para a próxima aula.
+

@@ -1,0 +1,63 @@
+<H2>Exercícios - Aula 28</H2>
+<BR>
+<p>1. Escreva uma função em um script para testar os parametros de
+entrada dos exercícios das aulas anteriores. Se for valor inteiros positivo,
+ o nome da funcao deve ser testa_inteiro_positivo.
+<p>2. O que faz o programa abaixo:
+<PRE>
+#!/bin/bash
+function calendario()
+{
+mes=$1
+ano=$2
+echo "Calendario de $1/$2"
+echo ""
+cal $1 $2
+return
+}
+calendario 11 2004
+</PRE>
+<p>3. Explique o que acontece se alterarmos a última linha do script do
+      exercício 2 para calendario $1 $2
+
+<p>4. Altere seus scripts das listas anteriores de forma a criar funções genéricas
+evitando repetição de código. 
+<p>5. Explique o programa abaixo:<BR>
+<PRE>
+#!/bin/bash
+while true 
+do
+  clear
+  echo " Funcoes "
+  echo "---------"
+  echo "[1] Data"
+  echo "[2] Calendario"
+  echo "[3] Sair"
+  echo "--------"
+  echo -n "Digite sua escolha [1-3]: "
+  read escolha
+  case $escolha in
+     1) date; echo "Pressione qualquer tecla"; read
+        ;;
+     2) cal; echo "Pressione qualquer tecla"; read
+        ;;
+     3) echo "Fim do programa"; exit
+        ;;
+     *) echo "Erro! Voce deve digitar 1, 2 ou 3"
+        echo "Pressione qualquer tecla"; read
+        ;; 
+  esac
+done
+</PRE>
+<p>6. Veja o que faz o comando dialog. Use o comando dialog nos seus scripts 
+para torná-los mais gráficos. Ex:
+<PRE>
+#!/bin/bash
+dialog \
+--title "Teste de interface" \
+--backtitle "Programa exemplo" \
+--infobox "Este é um programa teste. \
+Pressione qualquer tecla." 5 30
+read
+</PRE>
+<p>7. Anote suas dúvidas para a próxima aula.

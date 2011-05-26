@@ -1,0 +1,106 @@
+<PRE>
+Aula 26
+
+Operações com inteiros e com ponto flutuante
+
+- uma operação interessante com inteiros é fazer a decomposição em
+  fatores primos, usando o comando factor. Com este comando é possível
+  saber se um número é primo. Por exemplo, 1777 é primo?
+
+  factor 52
+  52: 2 2 13
+
+
+- usa-se o comando bc para fazer o cálculo usando ponto flutuante e o retorno
+  do comando é geralmente atribuido a uma variável do programa.
+
+- no comando bc você pode alterar o número de dígitos após o ponto. Para isso
+  usa-se a opção scale. Se você não usar scale e colocar a opçao -l no bc o
+ número de dígitos após o ponto passa a ser 20.
+ 
+ echo "scale=3; 0.5/11 + 1.0" | bc
+ 1.045
+
+ echo "0.5/11 + 1.0" | bc -l
+ 1.04545454545454545454
+
+
+- você pode fazer uso também de variáveis no comando bc.
+  a=5
+  b=3.2
+  echo "$a + $b" | bc -l
+  8.2
+  
+
+- internamente no bc você pode declarar variáveis
+  bc -l
+  a=5
+  b=4.2
+  a*b
+  21.0
+
+
+- exemplo interessante de uso para expressões grandes
+
+n1=5.5
+n2=4.2
+n3=6.1
+media=$( bc << FIM
+scale=3
+soma=($n1+$n2+$n3)
+soma/3
+FIM
+)
+echo $media
+
+
+- o comando bc possui diversas funções matemáticas pré-definidas como
+  seno, coseno, raiz quadrada, etc
+  bc -l
+  sqrt (20)
+  4.47213595499957939281
+
+
+- é possível ainda usar o comando bc para teste de expressão, por exemplo
+  se var1 > 4.34. O resultado é 1 para verdadeiro e 0 para falso.
+
+  bc
+  3.4 > 4
+  1
+
+
+Exercícios:
+
+1) Escreva um programa para ler 3 notas (podendo ser ponto flutuante) e
+calcule a média delas usando peso 1, 2 e 4 para cada nota respectivamente.
+O programa deve imprimir a situação de aprovado, reprovado ou em final
+com a média e nota necessária caso fique em final. Siga com exemplo
+as saídas:
+
+  "Aluno aprovado - media = 7.3"  --> caso a média seja maior que 7.
+  "Aluno reprovado - media = 3.4"  --> caso a média seja menor que 4
+  "Aluno em exame - media = 4.5 - precisa de 5.5 na final para passar"
+
+
+2) Escreva um programa baseado no script do exercício 1, que lê
+o nome e as notas de diversos alunos de um arquivo com 5 colunas
+, as 2 primeiras o nome e sobrenome do aluno e as demais colunas
+com as 3 notas. O programa deve gerar um novo arquivo contendo
+mais uma coluna com a média do aluno.
+
+3) Escreva um programa baseado nos execícios 1 e 2, para calcular
+algumas estatísticas como abaixo. Para isso você deve construir
+um arquivo com todas as notas, incluindo as dos exames finais.
+Use a variável RANDOM para isso se quiser.
+
+ - porcentagem de alunos com notas acima de 7, abaixo de 4 e 
+   entre 4 e 7 em cada uma das provas.
+-  porcentagem de alunos em final após a segunda prova
+-  porcentagem de alunos reprovados após a terceira prova
+-  porcentagem de alunos aprovados no curso sem fazer final
+-  porcentagem de alunos em exame final
+-  porcentagem de alunos aprovados no curso após fazer final
+-  porcentagem de alunos reprovados no curso após fazer final
+
+
+</PRE>

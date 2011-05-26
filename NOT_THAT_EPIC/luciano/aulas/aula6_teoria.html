@@ -1,0 +1,45 @@
+<PRE>
+
+Aula 6
+
+Segurança do sistema de arquivos, permissões de acesso
+
+- Sistema de segurança em arquivos
+- Definição de (rwx)
+- Diferença entre permissões de arquivos e diretórios
+- Usuário (owner), grupos e outros
+- Comando ls -l para verificar permissões
+- Comandos para mudança de permissões: chmod
+- Representação em octal
+- Principais modos de permissão
+- Troca de permissão recursiva
+- Troca de owner (chown)
+- Troca de informações de tempo em arquivos/diretórios(touch)
+- listagem das permissões através do comando ls -l
+- diferença entre usuário e grupos
+- modo octal para trocar de permissões
+- diferença entre chmod e umask
+   
+ -------------------------------------------
+|       |        ARQUIVO       | DIRETÓRIO  |
+| UMASK |----------------------|            |
+|       |   Binário  |  Texto  |            |
+|------------------------------|------------|
+|   0   |    r-x     |   rw-   |    rwx     |
+|   1   |    r--     |   rw-   |    rw-     |
+|   2   |    r-x     |   r--   |    r-x     |
+|   3   |    r--     |   r--   |    r--     |
+|   4   |    --x     |   -w-   |    -wx     |
+|   5   |    ---     |   -w-   |    -w-     |
+|   6   |    --x     |   ---   |    --x     |
+|   7   |    ---     |   ---   |    ---     |
+ -------------------------------------------
+	
+- criação de usuários e grupos
+- atribuição de grupos (comando group, id)
+- principais arquivos do sistema quanto a usuários e grupos
+- uso de dispositivos por grupos
+- compartilhamento de arquivos e diretórios para grupos
+
+</PRE>
+

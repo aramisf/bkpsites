@@ -1,0 +1,28 @@
+<PRE>
+
+Aula 18
+
+Prioridade de processos e agendamentos
+
+- conceito de prioridade entre processos 
+- processos do usuário no Dinf rodam com prioridade 5.
+- prioridade podem ir de -20 (maior possível) até 19 (menor possível)
+- uso do comando nice
+Ex: nice -n 10 xclock &
+[1] 3839
+- uso do comando renice
+- usuários podem apenas diminuir sua prioridade e nunca aumentar
+Ex: renice 15 -p 3839
+- o comando renice pode ser feito para todos os processos do usuário (-u)
+- agendamento de execução de processos com o comando at
+Ex: criar um arquivo com o comando desejado e agendar com at a sua
+execução
+cat > teste
+ls -l > saida.txt
+Ctrl+D
+at 17:01 -f teste
+
+- usar o comando atq para visualizar os processos agendados
+- usar o comando atrm para eliminar o agendamento
+
+</PRE>

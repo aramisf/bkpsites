@@ -1,0 +1,142 @@
+Abaixo segue uma lista de exercícios para fixar os conceitos
+abordados na disciplina CI066.
+
+1. O que é e como estão relacionados os conceitos de
+SHELL, HOME, PROMPT, TERMINAL e X ?
+
+2. Explique os comandos abaixo:
+   ls -ld /etc
+   ls -l /etc 
+   ls -la ~
+   cd -
+   cd ~
+   cd ../../etc
+
+3. Qual a diferença entre caminha absoluto e caminho
+relativo? Cite um exemplo e explique.
+
+4. Como funciona o man e quais são as opções (teclas)
+mais importantes para você navegar e encontrar as
+informações desejadas ?
+
+5. Qual a função no SHELL das seguintes composições de
+teclas:
+   TAB
+   Ctrl-c
+   Ctrl-z bg
+   Ctrl-r
+   Ctrl-e
+   Ctrl-a
+
+6. Para que serve as opções -k e -f do man? Ex: man -f cp 
+
+7. Explique o comando rm e suas opções -R -f e -i 
+
+8. O que faz o comando alias? Cite alguns exemplos e explique.
+
+9. O que fazem os comandos abaixo:
+   file
+   stat
+   touch
+
+10. Como você faria para copiar todo um diretório do sistema,
+por exemplo o /etc/X11 para a sua área em um diretório tmp,
+preservando as datas originais e propriedades dos arquivos
+origem?
+
+11. Como você faria para concatenar e compactar em um único
+arquivo na sua área contendo todo o diretório /etc/X11?
+
+12. Dê 3 exemplos de uso do comando chmod, usando diferentes
+notações, tanto a normal quanto a octal. Explique sua resposta.
+
+13. Explique algumas das opções do comando chmod. Ex: -R, -c
+
+14. Qual a função do comando umask? E como funciona o sistema
+de permissão de arquivos no Linux?
+
+15. Escreva uma linha de comando para encontrar:
+a) todos os arquivos terminados com .doc na sua área.
+b) todos os arquivos maiores do que 1Mb a partir do /etc.
+c) todos os arquivos na sua área que tem permissão para
+   leitura de outros usuários
+d) todos os diretórios que terminam com conf no /etc
+
+16. Qual a função do comando find? Dê 3 exemplos.
+
+17. Explique como funciona a opção -exec do comando find.
+
+18. Como você faria para encontrar arquivos no sistema considerando
+uma determinada terminação (ex: .doc) e poder visualizar as
+permissões e propriedades destes arquivos?
+
+19. Considere que você quer encontrar todos os arquivos .txt
+na sua área e compactá-los com gzip, qual linha de comando
+você usaria?
+
+20. Para fazer um backup de todos os arquivos .pdf da sua área
+em um único arquivo .tgz qual a linha de comando que você
+usaria para isso?
+
+21. Como você faria para encontrar na sua área todos os arquivos
+que foram modificados a mais de 10 dias?
+
+22. Como você faria para encontrar na sua área todos os diretórios
+que foram modificados a menos de 1 mês?
+
+23. Qual o comando para criar um arquivo contendo a lista de
+todos os arquivos terminados com .conf do diretório /etc? Este
+arquivo deve ser criado na sua área.
+
+24. Qual a diferença dos comandos abaixo: Explique sua resposta
+    a) echo cinco > dois
+    b) echo cinco \> dois
+
+25. Usando o comando find para procurar arquivos terminados com
+.conf no /etc escreva uma linha de comando para criar 2 arquivos.
+O primeiro deve conter a lista de arquivos encontrados e o segundo
+a lista de erros gerados durante a busca.
+
+26. Explique o funcionamento do pipe (|) e mostre 3 exemplos de uso.
+
+27. Explique a linha de comando abaixo:
+    ls -l /etc | tr -s " " | cut -d" " -f1,8 > perm_nomes.txt
+  
+28. Escreva uma linha de comando utilizando pipe para dizer quantos
+são os arquivos com tamanho maior que 100K encontrados a partir
+do seu diretório HOME.
+
+29. Escreva uma linha de comando usando finger em conjunto com 
+pipe e outros comandos para mostrar todos os usuários logins de
+usuários que possuem a palavra SILVA no seu cadastro.
+
+30. Utilizando o comando grep mostre quais arquivos do diretório
+/etc que possuem a palavra root.
+
+31. Encontre todos os usuários do sistema que possuem a palavra
+SILVA no seu nome e tenha logins começados com consoantes.
+
+32. Encontre dentre os usuários logados no sistema quais deles
+possuem logins começados com vogais. Use o comando w para mostrar
+os usuários logados.
+
+33. Usando o comando last em conjunto com o pipe e grep, mostre
+quais foram os usuários que efetuaram logins no sistema dia 21 de
+outubro das 14:00 as 18:00 horas.
+
+34. Escreva um arquivo contendo todos os logins de usuários que 
+utilizaram o sistema em outubro deste ano. Use o comando last
+em conjunto com outros comandos.
+
+35. Escreva expressões regulares para as seguintes situações:
+a) usuários com nomes começados com consoantes e terminados com
+vogais.
+b) usuários com um nome e um sobrenome apenas.
+c) usuários com nomes terminados pela palavra silva ou souza.
+d) diretórios com terminação com 3 caracteres. Ex: .doc, .pdf
+e) usuários com logins com 3 ou 5 carateres.
+
+36. Escreva 3 linhas de comando usando finger em conjunto com
+pipe e grep para encontrar alguns usuários com determinado padrão
+no seu nome ou login
+

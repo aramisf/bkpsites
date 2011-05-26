@@ -1,0 +1,189 @@
+<PRE>
+Aula 21
+
+Shell -> interpretador de comandos
+Programação em Shell -> script
+Script -> sequência de comandos do Shell em um arquivo 
+               texto com permissão de execução.
+
+Linguagem de programação -> sintaxe rígida 
+Filosofia básica para programar -> dividir o problema em
+ partes/sub-problemas menores
+
+Boas práticas de programação:
+- organizar idéias antes de começar a escrever
+- documentar código (comentários nunca são demais)
+- incluir cabeçalho para dizer o que o programa faz e quais são suas
+  entradas e saídas
+- escrever sub-rotinas simples e reutilizáveis
+- usar endentação
+- usar variáveis com nomes compreensíveis
+- nunca usar  "números mágicos"
+- teste o programa com diferentes entradas/problemas semelhantes
+ 
+
+CUIDADOS:
+- "espaços" pertencem a sintaxe do script. Atribuição de
+  valor a variáveis não deve ter espaços
+- maiúsculas e minúsculas tem siginificados distintos em script.
+
+Exemplo de construção de um script:
+
+-Criar um arquivo com comandos:
+$ cat > teste1.sh
+date
+cal
+Ctrl-D
+
+- Inserir permissão de execução:
+$ chmod +x teste1.sh
+
+- Executando o script no diretorio onde está o script:
+$ ./teste.sh
+
+ou (caminho completo a partir do HOME do usuário)
+$ ~/diretorio/teste.sh
+
+ou (caminho absoluto)
+$ /home/grad/fulano/diretorio/teste.sh
+
+- Para não precisar passar o caminho completo (relativo/absoluto)
+  é necessário incluir o diretório onde está o script na variável PATH:
+$ export PATH=$PATH:diretorio
+
+- Recomenda-se colocar os scripts no diretório bin da sua área e 
+redefinir a variável PATH. Esta linha pode ficar no seu .bashrc
+$ export PATH=$PATH:$HOME/bin
+
+- Outra alternativa é executar um shell passando o  script como parâmetro
+$ sh teste.sh
+# Neste caso não é necessário que o arquivo tenha permissão de execução
+
+
+
+Padronizando scripts (portabilidade) -> indicar o interpretador a ser usado
+
+$ cat > teste2.sh
+#!/bin/bash
+#
+# Script teste2
+#
+date
+cal
+Ctrl-D
+
+
+Variáveis em script:
+
+a=1
+b=teste
+c="de string"
+d=$(date)
+e=`uname -a`
+f=$b
+echo $a $b $c $d $e $f
+echo "Valor de a=$a"
+
+
+Teste de variáveis (verificação de tipos)
+# Variáveis são inteiras ou strings
+
+a=2
+let a=a+1
+b=teste
+c=$a$b
+echo $c
+let b=b+1
+echo $b
+
+Declaração de variáveis
+
+# variável apenas para leitura (semelhante ao const no C)
+declare -r constante
+
+# variável inteira (assume valor inicial vazio)
+declare -i variavel1
+variavel1=5
+echo $variavel1
+variavel1=teste   ### variável é inteira, assume valor 0
+echo $variavel1
+
+# variável inteira -> operações básicas
+declare -i a
+a=50
+b=50/2
+declare -i c
+c=50/2
+
+# operações aritméticas
+declare -i n
+n=50/2 ; echo $n
+n=20%2  ### se 0 -> é par, se 1 -> é impar 
+echo $n 
+n=30+2 ; echo $n
+n=5*3 ; echo $n
+n=50-10 ; echo $n
+
+# referência indireta a variáveis (não robusta - Bash versão 1)
+a=50
+b=a
+eval c=\$$b
+let a=a+1
+eval c=\$$b
+echo $a $c
+
+# referência indireta a variáveis (mais robusta - Bash versão 2)
+# semelhante a ponteiros em C
+a=50
+b=a
+echo $a ${!b}
+let a=a+1
+echo $a ${!b}
+
+# variável randômica
+var=$RANDOM
+echo $var
+let var2=var%10 
+echo $var2 
+
+# variável randômica entre dois limites i e j -> [50,60]
+i=50
+j=60
+let n=j-i+1
+let var=RANDOM%n+i
+echo $var
+
+# variáveis em strings
+a=5
+echo $aTeste
+echo ${a}Teste
+
+# opções do comando echo
+-n  não imprime nova linha
+-e  habilita a interpretação de algumas funçoes como:
+     \a bip sonoro
+     \b backspace
+     \c suprime uma nova linha
+     \n nova linha
+     \r retorna linha anterior
+     \t tabulação horizontal
+     \\ barra como caracter
+
+# alterações de cores e características do terminal
+sintaxe: echo -e "\033[<n>m"
+reset para retornar ao original
+
+Exemplos:
+$ echo -e "\033[0m teste"  ### fundo preto e letras brancas
+
+$ echo -e "\033[34m teste \033[0m"
+### de 30 a 37 troca a cor das letras
+### 30 preto, 31 vermelho, 32 verde, 33 marrom, 34 azul
+
+$ echo -e "\033[42m\033[31m teste \033[0m"
+### de 40 a 47 troca a cor do fundo
+
+
+
+
+</PRE>

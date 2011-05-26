@@ -1,0 +1,57 @@
+<H2>Exercícios - Aula 25</H2>
+<BR>
+<p>1. O que faz o programa abaixo:<BR>
+<PRE>
+#!/bin/bash
+for i in $(seq 0 10)
+do
+   echo $i
+done
+</PRE>
+<p>2. Explique o script abaixo:<BR>
+<PRE>
+#!/bin/bash
+for i in $(find $1 -iname "x*")
+do
+   echo $(basename $i)
+done
+</PRE>
+<p>3. Explique o script abaixo:<BR>
+<PRE>
+#!/bin/bash
+for i in *.txt
+do
+   nome=$(echo $(basename $i  .txt))
+   echo $nome
+done
+ </PRE>
+<p>4. Altere o exercício 3 para
+que a extensão do arquivo seja passada na linha de comando de forma
+a tornar um programa mais genérico. Ex: ./prog txt
+
+<p>5. Escreva um script my_chmod que recebe um diretório como
+parâmetro na linha de comando. O programa deve alterar a permissão
+de todos os subdiretórios a partir do diretório passado como parâmetro para
+755 e dos arquivos para 644. Use o comando find para encontrar os arquivos
+e diretórios.
+
+<p>6. Escreva um programa para trocar a terminação de todos seus arquivos
+.txt para .text
+
+<p>7. Faça um programa para transformar todo um diretório com imagens JPEG (arquivos com terminação
+      .jpg) para imagens em formato GIF (arquivos com terminação .gif). Para
+      isso use o comando: $ convert arq.jpg arq.gif
+
+<p>8. Faça um programa para reduzir o tamanho de imagens .jpg em um diretório
+      passado na linha de comando. As imagens devem ser reduzidas em 50%.
+<P>9. Explique o script abaixo (o arquivo txt possui 2 colunas):<BR>
+<PRE>
+#!/bin/bash
+while read a b
+do
+echo $a $b
+done < $1.txt
+</PRE>
+ 
+<p>10. Anote suas dúvidas para a próxima aula.
+

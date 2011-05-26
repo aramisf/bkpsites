@@ -1,0 +1,178 @@
+<PRE>
+
+Aula 22
+
+Variáveis e passagem de parâmetros para script
+
+- Para usar alias em script deve-se ativar o expand_aliases no início com shopt
+#!/bin/bash
+shopt -s expand_aliases
+alias teste="date"
+teste
+
+- para usar os alias definidos no seu .bashrc basta colocar depois
+do shopt a linha abaixo:
+source ~/.bashrc
+
+- Nome de variáveis não podem começar com números
+
+- Variáveis são locais, mas podem ser exportadas para chamadas de sub-shells
+a=5
+bash
+echo $a
+exit
+export a
+bash
+echo $a
+
+- O shell possue variáveis reservadas, como por exemplo HOME, PATH, PS1
+
+- O shell faz uso de parâmetros especiais (variáveis especiais) que não podem ser trocados apenas acessados. São eles:
+
+$* ou $@  -->   parâmetros da linha de comando a partir do primeiro
+                entre aspas-duplas "$*" usa o separador IFS definido
+#!/bin/bash
+# script1
+echo "$*"
+echo $*
+echo "$@"
+echo $@
+
+#!/bin/bash
+# script2
+IFS=:
+echo "$*"
+echo $*
+echo "$@"
+echo $@
+
+./script1 a b "c   3"
+a:b:c  3
+a b c  3
+a b c  3
+a b c  3
+
+./script2 a b "c   3"
+a b c  3
+a b c 3
+a b c  3
+a b c 3
+
+
+$#  --> número de parâmetros da linha de comando
+
+#!/bin/bash
+# script3
+echo "Número de parâmetros = $#"
+
+./script3 a b c d e
+Número de parâmetros = 5
+
+
+$0  -->  nome do script
+$1  -->  parâmetro 1
+$2  -->  parâmetro 2
+${10}  --> parâmetro 10
+$?  --> valor de retorno do último comando
+$$  --> número do processo (PID) do script
+$_  --> último parâmetro do comando anterior executado
+$!   --> número do processo (PID) do último comando executado em background
+
+
+- Para calcular o tamanho de um parâmetro ou variável usa-se ${#var}
+t1=5000
+echo ${#t1}
+4
+
+- tamanho do parâmetro 1 -->  ${#1}
+
+
+- atribuição de valor "default" se variável não existe
+
+teste=5
+echo ${teste:-1000}
+5
+
+echo ${var:-1000}
+1000
+
+default=0
+echo ${teste:-$default}
+5
+
+echo ${var:-$default}
+0
+
+
+- operações de string em variáveis
+
+${var:pos}  --> extrai a substring de $var a partir da posição dada por $pos
+teste=default
+echo ${teste:3}
+ault
+
+${var:pos:tam} --> extrai $tam caracteres de $var a partir da posição $pos
+teste=default
+echo ${teste:3:2}
+au
+
+${var%padrao}  -->  extrai de $var a menor substring dada por $padrao
+teste=arquivo.txt
+echo ${teste%.txt}
+arquivo
+
+${var%%padrao}  -->  extrai de $var a maior substring dada por $padrao
+teste=arquivo.tar.gz
+echo ${teste%%.*}
+arquivo
+
+---  opção para eliminar apenas a última terminação (caso genérico com ER)
+teste=arquivo.tar.gz
+nome=$(echo ${teste%.*})
+echo $nome
+
+
+${var/padrao/subst}  -->  substitui em $var o primeiro padrão $padrao por $subst
+teste="teste de arquivos"
+echo ${teste/de/para}
+teste para arquivos
+
+${var//padrao/subst}  -->  substitui em $var todos os padrões $padrao por $subst
+
+
+- operações aritméticas com variáveis inteiras com atribuição
+a=50
+b=1
+soma=$((a+b))
+echo "Soma de $a + $b = $soma"
+ 
+*** outra forma é usar let
+a=3
+b=1
+let c=$a+$b
+4
+
+*** outra forma é declarar soma como variável inteira
+a=50
+b=1
+soma=$a+$b
+echo $soma
+50+1
+declare -i soma
+soma=$a+$b
+echo $soma
+51
+
+
+
+- extraindo nome de arquivos e diretórios de variáveis
+
+a=/usr/doc/teste/arquivo.txt
+echo $(basename $a)
+arquivo.txt
+echo $(dirname $a)
+/usr/doc/teste
+
+
+
+</PRE>

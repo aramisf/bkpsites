@@ -1,0 +1,93 @@
+<PRE>
+
+Aula 14
+
+Comando sed
+
+Referências: http://sed.sourceforge.net
+
+opções: 
+ 
+ -n   --> não imprime a saída do sed. Para isso usa-se a função p/
+ -e   --> precede expressão para execução
+
+funções (expressões):
+
+ q       --> para a execução
+ d       --> deleta linha
+  /er/   --> especifica uma expressão regular (er), /^$/ representa linhas em branco
+ p       --> imprime as linhas com o padrão, usa-se com as opções -n -e
+ /er1/,/er2/p  --> imprime as linhas entre a expressão er1 até a expressão er2
+ s/er1/string/ --> comando para troca primeiro padrão (er1) da linha pela string
+ s/er1/string/g --> comando troca todos os padrões (er1) da linha pela string
+ &  --> representa o padrão encontrado para ser usado na saída do sed
+ ;   --> combina funções (AND) 
+
+- eliminar linha 1
+cat /etc/passwd | sed -e "1d"
+
+- eliminar da linha 1 a 20
+cat /etc/passwd | sed -e "1,20d"
+
+- elimina linhas em branco
+cat /etc/issue | sed -e "/^$/d"
+
+- eliminar comentários em arquivos de configuração
+cat /etc/identd.conf | sed -e  "/^#/d"
+
+- parar após ler uma linha em braco
+echo -e "teste\nde\narquivo\n\npara\nsed" | sed "/^$/q"
+
+- mostra linhas com o padrão encontrado
+ cat /etc/identd.conf |sed -n -e "/^#/p"
+
+- mostrar linhas entre padrões
+echo -e "teste\nde\narquivo\npara\nsed" | sed -n -e "/de/,/para/p"
+
+- troca a primeira vogal de cada linha por X
+echo -e "teste \n de \n arquivo \n para \n sed" | sed -e "s/[aeiou]/X/"
+
+- troca todas as vogais de cada linha por X
+echo -e "teste \n de \n arquivo \n para \n sed" | sed - e "s/[aeiou]/X/g"
+
+- troca todas as vogais por X somente entre as linhas com os padrões
+echo -e "teste \n de \n arquivo \n para \n sed" | sed -e "/de/,/para/s/[aeiou]/X/g"
+
+- troca todos os "a" por "\< a\>"
+echo -e "teste \n de \n arquivo \n para \n sed" | sed "s/a/\<&\>/g"
+
+- insere xxx: no início das linhas que começam com um espaço (padrão)
+echo -e "teste \n de \n arquivo \n para \n sed" | sed "s/^ /xxx: &/"
+
+- deleta as linhas que terminam com "o" e as que começam com letras entre "p" e "t"
+echo -e "teste\nde\narquivo\npara\nsed" | sed "/^a/d;/^[p-t]/d"
+
+
+
+Exercícios:
+
+1) Explique a linha de comando abaixo:
+echo -e "teste de exemplos do sed" | sed "s/e/E/2"
+
+2) Usando uma única linha de comando com sed elimine as linhas em branco 
+    as que começam com "#" do arquivo /etc/inetd.conf
+
+3) Escreva uma linha de comando com sed que retorne o mesmo resultado que:
+ ls -l | tr -s " " 
+
+4) Explique as linhas de comando abaixo:
+
+ls -l /etc | sed -e "s/^d/Dir /g;s/^-/Arq /g"
+
+ls -l /etc | sed -e "s/.*/# &/g"
+
+ls -l /etc | sed -e "s/  */ /g"
+
+ls -l /etc | sed -e "s/ \+/ /g"
+
+ls -l /etc | sed -e "s/.\{10\}//"
+
+ls -l /etc | sed -e "s/\./_/g"
+
+
+</PRE>

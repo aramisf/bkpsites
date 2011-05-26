@@ -1,0 +1,42 @@
+<PRE>
+Aula 28
+
+Funções
+
+- reaproveitamento de trechos de código.
+- facilita a manutenção do programa.
+- deve ser escrita no início do código (script) para poder ser utilizada depois
+
+function teste
+{
+   echo "executa funcao"
+}
+	
+ou
+
+teste ()
+{ 
+    echo "executa funcao"
+}
+
+  
+- para chamada da função basta escrever o nome da função:
+teste
+
+- para a passagem de parâmetros para a função usa-se:
+
+teste ()
+{ 
+  echo $1 $2
+}
+
+teste 5 10
+
+- as variáveis definidas dentro da função são locais
+
+- para guardar o valor de retorno de uma função usa-se $?
+teste 4 10
+retorno=$?
+
+
+</PRE>

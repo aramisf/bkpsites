@@ -1,0 +1,40 @@
+<H2>Revisão 2</H2>
+<BR>
+<p>1. Faça todos os exercícios das aulas anteriores.
+<p>2. Leia a bibliografia recomendada para esta disciplina.
+<p>3. O que faz o comando grep. E o que é uma expressão regular.
+<p>4. Escreva uma linha de comando usando grep para filtrar a saída do comando
+      ls -l /etc para mostrar apenas os arquivos que contenham "log" no seu
+      nome. Explique a sua linha de comando.
+<p>5. Usando alias, modifique o comando grep para que contenha a
+opção --color=always. O que acontece agora quando você usa este alias.
+<p>6. Filtre a saída do comando last para encontrar apenas os usuários que
+      logaram na máquina na última sexta-feira.
+<p>7. Escreva um comando para encontrar quantos destes usuários que foram encontrados no exercício 6 fizeram
+      login na parte da tarde ?
+<p>8. Escreva um comando para filtrar a saída do exercício 6, mostrando apenas
+      o login dos usuários. DICA: use awk ou cut
+<p>9. Escreva um comando para contar quantos logins distintos aparecem na saída do exercício 8.
+<p>10. Usando os comando uniq e sort, elimine os usuários repetidos do exercício 8 e ordene a saída alfabeticamente.
+<p>11. Use o comando top para mostrar todos os seus processos, e use o
+      comando kill dentro do top.
+<p>12. Como você poderia mostar todos os processos de um usuário específico no
+      sistema. Mostre a linha de comando.
+<p>13. O que faz a linha de comando abaixo:<BR>
+ps -aux |grep ^root | tr -s " " | cut -d" " -f2 | sort -n
+<p>14. Abra um xclock e escreva um comando para encontar o PID de processo do
+      xclock do seu usuário e use o comando kill para matar este processo.
+<p>15. Encontre todos os usuários do bcc que possuem a palavra Souza no
+      seu sobrenome e cujo primeiro nome começa com uma vogal.
+<p>16. Encontre os alunos do bcc cadastrados no sistema que possuem a palavra "dos" nos seus nomes e com logins começados com consoantes. Ex: Valdeci dos Santos
+<p>17. Com base no exercício 16 limite a busca apenas para os que foram
+      cadastrados a partir de 2000. 
+<p>18. Gere uma lista dos usuários que possuem dos no seu nome e
+que possuem o primeiro nome começados com vogais.
+Esta lista deve ser inserida em um arquivo, com a primeira coluna
+o login, e a segunda coluna para o nome completo. O separador
+das colunas é o ":"
+
+<p>19. Baseado no 18. gere uma lista somente para aqueles usuários que tem apenas 1 nome e 1 sobrenome.
+<p>20. Mostre dentre todos os usuários que estão logados na máquina o que possui o maior login.
+<p>21. Baseado no 20. qual é o usuário com o menor login?

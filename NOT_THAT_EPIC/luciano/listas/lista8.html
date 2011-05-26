@@ -1,0 +1,43 @@
+<H2>Exercícios - Aula 8</H2>
+<BR>
+<p>1. Leia a seção sobre REDIRECTION no manual do BASH.
+
+<p>2. Liste todos os diretórios do /tmp recursivamente fazendo
+      com que a saída de erro seja redirecionada para um arquivo.
+<p>3. Liste todos os diretórios do /tmp recursivamente fazendo
+com que o resultado seja inserido num arquivo inclusive os erros.
+<p>4. Qual a diferença entre os redirecionamentos > e >> ?
+<p>5. O que você deve fazer para evitar redirecionamentos
+	      destrutivos?
+<p>6. Explique o que faz a linha de comando:<BR>
+$ find /var -size +50k > ~/encontrados.txt 2> /dev/null
+<p>7. Sobre o arquivo /etc/passwd e usando o comando cut 
+mostre somente logins de usuários do sistema e seus respectivos
+		    UID. DICA: use cat, cut e pipe.
+<p>8. Construa uma linha de comando que encontre todos os 
+arquivos que começam com "a" no diretório
+		      /var e mostre na tela somente quantos
+		      arquivos foram encontrados. Lembre-se de
+eliminar os erros.
+<p>9. Explique o que faz o comando abaixo: <BR>
+ls -tR /tmp 2> /dev/null |tee resultado1.txt |sort > resultado2.txt
+<p>10. O que fazem os comando abaixo:<BR>
+ls -lt /etc |head<BR>
+ls -lt /etc |tail<BR>
+<p>11. Escreva 5 linhas de comandos usando pipes, explicando seu
+				    funcionamento.
+
+<p>12. Explique o comando: find ~ -type d | tee result.txt | less
+<p>13. Qual o comando que você usaria para mostrar os 5 maiores arquivos da sua
+      área? 
+<p>14. Escreva uma linha de comando usando o comando cut para mostrar apenas
+ as permissões e o nome dos arquivos da sua área.
+<p>15. O que faz o comando: zcat arquivo.txt.gz | more
+<p>16. Escreva um comando para contar quantos arquivos maiores que 100Kbytes
+você possui na sua área.
+<p>17. Explique a sequência de comandos abaixo:<BR>
+$ cat /etc/passwd | cut -d":" -f 1 > usuarios.txt<BR>
+$ cat /etc/passwd | cut -d":" -f 3 > uids.txt<BR>
+$ paste -d":" uids.txt usuarios.txt | less <BR>
+<p>18. O que faz o comando: ls -lX | less
+<p>19. Anote suas dúvidas para a próxima aula.

@@ -1,0 +1,231 @@
+<PRE>
+Aula 24
+
+Comandos condicionais
+
+- usa-se comandos condicionais para mudança de fluxo de execução
+de um programa, ou avaliação de estado de execução
+
+- geralmente se faz através de "teste" de expressão ou variável. Por
+exemplo se variável é igual a determinado valor, ou se arquivo existe,
+ou se determinada expressão é verdadeira, ou status de retorno do
+último comando executado
+
+- por definição valor 1 (um) para o resultado de avaliação de expressão 
+é porque a expressão é verdadeira, caso contrário a expressão é falsa.
+
+- sintaxe para teste usa-se [ ] como segue:
+
+  a=5
+  resultado=$[ $a > 4 ]
+  echo $resultado
+  1
+
+
+- usa-se a avaliação de expressões com o comando if - then
+
+ if [ <expressão> ]
+ then
+        echo "Expressão retorna verdadeiro"
+ fi
+
+ Exemplo:
+ 
+  a=5
+  if [ $a == 5 ]
+  then
+       echo "verdadeiro"
+  fi
+
+
+- o if pode ser usado para testar qualquer tipo de comando
+  ao invés de avaliar uma expressão
+
+  if grep -q root /etc/passwd
+  then
+        echo "encontrado"
+  fi
+
+- outra construção com tratamento se a expressão for falsa
+
+  if [ <expressão> ]
+  then
+     comandos caso expressão verdadeira
+  else
+     comandos caso expressão falsa
+  fi
+
+- você pode usar o then na mesma linha, mas precisa inserir um ";"
+ 
+   if [ <expressão> ]; then
+       comandos
+   fi
+
+- existe também a possibilidade de um if-else
+
+   if [ <expressão> ]; then
+       comandos
+   elif [ <expressão>]; then
+        comandos
+    else
+         comandos
+    fi
+
+
+- versão 2 do BASH introduziu outras construções, como  (( )) que são
+ operadores para expressões aritméticas. [[ ]]  para avaliação de expressões
+ extendidas (expande variáveis antes do teste, ou expressões regulares)
+
+  a=5
+  resultado=$((a+4))  ### pode ser $(($a+4))
+  echo $resultado
+  9
+
+- Expressões mais usadas
+
+[ -d ARQUIVO ]	ARQUIVO existe e é diretório
+[ -e ARQUIVO ]	ARQUIVO existe
+[ -f ARQUIVO ] 	ARQUIVO existe e é "regular file"
+[ -r ARQUIVO ] 	ARQUIVO existe e tem permissão de leitura
+[ -s ARQUIVO ]	ARQUIVO existe e tem tamanho maior que 0 (zero)
+[ -w ARQUIVO ]	ARQUIVO existe e tem permissão de escrita
+[ -x ARQUIVO ]	ARQUIVO exists e tem permissão de execução
+
+[ -z STRING ]	                    "STRING" is zero.
+[ -n STRING ] or [ STRING ]         tamanho da "STRING" maior que zero
+[ STRING1 == STRING2 ]              strings iguais
+[ STRING1 != STRING2 ] 	            strings diferentes
+[[ STRING1 < STRING2 ]] 	            "STRING1" está ordenada lexicograficamente
+                                    antes de "STRING2" 
+[[ STRING1 > STRING2 ]] 	            contrário da anterior
+
+[ ARG1 OP ARG2 ]	            "OP" são operadores de interios podendo
+		                    ser -eq, -ne, -lt, -le, -gt ou -ge
+
+
+- para o testar se a string está lexicograficamente ordenada pode-se usar:
+
+[[ STRING1 < STRING2 ]]
+
+   ou
+
+[ STRING1 \< STRING2 ]
+ 
+
+
+- Para testar número de argumentos negando a expressão com "!" :
+
+if [ ! $# == 2 ]
+then
+  echo "Uso: $0 var1 var2"
+  exit
+fi
+
+
+
+- para testar variável de resposta de comandos usa-se
+
+a="5"
+if [ $a ]
+then
+ echo a=$a
+fi
+
+b=""
+if [ $b ]
+then
+ echo b=$b
+fi
+
+
+- para verificar se último comando foi executado com sucesso
+
+if [ $? -eq 0 ]
+then 
+   echo ok
+fi
+
+
+- No caso de construções com [[ ]] pode usar operadores
+lógicos como AND (&&) e OR (||) de forma simplificada
+
+a=/etc/passwd
+b=/etc/teste
+
+if [ -e $a ] && [ -e $b ]
+
+  ou
+
+
+if [[ -e $a && -e $b ]]
+
+
+a=20
+b=50
+if [ "$a" -eq 20 ] && [ "$b" -eq 50 ]
+then
+  echo "Verdadeiro"
+else
+  echo "Falso"
+fi
+
+
+
+- Pode ainda usar -a (AND) ou -o (OR)
+
+if [ "$expressao1" -a "$expressão2" ]
+
+if [ "$expressao1" -o "$expressão2" ]
+
+
+
+
+- Para comparação entre valores ou ordem de string
+
+a=5;b=10; if [[ "$a" < "$b" ]]; then echo ok; fi
+
+a=5;b=10; if (( "$a" < "$b" )); then echo ok; fi
+ok
+
+a=05;b=10; if (( "$a" < "$b" )); then echo ok; fi
+ok
+
+a=05;b=10; if [[ "$a" < "$b" ]]; then echo ok; fi
+ok
+
+
+- Para comparação numérica ou string
+
+a=5; b=05; if [[ $a == $b ]]; then echo ok; fi
+
+
+a=5; b=05; if (( $a == $b )); then echo ok; fi
+ok
+
+
+
+- Para testar se existe "Expressão Regular"  usa=se:
+
+s="String"
+if [[ "$s" == [sS]tr[a-z]* ]]
+then
+    echo ok
+fi
+ 
+
+- Para testar se existe "Expressão Regular" (Bash versão 3) usa=se =~
+
+var="teste de variavel"
+echo $var
+if [[ "$var" =~ "v.*ave" ]]
+then
+    echo Achei
+fi
+
+
+- Como você faria para saber se uma variavel possue apenas (exatamente)
+duas letras?!
+
+
+
+</PRE>

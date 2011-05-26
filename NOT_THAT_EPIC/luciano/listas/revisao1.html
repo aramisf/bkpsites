@@ -1,0 +1,66 @@
+<H2>Revisão 1</H2>
+<BR>
+<p>1. Faça todos os exercícios das aulas anteriores.
+<p>2. Leia a bibliografia recomendada para esta disciplina.
+<p>3. O que fazem os comandos: man, ls, cd, cp, rm, rmdir, mv.
+<p>4. O que faz o Ctrl+C durante a execução de um comando?
+<p>5. Como você executa um comando e depois coloca-o em background? É possível
+      executar o comando e já deixá-lo em background?
+<p>6. Qual a função do Crtl+R no bash? E a tecla tab?
+<p>7. Qual o comando para copiar todo o diretório /etc para um outro diretório
+      chamado /tmp/etc?
+<p>8. Explique o comando: ls -lta /etc
+<p>9. O que faz o comando tac ? E o comando last?
+<p>10. Escreva um comando para trocar a permissão de todos os arquivos da
+sua área para 644. O comando não deve alterar diretórios.
+<p>11. O que faz o comando: du -S |sort -n
+<p>12. O que fazem os comandos which, whatis e whereis ?
+<p>13. Qual a diferença entre os comandos: w, who, whoami.
+<p>14. O que faz o comando:  ls -lS 
+<p>15. Explique o comando ls -l | tr -s " " | sort -n +4 (DICA: o sort -n +4
+      ordena pela coluna 4, porém a primeira coluna é a 0, a segunda, 1, etc) 
+<p>16. Qual a diferença entre um ls -F e um ls --color quando executado em um xterm?
+
+<p>17. O que faz o comando shopt -s cdspell. Veja o que
+acontece antes e depois de executar o comando nesta
+linha: mkdir teste; cd tete 
+<p>18. O que faz o comando: ls -lR /etc > arq1.txt & tail -f arq1.txt 
+<p>19. O que faz o Ctrl+W no BASH ?
+<p>20. O que faz o comando history ?
+<p>21. Desenhe a árvore de diretórios criada pela linha de comando abaixo:<BR>
+ mkdir -p teste/aula1/{ex1,ex2,../aula2}/r1<BR>
+<p>22.  O que faz o comando: cp arq2{,-backup}
+<p>23. Explique o que aconteceu com o arquivo arq1.txt na linha de comando abaixo:<BR>
+touch arq1.txt ; mv arq1{.txt,.old} ; ls arq1*<BR>
+<p>24. Escreva uma linha de comando para mostrar as 5
+próximas linhas, a partir da linha 6 do arquivo /etc/group (DICA use o comando
+      head e tail)
+<p>25. O que representa os comando: alias dir="ls -a -l --color"; dir
+
+<p>26. Qual a diferença entre os dois comandos abaixo:<BR>
+find . -name "*.c" -ls<BR>
+find . -name "*.c" -exec ls -l {} \;<BR>
+
+<p>27. O que faz a linha de comando:<BR>
+cat < /etc/issue /etc/a* 2> /dev/null | wc -l<BR>
+
+<p>28. O que representa o valor resultante da execução do comando 
+do exercício anterior.
+
+<p>29. Mostre a linha de comando para procurar todos os
+arquivos que começam com "c" no diretório /etc e direcionando
+a saída de erros para o arquivo /tmp/erro.txt
+
+<p>30. Encontre possíveis erro nas linhas de comando abaixo:<BR>
+a) ls l | sort<BR>
+b) cp etc/issue /tmp<BR>
+c) man ls -l<BR>
+d) ls -l | cut c11- <BR>
+e) find ~ name "*.txt"
+
+<p>31. Explique o funcionamento das linhas de comando abaixo:<BR>
+a) sort < arquivo.txt > arquivo_ordenado.txt<BR>
+b) cat /etc/passwd > arquivo.txt  ; wc -l arquivo.txt<BR>
+c) ls /etc | sort | less<BR>
+d) find ~ -iname "*.p" | sort 2> /dev/null<BR>
+e) cat /etc/issue ~/teste > /tmp/2<BR>

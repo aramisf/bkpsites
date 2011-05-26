@@ -1,0 +1,119 @@
+<PRE>
+
+Aula 13
+
+Expressões regulares (ER)
+
+- conceito e uso geral
+- usada para filtragem de arquivos ou resultado de linhas de comando
+- são usadas juntamente com comandos (grep, egrep, sed)
+- uso do comando grep e opções -i -c -v -r
+- variantes: egrep, rgrep
+
+^     -> início de uma linha. ^a - linha que começa com a
+$     -> final de uma linha.  conf$ - linha que termina com conf
+[ ]   -> um caracter indicado pelo colchetes. [abcd] ou lista [a-d] ou [a-dj-o]
+[^ ]  -> qualquer caracter que não esteja entre os indicados. [^a] - diferente de a
+*     -> zero ou mais ocorrências do caracter precedente. a*
+.     -> um caracter qualquer
+\<    -> início de uma palavra
+\>    -> final de uma palavra
+[[:alnum:]]  -->  [0-9A-Za-z]
+[[:alpha:]]  -->  [A-Za-z]
+[[:digit]]   -->  [0-9]
+
+
+- comando grep para filtragem usando ER 
+
+Exemplos:
+
+ls -l | grep "^-"
+ls -l | grep "^d"
+
+- Para habilitar cores na saída do grep execute:
+export GREP_OPTIONS="--color=always"
+ 
+echo "casa CASA Casa" | grep --color "[Cc]asa"
+
+- Para inverter a busca usa-se a opção -v no grep
+
+- Filtragem com acentuação funciona ?!
+Em sistemas com linguagem pt_BR sim.
+
+Exemplo:
+echo $LC_ALL
+pt_BR
+echo á | grep [a-z]
+á
+
+LC_ALL=en
+echo á | grep [a-z]
+
+
+- usando o grep para mostrar o contexto de um padrão de busca.
+Usa-se -A NUM (after) : mostra NUM linhas depois do padrão
+Usa-se -B NUM (before): mostra NUM linhas antes do padrão
+Usa-se -C NUM : mostra NUM linhas antes e depois do padrão
+
+Exemplo:
+echo -e 'a\nb\nc\nd\ne\nf'
+echo -e 'a\nb\nc\nd\ne\nf' | grep c
+echo -e 'a\nb\nc\nd\ne\nf' | grep -A1 -B2 c
+
+- usa-se -c para contar o número de linhas com o padrão.
+Note que duas ocorrências de um mesmo padrão por linha
+contabiliza apenas uma ocorrência.
+
+- usa-se -n para numerar as linhas com o padrão
+
+- para busca de padrões em vários arquivos,  o nome
+do arquivo aparece antes do padrão encontrado. Veja opção
+-h no grep para suprimir o nome
+
+- para ignorar maiúsculas e minúsculas usa-se -i no grep
+
+- para listar os arquivos que contém o padrão usa-se -l
+
+- IMPORTANTE, usa-se -m NUM para parar a busca em
+arquivos que já foi encotrado o NUM de linhas com o padrão
+
+
+Expressões Regulares Extendidas (usar egrep)
+
+
++        --> uma ou mais ocorrências do caracter precedente
+?        --> elemento precedente é opcional 
+{n}      --> elemento precedente ocorre exatamente n vezes
+{n,}     --> elemento precedente ocorre n ou mais vezes
+{n,m}  --> elemento precedente ocorre no mínimo n vezes e no máximo m vezes
+ |        --> "ou" entre padrões 
+( )       --> agrupamento/precedência
+
+
+Exemplos:
+
+echo "casa casas casada" | egrep --color "casas?\>"
+echo "casa casas casais casada" | egrep --color "casa(s|is)?\>"
+
+
+Exercícios:
+
+1) Usando o comando finger e filtrando sua saída responda:
+   a) quantos são os usuários cadastrados no sistema chamados Paulo?
+   b) quantos dos usuários encontrados em a) possuem login começando com p ?
+   c) quantos dos usuários encontrados em b) são alunos do ano 2005 ?
+
+2) Procure no sistema todos os usuários que possuem apenas 4 caracteres
+    (letras ou números) no seu login. (use o comando w)
+
+3) Encontre no sistema todos os usuários que possuem somente a palavra
+  "Silva" no seu sobrenome.
+
+4) Crie um arquivo que contenha apenas o login seguido do nome dos usuários do
+   sistema que se chamam Maria (dica: depois da filtragem use cut)
+
+5) Gere um arquivo com os nomes dos alunos do DInf que entraram em 2005. 
+   A lista de alunos deve estar ordenada. (dica: veja /home/bcc)
+
+
+</PRE>
