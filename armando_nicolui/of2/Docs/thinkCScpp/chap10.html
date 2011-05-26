@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 10: Vectors</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap11.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap09.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 10</h2>
+
+<h1>Vectors</h1>
+
+
+<p>A <b>vector</b> is a set of values where each value is identified by a number (called an index).  An <span class=code>pstring</span> is similar to a vector, since it is made up of an indexed set of characters.  The nice thing about vectors is that they can be made up of any type of element, including basic types like <span class=code><span class=keyword>int</span></span>s and <span class=code><span class=keyword>double</span></span>s, and user-defined types like <span class=code>Point</span> and <span class=code>Time</span>.</p>
+
+<p>The vector type that appears on the AP exam is called <span class=code>pvector</span>. In order to use it, you have to include the header file <span class=code>pvector.h</span>; again, the details of how to do that depend on your programming environment.</p>
+
+<p>You can create a vector the same way you create other variable types:</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; count;
+<br>&nbsp; pvector&lt;<span class=keyword>double</span>&gt; doubleVector;
+<br></span><p>The type that makes up the vector appears in angle brackets (<span class=code>&lt;</span> and <span class=code>&gt;</span>).  The first line creates a vector of integers named <span class=code>count</span>; the second creates a vector of <span class=code><span class=keyword>double</span></span>s.  Although these statements are legal, they are not very useful because they create vectors that have no elements (their length is zero).  It is more common to specify the length of the vector in parentheses:</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; count (4);
+<br></span><p>The syntax here is a little odd; it looks like a combination of a variable declarations and a function call.  In fact, that's exactly what it is.  The function we are invoking is an <span class=code>pvector</span> constructor.  A <b>constructor</b> is a special function that creates new objects and initializes their instance variables.  In this case, the constructor takes a single argument, which is the size of the new vector.</p>
+
+
+
+<p>The following figure shows how vectors are represented in state diagrams:</p>
+
+<p align="center"><img src="images/vector.png"></p>
+
+<p>The large numbers inside the boxes are the <b>elements</b> of the vector.  The small numbers outside the boxes are the indices used to identify each box.  When you allocate a new vector, the elements are not initialized.  They could contain any values.</p>
+
+<p>There is another constructor for <span class=code>pvector</span>s that takes two parameters; the second is a "fill value," the value that will be assigned to each of the elements.</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; count (4, 0);
+<br></span><p>This statement creates a vector of four elements and initializes all of them to zero.</p>
+
+<a name=1></a><br>
+<h3>10.1 Accessing elements</h3>
+
+<p>The <span class=code>[]</span> operator reads and writes the elements of a vector in much the same way it accesses the characters in an <span class=code>pstring</span>.  As with <span class=code>pstring</span>s, the indices start at zero, so <span class=code>count[0]</span> refers to the "zeroeth" element of the vector, and <span class=code>count[1]</span> refers to the "oneth" element.  You can use the <span class=code>[]</span> operator anywhere in an expression:</p>
+
+
+<span class=code>&nbsp; count[0] = 7;
+<br>&nbsp; count[1] = count[0] * 2;
+<br>&nbsp; count[2]++;
+<br>&nbsp; count[3] -= 60;
+<br></span><p>All of these are legal assignment statements.  Here is the effect of this code fragment:</p>
+
+<p align="center"><img src="images/vector2.png"></p>
+
+<p>Since elements of this vector are numbered from 0 to 3, there is no element with the index 4.  It is a common error to go beyond the bounds of a vector, which causes a run-time error.  The program outputs an error message like "Illegal vector index", and then quits.</p>
+
+
+
+<p>You can use any expression as an index, as long as it has type <span class=code><span class=keyword>int</span></span>.  One of the most common ways to index a vector is with a loop variable.  For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 0;
+<br>&nbsp; <span class=keyword>while</span> (i &lt; 4) {
+<br>&nbsp; &nbsp; cout &lt;&lt; count[i] &lt;&lt; endl;
+<br>&nbsp; &nbsp; i++;
+<br>&nbsp; }
+<br></span><p>This <span class=code><span class=keyword>while</span></span> loop counts from 0 to 4; when the loop variable <span class=code>i</span> is 4, the condition fails and the loop terminates.  Thus, the body of the loop is only executed when <span class=code>i</span> is 0, 1, 2 and 3.</p>
+
+
+
+<p>Each time through the loop we use <span class=code>i</span> as an index into the vector, outputting the <span class=code>i</span>th element.  This type of vector traversal is very common.  Vectors and loops go together like fava beans and a nice Chianti.</p>
+
+<a name=2></a><br>
+<h3>10.2 Copying vectors</h3>
+
+<p>There is one more constructor for <span class=code>pvector</span>s, which is called a copy constructor because it takes one <span class=code>pvector</span> as an argument and creates a new vector that is the same size, with the same elements.</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; copy (count);
+<br></span><p>Although this syntax is legal, it is almost never used for <span class=code>pvector</span>s because there is a better alternative:</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; copy = count;
+<br></span><p>The <span class=code>=</span> operator works on <span class=code>pvector</span>s in pretty much the way you would expect.</p>
+
+<a name=3></a><br>
+<h3>10.3 <span class=code><span class=keyword>for</span></span> loops</h3>
+
+<p>The loops we have written so far have a number of elements in common.  All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to that variable, like increment it.</p>
+
+
+
+<p>This type of loop is so common that there is an alternate loop statement, called <span class=code><span class=keyword>for</span></span>, that expresses it more concisely.  The general syntax looks like this:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (INITIALIZER; CONDITION; INCREMENTOR) {
+<br>&nbsp; &nbsp; BODY
+<br>&nbsp; }
+<br></span><p>This statement is exactly equivalent to</p>
+
+
+<span class=code>&nbsp; INITIALIZER;
+<br>&nbsp; <span class=keyword>while</span> (CONDITION) {
+<br>&nbsp; &nbsp; BODY
+<br>&nbsp; &nbsp; INCREMENTOR
+<br>&nbsp; }
+<br></span><p>except that it is more concise and, since it puts all the loop-related statements in one place, it is easier to read. For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; 4; i++) {
+<br>&nbsp; &nbsp; cout &lt;&lt; count[i] &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>is equivalent to</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 0;
+<br>&nbsp; <span class=keyword>while</span> (i &lt; 4) {
+<br>&nbsp; &nbsp; cout &lt;&lt; count[i] &lt;&lt; endl;
+<br>&nbsp; &nbsp; i++;
+<br>&nbsp; }
+<br></span><a name=4></a><br>
+<h3>10.4 Vector length</h3>
+
+<p>There are only a couple of functions you can invoke on an <span class=code>pvector</span>.  One of them is very useful, though: <span class=code>length</span>. Not surprisingly, it returns the length of the vector (the number of elements).</p>
+
+<p>It is a good idea to use this value as the upper bound of a loop, rather than a constant.  That way, if the size of the vector changes, you won't have to go through the program changing all the loops; they will work correctly for any size vector.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; count.length(); i++) {
+<br>&nbsp; &nbsp; cout &lt;&lt; count[i] &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>The last time the body of the loop gets executed, the value of <span class=code>i</span> is <span class=code>count.length() - 1</span>, which is the index of the last element.  When <span class=code>i</span> is equal to <span class=code>count.length()</span>, the condition fails and the body is not executed, which is a good thing, since it would cause a run-time error.</p>
+
+<a name=5></a><br>
+<h3>10.5 Random numbers</h3>
+
+<p>Most computer programs do the same thing every time they are executed, so they are said to be <b>deterministic</b>.  Usually, determinism is a good thing, since we expect the same calculation to yield the same result.  For some applications, though, we would like the computer to be unpredictable.  Games are an obvious example.</p>
+
+<p>Making a program truly <b>nondeterministic</b> turns out to be not so easy, but there are ways to make it at least seem nondeterministic.  One of them is to generate {pseudorandom} numbers and use them to determine the outcome of the program. Pseudorandom numbers are not truly random in the mathematical sense, but for our purposes, they will do.</p>
+
+<p>C++ provides a function called <span class=code>random</span> that generates pseudorandom numbers.  It is declared in the header file <span class=code>stdlib.h</span>, which contains a variety of "standard library" functions, hence the name.</p>
+
+<p>The return value from <span class=code>random</span> is an integer between 0 and <span class=code>RAND_MAX</span>, where <span class=code>RAND_MAX</span> is a large number (about 2 billion on my computer) also defined in the header file.  Each time you call <span class=code>random</span> you get a different randomly-generated number.  To see a sample, run this loop:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; 4; i++) {
+<br>&nbsp; &nbsp; <span class=keyword>int</span> x = random ();
+<br>&nbsp; &nbsp; cout &lt;&lt; x &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>On my machine I got the following output:</p>
+
+
+<span class=code>1804289383
+<br>846930886
+<br>1681692777
+<br>1714636915
+<br></span><p>You will probably get something similar, but different, on yours.</p>
+
+<p>Of course, we don't always want to work with gigantic integers. More often we want to generate integers between 0 and some upper bound.  A simple way to do that is with the modulus operator.  For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> x = random ();
+<br>&nbsp; <span class=keyword>int</span> y = x % upperBound;
+<br></span><p>Since <span class=code>y</span> is the remainder when <span class=code>x</span> is divided by <span class=code>upperBound</span>, the only possible values for <span class=code>y</span> are between 0 and <span class=code>upperBound - 1</span>, including both end points.  Keep in mind, though, that <span class=code>y</span> will never be equal to <span class=code>upperBound</span>.</p>
+
+<p>It is also frequently useful to generate random floating-point values. A common way to do that is by dividing by <span class=code>RAND_MAX</span>.  For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> x = random ();
+<br>&nbsp; <span class=keyword>double</span> y = <span class=keyword>double</span>(x) / RAND_MAX;
+<br></span><p>This code sets <span class=code>y</span> to a random value between 0.0 and 1.0, including both end points.  As an exercise, you might want to think about how to generate a random floating-point value in a given range; for example, between 100.0 and 200.0.</p>
+
+<a name=6></a><br>
+<h3>10.6 Statistics</h3>
+
+<p>The numbers generated by <span class=code>random</span> are supposed to be distributed uniformly.  That means that each value in the range should be equally likely.  If we count the number of times each value appears, it should be roughly the same for all values, provided that we generate a large number of values.</p>
+
+<p>In the next few sections, we will write programs that generate a sequence of random numbers and check whether this property holds true.</p>
+
+<a name=7></a><br>
+<h3>10.7 Vector of random numbers</h3>
+
+<p>The first step is to generate a large number of random values and store them in a vector.  By "large number," of course, I mean 20.  It's always a good idea to start with a manageable number, to help with debugging, and then increase it later.</p>
+
+<p>The following function takes a single argument, the size of the vector.  It allocates a new vector of <span class=code><span class=keyword>int</span></span>s, and fills it with random values between 0 and <span class=code>upperBound-1</span>.</p>
+
+
+<span class=code>pvector&lt;<span class=keyword>int</span>&gt; randomVector (<span class=keyword>int</span> n, <span class=keyword>int</span> upperBound) {
+<br>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; vec (n);
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;vec.length(); i++) {
+<br>&nbsp; &nbsp; vec[i] = random () % upperBound;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> vec;
+<br>}
+<br></span><p>The return type is <span class=code>pvector&lt;<span class=keyword>int</span>&gt;</span>, which means that this function returns a vector of integers. To test this function, it is convenient to have a function that outputs the contents of a vector.</p>
+
+
+<span class=code><span class=keyword>void</span> printVector (<span class=keyword>const</span> pvector&lt;<span class=keyword>int</span>&gt;& vec) {
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;vec.length(); i++) {
+<br>&nbsp; &nbsp; cout &lt;&lt; vec[i] &lt;&lt; <span class=quote>" "</span>;
+<br>&nbsp; }
+<br>}
+<br></span><p>Notice that it is legal to pass <span class=code>pvector</span>s by reference. In fact it is quite common, since it makes it unnecessary to copy the vector.  Since <span class=code>printVector</span> does not modify the vector, we declare the parameter <span class=code><span class=keyword>const</span></span>.</p>
+
+<p>The following code generates a vector and outputs it:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> numValues = 20;
+<br>&nbsp; <span class=keyword>int</span> upperBound = 10;
+<br>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; vector = randomVector (numValues, upperBound);
+<br>&nbsp; printVector (vector);
+<br></span><p>On my machine the output is</p>
+
+
+<span class=code>3 6 7 5 3 5 6 2 9 1 2 7 0 9 3 6 0 6 2 6
+<br></span><p>which is pretty random-looking.  Your results may differ.</p>
+
+<p>If these numbers are really random, we expect each digit to appear the same number of times---twice each.  In fact, the number 6 appears five times, and the numbers 4 and 8 never appear at all.</p>
+
+<p>Do these results mean the values are not really uniform?  It's hard to tell.  With so few values, the chances are slim that we would get exactly what we expect.  But as the number of values increases, the outcome should be more predictable.</p>
+
+<p>To test this theory, we'll write some programs that count the number of times each value appears, and then see what happens when we increase <span class=code>numValues</span>.</p>
+
+<a name=8></a><br>
+<h3>10.8 Counting</h3>
+
+<p>A good approach to problems like this is to think of simple functions that are easy to write, and that might turn out to be useful.  Then you can combine them into a solution.  This approach is sometimes called <b>bottom-up design</b>.  Of course, it is not easy to know ahead of time which functions are likely to be useful, but as you gain experience you will have a better idea.</p>
+
+
+
+<p>Also, it is not always obvious what sort of things are easy to write, but a good approach is to look for subproblems that fit a pattern you have seen before.</p>
+
+
+
+<p>Back in <a href="chap07.htm#9">Section 7.9</a> we looked at a loop that traversed a string and counted the number of times a given letter appeared.  You can think of this program as an example of a pattern called "traverse and count."  The elements of this pattern are:</p>
+
+<ul>
+
+<li>A set or container that can be traversed, like a string or a vector.</li>
+
+<li>A test that you can pply to each element in the container.</li>
+
+<li>A counter that keeps track of how many elements pass the test.</li>
+
+</ul>
+
+<p>In this case, I have a function in mind called <span class=code>howMany</span> that counts the number of elements in a vector that equal a given value. The parameters are the vector and the integer value we are looking for.  The return value is the number of times the value appears.</p>
+
+
+<span class=code><span class=keyword>int</span> howMany (<span class=keyword>const</span> pvector&lt;<span class=keyword>int</span>&gt;& vec, <span class=keyword>int</span> value) {
+<br>&nbsp; <span class=keyword>int</span> count = 0;
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i=0; i&lt; vec.length(); i++) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (vec[i] == value) count++;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> count;
+<br>}
+<br></span><a name=9></a><br>
+<h3>10.9 Checking the other values</h3>
+
+<p><span class=code>howMany</span> only counts the occurrences of a particular value, and we are interested in seeing how many times each value appears. We can solve that problem with a loop:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> numValues = 20;
+<br>&nbsp; <span class=keyword>int</span> upperBound = 10;
+<br>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; vector = randomVector (numValues, upperBound);
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"value\thowMany"</span>;
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;upperBound; i++) {
+<br>&nbsp; &nbsp; cout &lt;&lt; i &lt;&lt; <span class=quote>'\t'</span> &lt;&lt; howMany (vector, i) &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>Notice that it is legal to declare a variable inside a <span class=code><span class=keyword>for</span></span> statement.  This syntax is sometimes convenient, but you should be aware that a variable declared inside a loop only exists inside the loop.  If you try to refer to <span class=code>i</span> later, you will get a compiler error.</p>
+
+<p>This code uses the loop variable as an argument to <span class=code>howMany</span>, in order to check each value between 0 and 9, in order.  The result is:</p>
+
+
+<span class=code>value&nbsp; &nbsp;howMany
+<br>0&nbsp; &nbsp; &nbsp; &nbsp;2
+<br>1&nbsp; &nbsp; &nbsp; &nbsp;1
+<br>2&nbsp; &nbsp; &nbsp; &nbsp;3
+<br>3&nbsp; &nbsp; &nbsp; &nbsp;3
+<br>4&nbsp; &nbsp; &nbsp; &nbsp;0
+<br>5&nbsp; &nbsp; &nbsp; &nbsp;2
+<br>6&nbsp; &nbsp; &nbsp; &nbsp;5
+<br>7&nbsp; &nbsp; &nbsp; &nbsp;2
+<br>8&nbsp; &nbsp; &nbsp; &nbsp;0
+<br>9&nbsp; &nbsp; &nbsp; &nbsp;2
+<br></span><p>Again, it is hard to tell if the digits are really appearing equally often.  If we increase <span class=code>numValues</span> to 100,000 we get the following:</p>
+
+
+<span class=code>value&nbsp; &nbsp;howMany
+<br>0&nbsp; &nbsp; &nbsp; &nbsp;10130
+<br>1&nbsp; &nbsp; &nbsp; &nbsp;10072
+<br>2&nbsp; &nbsp; &nbsp; &nbsp;9990
+<br>3&nbsp; &nbsp; &nbsp; &nbsp;9842
+<br>4&nbsp; &nbsp; &nbsp; &nbsp;10174
+<br>5&nbsp; &nbsp; &nbsp; &nbsp;9930
+<br>6&nbsp; &nbsp; &nbsp; &nbsp;10059
+<br>7&nbsp; &nbsp; &nbsp; &nbsp;9954
+<br>8&nbsp; &nbsp; &nbsp; &nbsp;9891
+<br>9&nbsp; &nbsp; &nbsp; &nbsp;9958
+<br></span><p>In each case, the number of appearances is within about 1% of the expected value (10,000), so we conclude that the random numbers are probably uniform.</p>
+
+<a name=10></a><br>
+<h3>10.10 A histogram</h3>
+
+<p>It is often useful to take the data from the previous tables and store them for later access, rather than just print them. What we need is a way to store 10 integers.  We could create 10 integer variables with names like <span class=code>howManyOnes</span>, <span class=code>howManyTwos</span>, etc.  But that would require a lot of typing, and it would be a real pain later if we decided to change the range of values.</p>
+
+<p>A better solution is to use a vector with length 10.  That way we can create all ten storage locations at once and we can access them using indices, rather than ten different names. Here's how:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> numValues = 100000;
+<br>&nbsp; <span class=keyword>int</span> upperBound = 10;
+<br>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; vector = randomVector (numValues, upperBound);
+<br>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; histogram (upperBound);
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;upperBound; i++) {
+<br>&nbsp; &nbsp; <span class=keyword>int</span> count = howMany (vector, i);
+<br>&nbsp; &nbsp; histogram[i] = count;
+<br>&nbsp; }
+<br></span><p>I called the vector <b>histogram</b> because that's a statistical term for a vector of numbers that counts the number of appearances of a range of values.</p>
+
+
+
+<p>The tricky thing here is that I am using the loop variable in two different ways.  First, it is an argument to <span class=code>howMany</span>, specifying which value I am interested in.  Second, it is an index into the histogram, specifying which location I should store the result in.</p>
+
+<a name=11></a><br>
+<h3>10.11 A single-pass solution</h3>
+
+<p>Although this code works, it is not as efficient as it could be.  Every time it calls <span class=code>howMany</span>, it traverses the entire vector.  In this example we have to traverse the vector ten times!</p>
+
+<p>It would be better to make a single pass through the vector. For each value in the vector we could find the corresponding counter and increment it.  In other words, we can use the value from the vector as an index into the histogram.  Here's what that looks like:</p>
+
+
+<span class=code>&nbsp; pvector&lt;<span class=keyword>int</span>&gt; histogram (upperBound, 0);
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;numValues; i++) {
+<br>&nbsp; &nbsp; <span class=keyword>int</span> index = vector[i];
+<br>&nbsp; &nbsp; histogram[index]++;
+<br>&nbsp; }
+<br></span><p>The first line initializes the elements of the histogram to zeroes.  That way, when we use the increment operator (<span class=code>++</span>) inside the loop, we know we are starting from zero. Forgetting to initialize counters is a common error.</p>
+
+<p>As an exercise, encapsulate this code in a function called <span class=code>histogram</span> that takes a vector and the range of values in the vector (in this case 0 through 10), and that returns a histogram of the values in the vector.</p>
+
+<a name=12></a><br>
+<h3>10.12 Random seeds</h3>
+
+<p>If you have run the code in this chapter a few times, you might have noticed that you are getting the same "random" values every time.  That's not very random!</p>
+
+<p>One of the properties of pseudorandom number generators is that if they start from the same place they will generate the same sequence of values.  The starting place is called a <b>seed</b>; by default, C++ uses the same seed every time you run the program.</p>
+
+<p>While you are debugging, it is often helpful to see the same sequence over and over.  That way, when you make a change to the program you can compare the output before and after the change.</p>
+
+<p>If you want to choose a different seed for the random number generator, you can use the <span class=code>srand</span> function.  It takes a single argument, which is an integer between 0 and <span class=code>RAND_MAX</span>.</p>
+
+<p>For many applications, like games, you want to see a different random sequence every time the program runs.  A common way to do that is to use a library function like <span class=code>gettimeofday</span> to generate something reasonably unpredictable and unrepeatable, like the number of milliseconds since the last second tick, and use that number as a seed.  The details of how to do that depend on your development environment.</p>
+
+<a name=13></a><br>
+<h3>10.13 Glossary</h3>
+
+<dl>
+
+<dt>vector</dt>
+<dd>A named collection of values, where all the values have the same type, and each value is identified by an index.</dd>
+
+<dt>element</dt>
+<dd>One of the values in a vector.  The <span class=code>[]</span> operator selects elements of a vector.</dd>
+
+<dt>index</dt>
+<dd>An integer variable or value used to indicate an element of a vector.</dd>
+
+<dt>constructor</dt>
+<dd>A special function that creates a new object and initializes its instance variables.</dd>
+
+<dt>deterministic</dt>
+<dd>A program that does the same thing every time it is run.</dd>
+
+<dt>pseudorandom</dt>
+<dd>A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.</dd>
+
+<dt>seed</dt>
+<dd>A value used to initialize a random number sequence. Using the same seed should yield the same sequence of values.</dd>
+
+<dt>bottom-up design</dt>
+<dd>A method of program development that starts by writing small, useful functions and then assembling them into larger solutions.</dd>
+
+<dt>histogram</dt>
+<dd>A vector of integers where each integer counts the number of values that fall into a certain range.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap11.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap09.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

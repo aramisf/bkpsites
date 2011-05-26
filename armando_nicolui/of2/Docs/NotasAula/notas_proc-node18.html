@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>18 Strings</TITLE>
+<META NAME="description" CONTENT="18 Strings">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node19.html">
+<LINK REL="previous" HREF="notas_proc-node17.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node19.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html448"
+  HREF="notas_proc-node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html446"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html440"
+  HREF="notas_proc-node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html449"
+  HREF="notas_proc-node19.html">19 Estruturas</A>
+<B>Up:</B> <A NAME="tex2html447"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html441"
+  HREF="notas_proc-node17.html">17 Array de Caracteres</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html450"
+  HREF="notas_proc-node18.html#SECTION000181000000000000000">18.1 Imprimindo strings com <TT>puts()</TT> e <TT>printf()</TT></A>
+<LI><A NAME="tex2html451"
+  HREF="notas_proc-node18.html#SECTION000182000000000000000">18.2 Lendo strings do teclado com <TT>gets()</TT> e <TT>scanf()</TT></A>
+<LI><A NAME="tex2html452"
+  HREF="notas_proc-node18.html#SECTION000183000000000000000">18.3 Array de Strings</A>
+<LI><A NAME="tex2html453"
+  HREF="notas_proc-node18.html#SECTION000184000000000000000">18.4 Fun&#231;&#245;es de String</A>
+<UL>
+<LI><A NAME="tex2html454"
+  HREF="notas_proc-node18.html#SECTION000184100000000000000">18.4.1 A fun&#231;&#227;o <TT>strlen()</TT></A>
+<LI><A NAME="tex2html455"
+  HREF="notas_proc-node18.html#SECTION000184200000000000000">18.4.2 A fun&#231;&#227;o <TT>strcmp()</TT> </A>
+<LI><A NAME="tex2html456"
+  HREF="notas_proc-node18.html#SECTION000184300000000000000">18.4.3 A fun&#231;&#227;o <TT>strcpy()</TT></A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000180000000000000000">
+18 Strings</A>
+</H1>
+
+<P>
+Strings s&#227;o arrays de caracteres (arrays com elementos do tipo <TT>char</TT>) que DEVEM terminar com 
+<code>'\0'</code> (o caracter  NUL).   Se voc&#234; usa o nome NUL em seu
+programa, ent&#227;o &#233; necess&#225;ria a defini&#231;&#227;o
+<code>#define NUL '\0'</code> .
+
+<P>
+No exemplo acima, embora n&#227;o tenhamos escrito explicitamente o
+caracter NUL, o compilador automaticamente o colocou como o &#250;ltimo
+elemento do array <TT>arr2[]</TT>.  Portanto, o tamanho de <TT>arr2[]</TT>
+&#233; 6: 5 para os caracteres que digitamos (ci208) e 1 para o caractere
+NUL que o compilador introduziu automaticamente.  As defini&#231;&#245;es
+abaixo s&#227;o equivalentes.
+<PRE>
+      char arr2[] =  {'c','i',' ', '2','0','8','\0'};
+
+      char arr2[] =  {'c','i',' ', '2','0','8', NUL};
+</PRE>
+
+<P>
+O caractere NUL marca o fim de um string.
+Outros exemplos:
+
+<P>
+<PRE>
+    /* a maneira tediosa */
+    char name1[] = { 'j','o','s','e',' ','s','i','l','v','a','\0' };
+
+    /* e a maneira facil */
+    char name2[] = "jose silva";
+</PRE>
+
+<P>
+Embora o primeiro exemplo seja um string, o segundo exemplo mostra
+como strings s&#227;o geralmente escritos (como constantes).  Note que se
+voc&#234; usar aspas quando escreve uma constante, voc&#234; n&#227;o precisa
+colocar <code>'\0'</code>, porque o compilador faz isso para voc&#234;.
+
+<P>
+Quando voc&#234; for criar um array de caracteres de um tamanho
+espec&#237;fico, lembre-se de adicionar 1 para o tamanho m&#225;ximo de
+caracteres esperado para armazenar o caractere NUL.  Por exemplo, para
+armazenar o string <TT>``programar e divertido''</TT>, voc&#234; precisa de
+um array de tamanho 22 (21 caracteres + 1 para o NUL). 
+
+<P>
+
+<H2><A NAME="SECTION000181000000000000000">
+18.1 Imprimindo strings com <TT>puts()</TT> e <TT>printf()</TT></A>
+</H2>  
+
+<P>
+Strings podem ser impressos usando <TT>printf()</TT> com o especificador
+de formato <TT>%s</TT>.  Por exemplo:
+<PRE>
+   main()
+   {
+       char mensagem[] = "tchau";
+
+       printf("ola\n%s\n", mensagem);
+   }
+</PRE>
+
+<P>
+A sa&#237;da deste programa &#233;:
+<PRE>
+    ola
+    tchau
+</PRE>
+
+<P>
+A fun&#231;&#227;o <TT>puts()</TT> simplesmente imprime um string e depois pula
+de linha.  Nenhuma op&#231;&#227;o de formata&#231;&#227;o pode ser definida.  A
+fun&#231;&#227;o <TT>puts()</TT> somente pega um string como argumento e o
+imprime.  O programa abaixo tem a mesma sa&#237;da que o programa anterior.
+
+<P>
+<PRE>
+   main()
+   {
+       char mensagem[] = "tchau";
+
+       puts("ola");
+       puts(mensagem);
+   }
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000182000000000000000">
+18.2 Lendo strings do teclado com <TT>gets()</TT> e <TT>scanf()</TT></A>
+</H2>  
+
+<P>
+A fun&#231;&#227;o <TT>gets()</TT> l&#234; uma linha de texto digitado no teclado e a
+armazena em um string.  Veja o exemplo abaixo:
+
+<P>
+<PRE>
+   main()
+   {
+       char nome[100];
+
+       printf("Entre seu nome: ");
+       gets(nome);
+       printf("Oi, %s.\n", nome);
+   }
+</PRE>
+
+<P>
+Exemplo de execu&#231;&#227;o
+<PRE>
+   Entre seu nome: Jose Silva
+   Oi, Jose Silva.
+</PRE>
+
+<P>
+Passando um nome de array para a fun&#231;&#227;o <TT>gets()</TT>, como ilustrado
+no programa acima, coloca a linha inteira digitada pelo usu&#225;rio no
+array <TT>nome</TT> (tudo at&#233; que seja teclado enter).  Note que se o
+usu&#225;rio digitar caracteres demais (neste caso, mais de 99
+caracteres), isso causar&#225; um erro de acesso fora dos limites (que
+pode ser PERIGOSO !!)
+
+<P>
+A fun&#231;&#227;o <TT>scanf()</TT> pode ser usada de maneira similar.  A &#250;nica
+diferen&#231;a &#233; que o <TT>scanf()</TT> l&#234; somente a primeira palavra (tudo
+at&#233; que de digite um separador - um espa&#231;o em branco, tabula&#231;&#227;o,
+ou enter).  Al&#233;m disso, como estamos passando um array como argumento
+para o <TT>scanf()</TT>, <B>O &amp; QUE GERALMENTE PRECEDE O ARGUMENTO
+N&#195;O DEVE ESTAR PRESENTE</B>.
+
+<P>
+<PRE>
+   main()
+   {
+       char nome[100];
+
+       printf("Entre seu nome: ");
+       scanf("%s", nome);
+       printf("Oi, %s.\n", nome);
+   }
+</PRE>
+
+<P>
+Exemplo de execu&#231;&#227;o
+<PRE>
+   Entre seu nome: Jose Silva
+   Oi, Jose.
+</PRE>
+
+<P>
+Note que somente o primeiro nome &#233; lido pelo <TT>scanf()</TT> porque a
+fun&#231;&#227;o para no primeiro espa&#231;o em branco que encontra (enquanto
+<TT>gets()</TT> para quando encontra um enter).
+
+<P>
+
+<H2><A NAME="SECTION000183000000000000000">
+18.3 Array de Strings</A>
+</H2>
+Em notas de aula anteriores, vimos alguns exemplos de arrays de arrays
+(matrizes ou tabelas).  Como strings s&#227;o tamb&#233;m arrays, podemos
+definir arrays de strings.  O programa abaixo inicializa um array de
+strings com nomes e os imprime.
+
+<P>
+<PRE>
+   #define NUM_NOMES 5        /* define a quantidade de nomes no array */
+   #define TAM       20       /* define o tamanho maximo do nome */
+
+   main()
+   {
+       char nomes[NUM_NOMES][TAM] = {"Jose Silva", 
+                                     "Maria Silva",
+                                     "Antonio dos Santos",
+                                     "Pedro dos Santos",
+                                     "Joao da Silva"};
+       int i;
+ 
+       for(i = 0; i &lt; 5; i++)
+         printf("%s\n", nomes[i]);
+   }
+</PRE>
+
+<P>
+A sa&#237;da deste programa &#233;:
+<PRE>
+   Jose Silva 
+   Maria Silva
+   Antonio dos Santos
+   Pedro dos Santos
+   Joao da Silva
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000184000000000000000">
+18.4 Fun&#231;&#245;es de String</A>
+</H2> 
+
+<P>
+H&#225; fun&#231;&#245;es para manipula&#231;&#227;o de string j&#225; definidas na biblioteca
+padr&#227;o C chamada <TT>string.h</TT>.    Todas as fun&#231;&#245;es que
+apresentaremos nesta se&#231;&#227;o s&#227;o parte desta biblioteca.  Portanto,
+se seu programa utilizar uma destas fun&#231;&#245;es voc&#234; deve incluir a
+linha <TT>#include &lt;string.h&gt;</TT> no in&#237;cio do seu programa.
+
+<P>
+O objetivo desta se&#231;&#227;o &#233; mostrar como estas fun&#231;&#245;es poderiam ser
+implementadas como exemplos de programas de manipula&#231;&#227;o de strings.
+
+<P>
+
+<H3><A NAME="SECTION000184100000000000000">
+18.4.1 A fun&#231;&#227;o <TT>strlen()</TT></A>
+</H3>  
+<P>
+A fun&#231;&#227;o <TT>strlen()</TT> tem como argumento um string.  Ela retorna
+um inteiro que &#233; o comprimento do string (o n&#250;mero de caracteres do
+string, n&#227;o contando o caractere NUL).  Por exemplo, o comprimento do
+string <TT>``alo''</TT> &#233; <TT>3</TT>.
+
+<P>
+<PRE>
+   main()
+   {
+       char nome[100];
+       int comprimento;
+
+       printf("Entre seu nome: ");
+       gets(nome);
+       comprimento = strlen(nome);
+
+       printf("Seu nome tem  %d caracteres.\n", comprimento);
+   }
+</PRE>
+
+<P>
+Um exemplo de execu&#231;&#227;o:
+<PRE>
+   Entre seu nome: Dostoevsky
+   Seu nome tem 10 caracteres.
+</PRE>
+
+<P>
+Abaixo, mostramos como a fun&#231;&#227;o <TT>strlen()</TT> poderia ser implementada.
+
+<P>
+<PRE>
+   int strlen( char str[] )
+   {
+      int comprimento = 0;
+      
+      
+      while ( str[comprimento] != NUL )
+          comprimento++;
+      return comprimento;
+    }
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION000184200000000000000">
+18.4.2 A fun&#231;&#227;o <TT>strcmp()</TT> </A>
+</H3>
+
+<P>
+A fun&#231;&#227;o <TT>strcmp()</TT> &#233; usada para comparar dois strings.  Lembre
+que n&#227;o podemos usar <TT>==</TT>, como em <TT>str1 == str2</TT>, para
+comparar dois strings, uma vez que strings s&#227;o arrays.  Strings devem
+ser comparados caractere por caractere.  A fun&#231;&#227;o <TT>strcmp()</TT> tem
+como argumento dois strings e retorna um inteiro.
+
+<P>
+Strings s&#227;o ordenados de forma similar a maneira como palavras s&#227;o
+ordenadas em um dicion&#225;rio.  Ordenamos palavras em um dicion&#225;rio
+alfabeticamente, e ordenamos strings respeitando a ordem dos
+caracteres no conjunto de caracteres da m&#225;quina.  A ordena&#231;&#227;o
+abaixo &#233; v&#225;lida em qualquer computador:
+<PRE>
+'0' &lt; '1' &lt; ... &lt; '8' &lt; '9'
+'A' &lt; 'B' &lt; ... &lt; 'Y' &lt; 'Z'
+'a' &lt; 'b' &lt; ... &lt; 'y' &lt; 'z'
+</PRE>
+A ordem relativa do tr&#234;s conjuntos (d&#237;gitos, letras mai&#250;sculas e
+letras min&#250;sculas) depende do computador utilizado.
+
+<P>
+Se <TT>s1</TT> e <TT>s2</TT> s&#227;o strings, o resultado da chamada de
+fun&#231;&#227;o <TT>strcmp(s1, s2)</TT> &#233;:
+
+<P>
+<IMG
+ WIDTH="13" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img59.png"
+ ALT="$\bullet$"> se <TT>s1</TT> <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img60.png"
+ ALT="$=_{s}$"> <TT>s2</TT>, <TT>strcmp()</TT> retorna <TT>0</TT>
+
+<P>
+<IMG
+ WIDTH="13" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img59.png"
+ ALT="$\bullet$"> se <TT>s1</TT> <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img61.png"
+ ALT="$&lt;_{s}$"> <TT>s2</TT>, <TT>strcmp()</TT> retorna
+um n&#250;mero negativo (<TT>&lt; 0</TT>)
+
+<P>
+<IMG
+ WIDTH="13" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img59.png"
+ ALT="$\bullet$"> se <TT>s1</TT> <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img62.png"
+ ALT="$&gt;_{s}$"> <TT>s2</TT>, <TT>strcmp()</TT> retorna
+um inteiro positivo (<TT>&gt; 0</TT>)
+
+<P>
+(onde <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img60.png"
+ ALT="$=_{s}$">, <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img61.png"
+ ALT="$&lt;_{s}$"> e <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img62.png"
+ ALT="$&gt;_{s}$"> s&#227;o <IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img63.png"
+ ALT="$=$">, <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$"> e <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$">
+para strings)
+
+<P>
+<IMG
+ WIDTH="68" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img64.png"
+ ALT="$s1 &lt;_{s} s2$"> significa ``<IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img65.png"
+ ALT="$s1$"> vem antes de <IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img66.png"
+ ALT="$s2$"> no dicion&#225;rio''.
+Exemplos:
+<TT>``tudo''</TT> &#233; menor que <TT>``xadrez''</TT>, <TT>``calor''</TT> &#233; menor que
+<TT>``calorao''</TT>, <TT>``frio''</TT> &#233; menor que  <TT>``quente''</TT>, e &#233; claro o
+string vazio , <TT>NUL</TT>, &#233; menor que qualquer string.
+
+<P>
+Considere o exemplo abaixo que usa <TT>strcmp()</TT>:
+
+<P>
+<PRE>
+    main()
+    {
+        char palavra1[100], palavra2[100];
+        int resultado;
+
+        printf("entre com uma palavra: ");
+        gets(palavra1);
+        printf("entre outra palavra: ");
+        gets(palavra2);
+
+        resultado = strcmp(palavra1, palavra2);
+
+        if (resultado == 0) {
+            printf("igual\n");
+        } else if (resultado &gt; 0) {
+            printf("o primeiro e' maior\n");
+        } else {
+            printf("o segundo e' maior\n");
+        }
+    }
+</PRE>
+
+<P>
+Aqui est&#225; um exemplo de como a fun&#231;&#227;o <TT>strcmp()</TT> poderia ser
+implementada. 
+<PRE>
+int strcmp( char s1[], char s2[] )
+{
+   int i = 0;
+
+   while (1)
+     {
+     if (s1[i] == NUL &amp;&amp; s2[i] == NUL)
+        return 0;
+     else if (s1[i] == NUL)
+        return -1;
+     else if (s2[i] == NUL)
+        return 1;
+     else if (s1[i] &lt; s2[i])
+        return -1;
+     else if (s1[i] &gt; s2[i])
+        return 1;
+     else 
+        {
+        i++;
+        }
+     }
+}
+</PRE>
+
+<P>
+Na biblioteca padr&#227;o, a fun&#231;&#227;o <TT>strcmp()</TT> faz distin&#231;&#227;o entre
+letras mai&#250;sculas e min&#250;sculas.  Se voc&#234; n&#227;o quer que a fun&#231;&#227;o
+fa&#231;a esta distin&#231;&#227;o, voc&#234; pode modificar o seu string para ter
+apenas letras min&#250;sculas (ou mai&#250;sculas) antes de
+pass&#225;-lo como argumento para a fun&#231;&#227;o <TT>strcmp()</TT>.
+Para fazer isso, voc&#234; pode usar a fun&#231;&#227;o da biblioteca padr&#227;o <TT>tolower()</TT>, que tem como argumento um caractere.  Se o caractere
+passado &#233; uma letra mai&#250;scula, ele retorna esta letra min&#250;scula;
+caso contr&#225;rio, retorna o mesmo caractere.  Por exemplo:  
+<TT>tolower('A')</TT> &#233; <TT>'a'</TT>, <TT>tolower('1')</TT> &#233; <TT>'1'</TT>, <TT>tolower('a')</TT> &#233; <TT>'a'</TT>. 
+
+<P>
+
+<H3><A NAME="SECTION000184300000000000000">
+18.4.3 A fun&#231;&#227;o <TT>strcpy()</TT></A>
+</H3>
+
+<P>
+A fun&#231;&#227;o <TT>strcpy()</TT> &#233; usada para copiar o conte&#250;do de um
+string para outro.  Ela tem dois argumentos:
+<TT>strcpy(s1, s2)</TT> copia o conte&#250;do do string <TT>s2</TT> para o string <TT>s1</TT>.   A fun&#231;&#227;o  <TT>strcpy()</TT> que
+apresentamos abaixo n&#227;o retorna um valor.  Seu prot&#243;tipo &#233;
+<PRE>
+void strcmp(char [], char []);
+</PRE>
+
+<P>
+O exemplo abaixo mostra a utiliza&#231;&#227;o do <TT>strcpy()</TT>.
+<PRE>
+    main()
+    {
+        char pal[100], palCopia[100];
+
+        printf("entre com uma palavra: ");
+        gets(pal);
+        strcpy(palCopia, pal);
+
+        printf("entre outra palavra: ");
+        gets(pal);
+
+        printf("voce entrou primeiro: %s\n", palCopia);
+    }
+</PRE>
+
+<P>
+Embora este programa pudesse ter sido escrito sem usar <TT>strcpy()</TT>,
+o objetivo &#233; mostrar que se pode usar <TT>strcpy()</TT> para fazer
+``atribui&#231;&#227;o'' de strings.
+
+<P>
+A fun&#231;&#227;o <TT>strcpy()</TT> poderia ter sido implementada da seguinte forma:
+<PRE>
+   void strcpy( char s1[], char s2[] )
+   {
+      int i = 0;
+
+      while ( s2[i] != NUL ) {
+          s1[i] = s2[i];
+          i++;
+      }
+      s1[i] = s2[i];      
+   }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html448"
+  HREF="notas_proc-node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html446"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html440"
+  HREF="notas_proc-node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html449"
+  HREF="notas_proc-node19.html">19 Estruturas</A>
+<B>Up:</B> <A NAME="tex2html447"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html441"
+  HREF="notas_proc-node17.html">17 Array de Caracteres</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

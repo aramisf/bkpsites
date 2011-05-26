@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10 A construção else-if</TITLE>
+<META NAME="description" CONTENT="10 A construção else-if">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node11.html">
+<LINK REL="previous" HREF="notas_proc-node9.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node11.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html326"
+  HREF="notas_proc-node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html324"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html318"
+  HREF="notas_proc-node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="notas_proc-node11.html">11 A sentença switch</A>
+<B>Up:</B> <A NAME="tex2html325"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html319"
+  HREF="notas_proc-node9.html">9 Exemplos</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html328"
+  HREF="notas_proc-node10.html#SECTION000100010000000000000">Exemplo 9:</A>
+<LI><A NAME="tex2html329"
+  HREF="notas_proc-node10.html#SECTION000100020000000000000">Exemplo 10:</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000100000000000000000">
+10 A constru&#231;&#227;o  <TT>else-if</TT></A>
+</H1> 
+
+<P>
+Embora  ela  n&#227;o  seja  um  tipo  diferente  de  senten&#231;a,  a  seguinte
+constru&#231;&#227;o  &#233; bastante  comum  para programar  decis&#245;es entre  diversas
+alternativas:
+
+<P>
+
+<P>
+<TT>if</TT> (<IMG
+ WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img27.png"
+ ALT="$expressao_{1}$">)
+
+<P>
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img23.png"
+ ALT="$sentenca_{1}$">
+
+<P>
+<TT>else if</TT> (<IMG
+ WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img28.png"
+ ALT="$expressao_{2}$">)
+
+<P>
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img24.png"
+ ALT="$sentenca_{2}$">
+
+<P>
+<TT>else if</TT> (<IMG
+ WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img29.png"
+ ALT="$expressao_{3}$">) 
+
+<P>
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img30.png"
+ ALT="$sentenca_{3}$">
+
+<P>
+<IMG
+ WIDTH="9" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img31.png"
+ ALT="$\vdots$">
+
+<P>
+<TT>else if</TT> (<!-- MATH
+ $expressao_{n-1}$
+ -->
+<IMG
+ WIDTH="108" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img32.png"
+ ALT="$expressao_{n-1}$">)
+
+<P>
+<!-- MATH
+ $sentenca_{n-1}$
+ -->
+<IMG
+ WIDTH="99" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img33.png"
+ ALT="$sentenca_{n-1}$">
+
+<P>
+<TT>else</TT>
+
+<P>
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img34.png"
+ ALT="$sentenca_{n}$">
+
+<P>
+
+<P>
+As  express&#245;es  l&#243;gicas  s&#227;o   avaliadas  em  ordem,  come&#231;ando  com  a
+<IMG
+ WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img27.png"
+ ALT="$expressao_{1}$">.   Se uma  das  express&#245;es for  verdadeira, a  senten&#231;a
+associada ser&#225; executada.  Se nenhuma for verdadeira, ent&#227;o a senten&#231;a,
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img35.png"
+ ALT="$sentenca_n$">,  do &#250;ltimo  <TT>else</TT> ser&#225;  executada  como op&#231;&#227;o  <EM>default</EM>.  Se a op&#231;&#227;o <EM>default</EM> n&#227;o for necess&#225;ria, ent&#227;o a parte
+
+<P>
+<TT>else</TT>
+
+<P>
+<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img34.png"
+ ALT="$sentenca_{n}$">
+
+<P>
+pode ser removida.
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="712" HEIGHT="238" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img36.png"
+ ALT="\includegraphics[scale=1.0]{else-if}"></DIV>
+
+<P>
+
+<H4><A NAME="SECTION000100010000000000000">
+Exemplo 9:</A>
+</H4>
+
+<P>
+O seguinte exemplo mostra um  <TT>else-if</TT> de tr&#234;s op&#231;&#245;es.  O programa
+l&#234; dois  n&#250;meros e diz  se eles  s&#227;o iguais ou  se o primeiro  n&#250;mero &#233;
+menor ou maior que o segundo.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num1, num2;
+  
+  /* obtem 2 numeros do usuario */
+  printf("Entre um numero: ");
+  scanf("%d", &amp;num1);
+  printf("Entre com um outro numero: ");
+  scanf("%d", &amp;num2);
+  
+  /* mostra a mensagem de comparacao */
+  if (num1 == num2)
+    printf("Os numeros sao iguais\n");
+  else if (num1 &lt; num2)
+    printf("O primeiro numero e menor\n");
+  else
+    printf("O primeiro numero e maior\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+No programa  acima, se  <TT>(num1 ==  num2)</TT> for verdadeiro,  ent&#227;o os
+n&#250;meros s&#227;o  iguais.  Sen&#227;o, &#233; verificado  se <TT>(num1  &lt; num2)</TT>.  Se
+esta condi&#231;&#227;o for verdadeira, ent&#227;o o primeiro n&#250;mero &#233; menor.  Se isso
+n&#227;o  for verdadeiro,  ent&#227;o a  &#250;nica op&#231;&#227;o  restante &#233;  que  o primeiro
+n&#250;mero &#233; maior.
+
+<P>
+
+<H4><A NAME="SECTION000100020000000000000">
+Exemplo 10:</A>
+</H4>
+
+<P>
+Este programa l&#234; um n&#250;mero, um operador e um segundo n&#250;mero e
+realiza a opera&#231;&#227;o correspondente entre os operandos dados.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  float num1, num2;
+  char op;
+  
+  /* obtem uma expressao do usuario */
+  printf("Entre com numero operador numero\n");
+  scanf("%f %c %f", &amp;num1, &amp;op, &amp;num2);
+  
+  /* mostra o resultado da operacao */
+  if (op == '+')
+    printf(" = %.2f", num1 + num2);
+  else if (op == '-')
+    printf(" = %.2f", num1 - num2);
+  else if (op == '/')
+    printf(" = %.2f", num1 / num2);
+  else if (op == '*')
+    printf(" = %.2f", num1 * num2);
+  else 
+    printf(" Operador invalido.");
+  printf("\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Exemplos da execu&#231;&#227;o deste programa:
+
+<P>
+<PRE>
+   Entre com numero operador numero:
+   5 * 3.5
+    = 17.50
+
+   Entre com numero operador numero:
+   10 + 0
+    = 10.00
+
+   Entre com numero operador numero:
+   10 x 5.0
+    Operador invalido.
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html326"
+  HREF="notas_proc-node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html324"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html318"
+  HREF="notas_proc-node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="notas_proc-node11.html">11 A sentença switch</A>
+<B>Up:</B> <A NAME="tex2html325"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html319"
+  HREF="notas_proc-node9.html">9 Exemplos</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

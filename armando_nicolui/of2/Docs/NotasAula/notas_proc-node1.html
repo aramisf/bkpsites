@@ -1,0 +1,884 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1 Programas C&nbsp;</TITLE>
+<META NAME="description" CONTENT="1 Programas C&nbsp;">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node2.html">
+<LINK REL="previous" HREF="notas_proc.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node2.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html197"
+  HREF="notas_proc-node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html195"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html189"
+  HREF="notas_proc.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html198"
+  HREF="notas_proc-node2.html">2 Opera&#231;&#245;es Aritm&#233;ticas e</A>
+<B>Up:</B> <A NAME="tex2html196"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html190"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html199"
+  HREF="notas_proc-node1.html#SECTION00011000000000000000">1.1 Senteças: simples e compostas</A>
+<LI><A NAME="tex2html200"
+  HREF="notas_proc-node1.html#SECTION00012000000000000000">1.2 Variáveis em C&nbsp;</A>
+<LI><A NAME="tex2html201"
+  HREF="notas_proc-node1.html#SECTION00013000000000000000">1.3 Definição de Variável em C&nbsp;</A>
+<LI><A NAME="tex2html202"
+  HREF="notas_proc-node1.html#SECTION00014000000000000000">1.4 Constantes</A>
+<LI><A NAME="tex2html203"
+  HREF="notas_proc-node1.html#SECTION00015000000000000000">1.5 Caracteres Constantes</A>
+<LI><A NAME="tex2html204"
+  HREF="notas_proc-node1.html#SECTION00016000000000000000">1.6 Entrada e Saída</A>
+<LI><A NAME="tex2html205"
+  HREF="notas_proc-node1.html#SECTION00017000000000000000">1.7 Exibindo informações na tela: printf()</A>
+<LI><A NAME="tex2html206"
+  HREF="notas_proc-node1.html#SECTION00018000000000000000">1.8 Lendo informação: scanf()</A>
+<LI><A NAME="tex2html207"
+  HREF="notas_proc-node1.html#SECTION00019000000000000000">1.9 Algoritmo X Programa</A>
+<UL>
+<LI><A NAME="tex2html208"
+  HREF="notas_proc-node1.html#SECTION00019010000000000000">Programa em C&nbsp;</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Programas C&nbsp;</A>
+</H1>
+
+<P>
+Um programa C&nbsp;consiste de  uma ou mais partes chamadas fun&#231;&#245;es.  Um
+programa  em   C&nbsp;consiste  de   pelo  menos  uma   fun&#231;&#227;o  chamada
+<B>main</B>.  Esta fun&#231;&#227;o  marca o  ponto  de in&#237;cio  de execu&#231;&#227;o  do
+programa.
+
+<P>
+Programas C&nbsp;tem  a seguinte estrutura geral:
+
+<P>
+
+<PRE><TT>
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"> <BR>
+<BR><I>defini&#231;&#227;o de constantes</I> <BR>
+<BR><I>fun&#231;&#245;es</I> <BR>
+<BR>
+main()  
+<BR>{ 
+<BR><I>declara&#231;&#227;o de vari&#225;veis</I> 
+<BR><I>....</I> 
+<BR><I>senten&#231;as</I> 
+<BR><I>....</I> 
+<BR>}
+</TT></PRE>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Sente&#231;as: simples e compostas</A>
+</H2>
+
+<P>
+Cada  instru&#231;&#227;o em  C &#233;  chamada  de senten&#231;a.   Senten&#231;as simples  s&#227;o
+terminadas  com um  ponto e  v&#237;rgula.  Usando  chaves,  podemos agrupar
+senten&#231;as em blocos, chamados de senten&#231;as compostas.
+
+<P>
+Exemplos de senten&#231;as incluem:
+
+<P>
+
+<UL>
+<LI>Simples:
+<PRE>
+    x = 3;
+</PRE>
+</LI>
+<LI>Composta:
+<PRE>
+    {
+       i = 3;
+
+       printf("%d\n", i);
+
+       i = i + 1;
+    }
+</PRE>
+</LI>
+</UL>
+
+<P>
+O corpo da fun&#231;&#227;o main() &#233; um exemplo de senten&#231;a composta.
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Vari&#225;veis em C&nbsp;</A>
+</H2>
+
+<P>
+Uma vari&#225;vel &#233;  uma informa&#231;&#227;o qe voc&#234; pode usar  dentro de um programa
+C&nbsp;.   Esta informa&#231;&#227;o  est&#225;  associada com  um  lugar espec&#237;fico  da
+mem&#243;ria (isso &#233; feito pelo  compilador).  O <B>nome</B> da vari&#225;vel e
+o  endere&#231;o  da  mem&#243;ria   onde  a  informa&#231;&#227;o  est&#225;  armazenada  est&#227;o
+associados.  O nome e o endere&#231;o n&#227;o mudam.  Mas, o valor da informa&#231;&#227;o
+pode mudar  (o valor do que est&#225;  dentro da caixa pode  mudar, embora o
+tipo  seja sempre  o  mesmo).   Cada vari&#225;vel  tem  um tipo  associado.
+Alguns tipos  de vari&#225;veis que  discutiremos incluem int,  char e
+float.
+
+<P>
+Cada  vari&#225;vel  usa  uma  determinada quantidade  de  armazenamento  em
+mem&#243;ria.  A  maneira como sabemos  quantos bytes s&#227;o utilizados  &#233; pelo
+tipo da vari&#225;vel.   Vari&#225;veis do mesmo tipo utilizam  o mesmo n&#250;mero de
+bytes, n&#227;o interessando qual o valor que a vari&#225;vel armazena.
+
+<P>
+Um dos  tipos utilizados para armazanar  n&#250;meros &#233; o int.  Ele &#233;
+usado para armazenar n&#250;meros inteiros.  Em Borland&nbsp;C++&nbsp;, valores do tipo
+int usam 2 bytes de mem&#243;ria e podem armazenar valores de -32768 a
+32767.  Por exemplo, 42, 1492, ou -3691.
+
+<P>
+Outro  tipo  &#233; o  char,  usado  para armazenar  caracteres.   Um
+caracter &#233; um s&#237;mbolo (uma letra  do alfabeto, um d&#237;gito, um s&#237;mbolo de
+pontua&#231;&#227;o,  etc).  Um char &#233;  armazenado em  1 byte  de mem&#243;ria.
+Cada caracter  &#233; associado com  um valor entre  0 e 255.   O compilador
+C&nbsp;faz a  tradu&#231;&#227;o para voc&#234;, portanto voc&#234;  n&#227;o precisa saber estes
+n&#250;meros.  Em  C&nbsp;, um caracter  &#233; representado entre  ap&#243;strofes (').
+Por exemplo, 'C', 'a',  '5', '$'.  Note que '5' &#233; um  caracter, e n&#227;o o
+inteiro 5.
+
+<P>
+
+<DIV ALIGN="CENTER">
+  <DIV ALIGN="CENTER">  <IMG
+ WIDTH="365" HEIGHT="266" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img3.png"
+ ALT="\includegraphics[scale=0.5]{variable}">
+</DIV>
+</DIV>
+
+<P>
+A figura acima mostra como um int e um char s&#227;o armazenados
+na mem&#243;ria.
+
+<P>
+Outro  tipo existente  &#233; o  float,  usado para  armazenar n&#250;meros
+reais (n&#250;meros com  o ponto decimal).  Este n&#250;meros  s&#227;o armazenados em
+duas partes: a <EM>mantissa</EM> e o <EM>expoente</EM>.  Eles s&#227;o armazenados
+de uma maneira que se  assemelha a nota&#231;&#227;o exponencial.  Por exemplo, o
+n&#250;mero <!-- MATH
+ $6.023 \times 10^{23}$
+ -->
+<IMG
+ WIDTH="97" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img4.png"
+ ALT="$6.023 \times 10^{23}$"> &#233; escrito como <IMG
+ WIDTH="70" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img5.png"
+ ALT="$6.023e23$">.  Neste caso, a
+mantissa &#233; 6.023 e o expoente 23.
+
+<P>
+Estes n&#250;meros s&#227;o  armazenados de uma forma padr&#227;o,  tal que a mantissa
+tem apenas  um d&#237;gito para a  esquerda do ponto  decimal.  Desta forma,
+3634.1 &#233;  escrito como 3.6341e3,  e 0.0000341 &#233; escrito  3.41e-5.  Note
+tamb&#233;m que a  precis&#227;o &#233; limitada pela mantissa.   Somente os 6 d&#237;gitos
+mais  significativos s&#227;o  armazenados.  Em  Borland&nbsp;C++&nbsp;um  float
+ocupa 4  bytes de mem&#243;ria.  H&#225;  muitos outros tipos  (short, long,
+double), que ser&#227;o descritos no futuro.
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Defini&#231;&#227;o de Vari&#225;vel em C&nbsp;</A>
+</H2>
+
+<P>
+Se voc&#234; usa vari&#225;veis no  programa, voc&#234; deve defini-las.  Isto envolve
+especificar o tipo da vari&#225;vel e  o seu nome.  As regras para formar
+nomes de vari&#225;veis em C&nbsp;s&#227;o:
+
+<UL>
+<LI>qualquer sequ&#234;ncia  de letras, digitos, e '_',  MAS DEVE COME&#199;AR
+  com uma  letra ou com  '_'.  Por exemplo, hora_inicio, tempo,
+  var1 s&#227;o nomes de  vari&#225;veis v&#225;lidos, enquanto 3horas, total$
+  e azul-claro n&#227;o s&#227;o nomes v&#225;lidos;
+</LI>
+<LI>Mai&#250;sculas <IMG
+ WIDTH="18" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img6.png"
+ ALT="$\neq$"> Min&#250;sculas;
+</LI>
+<LI>N&#227;o s&#227;o permitidos nomes ou palavras reservadas da linguagem.
+</LI>
+</UL>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="145"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Palavras Reservadas da Linguagem C&nbsp;</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">auto</TD>
+<TD ALIGN="CENTER">break</TD>
+<TD ALIGN="CENTER">case</TD>
+<TD ALIGN="CENTER">char</TD>
+<TD ALIGN="CENTER">const</TD>
+<TD ALIGN="CENTER">continue</TD>
+</TR>
+<TR><TD ALIGN="CENTER">default</TD>
+<TD ALIGN="CENTER">do</TD>
+<TD ALIGN="CENTER">double</TD>
+<TD ALIGN="CENTER">else</TD>
+<TD ALIGN="CENTER">enum</TD>
+<TD ALIGN="CENTER">extern</TD>
+</TR>
+<TR><TD ALIGN="CENTER">float</TD>
+<TD ALIGN="CENTER">for</TD>
+<TD ALIGN="CENTER">goto</TD>
+<TD ALIGN="CENTER">if</TD>
+<TD ALIGN="CENTER">int</TD>
+<TD ALIGN="CENTER">long</TD>
+</TR>
+<TR><TD ALIGN="CENTER">main</TD>
+<TD ALIGN="CENTER">register</TD>
+<TD ALIGN="CENTER">return</TD>
+<TD ALIGN="CENTER">short</TD>
+<TD ALIGN="CENTER">signed</TD>
+<TD ALIGN="CENTER">sizeof</TD>
+</TR>
+<TR><TD ALIGN="CENTER">static</TD>
+<TD ALIGN="CENTER">struct</TD>
+<TD ALIGN="CENTER">switch</TD>
+<TD ALIGN="CENTER">typedef</TD>
+<TD ALIGN="CENTER">union</TD>
+<TD ALIGN="CENTER">unsigned</TD>
+</TR>
+<TR><TD ALIGN="CENTER">void</TD>
+<TD ALIGN="CENTER">volatile</TD>
+<TD ALIGN="CENTER">while</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:palavrasReservadas"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+&#201; sempre uma boa id&#233;ia ter  certas regras (para voc&#234; mesmo) para nomear
+vari&#225;veis para tornar o programa mais leg&#237;vel:
+
+<UL>
+<LI>D&#234; nomes significativos as vari&#225;veis (mas n&#227;o muito longos);
+</LI>
+<LI>Use nomes de vari&#225;veis do tipo  i,  j, k somente  para
+  vari&#225;veis tipo  contadores;
+</LI>
+<LI>Pode-se usar letras mai&#250;sculas ou '_' para juntar palavras.  Por
+  exemplo, horaInicio ou hora_inicio.
+  Use  o  que  voc&#234;  preferir,  mas SEJA  <B>CONSISTENTE</B>  em  sua
+  escolha.
+</LI>
+</UL>
+
+<P>
+Os tipos b&#225;sicos de dados existentes em C&nbsp;s&#227;o:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Tipo de Dado</TD>
+<TD ALIGN="LEFT">Bits</TD>
+<TD ALIGN="LEFT">Faixa de Valores</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TH ALIGN="LEFT"><B>char</B></TH>
+<TD ALIGN="LEFT">8</TD>
+<TD ALIGN="LEFT">-128 a 127</TD>
+</TR>
+<TR><TH ALIGN="LEFT"><B>int</B></TH>
+<TD ALIGN="LEFT">16</TD>
+<TD ALIGN="LEFT">-32768 a 32767</TD>
+</TR>
+<TR><TH ALIGN="LEFT"><B>float</B></TH>
+<TD ALIGN="LEFT">32</TD>
+<TD ALIGN="LEFT">6 a 7 d&#237;gitos significativos</TD>
+</TR>
+<TR><TH ALIGN="LEFT"><B>double</B></TH>
+<TD ALIGN="LEFT">64</TD>
+<TD ALIGN="LEFT">15 a 16 d&#237;gitos significativos</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Abaixo  est&#225; um  exemplo  de  um programa  com  diversas defini&#231;&#245;es  de
+vari&#225;veis:
+
+<P>
+
+<PRE><TT>
+main() 
+<BR>{ 
+<BR>
+int pera; 
+<BR>
+char qualidade; 
+<BR>
+float peso; 
+<BR>
+<BR>
+pera = 3; 
+<BR>
+qualidade = 'A'; 
+<BR>
+peso = 0.653; 
+<BR>... 
+<BR>}
+</TT></PRE>
+
+<P>
+Quando vari&#225;veis  s&#227;o definidas, elas  n&#227;o possuem valores  ainda.  N&#243;s
+damos valores as  vari&#225;veis usando o <EM>operador  de atribui&#231;&#227;o</EM> (=).
+Vari&#225;veis tamb&#233;m podem ser inicializadas para conter valores quando s&#227;o
+definidas.  Usando esta forma, o program acima ficaria:
+
+<P>
+
+<PRE><TT>
+main() 
+<BR>{ 
+<BR>
+int pera = 3; 
+<BR>
+char qualidade = 'A'; 
+<BR>
+float peso = 0.653; 
+<BR>
+<BR>... 
+<BR>}
+</TT></PRE>
+
+<P>
+Para resumir:  quando um programa &#233; executado,  <B>uma vari&#225;vel</B> &#233;
+associada com:
+
+<P>
+
+<UL>
+<LI><B>um tipo:</B> diz quantos  bytes a vari&#225;vel ocupa, e como ela
+  deve ser interpretada.
+</LI>
+<LI><B>um nome:</B> um identificador.
+</LI>
+<LI><B>um  endere&#231;o:</B> o endere&#231;o do byte  menos significativo do
+  local da mem&#243;ria associado a vari&#225;vel.
+</LI>
+<LI><B>um  valor:</B> o  conte&#250;do real dos  bytes associados  com a
+  vari&#225;vel;  o  valor  da  vari&#225;vel  depende do  tipo  da  vari&#225;vel;  a
+  defini&#231;&#227;o da  vari&#225;vel n&#227;o d&#225; valor  a vari&#225;vel; o valor  &#233; dado pelo
+  operador  de  atribui&#231;&#227;o, ou  usando  a  fun&#231;&#227;o  scanf().   N&#243;s
+  veremos mais tarde que a  fun&#231;&#227;o scanf() atribui a uma vari&#225;vel
+  um valor digitado no teclado.
+</LI>
+<LI>Em C&nbsp;, nomes de  vari&#225;veis devem ser declarados antes de serem
+  usados.  Se n&#227;o for declarado, ocorrer&#225; um erro de compila&#231;&#227;o.
+</LI>
+<LI>Devem  ser dados valores &#224;s  vari&#225;veis antes que  sejam
+  utilizadas.  Se voc&#234; tentar utilizar a vari&#225;vel antes de especificar o
+  seu valor, voc&#234; obter&#225; ``lixo''  (o que quer que esteja armazenado no
+  endere&#231;o  da  vari&#225;vel  na  mem&#243;ria  quando  o  programa  come&#231;a  sua
+  execu&#231;&#227;o), culminando com falha na execu&#231;&#227;o do programa.
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+1.4 Constantes</A>
+</H2>
+
+<P>
+Em  C&nbsp;,  al&#233;m de  vari&#225;veis,  n&#243;s  podemos  usar tamb&#233;m  n&#250;meros  ou
+caracteres cujos  valores n&#227;o mudam.  Eles s&#227;o  chamados de constantes.
+Constantes n&#227;o s&#227;o associados a lugares na mem&#243;ria.
+
+<P>
+Assim como vari&#225;veis, constantes  tamb&#233;m t&#234;m tipos.  Uma constante pode
+ser  do  tipo  int,  char,  etc.   Voc&#234;  nao  tem  que  declarar
+constantes, e  pode utiliz&#225;-las  diretamente (o compilador  reconhece o
+tipo pela  maneira que s&#227;o escritos).   Por exemplo, 2  &#233; do tipo
+int, e 2.0 &#233; do tipo double.  Por conven&#231;&#227;o, todas as
+constantes reais s&#227;o do tipo double.
+
+<P>
+
+<H2><A NAME="SECTION00015000000000000000">
+1.5 Caracteres Constantes</A>
+</H2>
+
+<P>
+Um constante caracter  &#233; escrita entre ap&#243;strofes, como  em 'A'.  Todas
+as  letras, n&#250;meros  e s&#237;mbolos  que podem  ser impressos  s&#227;o escritos
+desta forma  em C&nbsp;.  &#192;s  vezes precisamos de caracteres  que n&#227;o
+podem ser impressos, por exemplo, o caracter de ``nova linha'', que n&#227;o
+tem  uma  tecla  espec&#237;fica   no  teclado.   Neste  caso,  usa-se  <EM>caracteres de  escape</EM>.  Tais caracteres s&#227;o escritos  n&#227;o somente como
+um s&#237;mbolo entre ap&#243;strofes, mas  como um sequ&#234;ncia de caracteres entre
+ap&#243;strofes.  Por exemplo, <code>'\n'</code> &#233; o caracter para nova linha (uma
+sequ&#234;ncia   que   inicia  com   a   barra   invertida   &#233;  chamada   de
+<I>sequ&#234;ncia de escape</I>).  Se  quisermos representar o caracter de
+barra  invertida,  temos  que  escrever  <code>'\\'</code>.   Note  que  
+<code>\n</code> &#233;  o caracter  de nova linha  - embora use-se  dois s&#237;mbolos
+para represent&#225;-lo.   A barra  invertida &#233; chamada  de <I>escape</I>.
+Ele diz ao compilador que o n  que segue n&#227;o &#233; a letra n, mas que
+a  sequ&#234;ncia  completa  de  caracteres  deve ser  interpretada  como  o
+caracter de ``nova linha''.
+
+<P>
+Cada  caracter  constante tem  um  valor  inteiro  igual ao  seu  valor
+num&#233;rico do seu c&#243;digo ASCII.   Por exemplo, considere a constante 'A',
+que tem c&#243;digo ASCII  65, e 'B' que tem c&#243;digo 66.   N&#243;s podemos usar a
+express&#227;o 'A' + 1.  O  resultado &#233; o valor  66.  E se  o tipo da
+express&#227;o resultante for  char, ent&#227;o o resultado  da express&#227;o &#233;
+'B'.
+
+<P>
+
+<H2><A NAME="SECTION00016000000000000000">
+1.6 Entrada e Sa&#237;da</A>
+</H2>
+
+<P>
+Se  quisermos que  um programa  C&nbsp;mostre  alguns resultados,  or se
+quisermos  que  o  programa  pe&#231;a  ao  usu&#225;rio  que  entre  com  alguma
+informa&#231;&#227;o, n&#243;s  podemos usar as  fun&#231;&#245;es existentes em  C&nbsp;chamadas
+printf() e  scanf().  Se voc&#234; quiser  usar estas fun&#231;&#245;es em
+seu  programa, voce  deve incluir  a seguinte  linha no  in&#237;cio  do seu
+programa:
+
+<P>
+
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$">
+
+<P>
+Isto  causa que o  arquivo <I>header</I>  chamado stdio.h seja
+inclu&#237;do no seu arquivo fonte.  Este arquivo cont&#233;m <I>prot&#243;tipos</I>
+das fun&#231;&#245;es print() e scanf().  Ele declara ao compilador o
+nome das fun&#231;&#245;es e  algumas informa&#231;&#245;es adicionais necess&#225;rias para que
+as instru&#231;&#245;es sejam executadas corretamente.
+
+<P>
+
+<H2><A NAME="SECTION00017000000000000000">
+1.7 Exibindo informa&#231;&#245;es na tela: printf()</A>
+</H2>
+
+<P>
+printf() pode ser utilizado  para imprimir mensagens e valores em
+uma  variedade de  formatos.   Por enquanto,  printf() &#233;  melhor
+descrito atrav&#233;s de exemplos.
+
+<P>
+<BR>
+<BR>
+printf(``Alo todo mundo'');
+
+<BR>
+<BR>
+
+<P>
+Imprimir&#225; Alo todo mundo para o usu&#225;rio.
+
+<P>
+Para  dizer  a  fun&#231;&#227;o  printf  exatamente o  que  fazer,  n&#243;s  devemos
+especificar  o que  ser&#225;  impresso.  N&#243;s  devemos  dar a  fun&#231;&#227;o o  que
+chamamos  de  <EM>argumentos</EM>.   No  exemplo  acima,  ``Alo  todo
+mundo'' &#233; um argumento para a fun&#231;&#227;o printf().
+
+<P>
+O primeiro  argumento do printf()  &#233; sempre um  <EM>string</EM> (uma
+s&#233;rie de caracteres entre aspas (")).
+
+<P>
+N&#243;s tamb&#233;m podemos colocar caracteres de escape no string para imprimir
+caracteres especiais.  Por exemplo, colocando <code>\n</code> no string
+causa que o restante do string seja impresso na linha seguinte.  Outros
+caracteres de escape ser&#227;o apresentados no futuro.
+
+<P>
+Se  quisermos  imprimir o  valor  de  express&#245;es vari&#225;veis,  argumentos
+adicionais  s&#227;o necess&#225;rios.   Dizemos ao  printf()  como mostrar
+valores de express&#245;es usando <EM>especificadores de formato</EM>.  Podemos
+colocar  %c,  %d,  %f (ou  outros  especificadores de  formato
+listados no texto) dentro do  primeiro argumento para especificar o que
+queremos dar display.  N&#243;s ent&#227;o passamos argumentos adicionais que ser
+referem aos especificadores de formato  (na ordem em que eles ocorrem).
+Este argumentos podem ser  constantes ou vari&#225;veis, ou alguma express&#227;o
+mais complicada.  O que quer que eles sejam, eles devem ser avaliados e
+os  valores obtidos  e impressos  de acordo  com os  especificadores de
+formato.  Considere o seguinte programa:
+
+<P>
+
+<PRE><TT>
+
+<P>
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"> 
+<BR>#define PRECO 1.99 
+<BR>
+<BR>
+main() 
+<BR>{ 
+<BR>
+int pera = 3; 
+<BR>
+char qualidade = 'A'; 
+<BR>
+float peso = 2.5; 
+<BR>
+<BR>
+printf(``Existem %d peras de qualidade %c ``, pera, qualidade); 
+<BR>
+printf(``pesando %f quilos.<code>\n</code>'', peso); 
+<BR>
+printf(``O preco por quilo e %f, total e %f<code>\n</code>'', PRECO, peso * PRECO); 
+<BR>}
+</TT></PRE>
+
+<P>
+A sa&#237;da do programa ser&#225;: <BR>
+<BR>
+Existem 3 peras de qualidade A pesando 2.500000 quilos. 
+<BR>
+O preco por quilo e 1.990000, total e 4.975000
+
+<BR>
+<BR>
+
+<P>
+A linha #define PRECO 1.99 no in&#237;cio do programa define uma <EM>macro</EM>.  Ou seja, definimos que PRECO &#233; um sin&#244;nimo para 
+1.99  e,  portanto, toda  ocorr&#234;ncia  de  PRECO no  programa  &#233;
+substitu&#237;do por 1.99 antes que ele seja compilado.
+
+<P>
+N&#243;s tamb&#233;m  podemos especificar o  tamanho utilizado para  impress&#227;o da
+seguinte forma:
+
+<P>
+<PRE><TT>
+%6d 		 inteiro, com pelo tamanho pelo menos 6 
+<BR>%6f 		 ponto flutuante, com tamanho pelo menos 6 
+<BR>%.3f 		 ponto flutuante, com 3 digitos depois do ponto decimal 
+<BR>%6.3f 		 ponto flutuante, com tamanho pelo menos 6 e 3 digitosdepois do ponto decimal 
+<BR>%6.0f 		ponto flutuante, com pelo menos tamanho 6 e nenhum digitodepois do ponto decimal.
+</TT></PRE>
+
+<P>
+Note que  a especifica&#231;&#227;o de  tamanho simplesmente determina  o tamanho
+m&#237;nimo.   Se o  n&#250;mero n&#227;o  couber  no tamanho  especificado, o  n&#250;mero
+completo ser&#225; mostrado.
+
+<P>
+Quando utilizar a fun&#231;&#227;o  printf() tenha cuidado para especificar
+o tipo correto dos argumentos.  Se o tipo do argumento n&#227;o for correto,
+o compilador  Borland&nbsp;C++&nbsp;n&#227;o acusar&#225;  erro, e um valor  incorreto ser&#225;
+mostrado.  Por exemplo, no programa abaixo que est&#225; incorreto:
+
+<P>
+
+<PRE><TT>
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"> 
+<BR>
+<BR>
+main() 
+<BR>{ 
+<BR>
+printf(``Exemplo errado: %d<code>\n</code>'', 3.14159); 
+<BR>}
+</TT></PRE>
+
+<P>
+O resultado do programa ser&#225; alguma coisa como: <BR>
+<BR>
+Exemplo errado: -31147
+
+<P>
+
+<H2><A NAME="SECTION00018000000000000000">
+1.8 Lendo informa&#231;&#227;o: scanf()</A>
+</H2>
+
+<P>
+scanf()  pode ser  usado para ler  valores digitados  no teclado.
+Estes  valores  s&#227;o  lidos   de  acordo  com  <EM>especificadores  de
+convers&#227;o</EM>, que  s&#227;o especificados pelo programador  como argumentos do
+scanf().
+
+<P>
+Considere o seguinte programa:
+
+<P>
+
+<PRE><TT>
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"> 
+<BR>
+<BR>
+main() 
+<BR>{ 
+<BR>
+int idade; 
+<BR>
+<BR>
+printf(``Entre sua idade: ``); 
+<BR>
+scanf(``%d'', &amp;idade); 
+<BR>
+<BR>
+printf(``Voce tem %d anos<code>\n</code>'', idade); 
+<BR>}
+</TT></PRE>
+
+<P>
+Este programa mostrar&#225; no monitor:  Entre sua idade:  e aguardar&#225;
+que um  n&#250;mero seja digitado  e a tecla  ENTER.  Depois  disso, a
+vari&#225;vel idade conter&#225; o valor digitado pelo usu&#225;rio.
+
+<P>
+Assim como com o printf(), o primeiro argumento &#233; o especificador
+de formato.   Os pr&#243;ximos  argumentos correspondem a  o que  est&#225; sendo
+especificado pelo primeiro argumento.
+
+<P>
+Note o  &amp; precedendo a  vari&#225;vel idade.   Simplesmente lembre-se
+que  voc&#234;  geralmente  precisar&#225;  colocar  um &amp;  precedendo  nomes  de
+vari&#225;veis em um  scanf().  Voc&#234; sempre precisar&#225;  us&#225;-lo antes de
+vari&#225;veis do  tipo prim&#225;rio como  os discutidos at&#233; este  momento (
+int, char, float, e suas vers&#245;es long e unsigned).
+
+<P>
+Mais de um valor pode ser lido por um mesmo scanf().  Considere o
+seguinte exemplo:
+
+<P>
+
+<PRE><TT>
+#include <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$">stdio.h<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"> 
+<BR>
+<BR>
+main() 
+<BR>{ 
+<BR>
+int dia, mes, ano; 
+<BR>
+<BR>
+printf(``Entre com a data do seu aniversario (dd mm aa): ``); 
+<BR>
+scanf(``%d %d %d'', &amp;dia, &amp;mes, &amp;ano); 
+<BR>
+<BR>
+printf(``Voce nasceu em %d/%d/%d<code>\n</code>'', dia, mes, ano); 
+<BR>}
+</TT></PRE>
+
+<P>
+Este  exemplo funciona exatamente  como o  exemplo anterior.   Um &#250;nico
+scanf()  l&#234; os 3 n&#250;meros  quando estes n&#250;meros  s&#227;o separados por
+espa&#231;os (espa&#231;os em branco,  tabula&#231;&#227;o, novas linhas).  Ent&#227;o voc&#234; pode
+teclar ENTER  depois de cada  n&#250;mero, ou colocar espa&#231;os  ou tabula&#231;&#245;es
+entre os  n&#250;meros.  Os  espa&#231;os s&#227;o ignorados  pelo scanf().  Os
+brancos na especifica&#231;&#227;o  de formato do scanf(),  ``%d %d %d''
+s&#227;o simplesmente para facilitar a leitura do programa, e n&#227;o tem nada a
+ver com os espa&#231;os ignorados pelo scanf().  Se tiv&#233;ssemos escrito
+``%d%d%d'',  o scanf()  funcionaria da mesma  forma.  Os
+espa&#231;os  em  branco  simplesmente  s&#227;o necess&#225;rios  para  saber  quando
+termina um n&#250;mero e come&#231;a o outro.
+
+<P>
+Por&#233;m  se o  scanf()  estiver  lendo caracteres  (%c),  os
+espa&#231;os n&#227;o  s&#227;o ignorados,  j&#225; que espa&#231;os  s&#227;o caracteres  v&#225;lidos na
+linguagem.  Por exemplo, o c&#243;digo ASCII para espa&#231;o em branco e' 32.
+
+<P>
+
+<H2><A NAME="SECTION00019000000000000000">
+1.9 Algoritmo X Programa</A>
+</H2>
+
+<P>
+<PRE>
+   ALGORITMO PERIMETRO_AREA
+
+     /* Calcula o perímetro e a area de uma circunferencia 
+        de raio R (fornecido pelo usuario) */
+
+     /* Definir variaveis */
+           int Raio;
+           float Perim, Area, PI;   
+           PI = 3.14159;
+
+     /* Obter Raio da circunferencia */
+           Escreva("Entre com o valor do raio:");
+           Leia(Raio);
+
+     /* Calcular Perimetro do Circulo */
+           Perim = 2 * PI * Raio;
+
+     /* Calcular Area da Circunferencia */
+           Area = PI * Raio ** 2;
+
+     /* Exibir Resultados */ 
+           Escreva("O perimetro da circunferencia de raio", Raio, "eh", Perim);
+           Escreva("e a area eh ",Area);
+
+     /* Terminar Programa */
+
+   FIM_ALGORITMO PERIMETRO_AREA
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00019010000000000000">
+Programa em C&nbsp;</A>
+</H4>
+<PRE>
+     /* programa que calcula o perímetro e a área de uma
+        circunferência de raio R (fornecido pelo usuário) */
+
+#include &lt;stdio.h&gt;  /* inclui diretivas  de     entrada-saída */
+#include &lt;math.h&gt;  /*  inclui diretivas das funções matemáticas */
+
+#define  PI  3.14159
+
+main()
+{
+     /* Definir variaveis */
+        int Raio;
+        float  Perim, Area;
+
+     /* Obter Raio da circunferencia */
+        printf("Entre com o valor do raio: ");
+        scanf("%d", &amp;Raio);
+
+     /* Calcular Perimetro do Circulo */
+        Perim = 2 * PI * Raio;
+
+     /* Calcular Area da Circunferencia */
+        Area  = PI * pow(Raio, 2);
+
+     /* Exibir Resultados */ 
+        printf("O perimetro da circunferencia de raio %d eh %.2f  \n", Raio, Perim);
+        printf("e a area eh %.2f", Area);
+}
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<A NAME="tex2html197"
+  HREF="notas_proc-node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html195"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html189"
+  HREF="notas_proc.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html198"
+  HREF="notas_proc-node2.html">2 Opera&#231;&#245;es Aritm&#233;ticas e</A>
+<B>Up:</B> <A NAME="tex2html196"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html190"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

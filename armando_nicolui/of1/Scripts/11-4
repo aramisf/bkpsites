@@ -1,0 +1,67 @@
+#!/bin/bash
+
+PHONEBOOK="Arquivos/telefones.txt"
+
+export PHONEBOOK
+
+if [[ ! -f $PHONEBOOK ]]; then
+    echo "Nao existe lista telefonica $PHONEBOOK !!"
+    exit 1
+fi
+
+# Se há argumentos, faz a busca
+
+if [[ $# -eq 1 ]]; then
+    echo
+    buscar "$*"
+    echo
+    exit $?
+fi
+
+opcao=""
+opcaovalida=""
+
+# Loop ate que selecao valida eh feita
+
+until [[ -n "$opcaovalida" ]]; do
+    #
+    # Mostra menu
+    #
+
+    echo -n '
+
+      Voce gostaria de:
+
+          1. Procurar alguem ?
+          2. Inserir alguem na lista de telefones ?
+          3. Remover algume da lista de telefones ?
+
+      Por favor, selecione uma das opcoes acima (1-3): '
+
+    read opcao
+    echo
+
+    case "$opcao" in
+	1) read -p "Entre com nome a ser procurado: " nome
+	   echo
+	   buscar "$nome"
+	   echo
+	   opcaovalida="TRUE"
+	   ;;
+	2) read -p "Entre com nome a ser inserido: " nome 
+	   read -p "Entre com o numero: " fone 
+	   echo
+	   inserir "$nome" "$fone"
+	   echo
+	   opcaovalida="TRUE"
+	   ;;
+	3) read -p "Entre com nome a ser removido: " nome 
+	   echo
+	   remover "$nome"
+	   echo
+	   opcaovalida="TRUE"
+	   ;;
+	*) echo "Opcao invalida. Escolha opcoes de 1 a 3." ;;
+    esac
+done
+

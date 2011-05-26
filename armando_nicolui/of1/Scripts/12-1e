@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Maximo de dois inteiros > 256
+
+# Este eh o exemplo 12-1d modificado,
+# permitindo comparar inteiros maiores que 256.
+
+EQUAL=0             # Return value if both params equal.
+MAXRETVAL=256       # Maximum positive return value from a function.
+E_PARAM_ERR=-1      # Parameter error.
+
+max2 ()             # Returns larger of two numbers.
+{
+
+    local retorno
+
+    if [[ -z "$2" ]]; then
+	retorno="$E_PARAM_ERR"
+    elif [[ $1 -eq $2 ]]; then
+	retorno="$EQUAL"
+    elif [[ $1 -gt $2 ]]; then
+	retorno="$1"
+    else
+	retorno="$2"
+    fi
+
+    echo "$retorno"      # Valor de "Retorno" eh ecoado
+}
+
+## valor_retorno=`max2 33001 33997`
+valor_retorno=`max2 $1 $2`
+
+if [[ $valor_retorno -eq $E_PARAM_ERR ]]; then   # Parameter error "flag" gets sign changed, too.
+  echo "Erro: Sao necessarios 2 numeros para comparar."
+elif [[ $valor_retorno -eq $EQUAL ]]; then
+    echo "Os dois numeros sao iguais."
+else
+    echo "O maior dos dois numeros eh  $valor_retorno."
+fi  
+  
+exit 0

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+flag=
+
+for i
+do
+  case $i in
+      -c) flag=N ;;
+       *) if [[ -f $i ]]; then
+	     ln $i lixo$$
+	     rm lixo$$
+	  elif [[ "$flag" ]]; then                 # VERDADE se nao eh NULL
+	     echo "\'$i\' nao existe"
+	  else
+	     >$i
+          fi ;;
+  esac
+done

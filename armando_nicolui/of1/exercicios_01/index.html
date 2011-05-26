@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Lista de Exerc&#237;cios # 01</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Lista de Exerc&#237;cios # 01">
+<META NAME="keywords" CONTENT="exercicios">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="exercicios.css">
+
+</HEAD>
+
+<BODY >
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Lista de Exerc&#237;cios # 01</H1>
+<DIV>
+
+</DIV>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="1"><li>Utilize   o   manual  online   para   conhecer  os   comandos
+  <B><I>date(1)</I></B>,   <B><I>echo(1)</I></B>,  <B><I>chmod(1)</I></B>,  <B><I>touch(1)</I></B>,
+  <B><I>rm(1)</I></B>,      <B><I>ls(1)</I></B>,      <B><I>cp(1)</I></B>,     <B><I>mv(1)</I></B>,
+  <B><I>mkdir(1)</I></B>,   <B><I>rmdir(1)</I></B>,   <B><I>less(1)</I></B>,  <B><I>who(1)</I></B>,
+  <B><I>id(1)</I></B>,        <B><I>whoami(1)</I></B>,       <B><I>finger(1)</I></B>       e
+  <B><I>cat(1)</I></B>. Este exerc&#237;cio &#233; n&#227;o somente um exerc&#237;cio de paci&#234;ncia
+  mas principalmente  de persist&#234;ncia.  Lendo  manuais <I>on-line</I>
+  torna poss&#237;vel a familiariza&#231;&#227;o gradativa com os comandos UNIX.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="2"><li>Fa&#231;a os exerc&#237;cios da <A NAME="tex2html1"
+  HREF="http://pet.inf.ufpr.br/~daniel/LinuxBasico.pdf">Apostila Linux
+    B&#225;sico</A>, Cap&#237;tulo
+
+3, p&#225;g. 25.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="3"><li>Crie   o  diret&#243;rio   <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/exerc_01/arquivos</FONT></B>  usando
+  <B><I>mkdir(1)</I></B> APENAS uma vez.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="4"><li>Copie  para  o  diret&#243;rio  criado no  exerc&#237;cio  anterior  os
+  arquivos   <B><FONT FACE="Helvetica, Arial, sans-serif">pub/soft/doc/yz</FONT></B>,   <B><FONT FACE="Helvetica, Arial, sans-serif">pub/win/lib/pqr/pqr-4</FONT></B>   e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">/tmp/bkp/Meu&nbsp;Arquivo.txt</FONT></B>, que est&#227;o no diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum4</FONT></B>
+  do  usu&#225;rio <B>ci066</B>.  Resolva  este exerc&#237;cio  com APENAS  UMA
+  &#218;NICA linha de comando.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="5"><li>Suponha que  voc&#234; tem em um  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/home/Empresa</FONT></B> os
+  subdiret&#243;rios   <B><FONT FACE="Helvetica, Arial, sans-serif">memorandos</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">contratos</FONT></B>,   <B><FONT FACE="Helvetica, Arial, sans-serif">vendas</FONT></B>  e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">clientes</FONT></B>.   Cada  um  destes  subdiret&#243;rios possui  centenas  e
+  centenas  de   arquivos  e   subdiret&#243;rios  que  foram   criados  por
+  voc&#234;. Agora, voc&#234; quer proteger o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/home/Empresa</FONT></B> e seu
+  subdiret&#243;rios e arquivos,  de forma que os arquivos  possam ser lidos
+  por voc&#234;  e por  usu&#225;rios de  seu grupo UNIX,  mas apenas  voc&#234; possa
+  alter&#225;-los.   Al&#233;m  disso, outros  usu&#225;rios  n&#227;o  devem ter  qualquer
+  permiss&#227;o  de acesso a  estes arquivos.   Como n&#227;o  bastasse, somente
+  voc&#234;   deve    ter   permiss&#227;o   para   listar    os   conte&#250;dos   do
+  diret&#243;rios.  Indique  qual  a  seq&#252;&#234;ncia  de comandos  que  deve  ser
+  executada para garantir os objetivos acima.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="6"><li>Crie   o  arquivo   <B><FONT FACE="Helvetica, Arial, sans-serif">mocorongo</FONT></B>   dentro  do   diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/exercicios_01</FONT></B>.    Em   seguida,   indique  como   usar
+  <B><I>chmod(1)</I></B> para definir as permiss&#245;es abaixo:
+  
+<UL>
+<LI>Leitura  e escrita para  voc&#234; e outros. Nenhuma  permiss&#227;o para
+    usu&#225;rios de seu grupo UNIX;
+</LI>
+<LI>Somente voc&#234; pode listar os arquivos do diret&#243;rio;
+</LI>
+<LI>Todos  podem ler os arquivos  do diret&#243;rio, mas  somente voc&#234; e
+    usu&#225;rios de seu grupo UNIX podem listar os arquivos do diret&#243;rio
+  
+</LI>
+</UL></li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="7"><li>Voc&#234;  se encontra  em uma  situa&#231;&#227;o dif&#237;cil.   Voc&#234;  criou um
+  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Trab_Prog_01</FONT></B>  e nele voc&#234;  criou 4 (quatro)
+  arquivos,  cada um  contendo um  programa em  linguagem  Pascal, para
+  serem entregues  ao professor  da disciplina CI055.   Como voc&#234;  &#233; um
+  aluno  consciente  e correto  (e  n&#227;o  quer  <I>dar moleza  para
+  neguinho  vagal</I>),  voc&#234;  executou  os  comandos UNIX  abaixo  com  o
+  objetivo de  bloquear, para quaisquer  usu&#225;rios exceto voc&#234;  mesmo, o
+  acesso de leitura e escrita aos arquivos:
+<BR>
+<BR>     <TT>cd</TT> 
+<BR>     <TT>chmod -R 600 Trab_Prog_01</TT> <BR>
+Mas,  depois de executados  estes comandos,  NEM MESMO  VOC&#202; consegue
+  agora acessar  seus pr&#243;prios arquivos.   O que voc&#234; fez  errado? Como
+  corrigir o problema, mantendo o seu objetivo inicial?</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="8"><li>Considerando ainda o exerc&#237;cio  anterior, qual seria o efeito
+  dos comandos abaixo?
+<BR>
+<BR>           <TT>cd</TT> 
+<BR>           <TT>chmod -R 600 .</TT>
+</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="9"><li>Voc&#234;   deseja   retirar   todos   os  arquivos   com   sufixo
+  <B><FONT FACE="Helvetica, Arial, sans-serif">*.bak</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">*%</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">*<FONT SIZE=3>~</FONT>&nbsp;</FONT></B> e  os  arquivos de  nome
+  <B><FONT FACE="Helvetica, Arial, sans-serif">core</FONT></B> existentes  em sua &#225;rea. No  entanto, o que  voc&#234; quer de
+  fato   &#233;  mov&#234;-los  para   um  diret&#243;rio   <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.trash</FONT></B>  para
+  posteriormente apag&#225;-los com algum outro comando.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="10"><li>Com  o problema  definido no  exerc&#237;cio anterior,  voc&#234; agora
+  deve  comprimir (atrav&#233;s  de  <B><I>bzip2(1)</I></B>) todos  os arquivos  do
+  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.trash</FONT></B> cujo tamanho seja maior que 2M bytes.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="11"><li>Como  complementa&#231;&#227;o final  aos  dois exerc&#237;cios  anteriores,
+  voc&#234; deseja  remover de  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.trash</FONT></B> os arquivos  que tenham
+  sido copiados para l&#225; h&#225; 3 dias ou mais.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+
+<P>
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-09-17</I>
+</ADDRESS>
+</BODY>
+</HTML>

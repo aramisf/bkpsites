@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 8: Structures</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap09.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap07.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 8</h2>
+
+<h1>Structures</h1>
+
+
+<a name=1></a><br>
+<h3>8.1 Compound values</h3>
+
+<p>Most of the data types we have been working with represent a single value---an integer, a floating-point number, a boolean value.  <span class=code>pstring</span>s are different in the sense that they are made up of smaller pieces, the characters.  Thus, <span class=code>pstring</span>s are an example of a <b>compound</b> type.</p>
+
+<p>Depending on what we are doing, we may want to treat a compound type as a single thing (or object), or we may want to access its parts (or instance variables).  This ambiguity is useful.</p>
+
+<p>It is also useful to be able to create your own compound values.  C++ provides two mechanisms for doing that: <b>structures</b> and <b>classes</b>.  We will start out with structures and get to classes in <a href="chap14.html">Chapter 14</a> (there is not much difference between them).</p>
+
+<a name=2></a><br>
+<h3>8.2 <span class=code>Point</span> objects</h3>
+
+<p>As a simple example of a compound structure, consider the concept of a mathematical point.  At one level, a point is two numbers (coordinates) that we treat collectively as a single object.  In mathematical notation, points are often written in parentheses, with a comma separating the coordinates.  For example, <tt>(0, 0)</tt> indicates the origin, and <tt>(x, y)</tt> indicates the point <tt>x</tt> units to the right and <tt>y</tt> units up from the origin.</p>
+
+<p>A natural way to represent a point in C++ is with two <span class=code><span class=keyword>double</span></span>s. The question, then, is how to group these two values into a compound object, or structure.  The answer is a <span class=code><span class=keyword>struct</span></span> definition:</p>
+
+
+<span class=code><span class=keyword>struct</span> Point {
+<br>&nbsp; <span class=keyword>double</span> x, y;
+<br>};
+<br></span><p><span class=code><span class=keyword>struct</span></span> definitions appear outside of any function definition, usually at the beginning of the program (after the <span class=code>include</span> statements).</p>
+
+<p>This definition indicates that there are two elements in this structure, named <span class=code>x</span> and <span class=code>y</span>.  These elements are called <b>instance variables</b>, for reasons I will explain a little later.</p>
+
+<p>It is a common error to leave off the semi-colon at the end of a structure definition.  It might seem odd to put a semi-colon after a squiggly-brace, but you'll get used to it.</p>
+
+<p>Once you have defined the new structure, you can create variables with that type:</p>
+
+
+<span class=code>&nbsp; Point blank;
+<br>&nbsp; blank.x = 3.0;
+<br>&nbsp; blank.y = 4.0;
+<br></span><p>The first line is a conventional variable declaration: <span class=code>blank</span> has type <span class=code>Point</span>.  The next two lines initialize the instance variables of the structure.  The "dot notation" used here is similar to the syntax for invoking a function on an object, as in <span class=code>fruit.length()</span>. Of course, one difference is that function names are always followed by an argument list, even if it is empty.</p>
+
+
+
+<p>The result of these assignments is shown in the following state diagram:</p>
+
+<p align="center"><img src="images/point.png"></p>
+
+<p>As usual, the name of the variable <span class=code>blank</span> appears outside the box and its value appears inside the box.  In this case, that value is a compound object with two named instance variables.</p>
+
+<a name=3></a><br>
+<h3>8.3 Accessing instance variables</h3>
+
+<p>You can read the values of an instance variable using the same syntax we used to write them:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>int</span> x = blank.x;
+<br></span><p>The expression <span class=code>blank.x</span> means "go to the object named <span class=code>blank</span> and get the value of <span class=code>x</span>."  In this case we assign that value to a local variable named <span class=code>x</span>.  Notice that there is no conflict between the local variable named <span class=code>x</span> and the instance variable named <span class=code>x</span>.  The purpose of dot notation is to identify <i>which</i> variable you are referring to unambiguously.</p>
+
+<p>You can use dot notation as part of any C++ expression, so the following are legal.</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; blank.x &lt;&lt; <span class=quote>", "</span> &lt;&lt; blank.y &lt;&lt; endl;
+<br>&nbsp; <span class=keyword>double</span> distance = blank.x * blank.x + blank.y * blank.y;
+<br></span><p>The first line outputs <span class=code>3, 4</span>; the second line calculates the value 25.</p>
+
+<a name=4></a><br>
+<h3>8.4 Operations on structures</h3>
+
+<p>Most of the operators we have been using on other types, like mathematical operators ( <span class=code>+</span>, <span class=code>%</span>, etc.) and comparison operators (<span class=code>==</span>, <span class=code>&gt;</span>, etc.), do not work on structures. Actually, it is possible to define the meaning of these operators for the new type, but we won't do that in this book.</p>
+
+<p>On the other hand, the assignment operator <i>does</i> work for structures.  It can be used in two ways: to initialize the instance variables of a structure or to copy the instance variables from one structure to another.  An initialization looks like this:</p>
+
+
+<span class=code>&nbsp; Point blank = { 3.0, 4.0 };
+<br></span><p>The values in squiggly braces get assigned to the instance variables of the structure one by one, in order.  So in this case, <span class=code>x</span> gets the first value and <span class=code>y</span> gets the second.</p>
+
+<p>Unfortunately, this syntax can be used only in an initialization, not in an assignment statement.  So the following is illegal.</p>
+
+
+<span class=code>&nbsp; Point blank;
+<br>&nbsp; blank = { 3.0, 4.0 };&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG !!
+</span><br></span><p>You might wonder why this perfectly reasonable statement should be illegal, and there is no good answer.  I'm sorry.</p>
+
+<p>On the other hand, it is legal to assign one structure to another.  For example:</p>
+
+
+<span class=code>&nbsp; Point p1 = { 3.0, 4.0 };
+<br>&nbsp; Point p2 = p1;
+<br>&nbsp; cout &lt;&lt; p2.x &lt;&lt; <span class=quote>", "</span> &lt;&lt;&nbsp; p2.y &lt;&lt; endl;
+<br></span><p>The output of this program is <span class=code>3, 4</span>.</p>
+
+<a name=5></a><br>
+<h3>8.5 Structures as parameters</h3>
+
+<p>You can pass structures as parameters in the usual way.  For example,</p>
+
+
+<span class=code><span class=keyword>void</span> printPoint (Point p) {
+<br>&nbsp; cout &lt;&lt; <span class=quote>"("</span> &lt;&lt; p.x &lt;&lt; <span class=quote>", "</span> &lt;&lt; p.y &lt;&lt; <span class=quote>")"</span> &lt;&lt; endl;
+<br>}
+<br></span><p><span class=code>printPoint</span> takes a point as an argument and outputs it in the standard format.  If you call <span class=code>printPoint (blank)</span>, it will output <span class=code>(3, 4)</span>.</p>
+
+<p>As a second example, we can rewrite the <span class=code>distance</span> function from <a href="chap05.htm#2">Section 5.2</a> so that it takes two <span class=code>Point</span>s as parameters instead of four <span class=code><span class=keyword>double</span></span>s.</p>
+
+
+<span class=code><span class=keyword>double</span> distance (Point p1, Point p2) {
+<br>&nbsp; <span class=keyword>double</span> dx = p2.x - p1.x;
+<br>&nbsp; <span class=keyword>double</span> dy = p2.y - p1.y;
+<br>&nbsp; <span class=keyword>return</span> sqrt (dx*dx + dy*dy);
+<br>}
+<br></span><a name=6></a><br>
+<h3>8.6 Pass by value</h3>
+
+<p>When you pass a structure as an argument, remember that the argument and the parameter are not the same variable.  Instead, there are two variables (one in the caller and one in the callee) that have the same value, at least initially.  For example, when we call <span class=code>printPoint</span>, the stack diagram looks like this:</p>
+
+<p align="center"><img src="images/point2.png"></p>
+
+<p>If <span class=code>printPoint</span> happened to change one of the instance variables of <span class=code>p</span>, it would have no effect on <span class=code>blank</span>.  Of course, there is no reason for <span class=code>printPoint</span> to modify its parameter, so this isolation between the two functions is ppropriate.</p>
+
+<p>This kind of parameter-passing is called "pass by value" because it is the value of the structure (or other type) that gets passed to the function.</p>
+
+<a name=7></a><br>
+<h3>8.7 Pass by reference</h3>
+
+<p>An alternative parameter-passing mechanism that is available in C++ is called "pass by reference."  This mechanism makes it possible to pass a structure to a procedure and modify it.</p>
+
+<p>For example, you can reflect a point around the 45-degree line by swapping the two coordinates.  The most obvious (but incorrect) way to write a <span class=code>reflect</span> function is something like this:</p>
+
+
+<span class=code><span class=keyword>void</span> reflect (Point p)&nbsp; &nbsp; &nbsp; <span class=comment>// WRONG !!
+</span><br>{
+<br>&nbsp; <span class=keyword>double</span> temp = p.x;
+<br>&nbsp; p.x = p.y;
+<br>&nbsp; p.y = temp;
+<br>}
+<br></span><p>But this won't work, because the changes we make in <span class=code>reflect</span> will have no effect on the caller.</p>
+
+<p>Instead, we have to specify that we want to pass the parameter by reference.  We do that by adding an ampersand (<span class=code>&</span>) to the parameter declaration:</p>
+
+
+<span class=code><span class=keyword>void</span> reflect (Point& p)
+<br>{
+<br>&nbsp; <span class=keyword>double</span> temp = p.x;
+<br>&nbsp; p.x = p.y;
+<br>&nbsp; p.y = temp;
+<br>}
+<br></span><p>Now we can call the function in the usual way:</p>
+
+
+<span class=code>&nbsp; printPoint (blank);
+<br>&nbsp; reflect (blank);
+<br>&nbsp; printPoint (blank);
+<br></span><p>The output of this program is as expected:</p>
+
+
+<span class=code>(3, 4)
+<br>(4, 3)
+<br></span><p>Here's how we would draw a stack diagram for this program:</p>
+
+<p align="center"><img src="images/point3.png"></p>
+
+<p>The parameter <span class=code>p</span> is a reference to the structure named <span class=code>blank</span>.  The usual representation for a reference is a dot with an arrow that points to whatever the reference refers to.</p>
+
+<p>The important thing to see in this diagram is that any changes that <span class=code>reflect</span> makes in <span class=code>p</span> will also affect <span class=code>blank</span>.</p>
+
+<p>Passing structures by reference is more versatile than passing by value, because the callee can modify the structure.  It is also faster, because the system does not have to copy the whole structure.  On the other hand, it is less safe, since it is harder to keep track of what gets modified where.  Nevertheless, in C++ programs, almost all structures are passed by reference almost all the time.  In this book I will follow that convention.</p>
+
+<a name=8></a><br>
+<h3>8.8 Rectangles</h3>
+
+<p>Now let's say that we want to create a structure to represent a rectangle.  The question is, what information do I have to provide in order to specify a rectangle?  To keep things simple let's assume that the rectangle will be oriented vertically or horizontally, never at an angle.</p>
+
+<p>There are a few possibilities: I could specify the center of the rectangle (two coordinates) and its size (width and height), or I could specify one of the corners and the size, or I could specify two opposing corners.</p>
+
+<p>The most common choice in existing programs is to specify the upper left corner of the rectangle and the size.  To do that in C++, we will define a structure that contains a <span class=code>Point</span> and two doubles.</p>
+
+
+<span class=code><span class=keyword>struct</span> Rectangle {
+<br>&nbsp; Point corner;
+<br>&nbsp; <span class=keyword>double</span> width, height;
+<br>};
+<br></span><p>Notice that one structure can contain another.  In fact, this sort of thing is quite common.  Of course, this means that in order to create a <span class=code>Rectangle</span>, we have to create a <span class=code>Point</span> first:</p>
+
+
+<span class=code>&nbsp; Point corner = { 0.0, 0.0 };
+<br>&nbsp; Rectangle box = { corner, 100.0, 200.0 };
+<br></span><p>This code creates a new <span class=code>Rectangle</span> structure and initializes the instance variables.  The figure shows the effect of this assignment.</p>
+
+<p align="center"><img src="images/rectangle.png"></p>
+
+<p>We can access the <span class=code>width</span> and <span class=code>height</span> in the usual way:</p>
+
+
+<span class=code>&nbsp; box.width += 50.0;
+<br>&nbsp; cout &lt;&lt; box.height &lt;&lt; endl;
+<br></span><p>In order to access the instance variables of <span class=code>corner</span>, we can use a temporary variable:</p>
+
+
+<span class=code>&nbsp; Point temp = box.corner;
+<br>&nbsp; <span class=keyword>double</span> x = temp.x;
+<br></span><p>Alternatively, we can compose the two statements:</p>
+
+
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> x = box.corner.x;
+<br></span><p>It makes the most sense to read this statement from right to left: "Extract <span class=code>x</span> from the <span class=code>corner</span> of the <span class=code>box</span>, and assign it to the local variable <span class=code>x</span>."</p>
+
+<p>While we are on the subject of composition, I should point out that you can, in fact, create the <span class=code>Point</span> and the <span class=code>Rectangle</span> at the same time:</p>
+
+
+<span class=code>&nbsp; Rectangle box = { { 0.0, 0.0 }, 100.0, 200.0 };
+<br></span><p>The innermost squiggly braces are the coordinates of the corner point; together they make up the first of the three values that go into the new <span class=code>Rectangle</span>.  This statement is an example of <b>nested structure</b>.</p>
+
+
+
+<a name=9></a><br>
+<h3>8.9 Structures as return types</h3>
+
+<p>You can write functions that return structures.  For example, <span class=code>findCenter</span> takes a <span class=code>Rectangle</span> as an argument and returns a <span class=code>Point</span> that contains the coordinates of the center of the <span class=code>Rectangle</span>:</p>
+
+
+<span class=code>Point findCenter (Rectangle& box)
+<br>{
+<br>&nbsp; <span class=keyword>double</span> x = box.corner.x + box.width/2;
+<br>&nbsp; <span class=keyword>double</span> y = box.corner.y + box.height/2;
+<br>&nbsp; Point result = {x, y};
+<br>&nbsp; <span class=keyword>return</span> result;
+<br>}
+<br></span><p>To call this function, we have to pass a box as an argument (notice that it is being passed by reference), and assign the return value to a <span class=code>Point</span> variable:</p>
+
+
+<span class=code>&nbsp; Rectangle box = { {0.0, 0.0}, 100, 200 };
+<br>&nbsp; Point center = findCenter (box);
+<br>&nbsp; printPoint (center);
+<br></span><p>The output of this program is <span class=code>(50, 100)</span>.</p>
+
+<a name=10></a><br>
+<h3>8.10 Passing other types by reference</h3>
+
+<p>It's not just structures that can be passed by reference. All the other types we've seen can, too.  For example, to swap two integers, we could write something like:</p>
+
+
+<span class=code><span class=keyword>void</span> swap (<span class=keyword>int</span>& x, <span class=keyword>int</span>& y)
+<br>{
+<br>&nbsp; <span class=keyword>int</span> temp = x;
+<br>&nbsp; x = y;
+<br>&nbsp; y = temp;
+<br>}
+<br></span><p>We would call this function in the usual way:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 7;
+<br>&nbsp; <span class=keyword>int</span> j = 9;
+<br>&nbsp; swap (i, j);
+<br>&nbsp; cout &lt;&lt; i &lt;&lt; j &lt;&lt; endl;
+<br></span><p>The output of this program is <span class=code>97</span>.  Draw a stack diagram for this program to convince yourself this is true. If the parameters <span class=code>x</span> and <span class=code>y</span> were declared as regular parameters (without the <span class=code>&</span>s), <span class=code>swap</span> would not work.  It would modify <span class=code>x</span> and <span class=code>y</span> and have no effect on <span class=code>i</span> and <span class=code>j</span>.</p>
+
+<p>When people start passing things like integers by reference, they often try to use an expression as a reference argument.  For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 7;
+<br>&nbsp; <span class=keyword>int</span> j = 9;
+<br>&nbsp; swap (i, j+1);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG!!
+</span><br></span><p>This is not legal because the expression <span class=code>j+1</span> is not a variable---it does not occupy a location that the reference can refer to.  It is a little tricky to figure out exactly what kinds of expressions can be passed by reference.  For now a good rule of thumb is that reference arguments have to be variables.</p>
+
+<a name=11></a><br>
+<h3>8.11 Getting user input</h3>
+
+<p>The programs we have written so far are pretty predictable; they do the same thing every time they run.  Most of the time, though, we want programs that take input from the user and respond accordingly.</p>
+
+<p>There are many ways to get input, including keyboard input, mouse movements and button clicks, as well as more exotic mechanisms like voice control and retinal scanning.  In this text we will consider only keyboard input.</p>
+
+
+
+<p>In the header file <span class=code>iostream.h</span>, C++ defines an object named <span class=code>cin</span> that handles input in much the same way that <span class=code>cout</span> handles output.  To get an integer value from the user:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> x;
+<br>&nbsp; cin &gt;&gt; x;
+<br></span><p>The <span class=code>&gt;&gt;</span> operator causes the program to stop executing and wait for the user to type something.  If the user types a valid integer, the program converts it into an integer value and stores it in <span class=code>x</span>.</p>
+
+
+
+<p>If the user types something other than an integer, C++ doesn't report an error, or anything sensible like that. Instead, it puts some meaningless value in <span class=code>x</span> and continues.</p>
+
+<p>Fortunately, there is a way to check and see if an input statement succeeds.  We can invoke the <span class=code>good</span> function on <span class=code>cin</span> to check what is called the <b>stream state</b>. <span class=code>good</span> returns a <span class=code><span class=keyword>bool</span></span>: if true, then the last input statement succeeded.  If not, we know that some previous operation failed, and also that the next operation will fail.</p>
+
+<p>Thus, getting input from the user might look like this:</p>
+
+
+<span class=code><span class=keyword>int</span> main ()
+<br>{
+<br>&nbsp; <span class=keyword>int</span> x;
+<br>
+<br>&nbsp; <span class=comment>// prompt the user for input
+</span><br>&nbsp; cout &lt;&lt; <span class=quote>"Enter an integer: "</span>;
+<br>
+<br>&nbsp; <span class=comment>// get input
+</span><br>&nbsp; cin &gt;&gt; x;
+<br>
+<br>&nbsp; <span class=comment>// check and see if the input statement succeeded
+</span><br>&nbsp; <span class=keyword>if</span> (cin.good() == <span class=keyword>false</span>) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"That was not an integer."</span> &lt;&lt; endl;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> -1;
+<br>&nbsp; }
+<br>
+<br>&nbsp; <span class=comment>// print the value we got from the user
+</span><br>&nbsp; cout &lt;&lt; x &lt;&lt; endl;
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><p><span class=code>cin</span> can also be used to input a <span class=code>pstring</span>:</p>
+
+
+<span class=code>&nbsp; pstring name;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"What is your name? "</span>;
+<br>&nbsp; cin &gt;&gt; name;
+<br>&nbsp; cout &lt;&lt; name &lt;&lt; endl;
+<br></span><p>Unfortunately, this statement only takes the first word of input, and leaves the rest for the next input statement. So, if you run this program and type your full name, it will only output your first name.</p>
+
+<p>Because of these problems (inability to handle errors and funny behavior), I avoid using the <span class=code>&gt;&gt;</span> operator altogether, unless I am reading data from a source that is known to be error-free.</p>
+
+<p>Instead, I use a function in the <span class=code>pstring</span> called <span class=code>getline</span>.</p>
+
+
+<span class=code>&nbsp; pstring name;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"What is your name? "</span>;
+<br>&nbsp; getline (cin, name);
+<br>&nbsp; cout &lt;&lt; name &lt;&lt; endl;
+<br></span><p>The first argument to <span class=code>getline</span> is <span class=code>cin</span>, which is where the input is coming from.  The second argument is the name of the <span class=code>pstring</span> where you want the result to be stored.</p>
+
+<p><span class=code>getline</span> reads the entire line until the user hits Return or Enter.  This is useful for inputting strings that contain spaces.</p>
+
+<p>In fact, <span class=code>getline</span> is generally useful for getting input of any kind.  For example, if you wanted the user to type an integer, you could input a string and then check to see if it is a valid integer.  If so, you can convert it to an integer value.  If not, you can print an error message and ask the user to try again.</p>
+
+<p>To convert a string to an integer you can use the <span class=code>atoi</span> function defined in the header file <span class=code>stdlib.h</span>.  We will get to that in <a href="chap23.htm#4">Section 23.4</a>.</p>
+
+<a name=12></a><br>
+<h3>8.12 Glossary</h3>
+
+<dl>
+
+<dt>structure</dt>
+<dd>A collection of data grouped together and treated as a single object.</dd>
+
+<dt>instance variable</dt>
+<dd>One of the named pieces of data that make up a structure.</dd>
+
+<dt>reference</dt>
+<dd>A value that indicates or refers to a variable or structure.  In a state diagram, a reference appears as an arrow.</dd>
+
+<dt>pass by value</dt>
+<dd>A method of parameter-passing in which the value provided as an argument is copied into the corresponding parameter, but the parameter and the argument occupy distinct locations.</dd>
+
+<dt>pass by reference</dt>
+<dd>A method of parameter-passing in which the parameter is a reference to the argument variable.  Changes to the parameter also affect the argument variable.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap09.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap07.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 03
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 03
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>Notas de Aula # 03
+<BR>2&ordm;&nbsp;semestre 2003</H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Manipula&#231;&#227;o de Arquivos e diret&#243;rios</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Usu&#225;rios e Seguran&#231;a em Arquivos</A>
+</H2>
+
+<P>
+Usu&#225;rios em  um sistema UNIX  possuem uma identifica&#231;&#227;o  num&#233;rica &#250;nica
+denominada UID (<I>User IDentification</I>) e um nome simb&#243;lico &#250;nico
+conhecido como <I>Login</I> ou <I>Username</I>.
+
+<P>
+Tamb&#233;m    s&#227;o   definidos    em   um    sistema   UNIX    os   chamados
+<B>grupos</B>. Cada grupo representa  um conjunto de usu&#225;rios que por
+alguma raz&#227;o  possuem uma fun&#231;&#227;o  ou atividades em comum  (por exemplo,
+usu&#225;rios que s&#227;o alunos de  gradua&#231;&#227;o, usu&#225;rios que s&#227;o os professores,
+etc.).
+
+<P>
+Cada grupo em um sistema  UNIX possui tamb&#233;m uma identifica&#231;&#227;o num&#233;rica
+&#250;nica  denominada   GID  (<I>Group  IDentification</I>)   e  um  nome
+simb&#243;lico  &#250;nico  conhecido como  <I>Group  name</I> ou  simplesmente
+<I>Grupo</I>.
+
+<P>
+Estes  conceitos s&#227;o  importantes para  entender como  um  sistema UNIX
+controla a forma  com que arquivos podem ser acessados e  o que se pode
+se fazer  com eles uma vez  acessados. Voc&#234; pode,  por exemplo, desejar
+que o conte&#250;do de um  determinado arquivo possa ser alterado apenas por
+voc&#234;  que o criou.  Por outro  lado voc&#234;  pode fazer  com que  um outro
+arquivo tenha seu conte&#250;do lido por qualquer usu&#225;rio no sistema.
+
+<P>
+O   comando  <B><I>id(1)</I></B>  pode   ser  usado   para  se   determinar  a
+identifica&#231;&#227;o completa de um usu&#225;rio: seu UID e GID.
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Permiss&#245;es de acesso</A>
+</H2>
+
+<P>
+Quando  um  arquivo qualquer  &#233;  criado  em UNIX,  ele  &#233;  dito ter  um
+Propriet&#225;rio e um Grupo. O <B>Propriet&#225;rio do arquivo</B> corresponde
+ao <I>Login</I>  do usu&#225;rio que  criou o arquivo. O  <B>Grupo do
+arquivo</B>  corresponde  ao  Grupo  ao  qual pertence  o  usu&#225;rio  que  o
+criou. Por exemplo, se  o usu&#225;rio <B>ci066</B>, registrado como sendo
+do grupo  <B>especial</B> cria um arquivo, dizemos  que este pertence
+ao Propriet&#225;rio <B>ci066</B> e ao Grupo <B>especial</B>.
+
+<P>
+O  acesso  a  arquivos  UNIX  &#233;  definido atrav&#233;s  de  3  conjuntos  de
+permiss&#245;es: um conjunto para  Propriet&#225;rio do arquivo, um conjunto para
+Grupo do arquivo e um conjunto para Outros usu&#225;rios.
+
+<P>
+Cada   conjunto  pode   assumir  as   permiss&#245;es   de  <B>Leitura</B>
+(representada  pela letra  <B>r</B>),  <B>Escrita</B> (representada
+pela letra  <B>w</B>) e <B>Execu&#231;&#227;o  ou Navega&#231;&#227;o</B> (representada
+pela letra <B>x</B>).
+
+<P>
+Em se tratando de um  arquivo regular, a permiss&#227;o de Leitura significa
+que se pode ler o conte&#250;do do arquivo, a permiss&#227;o de Escrita significa
+que se  pode alterar (editar) o  conte&#250;do do arquivo, e  a permiss&#227;o de
+Execu&#231;&#227;o  significa   que  este  arquivo  cont&#233;m  um   programa  ou  um
+<I>script  shell</I>,  podendo  ser  executado como  um  comando.
+
+<P>
+Em se tratando de um diret&#243;rio, a permiss&#227;o de Leitura significa que se
+pode  ler o  conte&#250;do do  diret&#243;rio (por  exemplo com  <B><I>ls(1)</I></B>), a
+permiss&#227;o de Escrita significa que se pode criar ou remover arquivos do
+diret&#243;rio, e  a permiss&#227;o  de Execu&#231;&#227;o significa  que este  diret&#243;rio &#233;
+<I>naveg&#225;vel</I>, isto  &#233;, pode-se navegar  para ele ou  atrav&#233;s dele
+com  comandos   como  <B>cd</B>,  <B>pushd</B>,   <B>popd</B>  ou
+<B><I>find(1)</I></B>.
+
+<P>
+
+<H4><A NAME="SECTION00012010000000000000">
+NOTA:</A>
+</H4> Em UNIX, TUDO &#201; CONSIDERADO UM ARQUIVO. Existem
+assim   diferentes   tipos    de   arquivos:   regulares,   diret&#243;rios,
+<I>links</I> simb&#243;licos,  arquivos associados a  recursos de hardware
+(tais como disco, interface de  rede, teclado e terminal, etc.). Assim,
+a permiss&#227;o de Escrita em  um diret&#243;rio significa alterar o arquivo que
+representa um  diret&#243;rio, o que significa efetivamente  criar e remover
+arquivos.
+
+<P>
+As <B>permiss&#245;es  de acesso</B> podem  ser definidas a  qualquer hora
+por <B><I>chmod(1)</I></B>  e podem  ser visualizadas atrav&#233;s  de <B><I>command(1)</I></B>ls)
+usando-se a op&#231;&#227;o -l. Seja, por exemplo:
+
+<P>
+<PRE>
+                ci066@dupond $ ls -l teste.c
+                -rw-r--r-- 1 ci066 especial  2331 Mai 30 11:36 teste.c
+                ci066@dupond $ ls -l a.out
+                -rw-r-x--- 1 ci066 especial  2331 Mai 30 11:36 a.out
+                ci066@dupond $ ls -ld LabNum2
+                drwxr-xr-- 1 ci066 especial  2331 Mai 30 11:36 LabNum2
+</PRE>
+
+<P>
+No exemplo acima, o  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">teste.c</FONT></B> possui permiss&#227;o de Leitura
+e  Escrita para  o  Propriet&#225;rio do  arquivo (usu&#225;rio  <I>ci066</I>),
+apenas permiss&#227;o  de Leitura para  usu&#225;rios do Grupo do  arquivo (grupo
+<I>especial</I>), e apenas permiss&#227;o de Leitura para Outros usu&#225;rios.
+
+<P>
+Ainda  no exemplo  acima, o  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">a.out</FONT></B>  possui  permiss&#227;o de
+Leitura  e Execu&#231;&#227;o  para  Propriet&#225;rio e  Grupo,  Escrita apenas  para
+Propriet&#225;rio,  e   NENHUMA  permiss&#227;o  para   Outros  usu&#225;rios.  Assim,
+<B><FONT FACE="Helvetica, Arial, sans-serif">a.out</FONT></B>  pode ser executado  como um  comando apenas  pelo usu&#225;rio
+<B>ci066</B> e por usu&#225;rios do grupo <B>especial</B>.
+
+<P>
+Finalmente, todos os  usu&#225;rios tem permiss&#227;o para listar  o conte&#250;do do
+diret&#243;rio   <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum2</FONT></B>.    Por  outro   lado,   apenas  o   usu&#225;rio
+<B>ci066</B> e  os usu&#225;rios do grupo  <B>especial</B> tem permiss&#227;o
+para  navegar  para  ou  atrav&#233;s  deste diret&#243;rio.  Somente  o  usu&#225;rio
+<B>ci066</B> tem permiss&#227;o para criar arquivos dentro do diret&#243;rio.
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Permiss&#245;es de acesso: Nota&#231;&#227;o octal</A>
+</H2>
+
+<P>
+As permiss&#245;es  de acesso de um  arquivo podem ser  representadas de uma
+forma  mais compacta,  usando uma  nota&#231;&#227;o de  3 D&#205;GITOS  OCTAIS.  Esta
+forma compacta de representar as permiss&#245;es &#233; referenciada em UNIX como
+<I>FILE   MODE</I>   (<I>modo   do  arquivo</I>   ou   simplesmente
+<I>MODO</I>).
+
+<P>
+Em  um  MODO, cada  d&#237;gito  corresponde a  um  grupo  de permiss&#245;es:  O
+primeiro d&#237;gito  corresponde &#224;s  permiss&#245;es do Propriet&#225;rio,  o segundo
+d&#237;gito  corresponde &#224;s  permiss&#245;es para  o  Grupo e  o terceiro  d&#237;gito
+corresponde &#224;s permiss&#245;es para Outros Usu&#225;rios.
+
+<P>
+Cada  d&#237;gito octal  do modo  &#233; definido  pela soma  dos  valores octais
+abaixo:
+<PRE>
+                4 = permissão de Leitura
+                2 = permissão de Escrita
+                1 = permissão de Execução/Navegação
+</PRE>
+
+<P>
+Assim, a permiss&#227;o <B>-r-xr--wx</B>  pode ser representada pelo Modo
+<B>543</B>:<BR>
+<BR><PRE>
+                5 ( = 4 + 1) representa permissão  de Leitura e Execução para Proprietário;
+                4 representa unicamente a permissão de Leitura para Grupo;
+                3 ( =  2 + 1) representa permissão de Escrita  e Execução para Outros.
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+1.4 Alterando as permiss&#245;es de um arquivo: <B><I>chmod(1)</I></B></A>
+</H2>
+
+<P>
+Para alterar as  permiss&#245;es com <B><I>chmod(1)</I></B> pode ser  usado um Modo
+(nota&#231;&#227;o octal)  ou nota&#231;&#227;o simb&#243;lica  (<I>[augo][+-=][rwx]</I>) para
+especificar a mudan&#231;a de permiss&#245;es:
+<PRE>
+                chmod 754 teste.c  (equiv. a chmod u=rwx,g=rx,o=r teste.c)
+                chmod 664 teste.c  (equiv. a chmod ug=rw,o=r teste.c)
+                chmod u+r,go+r,go-wx teste.c
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00015000000000000000">
+1.5 Permiss&#227;o padr&#227;o com <B><I>umask(1)</I></B></A>
+</H2>
+
+<P>
+Em UNIX, quando um arquivo &#233; criado, ele inicia com as seguintes
+permiss&#245;es:
+<DL>
+<DT><STRONG>666 ( rw-rw-rw )</STRONG></DT>
+<DD>para arquivos regulares n&#227;o-execut&#225;veis (por
+  exemplo, arquivos criados com <B><I>emacs(1)</I></B>);
+</DD>
+<DT><STRONG>777 ( rwxrwxrwx )</STRONG></DT>
+<DD>para arquivos regulares execut&#225;veis (por
+  exemplo, programas gerados por um compilador PASCAL ou C);
+</DD>
+<DT><STRONG>777 ( rwxrwxrwx )</STRONG></DT>
+<DD>para diret&#243;rios.
+</DD>
+</DL>
+
+<P>
+Deste estado inicial de permiss&#245;es,  UNIX subtrai o valor da M&#193;SCARA DE
+PERMISS&#213;ES DO  USU&#193;RIO. Esta m&#225;scara  &#233; um MODO (permiss&#245;es  em nota&#231;&#227;o
+octal)  no qual  voc&#234;  indica  quais permiss&#245;es  devem  ser negadas  ou
+restringidas.
+
+<P>
+Para definir esta m&#225;scara de permiss&#245;es usa-se o comando
+<B><I>umask(1)</I></B>. A sintaxe do comando &#233;:
+<PRE>
+             umask modo_octal
+     ou
+             umask
+</PRE>
+onde <I>modo</I> indica quais as permiss&#245;es que se quer restringir ou
+negar.  Sem  argumentos,  <B><I>umask(1)</I></B>  mostra  qual  a  m&#225;scara  de
+permiss&#245;es que est&#225; v&#225;lida no momento.
+
+<P>
+Como  exemplo, suponha  que voc&#234;  tenha definido  a m&#225;scara  023 usando
+<B>umask</B>, e que  voc&#234; tenha criado o programa  fonte em linguagem
+PASCAL (arquivo regular) <B><FONT FACE="Helvetica, Arial, sans-serif">prog.p</FONT></B> com um editor de texto.
+
+<P>
+As permiss&#245;es  finais deste arquivo ser&#227;o resultado  da permiss&#227;o 666
+(que  UNIX tenta  atribuir  por <I>default</I>  a arquivos  regulares
+n&#227;o-execut&#225;veis) com restri&#231;&#227;o nas  permiss&#245;es indicadas na m&#225;scara (no
+exemplo,                 <TT>023                =
+- - - -w- -wx</TT>).          O
+resultado final ser&#225; que o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">prog.p</FONT></B> ter&#225; a permiss&#227;o 644 (
+rw-r- -r- - ).
+
+<P>
+Ainda  neste exemplo,  ao  se compilar  o  programa fonte  que est&#225;  em
+<B><FONT FACE="Helvetica, Arial, sans-serif">prog.p</FONT></B>,  ser&#225; gerado  um  arquivo chamado  <B><FONT FACE="Helvetica, Arial, sans-serif">prog</FONT></B>  que &#233;  o
+programa execut&#225;vel. As permiss&#245;es finais deste arquivo ser&#227;o resultado
+da  permiss&#227;o  777 (que  UNIX  tenta  atribuir  por <I>default</I>  a
+arquivos regulares execut&#225;veis)  com restri&#231;&#227;o nas permiss&#245;es indicadas
+na m&#225;scara  (no exemplo,  023).  O resultado  final ser&#225; que  o arquivo
+<B><FONT FACE="Helvetica, Arial, sans-serif">prog.p</FONT></B> ter&#225; a permiss&#227;o 754 ( rwxr-xr- - ).
+
+<P>
+
+<H4><A NAME="SECTION00015010000000000000">
+ATEN&#199;&#195;O:</A>
+</H4> <B><I>umask(1)</I></B> n&#227;o muda permiss&#245;es de arquivos
+j&#225; existentes. A altera&#231;&#227;o da  m&#225;scara afeta APENAS os arquivos criados
+AP&#211;S a execu&#231;&#227;o de <B><I>umask(1)</I></B>. Para alterar permiss&#245;es de arquivos
+j&#225; existentes, use <B><I>chmod(1)</I></B>.
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Encontrando arquivos: <B><I>find(1)</I></B></A>
+</H1>
+Comando <B>find</B>: op&#231;&#245;es, execu&#231;&#227;o de um comando em cada
+  arquivo encontrado, etc.;
+
+<P>
+SINTAXE: &nbsp;&nbsp;&nbsp;&nbsp;<B>find <I>rota_de_diret&#243;rio crit&#233;rio_de_procura a&#231;&#227;o</I></B>
+
+<P>
+Procura    em   um   conjunto    de   arquivos    e/ou   diret&#243;rios
+(<I>rota_de_diret&#243;rio</I>)    por     arquivos    que    tenham
+caracter&#237;sticas  definidas por um  <I>crit&#233;rio de  procura</I>, e
+executa uma <I>a&#231;&#227;o</I> para cada arquivo encontrado.
+
+<P>
+<DL>
+<DT><STRONG>Exemplo 1:</STRONG></DT>
+<DD> 
+<BR>  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066 -name jan83  -print</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">/home/esp/ci066/LabNum4/docs/jan83</FONT><BR>
+  
+
+<P>
+Neste exemplo:
+
+<P>
+rota_de_diret&#243;rio: <B><FONT SIZE=3>~</FONT>ci066</B>
+
+<P>
+crit&#233;rio de procura: <B>-name jan83</B>
+
+<P>
+a&#231;&#227;o: <B>-print</B>
+
+<P>
+</DD>
+<DT><STRONG>Exemplo 2:</STRONG></DT>
+<DD> 
+<BR>  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066 -perm -033 -atime -2 -exec chmod go-rwx {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT><BR>
+  
+
+<P>
+Neste exemplo:
+
+<P>
+rota_de_diret&#243;rio: <B><FONT SIZE=3>~</FONT>ci066</B>
+
+<P>
+crit&#233;rio  de  procura: <B>-perm -033  -atime -2</B>  (arquivos
+  acessados nos  &#250;ltimos 2 dias  E que tenham permiss&#227;o  de Escrita
+  E Execu&#231;&#227;o para Grupo e Outros)
+
+<P>
+a&#231;&#227;o: <B>-exec  chmod go-rwx {}  <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B> muda a
+                permiss&#227;o dos arquivos que correspondem ao crit&#233;rio
+                de procura.
+
+<P>
+Observe o uso de <B>{}</B> para representar em
+                <B><I>find(1)</I></B> os arquivos selecionados pelo crit&#233;rio
+                de procura.
+
+<P>
+</DD>
+<DT><STRONG>Exemplo 3:</STRONG></DT>
+<DD> 
+<BR>  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066 <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">( -name '*-8' -o -name '*~' -o -name 'jan[0-9]*' <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">)  -exec rm {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">/home/esp/ci066/LabNum4/docs/jan83</FONT><BR>
+  
+
+<P>
+Neste exemplo:
+
+<P>
+rota_de_diret&#243;rio: <B><FONT SIZE=3>~</FONT>ci066</B>
+
+<P>
+crit&#233;rio de procura: . Este crit&#233;rio
+  indica que os nomes dos arquivos que devem ser encontrados devem
+  terminar com <B>-8</B> OU <B>~</B> OU come&#231;ar com
+  <B>jan</B> seguido de um d&#237;gito de 0 a 9.
+
+<P>
+Observe  tamb&#233;m o  uso  de <B>-o</B>  para  representar a  opera&#231;&#227;o
+  l&#243;gica  OU entre os  crit&#233;rios. A  aus&#234;ncia do  conectivo <B>-o</B>
+  implica  em   uma  opera&#231;&#227;o  E,  tamb&#233;m  representada   pelo  uso  de
+  <B>-a</B>.
+
+<P>
+Observe  o  uso  de  par&#234;nteses  para  agrupar  todo  o  conjunto  de
+  crit&#233;rios. Deve-se  observar tamb&#233;m que os  par&#234;nteses s&#227;o precedidos
+  de  <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">,  para evitar  que  o  <I>shell</I> interprete  os
+  par&#234;nteses de  forma especial. Finalmente,  &#233; mandat&#243;ria o uso  de um
+  espa&#231;o em  branco entre os par&#234;nteses  e o conjunto  de crit&#233;rios que
+  eles agrupam.
+
+<P>
+a&#231;&#227;o:  <B>-rm {}  <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B>  remove cada  arquivo
+                selecionado pelos crit&#233;rios de procura.
+
+<P>
+Observe o uso de <B>{}</B> para representar em
+                <B><I>find(1)</I></B> os arquivos selecionados pelo crit&#233;rio
+                de procura, e de <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">; para indicar o final da
+                op&#231;&#227;o <B>-exec</B>.
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Compacta&#231;&#227;o de arquivos. Arquivamento e <I>Backup</I></A>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION00030010000000000000">
+Refer&#234;ncia b&#225;sica: Cap&#237;tulo 6, se&#231;&#227;o 6.4 da Apostila Linux B&#225;sico (<A
+ HREF="teoria.html#pet02a">1</A>)</A>
+</H4>
+
+<P>
+<DL>
+<DT><STRONG>Compactadores</STRONG></DT>
+<DD>Arquivos de grande volume podem ser comprimidos e posteriomente
+  recuperados para seu tamanho original com comandos de compress&#227;o. Em
+  UNIX os principais comandos s&#227;o:
+  <DL>
+<DT><STRONG>Familia <B><I>gzip(1)</I></B>:</STRONG></DT>
+<DD>Atualmente os comandos mais
+    usados   em  UNIX.
+  
+</DD>
+<DT><STRONG>Fam&#237;lia <B><I>bzip2(1)</I></B>:</STRONG></DT>
+<DD>Cada  vez mais  usados,
+    oferecem um fator de compress&#227;o maior que o comando <B><I>gzip(1)</I></B>.
+  
+</DD>
+<DT><STRONG>Fam&#237;lia <B><I>zip(1)</I></B>:</STRONG></DT>
+<DD>Mesmo formato  de compress&#227;o
+    dos  comandos  da   fam&#237;lia  <B>winzip</B>  do  ambiente  Microsoft
+    Windows.
+  
+</DD>
+</DL>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="250"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Fam&#237;lias de Compactadores de Arquivos</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT">Fam&#237;lia</TD>
+<TD ALIGN="RIGHT">Compactador</TD>
+<TD ALIGN="RIGHT">Descompactador</TD>
+<TD ALIGN="RIGHT">Visualizador</TD>
+<TD ALIGN="RIGHT">Sufixos</TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><B><I>gzip(1)</I></B></TD>
+<TD ALIGN="RIGHT">gzip</TD>
+<TD ALIGN="RIGHT">gunzip</TD>
+<TD ALIGN="RIGHT">zcat</TD>
+<TD ALIGN="RIGHT">.gz</TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><B><I>bzip2(1)</I></B></TD>
+<TD ALIGN="RIGHT">bzip2</TD>
+<TD ALIGN="RIGHT">bunzip2</TD>
+<TD ALIGN="RIGHT">bzcat</TD>
+<TD ALIGN="RIGHT">.bz2</TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><B><I>zip(1)</I></B></TD>
+<TD ALIGN="RIGHT">zip</TD>
+<TD ALIGN="RIGHT">unzip</TD>
+<TD ALIGN="RIGHT">-</TD>
+<TD ALIGN="RIGHT">.zip</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:compactadores"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P><BR>
+
+<P>
+</DD>
+<DT><STRONG>Arquivadores (<I>archivers</I>):</STRONG></DT>
+<DD>usados para agregar um
+  conjunto de arquivos em um &#250;nico (denominado <I>achive</I>). Muito
+  utilizados para fazer c&#243;pias de seguran&#231;a (<I>Backup</I>) de &#225;reas
+  de usu&#225;rios ou de um  conjunto de arquivos e diret&#243;rios.
+  <DL>
+<DT><STRONG><B><I>tar(1)</I></B>:</STRONG></DT>
+<DD>O   mais  usado  em   sistemas  UNIX.  Sintaxe
+    totalmente  pr&#243;pria do  comando e  seu formato  &#233;  incompat&#237;vel com
+    outros arquivadores;
+
+<P>
+Muitas vezes, arquivos gerados com <B><I>tar(1)</I></B> s&#227;o posteriormente
+    compactados com <B><I>gzip(1)</I></B>  ou <B><I>bzip2(1)</I></B>. Isto &#233; indicado
+    pelos sufixos da Tabela&nbsp;<A HREF="#tab:tarcompact">2</A>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="298"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 2:</STRONG>
+Sufixos associados a arquivos <I>tar</I> compactados</CAPTION>
+<TR><TD>      <DIV ALIGN="CENTER">      <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT">Compactador</TD>
+<TD ALIGN="RIGHT">Sufixo</TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><B><I>gzip(1)</I></B></TD>
+<TD ALIGN="RIGHT">.tar.gz, .tgz, .taz</TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><B><I>bzip2(1)</I></B></TD>
+<TD ALIGN="RIGHT">.tar.bz2, .tbz</TD>
+</TR>
+</TABLE>
+      
+      <A NAME="tab:tarcompact"></A>    </DIV></TD></TR>
+</TABLE>
+</DIV><P></P><BR>
+
+<P>
+</DD>
+<DT><STRONG><B><I>zip(1)</I></B>:</STRONG></DT>
+<DD>Al&#233;m  de  ser   um  compactador,   o  comando
+    <B><I>zip(1)</I></B>  &#233;  tamb&#233;m um  arquivador,  j&#225;  que  na verdade  este
+    comando compacta  um conjunto de  arquivos e ap&#243;s a  compacta&#231;&#227;o de
+    cada um, os coloca todos em um &#250;nico arquivo.
+  
+</DD>
+</DL>
+
+<P>
+</DD>
+<DT><STRONG><B><I>split(1)</I></B>:</STRONG></DT>
+<DD>Usado para dividir um arquivo muito grande para
+  que caiba em diversas m&#237;dias (floppy ou zip) de tamanho pequeno.
+
+<P>
+Exemplo: <B>split -bytes=1400k bkp.tar.gz</B>: desmembra o arquivo
+  bkp.tar.gz em partes com tamanho m&#225;ximo de 1400 Kbytes.
+</DD>
+</DL>
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="pet02a">1</A>
+<DD>
+PET Inform&#225;tica.
+<BR> Linux B&#225;sico.
+<BR> UFPR, Outubro 2002.
+<BR> URL <TT>http://pet.inf.ufpr.br/&nbsp;daniel/LinuxBasico.pdf</TT>.
+
+<BR>
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-10-08
+</ADDRESS>
+</BODY>
+</HTML>

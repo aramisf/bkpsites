@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 06
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 08
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 06
+<BR>
+2&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Processos</A>
+</H1>
+
+<P>
+Um <B>processo</B> &#233; um programa  em execu&#231;&#227;o. Toda vez que o usu&#225;rio
+digita um comando que executa um  programa, o sistema UNIX cria um novo
+processo.
+
+<P>
+Mesmo que o usu&#225;rio n&#227;o  esteja fazendo nada em particular, haver&#225; pelo
+menos 1  (um) processo em execu&#231;&#227;o: aquele  associado ao <I>shell</I>
+iniciado quando o usu&#225;rio <I>logou</I> no sistema.
+
+<P>
+Para a maioria dos processos, a entrada e sa&#237;da est&#225; associada ao
+terminal:
+
+<UL>
+<LI>Entrada &nbsp;&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$=$"> &nbsp;&nbsp;&nbsp;&nbsp;teclado
+</LI>
+<LI>Sa&#237;da &nbsp;&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$=$"> &nbsp;&nbsp;&nbsp;&nbsp;tela de um terminal do computador ou janela
+  de um emulador de terminal (e.g., xterm)
+</LI>
+</UL>
+
+<P>
+Por causa  disto, ao  executar um programa,  o usu&#225;rio  geralmente deve
+esperar pelo  seu t&#233;rmino  antes de estar  habilitado a  executar outro
+comando ou programa.
+
+<P>
+Mas alguns  programas podem n&#227;o usar  ou necessitar de  intera&#231;&#227;o com o
+usu&#225;rio. Por exemplo:
+
+<P>
+<PRE>
+                 sort -k2 clientes &gt;clientes_por_fone
+</PRE>
+
+<P>
+Outros programas interagem com o  usu&#225;rio atrav&#233;s de uma janela gr&#225;fica
+ dedicada   e  distinta  do   emulador  de   terminal  de   onde  foram
+ iniciados. Exemplo  disto &#233; o  <B><I>emacs(1)</I></B> quando executado  em um
+ ambiente X Windows.
+
+<P>
+Em  ambos os  cen&#225;rios, n&#227;o  &#233; necess&#225;rio  que o  usu&#225;rio  espere pelo
+ t&#233;rmino  do programa.   Seria  interessante que,  enquanto o  programa
+ acima  &#233; executado,  o  usu&#225;rio pudesse  continuar  a executar  outras
+ tarefas pelo mesmo terminal. Para  fazer isto em UNIX, basta colocar o
+ caracter <B>&amp;  (ampersand)</B> ao final  da linha de  comando (ap&#243;s
+ quaisquer redirecionamentos, se houver):
+
+<P>
+<PRE>
+                 sort -k2 clientes &gt;clientes_por_fone &amp;
+                 emacs fones.txt &amp;
+</PRE>
+
+<P>
+Quando o  <I>shell</I> espera  pelo t&#233;rmino de  um programa  antes de
+habilitar  ao usu&#225;rio  a execu&#231;&#227;o  de um  novo comando,  dizemos  que o
+programa est&#225; sendo executado em <I>foreground</I>.
+
+<P>
+Quando o <I>shell</I> inicia o programa, mas o deixa executar por si,
+retornando  o   controle  do  terminal  ao  usu&#225;rio   (o  que  acontece
+colocando-se <B>&amp;</B> ao  final da linha de comando),  dizemos que o
+programa est&#225; sendo executado em <I>background</I>.
+
+<P>
+Um programa  &#233; candidato a ser executado  em <I>background</I> quando
+ele n&#227;o necessita interagir com o usu&#225;rio ou quando necessita manipular
+o cursor na sa&#237;da padr&#227;o (e.g., um editor).
+
+<P>
+V&#225;rios programas podem  ser executados em <I>foreground</I> usando-se
+apenas uma linha  de comando. Basta separar cada  comando por <B>;
+(ponto e v&#237;rgula)</B>. Assim, a linha de comando
+
+<P>
+<PRE>
+               ls ~ ; cd ~ci066 ; wc -l LabNum7/fones.txt
+</PRE>
+
+<P>
+&#233; equivalente &#224; 
+
+<P>
+<PRE>
+               ls ~
+               cd ~ci066
+               wc -l LabNum7/fones.txt
+</PRE>
+
+<P>
+Da   mesma   forma,   &#233;   poss&#237;vel   executar   v&#225;rios   programas   em
+<I>background</I>  usando-se  apenas  uma  linha  de  comando.  Basta
+separar cada comando por <B>&amp;</B>. Assim, a linha de comando
+
+<P>
+<PRE>
+   sort -k2 clientes &gt;clientes_por_fone &amp; wc -l fones.txt &gt;num_fones &amp;
+</PRE>
+
+<P>
+&#233; equivalente a:
+
+<P>
+<PRE>
+           sort -k2 clientes &gt;clientes_por_fone &amp; 
+           wc -l fones.txt &gt;num_fones &amp;
+</PRE>
+
+<P>
+A todo  <B>processo</B> o sistema UNIX associa  um n&#250;mero, denominado
+<B>process ID</B> ou  simplesmente <B>PID</B>. Este identificador &#233;
+usado para  eventualmente abortar um  processo caso se observe  que ele
+n&#227;o est&#225; trabalhando como devia.
+
+<P>
+Um  comando pode  disparar a  execu&#231;&#227;o de  um &#250;nico  programa ou  de um
+conjunto de  2 ou  mais programas. Assim,  usa-se o  termo <B>job</B>
+para   se   referir   a    um   comando   executado   pelo   shell   em
+<I>background</I>.  A  cada <I>job</I> (que  pode gerar um  ou mais
+processos)  o shell  associa um  n&#250;mero denominado  <B>Job  ID</B> ou
+simplesmente <B>JID</B>.
+
+<P>
+Tanto o PID quanto  o JID s&#227;o exibidos pelo shell no  momento em que se
+inicia  a  execu&#231;&#227;o de  um  comando  em  <I>background</I>. Eles  s&#227;o
+exibidos em uma &#250;nica linha na forma <B>[JID]&nbsp;&nbsp;PID</B>. Por exemplo:
+
+<P>
+<PRE>
+               sort -k2 clientes &gt;clientes_por_fone &amp; 
+               [1] 1345
+</PRE>
+
+<P>
+Quando um processos iniciado em <I>background</I> termina, o shell
+exibe uma pequena mensagem na tela de onde o programa foi  iniciado,
+indicando o JID e o comando:
+
+<P>
+<PRE>
+               [1]    Done        sort -k2 clientes &gt;clientes_por_fone
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Controle de Processos</A>
+</H2>
+
+<P>
+Os principais comandos para controle de processos e <I>jobs</I> s&#227;o:
+
+<P>
+
+<UL>
+<LI><B><B><FONT SIZE=3>^</FONT></B>C</B> (Control-C):  TERMINA execu&#231;&#227;o de um processo
+  em <I>foreground</I>.
+</LI>
+<LI><B><B><FONT SIZE=3>^</FONT></B>Z</B> (Control-Z): SUSPENDE execu&#231;&#227;o de um processo
+  em <I>foreground</I>. Para o  processo voltar &#224; execu&#231;&#227;o, usa-se os
+  comandos    <B>fg</B>,  <B>bg</B>    e   <B>jobs</B>    (vide
+  se&#231;&#227;o JOB CONTROL em <B><I>bash(1)</I></B>);
+</LI>
+<LI><B><I>ps(1)</I></B>: mostra o estado dos processos;
+</LI>
+<LI><B><I>kill(1)</I></B>: termina (<I>mata</I>) um processo;
+</LI>
+<LI><B><I>top(1)</I></B>: exibe os processos em ordem de uso da CPU;
+</LI>
+<LI><B><I>nice(1)</I></B>: executa um programa com prioridade determinada;
+</LI>
+<LI><B><I>renice(1)</I></B>: altera prioridade de processos j&#225; em execu&#231;&#227;o.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00011100000000000000">
+Controle de <I>Jobs</I></A>
+</H3>
+
+<P>
+Quando um  programa &#233; iniciado  em <I>foreground</I>, o  usu&#225;rio pode
+SUSPENDER  (parar  sem  terminar)  a execu&#231;&#227;o  com  <B><B><FONT SIZE=3>^</FONT></B>Z</B>
+(Control-Z).   A mensagem  <B>[1]&nbsp;&nbsp;&nbsp;&nbsp;Stopped&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;comando&gt;</B>
+ser&#225; exibida pelo shell. A partir deste momento, o usu&#225;rio pode digitar
+qualquer comando, pois o  programa est&#225; <I>parado</I>. Para retomar a
+execu&#231;&#227;o do programa (em  ingl&#234;s, <I>resume</I>), dois comandos podem
+ser executados:
+
+<UL>
+<LI><B>fg</B> o shell reativa o programa em <I>foreground</I>;
+</LI>
+<LI><B>bg</B> o shell reativa o programa em <I>background</I>;
+</LI>
+</UL>
+
+<P>
+Para  obter uma  lista de  todos os  <I>jobs</I> em  execu&#231;&#227;o  em uma
+determinada   sess&#227;o   de   <I>shell</I>,   basta  usar   o   comando
+<B>jobs</B>, que mostra uma lista do tipo abaixo:
+
+<P>
+<PRE>
+        [1]   Running                 emacs &amp;
+        [2]-  Running                 netscape &amp;
+        [3]+  Stopped                 vi
+</PRE>
+
+<P>
+O sinal <B><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$+$"></B> indica o JOB CORRENTE. O sinal <B><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$-$"></B> indica
+o  JOB  ANTERIOR. Caso  os  comandos  <B>fg</B>  e <B>bg</B>  sejam
+executados sem argumentos, eles s&#227;o aplicados ao JOB CORRENTE.
+
+<P>
+Executando-se <B>jobs -l</B>, tamb&#233;m ser&#225; exibido o PID do processo
+principal do <I>job</I>:
+
+<P>
+<PRE>
+        [1]   1245 Running                 emacs &amp;
+        [2]-  1247 Running                 netscape &amp;
+        [3]+  1256 Stopped (tty output)    vi
+</PRE>
+
+<P>
+Caso se queira aplicar  <B>fg</B> e <B>bg</B> em algum <I>job</I>
+que  n&#227;o o  corrente, usa-se  como argumento  o n&#250;mero  do <I>job</I>
+precedido por <B>% (porcentagem)</B>:
+
+<P>
+<PRE>
+        fg %3
+        ^Z
+        bg %3
+</PRE>
+
+<P>
+Os argumentos para <B>fg</B> e <B>bg</B> podem ser na forma da
+tabela&nbsp;<A HREF="#tab:jobs">1</A>.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="241"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Formas de especifica&#231;&#227;o de <I>jobs</I></CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT"><B>Argumento</B></TH>
+<TH ALIGN="LEFT"><B>Descri&#231;&#227;o</B></TH>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%<I>nn</I></TD>
+<TD ALIGN="LEFT"><I>job</I> n&#250;mero <I>nn</I></TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%<I>nome</I></TD>
+<TD ALIGN="LEFT">comando que come&#231;a com <I>nome</I></TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%?<I>nome</I></TD>
+<TD ALIGN="LEFT">comando que cont&#233;m com <I>nome</I></TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%</TD>
+<TD ALIGN="LEFT"><I>job</I> corrente</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$+$"></TD>
+<TD ALIGN="LEFT">o mesmo que %</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">%<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$-$"></TD>
+<TD ALIGN="LEFT"><I>job</I> anterior</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:jobs"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00011200000000000000">
+Controle de Processos</A>
+</H3>
+
+<P>
+O  comando  <B><I>ps(1)</I></B>  exibe  na  tela  informa&#231;&#227;o  a  respeito  dos
+processos atualmente sendo executados no sistema. Conforme a op&#231;&#227;o, s&#227;o
+mostrados apenas  os processos  do usu&#225;rio ou  de todos os  usu&#225;rios. A
+principal  informa&#231;&#227;o &#233;  o PID,  o  programa em  execu&#231;&#227;o e  o nome  do
+usu&#225;rio.
+
+<P>
+O comando <B><I>top(1)</I></B> mostra os  processos em ordem reversa de uso de
+CPU: os  processos que  mais usam  a CPU aparecem  no in&#237;cio  da lista,
+juntamente com  o propriet&#225;rio  do processo e  com o PID,  entre outras
+informa&#231;&#245;es.
+
+<P>
+O comando <B><I>kill(1)</I></B> termina ou <I>mata</I> um processo. Seus
+argumentos s&#227;o o PID ou JID, podendo haver mais que um ID na mesma
+linha de comando. Por exemplo:
+<PRE>
+            kill 1245
+            kill 345 %3
+            kill 2345 567 3456
+</PRE>
+
+<P>
+Quando  se  executa um  programa,  ele  pode  ser interrompida  com  um
+<B><B><FONT SIZE=3>^</FONT></B>C (Control-C)</B>.  No entanto, isto  pode n&#227;o funcionar,
+sendo necess&#225;rio ent&#227;o lan&#231;ar m&#227;o de <B><I>kill(1)</I></B>.
+
+<P>
+Quando se termina um processo com <B><I>kill(1)</I></B>, o shell exibe uma
+mensagem do tipo
+<PRE>
+          [1]     Terminated           emacs
+</PRE>
+
+<P>
+O efeito de um <B>kill</B> &#233; fazer com que o programa seja terminado
+de forma suave e ordenada, sem preju&#237;zo de eventuais arquivos que
+estejam sendo usados pelo processo.
+
+<P>
+Geralmente uma  simples execu&#231;&#227;o de  <B>kill</B> &#233; o  suficiente para
+terminar um programa,  mas h&#225; exce&#231;&#245;es. Neste caso,  deve-se indicar um
+argumento  opcional <B>-9</B> que  indica ao  sistema que  o processo
+deve  ser terminado de  modo for&#231;ado,  sem d&#243;  nem piedade.  Isto pode,
+eventualmente  gerar   problemas  em  arquivos   usados  pelo  programa
+<I>morto</I>.
+
+<P>
+<PRE>
+            kill -9 1245
+            kill -KILL 345
+</PRE>
+
+<P>
+Um usu&#225;rio somente pode matar processos iniciados por ele mesmo.
+
+<P>
+
+<H3><A NAME="SECTION00011300000000000000">
+Prioridades de Processos</A>
+</H3>
+
+<P>
+Cada  processo  tem direito  a  utilizar  os  recursos do  sistema.  No
+entanto, Um  processo pode  ter associado uma  <B>prioridade</B> mais
+alta ou mais baixa na utiliza&#231;&#227;o destes recursos.
+
+<P>
+Esta  prioridade &#233;  definida com  <B><I>nice(1)</I></B>:  <B>nice -AJUSTE
+  COMANDO</B>, onde AJUSTE  varia de -20 (maior prioridade)  at&#233; 19 (menor
+  prioridade).
+
+<P>
+<PRE>
+      nice -15 ls           --&gt; define prioridade mais baixa
+      nice --12 netscape    --&gt; aumenta a prioridade do processo
+</PRE>
+
+<P>
+Somente  o   usu&#225;rio  <B>root</B>  pode  aumentar   a  prioridade  de
+processos. Outros usu&#225;rios podem apenas DIMINUIR a prioridade, usando
+para isto <B><I>renice(1)</I></B>:
+
+<P>
+<PRE>
+      renice 12 345        --&gt; muda a prioridade do process com PID=345
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Propriet&#225;rios de Processos</A>
+</H2>
+
+<P>
+UNIX diferencia dois tipos de USU&#193;RIO e GRUPO, para efeitos de
+defini&#231;&#227;o de permiss&#245;es de acesso a arquivos por um programa:
+
+<P>
+
+<UL>
+<LI>REAL:  corresponde ao usu&#225;rio que est&#225; logado e que iniciou a
+  execu&#231;&#227;o de um programa;
+</LI>
+<LI>EFETIVO:  corresponde ao usu&#225;rio  que o sistema entende  que est&#225;
+  efetivamente executando o programa.  Pode ser igual ao REAL (situa&#231;&#227;o
+  normal) ou  igual ao propriet&#225;rio/grupo do  arquivo correspondente ao
+  programa.
+</LI>
+</UL>
+
+<P>
+As permiss&#245;es de  acesso a arquivos por um  processo s&#227;o verificadas de
+acordo com a identifica&#231;&#227;o EFETIVA de usu&#225;rio e grupo.
+
+<P>
+No momento, nesta disciplina, o usu&#225;rio e grupo efetivos s&#227;o iguais aos
+usu&#225;rio e grupo real, isto &#233;, ao usu&#225;rio que inicia o programa.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-11-20
+</ADDRESS>
+</BODY>
+</HTML>

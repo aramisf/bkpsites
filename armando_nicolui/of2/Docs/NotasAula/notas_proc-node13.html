@@ -1,0 +1,1314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>13 Estruturas de Repetição</TITLE>
+<META NAME="description" CONTENT="13 Estruturas de Repetição">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node14.html">
+<LINK REL="previous" HREF="notas_proc-node12.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node14.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html360"
+  HREF="notas_proc-node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html358"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html352"
+  HREF="notas_proc-node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html361"
+  HREF="notas_proc-node14.html">14 Tipo Enumerado</A>
+<B>Up:</B> <A NAME="tex2html359"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html353"
+  HREF="notas_proc-node12.html">12 A sentença break</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html362"
+  HREF="notas_proc-node13.html#SECTION000131000000000000000">13.1 O comando de repetição while</A>
+<UL>
+<LI><A NAME="tex2html363"
+  HREF="notas_proc-node13.html#SECTION000131010000000000000">Exemplo 1:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html364"
+  HREF="notas_proc-node13.html#SECTION000132000000000000000">13.2 A Estrutura de Repetição do...while</A>
+<UL>
+<LI><A NAME="tex2html365"
+  HREF="notas_proc-node13.html#SECTION000132010000000000000">Exemplo 2:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html366"
+  HREF="notas_proc-node13.html#SECTION000133000000000000000">13.3 A Extrutura de Repetição for</A>
+<UL>
+<LI><A NAME="tex2html367"
+  HREF="notas_proc-node13.html#SECTION000133100000000000000">13.3.1 Diversas sentenças dentro de um laço</A>
+<UL>
+<LI><A NAME="tex2html368"
+  HREF="notas_proc-node13.html#SECTION000133110000000000000">Exemplo 3:</A>
+<LI><A NAME="tex2html369"
+  HREF="notas_proc-node13.html#SECTION000133120000000000000">Exemplo 4:</A>
+</UL>
+<LI><A NAME="tex2html370"
+  HREF="notas_proc-node13.html#SECTION000133200000000000000">13.3.2 Laços aninhados</A>
+<UL>
+<LI><A NAME="tex2html371"
+  HREF="notas_proc-node13.html#SECTION000133210000000000000">Exemplo 5:</A>
+<LI><A NAME="tex2html372"
+  HREF="notas_proc-node13.html#SECTION000133220000000000000">Exemplo 6:</A>
+<LI><A NAME="tex2html373"
+  HREF="notas_proc-node13.html#SECTION000133230000000000000">Exemplo 7:</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html374"
+  HREF="notas_proc-node13.html#SECTION000134000000000000000">13.4 Estilo de formatação para estruturas de repetição</A>
+<UL>
+<LI><A NAME="tex2html375"
+  HREF="notas_proc-node13.html#SECTION000134100000000000000">13.4.1 Colocação das chaves</A>
+<LI><A NAME="tex2html376"
+  HREF="notas_proc-node13.html#SECTION000134200000000000000">13.4.2 Necessidade ou não das chaves</A>
+<LI><A NAME="tex2html377"
+  HREF="notas_proc-node13.html#SECTION000134300000000000000">13.4.3 Uso de espaço em branco</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html378"
+  HREF="notas_proc-node13.html#SECTION000135000000000000000">13.5 Lendo o teclado</A>
+<UL>
+<LI><A NAME="tex2html379"
+  HREF="notas_proc-node13.html#SECTION000135100000000000000">13.5.1 Lendo o teclado usando  getchar()</A>
+<LI><A NAME="tex2html380"
+  HREF="notas_proc-node13.html#SECTION000135200000000000000">13.5.2 Marcando o final da entrada</A>
+<LI><A NAME="tex2html381"
+  HREF="notas_proc-node13.html#SECTION000135300000000000000">13.5.3 Lendo o teclado usando getch() e getche()</A>
+<LI><A NAME="tex2html382"
+  HREF="notas_proc-node13.html#SECTION000135400000000000000">13.5.4 Para evitar problemas com a entrada...</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html383"
+  HREF="notas_proc-node13.html#SECTION000136000000000000000">13.6 Usando while e for</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000130000000000000000">
+13 Estruturas de Repeti&#231;&#227;o</A>
+</H1>
+A linguagem C possui comandos para repetir uma sequ&#234;ncia de instru&#231;&#245;es.
+Estas   <B>estruturas  de   repeti&#231;&#227;o</B>,  tamb&#233;m   conhecidas  como
+<B>la&#231;os</B>   (do   ingl&#234;s   <B><I>loops</I></B>).  A   primeira
+constru&#231;&#227;o que veremos &#233; o while, seguida de for e de 
+do ... while.
+
+<P>
+
+<H2><A NAME="SECTION000131000000000000000">
+13.1 O comando de repeti&#231;&#227;o while</A>
+</H2>
+
+<P>
+O comando de repeti&#231;&#227;o while tem duas partes: a <I>express&#227;o
+de teste</I> e o <I>corpo da repeti&#231;&#227;o</I>.  O formato do while &#233;:
+
+<P>
+while (<EM>express&#227;o teste</EM>)
+
+<P>
+<EM>corpo da repeti&#231;&#227;o</EM>
+
+<P>
+
+<P>
+A <I>express&#227;o teste</I> &#233;  inicialmente avaliada para verificar se o
+la&#231;o  deve  terminar.   Caso  a  express&#227;o  seja  verdadeira  (isto  &#233;,
+diferente  de 0  (zero)), o  <I>corpo da  repeti&#231;&#227;o</I>  &#233; executado.
+Depois   desta  execu&#231;&#227;o,   o   processo  &#233;   repetido   a  partir   da
+<I>express&#227;o teste</I>.  O <I>corpo  do la&#231;o</I>, por sua vez, pode
+ser uma senten&#231;a simples ou composta.
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="195" HEIGHT="265" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img39.png"
+ ALT="\includegraphics[scale=1.0]{while}"></DIV>
+
+<P>
+O exemplo abaixo mostra o uso do comando de repeti&#231;&#227;o while:
+
+<P>
+<PRE>
+             int contador = 0;
+
+             while( contador &lt; 5 )
+               printf( "contador = %d\n", contador++ );
+
+             printf("ACABOU !!!!\n");
+</PRE>
+
+<P>
+<B>Sa&#237;da:</B>
+<PRE>
+             contador = 0
+             contador = 1
+             contador = 2
+             contador = 3
+             contador = 4
+             ACABOU !!!!
+</PRE>
+
+<P>
+Neste exemplo,  a express&#227;o de teste  &#233; contador &lt;  5, e o
+corpo do la&#231;o &#233; a senten&#231;a printf().
+
+<P>
+Se examinarmos cuidadosamente este exemplo, veremos que a vari&#225;vel 
+contador &#233; inicializada com 0 (zero) quando &#233; definida.  Depois disso,
+a  express&#227;o  de teste  &#233;  verificada  e, como  0  &lt; 5  &#233;
+verdadeiro, o corpo da repeti&#231;&#227;o &#233; executado. Assim, o programa imprime
+contador =  0, e incrementa contador  de um (atrav&#233;s
+do p&#243;s-decremento indicado no argumento de printf()). Em seguida,
+a express&#227;o de teste &#233; verificada novamente e todo o processo se repete
+at&#233; que  contador seja 4 e contador  = 4 seja
+impresso.
+
+<P>
+Depois disso,  contador &#233; incrementado  para 5 e  o teste &#233;
+executado.  Mas desta vez, 5 &lt; 5 &#233; falso, ent&#227;o o la&#231;o n&#227;o
+continua.  A execu&#231;&#227;o do programa continua na senten&#231;a que segue o la&#231;o
+(no caso, imprimir a frase ACABOU !!!).
+
+<P>
+Ap&#243;s a  execu&#231;&#227;o do  while, a  vari&#225;vel contador  tem valor
+5.
+
+<P>
+No  exemplo acima,  h&#225;  uma  senten&#231;a simples  no  corpo da  repeti&#231;&#227;o.
+Quando este for definido por uma senten&#231;a composta (bloco), n&#227;o se deve
+esquecer de usar as chaves ({ e }) para delimitar o bloco
+da senten&#231;a composta.
+
+<P>
+
+<P>
+O  exemplo seguinte  mostra  um  uso mais  apropriado  do comando  
+while: Em situa&#231;&#245;es onde o  n&#250;mero de repeti&#231;&#245;es n&#227;o &#233; conhecido antes
+do inic&#237;o do comando while:
+
+<P>
+
+<H4><A NAME="SECTION000131010000000000000">
+Exemplo 1:</A>
+</H4> Este programa pede n&#250;meros ao usu&#225;rio at&#233; que a soma de
+todos os n&#250;meros digitados for pelo menos 20.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main( ){
+
+  int total = 0, num;
+  
+  while( total &lt; 20 ) {
+    printf( "Total = %d\n", total );
+    
+    printf( "Entre com um numero: " );
+    scanf( "%d", &amp;num );
+    
+    total += num;
+  }
+  
+  printf( "Final total = %d\n", total );
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<B>Exemplo de sa&#237;da:</B>
+
+<P>
+<PRE>
+   Total = 0
+   Entre com um numero: 3
+   Total = 3
+   Entre com um numero: 8
+   Total = 11
+   Entre com um numero: 15
+   Final total = 26
+</PRE>
+
+<P>
+Inicialmente, &#233; dado o valor 0 &#224; vari&#225;vel total, e o teste
+&#233;  verdadeiro (0  &lt; 20).   Em  cada itera&#231;&#227;o,  o total  &#233;
+impresso  e o  usu&#225;rio digita  um n&#250;mero  que &#233;  somado a  total.
+Quanto total for  maior ou igual  a 20,  o teste do  while
+torna-se falso, e a repeti&#231;&#227;o termina.
+
+<P>
+
+<H2><A NAME="SECTION000132000000000000000">
+13.2 A Estrutura de Repeti&#231;&#227;o do...while</A>
+</H2> 
+
+<P>
+H&#225; outro  comando de  repeti&#231;&#227;o em linguagem  C.  O do...while &#233;
+bastante parecido com  while, com a diferen&#231;a  que a express&#227;o de
+teste &#233; avaliada DEPOIS que o corpo da repeti&#231;&#227;o &#233; executado.
+
+<P>
+O formato do  do...while &#233;:
+
+<P>
+do
+
+<P>
+<EM>corpo da repeti&#231;&#227;o</EM>
+
+<P>
+while (<EM>express&#227;o teste</EM>)
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="159" HEIGHT="243" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img40.png"
+ ALT="\includegraphics[scale=1.0]{do-while}"></DIV>
+
+<P>
+O exemplo abaixo usa o do...while:
+
+<P>
+<PRE>
+             int contador = 0;
+
+             do {
+                printf( "contador = %d\n", contador++ );
+             } while( contador &lt; 5 )
+
+             printf("ACABOU !!!!\n");
+</PRE>
+
+<P>
+A execu&#231;&#227;o deste programa &#233;  id&#234;ntico ao primeiro exemplo mostrado para
+o comando while, com a express&#227;o de teste mudada para o final.
+
+<P>
+Sa&#237;da:
+<PRE>
+             contador = 0
+             contador = 1
+             contador = 2
+             contador = 3
+             contador = 4
+</PRE>
+
+<P>
+O  do...while &#233;  usado  quando o  corpo  da  repeti&#231;&#227;o deve  ser
+executado pelo menos uma vez.  Um exemplo comum disto &#233; o processamento
+da entrada de um programa.
+
+<P>
+
+<H4><A NAME="SECTION000132010000000000000">
+Exemplo 2:</A>
+</H4>  Neste exemplo, o teste do la&#231;o &#233; baseado no
+valor digitado  pelo usu&#225;rio.  O la&#231;o  deve ser executado  pelo uma vez
+antes que o teste sobre o valor seja executado.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio&gt;
+
+main( ){
+  
+  int num;
+  
+  printf( "Entre com um numero par:\n" );
+  
+  do{
+    scanf( "%d", &amp;num );
+  } while( num % 2 != 0 );
+  
+  printf( "Obrigado.\n" );
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<B>Exemplo de execu&#231;&#227;o:</B>
+<PRE>
+     Entre com um numero par:
+     3
+     1
+     5
+     4
+     Obrigado.
+</PRE>
+
+<P>
+Neste  caso,   o  valor   da  vari&#225;vel  num  &#233;   digitado  pelo
+usu&#225;rio. Depois disso, o teste &#233; executado para verificar se o n&#250;mero &#233;
+par (o teste <code>num % 2 != 0</code> &#233; falso se num &#233; par j&#225; que o 
+resto da divis&#227;o de qualquer n&#250;mero par por 2 &#233; zero).
+
+<P>
+&#201; poss&#237;vel escrever o programa acima usando while:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio&gt;
+
+main( ){
+  
+  int num = 1;      /* Atribui um numero impar a  num */
+  
+  printf( "Entre com um numero par:\n" );
+  
+  while( num % 2 != 0 ){
+    scanf( "%d", &amp;num );
+  }
+  printf( "Obrigado.\n" );
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+O  problema com  este programa  &#233;  que a  vari&#225;vel num deve  ser
+inicializada com um valor que  torne o teste do la&#231;o verdadeiro.  Neste
+exemplo, &#233; simples encontrar tal  valor.  Para uma express&#227;o teste mais
+complicada, isso pode n&#227;o ser t&#227;o f&#225;cil.
+
+<P>
+
+<H2><A NAME="SECTION000133000000000000000">
+13.3 A Extrutura de Repeti&#231;&#227;o for</A>
+</H2>
+
+<P>
+H&#225; 4 partes  no la&#231;o for: <EM>inicializa&#231;&#227;o</EM>, <EM>express&#227;o de
+teste</EM>,  <EM>express&#227;o  de incremento</EM>  e o  <EM>corpo  do  la&#231;o</EM>.  O
+formato do la&#231;o for &#233;:
+
+<P>
+
+<P>
+<EM>corpo da repeti&#231;&#227;o</EM>
+
+<P>
+}
+
+<P>
+
+<P>
+A <I>inicializa&#231;&#227;o</I> &#233;  executada uma &#250;nica vez no  in&#237;cio do la&#231;o.
+A <I>express&#227;o  teste</I> &#233; ent&#227;o  avaliada para verificar se  o la&#231;o
+deve terminar.  Caso a express&#227;o  seja verdadeira (isto &#233;, diferente de
+Zero),  o  <I>corpo  da  repeti&#231;&#227;o</I>  &#233;  executado.   Depois  desta
+execu&#231;&#227;o, a express&#227;o de <I>incremento</I> &#233; executada e o processo &#233;
+repetido  a  partir da  <I>express&#227;o  teste</I>.  O <I>corpo  da
+repeti&#231;&#227;o</I>, por sua vez, pode ser uma senten&#231;a simples ou composta.
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="177" HEIGHT="430" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img41.png"
+ ALT="\includegraphics[scale=1.0]{for}"></DIV>
+
+<P>
+Veja abaixo um exemplo simples do  la&#231;o for:
+<PRE>
+             int contador;
+
+             for( contador = 0; contador &lt; 5; contador++ )
+                 printf( "contador = %d\n", contador );
+
+             printf{"ACABOU !!!!\n");
+</PRE>
+<B>Sa&#237;da do programa:</B>
+<PRE>
+             contador = 0
+             contador = 1
+             contador = 2
+             contador = 3
+             contador = 4
+             ACABOU !!!!
+</PRE>
+
+<P>
+Se voc&#234; examinar cuidadosamente este exemplo, poder&#225; ver precisamente o
+que est&#225; acontecendo.   Primeiro, a inicializa&#231;&#227;o &#233; executada,  que &#233; a
+senten&#231;a contador = 0.   Isso modifica o valor da vari&#225;vel
+contador  para 0.   Ent&#227;o,  o  teste &#233;  executado.   como
+0  &lt; 5 &#233; verdadeiro,  o la&#231;o continua.  Assim,  o corpo da
+repeti&#231;&#227;o &#233; executado, imprimindo a primeira linha da sa&#237;da, 
+contador  = 0.   Depois  disso, o  incremento  &#233; executado,  que &#233;  a
+senten&#231;a contador++, que altera o valor da vari&#225;vel 
+contador para 1.
+
+<P>
+Esta  &#233;  a 1&ordf;&nbsp;itera&#231;&#227;o  do la&#231;o.   Ent&#227;o,  o  teste &#233;  executado
+novamente (como  1 &lt; 5  &#233; verdadeiro, o  la&#231;o continua), o
+corpo da repeti&#231;&#227;o mostra contador = 1, e contador &#233;
+incrementado novamente.
+
+<P>
+Este processo continua at&#233; que contador seja 4 e 
+contador  =  4  seja   impresso.   Depois  disso,  contador  &#233;
+incrementado  para 5  e o  teste  &#233; executado.   Mas desta  vez,
+5 &lt;  5 &#233; falso, ent&#227;o o la&#231;o n&#227;o  continua.  A execu&#231;&#227;o do
+programa continua  na senten&#231;a  que segue o  la&#231;o (no caso,  imprimir a
+frase ACABOU !!!).
+
+<P>
+Ap&#243;s a execu&#231;&#227;o do la&#231;o, a vari&#225;vel contador tem valor 5.
+
+<P>
+Ao inv&#233;s de usar o teste contador &lt; 5, voc&#234; poderia tamb&#233;m
+ter usado a express&#227;o contador &lt;= 4.  O resultado seria o
+mesmo.  Use a express&#227;o que  voc&#234; preferir.  Outra express&#227;o que tamb&#233;m
+poderia  ter sido  usada  &#233;  contador  !=  5.  Por&#233;m  esta
+express&#227;o  torna o programa  menos leg&#237;vel  (n&#227;o &#233;  t&#227;o evidente  que o
+valor de  contador  est&#225; sendo incrementado  at&#233; atingir  o valor
+5).   Al&#233;m disso, isso  poderia causar problemas se  mud&#225;ssemos a
+inicializa&#231;&#227;o  para um  valor maior  que 5.  Por  exemplo,  se a
+inicializa&#231;&#227;o for  contador =  25 e a express&#227;o  teste for
+contador  != 5  o la&#231;o nunca  terminaria, pois  o contador
+come&#231;a com  25 e  a cada itera&#231;&#227;o  o valor &#233; incrementado,  o que
+nunca tornaria o teste falso.
+
+<P>
+Tamb&#233;m poder&#237;amos ao inv&#233;s de usar contador++ como a express&#227;o de
+incremento, usar ++contador, contador += 1
+e  contador =  contador +  1.  O  resultado seria  o mesmo
+(neste caso, o uso de p&#243;s- e pr&#233;-incremento n&#227;o faz diferen&#231;a).
+
+<P>
+Se voc&#234; quisesse incrementos  de dois, voc&#234; poderia escrever 
+contador += 2 (ou contador = contador + 2).
+
+<P>
+
+<H3><A NAME="SECTION000133100000000000000">
+13.3.1 Diversas senten&#231;as dentro de um la&#231;o</A>
+</H3>
+Como no comando while, o corpo da repeti&#231;&#227;o pode ser definido por
+uma senten&#231;a  simples ou  composta.  No caso  de uma  senten&#231;a composta
+(bloco), n&#227;o se  deve esquecer de usar as chaves ({ e })
+para delimitar o bloco da senten&#231;a composta.
+
+<P>
+Em  um  for  tamb&#233;m   podemos  ter  mais  de  uma  express&#227;o  de
+inicializa&#231;&#227;o ou incremento.  Nestes caso, elas devem ser separadas por
+v&#237;rgula (,) o que &#233; ilustrado no exemplo abaixo:
+
+<P>
+
+<H4><A NAME="SECTION000133110000000000000">
+Exemplo 3:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+#include &lt;stdio.h&gt;
+
+main( void ){
+  
+  int contador, total;
+  
+  for( contador = 0, total = 0; contador &lt; 10; contador++ ){
+    total += contador;
+    printf( "contador = %d, total = %d\n", contador, total );
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<B>Sa&#237;da:</B>
+<PRE>
+    contador = 0, total = 0
+    contador = 1, total = 1
+    contador = 2, total = 3
+    contador = 3, total = 6
+    contador = 4, total = 10
+    contador = 5, total = 15
+    contador = 6, total = 21
+    contador = 7, total = 28
+    contador = 8, total = 36
+    contador = 9, total = 45
+</PRE>
+
+<P>
+No  exemplo  acima,   contador  =  0,  total   =  0  &#233;  a
+inicializa&#231;&#227;o, contador  &lt; 10 &#233; a express&#227;o  teste, e 
+contador++ &#233; a express&#227;o de incremento.
+
+<P>
+
+<H4><A NAME="SECTION000133120000000000000">
+Exemplo 4:</A>
+</H4> Um programa que imprime  todos os n&#250;meros entre  30 e 5
+(nesta ordem) divis&#237;veis por 3, e no final imprime sua soma.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main( ){
+
+  int i, soma = 0;
+  
+  for( i = 30; i &gt;= 5; i-- ){
+    if( (i % 3) == 0 ){
+      printf( "\t%2d\n", i );
+      soma += i;
+    }
+  }
+  printf( "\t soma = %d\n", soma );
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<B>Sa&#237;da do programa:</B>
+<PRE>
+       30
+       27
+       24
+       21
+       18
+       15
+       12
+        9
+        6
+       soma = 162
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION000133200000000000000">
+13.3.2 La&#231;os aninhados</A>
+</H3>
+
+<P>
+&#201; poss&#237;vel colocar um la&#231;o dentro de outro (la&#231;o aninhado).
+
+<P>
+
+<H4><A NAME="SECTION000133210000000000000">
+Exemplo 5:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main( ){
+  
+  int linha, coluna;
+  
+  for( linha = 1; linha &lt; 5; linha++ ){
+    for( coluna = 1; coluna &lt; 5; coluna++ ) 
+      printf( "%3d", linha * coluna );
+    
+    printf( "\n" );
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<B>Sa&#237;da:</B>
+<PRE>
+      1  2  3  4
+      2  4  6  8
+      3  6  9 12
+      4  8 12 16
+</PRE>
+
+<P>
+No exemplo  acima, para cada itera&#231;&#227;o  do la&#231;o externo,  o la&#231;o interno
+imprime uma linha com n&#250;meros e depois pula de linha.
+
+<P>
+
+<H4><A NAME="SECTION000133220000000000000">
+Exemplo 6:</A>
+</H4> Este exemplo &#233; parecido com o anterior, exceto que o 
+printf() &#233;  colocado dentro  do la&#231;o  interno.  Como  era  de se
+esperar  uma nova  linha &#233;  impressa ap&#243;s  cada valor  ao inv&#233;s  de ser
+depois de 4 valores.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main( ){
+  
+  int linha, coluna;
+  
+  for( linha = 1; linha &lt; 5; linha++ ){
+    for( coluna = 1; coluna &lt; 5; coluna++ ){
+      printf( "%3d", linha * coluna );
+      printf( "\n" );
+    }
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE> 
+
+<P>
+<B>Sa&#237;da:</B>
+<PRE>
+            1
+            2
+            3
+            4
+            2
+            4
+            6
+            8
+            3
+            6
+            9
+           12
+            4
+            8
+           12
+           16
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION000133230000000000000">
+Exemplo 7:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main( ){
+  
+  int linha, coluna;
+  
+  printf("\n");
+  for( linha = 1; linha &lt; 10; linha++ ){
+    printf( "\t" );
+    for( coluna = 1; coluna &lt; linha; coluna++ ) 
+      printf( "*" );
+    printf( "\n" );
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE> 
+
+<P>
+<B>Sa&#237;da: </B>
+<PRE>
+                *
+                **
+                ***
+                ****
+                *****
+                ******
+                *******
+                ********
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000134000000000000000">
+13.4 Estilo de formata&#231;&#227;o para estruturas de repeti&#231;&#227;o</A>
+</H2> 
+
+<P>
+A regra  principal &#233; ser  <B>consistente</B>.  Assim, seu  programa ser&#225;
+mais leg&#237;vel.
+
+<P>
+
+<H3><A NAME="SECTION000134100000000000000">
+13.4.1 Coloca&#231;&#227;o das chaves</A>
+</H3>
+
+<P>
+H&#225; tr&#234;s estilos comuns de colocar as chaves:
+
+<P>
+<PRE>
+   while (expressao)
+      {
+      sentenca;
+      }
+</PRE>
+
+<P>
+<PRE>
+   while (expressao)
+   {
+      sentenca;
+   }
+</PRE>
+
+<P>
+<PRE>
+   while (expressao) {
+      sentenca;
+   }
+</PRE>
+
+<P>
+APENAS  UM  DESTES ESTILOS  deve  ser  consistentemente  usado para  as
+senten&#231;as for, while e  do ... while.   Use o estilo
+com o qual voc&#234; se sentir mais confort&#225;vel.
+
+<P>
+
+<P>
+
+<H3><A NAME="SECTION000134200000000000000">
+13.4.2 Necessidade ou n&#227;o das chaves</A>
+</H3>
+
+<P>
+Foi mencionado anteriormente que as  chaves ({ e }) podem
+ser omitidas quando o corpo  da repeti&#231;&#227;o contiver apenar uma senten&#231;a.
+Por exemplo:
+
+<P>
+<PRE>
+   while( i &lt; 5 )
+      i++;
+</PRE>
+
+<P>
+Embora  as  chaves  possam  ser  omitidas,  h&#225;  uma  &#250;nica  raz&#227;o  para
+coloc&#225;-las sempre:
+
+<P>
+<PRE>
+   while( i &lt; 5 ) {
+      i++;
+   }
+</PRE>
+
+<P>
+Quando  voc&#234; adicionar  algo  ao programa,  voc&#234;  poder&#225; adicionar  uma
+senten&#231;a para um  la&#231;o com apenas uma senten&#231;a.  Se  voc&#234; fizer isso, &#233;
+vital  que voc&#234;  tamb&#233;m adicione  chaves.  Se  voc&#234; n&#227;o  fizer  isso, a
+segunda senten&#231;a do la&#231;o n&#227;o  ser&#225; considerada como parte do la&#231;o.  Por
+exemplo:
+
+<P>
+<PRE>
+   while( i &lt; 5 )
+      i++;
+      j++;
+</PRE>
+
+<P>
+&#233; na verdade o mesmo que:
+
+<P>
+<PRE>
+   while( i &lt; 5 )
+      i++;
+   j++;
+</PRE>
+
+<P>
+enquanto a inten&#231;&#227;o era na realidade:
+
+<P>
+<PRE>
+   while( i &lt; 5 ) {
+      i++;
+      j++;
+   }
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION000134300000000000000">
+13.4.3 Uso de espa&#231;o em branco</A>
+</H3>
+
+<P>
+A outra quest&#227;o  de formato &#233; se deve ser colocado  um espa&#231;o em branco
+depois do for e while e antes do abre par&#234;nteses (().
+Por exemplo:
+<PRE>
+     for (i=0; i&lt;5; i++)
+</PRE>
+
+<P>
+ou
+
+<P>
+<PRE>
+     for(i=0; i&lt;5; i++)
+</PRE>
+
+<P>
+ou
+
+<P>
+<PRE>
+     for( i=0; i&lt;5; i++ )
+</PRE>
+
+<P>
+Isto tamb&#233;m &#233; uma escolha pessoal.  Por&#233;m seja consistente em sua
+escolha !
+
+<P>
+
+<H2><A NAME="SECTION000135000000000000000">
+13.5 Lendo o teclado</A>
+</H2>
+
+<P>
+Como    vimos    nas    <A NAME="tex2html8"
+  HREF="../teoria_06/index.html#SECTION00030000000000000000">Notas   de    Aula    #
+06</A>,  h&#225; situa&#231;&#245;es
+em  que  a  fun&#231;&#227;o scanf()  n&#227;o  se  adapta &#224;s  necessidades  do
+programa, pois  &#233; necess&#225;rio pressionar  <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">para que  scanf()
+proceda com a leitura.  Vimos naquela ocasi&#227;o uma fun&#231;&#227;o que l&#234; um
+caracter no instante em que ele &#233; digitado seguido de um <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">: A
+fun&#231;&#227;o getchar(). Veremos aqui  exemplos mais pr&#225;ticos de seu uso,
+bem como de duas novas fun&#231;&#245;es: getche() e getch(). 
+
+<P>
+
+<H3><A NAME="SECTION000135100000000000000">
+13.5.1 Lendo o teclado usando  getchar()</A>
+</H3>
+
+<P>
+getchar()  &#233; uma fun&#231;&#227;o  da biblioteca padr&#227;o stdio.  Cada
+vez  que &#233; chamada,  a fun&#231;&#227;o  l&#234; um  caractere teclado;  getchar
+come&#231;a  a ler depois  que a  tecla <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">&#233; digitada  no final  de uma
+sequ&#234;ncia  de caracteres  (dizemos que  a  entrada para  a fun&#231;&#227;o  
+getchar()  est&#225; no <EM>buffer</EM>). A  fun&#231;&#227;o getchar()retorna um
+valor, o  caractere lido (mais  precisamente, o c&#243;digo  inteiro (ASCII)
+correspondente ao caractere).
+
+<P>
+Vejamos o que acontece quando um programa trivial &#233; executado.
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+main(){
+
+    int ch;
+
+    ch = getchar();
+}
+</PRE>
+
+<P>
+getchar() obt&#233;m  sua  entrada do  teclado.   Portanto, quando  o
+programa  acima &#233;  executado, o  programa espera  que o  usu&#225;rio digite
+alguma  coisa.   Cada caractere  digitado  &#233;  mostrado  no monitor.   O
+usu&#225;rio pode digitar diversos caracteres na mesma linha, inclusive <EM>backspace</EM> para  corrigir caracteres j&#225; digitados.  No  momento que ele
+teclar <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">, o primeiro caractere da sequ&#234;ncia digitada &#233; o resultado
+da fun&#231;&#227;o getchar().  Portanto,  na instru&#231;&#227;o do programa acima o
+caractere (ou melhor,  o seu c&#243;digo ASCII) &#233;  atribu&#237;do a vari&#225;vel 
+ch.  Note que o usu&#225;rio pode ter digitado diversos caracteres antes de
+teclar <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">, mas a fun&#231;&#227;o getchar() s&#243; come&#231;ar&#225; a ler o que foi
+digitado depois que for teclado <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">.  Al&#233;m disso, com uma chamada da
+fun&#231;&#227;o getchar() s&#243; o  primeiro caractere da sequ&#234;ncia digitada &#233;
+lida.
+
+<P>
+Voc&#234; deve saber  que o caractere de nova linha,  <code>`\n`</code>, que tem o
+c&#243;digo  ASCII 10,  &#233; automaticamente  adicionado na  sequ&#234;ncia de
+caracteres  de  entrada  quando  o  <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">&#233;  teclado.   Isso  n&#227;o  tem
+import&#226;ncia  quando a fun&#231;&#227;o  getchar()  &#233; chamada  uma &#250;nica
+vez, mas  isto pode causar  problemas quando ele  &#233; usado dentro  de um
+la&#231;o.
+
+<P>
+No inic&#237;cio  de qualquer  programa que usa  getchar(),  voc&#234; deve
+incluir
+
+<P>
+#include &lt;stdio.h&gt;
+
+<P>
+Esta  diretiva  do  pr&#233;-processador  diz  ao  compilador  para  incluir
+informa&#231;&#245;es sobre  getchar()  e EOF  (mais sobre  EOF
+mais tarde.)
+
+<P>
+Considere o seguinte programa:
+
+<P>
+<PRE>
+   #include &lt;stdio.h&gt;
+
+   main(){
+   
+      int ch;
+   
+         printf( "Entre com uma letra: " );
+         ch = getchar();
+         if( ch &lt; 'A' || ch &gt; 'z' )
+            printf( "Voce nao teclou uma letra!" );
+         else
+            printf( "Voce teclou %c, e seu codigo ASCII e %d.\n", ch, ch );
+   }
+</PRE>
+
+<P>
+Um exemplo da execu&#231;&#227;o do programa:
+
+<P>
+<PRE>
+        Entre com uma letra: A
+        Voce teclou A, e seu codigo ASCII e 65.
+</PRE>
+
+<P>
+No exemplo de execu&#231;&#227;o acima o usu&#225;rio teclou A e depois <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">.
+
+<P>
+Outro exemplo de execu&#231;&#227;o do programa:
+
+<P>
+<PRE>
+        Entre com uma letra: AbcD
+        Voce teclou A, e seu codigo  ASCII e 65.
+</PRE>
+
+<P>
+Neste caso o usu&#225;rio digitou  quatro caracteres e depois teclou <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">.
+Embora quatro  caracteres tenham sido digitados, somente  uma chamada a
+fun&#231;&#227;o  getchar()  foi  feita  pelo  programa,  portanto  s&#243;  um
+caractere foi lido.
+
+<P>
+O tipo  do resultado da fun&#231;&#227;o getchar() &#233; int  e n&#227;o 
+char.  O valor &#233; o c&#243;digo ASCII do caractere lido.
+
+<P>
+
+<H3><A NAME="SECTION000135200000000000000">
+13.5.2 Marcando o final da entrada</A>
+</H3>  
+
+<P>
+Frequentemente quando  voc&#234; est&#225; digitando  a entrada para  o programa,
+voc&#234; quer dizer ao programa que  voc&#234; terminou de digitar o que queria.
+Em  Turbo C++,  digitando <code>^Z</code>  (segure a  tecla de  Ctrl e
+pressione  Z)  voc&#234; diz  ao programa  que terminou  a  entrada do
+programa.
+
+<P>
+Isto envia  um sinal a fun&#231;&#227;o  getchar().  Quando  isso ocorre, o
+valor de  ch  depois de  executar ch  = getchar();  ser&#225; um
+valor especial  chamado EOF (que  significa <EM>end  of file</EM> -
+final do arquivo).
+
+<P>
+Considere o seguinte programa exemplo  que conta o n&#250;mero de caracteres
+digitados (incluindo o caractere de ``pr&#243;xima linha''):
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+main(){
+
+   int total = 0, ch;
+
+   /* Le o proximo caractere em ch e para quando encontrar final do arquivo */
+   while( (ch = getchar()) != EOF ) {
+      total++;
+   }
+   printf( "\n%d caracteres digitados\n", total );
+}
+</PRE>
+
+<P>
+
+<P>
+S&#243;  para esclarecer: voc&#234;  deve teclar  <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">depois  de entrar  com o
+comando <code>^Z</code>.
+
+<P>
+
+<H3><A NAME="SECTION000135300000000000000">
+13.5.3 Lendo o teclado usando getch() e getche()</A>
+</H3> 
+
+<P>
+As duas fun&#231;&#245;es getch() e getche() s&#227;o fun&#231;&#245;es de entrada de
+leitura de  caracter existentes em  certos compiladores C  existentes em
+ambiente  MS-Windows, onde  est&#227;o  definidas na  biblioteca padr&#227;o  
+  conio. Em ambientes UNIX, elas s&#227;o definidas geralmente em bibliotecas
+n&#227;o-padr&#227;o (por exemplo, curses).  Descreveremos aqui o seu uso em
+ambiente MS-Windows.
+
+<P>
+A  fun&#231;&#227;o getch() l&#234;  um caractere  cada vez  que &#233;  chamado.  Os
+caracteres  digitados n&#227;o s&#227;o  mostrados no  monitor.  Cada  caractere &#233;
+lido  no momento que  &#233; digitado  (n&#227;o &#233;  necess&#225;rio teclar  <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">), ou
+seja, o que &#233; digitado n&#227;o &#233; colocado em um <EM>buffer</EM>.
+
+<P>
+<PRE>
+#include &lt;conio.h&gt;
+
+main()
+{
+   char ch;
+
+   printf("Digite algum caracter: ");
+
+   ch = getch();
+
+   printf("\n A tecla pressionada eh %c.\n", ch);
+
+}
+</PRE>
+
+<P>
+O Resultado deste programa na tela &#233;:
+<PRE>
+   Digite algum caracter: 
+    A tecla pressionada eh A.
+</PRE>
+
+<P>
+A fun&#231;&#227;o  getche()  l&#234; o caracter  do teclado  e mostra o  que foi
+digitado na tela. Ela n&#227;o aceita argumentos e devolve o caracter lido:
+<PRE>
+#include &lt;conio.h&gt;
+
+main()
+{
+   char ch;
+
+   printf("Digite algum caracter: ");
+
+   ch = getche();
+
+   printf("\n A tecla pressionada eh %c.\n", ch);
+
+}
+</PRE>
+
+<P>
+O Resultado deste programa na tela &#233;:
+<PRE>
+   Digite algum caracter: A
+    A tecla pressionada eh A.
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION000135400000000000000">
+13.5.4 Para evitar problemas com a entrada...</A>
+</H3>
+
+<P>
+(Observa&#231;&#227;o: nesta se&#231;&#227;o, espa&#231;os em branco s&#227;o relevantes e
+s&#227;o mostrados como )
+
+<P>
+Quando voc&#234; executa um programa,  cada caractere que voc&#234; digita &#233; lido
+e  considerado como  parte do  <EM>fluxo de  entrada</EM>.  Por  exemplo,
+quando  voc&#234; usa  getchar(),  voc&#234; deve  teclar <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">no final.
+Como  mencionado anteriormente,  o primeiro  caractere digitado  &#233; lido
+pelo getchar().  Mas, o caractere de nova linha continua no fluxo
+de entrada (porque voc&#234; teclou <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">).
+
+<P>
+De qualquer  forma, se  voc&#234; executar um  getchar() depois  de um
+scanf()  ou de um getchar() voc&#234; ler&#225; o  caractere de nova
+linha deixado no fluxo de entrada.
+
+<P>
+Da mesma forma, quando voc&#234; usa scanf() para ler informa&#231;&#245;es, ele
+somente l&#234; o que &#233; necess&#225;rio.   Se voce usar scanf() para ler um
+n&#250;mero  inteiro  e   digitar  <code>42</code>&nbsp;(seguido  de
+<IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">), o scanf()  l&#234; <code>42</code>, mas deixa&nbsp;(e
+o caractere de nova linha do <IMG
+ WIDTH="86" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img42.png"
+ ALT="\enter">) no fluxo de entrada.
+
+<P>
+Outro caso ``problem&#225;tico'' &#233; quando  o scanf() &#233; usado num la&#231;o.
+Se voc&#234; digitar  um valor do tipo errado, o scanf() ler&#225; o valor
+errado  e  a  execu&#231;&#227;o do  la&#231;o  continuar&#225;  na  senten&#231;a ap&#243;s  o  
+scanf().  Na pr&#243;xima  itera&#231;&#227;o do la&#231;o o scanf() vai tentar ler
+novamente, mas o ``lixo'' deixado da itera&#231;&#227;o anterior ainda estar&#225; l&#225;,
+e portanto a  chamada corrente do scanf()  tamb&#233;m n&#227;o dar&#225; certo.
+Este  comportamento resultar&#225;  num  la&#231;o infinito  (um  la&#231;o que  nunca
+termina), ou terminar&#225; e ter&#225; um resultado errado.
+
+<P>
+H&#225; uma  maneira simples  de resolver este  problema; toda vez  que voc&#234;
+usar getchar()  (para ler um caracter s&#243;)  ou scanf(), voc&#234;
+deve  ler todo  o  ``lixo'' restante  at&#233;  o caractere  de nova  linha.
+Colocando as  seguinte linhas ap&#243;s  chamadas a getchar()  ou 
+scanf() o problema &#233; eliminado:
+
+<P>
+<PRE>
+        /* Pula o restante da linha */
+        while( getchar() != '\n' );
+</PRE>
+
+<P>
+Note que isso n&#227;o &#233; necess&#225;rio ap&#243;s todas as chamadas a getchar()
+ou  scanf().  S&#243;  depois  daquelas  chamadas  que precedem  
+getchar() (ou scanf()), especialmente em um la&#231;o.
+
+<P>
+A fun&#231;&#227;o scanf() na realidade retorna um inteiro  que &#233; o n&#250;mero
+de itens  (valores) lidos com sucesso.   Voc&#234; pode verificar  se o 
+scanf() funcionou testando  se o valor retornado &#233;  igual ao n&#250;mero de
+especificadores de formato no primeiro argumento da fun&#231;&#227;o.
+
+<P>
+<PRE>
+main(){
+
+   int total = 0, num;
+
+   while( total &lt; 20 ){
+      printf( "Total = %d\n", total );
+
+      printf( "Entre com um numero: " );
+      if( scanf("%d", &amp;num) &lt; 1 )
+          /* Ignora o resto da linha */
+          while( getchar() != '\n' );
+      else 
+         total += num;
+   }
+
+   printf( "Final total = %d\n", total );
+}
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000136000000000000000">
+13.6 Usando while e for</A>
+</H2>
+
+<P>
+Embora qualquer la&#231;o possa ser escrito usando while ou for,
+a escolha &#233;  baseada principalmente no estilo.  Por  exemplo, se o la&#231;o
+precisa  de  uma inicializa&#231;&#227;o  e  um  incremento,  ent&#227;o o  for
+geralmente  &#233; usado.   No caso  em  que o  n&#250;mero de  repeti&#231;&#245;es n&#227;o  &#233;
+pr&#233;-determinado em geral usa-se o while.
+
+<P>
+Como o comando for:
+
+<P>
+<PRE>
+   for( inicializacao; teste; incremento )
+     sentenca;
+</PRE>
+
+<P>
+
+<P>
+&#233; equivalente a:
+
+<P>
+<PRE>
+   inicializacao;
+   while( teste ) {
+      sentenca;
+      incremento;
+   };
+</PRE>
+
+<P>
+voc&#234; pode escolher o que preferir, a princ&#237;pio.
+
+<P>
+<HR>
+<A NAME="tex2html360"
+  HREF="notas_proc-node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html358"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html352"
+  HREF="notas_proc-node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html361"
+  HREF="notas_proc-node14.html">14 Tipo Enumerado</A>
+<B>Up:</B> <A NAME="tex2html359"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html353"
+  HREF="notas_proc-node12.html">12 A sentença break</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

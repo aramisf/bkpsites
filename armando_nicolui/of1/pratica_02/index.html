@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 02
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 02
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 02
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00001000000000000000">
+Arquivos e &#193;rvore de Diret&#243;rios. Manipula&#231;&#227;o de Arquivos.</A>
+</H2>
+
+<P>
+
+<OL>
+<LI><A NAME="item:inicio"></A> SEM  EXECUTAR, explique o que faz  a linha de
+  comando  abaixo.  Use  o  manual <I>on-line</I>  para investigar  o
+  comando <B>cp</B>.
+<PRE>
+            cp  -r  ~ci066/LabNum2   ~
+</PRE>
+
+<P>
+Em seguida, execute a linha de comando.
+
+<P>
+<B>DICA:</B> O  caracter <B><FONT SIZE=3>~</FONT>&nbsp;</B>  usado em um  caminho de
+  diret&#243;rio se refere ao diret&#243;rio de <I>login</I> do usu&#225;rio. Quando
+  seguido  de  um <I>login</I>  de  qualquer  usu&#225;rio,  se refere  ao
+  diret&#243;rio de  <I>login</I> deste  usu&#225;rio. Por exemplo,  <FONT SIZE=3>~</FONT> se
+  refere  ao   seu  diret&#243;rio   de  <I>login</I>.  Por   outro  lado,
+  <FONT SIZE=3>~</FONT>ci066  se refere  ao  diret&#243;rio de  <I>login</I> do  usu&#225;rio
+  cujo <I>login</I> &#233; <I>ci066</I>.
+
+<P>
+</LI>
+<LI>Com <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum2/docs</FONT></B>  sendo seu diret&#243;rio corrente, use
+  <B><I>ls(1)</I></B> para obter uma lista dos arquivos deste diret&#243;rio.
+
+<P>
+<B>DICA:</B>  Use <B>cd</B>  para mudar  de diret&#243;rio  corrente e
+  <B>pwd</B> para conferir o resultado.
+
+<P>
+</LI>
+<LI><A NAME="item:metachars"></A>  <B>Metacaracteres   em   nomes  de
+  arquivos.</B> Ainda  considerando o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum2/docs</FONT></B>
+  como  corrente,  qual  ser&#225;  o  resultado na  tela  da  execu&#231;&#227;o  dos
+  seguintes comandos.  ANTES  DE EXECUTAR O COMANDO, ANALISE  A LINHA E
+  FA&#199;A UMA PREVIS&#195;O DO RESULTADO.
+
+<P>
+<PRE>
+             ls *
+             ls m[a-df-z]*
+             ls jan*
+             ls ?????
+             ls jan?? feb?? mar??
+             ls *[!0-9]
+             ls [A-Z]*
+             ls *.*
+             ls *.*.*
+             ls *86
+             ls *[86]
+             ls [fjm][ae][bn]*
+</PRE>
+
+<P>
+</LI>
+<LI>Ainda no diret&#243;rio  <I><FONT SIZE=3>~</FONT>/LabNum2/docs</I> qual  o efeito
+  dos comandos abaixo? ATEN&#199;&#195;O:  N&#195;O EXECUTE OS COMANDOS. DESCREVA SEUS
+  EFEITOS MAS N&#195;O OS EXECUTE.
+
+<P>
+<PRE>
+             rm ???
+             cp memo1 ../..
+             mv jan* ../bin
+             cp memo2* ~/LabNum2/lib
+             rm *.sv
+             cd; pwd
+</PRE>
+
+<P>
+</LI>
+<LI>Usando <B><I>ls(1)</I></B>,  listar  todos os  arquivos dos  diret&#243;rios
+  abaixo  que  terminam  por  <I>a,b,c,d,e,h,j,o,x</I>  mas  que  N&#195;O
+  COME&#199;AM com estes caracteres:
+
+<P>
+<PRE>
+             /lib
+             /usr/bin
+             /usr/X11/bin
+             ~/LabNum2/pub
+</PRE>
+
+<P>
+</LI>
+<LI><A NAME="item:criandoarqs"></A><B>Criando arquivos e  exibindo seu
+  conte&#250;do.</B>  Em  seu diret&#243;rio  de  <I>login</I>,  crie os  arquivos
+  <B><FONT FACE="Helvetica, Arial, sans-serif">fantomas</FONT></B>,   <B><FONT FACE="Helvetica, Arial, sans-serif">nacional_kid</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">incas_venusianos</FONT></B>  e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo</FONT></B>  usando seu editor predileto.   Coloque em  cada  um deles
+  qualquer texto de sua escolha,  desde que cada texto tenha pelo menos
+  4 linhas. Coloque textos diferenciados em cada arquivo.
+
+<P>
+</LI>
+<LI>O comando <B><I>touch(1)</I></B> pode  ser usado para criar arquivos sem
+  conte&#250;do.    Usando  este  comando,   crie  um   arquivo  chamado
+  <B><FONT FACE="Helvetica, Arial, sans-serif">teste.arq.doc</FONT></B>.
+
+<P>
+</LI>
+<LI>Usando  <B><I>cat(1)</I></B>, exiba separadamente o conte&#250;do  de cada um
+  dos arquivos criados no item <A HREF="#item:criandoarqs">6</A>.
+
+<P>
+<B>NOTA 1:</B> Quando o conte&#250;do  de um arquivo &#233; muito extenso que
+                   n&#227;o   cabe  todo   na  tela   de   terminal,  usa-se
+                   <B><I>less(1)</I></B>  ou   <B><I>more(1)</I></B>  para  exibir  o
+                   conte&#250;do. do arquivo.
+
+<P>
+<B>NOTA   2:</B>  Os   comandos  <B><I>cat(1)</I></B>,   <B><I>less(1)</I></B>  e
+                   <B><I>more(1)</I></B> s&#227;o  usados para exibir  conte&#250;dos de
+                   arquivos  do  tipo   texto  ou  ASCII.  Para  exibir
+                   conte&#250;do de arquivos de outros tipos outros comandos
+                   devem ser usados (por exemplo, <B><I>od(1)</I></B>).
+
+<P>
+</LI>
+<LI>Explique o que faz o comando abaixo:
+<PRE>
+          cat fantomas nacional_kid incas_venusianos macanudo
+</PRE>
+
+<P>
+</LI>
+<LI><B>Criando  diret&#243;rios.</B> Sem mudar de  diret&#243;rio corrente, e
+  usando  <B><I>mkdir(1)</I></B>,  crie  o diret&#243;rio  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab/teste</FONT></B>.
+
+<P>
+</LI>
+<LI><B>Copiando,  movendo e  apagando  arquivos e  diret&#243;rios.</B>
+  Usando <B><I>cp(1)</I></B>,  copie o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo</FONT></B>  criado no item
+  <A HREF="#item:criandoarqs">6</A>  para  este  diret&#243;rio,  tamb&#233;m  SEM  MUDAR  o
+  diret&#243;rio corrente.
+
+<P>
+<B>DICA:</B> <B><I>cp(1)</I></B>  usa pelo menos 2  argumentos: um arquivo
+  de  origem seguido  de um  argumento  que pode  ser o  nome de  outro
+  arquivo ou o nome de um diret&#243;rio.
+
+<P>
+</LI>
+<LI>O  comando <B>cp</B>  (<I>copy</I>)  cria  uma  c&#243;pia de  um
+  arquivo com outro  nome ou copia um arquivo  de um diret&#243;rio para
+  outro.  Copie <B><FONT FACE="Helvetica, Arial, sans-serif">fantomas</FONT></B> para o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">phantomas</FONT></B> e liste
+  o conte&#250;do do diret&#243;rio ap&#243;s  a opera&#231;&#227;o.  Liste tamb&#233;m o conte&#250;do de
+  <B><FONT FACE="Helvetica, Arial, sans-serif">phantomas</FONT></B>.
+
+<P>
+</LI>
+<LI>Copie <B><FONT FACE="Helvetica, Arial, sans-serif">incas_venusianos</FONT></B> para  <B><FONT FACE="Helvetica, Arial, sans-serif">phantomas</FONT></B> e  liste o
+   conte&#250;do  deste  &#250;ltimo.  Como  impedir  que  o comando  <B>cp</B>
+   sobrescreva arquivos?
+
+<P>
+</LI>
+<LI>Remova o  arquivo de  nome <B><FONT FACE="Helvetica, Arial, sans-serif">nacional_kid</FONT></B>,  com  o comando
+  <B>rm     -i</B>.     Tente     remover    tamb&#233;m     o     arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif">teste.txt</FONT></B>.  SEMPRE  LEIA  ATENTAMENTE  as  mensagens  exibidas
+  durante a execu&#231;&#227;o de um comando.
+
+<P>
+NESTE PONTO CHAME O PROFESSOR PARA ESCLARECIMENTOS SOBRE O COMANDO
+  <B>rm</B>
+
+<P>
+OBS: Lembre-se:  O comando de  remo&#231;&#227;o de arquivos, <I>rm</I>  &#233; um
+       comando  perigoso. Procure  sempre usar  a forma  <B>rm -i</B>
+       para  remover arquivos. Mais  adiante nesta  disciplina veremos
+       como fazer a op&#231;&#227;o <B>-i</B> ser executada sempre.
+
+<P>
+</LI>
+<LI><A NAME="item:cp"></A>  Como usar  <B><I>cp(1)</I></B> para copiar  os arquivos
+  <B><FONT FACE="Helvetica, Arial, sans-serif">fantomas</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">nacional_kid</FONT></B> (criados  na aula  anterior) e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo</FONT></B> para o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B>.
+
+<P>
+<B>DICA:</B>   Quando   executado  com   mais   de  2   argumentos,
+  <B><I>cp(1)</I></B>  copia todos  os  argumentos (exceto  o  &#250;ltimo) para  o
+  &#250;ltimo argumento. Neste  caso, OBRIGATORIAMENTE este &#250;ltimo argumento
+  DEVE SER um diret&#243;rio.
+
+<P>
+</LI>
+<LI>Mantendo seu diret&#243;rio de <I>login</I> como diret&#243;rio corrente,
+  use <B><I>rm(1)</I></B>  para remover (apagar) o  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo</FONT></B> do
+  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B>.
+
+<P>
+<B>ATEN&#199;&#195;O:</B>  Durante os  exerc&#237;cios e  at&#233; que  voc&#234;  fique bem
+  familiar com o uso de diret&#243;rios em linhas de comandos, SEMPRE USAR A
+  OP&#199;&#195;O <B>-i</B> de <B><I>rm(1)</I></B> (<B>rm -i</B>).
+
+<P>
+</LI>
+<LI><A NAME="item:rm"></A>Como  deve ser  usado  <B><I>rm(1)</I></B> para  remover
+  TODOS os arquivos do diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B>?
+
+<P>
+<B>DICA:</B> Use metacaracteres como no item <A HREF="#item:metachars">3</A>.
+
+<P>
+<B>ATEN&#199;&#195;O:</B>  <FONT FACE="Helvetica, Arial, sans-serif">Fique atento  ao que  voc&#234;  est&#225; digitando
+  como argumento  de <B><I>rm(1)</I></B>. A melhor  forma de atuar  em UNIX ao
+  executar QUALQUER COMANDO &#233;: ANTES  DE TECLAR <IMG
+ WIDTH="85" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="\enter">, LEIA A LINHA DE
+  COMANDO DIGITADA.</FONT>
+
+<P>
+</LI>
+<LI>Use  <B><I>mv(1)</I></B>  para  mover  os  arquivos  <B><FONT FACE="Helvetica, Arial, sans-serif">fantomas</FONT></B>  e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">nacional_kid</FONT></B>  (que   DEVERIAM  estar  em   seu  diret&#243;rio  de
+  <I>login</I>) para o  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B>. Use <B><I>ls(1)</I></B>
+  nos diret&#243;rios  de origem  e destino para  verificar se voc&#234;  DE FATO
+  moveu os arquivos.
+
+<P>
+<B>NOTA:</B>  <B><I>mv(1)</I></B>  &#233; usado  para  MOVER  arquivos para  um
+                 diret&#243;rio. Sua forma de uso &#233; similar a <B><I>cp(1)</I></B>.
+
+<P>
+</LI>
+<LI>Usando <B><I>mv(1)</I></B>, mude o nome do arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">phantomas</FONT></B> para
+  <B><FONT FACE="Helvetica, Arial, sans-serif">fantasma</FONT></B>.
+
+<P>
+<B>NOTA:</B> <B>mv</B> n&#227;o apenas  move arquivos como tamb&#233;m pode
+                 ser usado  para trocar seus nomes. A  linha de comando
+                 deve  ter APENAS  2  (dois) argumentos  do mesmo  tipo
+                 (dois  diret&#243;rios ou  dois arquivos  regulares).
+
+<P>
+Neste caso, se o  2&ordm;&nbsp;argumento for um diret&#243;rio
+                 j&#225; existente,  o 1&ordm;&nbsp;argumento  ser&#225; MOVIDO para
+                 dentro do 2&ordm;&nbsp;(n&#227;o haver&#225; renomea&#231;&#227;o).
+
+<P>
+</LI>
+<LI>Use APENAS <B><I>mv(1)</I></B> para mover o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo</FONT></B> (que
+  deveria estar  em seu diret&#243;rio  de <I>login</I>) para  o diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab/teste</FONT></B>, sendo  que no destino  deve ter o  novo nome
+  <B><FONT FACE="Helvetica, Arial, sans-serif">macanudo-tche</FONT></B>.
+
+<P>
+</LI>
+<LI><B>Removendo  diret&#243;rios</B>   Ap&#243;s  remover  os  arquivos  do
+  diret&#243;rio   <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab/teste</FONT></B>,   remova   este  diret&#243;rio   com
+  <B><I>rmdir(1)</I></B>.     Usando     este     mesmo    comando,     remova
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B>. Houve sucesso na opera&#231;&#227;o? O que aconteceu?  O que
+  deve  ser  feito  para remover  de  uma  vez  por todas  o  diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B> ?
+
+<P>
+</LI>
+<LI>Execute o comando abaixo:
+<PRE>
+            cp  -r  /home/especial/ci066/LabNum3   ~
+</PRE>
+
+<P>
+O que faz o comando acima?
+
+<P>
+</LI>
+<LI><A NAME="item:cd"></A><B>Navegando em  diret&#243;rios</B>. Com o diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum3</FONT></B> como seu  diret&#243;rio corrente, mude sequencialmente para
+  os diret&#243;rios  abaixo usando apenas  o comando <B>cd</B>  UMA &#218;NICA
+  VEZ,  executando  o  comando  <B><I>pwd(1)</I></B>  ap&#243;s  cada  execu&#231;&#227;o  de
+  <B>cd</B>:
+<PRE>
+                   lib/teste/bin
+                   ~/LabNum3/pub/hard/bin/ghi
+                   /usr/share/texmf/tex/latex/amsfonts/
+                   ~/LabNum3/tmp/mail
+</PRE>
+
+<P>
+Uma vez  no &#250;ltimo  diret&#243;rio da lista,  mude de um  diret&#243;rio para
+    outro, na  seq&#252;&#234;ncia inversa da lista  acima, usando alternadamente
+    <B>cd</B> para mudar de diret&#243;rio e <B><I>pwd(1)</I></B> para visualizar
+    seu diret&#243;rio corrente.
+
+<P>
+</LI>
+<LI><B>Como copiar  arquivos  em disquete  nos Laborat&#243;rios  do
+    DInf.</B> Usa-se  <B><I>ftp(1)</I></B> ou  <B><I>gftp(1)</I></B>. Leia o  arquivo de
+    <A NAME="tex2html1"
+  HREF="../../../FAQS-DINF/floppy-drives">FAQ                                     sobre
+    disquete</A>.   Procure   o
+
+professor para esclarecimentos sobre o comando <B><I>ftp(1)</I></B>.
+</LI>
+</OL>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Conclus&#245;es</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>Remova   todo    os   subdiret&#243;rios   <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum2</FONT></B>   e
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3</FONT></B> com APENAS uma linha de comando.
+
+<P>
+<B>DICA:</B> Use <B><I>rm(1)</I></B> com  uma op&#231;&#227;o adequada E COM CUIDADO
+  (veja recomenda&#231;&#245;es no item <A HREF="#item:rm">17</A>).
+
+<P>
+</LI>
+<LI><B>SEMPRE TRAGA UM DISQUETE FORMATADO PARA AS PR&#211;XIMAS AULAS</B>
+
+<P>
+</LI>
+<LI>ASSUNTOS DAS PR&#211;XIMAS AULAS:
+  
+<UL>
+<LI>Permiss&#245;es de acesso a arquivos: conceito, nota&#231;&#227;o simb&#243;lica e
+    octal; m&#225;scara padr&#227;o de permiss&#245;es;
+</LI>
+<LI><B><I>find(1)</I></B>: encontrando arquivos e fazendo manipula&#231;&#245;es ao
+    mesmo tempo;
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-08-25
+</ADDRESS>
+</BODY>
+</HTML>

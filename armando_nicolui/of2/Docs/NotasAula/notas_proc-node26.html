@@ -1,0 +1,675 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>26 Arquivos</TITLE>
+<META NAME="description" CONTENT="26 Arquivos">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node27.html">
+<LINK REL="previous" HREF="notas_proc-node25.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node27.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html569"
+  HREF="notas_proc-node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html567"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html561"
+  HREF="notas_proc-node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html570"
+  HREF="notas_proc-node27.html">27 Ponteiros</A>
+<B>Up:</B> <A NAME="tex2html568"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html562"
+  HREF="notas_proc-node25.html">25 Entrada e Saída</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html571"
+  HREF="notas_proc-node26.html#SECTION000261000000000000000">26.1 Acessando um arquivo: <TT>FILE *</TT>, <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B></A>
+<LI><A NAME="tex2html572"
+  HREF="notas_proc-node26.html#SECTION000262000000000000000">26.2 Processando arquivos de texto</A>
+<UL>
+<LI><A NAME="tex2html573"
+  HREF="notas_proc-node26.html#SECTION000262100000000000000">26.2.1 Entrada e saída de caracteres</A>
+<LI><A NAME="tex2html574"
+  HREF="notas_proc-node26.html#SECTION000262200000000000000">26.2.2 Entrada e saída de <I>strings</I></A>
+<LI><A NAME="tex2html575"
+  HREF="notas_proc-node26.html#SECTION000262300000000000000">26.2.3 Entrada e saída formatada: <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B></A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000260000000000000000">
+26 Arquivos</A>
+</H1>
+
+<P>
+O armazenamento de dados em vari&#225;veis e <I>arrays</I> &#233;
+tempor&#225;rio. Arquivos s&#227;o usados para armazenamento permanente de
+grandes quantidades de dados (e programas) em dispositivos de
+armazenamento secund&#225;rio, como discos.
+
+<P>
+&#193;s vezes n&#227;o &#233; suficeinte para um programa usar somente a entrada e
+sa&#237;da padr&#227;o. H&#225; casos em que um programa deve acessar arquivos. Por
+exemplo, se n&#243;s guardamos uma base de dados com endere&#231;os de pessoas em
+um arquivo, e queremos escrever um programa que permita ao usu&#225;rio
+interativamente buscar, imprimir e mudar dados nesta base, este
+programa deve ser capaz de ler dados do arquivo e tamb&#233;m gravar dados
+no mesmo arquivo.
+
+<P>
+No restante desta se&#231;&#227;o discutiremos como arquivos de texto s&#227;o
+manipulados em C&nbsp;. Como ser&#225; visto, tudo ocorre de maneira an&#225;loga
+ao que acontece com entrada e sa&#237;da padr&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION000261000000000000000">
+26.1 Acessando um arquivo: <TT>FILE *</TT>, <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B></A>
+</H2>
+
+<P>
+C&nbsp;visualiza cada arquivo simplesmente como um <I>stream</I>
+seq&#252;encial de bytes. Da mesma forma que uma <I>string</I> em C&nbsp;
+termina com o caracter nulo, <code>'\0'</code>, cada arquivo em C&nbsp;
+termina com um marcador de final de arquivo (<I>end-of-file</I>),
+<TT>EOF</TT>.
+
+<P>
+As regras para acessar um arquivo s&#227;o simples. Antes que um arquivo
+seja lido ou gravado, ele &#233; <I>aberto</I>.  Um arquivo &#233; aberto em um
+<I>modo</I> que descreve como o arquivo ser&#225; usado (por exemplo, para
+leitura, grava&#231;&#227;o ou ambos). Um arquivo aberto pode ser processado por
+fun&#231;&#245;es da biblioteca padr&#227;o em C&nbsp;. Estas fun&#231;&#245;es s&#227;o similares &#224;s
+fun&#231;&#245;es de biblioteca que l&#234;em e escrevem de/para entrada/sa&#237;da
+padr&#227;o. Quando um arquivo n&#227;o &#233; mais necess&#225;rio ele deve ser
+<I>fechado</I>. Ao final da execu&#231;&#227;o de um programa todos os arquivos
+abertos s&#227;o automaticamente fechados. Existe um n&#250;mero m&#225;ximo de
+arquivos que podem ser simultaneamente abertos 
+de forma que voc&#234; deve tentar fechar arquivos quando voc&#234; n&#227;o precisa
+mais deles.
+
+<P>
+Quando um arquivo est&#225; <I>aberto</I>, um <I>stream</I> &#233; associado
+ao arquivo. Este <I>stream</I> fornece um canal de comunica&#231;&#227;o entre
+um arquivo e o programa. Tr&#234;s arquivos e seus respectivos
+<I>streams</I> s&#227;o abertos automaticamente quando um programa inicia
+sua execu&#231;&#227;o: a entrada padr&#227;o, a sa&#237;da padr&#227;o e a sa&#237;da padr&#227;o de erros.
+
+<P>
+A fun&#231;&#227;o da biblioteca padr&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> &#233; usada para abrir um
+arquivo. <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> toma dois argumentos do tipo <I>string</I>: o
+primeiro argumento &#233; o nome do arquivo (por exemplo <B><FONT FACE="Helvetica, Arial, sans-serif">data.txt</FONT></B>), o
+segundo argumento &#233; a indica&#231;&#227;o do modo no qual o arquivo deve ser
+aberto. <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> negocia com o sistema operacional e retorna um
+ponteiro para um tipo estrutura especial <TT>FILE</TT>. Este ponteiro &#233;
+chamado <I>file pointer</I>, e aponta para uma estrutura que cont&#233;m
+informa&#231;&#245;es de sistema sobre o arquivo. O tipo <TT>FILE</TT> &#233; predefinido
+em <B><FONT FACE="Helvetica, Arial, sans-serif">&lt;stdio.h&gt;</FONT></B>. O <I>file pointer</I> &#233; usado pelas fun&#231;&#245;es de
+biblioteca que processam o arquivo aberto, e "representa" o arquivo do
+momento em que &#233; aberto at&#233; o momento em que &#233; fechado. A estrutura
+<TT>FILE</TT> &#233; referida como <EM>file control   block</EM> (FCB). Cada
+arquivo possui um FCB correspondente no disco. Quando um arquivo &#233;
+aberto sua FCB &#233; copiada para a mem&#243;ria e um ponteiro &#233; definido para
+l&#225;. O processamento do arquivo usa o ponteiro para o FCB para manipular
+arquivos, de forma que o tipo do ponteiro &#233; <TT>FILE *</TT>. A sa&#237;da
+padr&#227;o, a entrada padr&#227;o e a sa&#237;da padr&#227;o de erros s&#227;o manipulados
+usando ponteiros pr&#233;-definidos chamados <TT>stdout, stdin</TT> e <TT>  stderr</TT> respectivamente.
+
+<P>
+O usu&#225;rio n&#227;o necessita saber detalhes de como a transfer&#234;ncia de dados
+entre programa e arquivo &#233; feita. As &#250;nicas senten&#231;as necess&#225;rias no
+programa s&#227;o a defini&#231;&#227;o de uma vari&#225;vel do tipo <TT>FILE *</TT> (um
+<I>file pointer</I>) e uma atribui&#231;&#227;o de um valor para aquela
+vari&#225;vel por <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>. As senten&#231;as abaixo d&#227;o um exemplo de como
+abrir o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">data.txt</FONT></B> para leitura.
+
+<P>
+<PRE>
+FILE *fp;
+fp = fopen("data.txt", "r");
+</PRE>
+
+<P>
+O prot&#243;tipo da fun&#231;&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> &#233;:
+
+<P>
+<PRE>
+FILE *fopen(char *name, char *mode);
+</PRE>
+
+<P>
+<B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> recebe dois argumentos: o primeiro &#233; uma <I>string</I>
+que &#233; um nome de um arquivo a ser aberto, e o segundo &#233; uma
+<I>string</I> que representa o modo de abertura do arquivo: <TT>  ``r''</TT> indica que o arquivo ser&#225; aberto apenas para leitura, <TT>  ``w''</TT>, para escrita apenas. Se o arquivo n&#227;o existe e &#233; aberto para
+escrita, <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> cria o arquivo. Se um arquivo j&#225; existente &#233;
+aberto para escrita, o seu conte&#250;do &#233; descartado. H&#225; outros modos,
+incluindo anexa&#231;&#227;o a um arquivo, leitura e escrita simult&#226;nea; para
+mais detalhes, veja a documenta&#231;&#227;o da fun&#231;&#227;o nos livros-texto ou no
+manual on-line.
+
+<P>
+Se um arquivo &#233; aberto com sucesso, o endere&#231;o da estrutura <TT>FILE</TT> &#233;
+retornado  por <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>.  Se  a tentativa  de abertura  resulta em
+erro, <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>  retorna um ponteiro nulo, <TT>NULL</TT>.  Alguns dos
+error poss&#237;veis  s&#227;o: abrir  um arquivo que  n&#227;o existe para  leitura,
+abrir um  arquivo para escrita quando  n&#227;o h&#225; mais  espa&#231;o dispon&#237;vel em
+disco,  ou  abrir  um  arquivo  para  qualquer  opera&#231;&#227;o  sendo  que  as
+permiss&#245;es de acesso do arquivo n&#227;o o permitem.
+
+<P>
+&#201; recomend&#225;vel que voc&#234; teste  o valor de retorno de <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B> para
+verificar se houve erro de abertura. O trecho de programa abaixo ilustra
+como faz&#234;-lo:
+<PRE>
+#include &lt;stdio.h&gt;
+.... 
+FILE *fp;
+char fnome[13];
+char fmodo[3];
+
+printf("Entre um nome de arquivo para abrir:");
+scanf("%s", fnome);
+printf("Entre o modo de abertura do arquivo:");
+scanf("%s", fmodo);
+
+fp = fopen( fnome, fmodo );
+if (fp == NULL) 
+   {
+   printf("Erro na abertura de %s no modo %s\n", fnome, fmodo);
+   return ;
+   }
+else
+   printf("Arquivo %s aberto com sucesso no modo %s\n", fnome, fmodo); 
+...
+</PRE>
+
+<P>
+No exemplo  acima se  o arquivo  n&#227;o puder ser  aberto com  sucesso, uma
+mensagem apropriada &#233; exibida na sa&#237;da padr&#227;o e o programa termina. Caso
+contr&#225;rio  uma mensagem  indicando o  sucesso na  abertura do  arquivo &#233;
+exibida e o programa continua sua execu&#231;&#227;o.
+
+<P>
+Cada  arquivo  aberto  possui  seu pr&#243;prio  <I>file  pointer</I>.  Por
+exemplo,  se   um  programa  vai  manipular   dois  arquivos  diferentes
+<B><FONT FACE="Helvetica, Arial, sans-serif">arq1</FONT></B>  and <B><FONT FACE="Helvetica, Arial, sans-serif">arq2</FONT></B>  simultaneamente (um  para leitura  e outro
+para escrita), dois <I>file pointers</I> devem ser usados:
+<PRE>
+FILE *fp1, *fp2;
+
+fp1 = fopen("arq1", "r");
+fp2 = fopen("arq2", "w");
+</PRE>
+
+<P>
+Os  valores  de  <I>file  pointer</I>  (<TT>FILE  *</TT>)  s&#227;o  chamados
+<I>streams</I>.  Eles estabelecem conex&#227;o entre o programa e o arquivo
+aberto. A partir do momento de abertura, o nome do arquivo &#233; irrelevante
+para o  programa. Todas  as fun&#231;&#245;es  que operam sobre  o arquivo  usam o
+<I>file pointer</I> associado.
+
+<P>
+Terminada a manipula&#231;&#227;o  do arquivo o programa deve  fechar o arquivo. A
+fun&#231;&#227;o padr&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B>  &#233; usada com este prop&#243;sito.  Ela quebra a
+conex&#227;o entre o  <I>file pointer</I> e o arquivo.  Esta fun&#231;&#227;o toma como
+argumento o <I>file pointer</I> que representa o arquivo a ser fechado.
+file to be closed. O prot&#243;tipo de <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B> &#233;:
+<PRE>
+int fclose(FILE *);
+</PRE>
+<B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B> retorna <TT>0</TT>, se h&#225; sucesso ou <TT>EOF</TT> em caso contr&#225;rio.
+Abaixo um exemplo de uso de <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B>:
+<PRE>
+fclose(pf1);
+fclose(pf2);
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000262000000000000000">
+26.2 Processando arquivos de texto</A>
+</H2>
+
+<P>
+Arquivos podem guardar duas  categorias b&#225;sicas de dados: <B>texto</B>
+(caracteres   no  universo  ASCII)   ou  <B>bin&#225;rio</B>   (como  dados
+armazenados em  mem&#243;ria ou dados  que representam uma imagem  JPEG).
+
+<P>
+Depois que um arquivo de texto  &#233; aberto, existem 3 formas diferentes de
+ler  ou escrever  sequencialmente os  dados:  (i) um  caracter por  vez,
+usando as fun&#231;&#245;es da biblioteca padr&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fgetc()</FONT></B> e <B><FONT FACE="Helvetica, Arial, sans-serif">fputc()</FONT></B>;
+(ii)  uma  linha  (<I>string</I>)  por vez,  usando  <B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B>  e
+<B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B>; e (iii) em um formato espec&#237;fico, usando <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>
+e <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B>.
+
+<P>
+Arquivos   bin&#225;rios   podem   ser   lidos  como   registros   de   dados
+estruturados. Al&#233;m  disso, uma  vez que todos  os registros tem  o mesmo
+tamanho, os  dados podem ser  acessados de forma  n&#227;o-sequencial (acesso
+aleat&#243;rio).  As   fun&#231;&#245;es  usadas   para  isto  s&#227;o   <B><FONT FACE="Helvetica, Arial, sans-serif">fwrite()</FONT></B>  e
+<B><FONT FACE="Helvetica, Arial, sans-serif">fread()</FONT></B>.
+
+<P>
+Outras fun&#231;&#245;es  de entrada  e sa&#237;da  de mais baixo  n&#237;vel que  podem ser
+usadas s&#227;o as fun&#231;&#245;es  <B><FONT FACE="Helvetica, Arial, sans-serif">read()</FONT></B> e <B><FONT FACE="Helvetica, Arial, sans-serif">write()</FONT></B>. Estas fun&#231;&#245;es n&#227;o
+ser&#227;o usadas  no momento e geralmente  somente programadores experientes
+as usam.
+
+<P>
+
+<H3><A NAME="SECTION000262100000000000000">
+26.2.1 Entrada e sa&#237;da de caracteres</A>
+</H3>
+As fun&#231;&#245;es <B><FONT FACE="Helvetica, Arial, sans-serif">fgetc()</FONT></B> e <B><FONT FACE="Helvetica, Arial, sans-serif">putc()</FONT></B> s&#227;o similares a <B><FONT FACE="Helvetica, Arial, sans-serif">getchar()</FONT></B> e
+<B><FONT FACE="Helvetica, Arial, sans-serif">putchar()</FONT></B>. Elas operam sobre  um arquivo aberto cujo <I>file
+  pointer</I> &#233; passado como argumento.
+
+<P>
+Os prot&#243;tipos de <B><FONT FACE="Helvetica, Arial, sans-serif">fgetc()</FONT></B> e <B><FONT FACE="Helvetica, Arial, sans-serif">fputc()</FONT></B> are
+<PRE>
+int fgetc(FILE *fp);
+int fputc(char ch, FILE *fp);
+</PRE>
+<B><FONT FACE="Helvetica, Arial, sans-serif">getc()</FONT></B> returns the next character read from the file represented by
+the stream <TT>fp</TT>, or <TT>EOF</TT> if error or end of file occurs.
+<B><FONT FACE="Helvetica, Arial, sans-serif">putc()</FONT></B> writes the character <TT>ch</TT> in the file represented by 
+the stream <TT>fp</TT>. It returns the character written or <TT>EOF</TT>.
+
+<P>
+Abaixo  segue  um exemplo  de  programa que  l&#234;  um  arquivo caracter  a
+caracter e imprime o que foi lido na sa&#237;da padr&#227;o (a tela do computador):
+<PRE>
+/************************************************************************
+ * Lê um caracter por vez de um arquivo e
+ * o imprime na saída padrão
+ ************************************************************************/
+#include &lt;stdio.h&gt; /* para funções padrão de E/S */
+
+main()
+{
+   FILE *fp;                      
+   char fnome[13];
+   int ch;
+
+   /* dialogo com usuário */
+   printf("Entre um nome de arquivo: ");
+   scanf("%s", fnome);
+
+   fp = fopen( fnome, "r" ); /* abre arquivo*/
+if (fp == NULL) 
+      {
+      printf("Erro ao abrir %s\n", fnome);
+      return;
+      }
+   else
+      {
+      printf("Arquivo aberto com sucesso.\n");
+
+   /* Lê o arquivo caracter a caracter e imprime em stdout (saída padrão) */
+   while( (ch=fgetc(fp)) != EOF ) 
+          printf("%c", ch);             
+
+      fclose(fp); /* fecha arquivo */
+}
+}
+</PRE>
+<H3><A NAME="SECTION000262200000000000000">
+26.2.2 Entrada e sa&#237;da de <I>strings</I></A>
+</H3>
+As fun&#231;&#245;es <B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B> and <B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B> s&#227;o similares a  <B><FONT FACE="Helvetica, Arial, sans-serif">gets()</FONT></B> e
+<B><FONT FACE="Helvetica, Arial, sans-serif">puts()</FONT></B>. Elas operam sobre  um arquivo aberto cujo <I>file
+  pointer</I> &#233; passado como argumento.
+
+<P>
+Os prot&#243;tipos de <B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B> e <B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B> s&#227;o:
+<PRE>
+char *fgets(char *str, int n, FILE *fp);
+int fputs(char *str, FILE *fp);
+</PRE>
+A fun&#231;&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B> l&#234;  do arquivo conectado ao <I>stream</I> <TT>  fp</TT>  no m&#225;ximo <TT>(n -  1)</TT> caracteres  para o  <I>array</I> <TT>  str</TT>,  parando a  leitura  se o  caracter  <TT>'<IMG
+ WIDTH="13" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img83.png"
+ ALT="$\backslash$">n'</TT>  (uma
+mudan&#231;a  de linha)  &#233;  encontrado; O  caracter  <TT>'<IMG
+ WIDTH="13" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img83.png"
+ ALT="$\backslash$">n'</TT>  &#233;
+inclu&#237;do no  <I>array</I> e ao  elemento do <I>array</I>  seguinte &#233;
+atribu&#237;do   <code>'\0'</code>   (final    de   <I>string</I>).    A   fun&#231;&#227;o
+<B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B> retorna <TT>str</TT> ou o ponteiro nulo,  <TT>NULL</TT>, se um
+erro ou final de arquivo ocorre.
+
+<P>
+A fun&#231;&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B> escreve  no arquivo conectado ao <I>stream</I>
+<TT>fp</TT> a <I>string</I> <TT>str</TT>, retornando um n&#250;mero n&#227;o-negativo,
+ou <TT>EOF</TT> em caso de erro.
+
+<P>
+No  exemplo   a  seguir   &#233;  usada  a   fun&#231;&#227;o  <B><FONT FACE="Helvetica, Arial, sans-serif">fgets()</FONT></B>   (e  n&#227;o
+<B><FONT FACE="Helvetica, Arial, sans-serif">gets()</FONT></B>. Voc&#234;  pode dizer por qu&#234;?)  para salvar em  um arquivo um
+texto digitado  atrav&#233;s da entrada padr&#227;o (stdin).   Para sinalizar pelo
+teclado que voc&#234; terminou de  entrar o texto, deve-se teclar <code>^D</code>
+(<code>^Z</code> Turbo C&nbsp;) e ent&#227;o a tecla ENTER.
+
+<P>
+<PRE>
+/************************************************************************
+ * Escreve texto digitado em stdin em um arquivo
+ ***********************************************************************/
+#include &lt;stdio.h&gt; /* funções padrão de E/S */
+
+main()
+{
+   FILE *fp;                      
+   char fnome[13];
+   char linha[81];
+
+   /* dialogo com usuario */
+   printf("Entre um nome de arquivo: ");
+   scanf("%s", fnome);
+
+   fp = fopen( fnome, "w" ); /* abre arquivo. Conteúdo anterior é perdido.*/
+ if (fp == NULL) 
+      {
+      printf("Erro ao abrir %s\n", fnome);
+      return;
+      }
+   else
+      {
+      printf("Arquivo aberto com sucesso");
+
+      /* lê linha do teclado, armazena em uma string,
+       * salva string em arquivo */
+
+      while( fgets(linha, 80, stdin ) != NULL)  
+         fputs(linha, fp);              
+      fclose(fp); /* fecha arquivo */
+}
+}
+</PRE>
+<H3><A NAME="SECTION000262300000000000000">
+26.2.3 Entrada e sa&#237;da formatada: <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B></A>
+</H3>
+Para  entrada e  sa&#237;da  formatada as  fun&#231;&#245;es  padr&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>  e
+<B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B>  podem  ser  usadas.   Elas s&#227;o  id&#234;nticas  &#224;s  fun&#231;&#245;es
+<B><FONT FACE="Helvetica, Arial, sans-serif">scanf()</FONT></B>  e  <B><FONT FACE="Helvetica, Arial, sans-serif">printf()</FONT></B>, exceto  que  elas  t&#234;m um  argumento
+adicional   (o  primeiro   em  sua   lista  de   argumentos)  que   &#233;  o
+<I>stream</I>    conectado    ao     arquivo    a    ser    lido    ou
+escrito. Informalmente, seus prot&#243;tipos podem ser escritos como:
+<PRE>
+int fscanf( FILE *fp, char *format, arg1, arg2, ... );
+int fprintf(FILE *fp, char *format, arg1, arg2, ... );
+</PRE>
+A   fun&#231;&#227;o   <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>  l&#234;   do   arquivo  representado   pelo
+<I>stream</I> <TT>fp</TT> sob controle de um  <I>string</I> de formato
+<TT>format</TT>. O <I>string</I>  de formato geralmente cont&#233;m convers&#245;es
+(como <TT>%d, %s, %f</TT>) que  dirigem a interpreta&#231;&#227;o  da entrada. Os
+valores convertidos s&#227;o atribu&#237;dos para os argumentos subsequentes, cada
+qual <B>devendo ser um ponteiro</B>.  A fun&#231;&#227;o <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B> retorna
+quando o <I>string</I> de formato foi totalmente interpretado. O valor
+retornado  por <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B> &#233;  <TT>EOF</TT>  se o  final do  arquivo foi
+atingido ou um erro ocorre, caso contr&#225;rio retorna a quantidade de itens
+convertidos e atribu&#237;dos.
+
+<P>
+A   fun&#231;&#227;o   <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B>    escreve   no   arquivo   conectado   ao
+<I>stream</I> <TT>fp</TT> sob controle de um  <I>string</I> de formato
+<TT>format</TT>. O <I>string</I> de  format cont&#233;m dois tipos de objetos:
+caracteres   ordin&#225;rios  que   s&#227;o  copiados   do  jeito   que   s&#227;o,  e
+especificadores  de convers&#227;o  que causam  a convers&#227;o  e  impress&#227;o dos
+argumentos seguintes de <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B>. O  valor de retorno &#233; o n&#250;mero
+de caracteres escritos, ou negativo em caso de ocorr&#234;ncia de erros. 
+
+<P>
+Abaixo  segue  um  exemplo  simples  de  base de  dados.  Os  dados  s&#227;o
+armazenados permanentemente em um arquivo, <B><FONT FACE="Helvetica, Arial, sans-serif">agentes.txt</FONT></B>. A base de
+dados cont&#233;m registros de agentes  secretos famosos. Para cada agente um
+apelido e  um n&#250;mero de c&#243;digo  s&#227;o armazenados. Uma vez  que ser&#225; usada
+e/s  formatada,  deve-se conhecer  o  formato  no  qual os  dados  est&#227;o
+armazenados no  arquivo da base  de dados. Este  formato &#233;: os  dados de
+diferentes agentes  est&#227;o em linhas  separadas; para cada agente  em uma
+linha, tem-se  primeiro o apelido  e ent&#227;o o c&#243;digo  num&#233;rico, separados
+por espa&#231;o.
+
+<P>
+O programa orientado  a menu abaixo lista todos  os registros e adiciona
+novos itens.
+
+<P>
+<PRE>
+/****************************************************************
+ * programa com menu para operar uma base de dados de no máximo 50
+ * agentes secretos; a base de dados é guardada permanentemente em
+ * um arquivo em disco.
+ ****************************************************************/
+
+#include &lt;stdio.h&gt;                    /* funções padrão de E/S */
+#define FNOME "agentes.txt"             /* nome do arquivo de dados */
+#define NUM 50                        /* numero de registros na base de dados */
+#define NOMELEN 30                    /* tamanho de um nome */
+
+/*** declara estrutura de dados ***/
+struct pessoal               
+   {
+   char nome [NOMELEN];         /* nome codigo(sem espaços em branco) */
+   int agnum ;                  /* numero codigo */
+   };
+
+/*** prototipos ***/
+int  cargadb(struct pessoal []);
+int  novonome(struct pessoal [], int);
+void listatudo(struct pessoal [], int);
+void salvadb(struct pessoal [], int);
+</PRE>
+
+<PRE>
+/****** MAIN *********/
+main()
+{
+   struct pessoal agentes[50];     /* array de 50 estruturas      */
+   int n;                          /* indice para o ultimo registro ativo */
+   char ch;
+   
+   /*** carrega a base de dados em agentes[], n é o tamanho da base de dados     */
+   n = loaddb(agentes);              
+
+   /* seleciona uma opção do menu e processa os dados em memória  */
+   do {
+      printf("\nDigite 'e' para entrar novo agente,"); 
+      printf("\n     'l' para listar todos os agentes,");    
+      printf("\n     'q' para terminar: ");
+      ch = getchar();                            
+      switch (ch)
+         {
+         case 'e':
+            n = novonome(agentes, n);   /* adiciona um novo agente no indice n  */
+            break;
+         case 'l':                      /* lista todos os registros */
+            listatudo(agentes, n);
+            break;
+         case 'q':                      /* salva todos os registros */
+            salvadb(agentes, n); 
+            break;
+         default:                       /* Engano do usuario  */
+            printf("\nEntre somente as opções listadas.\n");
+         }  
+         while (fgetc(stdin) != '\n') ;
+      } while (ch != 'q');
+}
+</PRE>
+Uma amostra  de uma  execu&#231;&#227;o do programa  segue abaixo.  Inicialmente o
+conte&#250;do do arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">agentes.txt</FONT></B> &#233;:
+<PRE>
+Klara 89
+Edward 888
+ZipZap 109
+</PRE>
+
+Uma amostra de execu&#231;&#227;o:
+<PRE>
+Digite 'e' para entrar novo agente,
+       'l' para listar todos os agentes,
+       'q' para terminar: l
+Klara 89
+Edward 888
+ZipZap 109
+
+Digite 'e' para entrar novo agente,
+       'l' para listar todos os agentes,
+       'q' para terminar: e
+Digite nome e código: TipTop 999
+
+Digite 'e' para entrar novo agente,
+       'l' para listar todos os agentes,
+       'q' para terminar: l
+Klara 89
+Edward 888
+ZipZap 109
+TipTop 999
+
+Digite 'e' para entrar novo agente,
+       'l' para listar todos os agentes,
+       'q' para terminar: q
+Salvar? ('s' para salvar)
+y
+Salvando...Feito
+</PRE>
+A seguir, apresenta-se a implementa&#231;&#227;o das quatro fun&#231;&#245;es <B><FONT FACE="Helvetica, Arial, sans-serif">cargadb()</FONT></B>,
+<B><FONT FACE="Helvetica, Arial, sans-serif">novonome()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">listatudo()</FONT></B>, and <B><FONT FACE="Helvetica, Arial, sans-serif">salvadb()</FONT></B>.
+<PRE>
+/***********************************************************************
+ * lê a base de dados do arquivo (até EOF) no array em memória
+ * ENTRADA: um array de do tipo struct pessoal
+ * RETORNO: número de elementos lidos
+ * SUPOSIÇÕES: o tamanho da base de dados deve ter no máximo 50 registros
+ ***********************************************************************/
+int cargadb(struct pessoal pessoa[])
+{
+   int i = 0;
+   FILE *fp;                     /* define ptr to FILE          */
+
+   fp = fopen(FNOME, "r");    
+
+   while ( fscanf(fp, "%s %d", pessoa[i].nome, &amp;pessoa[i].agnum) != EOF )
+      i++;
+   fclose(fp);
+   return i;
+}
+</PRE>
+
+<PRE>
+/*************************************************************************
+ * adiciona novo elemento ao indice n no array pessoa[],
+ * o valo da estrutura é obtido da entrada padrão
+ * ENTRADA: array pessoa[] -- to store the structure value
+ *                       n -- indice do elemento, incrementado a 
+ *                            cada novo elemento
+ *************************************************************************/
+int novonome(struct pessoal pessoa[], int n)
+   {
+      if (n &lt; NUM)
+      {
+         printf("Digite nome e código: ");
+         scanf("%s %d", pessoa[n].nome, &amp;pessoa[n].agnum);
+         n++;
+      }
+      else
+         printf("Não há mais espaço\n");
+      return n;
+   }
+
+/*************************************************************************
+ * imprime a base de dados na tela
+ * ENTRADA: array pessoa[] a imprimir
+ *                       n número de registros para imprimir
+ *************************************************************************/
+void listatudo(struct pessoal pessoa[], int n)
+   {
+   int j;
+
+   for (j = 0; j &lt; n; j++)
+       {
+       printf("%s %d\n", pessoa[j].nome, pessoa[j].agnum);
+       }
+   }
+
+/**************************************************************************
+ * Pergunta ao usuário se quer salvar a base de dados. Se a resposta é SIM (s)
+ * abre o arquivo para escrita e grava o array no arquivo
+ * ENTRADA: array pessoa[] a ser salvo
+ *                       n número de registros a ser salvo
+ **************************************************************************/
+void salvadb(struct pessoal pessoa[], int n)
+{
+  int i;
+  FILE *fp;
+
+  while (fgetc(stdin) != '\n') ;
+  printf("Salvar? ('s' para salvar)\n");
+  if ( getchar() == 's')
+     {
+     fp = fopen(FNOME, "w");    
+     printf("Salvando...");
+     for (i = 0; i &lt; n; i++) 
+       {
+       fprintf(fp, "%s %d\n", pessoa[i].nome, pessoa[i].agnum);
+       }
+     fclose(fp);
+     printf("Feito.\n");
+     }
+  else
+     printf("Alterações não foram salvas.\n");
+}
+</PRE>
+<HR>
+<A NAME="tex2html569"
+  HREF="notas_proc-node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html567"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html561"
+  HREF="notas_proc-node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html570"
+  HREF="notas_proc-node27.html">27 Ponteiros</A>
+<B>Up:</B> <A NAME="tex2html568"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html562"
+  HREF="notas_proc-node25.html">25 Entrada e Saída</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

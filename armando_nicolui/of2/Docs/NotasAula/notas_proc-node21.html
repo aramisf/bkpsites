@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>21 O pré-processador</TITLE>
+<META NAME="description" CONTENT="21 O pré-processador">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node22.html">
+<LINK REL="previous" HREF="notas_proc-node20.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node22.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html506"
+  HREF="notas_proc-node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html498"
+  HREF="notas_proc-node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="notas_proc-node22.html">22 Mais sobre funções</A>
+<B>Up:</B> <A NAME="tex2html505"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html499"
+  HREF="notas_proc-node20.html">20 Fun&#231;&#245;es</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html508"
+  HREF="notas_proc-node21.html#SECTION000211000000000000000">21.1 A diretiva <TT>#define</TT></A>
+<LI><A NAME="tex2html509"
+  HREF="notas_proc-node21.html#SECTION000212000000000000000">21.2 A diretiva  <TT>#include</TT></A>
+<LI><A NAME="tex2html510"
+  HREF="notas_proc-node21.html#SECTION000213000000000000000">21.3 Comentários</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000210000000000000000">
+21 O pr&#233;-processador</A>
+</H1>
+
+<P>
+O pr&#233;-processador  &#233; um programa que faz  alguns processamentos simples
+antes do  compilador.  Ele &#233;  executado automaticamente todas  as vezes
+que  seu programa &#233;  compilado, e  os comandos  a serem  executados s&#227;o
+dados atrav&#233;s de <EM>diretivas do pr&#233;-processador</EM>.
+
+<P>
+Estas diretivas s&#227;o  colocadas em linhas que cont&#233;m  somente a diretiva
+(elas n&#227;o s&#227;o  c&#243;digo da linguagem C, portanto as  regras para elas s&#227;o
+um  pouco diferentes).   As  linhas  que come&#231;am  com  um <code>#</code>  s&#227;o
+comandos para o pr&#233;-processador.  A linha inteira &#233; reservada para este
+comando  (nenhum c&#243;digo  C  pode  aparecer nesta  linha  e comandos  do
+pr&#233;-processador n&#227;o podem estar separados em diversas linhas).
+
+<P>
+
+<H2><A NAME="SECTION000211000000000000000">
+21.1 A diretiva <TT>#define</TT></A>
+</H2>
+
+<P>
+Uma  diretiva que  &#233;  usada frequentemente  &#233;  o <code>#define</code>.   Esta
+diretiva  &#233;  usada  para  fazer  <EM>substitui&#231;&#227;o  de  macros</EM>.   Por
+enquanto, mostraremos  uma utiliza&#231;&#227;o simples do  <code>#define</code>, que &#233;
+simplestemente uma substitui&#231;&#227;o no texto.
+
+<P>
+O  uso mais  frequente  desta diretiva  &#233;  dar nomes  simb&#243;licos a  uma
+constante (voc&#234; j&#225; viu outra maneira de definir contantes que &#233; colocar
+a  palvavra <TT>const</TT>  antes  da defini&#231;&#227;o  de  uma vari&#225;vel).   Por
+exemplo, seria conveniente usar <TT>PI</TT> em seus programas ao inv&#233;s de
+digitar  <TT>3.1415926535</TT>  toda hora.   Como outro  exemplo,  se voc&#234;
+quiser escrever um programa sobre estudantes de uma turma de 81 alunos,
+voc&#234;  poderia definir  <TT>NUM_ALUNOS</TT>  como <TT>81</TT>.  Assim,  se o
+n&#250;mero  de alunos  mudar,  voc&#234;  n&#227;o precisaria  modificar  todo o  seu
+programa  onde  o  n&#250;mero  de   alunos  (<TT>81</TT>)  &#233;  utilizado,  mas
+simplesmente alterar  a diretiva <code>#define</code>.   Estas duas diretivas
+s&#227;o definidas da seguinte forma:
+
+<P>
+<code>#define PI          3.1415926535</code>
+
+<P>
+<code>#define NUM_ALUNOS  81</code>
+
+<P>
+Por conven&#231;&#227;o, nomes introduzidos  por um <code>#define</code> s&#227;o geralmente
+em letra mai&#250;scula (e vari&#225;veis  s&#227;o em letra min&#250;scula, ou uma mistura
+de letras min&#250;sculas  e mai&#250;sculas).  Assim, quando voc&#234;  v&#234; um nome em
+um programa,  voc&#234; sabe se o nome  refere-se a uma vari&#225;vel  ou um nome
+definido por um <code>#define</code>.
+
+<P>
+Considere o seguinte programa exemplo que usa <TT>PI</TT>:
+
+<P>
+<PRE>
+   #define PI        3.14159265
+
+   main()
+   {
+      double raio;
+
+      printf("Entre com o raio: ");
+      scanf("%f", &amp;raio);
+
+      printf("Circunferencia = %f\n", 2.0 * PI * raio);
+   }
+</PRE>
+
+<P>
+Lembre-se que o nome <TT>PI</TT> n&#227;o &#233; um nome de vari&#225;vel.  Ele &#233; um nome
+que o  pr&#233;-processador substituir&#225;  pelo <EM>texto</EM>  especificado pelo
+<code>#define</code>   (mais  ou  menos   da  mesma   forma  que   o  comando
+pesquisa-e-substitui  do editor de  texto).  O  compilador nunca  v&#234; ou
+sabe  sobre <TT>PI</TT>.   O compilador  v&#234; o  seguinte <TT>printf()</TT> do
+programa acima depois do pr&#233;-processador ser executado:
+<PRE>
+      printf("Circunferencia = %f\n", 2.0 * 3.14159265 * raio);
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000212000000000000000">
+21.2 A diretiva  <TT>#include</TT></A>
+</H2>
+
+<P>
+Agora  imagine que  estamos  escrevendo uma  biblioteca geom&#233;trica:  um
+conjunto de fun&#231;&#245;es para calcular  a &#225;rea de cilindros, cones, esferas.
+Se  diferentes pessoal  est&#227;o  escrevendo cada  uma  das fun&#231;&#245;es,  eles
+provavelmente colocar&#227;o suas fun&#231;&#245;es em diferentes arquivos.  Mas todas
+as fun&#231;&#245;es usam  o numero <IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img68.png"
+ ALT="$\pi$">, e algumas  outras constantes podem ser
+necess&#225;rias tamb&#233;m.  Ao inv&#233;s de  colocar o <code>#define</code> no in&#237;cio de
+cada  arquivo, um  &#250;nico arquivo  <TT>geom.h</TT>  pode ser  criado.  Este
+arquivo conter&#225;  a linha
+
+<P>
+<code>#define  PI    3.14159265</code>
+
+<P>
+Assim,  se todos os  arquivos de  fun&#231;&#245;es geom&#233;tricas  puderem enxergar
+<TT>geom.h</TT>,  eles compartilhar&#227;o as  mesmas defini&#231;&#245;es.  &#233;  para isso
+que usamos  a diretiva <code>#include</code>,  para incluir em  seu programa,
+informa&#231;&#245;es  que est&#227;o  em outro  arquivo.  Estas  diretivas geralmente
+est&#227;o  no in&#237;cio do  programa fonte,  antes da  defini&#231;&#227;o de  fun&#231;&#245;es e
+var&#225;veis.  Por exemplo, a diretiva
+
+<P>
+<code>#include "geom.h"</code>
+
+<P>
+colocada nos arquivos fontes que cont&#234;m as fun&#231;&#245;es geom&#233;tricas far&#225; com
+que  todos  eles usem  o  nome  simb&#243;lico <TT>PI</TT>  ao  inv&#233;s de  <TT>3.14159265</TT>.  O fato do nome do  arquivo estar em aspas significa que o
+arquivo <TT>geom.h</TT> est&#225; no mesmo diret&#243;rio que os arquivos fontes (ao
+inv&#233;s do diret&#243;rio onde se encontram as bibliotecas padr&#227;o de C).
+
+<P>
+A diretiva
+
+<P>
+<code>#include &lt;stdio.h&gt;</code>
+
+<P>
+
+&#233; colocada no  in&#237;cio do programa fonte para  incluir informa&#231;&#245;es (como
+prot&#243;tipos de fun&#231;&#245;es) que s&#227;o necess&#225;rios quando <TT>printf()</TT> e <TT>scanf()</TT> s&#227;o  chamados dentro do programa.   O arquivo entre  <TT>&lt; &gt;</TT>
+est&#225; em  algum diret&#243;rio  padr&#227;o conhecido pelo  pr&#233;-processador.  Este
+arquivo <TT>stdio.h</TT> &#233; comum  a todas as implementa&#231;&#245;es da linguagem C
+e cont&#233;m  infoma&#231;&#245;es necess&#225;rias para  executar opera&#231;&#245;es de  entrada e
+sa&#237;da da entrada e sa&#237;da padr&#227;o (teclado e monitor).
+
+<P>
+A extens&#227;o <TT>.h</TT> vem do ingl&#234;s <EM>header file</EM>.  Apesar de n&#227;o ser
+obrigat&#243;rio  que  arquivos  inclu&#237;dos   tenham  a  extens&#227;o  <TT>.h</TT>,
+geralmente esta &#233; a conven&#231;&#227;o utilizada.
+
+<P>
+
+<H2><A NAME="SECTION000213000000000000000">
+21.3 Coment&#225;rios</A>
+</H2>
+De um modo geral,  o pr&#233;-processador dos compiladores existentes remove
+todos os coment&#225;rios do arquivo  fonte antes do programa ser compilado.
+Portanto, o compilador nunca v&#234; realmente os coment&#225;rios.
+
+<P>
+<HR>
+<A NAME="tex2html506"
+  HREF="notas_proc-node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html498"
+  HREF="notas_proc-node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="notas_proc-node22.html">22 Mais sobre funções</A>
+<B>Up:</B> <A NAME="tex2html505"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html499"
+  HREF="notas_proc-node20.html">20 Fun&#231;&#245;es</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

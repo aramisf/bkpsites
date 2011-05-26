@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 12: Vectors of Objects</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap13.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap11.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 12</h2>
+
+<h1>Vectors of Objects</h1>
+
+
+<a name=1></a><br>
+<h3>12.1 Composition</h3>
+
+<p>By now we have seen several examples of composition (the ability to combine language features in a variety of arrangements).  One of the first examples we saw was using a function invocation as part of an expression.  Another example is the nested structure of statements: you can put an <span class=code><span class=keyword>if</span></span> statement within a <span class=code><span class=keyword>while</span></span> loop, or within another <span class=code><span class=keyword>if</span></span> statement, etc.</p>
+
+<p>Having seen this pattern, and having learned about vectors and objects, you should not be surprised to learn that you can have vectors of objects.  In fact, you can also have objects that contain vectors (as instance variables); you can have vectors that contain vectors; you can have objects that contain objects, and so on.</p>
+
+<p>In the next two chapters we will look at some examples of these combinations, using <span class=code>Card</span> objects as a case study.</p>
+
+<a name=2></a><br>
+<h3>12.2 <span class=code>Card</span> objects</h3>
+
+<p>If you are not familiar with common playing cards, now would be a good time to get a deck, or else this chapter might not make much sense. There are 52 cards in a deck, each of which belongs to one of four suits and one of 13 ranks.  The suits are Spades, Hearts, Diamonds and Clubs (in descending order in Bridge).  The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen and King.  Depending on what game you are playing, the rank of the Ace may be higher than King or lower than 2.</p>
+
+
+
+<p>If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be: <span class=code>rank</span> and <span class=code>suit</span>.  It is not as obvious what type the instance variables should be.  One possibility is <span class=code>pstring</span>s, containing things like <span class=code><span class=quote>"Spade"</span></span> for suits and <span class=code><span class=quote>"Queen"</span></span> for ranks.  One problem with this implementation is that it would not be easy to compare cards to see which had higher rank or suit.</p>
+
+
+
+<p>An alternative is to use integers to <b>encode</b> the ranks and suits.  By "encode," I do not mean what some people think, which is to encrypt, or translate into a secret code.  What a computer scientist means by "encode" is something like "define a mapping between a sequence of numbers and the things I want to represent." For example,</p>
+
+
+
+<table align=center>
+<tr><td style="padding-right: 8;">Spades</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">3<br></td></tr>
+<tr><td style="padding-right: 8;">Hearts</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">2<br></td></tr>
+<tr><td style="padding-right: 8;">Diamonds</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">1<br></td></tr>
+<tr><td style="padding-right: 8;">Clubs</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">0</td></tr>
+</table>
+
+
+<p>The symbol <tt>-&gt;</tt> is mathematical notation for "maps to." The obvious feature of this mapping is that the suits map to integers in order, so we can compare suits by comparing integers. The mapping for ranks is fairly obvious; each of the numerical ranks maps to the corresponding integer, and for face cards:</p>
+
+
+
+<table align=center>
+<tr><td style="padding-right: 8;">Jack</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">11<br></td></tr>
+<tr><td style="padding-right: 8;">Queen</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">12<br></td></tr>
+<tr><td style="padding-right: 8;">King</td><td style="padding-right: 8;"><tt>-&gt;</tt></td><td style="padding-right: 8;">13<br></td></tr>
+</table>
+
+
+<p>The reason I am using mathematical notation for these mappings is that they are not part of the C++ program.  They are part of the program design, but they never appear explicitly in the code. The class definition for the <span class=code>Card</span> type looks like this:</p>
+
+
+<span class=code><span class=keyword>struct</span> Card
+<br>{
+<br>&nbsp; <span class=keyword>int</span> suit, rank;
+<br>
+<br>&nbsp; Card ();
+<br>&nbsp; Card (<span class=keyword>int</span> s, <span class=keyword>int</span> r);
+<br>};
+<br>
+<br>Card::Card () {
+<br>&nbsp; suit = 0;&nbsp; rank = 0;
+<br>}
+<br>
+<br>Card::Card (<span class=keyword>int</span> s, <span class=keyword>int</span> r) {
+<br>&nbsp; suit = s;&nbsp; rank = r;
+<br>}
+<br></span><p>There are two constructors for <span class=code>Card</span>s.  You can tell that they are constructors because they have no return type and their name is the same as the name of the structure.  The first constructor takes no arguments and initializes the instance variables to a useless value (the zero of clubs).</p>
+
+<p>The second constructor is more useful.  It takes two parameters, the suit and rank of the card.</p>
+
+
+
+<p>The following code creates an object named <span class=code>threeOfClubs</span> that represents the 3 of Clubs:</p>
+
+
+<span class=code>&nbsp; &nbsp;Card threeOfClubs (0, 3);
+<br></span><p>The first argument, <span class=code>0</span> represents the suit Clubs, the second, naturally, represents the rank 3.</p>
+
+<a name=3></a><br>
+<h3>12.3 The <span class=code>printCard</span> function</h3>
+
+<p>When you create a new type, the first step is usually to declare the instance variables and write constructors.  The second step is often to write a function that prints the object in human-readable form.</p>
+
+
+
+<p>In the case of <span class=code>Card</span> objects, "human-readable" means that we have to map the internal representation of the rank and suit onto words.  A natural way to do that is with a vector of <span class=code>pstring</span>s. You can create a vector of <span class=code>pstring</span>s the same way you create an vector of other types:</p>
+
+
+<span class=code>&nbsp; pvector&lt;pstring&gt; suits (4);
+<br></span><p>Of course, in order to use <span class=code>pvector</span>s and <span class=code>pstring</span>s, you will have to include the header files for both.</p>
+
+<p><span class=code>pvector</span>s are a little different from <span class=code>pstring</span>s in this regard. The file <span class=code>pvector.cpp</span> contains a template that allows the compiler to create vectors of various kinds.  The first time you use a vector of integers, the compiler generates code to support that kind of vector.  If you use a vector of <span class=code>pstring</span>s, the compiler generates different code to handle that kind of vector.  As a result, it is usually sufficient to include the header file <span class=code>pvector.h</span>; you do not have to compile <span class=code>pvector.cpp</span> at all!  Unfortunately, if you do, you are likely to get a long stream of error messages.  I hope this helps you avoid an unpleasant surprise, but the details in your development environment may differ.</p>
+
+<p>To initialize the elements of the vector, we can use a series of assignment statements.</p>
+
+
+<span class=code>&nbsp; suits[0] = <span class=quote>"Clubs"</span>;
+<br>&nbsp; suits[1] = <span class=quote>"Diamonds"</span>;
+<br>&nbsp; suits[2] = <span class=quote>"Hearts"</span>;
+<br>&nbsp; suits[3] = <span class=quote>"Spades"</span>;
+<br></span><p>A state diagram for this vector looks like this:</p>
+
+
+
+<p align="center"><img src="images/pstringvector.png"></p>
+
+<p>We can build a similar vector to decode the ranks. Then we can select the ppropriate elements using the <span class=code>suit</span> and <span class=code>rank</span> as indices.  Finally, we can write a function called <span class=code>print</span> that outputs the card on which it is invoked:</p>
+
+
+<span class=code><span class=keyword>void</span> Card::print () <span class=keyword>const</span>
+<br>{
+<br>&nbsp; pvector&lt;pstring&gt; suits (4);
+<br>&nbsp; suits[0] = <span class=quote>"Clubs"</span>;
+<br>&nbsp; suits[1] = <span class=quote>"Diamonds"</span>;
+<br>&nbsp; suits[2] = <span class=quote>"Hearts"</span>;
+<br>&nbsp; suits[3] = <span class=quote>"Spades"</span>;
+<br>
+<br>&nbsp; pvector&lt;pstring&gt; ranks (14);
+<br>&nbsp; ranks[1] = <span class=quote>"Ace"</span>;
+<br>&nbsp; ranks[2] = <span class=quote>"2"</span>;
+<br>&nbsp; ranks[3] = <span class=quote>"3"</span>;
+<br>&nbsp; ranks[4] = <span class=quote>"4"</span>;
+<br>&nbsp; ranks[5] = <span class=quote>"5"</span>;
+<br>&nbsp; ranks[6] = <span class=quote>"6"</span>;
+<br>&nbsp; ranks[7] = <span class=quote>"7"</span>;
+<br>&nbsp; ranks[8] = <span class=quote>"8"</span>;
+<br>&nbsp; ranks[9] = <span class=quote>"9"</span>;
+<br>&nbsp; ranks[10] = <span class=quote>"10"</span>;
+<br>&nbsp; ranks[11] = <span class=quote>"Jack"</span>;
+<br>&nbsp; ranks[12] = <span class=quote>"Queen"</span>;
+<br>&nbsp; ranks[13] = <span class=quote>"King"</span>;
+<br>
+<br>&nbsp; cout &lt;&lt; ranks[rank] &lt;&lt; <span class=quote>" of "</span> &lt;&lt; suits[suit] &lt;&lt; endl;
+<br>}
+<br></span><p>The expression <span class=code>suits[suit]</span> means "use the instance variable <span class=code>suit</span> from the current object as an index into the vector named <span class=code>suits</span>, and select the ppropriate string."</p>
+
+<p>Because <span class=code>print</span> is a <span class=code>Card</span> member function, it can refer to the instance variables of the current object implicitly (without having to use dot notation to specify the object).  The output of this code</p>
+
+
+<span class=code>&nbsp; Card card (1, 11);
+<br>&nbsp; card.print ();
+<br></span><p>is <span class=code>Jack of Diamonds</span>.</p>
+
+<p>You might notice that we are not using the zeroeth element of the <span class=code>ranks</span> vector.  That's because the only valid ranks are 1--13.  By leaving an unused element at the beginning of the vector, we get an encoding where 2 maps to "2", 3 maps to "3", etc.  From the point of view of the user, it doesn't matter what the encoding is, since all input and output uses human-readable formats.  On the other hand, it is often helpful for the programmer if the mappings are easy to remember.</p>
+
+<a name=4></a><br>
+<h3>12.4 The <span class=code>equals</span> function</h3>
+
+<p>In order for two cards to be equal, they have to have the same rank and the same suit.  Unfortunately, the <span class=code>==</span> operator does not work for user-defined types like <span class=code>Card</span>, so we have to write a function that compares two cards.  We'll call it <span class=code>equals</span>.  It is also possible to write a new definition for the <span class=code>==</span> operator, but we will not cover that in this book.</p>
+
+<p>It is clear that the return value from <span class=code>equals</span> should be a boolean that indicates whether the cards are the same.  It is also clear that there have to be two <span class=code>Card</span>s as parameters. But we have one more choice: should <span class=code>equals</span> be a member function or a free-standing function?</p>
+
+<p>As a member function, it looks like this:</p>
+
+
+<span class=code><span class=keyword>bool</span> Card::equals (<span class=keyword>const</span> Card& c2) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; <span class=keyword>return</span> (rank == c2.rank && suit == c2.suit);
+<br>}
+<br></span><p>To use this function, we have to invoke it on one of the cards and pass the other as an argument:</p>
+
+
+<span class=code>&nbsp; Card card1 (1, 11);
+<br>&nbsp; Card card2 (1, 11);
+<br>
+<br>&nbsp; <span class=keyword>if</span> (card1.equals(card2)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Yup, that's the same card."</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>This method of invocation always seems strange to me when the function is something like <span class=code>equals</span>, in which the two arguments are symmetric.  What I mean by symmetric is that it does not matter whether I ask "Is A equal to B?" or "Is B equal to A?"  In this case, I think it looks better to rewrite <span class=code>equals</span> as a nonmember function:</p>
+
+
+<span class=code><span class=keyword>bool</span> equals (<span class=keyword>const</span> Card& c1, <span class=keyword>const</span> Card& c2)
+<br>{
+<br>&nbsp; <span class=keyword>return</span> (c1.rank == c2.rank && c1.suit == c2.suit);
+<br>}
+<br></span><p>When we call this version of the function, the arguments appear side-by-side in a way that makes more logical sense, to me at least.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (equals (card1, card2)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Yup, that's the same card."</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>Of course, this is a matter of taste.  My point here is that you should be comfortable writing both member and nonmember functions, so that you can choose the interface that works best depending on the circumstance.</p>
+
+<a name=5></a><br>
+<h3>12.5 The <span class=code>isGreater</span> function</h3>
+
+<p>For basic types like <span class=code><span class=keyword>int</span></span> and <span class=code><span class=keyword>double</span></span>, there are comparison operators that compare values and determine when one is greater or less than another.  These operators (<span class=code>&lt;</span> and <span class=code>&gt;</span> and the others) don't work for user-defined types.  Just as we did for the <span class=code>==</span> operator, we will write a comparison function that plays the role of the <span class=code>&gt;</span> operator.  Later, we will use this function to sort a deck of cards.</p>
+
+
+
+<p>Some sets are totally ordered, which means that you can compare any two elements and tell which is bigger.  For example, the integers and the floating-point numbers are totally ordered.  Some sets are unordered, which means that there is no meaningful way to say that one element is bigger than another.  For example, the fruits are unordered, which is why we cannot compare pples and oranges.  As another example, the <span class=code><span class=keyword>bool</span></span> type is unordered; we cannot say that <span class=code><span class=keyword>true</span></span> is greater than <span class=code><span class=keyword>false</span></span>.</p>
+
+<p>The set of playing cards is partially ordered, which means that sometimes we can compare cards and sometimes not.  For example, I know that the 3 of Clubs is higher than the 2 of Clubs because it has higher rank, and the 3 of Diamonds is higher than the 3 of Clubs because it has higher suit.  But which is better, the 3 of Clubs or the 2 of Diamonds?  One has a higher rank, but the other has a higher suit.</p>
+
+
+
+<p>In order to make cards comparable, we have to decide which is more important, rank or suit.  To be honest, the choice is completely arbitrary.  For the sake of choosing, I will say that suit is more important, because when you buy a new deck of cards, it comes sorted with all the Clubs together, followed by all the Diamonds, and so on.</p>
+
+<p>With that decided, we can write <span class=code>isGreater</span>.  Again, the arguments (two <span class=code>Card</span>s) and the return type (boolean) are obvious, and again we have to choose between a member function and a nonmember function. This time, the arguments are not symmetric.  It matters whether we want to know "Is A greater than B?" or "Is B greater than A?" Therefore I think it makes more sense to write <span class=code>isGreater</span> as a member function:</p>
+
+
+<span class=code><span class=keyword>bool</span> Card::isGreater (<span class=keyword>const</span> Card& c2) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; <span class=comment>// first check the suits
+</span><br>&nbsp; <span class=keyword>if</span> (suit &gt; c2.suit) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (suit &lt; c2.suit) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=comment>// if the suits are equal, check the ranks
+</span><br>&nbsp; <span class=keyword>if</span> (rank &gt; c2.rank) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (rank &lt; c2.rank) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=comment>// if the ranks are also equal, return false
+</span><br>&nbsp; <span class=keyword>return false</span>;
+<br>}
+<br></span><p>Then when we invoke it, it is obvious from the syntax which of the two possible questions we are asking:</p>
+
+
+<span class=code>&nbsp; Card card1 (2, 11);
+<br>&nbsp; Card card2 (1, 11);
+<br>
+<br>&nbsp; <span class=keyword>if</span> (card1.isGreater (card2)) {
+<br>&nbsp; &nbsp; card1.print ();
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"is greater than"</span> &lt;&lt; endl;
+<br>&nbsp; &nbsp; card2.print ();
+<br>&nbsp; }
+<br></span><p>You can almost read it like English: "If card1 isGreater card2 ..." The output of this program is</p>
+
+
+<span class=code>Jack of Hearts
+<br>is greater than
+<br>Jack of Diamonds
+<br></span><p>According to <span class=code>isGreater</span>, aces are less than deuces (2s). As an exercise, fix it so that aces are ranked higher than Kings, as they are in most card games.</p>
+
+<a name=6></a><br>
+<h3>12.6 Vectors of cards</h3>
+
+<p>The reason I chose <span class=code>Cards</span> as the objects for this chapter is that there is an obvious use for a vector of cards---a deck.  Here is some code that creates a new deck of 52 cards:</p>
+
+
+<span class=code>&nbsp; pvector&lt;Card&gt; deck (52);
+<br></span><p>Here is the state diagram for this object:</p>
+
+
+
+<p align="center"><img src="images/cardvector.png"></p>
+
+<p>The three dots represent the 48 cards I didn't feel like drawing.  Keep in mind that we haven't initialized the instance variables of the cards yet.  In some environments, they will get initialized to zero, as shown in the figure, but in others they could contain any possible value.</p>
+
+<p>One way to initialize them would be to pass a <span class=code>Card</span> as a second argument to the constructor:</p>
+
+
+<span class=code>&nbsp; Card aceOfSpades (3, 1);
+<br>&nbsp; pvector&lt;Card&gt; deck (52, aceOfSpades);
+<br></span><p>This code builds a deck with 52 identical cards, like a special deck for a magic trick.  Of course, it makes more sense to build a deck with 52 different cards in it.  To do that we use a nested loop.</p>
+
+
+
+<p>The outer loop enumerates the suits, from 0 to 3.  For each suit, the inner loop enumerates the ranks, from 1 to 13.  Since the outer loop iterates 4 times, and the inner loop iterates 13 times, the total number of times the body is executed is 52 (13 times 4).</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 0;
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> suit = 0; suit &lt;= 3; suit++) {
+<br>&nbsp; &nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> rank = 1; rank &lt;= 13; rank++) {
+<br>&nbsp; &nbsp; &nbsp; deck[i].suit = suit;
+<br>&nbsp; &nbsp; &nbsp; deck[i].rank = rank;
+<br>&nbsp; &nbsp; &nbsp; i++;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br></span><p>I used the variable <span class=code>i</span> to keep track of where in the deck the next card should go.</p>
+
+
+
+<p>Notice that we can compose the syntax for selecting an element from an array (the <span class=code>[]</span> operator) with the syntax for selecting an instance variable from an object (the dot operator).  The expression <span class=code>deck[i].suit</span> means "the suit of the ith card in the deck".</p>
+
+
+
+<p>As an exercise, encapsulate this deck-building code in a function called <span class=code>buildDeck</span> that takes no parameters and that returns a fully-populated vector of <span class=code>Card</span>s.</p>
+
+<a name=7></a><br>
+<h3>12.7 The <span class=code>printDeck</span> function</h3>
+
+<p>Whenever you are working with vectors, it is convenient to have a function that prints the contents of the vector.  We have seen the pattern for traversing a vector several times, so the following function should be familiar:</p>
+
+
+<span class=code><span class=keyword>void</span> printDeck (<span class=keyword>const</span> pvector&lt;Card&gt;& deck) {
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; deck.length(); i++) {
+<br>&nbsp; &nbsp; deck[i].print ();
+<br>&nbsp; }
+<br>}
+<br></span><p>By now it should come as no surprise that we can compose the syntax for vector access with the syntax for invoking a function.</p>
+
+<p>Since <span class=code>deck</span> has type <span class=code>pvector&lt;Card&gt;</span>, an element of <span class=code>deck</span> has type <span class=code>Card</span>.  Therefore, it is legal to invoke <span class=code>print</span> on <span class=code>deck[i]</span>.</p>
+
+<a name=8></a><br>
+<h3>12.8 Searching</h3>
+
+<p>The next function I want to write is <span class=code>find</span>, which searches through a vector of <span class=code>Card</span>s to see whether it contains a certain card.  It may not be obvious why this function would be useful, but it gives me a chance to demonstrate two ways to go searching for things, a <span class=code>linear</span> search and a <span class=code>bisection</span> search.</p>
+
+
+
+<p>Linear search is the more obvious of the two; it involves traversing the deck and comparing each card to the one we are looking for.  If we find it we return the index where the card appears.  If it is not in the deck, we return -1.</p>
+
+
+<span class=code><span class=keyword>int</span> find (<span class=keyword>const</span> Card& card, <span class=keyword>const</span> pvector&lt;Card&gt;& deck) {
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; deck.length(); i++) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (equals (deck[i], card)) <span class=keyword>return</span> i;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> -1;
+<br>}
+<br></span><p>The loop here is exactly the same as the loop in <span class=code>printDeck</span>. In fact, when I wrote the program, I copied it, which saved me from having to write and debug it twice.</p>
+
+<p>Inside the loop, we compare each element of the deck to <span class=code>card</span>.  The function returns as soon as it discovers the card, which means that we do not have to traverse the entire deck if we find the card we are looking for.  If the loop terminates without finding the card, we know the card is not in the deck and return <span class=code>-1</span>.</p>
+
+
+
+<p>To test this function, I wrote the following:</p>
+
+
+<span class=code>&nbsp; pvector&lt;Card&gt; deck = buildDeck ();
+<br>
+<br>&nbsp; <span class=keyword>int</span> index = card.find (deck[17]);
+<br>&nbsp; cout &lt;&lt; <span class=quote>"I found the card at index = "</span> &lt;&lt; index &lt;&lt; endl;
+<br></span><p>The output of this code is</p>
+
+
+<span class=code>I found the card at index = 17
+<br></span><a name=9></a><br>
+<h3>12.9 Bisection search</h3>
+
+<p>If the cards in the deck are not in order, there is no way to search that is faster than the linear search.  We have to look at every card, since otherwise there is no way to be certain the card we want is not there.</p>
+
+<p>But when you look for a word in a dictionary, you don't search linearly through every word.  The reason is that the words are in alphabetical order.  As a result, you probably use an algorithm that is similar to a bisection search:</p>
+
+<ol>
+
+<li>Start in the middle somewhere.</li>
+
+<li>Choose a word on the page and compare it to the word you are looking for.</li>
+
+<li>If you found the word you are looking for, stop.</li>
+
+<li>If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go to step 2.</li>
+
+<li>If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go to step 2.</li>
+
+</ol>
+
+<p>If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary.  The only alternative is that your word has been misfiled somewhere, but that contradicts our assumption that the words are in alphabetical order.</p>
+
+<p>In the case of a deck of cards, if we know that the cards are in order, we can write a version of <span class=code>find</span> that is much faster.  The best way to write a bisection search is with a recursive function. That's because bisection is naturally recursive.</p>
+
+
+
+<p>The trick is to write a function called <span class=code>findBisect</span> that takes two indices as parameters, <span class=code>low</span> and <span class=code>high</span>, indicating the segment of the vector that should be searched (including both <span class=code>low</span> and <span class=code>high</span>).</p>
+
+<ol>
+
+<li>To search the vector, choose an index between <span class=code>low</span> and <span class=code>high</span>, and call it <span class=code>mid</span>.  Compare the card at <span class=code>mid</span> to the card you are looking for.</li>
+
+<li>If you found it, stop.</li>
+
+<li>If the card at <span class=code>mid</span> is higher than your card, search in the range from <span class=code>low</span> to <span class=code>mid-1</span>.</li>
+
+<li>If the card at <span class=code>mid</span> is lower than your card, search in the range from <span class=code>mid+1</span> to <span class=code>high</span>.</li>
+
+</ol>
+
+<p>Steps 3 and 4 look suspiciously like recursive invocations.  Here's what this all looks like translated into C++:</p>
+
+
+<span class=code><span class=keyword>int</span> findBisect (<span class=keyword>const</span> Card& card, <span class=keyword>const</span> pvector&lt;Card&gt;& deck,
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> low, <span class=keyword>int</span> high) {
+<br>&nbsp; <span class=keyword>int</span> mid = (high + low) / 2;
+<br>
+<br>&nbsp; <span class=comment>// if we found the card, return its index
+</span><br>&nbsp; <span class=keyword>if</span> (equals (deck[mid], card)) <span class=keyword>return</span> mid;
+<br>
+<br>&nbsp; <span class=comment>// otherwise, compare the card to the middle card
+</span><br>&nbsp; <span class=keyword>if</span> (deck[mid].isGreater (card)) {
+<br>&nbsp; &nbsp; <span class=comment>// search the first half of the deck
+</span><br>&nbsp; &nbsp; <span class=keyword>return</span> findBisect (card, deck, low, mid-1);
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=comment>// search the second half of the deck
+</span><br>&nbsp; &nbsp; <span class=keyword>return</span> findBisect (card, deck, mid+1, high);
+<br>&nbsp; }
+<br>}
+<br></span><p>Although this code contains the kernel of a bisection search, it is still missing a piece.  As it is currently written, if the card is not in the deck, it will recurse forever.  We need a way to detect this condition and deal with it properly (by returning <span class=code>-1</span>).</p>
+
+
+
+<p>The easiest way to tell that your card is not in the deck is if there are <i>no</i> cards in the deck, which is the case if <span class=code>high</span> is less than <span class=code>low</span>.  Well, there are still cards in the deck, of course, but what I mean is that there are no cards in the segment of the deck indicated by <span class=code>low</span> and <span class=code>high</span>.</p>
+
+<p>With that line added, the function works correctly:</p>
+
+
+<span class=code><span class=keyword>int</span> findBisect (<span class=keyword>const</span> Card& card, <span class=keyword>const</span> pvector&lt;Card&gt;& deck,
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> low, <span class=keyword>int</span> high) {
+<br>
+<br>&nbsp; cout &lt;&lt; low &lt;&lt; <span class=quote>", "</span> &lt;&lt; high &lt;&lt; endl;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (high &lt; low) <span class=keyword>return</span> -1;
+<br>
+<br>&nbsp; <span class=keyword>int</span> mid = (high + low) / 2;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (equals (deck[mid], card)) <span class=keyword>return</span> mid;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (deck[mid].isGreater (card)) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> findBisect (card, deck, low, mid-1);
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> findBisect (card, deck, mid+1, high);
+<br>&nbsp; }
+<br>}
+<br></span><p>I added an output statement at the beginning so I could watch the sequence of recursive calls and convince myself that it would eventually reach the base case.  I tried out the following code:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; findBisect (deck, deck[23], 0, 51));
+<br></span><p>And got the following output:</p>
+
+
+<span class=code>0, 51
+<br>0, 24
+<br>13, 24
+<br>19, 24
+<br>22, 24
+<br>I found the card at index = 23
+<br></span><p>Then I made up a card that is not in the deck (the 15 of Diamonds), and tried to find it.  I got the following:</p>
+
+
+<span class=code>0, 51
+<br>0, 24
+<br>13, 24
+<br>13, 17
+<br>13, 14
+<br>13, 12
+<br>I found the card at index = -1
+<br></span><p>These tests don't prove that this program is correct.  In fact, no amount of testing can prove that a program is correct.  On the other hand, by looking at a few cases and examining the code, you might be able to convince yourself.</p>
+
+
+
+<p>The number of recursive calls is fairly small, typically 6 or 7.  That means we only had to call <span class=code>equals</span> and <span class=code>isGreater</span> 6 or 7 times, compared to up to 52 times if we did a linear search.  In general, bisection is much faster than a linear search, especially for large vectors.</p>
+
+<p>Two common errors in recursive programs are forgetting to include a base case and writing the recursive call so that the base case is never reached.  Either error will cause an infinite recursion, in which case C++ will (eventually) generate a run-time error.</p>
+
+
+
+<a name=10></a><br>
+<h3>12.10 Decks and subdecks</h3>
+
+<p>Looking at the interface to <span class=code>findBisect</span></p>
+
+
+<span class=code><span class=keyword>int</span> findBisect (<span class=keyword>const</span> Card& card, <span class=keyword>const</span> pvector&lt;Card&gt;& deck,
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> low, <span class=keyword>int</span> high) {
+<br></span><p>it might make sense to treat three of the parameters, <span class=code>deck</span>, <span class=code>low</span> and <span class=code>high</span>, as a single parameter that specifies a <b>subdeck</b>.</p>
+
+
+
+<p>This kind of thing is quite common, and I sometimes think of it as an <b>abstract parameter</b>.  What I mean by "abstract," is something that is not literally part of the program text, but which describes the function of the program at a higher level.</p>
+
+<p>For example, when you call a function and pass a vector and the bounds <span class=code>low</span> and <span class=code>high</span>, there is nothing that prevents the called function from accessing parts of the vector that are out of bounds.  So you are not literally sending a subset of the deck; you are really sending the whole deck.  But as long as the recipient plays by the rules, it makes sense to think of it, abstractly, as a subdeck.</p>
+
+<p>There is one other example of this kind of abstraction that you might have noticed in <a href="chap09.htm#3">Section 9.3</a>, when I referred to an "empty" data structure.  The reason I put "empty" in quotation marks was to suggest that it is not literally accurate.  All variables have values all the time.  When you create them, they are given default values.  So there is no such thing as an empty object.</p>
+
+<p>But if the program guarantees that the current value of a variable is never read before it is written, then the current value is irrelevant. Abstractly, it makes sense to think of such a variable as "empty."</p>
+
+<p>This kind of thinking, in which a program comes to take on meaning beyond what is literally encoded, is a very important part of thinking like a computer scientist.  Sometimes, the word "abstract" gets used so often and in so many contexts that it is hard to interpret. Nevertheless, abstraction is a central idea in computer science (as well as many other fields).</p>
+
+
+
+<p>A more general definition of "abstraction" is "The process of modeling a complex system with a simplified description in order to suppress unnecessary details while capturing relevant behavior."</p>
+
+<a name=11></a><br>
+<h3>12.11 Glossary</h3>
+
+<dl>
+
+<dt>encode</dt>
+<dd>To represent one set of values using another set of values, by constructing a mapping between them.</dd>
+
+<dt>abstract parameter</dt>
+<dd>A set of parameters that act together as a single parameter.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap13.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap11.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

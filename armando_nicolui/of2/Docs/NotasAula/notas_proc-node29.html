@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>29 Arrays de ponteiros</TITLE>
+<META NAME="description" CONTENT="29 Arrays de ponteiros">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node30.html">
+<LINK REL="previous" HREF="notas_proc-node28.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node30.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html616"
+  HREF="notas_proc-node30.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html614"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html608"
+  HREF="notas_proc-node28.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html617"
+  HREF="notas_proc-node30.html">30 Argumentos de linha</A>
+<B>Up:</B> <A NAME="tex2html615"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html609"
+  HREF="notas_proc-node28.html">28 Strings e Ponteiros</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000290000000000000000">
+29 <I>Arrays</I> de ponteiros</A>
+</H1>
+
+<P>
+Da mesma forma  que se pode ter <I>arrays</I>  de tipos b&#225;sicos (e.g.
+<TT>int</TT>,  <TT>char</TT>)  e  de  estruturas,  pode-se  tamb&#233;m  definir
+<I>arrays</I> de ponteiros:
+
+<P>
+<PRE>
+          char *frases[60];
+
+          frases[0] = "Um string de caracteres";
+          frases[3] = "Um outro string de caracteres";
+          frases[10] = "Mais uma frase muito mais comprida que as outras acima";
+          frases[20] = "Agora uma frasesita pequena";
+          frases[30] = "Chega de frases";             
+
+          puts(frases[3]);
+</PRE>
+
+<P>
+No  exemplo acima  cada elemento  do  <I>array</I> <TT>frase</TT> &#233;  um
+ponteiro para <TT>char</TT>. Em cada uma das atribui&#231;&#245;es, cada elemento do
+<I>array</I> recebe  como valor  um ponteiro para  um <I>string</I>
+(veja se&#231;&#227;o anterior sobre constantes <I>string</I>).
+
+<P>
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

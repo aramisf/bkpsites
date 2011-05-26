@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>23 Ativação de função</TITLE>
+<META NAME="description" CONTENT="23 Ativação de função">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node24.html">
+<LINK REL="previous" HREF="notas_proc-node22.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node24.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html533"
+  HREF="notas_proc-node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html531"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html525"
+  HREF="notas_proc-node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html534"
+  HREF="notas_proc-node24.html">24 Mais sobre funções:</A>
+<B>Up:</B> <A NAME="tex2html532"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html526"
+  HREF="notas_proc-node22.html">22 Mais sobre funções</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000230000000000000000">
+23 Ativa&#231;&#227;o de fun&#231;&#227;o</A>
+</H1>
+Uma fun&#231;&#227;o come&#231;a sua execu&#231;&#227;o assim que for chamada.  Cada execu&#231;&#227;o da
+fun&#231;&#227;o &#233; chamada  de ativa&#231;&#227;o da fun&#231;&#227;o.  Como  j&#225; mencionamos em notas
+de aula anteriores,  vari&#225;veis locais s&#227;o locais a  ativa&#231;&#227;o da fun&#231;&#227;o:
+cada  ativa&#231;&#227;o possui  suas pr&#243;prias  vari&#225;veis locais.   No  come&#231;o da
+ativa&#231;&#227;o,  mem&#243;ria &#233; alocada  para as  vari&#225;veis locais  e no  final da
+execu&#231;&#227;o, elas s&#227;o dealocadas.
+
+<P>
+Defini&#231;&#245;es de  fun&#231;&#245;es em C n&#227;o  podem ser aninhadas,  mas ativa&#231;&#245;es de
+fun&#231;&#227;o  podem: uma  fun&#231;&#227;o, digamos  A, pode  chamar uma  outra fun&#231;&#227;o,
+digamos  B  (dizemos  que  A  chama  B).  Nos  referimos  a  A  como  o
+``chamador'' e B como a fun&#231;&#227;o ``chamada''.
+
+<P>
+O que  acontece quando uma fun&#231;&#227;o  chama outra (quando A  chama B)?  Um
+registro  especial, chamado  <EM>registro  de ativa&#231;&#227;o</EM>  &#233;  criado.  A
+informa&#231;&#227;o  neste  registro &#233;  necess&#225;ria  para  a  ativa&#231;&#227;o da  fun&#231;&#227;o
+chamada e para a reativa&#231;&#227;o do chamador depois que a execu&#231;&#227;o da fun&#231;&#227;o
+chamada termina.
+
+<P>
+
+<OL>
+<LI>C usa chamada-por-valor, ou seja, o chamador avalia as express&#245;es
+  que  s&#227;o os  par&#226;metros  reais e  passa  seus valores  para a  fun&#231;&#227;o
+  chamada.
+</LI>
+<LI>A informa&#231;&#227;o  necess&#225;ria  para reiniciar  a  execu&#231;&#227;o da  fun&#231;&#227;o
+  chamadora  &#233; guardada  em um  registro de  ativa&#231;&#227;o.   Tal informa&#231;&#227;o
+  inclui o endere&#231;o da instru&#231;&#227;o  do chamador que ser&#225; executada depois
+  que a fun&#231;&#227;o chamada termine.
+</LI>
+<LI>A fun&#231;&#227;o  chamada aloca  espa&#231;o na  mem&#243;ria para  suas vari&#225;veis
+  locais.
+</LI>
+<LI>O corpo da fun&#231;&#227;o chamada &#233; executado.
+</LI>
+<LI>O valor retornado  para a  fun&#231;&#227;o chamadora  atrav&#233;s de  um <TT>    return</TT> &#233; colocado em um lugar especial para que a fun&#231;&#227;o chamadora
+    possa encontr&#225;-lo.  O controle retorna a fun&#231;&#227;o chamadora.
+</LI>
+</OL>
+
+<P>
+O fluxo  de controle  atrav&#233;s de  ativa&#231;&#227;o de fun&#231;&#245;es  &#233; da  forma <EM>&#250;ltimo-que-entra-primeiro-que-sai</EM>.   Se A  chama B  e B  chama C:  A &#233;
+ativado primeiro, ent&#227;o  B &#233; ativado (um registro  de ativa&#231;&#227;o para ``A
+chama B'' &#233; criado e armazenado, A &#233; temporariamente suspenso), ent&#227;o C
+&#233;  ativado  (um registro  de  ativa&#231;&#227;o  de ``B  chama  C''  &#233; criado  e
+armazenado, A e B s&#227;o suspensos);  C &#233; o &#250;ltimo a iniciar execu&#231;&#227;o, mas
+o primeiro a  terminar (&#250;ltimo-a-entrar-primeiro-a-sair).  Depois que C
+termina,  B &#233;  reativado.  O  registro de  ativa&#231;&#227;o ``B  chama  C'' foi
+criado por  &#250;ltimo, mas o  primeiro a ser  destru&#237;do (no momento  que o
+controle &#233; retornada para B).  Depois  que B termina, A &#233; reativado.  O
+registro  de ativa&#231;&#227;o  correspondente a  ``A chama  B'' &#233;  destru&#237;do no
+momento em que o controle retorna para A.
+
+<P>
+<HR>
+<A NAME="tex2html533"
+  HREF="notas_proc-node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html531"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html525"
+  HREF="notas_proc-node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html534"
+  HREF="notas_proc-node24.html">24 Mais sobre funções:</A>
+<B>Up:</B> <A NAME="tex2html532"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html526"
+  HREF="notas_proc-node22.html">22 Mais sobre funções</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

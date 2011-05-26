@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 01
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 01
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 01
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00001000000000000000">
+Entrada de Usu&#225;rio no Sistema e Senhas</A>
+</H2>
+
+<P>
+
+<OL>
+<LI><A NAME="item:1"></A>Na tela inicial,  clique duplamente em um dos nomes
+  de  m&#225;quina que  se apresentam  (<I>dupond</I>,  <I>dupont</I> ou
+  <I>tournesol</I>).   Em  seguida   ser&#225;  apresentada  a  janela  de
+  <I>login</I>.
+
+<P>
+</LI>
+<LI><A NAME="item:2"></A>Tecle seu  nome de  usu&#225;rio  (<I>username</I> ou
+  <I>login</I>) e sua senha.
+
+<P>
+</LI>
+<LI><A NAME="item:3"></A>Em seguida  aparecer&#225; em  seu monitor  um ambiente
+  gr&#225;fico  de janelas  com  alguns &#237;cones  &#224;  direita e  &#224; esquerda  da
+  tela. No conjunto de &#237;cones no canto direito superior da tela, clique
+  duplamente  no  &#237;cone de  um  terminal  de  computador (geralmente  o
+  2&ordm;&nbsp;&#237;cone de cima para baixo).
+
+<P>
+O surgimento  de uma janela de <I>shell</I>,  a exibi&#231;&#227;o de
+  uma   eventual   mensagem,  e   o   <I>prompt</I>   na  janela   de
+  <I>shell</I>, indicam o sucesso da opera&#231;&#227;o.
+
+<P>
+OBS.   1:  Outra  forma  de  criar uma  janela  de  <I>shell</I>  &#233;
+            posicionar  o cursor  de mouse  em uma  regi&#227;o da  tela sem
+            &#237;cones ou  janelas (conhecida como <B>root  da &#225;rea de
+            trabalho</B>) e clique o bot&#227;o  direito do mouse.  No menu que
+            se   apresenta,   clique   a   op&#231;&#227;o   <B>Xterminals</B>.
+            Aparecer&#225;  uma lista  de op&#231;&#245;es  de tipos  de  terminais de
+            shell que  se pode escolher.  Escolha um deles com  o mouse
+            (posicione o cursor sobre uma das op&#231;&#245;es e clique).
+
+<P>
+OBS. 2: <I>prompt</I> &#233; um conjunto de caracteres (<I>string</I>)
+          que indica que o sistema est&#225; pronto para aceitar comandos do
+          usu&#225;rio.  Nos computadores  do DInf, este <I>prompt</I> tem
+          o seguinte formato:
+
+<P>
+<DIV ALIGN="CENTER">
+<B>[user@m&#225;quina:/diret&#243;rio_corrente]</B></DIV>
+
+<P>
+</LI>
+<LI>Para mudar  a  sua senha  utilize  o comando
+  <B>passwd</B>. 
+  ATEN&#199;&#195;O: voc&#234; n&#227;o conseguir&#225; mudar a senha se n&#227;o lembrar
+  a senha antiga. Tenha tamb&#233;m  cuidado ao digitar a nova senha. Digite
+  devagar  e   com  firmeza  para   ter  certeza  do  que   est&#225;  sendo
+  digitado. Lembre-se tamb&#233;m de pedir a pessoas pr&#243;ximas que se afastem
+  para garantir que ningu&#233;m possa ver o que voc&#234; est&#225; digitando.
+
+<P>
+</LI>
+<LI>Execute o o comando <B>passwd</B> para mudar a sua senha
+  para uma   de   sua   prefer&#234;ncia.    Observe  as   recomenda&#231;&#245;es
+  da <A NAME="tex2html1"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/teoria_01#SECTION00041000000000000000">Se&#231;&#227;o
+  4.1</A>
+(<B>Acesso  ao  Sistema</B>),  das <A NAME="tex2html2"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/teoria_01">Notas  de
+  Aula #  01</A>.  Procure mudar  para uma senha
+
+que seja muito pessoal e f&#225;cil de voc&#234; memorizar.
+
+<P>
+Observe  que  o  comando  <B>passwd</B> n&#227;o  permite  como
+  senha palavras menores que 6 caracteres.
+
+<P>
+</LI>
+<LI><A NAME="item:4"></A>          Execute         o         comando
+  <B><FONT SIZE=3>~</FONT>ci066/bin/configuser</B>,  respondendo  &#224;s perguntas  que
+  forem aparecendo  na tela. Estas perguntas se  referem &#224; configura&#231;&#227;o
+  de sua conta de e-mail no DInf.
+
+<P>
+</LI>
+<LI>Termine  suas atividades no sistema, efetuando  o procedimento de
+  <I>logout</I>.   Para isto,  posicione  o cursor  de  mouse em  uma
+  regi&#227;o  da tela sem  &#237;cones ou  janelas (conhecida  como <B>raiz
+  (<I>root</I>) da  &#225;rea de  trabalho</B>) e clique  o bot&#227;o  direito do
+  mouse.
+
+<P>
+No menu  que se apresenta,  clique na &#250;ltima op&#231;&#227;o  <B>Exit</B>. Na
+  janela que se apresentar em seguida confirme a sa&#237;da.
+
+<P>
+</LI>
+<LI>Efetue <I>login</I> novamente, conforme os &#237;tens <A HREF="#item:1">1</A> a
+<A HREF="#item:3">3</A>.
+
+<P>
+</LI>
+<LI>Execute o  comando  <B>firefox</B>.  Este  &#233;  o navegador
+  WEB recomendado  para uso  no DInf.   Observe  na parte  inferior de
+  seu monitor o  &#237;cone associado ao navegador  (aquele QUE N&#195;O  TEM UMA
+  UMA PEQUENA BARRA  DE T&#205;TULO).   Com o mouse,  arraste este &#237;cone
+  para o conjunto de &#237;cones no lado superior direito da tela.
+
+<P>
+A partir  de agora,  nas pr&#243;ximas vezes  que voc&#234; entrar  no sistema,
+  basta clicar duplamente neste novo &#237;cone para ativar o navegador.
+
+<P>
+</LI>
+<LI>Acesse                   a                  URL
+  <A NAME="tex2html3"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/"><FONT FACE="Helvetica, Arial, sans-serif">http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/</FONT></A>
+e     a
+  acrescente   na  lista   de  <B>Favoritos</B>   do   navegador  WEB
+  (<B>Bookmarks</B> no <B>firefox</B>).
+
+<P>
+</LI>
+<LI>Acesse                   a                  URL
+  <A NAME="tex2html4"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/pratica_01/"><FONT FACE="Helvetica, Arial, sans-serif">http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/pratica_01/</FONT></A>.
+
+e prossiga  com a leitura  do guia de  Laborat&#243;rio a partir  da se&#231;&#227;o
+  <B>Desktop da Disciplina</B>.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00002000000000000000">
+<I>Desktop</I> da Disciplina</A>
+</H2>
+
+<P>
+
+<OL>
+<LI><A NAME="item:desklab"></A>        Execute       o        comando
+  <B><FONT SIZE=3>~</FONT>ci066/bin/desklab1</B>.  Dever&#225;  aparecer uma nova janela
+  com o  ambiente de trabalho  do professor.  Esta janela  ser&#225; chamada
+  daqui   para  frente   de  <B><I>desktop</I>   de   ci066</B>  ou
+  simplesmente <B><I>desktop</I></B>. Ela  &#233; usada para o professor
+  mostrar aos alunos os conceitos e exemplos aos alunos da disciplina.
+
+<P>
+</LI>
+<LI>Observe  na parte  inferior de seu  monitor o &#237;cone  associado ao
+  <I>desktop</I>  (aquele  QUE  N&#195;O  TEM  UMA UMA  PEQUENA  BARRA  DE
+  T&#205;TULO).  Com o  mouse, arraste este &#237;cone para  o conjunto de &#237;cones
+  no lado superior direito da tela.
+
+<P>
+A partir  de agora,  nas pr&#243;ximas vezes  que voc&#234; entrar  no sistema,
+  basta clicar duplamente neste novo &#237;cone para ativar o desktop de
+  ci066.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00003000000000000000">
+Correio Eletr&#244;nico no DInf</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Todas  as mensagens eletr&#244;nicas  endere&#231;adas para <I>&nbsp;&lt;&nbsp;
+  seu_<I>login</I>&nbsp;&gt;&nbsp;@inf.ufpr.br</I> ou  <I>&nbsp;&lt;&nbsp;
+  seu_<I>login</I>&nbsp;&gt;&nbsp;@c3sl.ufpr.br</I>    s&#227;o    guardadas    e/ou
+  encaminhadas  pelo sistema para  os arquivos  e e-mails  indicados no
+  arquivo  <B>$HOME/.forward</B> que existe  em sua  &#225;rea.  Este  arquivo
+  foi criado quando voc&#234; executou  os passos indicados no item
+  <A HREF="#item:4">6</A> da  se&#231;&#227;o <B>Entrada de  Usu&#225;rio e  Senhas</B> acima.
+
+<P>
+Caso queira  refazer suas configura&#231;&#245;es de e-mail,  execute o comando
+  <B><FONT SIZE=3>~</FONT>ci066/bin/configmail</B> .
+
+<P>
+</LI>
+<LI>Atrav&#233;s     do     <B>firefox</B>,     acesse     a
+  URL <TT><A NAME="tex2html5"
+  HREF="http://www.inf.ufpr.br/mail">http://www.inf.ufpr.br/mail</A></TT>;
+
+<P>
+<B>SUGEST&#195;O:</B> Na  janela do navegador,  digite <I>Ctrl-t</I> e
+             em seguida digite a URL acima no campo de especifica&#231;&#227;o de
+             URL. Voc&#234; tamb&#233;m pode  clicar no <I>link</I> acima com o
+             bot&#227;o    direito   do   mouse    e   escolher    a   op&#231;&#227;o
+             O<SMALL>PEN&nbsp;</SMALL>L<SMALL>INK&nbsp;IN&nbsp;</SMALL>N<SMALL>EW&nbsp;</SMALL>T<SMALL>AB</SMALL>.  Voc&#234;  ter&#225; na mesma janela
+             de navegador duas ``pastas'', uma  com a p&#225;gina do guia de
+             laborat&#243;rio e outra com a p&#225;gina do Webmail.
+
+<P>
+</LI>
+<LI>Indique <B><FONT FACE="Helvetica, Arial, sans-serif">C3SL</FONT></B> como servidor de mensagens. Em
+  seguida, entre  com seu  login e  senha nos campos  adequados e
+  clique no bot&#227;o <I>log in</I> (ou <I>Entrar</I>, ou
+  <I>Conectar</I>);
+
+<P>
+</LI>
+<LI>Para  ler seu  e-mail  pelo webmail  do  DInf,  escolha a  pasta
+  <B>INBOX</B>  na lista de  pastas na  parte superior  direita da
+  p&#225;gina pessoal do Webmail.
+
+<P>
+Observe as opera&#231;&#245;es  poss&#237;veis de se fazer com  suas mensagens. Para
+  ler  a   mensagem,  clique  no   link  referente  &#224;   coluna  Assunto
+  (<I>Subject</I>) ou De (<I>From</I>) da mensagen.
+
+<P>
+A Caixa de Entrada (<B>INBOX</B>)  do Webmail est&#225;, no momento, sem
+  efeito,  e portanto  dever&#225;  estar sempre  vazia.   Caso n&#227;o  esteja,
+  comunique    &#224;    <A NAME="tex2html6"
+  HREF="mailto:treco@inf.ufpr.br">Equipe    de   Suporte    do
+  Laborat&#243;rio</A>
+&#224;    <A NAME="tex2html7"
+  HREF="mailto:root@c3sl.ufpr.br">Equipe    de   Suporte    do C3SL</A>.
+
+<P>
+</LI>
+<LI>Envie  uma mensagem ao  colega <I>logado</I> na esta&#231;&#227;o  ao seu
+  lado. Verifique a pasta <B>sent-mail</B>  (use a lista de pastas na
+  parte superior esquerda da p&#225;gina pessoal do Webmail).
+
+<P>
+</LI>
+<LI>Pe&#231;a que  ao colega <I>logado</I> na esta&#231;&#227;o  ao seu lado envie
+  uma mensagem para voc&#234;. Verifique a pasta <B>Mailbox</B> e responda
+  &#224;s  mensagens  recebeidas.  Pe&#231;a  ao  colega que  teve  uma  mensagem
+  recebida de voc&#234; confirme tal recep&#231;&#227;o.
+
+<P>
+</LI>
+<LI>Caso voc&#234;  n&#227;o tenha recebido mensagens de  algum colega e/ou n&#227;o
+  tenha conseguido enviar mensagens, chame o professor para verificar o
+  que aconteceu.
+
+<P>
+</LI>
+<LI>Se voc&#234;  n&#227;o pretende  masi  ler e/ou  enviar mensagens,  SEMPRE
+  efetue  desconex&#227;o do  Webmail (link  no  final do  menu &#224;  esquerda:
+  <I>Logout</I>, <I>Sair</I> ou <I>Desconectar</I>).
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00004000000000000000">
+Comandos b&#225;sicos Unix</A>
+</H2>
+
+<P>
+Quando voc&#234;  efetua <I>login</I>, o UNIX/Linux  assume um determinado
+diret&#243;rio como sendo o diret&#243;rio de trabalho inicial.
+
+<P>
+Este diret&#243;rio inicial &#233; conhecido dentro do jarg&#227;o UNIX como diret&#243;rio
+de    <I>login</I>,   diret&#243;rio   <I>home</I>,    ou   simplesmente
+<I>home</I>.
+
+<P>
+ATEN&#199;&#195;O:  Daqui para frente, nos textos produzidos para esta
+disciplina, este diret&#243;rio ser&#225; referenciado como <B><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$&lt;$">home<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="pratica-img2.png"
+ ALT="$&gt;$"></B>,
+<B>$HOME</B> ou <B><FONT SIZE=3>~</FONT></B>.
+
+<P>
+
+<OL>
+<LI><B>Verificando o  diret&#243;rio de  <I>login</I>.</B>  Execute o
+  comando   <B>pwd</B>.   Ele   mostra   ao   usu&#225;rio   o   diret&#243;rio
+  corrente. Imediatamente ap&#243;s o  <I>login</I>, ele mostra qual &#233; seu
+  diret&#243;rio de login.  Procure memorizar  o nome deste diret&#243;rio. Ele &#233;
+  muito importante.
+
+<P>
+</LI>
+<LI><B>Monitorando  sua  quota.</B>   Todo  usu&#225;rio   possui  uma
+  <B>quota</B>, isto  &#233;, um espa&#231;o  m&#225;ximo em disco que  este usu&#225;rio
+  pode ocupar com  seus arquivos. O comando para  verificar este espa&#231;o
+  utilizado e seus limites &#233; <B>quota</B>.
+
+<P>
+Execute este comando com a op&#231;&#227;o <B>-s</B> e verifique o
+  resultado que aparece na tela.
+
+<P>
+<B>NOTA:</B> No resultado apresentado pelo comando <B>quota</B>,
+               a  coluna <B>blocks</B>  indica o  total de  espa&#231;o em
+               disco   ocupado   pelos   seus   arquivos.    A   coluna
+               <B>quota</B>  indica  o  limite permitido.   A  coluna
+               <B>limit</B>  indica  o limite  de  toler&#226;ncia em  sua
+               quota.   Enquanto  o  valor  da  coluna  <B>blocks</B>
+               estiver  entre os valores  das colunas  <B>quota</B> e
+               <B>limit</B>,  a   coluna  <B>grace</B>  mostra  uma
+               mensagem com o prazo que voc&#234; tem para limpar sua &#225;rea e
+               baixar o  espa&#231;o ocupado por seu arquivos  abaixo de sua
+               quota. Durante este per&#237;odo de <B>grace</B>, o sistema
+               ainda deixa voc&#234; criar arquivos.
+
+<P>
+Esgotado o prazo, o  sistema dar&#225;  sempre a  mensagem de
+               <B>disk  full</B>   ou  <B>Disk  quota  exceeded</B>
+               sempre   que   voc&#234;  tentar   criar   um  arquivo   (via
+               <B>cp</B>, <B>emacs</B> ou qualquer outra forma de
+               cria&#231;&#227;o de arquivos).
+
+<P>
+</LI>
+<LI><B>Verificando  usu&#225;rios no  sistema.</B>   Execute o  comando
+  <B>who</B> para saber quem est&#225; compartilhando a esta&#231;&#227;o com voc&#234;.
+
+<P>
+</LI>
+<LI>Use o  comando <B>whoami</B>  para identificar  o  seu pr&#243;rpio
+  <I>username</I>.
+
+<P>
+</LI>
+<LI><B>Exibindo  o  conte&#250;do   de  um  diret&#243;rio.</B>  Execute  as
+  variantes  do  comando  <B>ls</B>  abaixo. Este  comando  mostra  o
+  conte&#250;do de um diret&#243;rio.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls -a</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls -l</B></FONT>
+<BR>
+  
+
+<P>
+Voc&#234; consegue perceber a diferen&#231;a entre os resultados da execu&#231;&#227;o de
+  cada linha de comando acima?
+
+<P>
+NESTE PONTO CHAME O PROFESSOR PARA ESCLARECIMENTOS SOBRE O COMANDO
+  <B>ls</B>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00005000000000000000">
+Editor EMACS</A>
+</H2>
+
+<P>
+Tenha  sempre  &#224;  m&#227;o  o   conjunto  de  opera&#231;&#245;es  b&#225;sicas  do  Emacs,
+dispon&#237;veis               na               <A NAME="tex2html8"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/teoria_01#SECTION00043000000000000000">Se&#231;&#227;o
+4.3</A>
+(<B>Editor de Texto - Emacs</B>), das <A NAME="tex2html9"
+  HREF="http://www.inf.ufpr.br/nicolui/UFPR/Graduacao/CI066/1-2006/teoria_01">Notas de
+Aula # 01</A>.
+
+<P>
+
+<OL>
+<LI><A NAME="item:emacs-1"></A>  Execute o  comandos <B>ls</B> de  forma a
+  exibir  na   tela  a   lista  dos  arquivos   em  seu   diret&#243;rio  de
+  <I>login</I>, mostrando tamanho e data de cria&#231;&#227;o dos arquivos.
+
+<P>
+</LI>
+<LI>Execute o comando <B>emacs</B>.
+
+<P>
+Observe  na  parte inferior  de  seu  monitor  o &#237;cone  associado  ao
+  <B>emacs</B>  (aquele  QUE  N&#195;O   TEM  UMA  UMA  PEQUENA  BARRA  DE
+  T&#205;TULO). Com o mouse, arraste este &#237;cone para o conjunto de &#237;cones no
+  lado superior direito da tela.
+
+<P>
+A partir  de agora,  nas pr&#243;ximas vezes  que voc&#234; entrar  no sistema,
+  basta clicar duplamente neste &#237;cone para ativar o editor Emacs.
+
+<P>
+</LI>
+<LI>Ap&#243;s o  surgimento da janela do editor,  digite um texto qualquer
+  que tenha  pelo menos 3 par&#225;grafos,  cada par&#225;grafo com  pelo menos 3
+  linhas.
+
+<P>
+</LI>
+<LI>Salve    o    texto     editado    no    arquivo    de    nome
+  <B><FONT FACE="Helvetica, Arial, sans-serif">Primeira-Aula.txt</FONT></B>, sem  terminar a  execu&#231;&#227;o do editor.  Use o
+  menu  existente  na  parte   superior  da  janela  do  editor  (Op&#231;&#227;o
+  F<SMALL>ILE&nbsp;</SMALL>&nbsp;</SMALL>S<SMALL>AVE&nbsp;</SMALL>B<SMALL>UFFER&nbsp;</SMALL>A<SMALL>S</SMALL>)
+
+<P>
+</LI>
+<LI>Repita o item <A HREF="#item:emacs-1">1</A>  e observe a presen&#231;a do arquivo
+  editado e o seu tamanho.
+
+<P>
+</LI>
+<LI><B>Treinamento  com Editor EMACS</B> Esta  parte oferece alguns
+  pequenos exerc&#237;cios para que voc&#234; exercite os comandos e opera&#231;&#245;es do
+  Emacs.
+
+<P>
+Copie  para   sua  &#225;rea  (diret&#243;rio  de   <I>login</I>)  o  arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif">/home/especial/ci066/Arquivos/da_varanda.txt</FONT></B>,  que  cont&#233;m um
+  singelo poema:
+<PRE>
+             cd
+             cp /home/especial/ci066/Arquivos/da_varanda.txt .
+</PRE>
+
+<P>
+</LI>
+<LI>Edite o  arquivo com  o  <B>emacs</B> e  execute as  opera&#231;&#245;es
+  indicadas abaixo.  Para cada  opera&#231;&#227;o, anote a sequ&#234;ncia de comandos
+  emacs usada.
+
+<P>
+<B>ATEN&#199;&#195;O:</B> SEMPRE observe as  mensagens da regi&#227;o de mensagens
+  na janela do EMACS.
+
+<P>
+Nas  opera&#231;&#245;es que  envolvem posisionar  o cursor  de texto  em algum
+  lugar, n&#227;o vale usar as setas de dire&#231;&#227;o ou o mouse para posisionar o
+  cursor;
+
+<P>
+
+<OL>
+<LI>Substitua em todo o arquivo a seq&#252;&#234;ncia <I>,c<IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img4.png"
+ ALT="$\sim$">ao</I> por
+    <I>cao</I>;
+</LI>
+<LI>Substitua em todo o arquivo a seq&#252;&#234;ncia <I><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img4.png"
+ ALT="$\sim$">ao</I> por
+    <I>ao</I>;
+</LI>
+<LI>Posicione o cursor de texto na linha 19 e transforme todas as
+    letras da palavra <I>esguio</I> em mai&#250;sculas;
+</LI>
+<LI>V&#225; para o in&#237;cio do arquivo (primeira letra da primeira linha);
+</LI>
+<LI>V&#225; para o final da segunda estrofe;
+</LI>
+<LI>No   verso   com   a   palavra   <I>olhos</I>,   acrescente
+    <I>cabisbundo e sorumbatico,</I> ao final da linha;
+</LI>
+<LI>Quantas vezes ocorre a palavra <I>pinheiro</I>?
+</LI>
+<LI>USANDO o mouse, marque toda a terceira estrofe e TRANSFIRA-A
+    para a posi&#231;&#227;o AP&#211;S a sexta estrofe;
+</LI>
+<LI>Abra  um novo  arquivo chamado <B><FONT FACE="Helvetica, Arial, sans-serif">mais_varandas.txt</FONT></B>  em um
+    novo <I>buffer</I> do emacs,  mantendo o <I>buffer</I> do texto
+    <B><FONT FACE="Helvetica, Arial, sans-serif">da_varanda.txt</FONT></B>       vis&#237;vel.       <B>DICA:</B>      Use
+    <I>Ctrl-x&nbsp;4&nbsp;f</I>;
+</LI>
+<LI>Copie uma  das estrofes  do poema  <B><FONT FACE="Helvetica, Arial, sans-serif">da_varanda.txt</FONT></B> para
+    <B><FONT FACE="Helvetica, Arial, sans-serif">mais_varandas.txt</FONT></B>;
+</LI>
+<LI>Termine   o  emacs,   salvando   APENAS   as  altera&#231;&#245;es   em
+    <B><FONT FACE="Helvetica, Arial, sans-serif">mais_varandas.txt</FONT></B>.  N&#195;O  SALVE   as  altera&#231;&#245;es  feitas  no
+    arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">da_varanda.txt</FONT></B>.
+  
+</LI>
+</OL>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00006000000000000000">
+Impress&#227;o de arquivos</A>
+</H2>
+
+<P>
+Em  UNIX,  o comando  para  enviar  o conte&#250;do  de  um  arquivo para  a
+impressora &#233;  <B>lpr</B>. Nos Laborat&#243;rios do  DInf, esta impressora
+se chama <B>salsicha</B> e se localiza no Laborat&#243;rio I.
+
+<P>
+Usa-se <B>lpr</B>  apenas para  arquivos texto/ASCII (do  tipo gerado
+pelo  editor  <B>emacs</B>).  Para  imprimir p&#225;ginas  html,  arquivos
+Word/OpenOffice  e  outros  tipo  de  arquivos  gerados  por  programas
+espec&#237;ficos,  estes programas  &#233; que  devem ser  usados para  efetuar a
+impress&#227;o.
+
+<P>
+<B>OBS.:</B> Em algumas  distribui&#231;&#245;es de UNIX/Linux, o comando  para 
+               impress&#227;o &#233; <B>lp</B>.
+
+<P>
+
+<H2><A NAME="SECTION00007000000000000000">
+Sa&#237;da do Sistema</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Se voc&#234;  tem um  navegador (firefox,  galeon, etc)  em
+  execu&#231;&#227;o, termine-o (clique  no <B>x</B> no canto superior  direito
+  da janela do  navegador  ou ativando  a  fun&#231;&#227;o  de  <I>Quit</I> no
+  menu  do programa);
+</LI>
+<LI>Para sair  da esta&#231;&#227;o, posicione o
+  cursor de mouse em  uma regi&#227;o  da tela sem  &#237;cones ou janelas
+  (conhecida como <B>root da &#225;rea de trabalho</B>) e clique o bot&#227;o
+  direito do mouse.
+
+<P>
+No menu  que se  apresenta, clique a  &#250;ltima op&#231;&#227;o  <B>Exit</B>. Na
+  janela que se apresentar em seguida confirme a sa&#237;da.
+</LI>
+</OL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-08-15
+</ADDRESS>
+</BODY>
+</HTML>

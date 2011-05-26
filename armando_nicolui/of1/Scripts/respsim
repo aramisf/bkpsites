@@ -1,0 +1,8 @@
+#!/bin/bash
+
+VALIDYES="sim Sim SIM s S yes Yes YES y Y"
+
+read -p "$1 [s/n]: " </dev/tty
+
+echo ${VALIDYES} | grep --quiet "\<${REPLY}\>"
+

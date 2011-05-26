@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 03
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 03
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 03
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00001000000000000000">
+Manipula&#231;&#227;o de Arquivos. Permiss&#245;es de Acesso, Busca e
+  Quotas.</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Copie  para  seu   diret&#243;rio  de  <I>login</I>  os  diret&#243;rios
+  <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum3</FONT></B> e  <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum4</FONT></B> (incluindo as  respectivas sub&#225;rvores)
+  que est&#227;o no diret&#243;rio de <I>login</I> do usu&#225;rio <I>ci066</I>.
+
+<P>
+</LI>
+<LI><B>Op&#231;&#245;es de  <B><I>ls(1)</I></B></B>. Use  <B><I>ls(1)</I></B> com  a op&#231;&#227;o
+  <B>-l</B>  para listar  os  arquivos de  seu diret&#243;rio  de
+  <I>login</I>.   Observe as  permiss&#245;es de  acesso dos  diret&#243;rios e
+  arquivos, bem como a ordem com que os arquivos s&#227;o mostrados.
+
+<P>
+</LI>
+<LI>Use agora  <B><I>ls(1)</I></B>  com a  op&#231;&#227;o <B>-a</B>  para
+  listar os  arquivos de seu  diret&#243;rio de <I>login</I>.   Observe os
+  arquivos   que    s&#227;o   exibidos.     Use   em   seguida    a   op&#231;&#227;o
+  <B>-la</B> e observe o resultado. Observe especialmente os
+  arquivos <B>.</B> e <B>..</B>. O  que eles representam? O que faz
+  a op&#231;&#227;o <B>-a</B>?
+
+<P>
+</LI>
+<LI>Descreva o que fazem os comandos abaixo:
+<PRE>
+           ls -l .
+           ls -ld .
+           ls -l ..
+           ls -ld ..
+           ls -l *
+           ls -ld *
+</PRE>
+
+<P>
+<B>DICAS:</B> Al&#233;m de simplesmente  executar os comandos e observar
+  os resultados, lembre-se de usar <B><I>man(1)</I></B> para obter informa&#231;&#245;es
+  sobre as op&#231;&#245;es de <B><I>ls(1)</I></B>.
+
+<P>
+</LI>
+<LI><A NAME="item:chmod_1"></A><B>Permiss&#245;es  de  acesso</B>.   Crie  um
+  arquivo qualquer com algum cont&#233;udo dentro do diret&#243;rio   <I><FONT SIZE=3>~</FONT>/LabNum3/tmp/mail</I>.  Como  devem ser as  permiss&#245;es de
+  acesso a  este diret&#243;rio  e ao arquivo  criado de forma  que qualquer
+  usu&#225;rio possa ler  o arquivo, mas nenhum usu&#225;rio  (exceto voc&#234;) possa
+  listar o conte&#250;do  do diret&#243;rio? Defina primeiro como  devem ser os 3
+  conjuntos de permiss&#245;es <B>rwx</B>.
+
+<P>
+Como deve ser usado <B><I>chmod(1)</I></B> para definir estas permiss&#245;es?
+
+<P>
+</LI>
+<LI><A NAME="item:chmod_2"></A>Usando  <B><I>touch(1)</I></B>  e  <B><I>chmod(1)</I></B>,
+  crie 4  (quatro) arquivos no  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3/lib</FONT></B> com
+  permiss&#227;o completa  para usu&#225;rio e  permiss&#227;o apenas de  leitura para
+  grupo e outros.
+
+<P>
+</LI>
+<!--
+<LI>A partir do  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3</FONT></B>, mude a permiss&#227;o de
+  todos  os  arquivos  cujo  nome  termina  com  <B>-8</B>  para  ter
+  permiss&#227;o de leitura para todos usu&#225;rios, EXCETO o propriet&#225;rio. Fa&#231;a
+  isto com APENAS EM UMA &#218;NICA EXECU&#199;&#195;O de <B><I>chmod(1)</I></B>.
+
+<P>
+</LI>
+-->
+<LI><A NAME="item:chmod_3"></A>Para  todos   os  arquivos   a   partir  de
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3/pub</FONT></B>, os arquivos devem ter permiss&#227;o de leitura
+  para todos os usu&#225;rios e NENHUMA permiss&#227;o de escrita e execu&#231;&#227;o para
+  grupo e outros.
+
+<P>
+Os diret&#243;rios devem ter permiss&#227;o de navega&#231;&#227;o para todos e leitura e
+  escrita APENAS para o propriet&#225;rio dos diret&#243;rios.
+
+<P>
+</LI>
+<LI>Crie um arquivo qualquer  em seu diret&#243;rio de <I>login</I> e em
+  seguida, usando  <B><I>ls(1)</I></B>, verifique  as permiss&#245;es de  acesso do
+  arquivo  que voc&#234;  criou. Anote  estas permiss&#245;es  em algum  lugar de
+  f&#225;cil acesso.
+
+<P>
+</LI>
+<LI>Usando <B><I>chmod(1)</I></B>  e a nota&#231;&#227;o textual, mude  a permiss&#227;o do
+  arquivo criado anteriormente de forma  a se ter ao final as seguintes
+  permiss&#245;es: <B>r-x-wx-x</B>.  Em  seguida, usando a nota&#231;&#227;o octal,
+  mude as permiss&#245;es para <B>rw-rw-wx</B>.
+
+<P>
+<B>DICA:</B>   SEMPRE  use  <B><I>ls(1)</I></B>   ap&#243;s  uma   execu&#231;&#227;o  de
+  <B><I>chmod(1)</I></B>  para  verificar   se  as  permiss&#245;es  foram  mudadas
+  conforme desejado.
+
+<P>
+</LI>
+<LI>Repita  os   &#237;tens  <A HREF="#item:chmod_1">5</A>,   <A HREF="#item:chmod_2">6</A>  e
+<A HREF="#item:chmod_3">7</A> usando nota&#231;&#227;o octal.
+
+<P>
+</LI>
+<LI>Deseja-se  definir permiss&#227;o  de escrita para  grupo e  retirar a
+  permiss&#227;o     de     execu&#231;&#227;o      para     outros     no     arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum4/pub/arq_02.txt</FONT></B>   SEM    ALTERAR   as   outras
+  permiss&#245;es que j&#225; est&#227;o definidas para este arquivo.  Como fazer isto
+  usando nota&#231;&#227;o simb&#243;lica? E com nota&#231;&#227;o octal?
+
+<P>
+</LI>
+<LI>Deseja-se  definir permiss&#227;o de  escrita para outros e  retirar a
+  permiss&#227;o      de     leitura      para     grupo      no     arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3/pub/soft/doc/yz/yz-9</FONT></B>  SEM  ALTERAR  as  outras
+  permiss&#245;es que j&#225; est&#227;o definidas para este arquivo.
+
+<P>
+Tamb&#233;m    se   deseja    alterar   as    permiss&#245;es    do   diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3/pub/soft/doc/yz</FONT></B>   de   forma   que  somente   o
+  propriet&#225;rio  do diret&#243;rio  possa  listar seu  conte&#250;do. No  entanto,
+  Outros  usu&#225;rios  podem criar  e  acessar  arquivos neste  diret&#243;rio.
+  Usu&#225;rios do  Grupo n&#227;o  podem listar e  tampouco acessar  arquivos no
+  diret&#243;rio.
+
+<P>
+Como fazer isto usando nota&#231;&#227;o simb&#243;lica? E com nota&#231;&#227;o octal?
+
+<P>
+</LI>
+<LI><B>Permiss&#245;es  <I>default</I>   de  acesso</B>.   Execute  o
+  comandos abaixo, observando com ATEN&#199;&#195;O as permiss&#245;es de acesso:
+<PRE>
+             touch arq_teste
+             cp /bin/ls meu_ls
+             ls -l arq_teste meu_ls
+             umask 733
+             touch arq_teste_2
+             cp /bin/ls meu_ls_2
+             ls -l arq_teste_2 meu_ls_2
+</PRE>
+
+<P>
+Qual foi o efeito da execu&#231;&#227;o de <B><I>umask(1)</I></B>?
+
+<P>
+<B>DICA:</B> As permiss&#245;es em nota&#231;&#227;o octal indicadas como argumentos
+               de  <B><I>umask(1)</I></B>  ``ligaram''  ou  ``desligaram''  as
+               permiss&#245;es finais  dos arquivos criados  ap&#243;s a execu&#231;&#227;o
+               de <B>umask</B>?
+
+<P>
+NESTE PONTO, CHAME O PROFESSOR PARA ESCLARECIMENTOS.
+
+<P>
+</LI>
+<LI>Qual   o   argumento   de   <B><I>umask(1)</I></B>   para   que,   por
+  <I>default</I>, as  permiss&#245;es de escrita e  execu&#231;&#227;o para usu&#225;rios
+  do  grupo e outros  usu&#225;rios estejam  sempre desabilitadas  quando se
+  criar um arquivo?
+
+<P>
+</LI>
+<LI><A NAME="item:findprint"></A><B>Encontrando    arquivos.</B>    Use
+  <B><I>find(1)</I></B> para  encontrar em seu diret&#243;rio  de <I>login</I> (e
+  toda   sua  sub&#225;rvore   de  diret&#243;rios)   qualquer   arquivo  chamado
+  <B><FONT FACE="Helvetica, Arial, sans-serif">core</FONT></B>  e  todos  os  arquivos  terminados com  um  dos  sufixos
+  <B><FONT FACE="Helvetica, Arial, sans-serif">.bak</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">%</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT></FONT></B>.
+
+<P>
+</LI>
+<LI><A NAME="item:findremove"></A>    Usando    a   solu&#231;&#227;o    do    item
+  <A HREF="#item:findprint">15</A>,  como  voc&#234;  faria  para  REMOVER  os  arquivos
+  encontrados?
+
+<P>
+<B>DICA 1</B>:  Primeiro fa&#231;a um  teste SEM EXECUTAR A  OPERA&#199;&#195;O DE
+                 REMOVER,   mas   imprimindo   na  tela   os   arquivos
+                 selecionados. Quando voc&#234; tiver certeza que somente os
+                 arquivos    desejados   est&#227;o    sendo   selecionados,
+                 acrescente  a  op&#231;&#227;o   do  <B><I>find(1)</I></B>  que  efetua
+                 remo&#231;&#227;o de arquivos.
+
+<P>
+<B>DICA   2:</B>   Leia   COM   ATEN&#199;&#195;O  E   PACI&#202;NCIA   o   manual
+                   <I>on-line</I> de <B><I>find(1)</I></B>.
+
+<P>
+</LI>
+<LI>Encontrar  em seu  diret&#243;rio de login  (e toda sua  sub&#225;rvore de
+  diret&#243;rios) todos os arquivos  que possuem permiss&#227;o de Execu&#231;&#227;o e/ou
+  Escrita para Outros.  Para cada um dos arquivos encontrados:
+  
+<UL>
+<LI>Se o arquivo for  DIRET&#211;RIO, definir permiss&#227;o de Execu&#231;&#227;o para
+    Grupo e  Outros, mas  retirar a permiss&#227;o  de Escrita e  Leitura de
+    Grupo e Outros;
+</LI>
+<LI>Se o  arquivo N&#195;O for diret&#243;rio, retirar  permiss&#227;o de Escrita
+    e Execu&#231;&#227;o para Outros e permiss&#227;o de Escrita para Grupo.
+  
+</LI>
+</UL>
+
+<P>
+<B>DICA 1</B>: Primeiro fa&#231;a um  teste SEM MUDAR AS PERMISS&#213;ES, mas
+                 imprimindo  na tela  os arquivos  selecionados. Quando
+                 voc&#234; tiver  certeza que somente  os arquivos desejados
+                 est&#227;o  sendo  selecionados,   acrescente  a  op&#231;&#227;o  do
+                 <B><I>find(1)</I></B> que permite a mudan&#231;a de permiss&#245;es.
+
+<P>
+<B>DICA   2:</B>   Leia   COM   ATEN&#199;&#195;O  E   PACI&#202;NCIA   o   manual
+                   <I>on-line</I> de <B><I>find(1)</I></B>.
+
+<P>
+</LI>
+<LI><B>Controle de quotas II.</B>  O que fazer quando voc&#234; descobre
+que sua quota foi atingida? Um comando conveniente &#233; <B><I>du(1)</I></B>. Este
+comando  permite que  voc&#234;  verifique  o espa&#231;o  em  disco ocupado  por
+arquivos e diret&#243;rios indicados como argumentos.
+
+<P>
+Por exemplo, ao executar
+<PRE>
+           du  -sh  ~/*  ~/.[a-zA-Z]*
+</PRE>
+  voc&#234; tem uma estat&#237;stica do  espa&#231;o ocupado por arquivos e diret&#243;rios
+  em sua &#225;rea.
+
+<P>
+Neste item, entenda e explique em  detalhes o que faz o comando acima
+  (o que  faz cada  op&#231;&#227;o e  o que significam  os outros  argumentos da
+  linha de comando).
+
+<P>
+</LI>
+<LI><B>Tarefa  para  casa:</B>  Descobertos os  ``culpados''  pelo
+  excesso de espa&#231;o ocupado, como  voc&#234; procederia para baixar o espa&#231;o
+  em disco aqu&#233;m de sua quota?
+
+<P>
+<B>DICA:</B> Pense em como  <B><I>find(1)</I></B> e <B><I>rm(1)</I></B> podem ser
+  usados. Tamb&#233;m  verifique se h&#225; um  padr&#227;o nos nomes  de arquivos que
+  costumam  ocupar  espa&#231;o  desnecess&#225;rio  (por exemplo,  arquivos  com
+  sufixo  <B>.bak</B> e  <B>*<FONT SIZE=3>~</FONT></B>,  ou arquivos  com o  nome
+  <B>core</B>).  Os arquivos  em ``cache''  de  navegadores (mozilla,
+  opera, galeon, etc.) tamb&#233;m costumam ocupar bastante espa&#231;o.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Conclus&#245;es</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>Remova todos os subdiret&#243;rios <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum3</FONT></B> e
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum4</FONT></B>.
+</LI>
+<LI><B>SEMPRE TRAGA UM DISQUETE FORMATADO PARA AS PR&#211;XIMAS AULAS</B>
+
+<P>
+</LI>
+<LI>ASSUNTOS DAS PR&#211;XIMAS AULAS:
+  
+<UL>
+<LI>Personaliza&#231;&#227;o de &#225;rea do usu&#225;rio;
+</LI>
+<LI>Comandos de compacta&#231;&#227;o de arquivos: <B><I>gzip(1)</I></B>,
+    <B><I>bzip2(1)</I></B> e <B><I>zip(1)</I></B>;
+</LI>
+<LI>Comando de <I>arquivamento</I>: <B><I>tar(1)</I></B>;
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-10-09
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 18: Linked lists</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap19.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap17.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 18</h2>
+
+<h1>Linked lists</h1>
+
+
+<a name=1></a><br>
+<h3>18.1 References in objects</h3>
+
+<p>One of the more interesting qualities of an object is that an object can contain a reference to another object of the same type. There is a common data structure, the <b>list</b>, that takes advantage of this feature.</p>
+
+<p>Lists are made up of <b>nodes</b>, where each node contains a pointer or reference to the next node in the list.  In addition, each node usually contains a unit of data called the <b>cargo</b>.  In our first example, the cargo will be a single integer, but later we will write a <b>generic</b> list that can contain objects of any type.</p>
+
+
+
+<a name=2></a><br>
+<h3>18.2 Revenge of the <span class=code>Node</span></h3>
+
+<p>As usual when we write a new class, we'll start with the instance variables, one or two constructors and <span class=code>toString</span> so that we can test the basic mechanism of creating and displaying the new type.</p>
+
+
+<span class=code><span class=keyword>struct</span> Node {
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>int</span> cargo;
+<br>&nbsp; &nbsp; &nbsp; Node* next;
+<br>
+<br>&nbsp; &nbsp; &nbsp; Node () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cargo = 0;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; next = null;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; Node (<span class=keyword>int</span> Cargo, Node Next) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cargo = Cargo;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; next = Next;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; pstring toString () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; pstring s;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span>(; n; n/=10)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; s = <span class=keyword>char</span>(n%10 + <span class=quote>'0'</span>) + s;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> s;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>}
+<br></span><p>The declarations of the instance variables follow naturally from the specification, and the rest follows mechanically from the instance variables.  The expression <span class=code>cargo + <span class=quote>""</span></span> is an awkward but concise way to convert an integer to a String.</p>
+
+<p>To test the implementation so far, we would put something like this in <span class=code>main</span>:</p>
+
+
+<span class=code>&nbsp; &nbsp; Node node = <span class=keyword>new</span> Node (1, null);
+<br>&nbsp; &nbsp; cout &lt;&lt; node.cargo;
+<br></span><p>The result is simply</p>
+
+
+<span class=code>1
+<br></span><p>To make it interesting, we need a list with more than one node!</p>
+
+
+<span class=code>&nbsp; &nbsp; Node node1 = <span class=keyword>new</span> Node (1, null);
+<br>&nbsp; &nbsp; Node node2 = <span class=keyword>new</span> Node (2, null);
+<br>&nbsp; &nbsp; Node node3 = <span class=keyword>new</span> Node (3, null);
+<br></span><p>This code creates three nodes, but we don't have a list yet because the nodes are not <b>linked</b>.  The state diagram looks like this:</p>
+
+<p align="center"><img src="images/list1.png"></p>
+
+<p>To link up the nodes, we have to make the first node refer to the second and the second node refer to the third.</p>
+
+
+<span class=code>&nbsp; &nbsp; node1.next = node2;
+<br>&nbsp; &nbsp; node2.next = node3;
+<br>&nbsp; &nbsp; node3.next = null;
+<br></span><p>The reference of the third node is <span class=code>null</span>, which indicates that it is the end of the list.  Now the state diagram looks like:</p>
+
+<p align="center"><img src="images/list2.png"></p>
+
+<p>Now we know how to create nodes and link them into lists.  What might be less clear at this point is why.  Now that we're a little more familiar with the use of the struct <span class=code>Node</span>, we can now introduce you to the other style of notation.  The use of dot notation can be replaced by the more well-known <span class=code>-&gt;</span></p>
+
+<p>For example:</p>
+
+
+<span class=code>&nbsp; &nbsp; node1-&gt;next = node2;
+<br>&nbsp; &nbsp; node2-&gt;next = node3;
+<br>&nbsp; &nbsp; node3-&gt;next = null;
+<br></span><a name=3></a><br>
+<h3>18.3 Lists as collections</h3>
+
+<p>The thing that makes lists useful is that they are a way of assembling multiple objects into a single entity, sometimes called a collection. In the example, the first node of the list serves as a reference to the entire list.</p>
+
+
+
+<p>If we want to pass the list as a parameter, all we have to pass is a reference to the first node.  For example, the method <span class=code>printList</span> takes a single node as an argument.  Starting with the head of the list, it prints each node until it gets to the end (indicated by the <span class=code>null</span> reference).</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> printList (Node *list) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *node = list;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>while</span> (node != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; node-&gt;cargo; &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; node = node-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br></span><p>To invoke this method we just have to pass a reference to the first node:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; printList (node1);
+<br></span><p>Inside <span class=code>printList</span> we have a reference to the first node of the list, but there is no variable that refers to the other nodes.  We have to use the <span class=code>next</span> value from each node to get to the next node.</p>
+
+<p>This diagram shows the value of <span class=code>list</span> and the values that <span class=code>node</span> takes on:</p>
+
+<p align="center"><img src="images/list3.png"></p>
+
+<p>This way of moving through a list is called a <b>traversal</b>, just like the similar pattern of moving through the elements of an array.  It is common to use a loop variable like <span class=code>node</span> to refer to each of the nodes in the list in succession.</p>
+
+
+
+<p>The output of this method is</p>
+
+
+<span class=code>123
+<br></span><p>By convention, lists are printed in parentheses with commas between the elements, as in <span class=code>(1, 2, 3)</span>.  As an exercise, modify <span class=code>printList</span> so that it generates output in this format.</p>
+
+<p>As another exercise, rewrite <span class=code>printList</span> using a <span class=code><span class=keyword>for</span></span> loop instead of a <span class=code><span class=keyword>while</span></span> loop.</p>
+
+<a name=4></a><br>
+<h3>18.4 Lists and recursion</h3>
+
+<p>Recursion and lists go together like fava beans and a nice Chianti.  For example, here is a recursive algorithm for printing a list backwards:</p>
+
+
+
+<ol>
+
+<li>Separate the list into two pieces: the first node (called the head) and the rest (called the tail).</li>
+
+<li>Print the tail backwards.</li>
+
+<li>Print the head.</li>
+
+</ol>
+
+<p>Of course, Step 2, the recursive call, assumes that we have a way of printing a list backwards.  But <i>if</i> we assume that the recursive call works---the leap of faith---then we can convince ourselves that this algorithm works.</p>
+
+
+
+<p>All we need is a base case, and a way of proving that for any list we will eventually get to the base case.  A natural choice for the base case is a list with a single element, but an even better choice is the empty list, represented by null.</p>
+
+
+<span class=code>&nbsp; &nbsp; printBackward (Node *list) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (list == null) <span class=keyword>return</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *head = list;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *tail = list-&gt;next;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; printBackward (tail);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; head-&gt;cargo;
+<br>&nbsp; &nbsp; }
+<br></span><p>The first line handles the base case by doing nothing.  The next two lines split the list into <span class=code>head</span> and <span class=code>tail</span>. The last two lines print the list.</p>
+
+<p>We invoke this method exactly as we invoked <span class=code>printList</span>:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; printBackward (node1);
+<br></span><p>The result is a backwards list.</p>
+
+<p>Can we prove that this method will always terminate?   In other words, will it always reach the base case?  In fact, the answer is no.  There are some lists that will make this method crash.</p>
+
+<a name=5></a><br>
+<h3>18.5 Infinite lists</h3>
+
+<p>There is nothing to prevent a node from referring back to an earlier node in the list, including itself.  For example, this figure shows a list with two nodes, one of which refers to itself.</p>
+
+<p align="center"><img src="images/list4.png"></p>
+
+<p>If we invoke <span class=code>printList</span> on this list, it will loop forever. If we invoke <span class=code>printBackward</span> it will recurse infinitely. This sort of behavior makes infinite lists difficult to work with.</p>
+
+<p>Nevertheless, they are occasionally useful.  For example, we might represent a number as a list of digits and use an infinite list to represent a repeating fraction.</p>
+
+<p>Regardless, it is problematic that we cannot prove that <span class=code>printList</span> and <span class=code>printBackward</span> terminate.  The best we can do is the hypothetical statement, "If the list contains no loops, then these methods will terminate."  This sort of claim is called a <b>precondition</b>.  It imposes a constraint on one of the parameters and describes the behavior of the method if the constraint is satisfied. We will see more examples soon.</p>
+
+
+
+<a name=6></a><br>
+<h3>18.6 The fundamental ambiguity theorem</h3>
+
+<p>There is a part of <span class=code>printBackward</span> that might have raised an eyebrow:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; Node *head = list;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *tail = list-&gt;next;
+<br></span><p>After the first assignment, <span class=code>head</span> and <span class=code>list</span> have the same type and the same value.  So why did I create a new variable?</p>
+
+<p>The reason is that the two variables play different roles.  We think of <span class=code>head</span> as a reference to a single node, and we think of <span class=code>list</span> as a reference to the first node of a list.  These "roles" are not part of the program; they are in the mind of the programmer.</p>
+
+
+
+<p>The second assignment creates a new reference to the second node in the list, but in this case we think of it as a list. So, even though <span class=code>head</span> and <span class=code>tail</span> have the same type, they play different roles.</p>
+
+<p>This ambiguity is useful, but it can make programs with lists difficult to read.  I often use variable names like <span class=code>node</span> and <span class=code>list</span> to document how I intend to use a variable, and sometimes I create additional variables to disambiguate.</p>
+
+<p>I could have written <span class=code>printBackward</span> without <span class=code>head</span> and <span class=code>tail</span>, but I think it makes it harder to understand:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> printBackward (Node *list) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (list == null) <span class=keyword>return</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; printBackward (list-&gt;next);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; list-&gt;cargo;
+<br>&nbsp; &nbsp; }
+<br>
+<br></span><p>Looking at the two function calls, we have to remember that <span class=code>printBackward</span> treats its argument as a list and <span class=code>print</span> treats its argument as a single object.</p>
+
+<p>Always keep in mind the <b>fundamental ambiguity theorem</b>:</p>
+
+<p style="margin-left: 30px; margin-right: 30px;"> A variable that refers to a node might treat the node as a single object or as the first in a list of nodes. </p>
+
+<a name=7></a><br>
+<h3>18.7 Object methods for nodes</h3>
+
+<p>You might have wondered why <span class=code>printList</span> and <span class=code>printBackward</span> are class methods.  I have made the claim that anything that can be done with class methods can also be done with object methods; it's just a question of which form is cleaner.</p>
+
+<p>In this case there is a legitimate reason to choose class methods.  It is legal to send <span class=code>null</span> as an argument to a class method, but it is not legal to invoke an object method on a null object.</p>
+
+
+<span class=code>&nbsp; &nbsp; Node *node = null;
+<br>&nbsp; &nbsp; printList (node);&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// legal
+</span><br>&nbsp; &nbsp; node.printList ();&nbsp; &nbsp; &nbsp; <span class=comment>// NullPointerException
+</span><br></span><p>This limitation makes it awkward to write list-manipulating code in a clean, object-oriented style.  A little later we will see a way to get around this, though.</p>
+
+<a name=8></a><br>
+<h3>18.8 Modifying lists</h3>
+
+<p>Obviously one way to modify a list is to change the cargo of one on the nodes, but the more interesting operations are the ones that add, remove, or reorder the nodes.</p>
+
+<p>As an example, we'll write a method that removes the second node in the list and returns a reference to the removed node.</p>
+
+
+<span class=code>&nbsp; &nbsp; Node* removeSecond (Node *list) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *first = list;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *second = list-&gt;next;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// make the first node refer to the third
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; first-&gt;next = second-&gt;next;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// separate the second node from the rest of the list
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; second-&gt;next = null;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> second;
+<br>&nbsp; &nbsp; }
+<br></span><p>Again, I am using temporary variables to make the code more readable.  Here is how to use this method.</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; printList (node1);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node *removed = removeSecond (node1);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; printList (removed);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; printList (node1);
+<br></span><p>The output is</p>
+
+
+<span class=code>(1, 2, 3)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;the original list
+<br>(2)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;the removed node
+<br>(1, 3)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; the modified list
+<br></span><p>Here is a state diagram showing the effect of this operation.</p>
+
+<p align="center"><img src="images/list5.png"></p>
+
+<p>What happens if we invoke this method and pass a list with only one element (a <b>singleton</b>)?  What happens if we pass the empty list as an argument?  Is there a precondition for this method?</p>
+
+
+
+<a name=9></a><br>
+<h3>18.9 Wrappers and helpers</h3>
+
+<p>For some list operations it is useful to divide the labor into two methods.  For example, to print a list backwards in the conventional list format, <span class=code>(3, 2, 1)</span> we can use the <span class=code>printBackwards</span> method to print <span class=code>3, 2,</span> but we need a separate method to print the parentheses and the first node. We'll call it <span class=code>printBackwardNicely</span>.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> printBackwardNicely (Node *list) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; <span class=quote>'('</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (list != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Node *head = list;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Node *tail = list-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printBackward (tail);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; head-&gt;cargo;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; <span class=quote>')'</span>;
+<br>&nbsp; &nbsp; }
+<br></span><p>Again, it is a good idea to check methods like this to see if they work with special cases like an empty list or a singleton.</p>
+
+
+
+<p>Elsewhere in the program, when we use this method, we will invoke <span class=code>printBackwardNicely</span> directly and it will invoke <span class=code>printBackward</span> on our behalf.  In that sense, <span class=code>printBackwardNicely</span> acts as a <b>wrapper</b>, and it uses <span class=code>printBackward</span> as a helper.</p>
+
+<a name=10></a><br>
+<h3>18.10 The <span class=code>LinkedList</span> class</h3>
+
+<p>There are a number of subtle problems with the way we have been implementing lists.  In a reversal of cause and effect, I will propose an alternative implementation first and then explain what problems it solves.</p>
+
+<p>First, we will create a new class called <span class=code>LinkedList</span>.  Its instance variables are an integer that contains the length of the list and a reference to the first node in the list.  LinkedList objects serve as handles for manipulating lists of Node objects.</p>
+
+
+<span class=code><span class=keyword>class</span> LinkedList {
+<br>
+<br>&nbsp; <span class=keyword>public</span>:
+<br>&nbsp; &nbsp; <span class=keyword>int</span> length;
+<br>&nbsp; &nbsp; Node* head;
+<br>
+<br>&nbsp; &nbsp; LinkedList () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; length = 0;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; head = null;
+<br>&nbsp; &nbsp; }
+<br>};
+<br></span><p>One nice thing about the <span class=code>LinkedList</span> class is that it gives us a natural place to put wrapper functions like <span class=code>printBackwardNicely</span>, which we can make an object method in the <span class=code>LinkedList</span> class.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>public void</span> printBackward () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; <span class=quote>'('</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (head != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Node *tail = head-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Node.printBackward (tail);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; head-&gt;cargo;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; <span class=quote>')'</span>;
+<br>&nbsp; &nbsp; }
+<br></span><p>Just to make things confusing, I renamed <span class=code>printBackwardNicely</span>. Now there are two methods named <span class=code>printBackward</span>: one in the <span class=code>Node</span> class (the helper) and one in the <span class=code>LinkedList</span> class (the wrapper).  In order for the wrapper to invoke the helper, it has to identify the class explicitly (<span class=code>Node.printBackward</span>).</p>
+
+<p>So, one of the benefits of the <span class=code>LinkedList</span> class is that it provides a nice place to put wrapper functions. Another is that it makes it easier to add or remove the first element of a list.  For example, <span class=code>addFirst</span> is an object method for <span class=code>LinkedLists</span>; it takes an <span class=code><span class=keyword>int</span></span> as an argument and puts it at the beginning of the list.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> addFirst (<span class=keyword>int</span> i) {
+<br>&nbsp; &nbsp; &nbsp; Node *node = <span class=keyword>new</span> Node (i, head);
+<br>&nbsp; &nbsp; &nbsp; head = node;
+<br>&nbsp; &nbsp; &nbsp; length++;
+<br>&nbsp; &nbsp; }
+<br></span><p>As always, to check code like this it is a good idea to think about the special cases.  For example, what happens if the list is initially empty?</p>
+
+<a name=11></a><br>
+<h3>18.11 Invariants</h3>
+
+<p>Some lists are "well-formed;" others are not.  For example, if a list contains a loop, it will cause many of our methods to crash, so we might want to require that lists contain no loops. Another requirement is that the <span class=code>length</span> value in the <span class=code>LinkedList</span> object should be equal to the actual number of nodes in the list.</p>
+
+<p>Requirements like this are called <b>invariants</b> because, ideally, they should be true of every object all the time.  Specifying invariants for objects is a useful programming practice because it makes it easier to prove the correctness of code, check the integrity of data structures, and detect errors.</p>
+
+<p>One thing that is sometimes confusing about invariants is that there are some times when they are violated.  For example, in the middle of <span class=code>addFirst</span>, after we have added the node, but before we have incremented <span class=code>length</span>, the invariant is violated.  This kind of violation is acceptable; in fact, it is often impossible to modify an object without violating an invariant for at least a little while.  Normally the requirement is that every method that violates an invariant must restore the invariant.</p>
+
+<p>If there is any significant stretch of code in which the invariant is violated, it is important for the comments to make that clear, so that no operations are performed that depend on the invariant.</p>
+
+
+
+<a name=12></a><br>
+<h3>18.12 Glossary</h3>
+
+<dl>
+
+<dt>list</dt>
+<dd>A data structure that implements a collection using a sequence of linked nodes.</dd>
+
+<dt>node</dt>
+<dd>An element of a list, usually implemented as an object that contains a reference to another object of the same type.</dd>
+
+<dt>cargo</dt>
+<dd>An item of data contained in a node.</dd>
+
+<dt>link</dt>
+<dd>An object reference embedded in an object.</dd>
+
+<dt>generic data structure</dt>
+<dd>A kind of data structure that can contain data of any type.</dd>
+
+<dt>precondition</dt>
+<dd>An assertion that must be true in order for a method to work correctly.</dd>
+
+<dt>invariant</dt>
+<dd>An assertion that should be true of an object at all times (except maybe while the object is being modified).</dd>
+
+<dt>wrapper method</dt>
+<dd>A method that acts as a middle-man between a caller and a helper method, often offering an interface that is cleaner than the helper method's.</dd>
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap19.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap17.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

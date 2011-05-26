@@ -1,0 +1,35 @@
+#!/bin/bash
+
+CMD=`basename $0`
+OLD_IFS="$IFS"
+
+#
+# Inverte o arquivo, linha a linha
+#
+IFS=$'\n'
+
+LINHAS=(`cat $CMD`)       # VETOR (nao guarda linhas em branco)
+NUM_LINHAS=${#LINHAS[@]}   # NUMERO DE ELEMENTOS DO VETOR = NUMERO DE LINHAS
+
+for (( i = $NUM_LINHAS - 1 ; i >= 0 ; i-- )); do
+    echo "${LINHAS[$i]}"
+done >$CMD.linhas
+
+#
+# Inverte o arquivo, palavra a palavra
+#
+IFS="${OLD_IFS}"
+
+PALAVRAS=(`cat $CMD`)
+NUM_PALS=${#PALAVRAS[@]}
+
+for (( i = $NUM_PALS - 1 ; i >= 0 ; i-- )); do
+    echo -n "${PALAVRAS[$i]} "
+done >$CMD.words
+
+#
+# Pense em uma forma de inverter o arquivo caracter a
+# caracter (mantendo-os nas mesmas linhas), usando arrays.
+#
+
+

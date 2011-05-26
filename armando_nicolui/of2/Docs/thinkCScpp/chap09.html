@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 9: More structures</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap10.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap08.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 9</h2>
+
+<h1>More structures</h1>
+
+
+<a name=1></a><br>
+<h3>9.1 Time</h3>
+
+<p>As a second example of a user-defined structure, we will define a type called <span class=code>Time</span>, which is used to record the time of day.  The various pieces of information that form a time are the hour, minute and second, so these will be the instance variables of the structure.</p>
+
+<p>The first step is to decide what type each instance variable should be.  It seems clear that <span class=code>hour</span> and <span class=code>minute</span> should be integers.  Just to keep things interesting, let's make <span class=code>second</span> a <span class=code><span class=keyword>double</span></span>, so we can record fractions of a second.</p>
+
+<p>Here's what the structure definition looks like:</p>
+
+
+<span class=code><span class=keyword>struct</span> Time {
+<br>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>double</span> second;
+<br>};
+<br></span><p>We can create a <span class=code>Time</span> object in the usual way:</p>
+
+
+<span class=code>&nbsp; Time time = { 11, 59, 3.14159 };
+<br></span><p>The state diagram for this object looks like this:</p>
+
+<p align="center"><img src="images/time.png"></p>
+
+<p>The word "instance" is sometimes used when we talk about objects, because every object is an instance (or example) of some type.  The reason that instance variables are so-named is that every instance of a type has a copy of the instance variables for that type.</p>
+
+<a name=2></a><br>
+<h3>9.2 <span class=code>printTime</span></h3>
+
+<p>When we define a new type it is a good idea to write function that displays the instance variables in a human-readable form.  For example:</p>
+
+
+<span class=code><span class=keyword>void</span> printTime (Time& t) {
+<br>&nbsp; cout &lt;&lt; t.hour &lt;&lt; <span class=quote>":"</span> &lt;&lt; t.minute &lt;&lt; <span class=quote>":"</span> &lt;&lt; t.second &lt;&lt; endl;
+<br>}
+<br></span><p>The output of this function, if we pass <span class=code>time</span> an argument, is <span class=code>11:59:3.14159</span>.</p>
+
+<a name=3></a><br>
+<h3>9.3 Functions for objects</h3>
+
+<p>In the next few sections, I will demonstrate several possible interfaces for functions that operate on objects.  For some operations, you will have a choice of several possible interfaces, so you should consider the pros and cons of each of these:</p>
+
+<dl>
+
+<dt>pure function</dt>
+<dd>Takes objects and/or basic types as arguments but does not modify the objects.  The return value is either a basic type or a new object created inside the function.</dd>
+
+<dt>modifier</dt>
+<dd>Takes objects as parameters and modifies some or all of them.  Often returns void.</dd>
+
+<dt>fill-in function</dt>
+<dd>One of the parameters is an "empty" object that gets filled in by the function.  Technically, this is a type of modifier.</dd>
+
+</dl>
+
+<a name=4></a><br>
+<h3>9.4 Pure functions</h3>
+
+<p>A function is considered a pure function if the result depends only on the arguments, and it has no side effects like modifying an argument or outputting something.  The only result of calling a pure function is the return value.</p>
+
+<p>One example is <span class=code>after</span>, which compares two <span class=code>Time</span>s and returns a <span class=code><span class=keyword>bool</span></span> that indicates whether the first operand comes after the second:</p>
+
+
+<span class=code><span class=keyword>bool</span> after (Time& time1, Time& time2) {
+<br>&nbsp; <span class=keyword>if</span> (time1.hour &gt; time2.hour) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (time1.hour &lt; time2.hour) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (time1.minute &gt; time2.minute) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (time1.minute &lt; time2.minute) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (time1.second &gt; time2.second) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>return false</span>;
+<br>}
+<br></span><p>What is the result of this function if the two times are equal?  Does that seem like the ppropriate result for this function?  If you were writing the documentation for this function, would you mention that case specifically?</p>
+
+<p>A second example is <span class=code>addTime</span>, which calculates the sum of two times.  For example, if it is <span class=code>9:14:30</span>, and your breadmaker takes 3 hours and 35 minutes, you could use <span class=code>addTime</span> to figure out when the bread will be done.</p>
+
+<p>Here is a rough draft of this function that is not quite right:</p>
+
+
+<span class=code>Time addTime (Time& t1, Time& t2) {
+<br>&nbsp; Time sum;
+<br>&nbsp; sum.hour = t1.hour + t2.hour;
+<br>&nbsp; sum.minute = t1.minute + t2.minute;
+<br>&nbsp; sum.second = t1.second + t2.second;
+<br>&nbsp; <span class=keyword>return</span> sum;
+<br>}
+<br></span><p>Here is an example of how to use this function.  If <span class=code>currentTime</span> contains the current time and <span class=code>breadTime</span> contains the amount of time it takes for your breadmaker to make bread, then you could use <span class=code>addTime</span> to figure out when the bread will be done.</p>
+
+
+<span class=code>&nbsp; Time currentTime = { 9, 14, 30.0 };
+<br>&nbsp; Time breadTime = { 3, 35, 0.0 };
+<br>&nbsp; Time doneTime = addTime (currentTime, breadTime);
+<br>&nbsp; printTime (doneTime);
+<br></span><p>The output of this program is <span class=code>12:49:30</span>, which is correct.  On the other hand, there are cases where the result is not correct.  Can you think of one?</p>
+
+<p>The problem is that this function does not deal with cases where the number of seconds or minutes adds up to more than 60.  When that happens we have to "carry" the extra seconds into the minutes column, or extra minutes into the hours column.</p>
+
+<p>Here's a second, corrected version of this function.</p>
+
+
+<span class=code>Time addTime (Time& t1, Time& t2) {
+<br>&nbsp; Time sum;
+<br>&nbsp; sum.hour = t1.hour + t2.hour;
+<br>&nbsp; sum.minute = t1.minute + t2.minute;
+<br>&nbsp; sum.second = t1.second + t2.second;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (sum.second &gt;= 60.0) {
+<br>&nbsp; &nbsp; sum.second -= 60.0;
+<br>&nbsp; &nbsp; sum.minute += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>if</span> (sum.minute &gt;= 60) {
+<br>&nbsp; &nbsp; sum.minute -= 60;
+<br>&nbsp; &nbsp; sum.hour += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> sum;
+<br>}
+<br></span><p>Although it's correct, it's starting to get big.  Later, I will suggest an alternate pproach to this problem that will be much shorter.</p>
+
+
+
+<p>This code demonstrates two operators we have not seen before, <span class=code>+=</span> and <span class=code>-=</span>.  These operators provide a concise way to increment and decrement variables.  For example, the statement <span class=code>sum.second -= 60.0;</span> is equivalent to <span class=code>sum.second = sum.second - 60;</span></p>
+
+<a name=5></a><br>
+<h3>9.5 <span class=code><span class=keyword>const</span></span> parameters</h3>
+
+<p>You might have noticed that the parameters for <span class=code>after</span> and <span class=code>addTime</span> are being passed by reference.  Since these are pure functions, they do not modify the parameters they receive, so I could just as well have passed them by value.</p>
+
+<p>The advantage of passing by value is that the calling function and the callee are ppropriately encapsulated---it is not possible for a change in one to affect the other, except by affecting the return value.</p>
+
+<p>On the other hand, passing by reference usually is more efficient, because it avoids copying the argument.  Furthermore, there is a nice feature in C++, called <span class=code><span class=keyword>const</span></span>, that can make reference parameters just as safe as value parameters.</p>
+
+<p>If you are writing a function and you do not intend to modify a parameter, you can declare that it is a <b>constant reference parameter</b>.  The syntax looks like this:</p>
+
+
+<span class=code><span class=keyword>void</span> printTime (<span class=keyword>const</span> Time& time) ...
+<br>Time addTime (<span class=keyword>const</span> Time& t1, <span class=keyword>const</span> Time& t2) ...
+<br></span><p>I've included only the first line of the functions.  If you tell the compiler that you don't intend to change a parameter, it can help remind you.  If you try to change one, you should get a compiler error, or at least a warning.</p>
+
+
+
+<a name=6></a><br>
+<h3>9.6 Modifiers</h3>
+
+<p>Of course, sometimes you <i>want</i> to modify one of the arguments.  Functions that do are called modifiers.</p>
+
+<p>As an example of a modifier, consider <span class=code>increment</span>, which adds a given number of seconds to a <span class=code>Time</span> object. Again, a rough draft of this function looks like:</p>
+
+
+<span class=code><span class=keyword>void</span> increment (Time& time, <span class=keyword>double</span> secs) {
+<br>&nbsp; time.second += secs;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (time.second &gt;= 60.0) {
+<br>&nbsp; &nbsp; time.second -= 60.0;
+<br>&nbsp; &nbsp; time.minute += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>if</span> (time.minute &gt;= 60) {
+<br>&nbsp; &nbsp; time.minute -= 60;
+<br>&nbsp; &nbsp; time.hour += 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>The first line performs the basic operation; the remainder deals with the special cases we saw before.</p>
+
+<p>Is this function correct?  What happens if the argument <span class=code>secs</span> is much greater than 60?  In that case, it is not enough to subtract 60 once; we have to keep doing it until <span class=code>second</span> is below 60.  We can do that by replacing the <span class=code><span class=keyword>if</span></span> statements with <span class=code><span class=keyword>while</span></span> statements:</p>
+
+
+<span class=code><span class=keyword>void</span> increment (Time& time, <span class=keyword>double</span> secs) {
+<br>&nbsp; time.second += secs;
+<br>
+<br>&nbsp; <span class=keyword>while</span> (time.second &gt;= 60.0) {
+<br>&nbsp; &nbsp; time.second -= 60.0;
+<br>&nbsp; &nbsp; time.minute += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>while</span> (time.minute &gt;= 60) {
+<br>&nbsp; &nbsp; time.minute -= 60;
+<br>&nbsp; &nbsp; time.hour += 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>This solution is correct, but not very efficient. Can you think of a solution that does not require iteration?</p>
+
+<a name=7></a><br>
+<h3>9.7 Fill-in functions</h3>
+
+<p>Occasionally you will see functions like <span class=code>addTime</span> written with a different interface (different arguments and return values). Instead of creating a new object every time <span class=code>addTime</span> is called, we could require the caller to provide an "empty" object where <span class=code>addTime</span> can store the result.  Compare the following with the previous version:</p>
+
+
+<span class=code><span class=keyword>void</span> addTimeFill (<span class=keyword>const</span> Time& t1, <span class=keyword>const</span> Time& t2, Time& sum) {
+<br>&nbsp; sum.hour = t1.hour + t2.hour;
+<br>&nbsp; sum.minute = t1.minute + t2.minute;
+<br>&nbsp; sum.second = t1.second + t2.second;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (sum.second &gt;= 60.0) {
+<br>&nbsp; &nbsp; sum.second -= 60.0;
+<br>&nbsp; &nbsp; sum.minute += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>if</span> (sum.minute &gt;= 60) {
+<br>&nbsp; &nbsp; sum.minute -= 60;
+<br>&nbsp; &nbsp; sum.hour += 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>One advantage of this pproach is that the caller has the option of reusing the same object repeatedly to perform a series of additions. This can be slightly more efficient, although it can be confusing enough to cause subtle errors.  For the vast majority of programming, it is worth a spending a little run time to avoid a lot of debugging time.</p>
+
+<p>Notice that the first two parameters can be declared <span class=code><span class=keyword>const</span></span>, but the third cannot.</p>
+
+<a name=8></a><br>
+<h3>9.8 Which is best?</h3>
+
+<p>Anything that can be done with modifiers and fill-in functions can also be done with pure functions.  In fact, there are programming languages, called <b>functional</b> programming languages, that only allow pure functions.  Some programmers believe that programs that use pure functions are faster to develop and less error-prone than programs that use modifiers.  Nevertheless, there are times when modifiers are convenient, and cases where functional programs are less efficient.</p>
+
+<p>In general, I recommend that you write pure functions whenever it is reasonable to do so, and resort to modifiers only if there is a compelling advantage.  This pproach might be called a functional programming style.</p>
+
+<a name=9></a><br>
+<h3>9.9 Incremental development versus planning</h3>
+
+<p>In this chapter I have demonstrated an pproach to program development I refer to as <b>rapid prototyping with iterative improvement</b>.  In each case, I wrote a rough draft (or prototype) that performed the basic calculation, and then tested it on a few cases, correcting flaws as I found them.</p>
+
+<p>Although this pproach can be effective, it can lead to code that is unnecessarily complicated---since it deals with many special cases---and unreliable---since it is hard to know if you have found all the errors.</p>
+
+<p>An alternative is high-level planning, in which a little insight into the problem can make the programming much easier.  In this case the insight is that a <span class=code>Time</span> is really a three-digit number in base 60!  The <span class=code>second</span> is the "ones column," the <span class=code>minute</span> is the "60's column", and the <span class=code>hour</span> is the "3600's column."</p>
+
+<p>When we wrote <span class=code>addTime</span> and <span class=code>increment</span>, we were effectively doing addition in base 60, which is why we had to "carry" from one column to the next.</p>
+
+
+
+<p>Thus an alternate pproach to the whole problem is to convert <span class=code>Time</span>s into <span class=code><span class=keyword>double</span></span>s and take advantage of the fact that the computer already knows how to do arithmetic with <span class=code><span class=keyword>double</span></span>s. Here is a function that converts a <span class=code>Time</span> into a <span class=code><span class=keyword>double</span></span>:</p>
+
+
+<span class=code><span class=keyword>double</span> convertToSeconds (<span class=keyword>const</span> Time& t) {
+<br>&nbsp; <span class=keyword>int</span> minutes = t.hour * 60 + t.minute;
+<br>&nbsp; <span class=keyword>double</span> seconds = minutes * 60 + t.second;
+<br>&nbsp; <span class=keyword>return</span> seconds;
+<br>}
+<br></span><p>Now all we need is a way to convert from a <span class=code><span class=keyword>double</span></span> to a <span class=code>Time</span> object:</p>
+
+
+<span class=code>Time makeTime (<span class=keyword>double</span> secs) {
+<br>&nbsp; Time time;
+<br>&nbsp; time.hour = <span class=keyword>int</span> (secs / 3600.0);
+<br>&nbsp; secs -= time.hour * 3600.0;
+<br>&nbsp; time.minute = <span class=keyword>int</span> (secs / 60.0);
+<br>&nbsp; secs -= time.minute * 60;
+<br>&nbsp; time.second = secs;
+<br>&nbsp; <span class=keyword>return</span> time;
+<br>}
+<br></span><p>You might have to think a bit to convince yourself that the technique I am using to convert from one base to another is correct.  Assuming you are convinced, we can use these functions to rewrite <span class=code>addTime</span>:</p>
+
+
+<span class=code>Time addTime (<span class=keyword>const</span> Time& t1, <span class=keyword>const</span> Time& t2) {
+<br>&nbsp; <span class=keyword>double</span> seconds = convertToSeconds (t1) + convertToSeconds (t2);
+<br>&nbsp; <span class=keyword>return</span> makeTime (seconds);
+<br>}
+<br></span><p>This is much shorter than the original version, and it is much easier to demonstrate that it is correct (assuming, as usual, that the functions it calls are correct).  As an exercise, rewrite <span class=code>increment</span> the same way.</p>
+
+<a name=10></a><br>
+<h3>9.10 Generalization</h3>
+
+<p>In some ways converting from base 60 to base 10 and back is harder than just dealing with times.  Base conversion is more abstract; our intuition for dealing with times is better.</p>
+
+<p>But if we have the insight to treat times as base 60 numbers, and make the investment of writing the conversion functions (<span class=code>convertToSeconds</span> and <span class=code>makeTime</span>), we get a program that is shorter, easier to read and debug, and more reliable.</p>
+
+<p>It is also easier to add more features later.  For example, imagine subtracting two <span class=code>Time</span>s to find the duration between them.  The naive pproach would be to implement subtraction with borrowing.  Using the conversion functions would be easier and more likely to be correct.</p>
+
+<p>Ironically, sometimes making a problem harder (more general) makes is easier (fewer special cases, fewer opportunities for error).</p>
+
+<a name=11></a><br>
+<h3>9.11 Algorithms</h3>
+
+<p>When you write a general solution for a class of problems, as opposed to a specific solution to a single problem, you have written an <b>algorithm</b>.  I mentioned this word in Chapter 1, but did not define it carefully.  It is not easy to define, so I will try a couple of pproaches.</p>
+
+<p>First, consider something that is not an algorithm. When you learned to multiply single-digit numbers, you probably memorized the multiplication table.  In effect, you memorized 100 specific solutions.  That kind of knowledge is not really algorithmic.</p>
+
+<p>But if you were "lazy," you probably cheated by learning a few tricks.  For example, to find the product of <tt>n</tt> and 9, you can write <tt>n-1</tt> as the first digit and <tt>10-n</tt> as the second digit.  This trick is a general solution for multiplying any single-digit number by 9. That's an algorithm!</p>
+
+<p>Similarly, the techniques you learned for addition with carrying, subtraction with borrowing, and long division are all algorithms.  One of the characteristics of algorithms is that they do not require any intelligence to carry out.  They are mechanical processes in which each step follows from the last according to a simple set of rules.</p>
+
+<p>In my opinion, it is embarrassing that humans spend so much time in school learning to execute algorithms that, quite literally, require no intelligence.</p>
+
+<p>On the other hand, the process of designing algorithms is interesting, intellectually challenging, and a central part of what we call programming.</p>
+
+<p>Some of the things that people do naturally, without difficulty or conscious thought, are the most difficult to express algorithmically.  Understanding natural language is a good example.  We all do it, but so far no one has been able to explain <i>how</i> we do it, at least not in the form of an algorithm.</p>
+
+<p>Later in this book, you will have the opportunity to design simple algorithms for a variety of problems.  If you take the next class in the Computer Science sequence, Data Structures, you will see some of the most interesting, clever, and useful algorithms computer science has produced.</p>
+
+<a name=12></a><br>
+<h3>9.12 Glossary</h3>
+
+<dl>
+
+<dt>instance</dt>
+<dd>An example from a category.  My cat is an instance of the category "feline things."  Every object is an instance of some type.</dd>
+
+<dt>instance variable</dt>
+<dd>One of the named data items that make up an structure.  Each structure has its own copy of the instance variables for its type.</dd>
+
+<dt>constant reference parameter</dt>
+<dd>A parameter that is passed by reference but that cannot be modified.</dd>
+
+<dt>pure function</dt>
+<dd>A function whose result depends only on its parameters, and that has so effects other than returning a value.</dd>
+
+<dt>functional programming style</dt>
+<dd>A style of program design in which the majority of functions are pure.</dd>
+
+<dt>modifier</dt>
+<dd>A function that changes one or more of the objects it receives as parameters, and usually returns <span class=code><span class=keyword>void</span></span>.</dd>
+
+<dt>fill-in function</dt>
+<dd>A function that takes an "empty" object as a parameter and fills it its instance variables instead of generating a return value.</dd>
+
+<dt>algorithm</dt>
+<dd>A set of instructions for solving a class of problems by a mechanical, unintelligent process.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap10.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap08.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

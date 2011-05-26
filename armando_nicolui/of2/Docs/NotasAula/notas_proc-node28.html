@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>28 Strings e Ponteiros</TITLE>
+<META NAME="description" CONTENT="28 Strings e Ponteiros">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node29.html">
+<LINK REL="previous" HREF="notas_proc-node27.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node29.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html606"
+  HREF="notas_proc-node29.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html604"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html598"
+  HREF="notas_proc-node27.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html607"
+  HREF="notas_proc-node29.html">29 Arrays de ponteiros</A>
+<B>Up:</B> <A NAME="tex2html605"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html599"
+  HREF="notas_proc-node27.html">27 Ponteiros</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000280000000000000000">
+28 <I>Strings</I> e Ponteiros</A>
+</H1>
+
+<P>
+Vimos  anteriormente  que  <I>strings</I>  em  C nada  mais  s&#227;o  que
+<I>arrays</I> de elementos do tipo  <TT>char</TT> cujo &#250;ltimo elemento &#233;
+o   caracter  '<IMG
+ WIDTH="13" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img83.png"
+ ALT="$\backslash$">0'   (nulo).  At&#233;   agora  a   declara&#231;&#227;o  e
+inicializa&#231;&#227;o de um <I>string</I> tem sido como abaixo:
+<PRE>
+         char nome[] = "Um string de caracteres";
+         char str[20] = "Um outro string de caracteres";
+</PRE>
+
+<P>
+No exemplo acima,  cada conjunto de caracteres limitados  por um par de
+aspas &#233; denominado de uma <B>constante <I>string</I></B>. Como toda
+express&#227;o em  C, uma constante <I>string</I>  tem um valor  e um tipo
+associado.
+
+<P>
+O compilador C automaticamente  aloca espa&#231;o no programa para armazenar
+este  <I>string</I>.  Esta  constante  na verdade  est&#225; definindo  um
+<I>array</I> que  est&#225; armazenado em  um endere&#231;o de mem&#243;ria  mas que
+n&#227;o t&#234;m  um nome de vari&#225;vel  associado a ele.  O  valor produzido para
+esta constante  <I>string</I> &#233; um ponteiro  para este <I>array</I>
+an&#244;nimo.  E o tipo da constante &#233; um ponteiro para <TT>char</TT>.
+
+<P>
+Assim, na maior  parte dos casos de programas em  C, &#233; mais conveniente
+representar  um  <I>string</I>  atrav&#233;s  de  um  ponteiro  para  <TT>char</TT>. O  valor inicial  deste ponteiro deve  ser sempre o  endere&#231;o do
+primeiro caracter do  <I>string</I> ou uma constante <I>string</I>.
+O exemplo  acima pode ser reescrito  como abaixo, que deve  ser a forma
+preferida para se declarar  e inicializar <I>strings</I> em programas
+em linguagem C:
+<PRE>
+         char *nome = "Um string de caracteres";
+         char *str = "Um outro string de caracteres";
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html606"
+  HREF="notas_proc-node29.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html604"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html598"
+  HREF="notas_proc-node27.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html607"
+  HREF="notas_proc-node29.html">29 Arrays de ponteiros</A>
+<B>Up:</B> <A NAME="tex2html605"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html599"
+  HREF="notas_proc-node27.html">27 Ponteiros</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

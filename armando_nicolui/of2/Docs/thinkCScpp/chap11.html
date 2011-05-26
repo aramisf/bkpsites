@@ -1,0 +1,493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 11: Member functions</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap12.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap10.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 11</h2>
+
+<h1>Member functions</h1>
+
+
+<a name=1></a><br>
+<h3>11.1 Objects and functions</h3>
+
+<p>C++ is generally considered an object-oriented programming language, which means that it provides features that support object-oriented programming.</p>
+
+<p>It's not easy to define object-oriented programming, but we have already seen some features of it:</p>
+
+<ol>
+
+<li>Programs are made up of a collection of structure definitions and function definitions, where most of the functions operate on specific kinds of structures (or objecs).</li>
+
+<li>Each structure definition corresponds to some object or concept in the real world, and the functions that operate on that structure correspond to the ways real-world objects interact.</li>
+
+</ol>
+
+<p>For example, the <span class=code>Time</span> structure we defined in <a href="chap09.html">Chapter 9</a> obviously corresponds to the way people record the time of day, and the operations we defined correspond to the sorts of things people do with recorded times.  Similarly, the <span class=code>Point</span> and <span class=code>Rectangle</span> structures correspond to the mathematical concept of a point and a rectangle.</p>
+
+<p>So far, though, we have not taken advantage of the features C++ provides to support object-oriented programming.  Strictly speaking, these features are not necessary.  For the most part they provide an alternate syntax for doing things we have already done, but in many cases the alternate syntax is more concise and more accurately conveys the structure of the program.</p>
+
+<p>For example, in the <span class=code>Time</span> program, there is no obvious connection between the structure definition and the function definitions that follow.  With some examination, it is pparent that every function takes at least one <span class=code>Time</span> structure as a parameter.</p>
+
+<p>This observation is the motivation for <b>member functions</b>. Member function differ from the other functions we have written in two ways:</p>
+
+<ol>
+
+<li>When we call the function, we <b>invoke</b> it on an object, rather than just call it.  People sometimes describe this process as "performing an operation on an object," or "sending a message to an object."</li>
+
+<li>The function is <i>declared</i> inside the <span class=code><span class=keyword>struct</span></span> definition, in order to make the relationship between the structure and the function explicit.</li>
+
+</ol>
+
+<p>In the next few sections, we will take the functions from <a href="chap09.html">Chapter 9</a> and transform them into member functions. One thing you should realize is that this transformation is purely mechanical; in other words, you can do it just by following a sequence of steps.</p>
+
+
+
+<p>As I said, anything that can be done with a member function can also be done with a nonmember function (sometimes called a <b>free-standing</b> function).   But sometimes there is an advantage to one over the other.  If you are comfortable converting from one form to another, you will be able to choose the best form for whatever you are doing.</p>
+
+<a name=2></a><br>
+<h3>11.2 <span class=code>print</span></h3>
+
+<p>In <a href="chap09.html">Chapter 9</a> we defined a structure named <span class=code>Time</span> and wrote a function named <span class=code>printTime</span></p>
+
+
+<span class=code><span class=keyword>struct</span> Time {
+<br>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>double</span> second;
+<br>};
+<br>
+<br><span class=keyword>void</span> printTime (<span class=keyword>const</span> Time& time) {
+<br>&nbsp; cout &lt;&lt; time.hour &lt;&lt; <span class=quote>":"</span> &lt;&lt; time.minute &lt;&lt; <span class=quote>":"</span> &lt;&lt; time.second &lt;&lt; endl;
+<br>}
+<br></span><p>To call this function, we had to pass a <span class=code>Time</span> object as a parameter.</p>
+
+
+<span class=code>&nbsp; Time currentTime = { 9, 14, 30.0 };
+<br>&nbsp; printTime (currentTime);
+<br></span><p>To make <span class=code>printTime</span> into a member function, the first step is to change the name of the function from <span class=code>printTime</span> to <span class=code>Time::print</span>.  The <span class=code>::</span> operator separates the name of the structure from the name of the function; together they indicate that this is a function named <span class=code>print</span> that can be invoked on a <span class=code>Time</span> structure.</p>
+
+<p>The next step is to eliminate the parameter.  Instead of passing an object as an argument, we are going to invoke the function on an object.</p>
+
+<p>As a result, inside the function, we no longer have a parameter named <span class=code>time</span>.  Instead, we have a <b>current object</b>, which is the object the function is invoked on.  We can refer to the current object using the C++ keyword <span class=code><span class=keyword>this</span></span>.</p>
+
+
+
+<p>One thing that makes life a little difficult is that <span class=code><span class=keyword>this</span></span> is actually a <b>pointer</b> to a structure, rather than a structure itself.  A pointer is similar to a reference, but I don't want to go into the details of using pointers yet.  The only pointer operation we need for now is the <span class=code>*</span> operator, which converts a structure pointer into a structure.  In the following function, we use it to assign the value of <span class=code><span class=keyword>this</span></span> to a local variable named <span class=code>time</span>:</p>
+
+
+<span class=code><span class=keyword>void</span> Time::print () {
+<br>&nbsp; Time time = *<span class=keyword>this</span>;
+<br>&nbsp; cout &lt;&lt; time.hour &lt;&lt; <span class=quote>":"</span> &lt;&lt; time.minute &lt;&lt; <span class=quote>":"</span> &lt;&lt; time.second &lt;&lt; endl;
+<br>}
+<br></span><p>The first two lines of this function changed quite a bit as we transformed it into a member function, but notice that the output statement itself did not change at all.</p>
+
+<p>In order to invoke the new version of <span class=code>print</span>, we have to invoke it on a <span class=code>Time</span> object:</p>
+
+
+<span class=code>&nbsp; Time currentTime = { 9, 14, 30.0 };
+<br>&nbsp; currentTime.print ();
+<br></span><p>The last step of the transformation process is that we have to declare the new function inside the structure definition:</p>
+
+
+<span class=code><span class=keyword>struct</span> Time {
+<br>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>double</span> second;
+<br>
+<br>&nbsp; <span class=keyword>void</span> Time::print ();
+<br>};
+<br></span><p>A <b>function declaration</b> looks just like the first line of the function definition, except that it has a semi-colon at the end.  The declaration describes the <b>interface</b> of the function; that is, the number and types of the arguments, and the type of the return value.</p>
+
+<p>When you declare a function, you are making a promise to the compiler that you will, at some point later on in the program, provide a definition for the function.  This definition is sometimes called the <b>implementation</b> of the function, since it contains the details of how the function works.  If you omit the definition, or provide a definition that has an interface different from what you promised, the compiler will complain.</p>
+
+<a name=3></a><br>
+<h3>11.3 Implicit variable access</h3>
+
+<p>Actually, the new version of <span class=code>Time::print</span> is more complicated than it needs to be.  We don't really need to create a local variable in order to refer to the instance variables of the current object.</p>
+
+<p>If the function refers to <span class=code>hour</span>, <span class=code>minute</span>, or <span class=code>second</span>, all by themselves with no dot notation, C++ knows that it must be referring to the current object.  So we could have written:</p>
+
+
+<span class=code><span class=keyword>void</span> Time::print ()
+<br>{
+<br>&nbsp; cout &lt;&lt; hour &lt;&lt; <span class=quote>":"</span> &lt;&lt; minute &lt;&lt; <span class=quote>":"</span> &lt;&lt; second &lt;&lt; endl;
+<br>}
+<br></span><p>This kind of variable access is called "implicit" because the name of the object does not appear explicitly.  Features like this are one reason member functions are often more concise than nonmember functions.</p>
+
+<a name=4></a><br>
+<h3>11.4 Another example</h3>
+
+<p>Let's convert <span class=code>increment</span> to a member function.  Again, we are going to transform one of the parameters into the implicit parameter called <span class=code><span class=keyword>this</span></span>.  Then we can go through the function and make all the variable accesses implicit.</p>
+
+
+<span class=code><span class=keyword>void</span> Time::increment (<span class=keyword>double</span> secs) {
+<br>&nbsp; second += secs;
+<br>
+<br>&nbsp; <span class=keyword>while</span> (second &gt;= 60.0) {
+<br>&nbsp; &nbsp; second -= 60.0;
+<br>&nbsp; &nbsp; minute += 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>while</span> (minute &gt;= 60) {
+<br>&nbsp; &nbsp; minute -= 60.0;
+<br>&nbsp; &nbsp; hour += 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>By the way, remember that this is not the most efficient implementation of this function.  If you didn't do it back in <a href="chap09.html">Chapter 9</a>, you should write a more efficient version now.</p>
+
+<p>To declare the function, we can just copy the first line into the structure definition:</p>
+
+
+<span class=code><span class=keyword>struct</span> Time {
+<br>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>double</span> second;
+<br>
+<br>&nbsp; <span class=keyword>void</span> Time::print ();
+<br>&nbsp; <span class=keyword>void</span> Time::increment (<span class=keyword>double</span> secs);
+<br>};
+<br></span><p>And again, to call it, we have to invoke it on a <span class=code>Time</span> object:</p>
+
+
+<span class=code>&nbsp; Time currentTime = { 9, 14, 30.0 };
+<br>&nbsp; currentTime.increment (500.0);
+<br>&nbsp; currentTime.print ();
+<br></span><p>The output of this program is <span class=code>9:22:50</span>.</p>
+
+<a name=5></a><br>
+<h3>11.5 Yet another example</h3>
+
+<p>The original version of <span class=code>convertToSeconds</span> looked like this:</p>
+
+
+<span class=code><span class=keyword>double</span> convertToSeconds (<span class=keyword>const</span> Time& time) {
+<br>&nbsp; <span class=keyword>int</span> minutes = time.hour * 60 + time.minute;
+<br>&nbsp; <span class=keyword>double</span> seconds = minutes * 60 + time.second;
+<br>&nbsp; <span class=keyword>return</span> seconds;
+<br>}
+<br></span><p>It is straightforward to convert this to a member function:</p>
+
+
+<span class=code><span class=keyword>double</span> Time::convertToSeconds () <span class=keyword>const</span> {
+<br>&nbsp; <span class=keyword>int</span> minutes = hour * 60 + minute;
+<br>&nbsp; <span class=keyword>double</span> seconds = minutes * 60 + second;
+<br>&nbsp; <span class=keyword>return</span> seconds;
+<br>}
+<br></span><p>The interesting thing here is that the implicit parameter should be declared <span class=code><span class=keyword>const</span></span>, since we don't modify it in this function. But it is not obvious where we should put information about a parameter that doesn't exist.  The answer, as you can see in the example, is after the parameter list (which is empty in this case).</p>
+
+<p>The <span class=code>print</span> function in the previous section should also declare that the implicit parameter is <span class=code><span class=keyword>const</span></span>.</p>
+
+<a name=6></a><br>
+<h3>11.6 A more complicated example</h3>
+
+<p>Although the process of transforming functions into member functions is mechanical, there are some oddities.  For example, <span class=code>after</span> operates on two <span class=code>Time</span> structures, not just one, and we can't make both of them implicit.  Instead, we have to invoke the function on one of them and pass the other as an argument.</p>
+
+<p>Inside the function, we can refer to one of the them implicitly, but to access the instance variables of the other we continue to use dot notation.</p>
+
+
+<span class=code><span class=keyword>bool</span> Time::after (<span class=keyword>const</span> Time& time2) <span class=keyword>const</span> {
+<br>&nbsp; <span class=keyword>if</span> (hour &gt; time2.hour) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (hour &lt; time2.hour) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (minute &gt; time2.minute) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>if</span> (minute &lt; time2.minute) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (second &gt; time2.second) <span class=keyword>return true</span>;
+<br>&nbsp; <span class=keyword>return false</span>;
+<br>}
+<br></span><p>To invoke this function:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (doneTime.after (currentTime)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"The bread will be done after it starts."</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>You can almost read the invocation like English: "If the done-time is after the current-time, then..."</p>
+
+<a name=7></a><br>
+<h3>11.7 Constructors</h3>
+
+<p>Another function we wrote in <a href="chap09.html">Chapter 9</a> was <span class=code>makeTime</span>:</p>
+
+
+<span class=code>Time makeTime (<span class=keyword>double</span> secs) {
+<br>&nbsp; Time time;
+<br>&nbsp; time.hour = <span class=keyword>int</span> (secs / 3600.0);
+<br>&nbsp; secs -= time.hour * 3600.0;
+<br>&nbsp; time.minute = <span class=keyword>int</span> (secs / 60.0);
+<br>&nbsp; secs -= time.minute * 60.0;
+<br>&nbsp; time.second = secs;
+<br>&nbsp; <span class=keyword>return</span> time;
+<br>}
+<br></span><p>Of course, for every new type, we need to be able to create new objects.  In fact, functions like <span class=code>makeTime</span> are so common that there is a special function syntax for them.  These functions are called <b>constructors</b> and the syntax looks like this:</p>
+
+
+<span class=code>Time::Time (<span class=keyword>double</span> secs) {
+<br>&nbsp; hour = <span class=keyword>int</span> (secs / 3600.0);
+<br>&nbsp; secs -= hour * 3600.0;
+<br>&nbsp; minute = <span class=keyword>int</span> (secs / 60.0);
+<br>&nbsp; secs -= minute * 60.0;
+<br>&nbsp; second = secs;
+<br>}
+<br></span><p>First, notice that the constructor has the same name as the class, and no return type.  The arguments haven't changed, though.</p>
+
+<p>Second, notice that we don't have to create a new time object, and we don't have to return anything.  Both of these steps are handled automatically.  We can refer to the new object---the one we are constructing---using the keyword <span class=code><span class=keyword>this</span></span>, or implicitly as shown here.  When we write values to <span class=code>hour</span>, <span class=code>minute</span> and <span class=code>second</span>, the compiler knows we are referring to the instance variables of the new object.</p>
+
+<p>To invoke the constructor, you use syntax that is a cross between a variable declaration and a function call:</p>
+
+
+<span class=code>&nbsp; Time time (seconds);
+<br></span><p>This statement declares that the variable <span class=code>time</span> has type <span class=code>Time</span>, and it invokes the constructor we just wrote, passing the value of <span class=code>seconds</span> as an argument.  The system allocates space for the new object and the constructor initializes its instance variables.  The result is assigned to the variable <span class=code>time</span>.</p>
+
+<a name=8></a><br>
+<h3>11.8 Initialize or construct?</h3>
+
+<p>Earlier we declared and initialized some <span class=code>Time</span> structures using squiggly-braces:</p>
+
+
+<span class=code>&nbsp; Time currentTime = { 9, 14, 30.0 };
+<br>&nbsp; Time breadTime = { 3, 35, 0.0 };
+<br></span><p>Now, using constructors, we have a different way to declare and initialize:</p>
+
+
+<span class=code>&nbsp; Time time (seconds);
+<br></span><p>These two functions represent different programming styles, and different points in the history of C++.  Maybe for that reason, the C++ compiler requires that you use one or the other, and not both in the same program.</p>
+
+<p>If you define a constructor for a structure, then you have to use the constructor to initialize all new structures of that type.  The alternate syntax using squiggly-braces is no longer allowed.</p>
+
+<p>Fortunately, it is legal to overload constructors in the same way we overloaded functions.  In other words, there can be more than one constructor with the same "name," as long as they take different parameters.  Then, when we initialize a new object the compiler will try to find a constructor that takes the ppropriate parameters.</p>
+
+<p>For example, it is common to have a constructor that takes one parameter for each instance variable, and that assigns the values of the parameters to the instance variables:</p>
+
+
+<span class=code>Time::Time (<span class=keyword>int</span> h, <span class=keyword>int</span> m, <span class=keyword>double</span> s)
+<br>{
+<br>&nbsp; hour = h;&nbsp; minute = m;&nbsp; second = s;
+<br>}
+<br></span><p>To invoke this constructor, we use the same funny syntax as before, except that the arguments have to be two integers and a <span class=code><span class=keyword>double</span></span>:</p>
+
+
+<span class=code>&nbsp; Time currentTime (9, 14, 30.0);
+<br></span><a name=9></a><br>
+<h3>11.9 One last example</h3>
+
+<p>The final example we'll look at is <span class=code>addTime</span>:</p>
+
+
+<span class=code>Time addTime2 (<span class=keyword>const</span> Time& t1, <span class=keyword>const</span> Time& t2) {
+<br>&nbsp; <span class=keyword>double</span> seconds = convertToSeconds (t1) + convertToSeconds (t2);
+<br>&nbsp; <span class=keyword>return</span> makeTime (seconds);
+<br>}
+<br></span><p>We have to make several changes to this function, including:</p>
+
+<ol>
+
+<li>Change the name from <span class=code>addTime</span> to <span class=code>Time::add</span>.</li>
+
+<li>Replace the first parameter with an implicit parameter, which should be declared <span class=code><span class=keyword>const</span></span>.</li>
+
+<li>Replace the use of <span class=code>makeTime</span> with a constructor invocation.</li>
+
+</ol>
+
+<p>Here's the result:</p>
+
+
+<span class=code>Time Time::add (<span class=keyword>const</span> Time& t2) <span class=keyword>const</span> {
+<br>&nbsp; <span class=keyword>double</span> seconds = convertToSeconds () + t2.convertToSeconds ();
+<br>&nbsp; Time time (seconds);
+<br>&nbsp; <span class=keyword>return</span> time;
+<br>}
+<br></span><p>The first time we invoke <span class=code>convertToSeconds</span>, there is no pparent object!  Inside a member function, the compiler assumes that we want to invoke the function on the current object. Thus, the first invocation acts on <span class=code><span class=keyword>this</span></span>; the second invocation acts on <span class=code>t2</span>.</p>
+
+<p>The next line of the function invokes the constructor that takes a single <span class=code><span class=keyword>double</span></span> as a parameter; the last line returns the resulting object.</p>
+
+<a name=10></a><br>
+<h3>11.10 Header files</h3>
+
+<p>It might seem like a nuisance to declare functions inside the structure definition and then define the functions later. Any time you change the interface to a function, you have to change it in two places, even if it is a small change like declaring one of the parameters <span class=code><span class=keyword>const</span></span>.</p>
+
+<p>There is a reason for the hassle, though, which is that it is now possible to separate the structure definition and the functions into two files: the <b>header file</b>, which contains the structure definition, and the implementation file, which contains the functions.</p>
+
+<p>Header files usually have the same name as the implementation file, but with the suffix <span class=code>.h</span> instead of <span class=code>.cpp</span>.  For the example we have been looking at, the header file is called <span class=code>Time.h</span>, and it contains the following:</p>
+
+
+<span class=code><span class=keyword>struct</span> Time {
+<br>&nbsp; <span class=comment>// instance variables
+</span><br>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>double</span> second;
+<br>
+<br>&nbsp; <span class=comment>// constructors
+</span><br>&nbsp; Time (<span class=keyword>int</span> hour, <span class=keyword>int</span> min, <span class=keyword>double</span> secs);
+<br>&nbsp; Time (<span class=keyword>double</span> secs);
+<br>
+<br>&nbsp; <span class=comment>// modifiers
+</span><br>&nbsp; <span class=keyword>void</span> increment (<span class=keyword>double</span> secs);
+<br>
+<br>&nbsp; <span class=comment>// functions
+</span><br>&nbsp; <span class=keyword>void</span> print () <span class=keyword>const</span>;
+<br>&nbsp; <span class=keyword>bool</span> after (<span class=keyword>const</span> Time& time2) <span class=keyword>const</span>;
+<br>&nbsp; Time add (<span class=keyword>const</span> Time& t2) <span class=keyword>const</span>;
+<br>&nbsp; <span class=keyword>double</span> convertToSeconds () <span class=keyword>const</span>;
+<br>};
+<br></span><p>Notice that in the structure definition I don't really have to include the prefix <span class=code>Time::</span> at the beginning of every function name.  The compiler knows that we are declaring functions that are members of the <span class=code>Time</span> structure.</p>
+
+<p><span class=code>Time.cpp</span> contains the definitions of the member functions (I have elided the function bodies to save space):</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>#include <span class=quote>"Time.h"</span>
+<br>
+<br>Time::Time (<span class=keyword>int</span> h, <span class=keyword>int</span> m, <span class=keyword>double</span> s)&nbsp; ...
+<br>
+<br>Time::Time (<span class=keyword>double</span> secs) ...
+<br>
+<br><span class=keyword>void</span> Time::increment (<span class=keyword>double</span> secs) ...
+<br>
+<br><span class=keyword>void</span> Time::print () <span class=keyword>const</span> ...
+<br>
+<br><span class=keyword>bool</span> Time::after (<span class=keyword>const</span> Time& time2) <span class=keyword>const</span> ...
+<br>
+<br>Time Time::add (<span class=keyword>const</span> Time& t2) <span class=keyword>const</span> ...
+<br>
+<br><span class=keyword>double</span> Time::convertToSeconds () <span class=keyword>const</span> ...
+<br></span><p>In this case the definitions in <span class=code>Time.cpp</span> appear in the same order as the declarations in <span class=code>Time.h</span>, although it is not necessary.</p>
+
+<p>On the other hand, it is necessary to include the header file using an <span class=code>include</span> statement.  That way, while the compiler is reading the function definitions, it knows enough about the structure to check the code and catch errors.</p>
+
+<p>Finally, <span class=code>main.cpp</span> contains the function <span class=code>main</span> along with any functions we want that are not members of the <span class=code>Time</span> structure (in this case there are none):</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>#include <span class=quote>"Time.h"</span>
+<br>
+<br><span class=keyword>void</span> main ()
+<br>{
+<br>&nbsp; Time currentTime (9, 14, 30.0);
+<br>&nbsp; currentTime.increment (500.0);
+<br>&nbsp; currentTime.print ();
+<br>
+<br>&nbsp; Time breadTime (3, 35, 0.0);
+<br>&nbsp; Time doneTime = currentTime.add (breadTime);
+<br>&nbsp; doneTime.print ();
+<br>
+<br>&nbsp; <span class=keyword>if</span> (doneTime.after (currentTime)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"The bread will be done after it starts."</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br>}
+<br>
+<br></span><p>Again, <span class=code>main.cpp</span> has to include the header file.</p>
+
+<p>It may not be obvious why it is useful to break such a small program into three pieces.  In fact, most of the advantages come when we are working with larger programs:</p>
+
+<dl>
+
+<dt>Reuse</dt>
+<dd>Once you have written a structure like <span class=code>Time</span>, you might find it useful in more than one program.  By separating the definition of <span class=code>Time</span> from <span class=code>main.cpp</span>, you make is easy to include the <span class=code>Time</span> structure in another program.</dd>
+
+<dt>Managing interactions</dt>
+<dd>As systems become large, the number of interactions between components grows and quickly becomes unmanageable.  It is often useful to minimize these interactions by separating modules like <span class=code>Time.cpp</span> from the programs that use them.</dd>
+
+<dt>Separate compilation</dt>
+<dd>Separate files can be compiled separately and then linked into a single program later.  The details of how to do this depend on your programming environment.  As the program gets large, separate compilation can save a lot of time, since you usually need to compile only a few files at a time.</dd>
+
+</dl>
+
+<p>For small programs like the ones in this book, there is no great advantage to splitting up programs.  But it is good for you to know about this feature, especially since it explains one of the statements that appeared in the first program we wrote:</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br></span><p><span class=code>iostream.h</span> is the header file that contains declarations for <span class=code>cin</span> and <span class=code>cout</span> and the functions that operate on them.  When you compile your program, you need the information in that header file.</p>
+
+<p>The implementations of those functions are stored in a library, sometimes called the "Standard Library" that gets linked to your program automatically.  The nice thing is that you don't have to recompile the library every time you compile a program. For the most part the library doesn't change, so there is no reason to recompile it.</p>
+
+<a name=11></a><br>
+<h3>11.11 Glossary</h3>
+
+<dl>
+
+<dt>member function</dt>
+<dd>A function that operates on an object that is passed as an implicit parameter named <span class=code><span class=keyword>this</span></span>.</dd>
+
+<dt>nonmember function</dt>
+<dd>A function that is not a member of any structure definition.  Also called a "free-standing" function.</dd>
+
+<dt>invoke</dt>
+<dd>To call a function "on" an object, in order to pass the object as an implicit parameter.</dd>
+
+<dt>current object</dt>
+<dd>The object on which a member function is invoked.  Inside the member function, we can refer to the current object implicitly, or by using the keyword <span class=code><span class=keyword>this</span></span>.</dd>
+
+<dt>this</dt>
+<dd>A keyword that refers to the current object. <span class=code><span class=keyword>this</span></span> is a pointer, which makes it difficult to use, since we do not cover pointers in this book.</dd>
+
+<dt>interface</dt>
+<dd>A description of how a function is used, including the number and types of the parameters and the type of the return value.</dd>
+
+<dt>function declaration</dt>
+<dd>A statement that declares the interface to a function without providing the body.  Declarations of member functions appear inside structure definitions even if the definitions appear outside.</dd>
+
+<dt>implementation</dt>
+<dd>The body of a function, or the details of how a function works.</dd>
+
+<dt>constructor</dt>
+<dd>A special function that initializes the instance variables of a newly-created object.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap12.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap10.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

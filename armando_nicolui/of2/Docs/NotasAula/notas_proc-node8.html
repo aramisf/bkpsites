@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8 Operadores Lógicos</TITLE>
+<META NAME="description" CONTENT="8 Operadores Lógicos">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node9.html">
+<LINK REL="previous" HREF="notas_proc-node7.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node9.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html304"
+  HREF="notas_proc-node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html302"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html296"
+  HREF="notas_proc-node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html305"
+  HREF="notas_proc-node9.html">9 Exemplos</A>
+<B>Up:</B> <A NAME="tex2html303"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html297"
+  HREF="notas_proc-node7.html">7 Aninhando senteças if</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00080000000000000000">
+8 Operadores L&#243;gicos</A>
+</H1> 
+
+<P>
+Todos os  programas at&#233;  agora consideraram <TT>if</TT> com  condi&#231;&#245;es de
+teste simples.  Alguns  exemplos de testes simples: <TT>b != 0</TT>, <TT>contador  &lt;=  5</TT>.  Estas  express&#245;es  testam  uma condi&#231;&#227;o.   Portanto,
+quando  mais  de uma  condi&#231;&#227;o  precisa  ser  testada, precisamos  usar
+senten&#231;as <TT>if</TT> e <TT>if-else</TT> aninhadas.
+
+<P>
+A lingugem  C, assim  como a maioria  das linguagens de  programa&#231;&#227;o de
+alto n&#237;vel suportam <EM>operadores  l&#243;gicos</EM> que podem ser usados para
+criar  <EM>opera&#231;&#245;es l&#243;gicas</EM>  mais  complexas, combinando  condi&#231;&#245;es
+simples.  O  valor de  uma express&#227;o l&#243;gica  &#233; ou VERDADEIRO  ou FALSO.
+Lembre  que n&#227;o  h&#225;  constantes l&#243;gicas  VERDADEIRO  e FALSO  em C;  em
+express&#245;es l&#243;gicas <TT>0</TT> &#233;  interpretado como FALSO, e qualquer valor
+diferente de zero &#233; interpretado como VERDADEIRO.
+
+<P>
+Os operadores l&#243;gicos s&#227;o
+
+<P>
+<code>!</code>     N&#195;O l&#243;gico, opera&#231;&#227;o de nega&#231;&#227;o (operador un&#225;rio)
+
+<P>
+<code>&amp;&amp;</code>   E l&#243;gico, conjun&#231;&#227;o (operador bin&#225;rio)
+
+<P>
+<code>||</code>   OU l&#243;gico, disjun&#231;&#227;o (operador bin&#225;rio).
+
+<P>
+
+<P>
+Por exemplo,  se quisermos testar se  um n&#250;mero <TT>num</TT>  &#233; positivo e
+par,  e  imprimir  uma  mensagem  como  no  exemplo  anterior,  podemos
+escrever:
+<PRE>
+      if (num &gt;= 0)
+         if (num % 2 == 0)
+            printf("Numero par nao negativo.\n");
+</PRE>
+
+<P>
+Com os operadores l&#243;gicos isso pode ser simplificado:
+<PRE>
+      if ((num&gt;=0) &amp;&amp; (num%2 == 0))
+          printf("Numero par nao negativo.\n");
+</PRE>
+
+<P>
+A opera&#231;&#227;o de nega&#231;&#227;o, <TT>!</TT>, pode ser usado da seguinte forma:
+
+<P>
+<TT>!</TT><EM>express&#227;o  l&#243;gica</EM>: O  valor &#233;  a nega&#231;&#227;o  l&#243;gica da
+express&#227;o dada.  Por exemplo:
+
+<P>
+<TT>!0      </TT> &#233; <TT>1</TT>
+
+<P>
+<TT>!1      </TT> &#233; <TT>0</TT>
+
+<P>
+
+<P>
+N&#243;s podemos  usar o  operador de nega&#231;&#227;o  l&#243;gica e escrever  o exemplo
+acima como:
+<PRE>
+      if (num&gt;0 &amp;&amp; !(num%2))
+            printf("Numero par nao negativo.\n");
+</PRE>
+
+<P>
+Os dois operadores bin&#225;rios operam  sobre duas express&#245;es l&#243;gicas e tem
+o valor  <TT>1</TT> (verdadeiro) or  <TT>0</TT> (falso).   Os exemplos abaixo
+mostram o seu uso:
+
+<P>
+<code>a==0 &amp;&amp; b==0</code> (verdadeiro se ambos <TT>a == 0</TT> e <TT>b ==
+0</TT>, portanto se <TT>a</TT> e <TT>b</TT> s&#227;o <TT>0</TT>)
+
+<P>
+<code>a==0 ||  b==0</code> (verdadeiro se pelo menos  uma das vari&#225;veis
+<TT>a</TT> or <TT>b</TT> for <TT>0</TT>)
+
+<P>
+
+<P>
+<B>Uma express&#227;o usando</B> <code>&amp;&amp;</code> <B>&#233; verdadeira somente se
+ambos os operadores forem verdadeiros (n&#227;o zero).</B>
+
+<P>
+<B>Uma  express&#227;o  usando</B> <code>||</code>  <B>&#233;  falsa somente  se
+ambos os operadores forem falsos (zero).</B>
+
+<P>
+
+<P>
+Verifique   na  Tabela&nbsp;<A HREF="#tab:opLogicos">3</A>  o   resultado  do   uso  de
+operadores l&#243;gicos:
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="tab:opLogicos"></A><A NAME="2218"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 3:</STRONG>
+Resultado de uso de Operadores L&#243;gicos</CAPTION>
+<TR><TD><IMG
+ WIDTH="488" HEIGHT="111" BORDER="0"
+ SRC="notas_proc-img26.png"
+ ALT="\begin{table}\centering\begin{displaymath}
+\begin{array}{\vert c\vert c\vert c\...
+...so &amp; falso &amp; falso &amp; falso \\ \hline
+\end{array} \end{displaymath}
+\end{table}"></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+A preced&#234;ncia  do operador de  nega&#231;&#227;o l&#243;gica &#233;  a mais alta  (no mesmo
+n&#237;vel  que  o ``-''  un&#225;rio).   A  preced&#234;ncia  dos operadores  l&#243;gicos
+bin&#225;rios &#233;  menor que a dos  operadores relacionais, e mais  alta que a
+opera&#231;&#227;o de  atribui&#231;&#227;o.  O <code>&amp;&amp;</code>  tem preced&#234;ncia mais alta  que o
+<code>||</code>,  e  ambos associam  da  esquerda  para  a direita  (como  os
+operadores aritm&#233;ticos).
+
+<P>
+Como a preced&#234;ncia dos operadores  l&#243;gicos &#233; menor que a dos operadores
+relacionais, n&#227;o &#233; necess&#225;rio usar par&#234;nteses em express&#245;es como:
+
+<P>
+
+<P>
+<TT>x &gt;= 3 &amp;&amp; x &lt;= 50</TT>
+
+<P>
+<TT>x == 1 || x == 2 || x == 3</TT>
+
+<P>
+
+<P>
+A Tabela&nbsp;<A HREF="#tab:precedencia-1">4</A> mostra  o quadro completo de preced&#234;ncia
+de operadores aritm&#233;ticos, relacionais e l&#243;gicos.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="2228"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 4:</STRONG>
+Preced&#234;ncia e associatividade de operadores</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Operador</TD>
+<TD ALIGN="LEFT">Associatividade</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>()</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>!  -  ++  --  (cast) &amp;</code> (un&#225;rios)</TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>*  /  %</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>+  -</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&lt;  &lt;=  &gt;  &gt;=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>==  !=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&amp;&amp;</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>||</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>=  +=  -=  *=  /=  %=</code></TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:precedencia-1"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+No  pr&#243;ximo exemplo,  o programa  verifica  se as  tr&#234;s vari&#225;veis  <TT>lado1</TT>, <TT>lado2</TT>, e <TT>lado3</TT>, podem ser lados de um tri&#226;ngulo
+reto.  N&#243;s usamos o fato que os tr&#234;s valores devem ser positivos, e que
+o quadrado  de um  dos lados deve  ser igual  a soma dos  quadrados dos
+outros lados (Teorema de  Pit&#225;goras) para determinar se o tri&#226;ngulo
+&#233; reto.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main() {
+  
+  int lado1, lado2, lado3;
+  int s1, s2, s3;
+  
+  printf(``Entre com o tamanho dos lados do triangulo: ``);
+  scanf(``%d %d %d'', &amp;lado1, &amp;lado2, &amp;lado3);
+  
+  /* calcula o quadrado dos lados */
+  s1 = lado1*lado1;
+  s2 = lado2*lado2;
+  s3 = lado3*lado3;
+  
+  /* testa a condicao para um triangulo reto */
+  
+  if ( lado1&gt;0 &amp;&amp; lado2&gt;0 &amp;&amp; lado3 &gt; 0 ) {
+    if (s1==s2+s3 || s2==s1+s2 || s2==s1+s3) ) {
+    printf("Triangulo reto!\n");
+  }
+  else {
+    printf("Nao pode ser um triangulo!\n");
+  }
+} 
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Na  utiliza&#231;&#227;o  de express&#245;es  l&#243;gicas,  as  seguintes identidades  s&#227;o
+&#250;teis.  Elas s&#227;o chamadas de <EM>Lei de DeMorgan</EM>:
+
+<P>
+<TT>!(x &amp;&amp; y) </TT> &#233; equivalente a <TT>!x || !y</TT>
+
+<P>
+e
+
+<P>
+<TT>!(x || y) </TT> &#233; equivalente a <TT>!x &amp;&amp; !y</TT>
+
+<P>
+<HR>
+<A NAME="tex2html304"
+  HREF="notas_proc-node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html302"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html296"
+  HREF="notas_proc-node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html305"
+  HREF="notas_proc-node9.html">9 Exemplos</A>
+<B>Up:</B> <A NAME="tex2html303"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html297"
+  HREF="notas_proc-node7.html">7 Aninhando senteças if</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

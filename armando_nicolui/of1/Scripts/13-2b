@@ -1,0 +1,8 @@
+#!/bin/bash
+
+COUNT=`wc -l "$1"`
+
+expr match $COUNT ' *\([0-9]*\) *'
+
+COUNT=`expr match "$(wc -c "$1")" ' *\([0-9]*\) *'`
+

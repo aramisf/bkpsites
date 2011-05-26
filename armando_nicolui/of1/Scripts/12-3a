@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Elementos de um array nao precisam ser consecutivos ou contiguos
+# Alguns elementos do array podem ser deixados sem inicializacao.
+# Falhas no array nao constituem problema.
+
+area[11]=23
+area[13]=37
+area[51]=UFOs
+
+
+echo -n "area[11] = "
+echo ${area[11]}         #  Chaves sao NECESSARIAS
+
+echo -n "area[13] = "
+echo ${area[13]}
+
+echo "Conteudo de area[51] eh ${area[51]}."
+
+# Conteudos de elementos nao-inicializados de array imprimem branco (nulo)
+echo -n "area[43] = "
+echo ${area[43]}
+echo "(area[43] nao-assinalado)"
+
+echo
+
+# Soma de dois elementos de array atribuida ao terceiro elemento.
+area[5]=$((${area[11]} + ${area[13]}))
+echo "area[5] = area[11] + area[13]"
+echo -n "area[5] = "
+echo ${area[5]}
+
+area[6]=$((${area[11]} + ${area[51]}))
+echo "area[6] = area[11] + area[51]"
+echo -n "area[6] = "
+echo ${area[6]}
+# O trecho acima falha porque adicionar um inteiro a um string nao eh permitido.
+
+echo; echo; echo
+
+# -----------------------------------------------------------------
+# Outro array, "area2".
+# Outra forma de atribuir valores a um array...
+# nome_array=( XXX YYY ZZZ ... )
+
+area2=( zero um dois tres quatro )
+
+# O primeiro elemento do array eh [0], nao eh [1].
+echo -n "area2[0] = "
+echo ${area2[0]}
+
+echo -n "area2[1] = "
+echo ${area2[1]}      # [1] eh o segundo elemento do array.
+# -----------------------------------------------------------------
+
+echo; echo; echo
+
+# -----------------------------------------------
+# Mais um array, "area3".
+# Mais uma outra forma de assinalar valores a um array...
+# nome_array=([xx]=XXX [yy]=YYY ...)
+
+area3=([17]=seventeen [24]=twenty-four)
+
+echo -n "area3[17] = "
+echo ${area3[17]}
+
+echo -n "area3[24] = "
+echo ${area3[24]}
+# -----------------------------------------------
+
+exit 0

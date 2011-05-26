@@ -1,0 +1,925 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Appendix A: Quick reference for pclasses</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap23.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Appendix A</h2>
+
+<h1>Quick reference for pclasses</h1>
+
+
+<p>These class definitions are copied from the pclasses web page, <a href="http://www.ibiblio.org/obp/pclasses/">http://www.ibiblio.org/obp/pclasses/</a>, with a few minor formatting changes.</p>
+
+<br>
+<h3>pstring</h3>
+
+
+<span class=code><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>class</span> pstringT
+<br>{
+<br>
+<br><span class=keyword>public</span>:
+<br>&nbsp; &nbsp; pstringT&lt;T&gt;();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//default constructor
+</span><br>&nbsp; &nbsp; pstringT&lt;T&gt;(<span class=keyword>const</span> pstringT&lt;T&gt; &);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//copy constructor
+</span><br>&nbsp; &nbsp; pstringT&lt;T&gt;(<span class=keyword>const</span> T *copy);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//copy constructor from C-style string
+</span><br>&nbsp; &nbsp; pstringT&lt;T&gt;(T ch);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy constructor from single character
+</span><br>&nbsp; &nbsp; <span class=keyword>virtual</span> ~pstringT&lt;T&gt;();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//destructor
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>inline</span> T * c_str() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//returns a null-terminated, C-style string
+</span><br>&nbsp; &nbsp; <span class=keyword>inline int</span> length() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns the number of characters in the string
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>int</span> find(<span class=keyword>const</span> pstringT&lt;T&gt; &str) <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp;<span class=comment>//return index of str or -1 if not found
+</span><br>&nbsp; &nbsp; <span class=keyword>int</span> find(<span class=keyword>const</span> T ch) <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//return index of ch or -1 if not found
+</span><br>&nbsp; &nbsp; pstringT&lt;T&gt; substr(<span class=keyword>int</span> pos, <span class=keyword>int</span> len) <span class=keyword>const</span>; <span class=comment>//returns substring from pos of length len
+</span><br>
+<br>&nbsp; &nbsp; T & <span class=keyword>operator</span> [] (<span class=keyword>int</span> n);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//access a character (mutable)
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T <span class=keyword>operator</span> [] (<span class=keyword>int</span> n) <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//access a character (immutable)
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> pstringT&lt;T&gt; &);&nbsp; &nbsp;<span class=comment>//assignment operator
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> T * <span class=keyword>const</span>);&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//assignment operator from C-style string
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> T);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//assignment operator from single character
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> += (<span class=keyword>const</span> pstringT&lt;T&gt; &);&nbsp; <span class=comment>//concatenation operator
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> += (<span class=keyword>const</span> T * <span class=keyword>const</span>);&nbsp; &nbsp; &nbsp; <span class=comment>//concatenation operator from C-style string
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> pstringT&lt;T&gt; & <span class=keyword>operator</span> += (<span class=keyword>const</span> T);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//concatenation operator from single character
+</span><br>
+<br><span class=keyword>protected</span>:
+<br>&nbsp; &nbsp; T *mystring;
+<br>
+<br>};
+<br>
+<br><span class=comment>//typedef for regular pstrings
+</span><br><span class=keyword>typedef</span> pstringT&lt;<span class=keyword>char</span>&gt; pstring;
+<br>
+<br><span class=comment>//concatenation operators
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; &, T);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; pstringT&lt;T&gt; <span class=keyword>operator</span> + (T, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> T * <span class=keyword>const</span>);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> T * <span class=keyword>const</span>, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br>
+<br><span class=comment>//stream operators
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline</span> ostream & <span class=keyword>operator</span> &lt;&lt; (ostream &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; istream & <span class=keyword>operator</span> &gt;&gt; (istream &, pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; istream & getline(istream &, pstringT&lt;T&gt; &);
+<br>
+<br><span class=comment>//comparison operators
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> == (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> != (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> &lt;&nbsp; (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> &lt;= (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> &gt;&nbsp; (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt; <span class=keyword>inline bool operator</span> &gt;= (<span class=keyword>const</span> pstringT&lt;T&gt; &, <span class=keyword>const</span> pstringT&lt;T&gt; &);
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>ostream & <span class=keyword>operator</span> &lt;&lt; (ostream &os, <span class=keyword>const</span> pstringT&lt;T&gt; &out)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> os &lt;&lt; out.c_str() &lt;&lt; flush;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>istream & <span class=keyword>operator</span> &gt;&gt; (istream &is, pstringT&lt;T&gt; &in)
+<br>{
+<br>&nbsp; &nbsp; fflush(stdin);
+<br>&nbsp; &nbsp; T input_buffer[4096];
+<br>&nbsp; &nbsp; is &gt;&gt; input_buffer;
+<br>&nbsp; &nbsp; in = input_buffer;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> is;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>istream & getline(istream &is, pstringT&lt;T&gt; &to_get)
+<br>{
+<br>&nbsp; &nbsp; fflush(stdin);
+<br>&nbsp; &nbsp; T getline_buffer[4096];
+<br>&nbsp; &nbsp; getline(is, getline_buffer, 4095);
+<br>&nbsp; &nbsp; to_get = getline_buffer;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> is;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt;::pstringT()
+<br>{
+<br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[1];
+<br>&nbsp; &nbsp; mystring[0] = 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt;::pstringT(<span class=keyword>const</span> T *copy)
+<br>{
+<br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[strlen(copy) + 1]; <span class=comment>//allocate memory
+</span><br>&nbsp; &nbsp; strcpy(mystring, copy);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//copy string
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt;::pstringT(T ch)
+<br>{
+<br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[2];
+<br>&nbsp; &nbsp; mystring[0] = ch;
+<br>&nbsp; &nbsp; mystring[1] = 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt;::pstringT(<span class=keyword>const</span> pstringT&lt;T&gt; & to_create_from)
+<br>{
+<br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[to_create_from.length()+1];
+<br>&nbsp; &nbsp; strcpy(mystring, to_create_from.c_str());&nbsp; &nbsp;<span class=comment>//copy string
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt;::~pstringT&lt;T&gt;()
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] mystring;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>T* pstringT&lt;T&gt;::c_str() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> mystring;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pstringT&lt;T&gt;::length() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strlen(mystring);
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pstringT&lt;T&gt;::find(<span class=keyword>const</span> pstringT&lt;T&gt; & str) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>int</span> i, j, endsearch = length() - str.length() + 1;
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(i = 0; i &lt; endsearch; i++)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span>(; i &lt; endsearch && mystring[i] != str[0]; i++);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span>(i == endsearch)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>break</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span>(j = 0; j &lt; str.length() && mystring[i+j] == str[j]; j++);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span>(j == str.length())
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> i;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> -1;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pstringT&lt;T&gt;::find(<span class=keyword>const</span> T ch) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> i = 0; i &lt; length(); i++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span>(mystring[i] == ch)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> i;
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>return</span> -1;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; pstringT&lt;T&gt;::substr(<span class=keyword>int</span> pos, <span class=keyword>int</span> len) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(pos &lt; 0 || len &lt; 0 || pos &gt;= length())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: substring ("</span> &lt;&lt; pos &lt;&lt; <span class=quote>","</span> &lt;&lt; len
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; <span class=quote>") out of bounds for string \""</span> &lt;&lt; mystring &lt;&lt; <span class=quote>'\"'</span> &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(pos + len &gt; length())
+<br>&nbsp; &nbsp; &nbsp; &nbsp; len = length() - pos;
+<br>&nbsp; &nbsp; T *result = <span class=keyword>new</span> T[len + 1];
+<br>&nbsp; &nbsp; memcpy(result, mystring + pos, len * <span class=keyword>sizeof</span>(T));
+<br>&nbsp; &nbsp; result[len] = 0;
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(result);
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] result;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> T * <span class=keyword>const</span> to_copy)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] mystring;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//deallocate mem
+</span><br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[strlen(to_copy)+1];
+<br>&nbsp; &nbsp; strcpy(mystring, to_copy);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy string
+</span><br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> T ch)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] mystring;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//deallocate memory
+</span><br>&nbsp; &nbsp; mystring = <span class=keyword>new</span> T[2];
+<br>&nbsp; &nbsp; mystring[0] = ch;
+<br>&nbsp; &nbsp; mystring[1] = 0;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> pstringT&lt;T&gt; &copy)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span> = copy.c_str();&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//call T pointer copier
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> += (<span class=keyword>const</span> T * <span class=keyword>const</span> to_append)
+<br>{
+<br>&nbsp; &nbsp; T *newbuffer = <span class=keyword>new</span> T[length() + strlen(to_append) + 1];
+<br>&nbsp; &nbsp; strcpy(newbuffer, mystring);
+<br>&nbsp; &nbsp; strcat(newbuffer, to_append);
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] mystring;
+<br>&nbsp; &nbsp; mystring = newbuffer;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> += (<span class=keyword>const</span> pstringT&lt;T&gt; &to_append)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span> += to_append.c_str();&nbsp; <span class=comment>//append T pointer
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstringT&lt;T&gt; & pstringT&lt;T&gt;::<span class=keyword>operator</span> += (<span class=keyword>const</span> T to_append)
+<br>{
+<br>&nbsp; &nbsp; T *newstring = <span class=keyword>new</span> T[length()+2];
+<br>&nbsp; &nbsp; strcpy(newstring, mystring);
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] mystring;
+<br>&nbsp; &nbsp; mystring = newstring;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//points to new string
+</span><br>&nbsp; &nbsp; mystring[length()+1] = 0;&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//null terminator
+</span><br>&nbsp; &nbsp; mystring[length()] = to_append;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; & lval, <span class=keyword>const</span> pstringT&lt;T&gt; & rval)
+<br>{
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(lval);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return += rval;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; & lval, <span class=keyword>const</span> T & rval)
+<br>{
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(lval);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return += rval;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; <span class=keyword>operator</span> + (T lval, <span class=keyword>const</span> pstringT&lt;T&gt; & rval)
+<br>{
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(lval);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return += rval;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> pstringT&lt;T&gt; & lval, <span class=keyword>const</span> T * <span class=keyword>const</span> rval)
+<br>{
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(lval);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return += rval;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstringT&lt;T&gt; <span class=keyword>operator</span> + (<span class=keyword>const</span> T * <span class=keyword>const</span> lval, <span class=keyword>const</span> pstringT&lt;T&gt; & rval)
+<br>
+<br>{
+<br>&nbsp; &nbsp; pstringT&lt;T&gt; to_return(lval);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> to_return += rval;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>T & pstringT&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> n)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(n&lt;0 || n&gt;=length())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: index out of range: "</span> &lt;&lt; n &lt;&lt; <span class=quote>" in string \""</span>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; mystring &lt;&lt; <span class=quote>"\" of length "</span> &lt;&lt; length() &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> mystring[n];
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T pstringT&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> n) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(n&lt;0 || n&gt;=length())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: index out of range: "</span> &lt;&lt; n &lt;&lt; <span class=quote>" in string \""</span>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; mystring &lt;&lt; <span class=quote>"\" of length "</span> &lt;&lt; length() &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> mystring[n];
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> == (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(), rval.c_str()) == 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> != (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(),rval.c_str()) != 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> &lt; (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(), rval.c_str()) &lt; 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> &lt;= (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(), rval.c_str()) &lt;= 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> &gt; (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(), rval.c_str()) &gt; 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool operator</span> &gt;= (<span class=keyword>const</span> pstringT&lt;T&gt; &lval, <span class=keyword>const</span> pstringT&lt;T&gt; &rval)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> strcmp(lval.c_str(), rval.c_str()) &gt;= 0;
+<br>}
+<br></span><br>
+<h3>pvector</h3>
+
+
+<span class=code><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>class</span> pvector
+<br>{
+<br>
+<br><span class=keyword>public</span>:
+<br>&nbsp; &nbsp; pvector();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//default constructor
+</span><br>&nbsp; &nbsp; pvector(<span class=keyword>int</span> size);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//constructor with specific dimension
+</span><br>&nbsp; &nbsp; pvector(<span class=keyword>int</span> size, <span class=keyword>const</span> T &fill_val);&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//create a pvector with a default fill value
+</span><br>&nbsp; &nbsp; pvector(<span class=keyword>const</span> pvector&lt;T&gt; &);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy constructor
+</span><br>&nbsp; &nbsp; <span class=keyword>virtual</span> ~pvector();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//destructor
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> resize(<span class=keyword>int</span> new_size);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//resize the vector
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>inline int</span> length() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns number of elements in pvector
+</span><br>
+<br>&nbsp; &nbsp; T & <span class=keyword>operator</span> [] (<span class=keyword>int</span> index);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//access a particular array element (mutable)
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T & <span class=keyword>operator</span> [] (<span class=keyword>int</span> index) <span class=keyword>const</span>;&nbsp; &nbsp; <span class=comment>//access a particular array element (immutable)
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pvector&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> pvector&lt;T&gt; &); <span class=comment>//assignment operator
+</span><br>
+<br><span class=keyword>protected</span>:
+<br>&nbsp; &nbsp; T *array;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> len;
+<br>
+<br>};
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt;::pvector() :array(0), len(0)
+<br>{}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt;::pvector(<span class=keyword>int</span> size)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(size &lt;= 0)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: invalid pvector dimension: "</span> &lt;&lt; size &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; array = <span class=keyword>new</span> T[size];
+<br>&nbsp; &nbsp; len = size;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt;::pvector(<span class=keyword>int</span> size, <span class=keyword>const</span> T &fill_val)
+<br>{
+<br>&nbsp; &nbsp; array = <span class=keyword>new</span> T[size];
+<br>&nbsp; &nbsp; len = size;
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> i=0; i&lt;size; i++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[i] = fill_val;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt;::pvector(<span class=keyword>const</span> pvector&lt;T&gt; &vec)
+<br>{
+<br>&nbsp; &nbsp; array = <span class=keyword>new</span> T[vec.length()];
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> i=0; i&lt;vec.length(); i++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[i] = vec[i];
+<br>&nbsp; &nbsp; len = vec.length();
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt;::~pvector()
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] array;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pvector&lt;T&gt;::length() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> len;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>T & pvector&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> index)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(index &lt; 0 || index &gt;= length())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: index out of range: "</span> &lt;&lt; index
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; <span class=quote>" in pvector of length "</span> &lt;&lt; length() &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> array[index];
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T & pvector&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> index) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(index &lt; 0 || index &gt;= length())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: index out of range: "</span> &lt;&lt; index
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; <span class=quote>" in pvector of length "</span> &lt;&lt; length() &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> array[index];
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pvector&lt;T&gt; & pvector&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> pvector&lt;T&gt; & vec)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] array;
+<br>&nbsp; &nbsp; array = <span class=keyword>new</span> T[vec.length()];
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> i=0; i&lt;vec.length(); i++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[i] = vec[i];
+<br>&nbsp; &nbsp; len = vec.length();
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pvector&lt;T&gt;::resize(<span class=keyword>int</span> new_size)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(new_size &lt;= 0)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: invalid pvector dimension: "</span> &lt;&lt; new_size &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; T *newarray = <span class=keyword>new</span> T[new_size];
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>int</span> minsize = (new_size&lt;len)?new_size:len;
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> i=0; i&lt;minsize; i++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; newarray[i] = array[i];
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>delete</span>[] array;
+<br>&nbsp; &nbsp; array = newarray;
+<br>&nbsp; &nbsp; len = new_size;
+<br>}
+<br></span><br>
+<h3>pmatrix</h3>
+
+
+<span class=code><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>class</span> pmatrix
+<br>{
+<br>
+<br><span class=keyword>public</span>:
+<br>&nbsp; &nbsp; pmatrix();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//default constructor
+</span><br>&nbsp; &nbsp; pmatrix(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//constructor with dimensions
+</span><br>&nbsp; &nbsp; pmatrix(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols, <span class=keyword>const</span> T & fillvalue);&nbsp; &nbsp;<span class=comment>//constructor with default fill value
+</span><br>&nbsp; &nbsp; pmatrix(<span class=keyword>const</span> pmatrix&lt;T&gt; &);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy constructor
+</span><br>&nbsp; &nbsp; <span class=keyword>virtual</span> ~pmatrix();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//destructor
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> resize(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//change matrix dimensions
+</span><br>&nbsp; &nbsp; <span class=keyword>inline int</span> numrows() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//returns number of rows in pmatrix
+</span><br>&nbsp; &nbsp; <span class=keyword>inline int</span> numcols() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//returns number of columns in pmatrix
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>inline</span> pvector&lt;T&gt; & <span class=keyword>operator</span> [] (<span class=keyword>int</span> index);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//access a particular array element (mutable)
+</span><br>&nbsp; &nbsp; <span class=keyword>inline const</span> pvector&lt;T&gt; & <span class=keyword>operator</span> [] (<span class=keyword>int</span> index) <span class=keyword>const</span>;<span class=comment>//access a particular array element (immutable)
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pmatrix&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> pmatrix&lt;T&gt; &);&nbsp; &nbsp; &nbsp;<span class=comment>//assignment operator
+</span><br>
+<br><span class=keyword>protected</span>:
+<br>&nbsp; &nbsp; pvector&lt; pvector&lt;T&gt; &gt; matrix;
+<br>
+<br>};
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pmatrix&lt;T&gt;::pmatrix()
+<br>{}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pmatrix&lt;T&gt;::pmatrix(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols)
+<br>{
+<br>&nbsp; &nbsp; resize(rows,cols);
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pmatrix&lt;T&gt;::pmatrix(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols, <span class=keyword>const</span> T & fillvalue)
+<br>{
+<br>&nbsp; &nbsp; resize(rows,cols);
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> x = 0; x &lt; rows; x++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> y = 0; y &lt; cols; y++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; matrix[x][y] = fillvalue;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pmatrix&lt;T&gt;::pmatrix(<span class=keyword>const</span> pmatrix&lt;T&gt; & copy)
+<br>{
+<br>&nbsp; &nbsp; *<span class=keyword>this</span> = copy;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pmatrix&lt;T&gt;::~pmatrix()
+<br>{}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pmatrix&lt;T&gt;::numrows() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> matrix.length();
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pmatrix&lt;T&gt;::numcols() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> (matrix.length())?matrix[0].length():0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pmatrix&lt;T&gt;::resize(<span class=keyword>int</span> rows, <span class=keyword>int</span> cols)
+<br>{
+<br>&nbsp; &nbsp; matrix.resize(rows);
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(<span class=keyword>int</span> x = 0; x &lt; rows; x++)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; matrix[x].resize(cols); <span class=comment>//resize each individual vector
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pmatrix&lt;T&gt; & pmatrix&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> pmatrix&lt;T&gt; & copy)
+<br>{
+<br>&nbsp; &nbsp; matrix = copy.matrix;&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//copy vector of vectors
+</span><br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pvector&lt;T&gt; & pmatrix&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> index) <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> matrix[index];
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pvector&lt;T&gt; & pmatrix&lt;T&gt;::<span class=keyword>operator</span> [] (<span class=keyword>int</span> index)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> matrix[index];
+<br>}
+<br></span><br>
+<h3>pstack</h3>
+
+
+<span class=code><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>class</span> pstack
+<br>{
+<br>
+<br><span class=keyword>public</span>:
+<br>&nbsp; &nbsp; pstack();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//default constructor
+</span><br>&nbsp; &nbsp; pstack(<span class=keyword>const</span> pstack&lt;T&gt; &);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy constructor
+</span><br>&nbsp; &nbsp; <span class=keyword>virtual</span> ~pstack();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//destructor
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> push(T storage);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//push data onto stack
+</span><br>&nbsp; &nbsp; <span class=keyword>void</span> pop(T & storage);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//pop data off stack and store in parameter
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T pop();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//pop data off stack and return
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T top() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns top value without popping
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> makeEmpty();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//empty the stack
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>inline bool</span> isEmpty() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns true if stack is empty
+</span><br>&nbsp; &nbsp; <span class=keyword>inline int</span> length() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns number of elements on stack
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pstack&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> pstack&lt;T&gt; &);&nbsp; &nbsp;<span class=comment>//assignment operator
+</span><br>
+<br><span class=keyword>protected</span>:
+<br>&nbsp; &nbsp; <span class=keyword>struct</span> node
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; T data;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node *next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node() :next(0) {}
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node(<span class=keyword>const</span> T & a) :next(0), data(a) {}
+<br>&nbsp; &nbsp; } *sp;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> size;
+<br>
+<br>};
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstack&lt;T&gt;::pstack() :sp(0), size(0)
+<br>{}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstack&lt;T&gt;::pstack(<span class=keyword>const</span> pstack&lt;T&gt; &copy) :sp(0), size(0)
+<br>{
+<br>&nbsp; &nbsp; *<span class=keyword>this</span> = copy;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pstack&lt;T&gt;::~pstack()
+<br>{
+<br>&nbsp; &nbsp; makeEmpty();
+<br>}
+<br>
+<br><span class=comment>//push a value onto the stack
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pstack&lt;T&gt;::push(T storage)
+<br>{
+<br>&nbsp; &nbsp; <span class=comment>//create new data
+</span><br>&nbsp; &nbsp; node *newnode = <span class=keyword>new</span> node;
+<br>
+<br>&nbsp; &nbsp; newnode-&gt;next=sp;
+<br>&nbsp; &nbsp; newnode-&gt;data=storage;
+<br>&nbsp; &nbsp; sp = newnode;
+<br>&nbsp; &nbsp; ++size;
+<br>}
+<br>
+<br><span class=comment>//pop a value off of stack
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pstack&lt;T&gt;::pop(T & storage)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(isEmpty())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: accessing empty stack through method pstack::pop\n"</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; <span class=comment>//store data
+</span><br>&nbsp; &nbsp; storage = sp-&gt;data;
+<br>
+<br>&nbsp; &nbsp; <span class=comment>//delete node and move stack pointer back one
+</span><br>&nbsp; &nbsp; node *temp = sp;
+<br>&nbsp; &nbsp; sp = sp-&gt;next;
+<br>&nbsp; &nbsp; <span class=keyword>delete</span> temp;
+<br>&nbsp; &nbsp; --size;
+<br>}
+<br>
+<br><span class=comment>//pop a value off of stack and return it
+</span><br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T pstack&lt;T&gt;::pop()
+<br>{
+<br>&nbsp; &nbsp; T val;
+<br>&nbsp; &nbsp; pop(val);
+<br>&nbsp; &nbsp; <span class=keyword>return</span> val;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T pstack&lt;T&gt;::top() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(isEmpty())
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: accessing empty stack through method pstack::top\n"</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>return</span> sp-&gt;data;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pstack&lt;T&gt;::length() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> size;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pstack&lt;T&gt;::makeEmpty()
+<br>{
+<br>&nbsp; &nbsp; node *temp;
+<br>&nbsp; &nbsp; <span class=comment>//iterate through list, deleting each elements
+</span><br>&nbsp; &nbsp; <span class=keyword>while</span>(sp!=0)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; temp = sp;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; sp = sp-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>delete</span> temp;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; size = 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool</span> pstack&lt;T&gt;::isEmpty() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> size == 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pstack&lt;T&gt; & pstack&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> pstack&lt;T&gt; & copy)
+<br>{
+<br>&nbsp; &nbsp; makeEmpty();
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(copy.isEmpty())
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>
+<br>&nbsp; &nbsp; sp = <span class=keyword>new</span> node(copy.sp-&gt;data);
+<br>&nbsp; &nbsp; node *newnode,*end = sp;
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(newnode = copy.sp-&gt;next; newnode; newnode = newnode-&gt;next)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; end-&gt;next = <span class=keyword>new</span> node(newnode-&gt;data);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; end = end-&gt;next;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; size = copy.size;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br></span><br>
+<h3>pqueue</h3>
+
+
+<span class=code><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>class</span> pqueue
+<br>{
+<br>
+<br><span class=keyword>public</span>:
+<br>&nbsp; &nbsp; pqueue();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//default constructor
+</span><br>&nbsp; &nbsp; pqueue(<span class=keyword>const</span> pqueue&lt;T&gt; &);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//copy constructor
+</span><br>&nbsp; &nbsp; <span class=keyword>virtual</span> ~pqueue();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//destructor
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> enqueue(<span class=keyword>const</span> T &data);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//enqueue data to queue
+</span><br>&nbsp; &nbsp; <span class=keyword>void</span> dequeue(T &storage);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//storage holds the data that is dequeued
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T dequeue();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//dequeue to return value
+</span><br>&nbsp; &nbsp; <span class=keyword>const</span> T & front() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns top value without dequeueing
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>void</span> makeEmpty();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//empty the queue
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>inline bool</span> isEmpty() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//returns true if queue is empty
+</span><br>&nbsp; &nbsp; <span class=keyword>inline int</span> length() <span class=keyword>const</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//find out the number of queued items
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>const</span> pqueue&lt;T&gt; & <span class=keyword>operator</span> = (<span class=keyword>const</span> pqueue&lt;T&gt; &);&nbsp; &nbsp;<span class=comment>//assignment operator
+</span><br>
+<br><span class=keyword>protected</span>:
+<br>&nbsp; &nbsp; <span class=keyword>struct</span> node
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; T data;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node *next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node() :next(0) {}
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node(<span class=keyword>const</span> T &a) :next(0), data(a) {}
+<br>&nbsp; &nbsp; } *head, *tail;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> size;
+<br>
+<br>};
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pqueue&lt;T&gt;::pqueue() :head(0), tail(0), size(0)
+<br>{}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pqueue&lt;T&gt;::pqueue(<span class=keyword>const</span> pqueue&lt;T&gt; &copy) :head(0), tail(0), size(0)
+<br>{
+<br>&nbsp; &nbsp; *<span class=keyword>this</span> = copy;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br>pqueue&lt;T&gt;::~pqueue()
+<br>{
+<br>&nbsp; &nbsp; makeEmpty();
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pqueue&lt;T&gt;::enqueue(<span class=keyword>const</span> T &data)
+<br>{
+<br>&nbsp; &nbsp; node *newnode = <span class=keyword>new</span> node(data); <span class=comment>//end of queue
+</span><br>
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(size==0) <span class=comment>//make sure queue exists
+</span><br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; head = newnode;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; tail = head;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>else</span>
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; tail-&gt;next = newnode;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; tail = newnode;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; ++size;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pqueue&lt;T&gt;::dequeue(T &storage)
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(head==0)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: accessing empty queue through method pqueue::dequeue\n"</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; storage = head-&gt;data;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//save to var
+</span><br>&nbsp; &nbsp; node *temp = head;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//make a new node
+</span><br>&nbsp; &nbsp; head = head-&gt;next;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//iterate
+</span><br>&nbsp; &nbsp; <span class=keyword>delete</span> temp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//delete the node
+</span><br>&nbsp; &nbsp; --size;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//decrement size
+</span><br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T pqueue&lt;T&gt;::dequeue()
+<br>{
+<br>&nbsp; &nbsp; T val;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>//store to temporary variable
+</span><br>&nbsp; &nbsp; dequeue(val);&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//dequeue
+</span><br>&nbsp; &nbsp; <span class=keyword>return</span> val;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> T & pqueue&lt;T&gt;::front() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(head==0)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cerr &lt;&lt; <span class=quote>"\nError: accessing empty queue through method pqueue::front\n"</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; exit(1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> head-&gt;data;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>void</span> pqueue&lt;T&gt;::makeEmpty()
+<br>{
+<br>&nbsp; &nbsp; node *temp;
+<br>&nbsp; &nbsp; <span class=keyword>while</span>(head)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; temp = head;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; head = head-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>delete</span> temp;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; size = 0;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>const</span> pqueue&lt;T&gt; & pqueue&lt;T&gt;::<span class=keyword>operator</span> = (<span class=keyword>const</span> pqueue&lt;T&gt; & copy)
+<br>{
+<br>&nbsp; &nbsp; makeEmpty();
+<br>&nbsp; &nbsp; <span class=keyword>if</span>(copy.isEmpty())
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>
+<br>&nbsp; &nbsp; head = <span class=keyword>new</span> node(copy.head-&gt;data);
+<br>&nbsp; &nbsp; tail = head;
+<br>&nbsp; &nbsp; node *newnode;
+<br>&nbsp; &nbsp; <span class=keyword>for</span>(newnode = copy.head-&gt;next; newnode; newnode = newnode-&gt;next)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; tail-&gt;next = <span class=keyword>new</span> node(newnode-&gt;data);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; tail = tail-&gt;next;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; size = copy.size;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> *<span class=keyword>this</span>;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>int</span> pqueue&lt;T&gt;::length() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> size;
+<br>}
+<br>
+<br><span class=keyword>template</span> &lt;<span class=keyword>class</span> T&gt;
+<br><span class=keyword>bool</span> pqueue&lt;T&gt;::isEmpty() <span class=keyword>const</span>
+<br>{
+<br>&nbsp; &nbsp; <span class=keyword>return</span> size == 0;
+<br>}
+<br></span><p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap23.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

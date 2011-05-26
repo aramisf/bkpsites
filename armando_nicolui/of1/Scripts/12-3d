@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Um array vazio NAO EH a mesma coisa que um array com ELEMENTOS vazios
+
+array_0=( primeiro segundo terceiro )
+array_1=( '' )   # "array_1" tem um elemento vazio.
+array_2=( )      # Nenhum elemento ... "array_2" estah vazio.
+
+echo
+
+echo "Elementos do array_0:  ${array_0[@]}"
+echo "Elementos do array_1:  ${array_1[@]}"
+echo "Elementos do array_2:  ${array_2[@]}"
+echo
+echo "Comprimento do 1o. elemento do array_0 = ${#array_0[0]}"
+echo "Comprimento do 1o. elemento do array_1 = ${#array_1[0]}"
+echo "Comprimento do 1o. elemento do array_2 = ${#array_2[0]}"
+echo
+echo "Numero de elementos no array_0 = ${#array_0[*]}"  # 3
+echo "Numero de elementos no array_1 = ${#array_1[*]} (SURPRESA !!)" # 1
+echo "Numero de elementos no array_2 = ${#array_2[*]}"  # 0
+
+echo
+
+# Copiando um array.
+array_2=( "${array_0[@]}" )
+echo "Elementos do array_2:  ${array_2[@]}"
+echo "Elemento 0 do array_2:  ${array_2[0]}"
+echo "Elemento 1 do array_2:  ${array_2[1]}"
+echo "Elemento 2 do array_2:  ${array_2[2]}"
+# ou
+array_2="${array_0[@]}"
+echo "Elementos do array_2:  ${array_2[@]}"
+echo "Elemento 0 do array_2:  ${array_2[0]}"
+echo "Elemento 1 do array_2:  ${array_2[1]}"
+echo "Elemento 2 do array_2:  ${array_2[2]}"
+
+# Adicionando um elemento ao array
+array_2=( "${array_2[@]}" "novo elemento" )
+echo "Elementos do array_2:  ${array_2[@]}"
+echo "Elemento 0 do array_2:  ${array_2[0]}"
+echo "Elemento 1 do array_2:  ${array_2[1]}"
+echo "Elemento 2 do array_2:  ${array_2[2]}"
+echo "Elemento 3 do array_2:  ${array_2[3]}"
+echo "Elemento 4 do array_2:  ${array_2[4]}"
+# ou
+array_2[${#array_2[*]}]="novo elemento 2"
+echo "Elementos do array_2:  ${array_2[@]}"
+echo "Elemento 0 do array_2:  ${array_2[0]}"
+echo "Elemento 1 do array_2:  ${array_2[1]}"
+echo "Elemento 2 do array_2:  ${array_2[2]}"
+echo "Elemento 3 do array_2:  ${array_2[3]}"
+echo "Elemento 4 do array_2:  ${array_2[4]}"
+
+exit 0
+

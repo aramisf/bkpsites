@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 16: Pointers and References</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap17.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap15.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 16</h2>
+
+<h1>Pointers and References</h1>
+ \author{Paul Bui}
+
+<p>I suppose the easiest way to explain pointers and references is to jump right into an example.  Let's first take a look at some Algebra:</p>
+
+
+
+<table align=center><tr><td><tt>
+x = 1
+</tt></td></tr></table>
+
+<p>In Algebra, when you use a variable, it is essentially a letter or designation that you use to store some number.  In programming, the variable in the equation above must be on the left side.  You've probably noticed by now that the compiler won't let you do something like this:</p>
+
+
+<span class=code>1 = x;
+<br></span><p>And if you didn't know this...now you know, and knowing is half the battle.  The reason why you receive a compile-time error like "lvalue required in..." is because the left hand side of the equation, traditionally referred to as the <b>lvalue</b>, must be an address in memory.  Think about it for a second.  If you wanted to store some data somewhere, you first need to know where you're going to store it before the action can take place.  The <b>lvalue</b> is the address of the place in memory where you're going to store the information and/or data of the right hand side of the equation, better known as the <b>rvalue</b>.</p>
+
+<p>In C++, you will most likely at one point or another, deal with memory management.  To manipulate addresses, C++ has two mechanisms: <b>pointers</b> and <b>references</b>.</p>
+
+<a name=1></a><br>
+<h3>16.1 What are pointers and references?</h3>
+
+<p>Pointers and references are essentially variables that hold memory addresses as their values.  You learned before about the various different data types such as: <span class=code><span class=keyword>int</span></span>, <span class=code><span class=keyword>double</span></span>, and <span class=code><span class=keyword>char</span></span>. Pointers and references hold the addresses in memory of where you find the data of the various data types that you have declared and assigned. The two mechanisms, pointers and references, have different syntax and different traditional uses.</p>
+
+<a name=2></a><br>
+<h3>16.2 Declaring pointers and references</h3>
+
+<p>When declaring a pointer to an object or data type, you basically follow the same rules of declaring variables and data types that you have been using, only now, to declare a pointer of <span class=code>SOMETYPE</span>, you tack on an asterix <span class=code>*</span> between the data type and its variable.</p>
+
+
+<span class=code>SOMETYPE* sometype;
+<br>
+<br><span class=keyword>int</span>* x;
+<br></span><p>To declare a reference, you do the exact same thing you did to declare a pointer, only this time, rather than using an asterix <span class=code>*</span>, use instead an ampersand <span class=code>&</span>.</p>
+
+
+<span class=code>SOMETYPE& sometype;
+<br>
+<br><span class=keyword>int</span>& x;
+<br></span><p>As you probably have already learned, spacing in C++ does not matter, so the following pointer declarations are identical:</p>
+
+
+<span class=code>SOMETYPE*&nbsp; sometype;
+<br>SOMETYPE * sometype;
+<br>SOMETYPE&nbsp; *sometype;
+<br></span><p>The following reference declarations are identical as well:</p>
+
+
+<span class=code>SOMETYPE&&nbsp; sometype;
+<br>SOMETYPE & sometype;
+<br>SOMETYPE&nbsp; &sometype;
+<br></span><a name=3></a><br>
+<h3>16.3 The "address of" operator</h3>
+
+<p>Although declaring pointers and references look similar, assigning them is a whole different story.  In C++, there is another operator that you'll get to know intimately, the "address of" operator, which is denoted by the ampersand <span class=code>&</span> symbol.  The "address of" operator does exactly what it says, it returns the "address of" a variable, a symbolic constant, or a element in an array, in the form of a pointer of the corresponding type.  To use the "address of" operator, you tack it on in front of the variable that you wish to have the address of returned.</p>
+
+
+<span class=code>SOMETYPE* x = &sometype; <span class=comment>// must be used as rvalue
+</span><br></span><p>Now, do not confuse the "address of" operator with the declaration of a reference.  Because use of operators is restricted to rvalues, or to the right hand side of the equation, the compiler knows that <span class=code>&SOMETYPE</span> is the "address of" operator being used to denote the return of the address of <span class=code>SOMETYPE</span> as a pointer.</p>
+
+<p>Furthermore, if you have a function which has a pointer as an argument, you may use the "address of" operator on a variable to which you have not already set a pointer to point.  By doing this, you do not necessarily have to declare a pointer just so that it is used as an argument in a function, the "address of" operator returns a pointer and thus can be used in that case too.</p>
+
+
+<span class=code>SOMETYPE MyFunc(SOMETYPE *x)
+<br>{
+<br>&nbsp; cout &lt;&lt; *x &lt;&lt; endl;
+<br>}
+<br>
+<br><span class=keyword>int</span> main()
+<br>{
+<br>&nbsp; SOMETYPE i;
+<br>
+<br>&nbsp; MyFunc(&i);
+<br>
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><a name=4></a><br>
+<h3>16.4 Assigning pointers and references</h3>
+
+<p>As you saw in the syntax of using the "address of" operator, a pointer is assigned to the return value of the "address of" operator.  Because the return value of an "address of" operator is a pointer, everything works out and your code should compile.  To assign a pointer, it must be given an address in memory as the rvalue, else, the compiler will give you an error.</p>
+
+
+<span class=code><span class=keyword>int</span> x;
+<br><span class=keyword>int</span>* px = &x;
+<br></span><p>The above piece of code shows a variable <span class=code>x</span> of type <span class=code><span class=keyword>int</span></span> being declared, and then a pointer <span class=code>px</span> being declared and assigned to the address in memory of <span class=code>x</span>.  The pointer <span class=code>px</span> essentially "points" to <span class=code>x</span> by storing its address in memory. Keep in mind that when declaring a pointer, the pointer needs to be of the same type pointer as the variable or constant from which you take the address.</p>
+
+<p>Now here is where you begin to see the differences between pointers and references.  To assign a pointer to an address in memory, you had to have used the "address of" operator to return the address in memory of the variable as a pointer.  A reference however, does not need to use the "address of" operator to be assigned to an address in memory.  To assign an address in memory of a variable to a reference, you just need to use the variable as the rvalue.</p>
+
+
+<span class=code><span class=keyword>int</span> x;
+<br><span class=keyword>int</span>& rx = x;
+<br></span><p>The above piece of code shows a variable <span class=code>x</span> of type <span class=code><span class=keyword>int</span></span> being declared, and then a reference <span class=code>rx</span> being declared and assigned to "refer to" <span class=code>x</span>.  Notice how the address of <span class=code>x</span> is stored in <span class=code>rx</span>, or "referred to" by <span class=code>rx</span> without the use of any operators, just the variable.  You must also follow the same rule as pointers, wherein you must declare the same type reference as the variable or constant to which you refer.</p>
+
+<p>Hypothetically, if you wanted to see what output a pointer would be...</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>
+<br><span class=keyword>int</span> main()
+<br>{
+<br>&nbsp; <span class=keyword>int</span> someNumber = 12345;
+<br>&nbsp; <span class=keyword>int</span>* ptrSomeNumber = &someNumber;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"someNumber = "</span> &lt;&lt; someNumber &lt;&lt; endl;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"ptrSomeNumber = "</span> &lt;&lt; ptrSomeNumber &lt;&lt; endl;
+<br>
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><p>If you compiled and ran the above code, you would have the variable <span class=code>someNumber</span> output <span class=code>12345</span> while <span class=code>ptrSomeNumber</span> would output some hexadecimal number (addresses in memory are represented in hex). Now, if you wanted to <span class=code>cout</span> the value pointed to by <span class=code>ptrSomeNumber</span>, you would use this code:</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>
+<br><span class=keyword>int</span> main()
+<br>{
+<br>&nbsp; <span class=keyword>int</span> someNumber = 12345;
+<br>&nbsp; <span class=keyword>int</span>* ptrSomeNumber = &someNumber;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"someNumber = "</span> &lt;&lt; someNumber &lt;&lt; endl;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"ptrSomeNumber points to "</span> &lt;&lt; *ptrSomeNumber &lt;&lt; endl;
+<br>
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><p>So basically, when you want to use, modify, or manipulate the value pointed to by pointer <span class=code>x</span>, you denote the value/variable with <span class=code>*x</span>.</p>
+
+<p>Here is a quick list of things you can do with pointers and references:</p>
+
+<ul> <li>You can assign pointers to "point to" addresses in memory </li><li>You can assign references to "refer to" variables or constants </li><li>You can copy the values of pointers to other pointers </li><li>You can modify the values stored in the memory pointed to or referred to by pointers and/or references, respectively </li><li>You can also increment or decrement the addresses stored in pointers </li><li>You can pass pointers and/or references to functions (Further information on "Passing by reference" can be found HERE) </li></ul>
+
+<a name=5></a><br>
+<h3>16.5 The Null pointer</h3>
+
+<p>Remember how you can assign a character or string to be <b>null</b>?  If you don't remember, check out HERE.  The <b>null</b> character in a string denotes the end of a string, however, if a pointer were to be assigned to the <span class=code>null</span> pointer, it points to nothing.  The null pointer is often denoted by <span class=code>0</span> or <span class=code>null</span>.  The <span class=code>null</span> pointer is often used in conditions and/or in logical operations.</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>
+<br><span class=keyword>int</span> main()
+<br>{
+<br>&nbsp; <span class=keyword>int</span> x = 12345;
+<br>&nbsp; <span class=keyword>int</span>* px = &x;
+<br>
+<br>&nbsp; <span class=keyword>while</span> (px) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Pointer px points to something\n"</span>;
+<br>&nbsp; &nbsp; px = 0;
+<br>&nbsp; }
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Pointer px points to null, nothing, nada!\n"</span>;
+<br>
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><p>If pointer <span class=code>px</span> is NOT null, then it is pointing to something, however, if the pointer is null, then it is pointing to nothing. The null pointer becomes very useful when you must test the state of a pointer, whether it has a value or not.</p>
+
+<a name=6></a><br>
+<h3>16.6 Dynamic Memory Allocation</h3>
+
+<p>You have probably wondered how programmers allocate memory efficiently without knowing, prior to running the program, how much memory will be necessary.  Here is when the fun starts with dynamic memory allocation.</p>
+
+<p>Several sections ago, we learned about assigning pointers using the "address of" operator because it returned the address in memory of the variable or constant in the form of a pointer.  Now, the "address of" operator is NOT the only operator that you can use to assign a pointer. In C++ you have yet another operator that returns a pointer, which is the <b>new</b> operator.  The <span class=code><span class=keyword>new</span></span> operator allows the programmer to allocate memory for a specific data type, struct, class, etc, and gives the programmer the address of that allocated sect of memory in the form of a pointer.  The <span class=code><span class=keyword>new</span></span> operator is used as an rvalue, similar to the "address of" operator.  Take a look at the code below to see how the <span class=code><span class=keyword>new</span></span> operator works.</p>
+
+
+<span class=code><span class=keyword>int</span> n = 10;
+<br>SOMETYPE *parray, *pS;
+<br><span class=keyword>int</span> *pint;
+<br>
+<br>parray = <span class=keyword>new</span> SOMETYPE[n];
+<br>pS = <span class=keyword>new</span> SOMETYPE;
+<br>pint = <span class=keyword>new int</span>;
+<br></span><p>By assigning the pointers to an allocated sect of memory, rather than having to use a variable declaration, you basically override the "middleman" (the variable declaration.  Now, you can allocate memory dynamically without having to know the number of variables you should declare.  If you looked at the above piece of code, you can use the <span class=code><span class=keyword>new</span></span> operator to allocate memory for arrays too, which comes quite in handy when we need to manipulate the sizes of large arrays and or classes efficiently.  The memory that your pointer points to because of the <span class=code><span class=keyword>new</span></span> operator can also be "deallocated," not destroyed but rather, freed up from your pointer.  The <span class=code><span class=keyword>delete</span></span> operator is used in front of a pointer and frees up the address in memory to which the pointer is pointing.</p>
+
+
+<span class=code><span class=keyword>delete</span> parray;
+<br><span class=keyword>delete</span> pint;
+<br></span><p>The memory pointed to by <span class=code>parray</span> and <span class=code>pint</span> have been freed up, which is a very good thing because when you're manipulating multiple large arrays, you try to avoid losing the memory someplace by leaking it. Any allocation of memory needs to be properly deallocated or a leak will occur and your program won't run efficiently.  Essentially, every time you use the <span class=code><span class=keyword>new</span></span> operator on something, you should use the <span class=code><span class=keyword>delete</span></span> operator to free that memory before exiting.  The <span class=code><span class=keyword>delete</span></span> operator, however, not only can be used to delete a pointer allocated with the <span class=code><span class=keyword>new</span></span> operator, but can also be used to "delete" a null pointer, which prevents attempts to delete non-allocated memory (this actions compiles and does nothing).</p>
+
+<p>The <span class=code><span class=keyword>new</span></span> and <span class=code><span class=keyword>delete</span></span> operators do not have to be used in conjunction with each other within the same function or block of code. It is proper and often advised to write functions that allocate memory and other functions that deallocate memory.</p>
+
+<a name=7></a><br>
+<h3>16.7 Returning pointers and/or references from functions</h3>
+
+<p>When declaring a function, you must declare it in terms of the type that it will return, for example:</p>
+
+
+<span class=code><span class=keyword>int</span> MyFunc(); <span class=comment>// returns an int
+</span><br>SOMETYPE MyFunc(); <span class=comment>// returns a SOMETYPE
+</span><br>
+<br><span class=keyword>int</span>* MyFunc(); <span class=comment>// returns a pointer to an int
+</span><br>SOMETYPE *MyFunc(); <span class=comment>// returns a pointer to a SOMETYPE
+</span><br>SOMETYPE &MyFunc(); <span class=comment>// returns a reference to a SOMETYPE
+</span><br>
+<br></span><p>Woah, my a-paul-igies, I didn't mean to jump right into it, but I'm pretty sure that if you're understanding pointers, the declaration of a function that returns a pointer or a reference should seem relatively logical.  The above piece of code shows how to basically declare a function that will return a reference or a pointer.</p>
+
+
+<span class=code>SOMETYPE *MyFunc(<span class=keyword>int</span> *p)
+<br>{
+<br>&nbsp; &nbsp;...
+<br>&nbsp; &nbsp;...
+<br>&nbsp; &nbsp;<span class=keyword>return</span> p;
+<br>}
+<br>
+<br>SOMETYPE &MyFunc(<span class=keyword>int</span> &r)
+<br>{
+<br>&nbsp; ...
+<br>&nbsp; ...
+<br>&nbsp; <span class=keyword>return</span> r;
+<br>}
+<br></span><p>Within the body of the function, the <span class=code><span class=keyword>return</span></span> statement should NOT return a pointer or a reference that has the address in memory of a local variable that was declared within the function, else, as soon as the function exits, all local variables ar destroyed and  your pointer or reference will be pointing to some place in memory that you really do not care about.  Having a dangling pointer like that is quite inefficient and dangerous outside of your function.</p>
+
+<p>However, within the body of your function, if your pointer or reference has the address in memory of a data type, struct, or class that you dynamically allocated the memory for, using the <span class=code><span class=keyword>new</span></span> operator, then returning said pointer or reference would be reasonable.</p>
+
+
+<span class=code>SOMETYPE *MyFunc()&nbsp; <span class=comment>//returning a pointer that has a dynamically
+</span><br>{&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>//allocated memory address is proper code
+</span><br>&nbsp; &nbsp;<span class=keyword>int</span> *p = <span class=keyword>new int</span>[5];
+<br>&nbsp; &nbsp;...
+<br>&nbsp; &nbsp;...
+<br>&nbsp; &nbsp;<span class=keyword>return</span> p;
+<br>}
+<br></span><a name=8></a><br>
+<h3>16.8 Glossary</h3>
+
+<dl> <dt>pointer</dt>
+<dd>a variable that holds an address in memory.  Similar to a reference, however, pointers have different syntax and traditional uses from references. </dd><dt>reference</dt>
+<dd>a variable that holds an address in memory.  Similar to a pointer, however, references have different syntax and traditional uses from pointers. </dd><dt>"address of" operator</dt>
+<dd>an operator that returns the address in memory of a variable. </dd><dt>dynamic memory allocation</dt>
+<dd>the explicit allocation of contiguous blocks of memory at any time in a program. </dd><dt>new</dt>
+<dd>an operator that returns a pointer of the appropriate data type, which points to the reserved place. </dd><dt>delete</dt>
+<dd>an operator that returns the memory pointed to by a pointer to the free store (a special pool of free memory that each program has)</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap17.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap15.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

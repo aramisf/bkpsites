@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while ! cp $1 $2
+do
+  echo "Tentativa em copiar $1 para $2 falhou. Aguardando ..."
+  sleep 5
+done
+

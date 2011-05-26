@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 05
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 05
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>Notas de Aula # 05
+<BR>2&ordm;&nbsp;semestre 2003</H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Entrada e Sa&#237;da Padr&#227;o em UNIX</A>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION00010010000000000000">
+Refer&#234;ncia b&#225;sica: Cap&#237;tulo 5, se&#231;&#227;o 5.5 da Apostila Linux B&#225;sico (<A
+ HREF="teoria.html#pet02a">1</A>)</A>
+</H4>
+
+<P>
+<DL>
+<DT><STRONG>Entrada:</STRONG></DT>
+<DD>dados que s&#227;o passados  a um programa, seja via teclado
+  de um terminal, seja pela leitura de um arquivo em disco;
+  <DL>
+<DT><STRONG>Entrada  Padr&#227;o:</STRONG></DT>
+<DD>Teclado.  Tamb&#233;m  denominado <I>Standard
+  Input</I> ou <I>STDIN</I>.
+  
+</DD>
+</DL>
+</DD>
+<DT><STRONG>Sa&#237;da:</STRONG></DT>
+<DD>mensagens que s&#227;o  geradas por um programa como resultado
+  do  processamento associado  que s&#227;o  e disponibilizadas  ao usu&#225;rio,
+  geralmente via terminal;
+  <DL>
+<DT><STRONG>Sa&#237;da  Padr&#227;o:</STRONG></DT>
+<DD>Tela  do  terminal  de  onde  o  programa  foi
+    iniciado.    Tamb&#233;m    denominado   <I>Standard   Output</I>   ou
+    <I>STDOUT</I>.
+  
+</DD>
+</DL>
+</DD>
+<DT><STRONG>Sa&#237;da de Erros:</STRONG></DT>
+<DD>mensagens indicativas de erros ou avisos que s&#227;o
+  geradas por um programa e disponibilizadas ao usu&#225;rio, geralmente via
+  terminal;
+  <DL>
+<DT><STRONG>Sa&#237;da Padr&#227;o de Erros:</STRONG></DT>
+<DD>Tela do terminal de onde o programa foi
+    iniciado.   Tamb&#233;m  denominado  <I>Standard Error  Output</I>  ou
+    <I>STDERR</I>.
+  
+</DD>
+</DL>
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Redirecionamento de Entrada e Sa&#237;da Padr&#227;o em UNIX</A>
+</H1>
+
+<P>
+Forma de desviar o local de onde um programa l&#234; ou escreve informa&#231;&#245;es:
+
+<P>
+<DL>
+<DT><STRONG>Entrada Padr&#227;o:</STRONG></DT>
+<DD>redireciona-se com o caracter <B>&nbsp;&lt;&nbsp;</B>
+</DD>
+<DT><STRONG>Sa&#237;da Padr&#227;o:</STRONG></DT>
+<DD>redireciona-se com o caracter <B>&nbsp;&gt;&nbsp;</B>
+</DD>
+<DT><STRONG>Sa&#237;da Padr&#227;o de  Erros:</STRONG></DT>
+<DD>redireciona-se com <B>&nbsp;2&gt;&nbsp;</B>
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>Exemplos:</STRONG></DT>
+<DD> 
+<BR>  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat <FONT SIZE=3>~</FONT>/yes.rsp</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">y</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>rm -i <FONT SIZE=3>~</FONT>ci066/texto &nbsp;&lt;&nbsp;<FONT SIZE=3>~</FONT>/yes.rsp</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">rm: remove 'no'?</FONT><BR><FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls -lR <FONT SIZE=3>~</FONT>ci066/LabNum4 &nbsp;&gt;&nbsp;<FONT SIZE=3>~</FONT>/LabNum4.txt</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find /home/grad/*02 -print &nbsp;&gt;&nbsp;<FONT SIZE=3>~</FONT>/files.txt &nbsp;2&gt;&nbsp;<FONT SIZE=3>~</FONT>/erros.txt</B></FONT><BR>
+  
+</DD>
+</DL>
+
+<P>
+O redirecionamento &#233; destrutivo, isto &#233;, ele apaga o conte&#250;do anterior
+do arquivo para onde ser&#225; redirecionada a sa&#237;da.
+
+<P>
+&#201;   poss&#237;vel  redirecionamento   N&#195;O-DESTRUTIVO.    Usa-se  a   nota&#231;&#227;o
+<B>&nbsp;&#187;&nbsp;</B> no lugar de <B>&nbsp;&gt;&nbsp;</B> e implica em ACRESCENTAR a sa&#237;da
+ao FINAL do arquivo para onde est&#225; sendo feito o redirecionamento.
+
+<P>
+<DL>
+<DT><STRONG>Exemplos:</STRONG></DT>
+<DD> 
+<BR> 
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls -lR <FONT SIZE=3>~</FONT>ci066/LabNum4 &nbsp;&gt;&nbsp;<FONT SIZE=3>~</FONT>/Arquivos.txt</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066 -print &nbsp;&#187;&nbsp;<FONT SIZE=3>~</FONT>/Arquivos.txt &nbsp;2&gt;&nbsp;/dev/null</B></FONT><BR>
+  
+</DD>
+</DL>
+
+<P>
+Quando o  usu&#225;rio deseja  que a sa&#237;da  padr&#227;o ou  a sa&#237;da de  erros N&#195;O
+sejam exibidas na tela do terminal e tampouco sejam redirecionadas para
+um  arquivo  adicional,  usa-se  o  redirecionamento  para  um  arquivo
+especial: <B><FONT FACE="Helvetica, Arial, sans-serif">/dev/null</FONT></B>.  No exemplo  acima, as mensagens de erro do
+comando  <B>find</B> n&#227;o  ser&#227;o exibidas,  pois  foram redirecionadas
+para <B><FONT FACE="Helvetica, Arial, sans-serif">/dev/null</FONT></B>.
+
+<P>
+
+<H2><A NAME="SECTION00021000000000000000">
+2.1 Bloqueio de redirecionamento destrutivo de sa&#237;da</A>
+</H2>
+
+<P>
+Da mesma forma que executar <B><I>rm(1)</I></B> sem a op&#231;&#227;o -i requer
+aten&#231;&#227;o   para  n&#227;o   ser  surpreendido   pelo  destino   cruel,  fazer
+redirecionamento destrutivo de sa&#237;da  (&nbsp;&gt;&nbsp;e &nbsp;2&gt;&nbsp;) tamb&#233;m pode
+trazer surpresas desagrad&#225;veis.
+
+<P>
+Existe,  felizmente, uma  forma  de bloquear  o  efeito destrutivo  dos
+redirecionamentos   de   sa&#237;da.     Para   isto   define-se   a   op&#231;&#227;o
+<B>noclobber</B> do <I>shell</I> executando-se o comando abaixo:
+<PRE>
+                  set  -o  noclobber
+</PRE>
+
+<P>
+Uma vez executado o comando acima, ao se tentar redirecionar STDOUT
+para um arquivo existente, uma mensagem de erro ser&#225; exibida:
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>set -o noclobber</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;|&nbsp;new_fantomas</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+Para que os redirecionamentos de sa&#237;da  <B>&nbsp;&gt;&nbsp;e &nbsp;2&gt;&nbsp;</B>
+voltem a ter seu comportamento destrutivo, existem duas solu&#231;&#245;es:
+
+<UL>
+<LI>Usar  o comando <B>set  +o noclobber</B>, o que  faz que
+  QUALQUER   uso  posterior  de   <B>&nbsp;&gt;&nbsp;e   &nbsp;2&gt;&nbsp;</B>
+  volte a ter seu comportamento destrutivo:
+  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>set -o noclobber</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>set +o noclobber</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+  
+</LI>
+<LI>Usar    <B>&nbsp;&gt;|&nbsp;e   &nbsp;2&gt;|&nbsp;</B>    no   lugar   de
+  <B>&nbsp;&gt;&nbsp;e &nbsp;2&gt;&nbsp;</B>,  respectivamente. Isto  faz com  que o
+  redirecionamento seja  destrutivo APENAS durante a  execu&#231;&#227;o da linha
+  de comando em que ocorrerem:
+  
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>set -o noclobber</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat fantomas &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;|&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat nacional_kid &nbsp;&gt;&nbsp;new_fantomas</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">bash: new_fantomas: cannot overwrite existing file</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+  
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 <I>Pipeline</I></A>
+</H1>
+
+<P>
+Suponha o seguinte exemplo:
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>sort <FONT SIZE=3>~</FONT>/Arquivos.txt &nbsp;&gt;&nbsp;<FONT SIZE=3>~</FONT>/ordenados.txt</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>less <FONT SIZE=3>~</FONT>/ordenados.txt</B></FONT><BR>
+  
+
+<P>
+<I>Pipe</I> &#233;  uma forma de redirecionamento que  ``conecta'' a sa&#237;da
+padr&#227;o  de  um  programa  &#224;  entrada padr&#227;o  de  outro  programa.   Com
+<I>pipes</I> (s&#237;mbolo <B>&nbsp;|&nbsp;</B>)  o exemplo acima se transforma
+em:
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>sort <FONT SIZE=3>~</FONT>/Arquivos.txt &nbsp;|&nbsp;less</B></FONT><BR>
+  
+
+<P>
+<I>Pipelines</I> podem ser usados em qualquer quantidade me uma linha
+de comando:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls -lR <FONT SIZE=3>~</FONT> &nbsp;|&nbsp;sort -r &nbsp;|&nbsp;cut -c1-10 &nbsp;|&nbsp;less</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">...</FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+<I>Pipelines</I> e  Redirecionamentos podem  ser usados em  uma mesma
+linha de comando:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find /var -print 2&gt;/dev/null &nbsp;|&nbsp;sort &gt;<FONT SIZE=3>~</FONT>/LOG</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+No  exemplo  acima, a  sa&#237;da  de  erros  (STDERR) do  <B><I>find(1)</I></B>  &#233;
+redirecionada para  <B><FONT FACE="Helvetica, Arial, sans-serif">/dev/null</FONT></B> (isto  &#233;, n&#227;o aparecer&#225;  na tela),
+mas a sa&#237;da  padr&#227;o (STDOUT) ser&#225; redirecionada para  o pipe. O comando
+<B><I>sort(1)</I></B>  ordena o  resultado do  <B><I>find(1)</I></B> e  redireciona o
+resultado final para o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LOG</FONT></B>.
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+4 Inserindo a sa&#237;da padr&#227;o em uma linha de comando</A>
+</H1>
+
+<P>
+Observe os comandos abaixo:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>LAB_DIR=$HOME/LabNum5</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $LAB_DIR</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">/home/especial/ci066/LabNum5</FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find $LAB_DIR -name &#180;*-8&#180; -exec rm -i {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">....</FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+Temos acima exemplos  da expans&#227;o do valor de  vari&#225;veis de ambiente em
+diversas linha de comando. No  caso, usa-se o caracter <B>$</B> para
+acessar e expandir o valor da vari&#225;vel onde isto for necess&#225;rio.
+
+<P>
+Suponha agora o exemplo abaixo:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066 -type d -perm -111 -print</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">/home/especial/ci066/LabNum3/doc</FONT><BR>
+  <FONT FACE="Times New Roman,Times">/home/especial/ci066/LabNum4/lib</FONT><BR>
+  <FONT FACE="Times New Roman,Times">/home/especial/ci066/LabNum5</FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find <FONT SIZE=3>~</FONT>ci066/LabNum3/doc <FONT SIZE=3>~</FONT>ci066/LabNum4
+    <FONT SIZE=3>~</FONT>ci066/LabNum5 -exec chmod go-rwx {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+Neste exemplo,  deseja-se obter os  diret&#243;rios que tenham  permiss&#227;o de
+navega&#231;&#227;o para todos os  usu&#225;rios e, nestes diret&#243;rios (e sub-&#225;rvores),
+retirar  as permiss&#245;es  de  Leitura,  Escrita e  Execu&#231;&#227;o  de todos  os
+arquivos. Observe-se que a solu&#231;&#227;o teve que ser feita em dois passos ou
+duas  linhas de  comando  distintas, sendo  que  o usu&#225;rio  no caso  do
+segundo  comando teve  de digitar  todos os  diret&#243;rios que  o primeiro
+devolveu como resultado.
+
+<P>
+Existe uma forma de ``redirecionar'' a sa&#237;da padr&#227;o de um comando para
+ser inserida em algum ponto de uma linha de comando. Para isto usa-se a
+crase (<B>`</B>) como no exemplo abaixo:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>DIRS=`find <FONT SIZE=3>~</FONT>ci066 -type d -perm -111 -print`</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find $DIRS -exec chmod go-rwx {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+Ao  executar  a  primeira  linha  de comando  acima,  o  <I>shell</I>
+``redirecionou'' a sa&#237;da padr&#227;o  de <B><I>find(1)</I></B> e colocou como valor
+da vari&#225;vel <I>shell</I> <B><FONT FACE="Helvetica, Arial, sans-serif">DIRS</FONT></B>.  O valor desta foi, ent&#227;o, usado
+na execu&#231;&#227;o da segunda linha de comando.
+
+<P>
+O exemplo acima poderia ser feito em apenas uma linha de comando:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find `find <FONT SIZE=3>~</FONT>ci066 -type d -perm -111 -print` -exec chmod go-rwx {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+Em      particular,      <B><I>bash(1)</I></B>      define      a      nota&#231;&#227;o
+<B>$(<I>comando</I>)</B> como alternativa  ao uso de crase. Assim,
+se  o seu  <I>shell</I> &#233;  <B><I>bash(1)</I></B>, o  exemplo acima  pode ser
+executado na forma abaixo:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>find $(find <FONT SIZE=3>~</FONT>ci066 -type d -perm -111 -print) -exec chmod go-rwx {} <IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">;</B></FONT><BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;</FONT><BR>
+
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="pet02a">1</A>
+<DD>
+PET Inform&#225;tica.
+<BR> Linux B&#225;sico.
+<BR> UFPR, Outubro 2002.
+<BR> URL <TT>http://pet.inf.ufpr.br/&nbsp;daniel/LinuxBasico.pdf</TT>.
+
+<BR>
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-10-20
+</ADDRESS>
+</BODY>
+</HTML>

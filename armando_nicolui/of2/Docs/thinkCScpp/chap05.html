@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 5: Fruitful functions</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap06.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap04.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 5</h2>
+
+<h1>Fruitful functions</h1>
+
+
+<a name=1></a><br>
+<h3>5.1 Return values</h3>
+
+<p>Some of the built-in functions we have used, like the math functions, have produced results.  That is, the effect of calling the function is to generate a new value, which we usually assign to a variable or use as part of an expression. For example:</p>
+
+
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> e = exp (1.0);
+<br>&nbsp; <span class=keyword>double</span> height = radius * sin (angle);
+<br></span><p>But so far all the functions we have written have been <b>void</b> functions; that is, functions that return no value.  When you call a void function, it is typically on a line by itself, with no assignment:</p>
+
+
+<span class=code>&nbsp; nLines (3);
+<br>&nbsp; countdown (n-1);
+<br></span><p>In this chapter, we are going to write functions that return things, which I will refer to as <b>fruitful</b> functions, for want of a better name.  The first example is <span class=code>area</span>, which takes a <span class=code><span class=keyword>double</span></span> as a parameter, and returns the area of a circle with the given radius:</p>
+
+
+
+
+<span class=code><span class=keyword>double</span> area (<span class=keyword>double</span> radius) {
+<br>&nbsp; <span class=keyword>double</span> pi = acos (-1.0);
+<br>&nbsp; <span class=keyword>double</span> area = pi * radius * radius;
+<br>&nbsp; <span class=keyword>return</span> area;
+<br>}
+<br></span><p>The first thing you should notice is that the beginning of the function definition is different.  Instead of <span class=code><span class=keyword>void</span></span>, which indicates a void function, we see <span class=code><span class=keyword>double</span></span>, which indicates that the return value from this function will have type <span class=code><span class=keyword>double</span></span>.</p>
+
+<p>Also, notice that the last line is an alternate form of the <span class=code><span class=keyword>return</span></span> statement that includes a return value.  This statement means, "return immediately from this function and use the following expression as a return value."  The expression you provide can be arbitrarily complicated, so we could have written this function more concisely:</p>
+
+
+<span class=code><span class=keyword>double</span> area (<span class=keyword>double</span> radius) {
+<br>&nbsp; <span class=keyword>return</span> acos(-1.0) * radius * radius;
+<br>}
+<br></span><p>On the other hand, <b>temporary</b> variables like <span class=code>area</span> often make debugging easier.  In either case, the type of the expression in the <span class=code><span class=keyword>return</span></span> statement must match the return type of the function. In other words, when you declare that the return type is <span class=code><span class=keyword>double</span></span>, you are making a promise that this function will eventually produce a <span class=code><span class=keyword>double</span></span>.  If you try to <span class=code><span class=keyword>return</span></span> with no expression, or an expression with the wrong type, the compiler will take you to task.</p>
+
+
+
+<p>Sometimes it is useful to have multiple return statements, one in each branch of a conditional:</p>
+
+
+<span class=code><span class=keyword>double</span> absoluteValue (<span class=keyword>double</span> x) {
+<br>&nbsp; <span class=keyword>if</span> (x &lt; 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> -x;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> x;
+<br>&nbsp; }
+<br>}
+<br></span><p>Since these returns statements are in an alternative conditional, only one will be executed.  Although it is legal to have more than one <span class=code><span class=keyword>return</span></span> statement in a function, you should keep in mind that as soon as one is executed, the function terminates without executing any subsequent statements.</p>
+
+<p>Code that appears after a <span class=code><span class=keyword>return</span></span> statement, or any place else where it can never be executed, is called <b>dead code</b>.  Some compilers warn you if part of your code is dead.</p>
+
+
+
+<p>If you put return statements inside a conditional, then you have to guarantee that <i>every possible path</i> through the program hits a return statement.  For example:</p>
+
+
+<span class=code><span class=keyword>double</span> absoluteValue (<span class=keyword>double</span> x) {
+<br>&nbsp; <span class=keyword>if</span> (x &lt; 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> -x;
+<br>&nbsp; } <span class=keyword>else if</span> (x &gt; 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> x;
+<br>&nbsp; }&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// WRONG!!
+</span><br>}
+<br></span><p>This program is not correct because if <span class=code>x</span> happens to be 0, then neither condition will be true and the function will end without hitting a return statement.  Unfortunately, many C++ compilers do not catch this error.  As a result, the program may compile and run, but the return value when <span class=code>x==0</span> could be anything, and will probably be different in different environments.</p>
+
+
+
+<p>By now you are probably sick of seeing compiler errors, but as you gain more experience, you will realize that the only thing worse than getting a compiler error is <i>not</i> getting a compiler error when your program is wrong.</p>
+
+<p>Here's the kind of thing that's likely to happen: you test <span class=code>absoluteValue</span> with several values of <span class=code>x</span> and it seems to work correctly.  Then you give your program to someone else and they run it in another environment.  It fails in some mysterious way, and it takes days of debugging to discover that the problem is an incorrect implementation of <span class=code>absoluteValue</span>.  If only the compiler had warned you!</p>
+
+
+
+<p>From now on, if the compiler points out an error in your program, you should not blame the compiler.  Rather, you should thank the compiler for finding your error and sparing you days of debugging.  Some compilers have an option that tells them to be extra strict and report all the errors they can find.  You should turn this option on all the time.</p>
+
+
+
+<p>As an aside, you should know that there is a function in the math library called <span class=code>fabs</span> that calculates the absolute value of a <span class=code><span class=keyword>double</span></span>---correctly.</p>
+
+<a name=2></a><br>
+<h3>5.2 Program development</h3>
+
+<p>At this point you should be able to look at complete C++ functions and tell what they do.  But it may not be clear yet how to go about writing them.  I am going to suggest one technique that I call <b>incremental development</b>.</p>
+
+
+
+<p>As an example, imagine you want to find the distance between two points, given by the coordinates <tt>(x<sub>1</sub>, y<sub>1</sub>)</tt> and <tt>(x<sub>2</sub>, y<sub>2</sub>)</tt>.  By the usual definition,</p>
+
+
+
+<table align=center><tr><td><tt>
+distance = sqrt((x<sub>2</sub> - x<sub>1</sub>)<sup>2</sup> + (y<sub>2</sub> - y<sub>1</sub>)<sup>2</sup>)
+</tt></td></tr></table>
+
+<p>The first step is to consider what a <span class=code>distance</span> function should look like in C++.  In other words, what are the inputs (parameters) and what is the output (return value).</p>
+
+<p>In this case, the two points are the parameters, and it is natural to represent them using four <span class=code><span class=keyword>double</span></span>s.  The return value is the distance, which will have type <span class=code><span class=keyword>double</span></span>.</p>
+
+<p>Already we can write an outline of the function:</p>
+
+
+<span class=code><span class=keyword>double</span> distance (<span class=keyword>double</span> x1, <span class=keyword>double</span> y1, <span class=keyword>double</span> x2, <span class=keyword>double</span> y2) {
+<br>&nbsp; <span class=keyword>return</span> 0.0;
+<br>}
+<br></span><p>The <span class=code><span class=keyword>return</span></span> statement is a placekeeper so that the function will compile and return something, even though it is not the right answer. At this stage the function doesn't do anything useful, but it is worthwhile to try compiling it so we can identify any syntax errors before we make it more complicated.</p>
+
+<p>In order to test the new function, we have to call it with sample values.  Somewhere in <span class=code>main</span> I would add:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> dist = distance (1.0, 2.0, 4.0, 6.0);
+<br>&nbsp; cout &lt;&lt; dist &lt;&lt; endl;
+<br></span><p>I chose these values so that the horizontal distance is 3 and the vertical distance is 4; that way, the result will be 5 (the hypotenuse of a 3-4-5 triangle). When you are testing a function, it is useful to know the right answer.</p>
+
+<p>Once we have checked the syntax of the function definition, we can start adding lines of code one at a time.  After each incremental change, we recompile and run the program.  That way, at any point we know exactly where the error must be---in the last line we added.</p>
+
+<p>The next step in the computation is to find the differences <tt>x<sub>2</sub> - x<sub>1</sub></tt> and <tt>y<sub>2</sub> - y<sub>1</sub></tt>.  I will store those values in temporary variables named <span class=code>dx</span> and <span class=code>dy</span>.</p>
+
+
+<span class=code><span class=keyword>double</span> distance (<span class=keyword>double</span> x1, <span class=keyword>double</span> y1, <span class=keyword>double</span> x2, <span class=keyword>double</span> y2) {
+<br>&nbsp; <span class=keyword>double</span> dx = x2 - x1;
+<br>&nbsp; <span class=keyword>double</span> dy = y2 - y1;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"dx is "</span> &lt;&lt; dx &lt;&lt; endl;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"dy is "</span> &lt;&lt; dy &lt;&lt; endl;
+<br>&nbsp; <span class=keyword>return</span> 0.0;
+<br>}
+<br></span><p>I added output statements that will let me check the intermediate values before proceeding.  As I mentioned, I already know that they should be 3.0 and 4.0.</p>
+
+
+
+<p>When the function is finished I will remove the output statements.  Code like that is called <b>scaffolding</b>, because it is helpful for building the program, but it is not part of the final product. Sometimes it is a good idea to keep the scaffolding around, but comment it out, just in case you need it later.</p>
+
+<p>The next step in the development is to square <span class=code>dx</span> and <span class=code>dy</span>. We could use the <span class=code>pow</span> function, but it is simpler and faster to just multiply each term by itself.</p>
+
+
+<span class=code><span class=keyword>double</span> distance (<span class=keyword>double</span> x1, <span class=keyword>double</span> y1, <span class=keyword>double</span> x2, <span class=keyword>double</span> y2) {
+<br>&nbsp; <span class=keyword>double</span> dx = x2 - x1;
+<br>&nbsp; <span class=keyword>double</span> dy = y2 - y1;
+<br>&nbsp; <span class=keyword>double</span> dsquared = dx*dx + dy*dy;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"dsquared is "</span> &lt;&lt; dsquared;
+<br>&nbsp; <span class=keyword>return</span> 0.0;
+<br>}
+<br></span><p>Again, I would compile and run the program at this stage and check the intermediate value (which should be 25.0).</p>
+
+<p>Finally, we can use the <span class=code>sqrt</span> function to compute and return the result.</p>
+
+
+<span class=code><span class=keyword>double</span> distance (<span class=keyword>double</span> x1, <span class=keyword>double</span> y1, <span class=keyword>double</span> x2, <span class=keyword>double</span> y2) {
+<br>&nbsp; <span class=keyword>double</span> dx = x2 - x1;
+<br>&nbsp; <span class=keyword>double</span> dy = y2 - y1;
+<br>&nbsp; <span class=keyword>double</span> dsquared = dx*dx + dy*dy;
+<br>&nbsp; <span class=keyword>double</span> result = sqrt (dsquared);
+<br>&nbsp; <span class=keyword>return</span> result;
+<br>}
+<br></span><p>Then in <span class=code>main</span>, we should output and check the value of the result.</p>
+
+<p>As you gain more experience programming, you might find yourself writing and debugging more than one line at a time.  Nevertheless, this incremental development process can save you a lot of debugging time.</p>
+
+<p>The key aspects of the process are:</p>
+
+<ul>
+
+<li>Start with a working program and make small, incremental changes.  At any point, if there is an error, you will know exactly where it is.</li>
+
+<li>Use temporary variables to hold intermediate values so you can output and check them.</li>
+
+<li>Once the program is working, you might want to remove some of the scaffolding or consolidate multiple statements into compound expressions, but only if it does not make the program difficult to read.</li>
+
+</ul>
+
+<a name=3></a><br>
+<h3>5.3 Composition</h3>
+
+<p>As you should expect by now, once you define a new function, you can use it as part of an expression, and you can build new functions using existing functions.  For example, what if someone gave you two points, the center of the circle and a point on the perimeter, and asked for the area of the circle?</p>
+
+<p>Let's say the center point is stored in the variables <span class=code>xc</span> and <span class=code>yc</span>, and the perimeter point is in <span class=code>xp</span> and <span class=code>yp</span>.  The first step is to find the radius of the circle, which is the distance between the two points.  Fortunately, we have a function, <span class=code>distance</span>, that does that.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> radius = distance (xc, yc, xp, yp);
+<br></span><p>The second step is to find the area of a circle with that radius, and return it.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> result = area (radius);
+<br>&nbsp; <span class=keyword>return</span> result;
+<br></span><p>Wrapping that all up in a function, we get:</p>
+
+
+<span class=code><span class=keyword>double</span> fred (<span class=keyword>double</span> xc, <span class=keyword>double</span> yc, <span class=keyword>double</span> xp, <span class=keyword>double</span> yp) {
+<br>&nbsp; <span class=keyword>double</span> radius = distance (xc, yc, xp, yp);
+<br>&nbsp; <span class=keyword>double</span> result = area (radius);
+<br>&nbsp; <span class=keyword>return</span> result;
+<br>}
+<br></span><p>The name of this function is <span class=code>fred</span>, which may seem odd.  I will explain why in the next section.</p>
+
+<p>The temporary variables <span class=code>radius</span> and <span class=code>area</span> are useful for development and debugging, but once the program is working we can make it more concise by composing the function calls:</p>
+
+
+<span class=code><span class=keyword>double</span> fred (<span class=keyword>double</span> xc, <span class=keyword>double</span> yc, <span class=keyword>double</span> xp, <span class=keyword>double</span> yp) {
+<br>&nbsp; <span class=keyword>return</span> area (distance (xc, yc, xp, yp));
+<br>}
+<br></span><a name=4></a><br>
+<h3>5.4 Overloading</h3>
+
+<p>In the previous section you might have noticed that <span class=code>fred</span> and <span class=code>area</span> perform similar functions---finding the area of a circle---but take different parameters.  For <span class=code>area</span>, we have to provide the radius; for <span class=code>fred</span> we provide two points.</p>
+
+<p>If two functions do the same thing, it is natural to give them the same name.  In other words, it would make more sense if <span class=code>fred</span> were called <span class=code>area</span>.</p>
+
+<p>Having more than one function with the same name, which is called <b>overloading</b>, is legal in C++ <i>as long as each version takes different parameters</i>.  So we can go ahead and rename <span class=code>fred</span>:</p>
+
+
+<span class=code><span class=keyword>double</span> area (<span class=keyword>double</span> xc, <span class=keyword>double</span> yc, <span class=keyword>double</span> xp, <span class=keyword>double</span> yp) {
+<br>&nbsp; <span class=keyword>return</span> area (distance (xc, yc, xp, yp));
+<br>}
+<br></span><p>This looks like a recursive function, but it is not.  Actually, this version of <span class=code>area</span> is calling the other version. When you call an overloaded function, C++ knows which version you want by looking at the arguments that you provide.  If you write:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>double</span> x = area (3.0);
+<br></span><p>C++ goes looking for a function named <span class=code>area</span> that takes a <span class=code><span class=keyword>double</span></span> as an argument, and so it uses the first version.  If you write</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>double</span> x = area (1.0, 2.0, 4.0, 6.0);
+<br></span><p>C++ uses the second version of <span class=code>area</span>.</p>
+
+<p>Many of the built-in C++ commands are overloaded, meaning that there are different versions that accept different numbers or types of parameters.</p>
+
+<p>Although overloading is a useful feature, it should be used with caution.  You might get yourself nicely confused if you are trying to debug one version of a function while accidently calling a different one.</p>
+
+<p>Actually, that reminds me of one of the cardinal rules of debugging: <b>make sure that the version of the program you are looking at is the version of the program that is running!</b>  Some time you may find yourself making one change after another in your program, and seeing the same thing every time you run it.  This is a warning sign that for one reason or another you are not running the version of the program you think you are.  To check, stick in an output statement (it doesn't matter what it says) and make sure the behavior of the program changes accordingly.</p>
+
+<a name=5></a><br>
+<h3>5.5 Boolean values</h3>
+
+<p>The types we have seen so far are pretty big.  There are a lot of integers in the world, and even more floating-point numbers. By comparison, the set of characters is pretty small.  Well, there is another type in C++ that is even smaller.  It is called <b>boolean</b>, and the only values in it are <span class=code><span class=keyword>true</span></span> and <span class=code><span class=keyword>false</span></span>.</p>
+
+<p>Without thinking about it, we have been using boolean values for the last couple of chapters.  The condition inside an <span class=code><span class=keyword>if</span></span> statement or a <span class=code><span class=keyword>while</span></span> statement is a boolean expression. Also, the result of a comparison operator is a boolean value. For example:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (x == 5) {
+<br>&nbsp; &nbsp; <span class=comment>// do something
+</span><br>&nbsp; }
+<br></span><p>The operator <span class=code>==</span> compares two integers and produces a boolean value.</p>
+
+
+
+<p>The values <span class=code><span class=keyword>true</span></span> and <span class=code><span class=keyword>false</span></span> are keywords in C++, and can be used anywhere a boolean expression is called for. For example,</p>
+
+
+<span class=code>&nbsp; <span class=keyword>while</span> (<span class=keyword>true</span>) {
+<br>&nbsp; &nbsp; <span class=comment>// loop forever
+</span><br>&nbsp; }
+<br></span><p>is a standard idiom for a loop that should run forever (or until it reaches a <span class=code><span class=keyword>return</span></span> or <span class=code><span class=keyword>break</span></span> statement).</p>
+
+<a name=6></a><br>
+<h3>5.6 Boolean variables</h3>
+
+<p>As usual, for every type of value, there is a corresponding type of variable.  In C++ the boolean type is called <b>bool</b>. Boolean variables work just like the other types:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>bool</span> fred;
+<br>&nbsp; fred = <span class=keyword>true</span>;
+<br>&nbsp; <span class=keyword>bool</span> testResult = <span class=keyword>false</span>;
+<br></span><p>The first line is a simple variable declaration; the second line is an assignment, and the third line is a combination of a declaration and as assignment, called an initialization.</p>
+
+
+
+<p>As I mentioned, the result of a comparison operator is a boolean, so you can store it in a <span class=code><span class=keyword>bool</span></span> variable</p>
+
+
+<span class=code>&nbsp; <span class=keyword>bool</span> evenFlag = (n%2 == 0);&nbsp; &nbsp; &nbsp;<span class=comment>// true if n is even
+</span><br>&nbsp; <span class=keyword>bool</span> positiveFlag = (x &gt; 0);&nbsp; &nbsp; <span class=comment>// true if x is positive
+</span><br></span><p>and then use it as part of a conditional statement later</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (evenFlag) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"n was even when I checked it"</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>A variable used in this way is called a <b>flag</b>, since it flags the presence or absence of some condition.</p>
+
+
+
+<a name=7></a><br>
+<h3>5.7 Logical operators</h3>
+
+<p>There are three <b>logical operators</b> in C++: AND, OR and NOT, which are denoted by the symbols <span class=code>&&</span>, <span class=code>||</span> and <span class=code>!</span>.  The semantics (meaning) of these operators is similar to their meaning in English.  For example <span class=code>x &gt; 0 && x &lt; 10</span> is true only if <span class=code>x</span> is greater than zero AND less than 10.</p>
+
+
+
+<p><span class=code>evenFlag || n%3 == 0</span> is true if <i>either</i> of the conditions is true, that is, if <span class=code>evenFlag</span> is true OR the number is divisible by 3.</p>
+
+<p>Finally, the NOT operator has the effect of negating or inverting a bool expression, so <span class=code>!evenFlag</span> is true if <span class=code>evenFlag</span> is false; that is, if the number is odd.</p>
+
+
+
+<p>Logical operators often provide a way to simplify nested conditional statements.  For example, how would you write the following code using a single conditional?</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (x &gt; 0) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (x &lt; 10) {
+<br>&nbsp; &nbsp; &nbsp; cout &lt;&lt; <span class=quote>"x is a positive single digit."</span> &lt;&lt; endl;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br></span><a name=8></a><br>
+<h3>5.8 Bool functions</h3>
+
+<p>Functions can return <span class=code><span class=keyword>bool</span></span> values just like any other type, which is often convenient for hiding complicated tests inside functions.  For example:</p>
+
+
+<span class=code><span class=keyword>bool</span> isSingleDigit (<span class=keyword>int</span> x)
+<br>{
+<br>&nbsp; <span class=keyword>if</span> (x &gt;= 0 && x &lt; 10) {
+<br>&nbsp; &nbsp; <span class=keyword>return true</span>;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>return false</span>;
+<br>&nbsp; }
+<br>}
+<br></span><p>The name of this function is <span class=code>isSingleDigit</span>.  It is common to give boolean functions names that sound like yes/no questions. The return type is <span class=code><span class=keyword>bool</span></span>, which means that every return statement has to provide a <span class=code><span class=keyword>bool</span></span> expression.</p>
+
+<p>The code itself is straightforward, although it is a bit longer than it needs to be.  Remember that the expression <span class=code>x &gt;= 0 && x &lt; 10</span> has type <span class=code><span class=keyword>bool</span></span>, so there is nothing wrong with returning it directly, and avoiding the <span class=code><span class=keyword>if</span></span> statement altogether:</p>
+
+
+<span class=code><span class=keyword>bool</span> isSingleDigit (<span class=keyword>int</span> x)
+<br>{
+<br>&nbsp; <span class=keyword>return</span> (x &gt;= 0 && x &lt; 10);
+<br>}
+<br></span><p>In <span class=code>main</span> you can call this function in the usual ways:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; isSingleDigit (2) &lt;&lt; endl;
+<br>&nbsp; <span class=keyword>bool</span> bigFlag = !isSingleDigit (17);
+<br></span><p>The first line outputs the value <span class=code><span class=keyword>true</span></span> because 2 is a single-digit number.  Unfortunately, when C++ outputs <span class=code><span class=keyword>bool</span></span>s, it does not display the words <span class=code><span class=keyword>true</span></span> and <span class=code><span class=keyword>false</span></span>, but rather the integers <span class=code>1</span> and <span class=code>0</span>.  (There is a way to fix that using the <span class=code>boolalpha</span> flag, but it is too hideous to mention.)</p>
+
+<p>The second line assigns the value <span class=code><span class=keyword>true</span></span> to <span class=code>bigFlag</span> only if 17 is <i>not</i> a single-digit number.</p>
+
+<p>The most common use of <span class=code><span class=keyword>bool</span></span> functions is inside conditional statements</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (isSingleDigit (x)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"x is little"</span> &lt;&lt; endl;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"x is big"</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><a name=9></a><br>
+<h3>5.9 Returning from <span class=code>main</span></h3>
+
+<p>Now that we have functions that return values, I can let you in on a secret.  <span class=code>main</span> is not really supposed to be a <span class=code><span class=keyword>void</span></span> function.  It's supposed to return an integer:</p>
+
+
+<span class=code><span class=keyword>int</span> main ()
+<br>{
+<br>&nbsp; <span class=keyword>return</span> 0;
+<br>}
+<br></span><p>The usual return value from <span class=code>main</span> is 0, which indicates that the program succeeded at whatever it was supposed to to.  If something goes wrong, it is common to return -1, or some other value that indicates what kind of error occurred.</p>
+
+<p>Of course, you might wonder who this value gets returned to, since we never call <span class=code>main</span> ourselves.  It turns out that when the system executes a program, it starts by calling <span class=code>main</span> in pretty much the same way it calls all the other functions.</p>
+
+<p>There are even some parameters that are passed to <span class=code>main</span> by the system, but we are not going to deal with them for a little while.</p>
+
+<a name=10></a><br>
+<h3>5.10 More recursion</h3>
+
+<p>So far we have only learned a small subset of C++, but you might be interested to know that this subset is now a <b>complete</b> programming language, by which I mean that anything that can be computed can be expressed in this language.  Any program ever written could be rewritten using only the language features we have used so far (actually, we would need a few commands to control devices like the keyboard, mouse, disks, etc., but that's all).</p>
+
+
+
+<p>Proving that claim is a non-trivial exercise first accomplished by Alan Turing, one of the first computer scientists (well, some would argue that he was a mathematician, but a lot of the early computer scientists started as mathematicians).  Accordingly, it is known as the Turing thesis.  If you take a course on the Theory of Computation, you will have a chance to see the proof.</p>
+
+<p>To give you an idea of what you can do with the tools we have learned so far, we'll evaluate a few recursively-defined mathematical functions.  A recursive definition is similar to a circular definition, in the sense that the definition contains a reference to the thing being defined.  A truly circular definition is typically not very useful:</p>
+
+<dl>
+
+<dt>frabjuous</dt>
+<dd>an adjective used to describe something that is frabjuous.</dd>
+
+
+
+</dl>
+
+<p>If you saw that definition in the dictionary, you might be annoyed.  On the other hand, if you looked up the definition of the mathematical function <b>factorial</b>, you might get something like:</p>
+
+
+
+<table align=center><tr><td><tt>
+0! = 1<br>
+n! = n &middot; (n-1)!
+</tt></td></tr></table>
+
+<p>(Factorial is usually denoted with the symbol <tt>!</tt>, which is not to be confused with the C++ logical operator <span class=code>!</span> which means NOT.)  This definition says that the factorial of 0 is 1, and the factorial of any other value, <tt>n</tt>, is <tt>n</tt> multiplied by the factorial of <tt>n-1</tt>.  So <tt>3!</tt> is 3 times <tt>2!</tt>, which is 2 times <tt>1!</tt>, which is 1 times 0!.  Putting it all together, we get <tt>3!</tt> equal to 3 times 2 times 1 times 1, which is 6.</p>
+
+<p>If you can write a recursive definition of something, you can usually write a C++ program to evaluate it.  The first step is to decide what the parameters are for this function, and what the return type is. With a little thought, you should conclude that factorial takes an integer as a parameter and returns an integer:</p>
+
+
+<span class=code><span class=keyword>int</span> factorial (<span class=keyword>int</span> n)
+<br>{
+<br>}
+<br></span><p>If the argument happens to be zero, all we have to do is return 1:</p>
+
+
+<span class=code><span class=keyword>int</span> factorial (<span class=keyword>int</span> n)
+<br>{
+<br>&nbsp; <span class=keyword>if</span> (n == 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>Otherwise, and this is the interesting part, we have to make a recursive call to find the factorial of <tt>n-1</tt>, and then multiply it by <tt>n</tt>.</p>
+
+
+<span class=code><span class=keyword>int</span> factorial (<span class=keyword>int</span> n)
+<br>{
+<br>&nbsp; <span class=keyword>if</span> (n == 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> 1;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>int</span> recurse = factorial (n-1);
+<br>&nbsp; &nbsp; <span class=keyword>int</span> result = n * recurse;
+<br>&nbsp; &nbsp; <span class=keyword>return</span> result;
+<br>&nbsp; }
+<br>}
+<br></span><p>If we look at the flow of execution for this program, it is similar to <span class=code>nLines</span> from the previous chapter. If we call <span class=code>factorial</span> with the value 3:</p>
+
+<p>Since 3 is not zero, we take the second branch and calculate the factorial of <tt>n-1</tt>...</p>
+
+<p style="margin-left: 30px; margin-right: 30px;"> Since 2 is not zero, we take the second branch and calculate the factorial of <tt>n-1</tt>...
+
+<p style="margin-left: 30px; margin-right: 30px;"> Since 1 is not zero, we take the second branch and calculate the factorial of <tt>n-1</tt>...
+
+<p style="margin-left: 30px; margin-right: 30px;"> Since 0 <i>is</i> zero, we take the first branch and return the value 1 immediately without making any more recursive calls.
+
+</p>
+
+<p>The return value (1) gets multiplied by <span class=code>n</span>, which is 1, and the result is returned.</p>
+
+</p>
+
+<p>The return value (1) gets multiplied by <span class=code>n</span>, which is 2, and the result is returned.</p>
+
+</p>
+
+<p>The return value (2) gets multiplied by <span class=code>n</span>, which is 3, and the result, 6, is returned to <span class=code>main</span>, or whoever called <span class=code>factorial (3)</span>.</p>
+
+
+
+<p>Here is what the stack diagram looks like for this sequence of function calls:</p>
+
+<p align="center"><img src="images/stack3.png"></p>
+
+<p>The return values are shown being passed back up the stack.</p>
+
+<p>Notice that in the last instance of <span class=code>factorial</span>, the local variables <span class=code>recurse</span> and <span class=code>result</span> do not exist because when <span class=code>n=0</span> the branch that creates them does not execute.</p>
+
+<a name=11></a><br>
+<h3>5.11 Leap of faith</h3>
+
+<p>Following the flow of execution is one way to read programs, but as you saw in the previous section, it can quickly become labarynthine. An alternative is what I call the "leap of faith."  When you come to a function call, instead of following the flow of execution, you <i>assume</i> that the function works correctly and returns the appropriate value.</p>
+
+<p>In fact, you are already practicing this leap of faith when you use built-in functions.  When you call <span class=code>cos</span> or <span class=code>exp</span>, you don't examine the implementations of those functions.  You just assume that they work, because the people who wrote the built-in libraries were good programmers.</p>
+
+<p>Well, the same is true when you call one of your own functions. For example, in <a href="chap05.htm#8">Section 5.8</a> we wrote a function called <span class=code>isSingleDigit</span> that determines whether a number is between 0 and 9.  Once we have convinced ourselves that this function is correct---by testing and examination of the code---we can use the function without ever looking at the code again.</p>
+
+<p>The same is true of recursive programs.  When you get to the recursive call, instead of following the flow of execution, you should <i>assume</i> that the recursive call works (yields the correct result), and then ask yourself, "Assuming that I can find the factorial of <tt>n-1</tt>, can I compute the factorial of <tt>n</tt>?"  In this case, it is clear that you can, by multiplying by <tt>n</tt>.</p>
+
+<p>Of course, it is a bit strange to assume that the function works correctly when you have not even finished writing it, but that's why it's called a leap of faith!</p>
+
+<a name=12></a><br>
+<h3>5.12 One more example</h3>
+
+<p>In the previous example I used temporary variables to spell out the steps, and to make the code easier to debug, but I could have saved a few lines:</p>
+
+
+<span class=code><span class=keyword>int</span> factorial (<span class=keyword>int</span> n) {
+<br>&nbsp; <span class=keyword>if</span> (n == 0) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> 1;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> n * factorial (n-1);
+<br>&nbsp; }
+<br>}
+<br></span><p>From now on I will tend to use the more concise version, but I recommend that you use the more explicit version while you are developing code.   When you have it working, you can tighten it up, if you are feeling inspired.</p>
+
+<p>After <span class=code>factorial</span>, the classic example of a recursively-defined mathematical function is <span class=code>fibonacci</span>, which has the following definition:</p>
+
+
+
+<table align=center><tr><td><tt>
+fibonacci(0) = 1<br>
+fibonacci(1) = 1<br>
+fibonacci(n) = fibonacci(n-1) + fibonacci(n-2);
+</tt></td></tr></table>
+
+<p>Translated into C++, this is</p>
+
+
+<span class=code><span class=keyword>int</span> fibonacci (<span class=keyword>int</span> n) {
+<br>&nbsp; <span class=keyword>if</span> (n == 0 || n == 1) {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> 1;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; <span class=keyword>return</span> fibonacci (n-1) + fibonacci (n-2);
+<br>&nbsp; }
+<br>}
+<br></span><p>If you try to follow the flow of execution here, even for fairly small values of <span class=code>n</span>, your head explodes.  But according to the leap of faith, if we assume that the two recursive calls (yes, you can make two recursive calls) work correctly, then it is clear that we get the right result by adding them together.</p>
+
+<a name=13></a><br>
+<h3>5.13 Glossary</h3>
+
+<dl>
+
+<dt>return type</dt>
+<dd>The type of value a function returns.</dd>
+
+<dt>return value</dt>
+<dd>The value provided as the result of a function call.</dd>
+
+<dt>dead code</dt>
+<dd>Part of a program that can never be executed, often because it appears after a <span class=code><span class=keyword>return</span></span> statement.</dd>
+
+<dt>scaffolding</dt>
+<dd>Code that is used during program development but is not part of the final version.</dd>
+
+<dt>void</dt>
+<dd>A special return type that indicates a void function; that is, one that does not return a value.</dd>
+
+<dt>overloading</dt>
+<dd>Having more than one function with the same name but different parameters.  When you call an overloaded function, C++ knows which version to use by looking at the arguments you provide.</dd>
+
+<dt>boolean</dt>
+<dd>A value or variable that can take on one of two states, often called <tt>true</tt> and <tt>false</tt>.  In C++, boolean values can be stored in a variable type called <span class=code><span class=keyword>bool</span></span>.</dd>
+
+<dt>flag</dt>
+<dd>A variable (usually type <span class=code><span class=keyword>bool</span></span>) that records a condition or status information.</dd>
+
+<dt>comparison operator</dt>
+<dd>An operator that compares two values and produces a boolean that indicates the relationship between the operands.</dd>
+
+<dt>logical operator</dt>
+<dd>An operator that combines boolean values in order to test compound conditions.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap06.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap04.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

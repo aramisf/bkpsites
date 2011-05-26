@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Lista de Exerc&#237;cios # 03</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Lista de Exerc&#237;cios # 03">
+<META NAME="keywords" CONTENT="exercicios">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="exercicios.css">
+
+</HEAD>
+
+<BODY >
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Lista de Exerc&#237;cios # 03</H1>
+<DIV>
+
+</DIV>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="1"><li>O que representam as express&#245;es regulares extendidas abaixo:</li></ol></FONT></td></tr></tbody></table>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="exercicios-img1.png"
+ ALT="$x*$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="79" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img2.png"
+ ALT="$[0-9]\{3\}$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="33" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="exercicios-img3.png"
+ ALT="$xx*$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="95" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img4.png"
+ ALT="$[0-9]\{3,5\}$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="57" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img5.png"
+ ALT="$x\{1,5\}$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $[0-9]\{1,3\},[0-9]\{3\}$
+ -->
+<IMG
+ WIDTH="178" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img6.png"
+ ALT="$[0-9]\{1,3\},[0-9]\{3\}$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="57" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img7.png"
+ ALT="$x\{10,\}$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><B><FONT SIZE=3>^</FONT></B><!-- MATH
+ $\backslash ...$
+ -->
+<IMG
+ WIDTH="28" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img8.png"
+ ALT="$\backslash ...$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="53" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img9.png"
+ ALT="$[0-9]$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $[A-Za-z\_][[:alnum:]]*$
+ -->
+<IMG
+ WIDTH="208" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img10.png"
+ ALT="$[A-Za-z\_][[:alnum:]]*$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="53" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img9.png"
+ ALT="$[0-9]$">*</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\circun{Begin\$}$
+ -->
+<IMG
+ WIDTH="63" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img11.png"
+ ALT="$\circun{Begin\$}$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $[0-9][0-9][0-9]$
+ -->
+<IMG
+ WIDTH="150" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img12.png"
+ ALT="$[0-9][0-9][0-9]$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT"><B><FONT SIZE=3>^</FONT></B><!-- MATH
+ $(.).*\backslash 1\$$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="exercicios-img13.png"
+ ALT="$(.).*\backslash 1\$$"></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="2"><li>Qual o efeito dos seguintes comandos:
+  
+<OL type="a">
+<LI>who &nbsp;|&nbsp;egrep &#180;delgado&#180;
+</LI>
+<LI>who &nbsp;|&nbsp;egrep &#180;<B><FONT SIZE=3>^</FONT></B>delgado&#180;
+</LI>
+<LI>egrep &#180;[Uu]nix&#180; ch?/*
+</LI>
+<LI>ls -l &nbsp;|&nbsp;sort -k5n | egrep &#180;[0-9]{3,}&#180;
+  
+</LI>
+</OL></li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="3"><li>Como encontrar todos os usu&#225;rios logados que tenham pelo
+  menos 4 caracteres em seu <I>login</I>?</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="4"><li>O  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7/mala_direta.txt</FONT></B> cont&#233;m
+  uma lista de funcion&#225;rios de  uma grande corpora&#231;&#227;o. Cada linha desta
+  lista  cont&#233;m: Nome  do funcion&#225;rio,  seu endere&#231;o  eletr&#244;nico, setor
+  onde trabalha,  projeto em que  trabalha atualmente, e sua  fun&#231;&#227;o na
+  empresa.
+<BR>
+Como fazer para enviar uma mesma mensagem para todos os programadores
+  que  trabalham no  Projeto ``XCite  Java''? Considere  que  o Assunto
+  (<I>Subject</I>) desta  mensagem &#233; <I>Altera&#231;&#227;o  IMPORTANTE no
+  ambiente Java  !!!</I>, e que a  mensagem a ser enviada  est&#225; no arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/java_news.txt</FONT></B>, criado previamente por voc&#234;.
+<BR>
+Considere o uso de <B><I>mail(1)</I></B>  para enviar as mensagens, bem como
+  o uso  da sa&#237;da padr&#227;o  de um comando  em uma linha de  comando (vide
+  Notas       de        aula       #05,       <A NAME="tex2html1"
+  HREF="../teoria_05/index.html#SECTION00040000000000000000">se&#231;&#227;o
+  4</A>).</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="5"><li>O  arquivo  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7/bookmarks.html</FONT></B> cont&#233;m
+  uma  lista  de  URL's,  em  que  cada linha  cont&#233;m  uma  URL  e  sua
+  descri&#231;&#227;o.
+<BR>
+A partir  desta lista,  deseja-se gerar uma  nova lista de  URL's que
+  tratem dos  assuntos ``Java'', ``CORBA'' ou ``Agents''.  A nova lista
+  deve  conter APENAS  as  URL's, sem  descri&#231;&#227;o  ou qualquer  marca&#231;&#227;o
+  HTML.</li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<table cellpadding="2" cellspacing="2" border="0" width="100%"><tbody><tr><td valign="top" width="5%">&nbsp;</td><td valign="top"><FONT SIZE=+1 FACE="Helvetica"><ol START="6"><li>O  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7/enderecos.txt</FONT></B>  tem por
+  conte&#250;do uma  lista de  endere&#231;os em que  cada linha indica:  Nome da
+  pessoa, 2  telefones de contato (com DDD  entre par&#234;nteses), endere&#231;o
+  postal e endere&#231;o eletr&#244;nico.
+<BR>
+Mostre os resultados abaixo:
+  
+<OL type="a">
+<LI>O 1&ordm;&nbsp;e &#250;ltimo nome das pessoas cujo 2&ordm;&nbsp;telefone &#233;
+    do Rio de Janeiro ou Curitiba;
+</LI>
+<LI>Os  endere&#231;os postal e  eletr&#244;nico das pessoas com  telefone em
+    S&#227;o Paulo, Belo Horizonte ou Bras&#237;lia;
+</LI>
+<LI>O nome e endere&#231;o postal das pessoas com contas no site
+    <EM><FONT FACE="Helvetica, Arial, sans-serif">&nbsp;pop.com.br&nbsp;</FONT></EM>.
+  
+</LI>
+</OL></li></ol></FONT></td></tr></tbody></table>
+<BR>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-10-09
+</ADDRESS>
+</BODY>
+</HTML>

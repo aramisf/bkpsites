@@ -1,0 +1,493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 09
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 09
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 09
+<BR>
+2&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Programa&#231;&#227;o Shell - <I>Scripts Shell</I></A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Conceitos B&#225;sicos</A>
+</H2>
+
+<P>
+Freq&#252;entemente um usu&#225;rio deseja executar repetidas v&#234;zes uma seq&#252;&#234;ncia
+espec&#237;fica de comandos  sem que precise redigitar todos  os comandos da
+seq&#252;&#234;ncia.
+
+<P>
+Em UNIX,  um usu&#225;rio pode criar  um arquivo cujo  conte&#250;do se constitui
+desta  seq&#252;&#234;ncia  de comandos,  passando  em  seguida  a utilizar  este
+arquivo como se  fosse um simples comando.  A  este arquivo denominamos
+<B>script  shell</B>  e  ele  &#233;  equivalente  aos  arquivos  em  lote
+(extens&#227;o <I>.bat</I>) encontrados nos sistemas MS-Windows.
+
+<P>
+Assim,    supondo-se     que    exista    um     arquivo    com    nome
+<B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/arq_estranhos</FONT></B> cujo conte&#250;do seja:
+<PRE>
+       #!/bin/bash
+
+       # Encontra arquivos de outros usu&aacute;rios
+       find ~ \( ! -user $USER -o -perm -033 \) -exec ls -l {} \; &gt;| ~/LOG
+
+       if [ -s ~/LOG ]; then
+          echo "Arquivos estranhos foram encontrados em sua &aacute;rea."
+          echo "Verifique o arquivo ~/LOG."
+       fi
+</PRE>
+
+<P>
+ser&#225;      poss&#237;vel     ao      usu&#225;rio      executar     o      comando
+<B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/arq_estranhos</FONT></B> na linha  de comando <I>shell</I>. O que
+acontece &#233; que todos os  comandos dentro do arquivo ser&#227;o executados em
+seq&#252;&#234;ncia.
+
+<P>
+A estrutura b&#225;sica de um <I>script</I> &#233; a seguinte:
+<PRE>
+       #!/bin/bash
+
+       &lt;defini&ccedil;&atilde;o de vari&aacute;veis de ambiente&gt;
+          .
+          .
+          .
+       &lt;comandos e/ou estruturas de controle&gt; # &lt;coment&aacute;rio&gt;
+          .
+          .
+          .
+       # &lt;comentarios&gt;
+</PRE>
+
+<P>
+A primeira linha indica qual <I>shell</I> ser&#225; usado para interpretar
+e executar o conte&#250;do do <I>script</I>.
+
+<P>
+Se  esta linha est&#225;  ausente, o  <I>shell</I> usado  ser&#225; o  mesmo da
+sess&#227;o corrente (indicado pela vari&#225;vel de ambiente <B><FONT FACE="Helvetica, Arial, sans-serif">SHELL</FONT></B>).
+
+<P>
+Qualquer  texto escrito  ap&#243;s o  caracter <B>#</B>  &#233;  considerado um
+coment&#225;rio e n&#227;o &#233; interpretado pelo <I>shell</I>.
+
+<P>
+
+<H3><A NAME="SECTION00011100000000000000">
+Execu&#231;&#227;o de <I>scripts shell</I></A>
+</H3>
+
+<P>
+Existem 2 formas de executar um <I>script shell</I>:
+
+<OL>
+<LI>Fornecer o nome do <I>script</I> como argumento para
+  <B><I>bash(1)</I></B>
+<PRE>
+         bash ~/arq_estranhos
+</PRE>
+</LI>
+<LI>Definir permiss&#227;o de <B>execu&#231;&#227;o</B> para o <I>script</I>:
+<PRE>
+        chmod +x ~/arq_estranhos
+        ~/arq_estranhos
+</PRE>
+
+<P>
+Neste caso, &#233; natural que o usu&#225;rio queira executar seu <I>script</I>
+digitando  apenas   o  nome   deste,  independente  de   seu  diret&#243;rio
+corrente.   Para  isto,   &#233;   importante  que   o   diret&#243;rio  onde   o
+<I>script</I>  est&#225;  fa&#231;a parte  do  valor  da  vari&#225;vel de  ambiente
+<B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B>.
+
+<P>
+Recomenda-se que o usu&#225;rio crie o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/bin</FONT></B> e coloque
+l&#225; todos seus <I>scripts</I>. Em seguida, acrescente ao final do
+arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">&nbsp;/.bashrc</FONT></B> a linha abaixo:
+<PRE>
+         export PATH="${HOME}/bin:${PATH}"
+</PRE>
+</LI>
+</OL>
+
+<P>
+
+<H3><A NAME="SECTION00011200000000000000">
+Argumentos de <I>scripts shell</I></A>
+</H3>
+
+<P>
+Como   qualquer   comando,   <I>scripts   shell</I>   podem   receber
+argumentos. Em <I>script</I> estes argumentos s&#227;o acessados via
+<I>par&#226;metros posicionais</I>:
+<DL>
+<DT><STRONG>$1, $2,  ...  $n</STRONG></DT>
+<DD>expande  para o valor do  n-&#233;simo argumento
+  (<I>positional parameter</I>  no manual <I>on-line</I>),  isto &#233;,
+  <B>$1</B>    acessa    o    1<SUP>o</SUP>    argumento,
+  <B>$2</B> acessa o 2<SUP>o</SUP> argumento, e assim por
+  diante.
+
+<P>
+ATEN&#199;&#195;O: se <B>n</B> <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$&gt;$"> 9, deve estar limitado por <B>{}</B>:
+  ${10}, ${11}, ...
+</DD>
+<DT><STRONG>$0</STRONG></DT>
+<DD>expande para o  valor do nome do <I>script</I> (incluindo
+  o caminho completo at&#233; o arquivo)
+</DD>
+<DT><STRONG>$*</STRONG></DT>
+<DD>expande  para o valor  de TODOS os argumentos  digitados na
+  linha de comando, come&#231;ando do 1<SUP>o</SUP> argumento. Se
+  limitado   por  aspas,   <B>$*"</B>   &#233;    equivalente   a
+  <B>$1&nbsp;$2&nbsp;$3&nbsp;..."</B>.
+</DD>
+<DT><STRONG>$@</STRONG></DT>
+<DD>expande  para o valor  de TODOS os argumentos  digitados na
+  linha de comando, come&#231;ando do 1<SUP>o</SUP> argumento. Se
+  limitado   por  aspas,   <B>$@"</B>   &#233;    equivalente   a
+  <B>$1"&nbsp;$2"&nbsp;$3"&nbsp;...</B>.
+</DD>
+<DT><STRONG>$#</STRONG></DT>
+<DD>expande  para o n&#250;mero de argumentos na linha de comando.
+</DD>
+<DT><STRONG>$$</STRONG></DT>
+<DD>expande  para o PID do <I>shell</I> em que executa o
+  <I>script</I>
+</DD>
+</DL>
+
+<P>
+O exemplo abaixo mostra um <I>script</I> <I>shell</I> que imprime
+o valor de seus par&#226;metros posicionais:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#!/bin/sh
+
+echo "\$0 = $0"
+echo "NOME SCRIPT = $(basename $0)"
+echo "Numero de argumentos = $#"
+echo "ARGUMENTOS = $*"
+echo "ARGUMENTOS = $@"
+echo "PID = $$"
+echo
+echo "\$1 = $1"
+echo "\$2 = $2"
+echo "\$3 = $3"
+echo "\$4 = $4"
+echo "\$10 = $10"
+echo "\$10 = ${10}"
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+O resultado da execu&#231;&#227;o do <I>script</I> acima &#233;:
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>bash ./teste.sh a b c d e f g h i j k l</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$0 = ./teste.sh</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">NOME SCRIPT = teste.sh</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">Numero de argumentos = 12</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ARGUMENTOS = a b c d e f g h i j k l</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ARGUMENTOS = a b c d e f g h i j k l</FONT>
+<BR> 
+  <FONT FACE="Times New Roman,Times">PID = 1249</FONT>
+<BR>
+  <BR>
+  <FONT FACE="Times New Roman,Times">$1 = a</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$2 = b</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$3 = c</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$4 = d</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$10 = a0</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$10 = j</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $PATH</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">.:/home/especial/ci066/bin:/usr/X11/bin:/usr/local/bin:/usr/bin:/bin</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>mv teste.sh <FONT SIZE=3>~</FONT>/bin</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>teste.sh a b c d e f g h i j k l</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$0 = /home/nicolui/bin/teste.sh</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">NOME SCRIPT = teste.sh</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$1 = a</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$2 = b</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$3 = c</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$4 = d</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$10 = a0</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">$10 = j</FONT>
+<BR>
+
+
+<P>
+Observe  a diferen&#231;a  no valor  do par&#226;metro  <B>$0</B> em  ambas as
+execu&#231;&#245;es acima. Observe tamb&#233;m a necessidade das chaves ao se exibir o
+valor do 10&ordm;&nbsp;argumento.
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Comandos &#250;teis em <I>scripts shell</I></A>
+</H2>
+
+<P>
+
+<UL>
+<LI><B><I>echo(1)</I></B> mostra uma linha de texto.
+</LI>
+<LI><B><I>sleep(1)</I></B> espera por um determinado tempo expresso em segundos.
+</LI>
+<LI><B><I>basename(1)</I></B> extrai o nome base de um nome de
+  arquivo. Trata-se do nome de arquivo sem a indica&#231;&#227;o do caminho de
+  diret&#243;rio (e.g., <B><FONT FACE="Helvetica, Arial, sans-serif">teste.txt</FONT></B> em <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab/teste.txt</FONT></B>).
+</LI>
+<LI><B><I>dirname(1)</I></B> extrai o nome de diret&#243;rio associado a um nome de
+  arquivo (e.g., <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab</FONT></B> em <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/Lab/teste.txt</FONT></B>). 
+</LI>
+<LI>comandos internos <B><I>bash(1)</I></B>:
+  
+<UL>
+<LI><B>shift</B> desloca a lista de argumentos de uma posi&#231;&#227;o. O
+  1<SUP>o</SUP> se perde, o 2<SUP>o</SUP> se
+  torna o 1<SUP>o</SUP>, e assim por diante.
+</LI>
+<LI><B>read [<I>var1 var2 ...</I>]</B> l&#234; uma linha de <I>stdin</I>. Cada palavra na
+  linha pode ser assinalada a uma vari&#225;vel de ambiente indicada como
+  argumento. 
+</LI>
+<LI><B>exit</B> 
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Vari&#225;veis de Ambiente em <I>scripts shell</I></A>
+</H2>
+
+<P>
+Vari&#225;veis de ambiente tem o mesmo objetivo de vari&#225;veis de programa&#231;&#227;o:
+guardar informa&#231;&#227;o ou valores que podem ser usados posteriormente
+durante a execu&#231;&#227;o de um <I>script</I>.
+
+<P>
+Adicionalmente,   algumas  vari&#225;veis  de   ambiente  s&#227;o   usadas  pelo
+<I>shell</I>  e  outros  programas   como  forma  de  configura&#231;&#227;o  e
+parametriza&#231;&#227;o.   S&#227;o  exemplos   disto  as   vari&#225;veis  <B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B>,
+<B><FONT FACE="Helvetica, Arial, sans-serif">MANPATH</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">EDITOR</FONT></B>, dentre outras.
+
+<P>
+
+<H3><A NAME="SECTION00013100000000000000">
+Cria&#231;&#227;o de vari&#225;veis</A>
+</H3>
+
+<P>
+Define-se um nome para a vari&#225;vel e assinala-se um valor ao nome
+usando-se <B>=</B>:
+
+<P>
+<PRE>
+         estado=12
+         NOME="Arnaldo Arnoldo"
+         vazio=""
+         cont=0
+</PRE>
+
+<P>
+ATEN&#199;&#195;O: N&#227;o h&#225; espa&#231;os em branco ao redor do <B>=</B>
+
+<P>
+
+<H3><A NAME="SECTION00013200000000000000">
+Exibi&#231;&#227;o do valor de vari&#225;veis</A>
+</H3>
+
+<P>
+Para referenciar ou exibir o valor de uma vari&#225;vel de ambiente, deve-se
+preceder o nome da vari&#225;vel por cifr&#227;o (<B>$</B>):
+
+<P>
+<PRE>
+          vazio=$estado
+          echo "O nome do suspeito eh $NOME"
+</PRE>
+
+<P>
+O &#250;ltimo comando  acima exibe na tela <I>O  nome do suspeito eh
+  Arnaldo Arnoldo</I>
+
+<P>
+Para   isolar  a   refer&#234;ncia   ao  valor   de  algum   <I>string</I>
+imediatamente  adjacente, coloca-se  o  nome da  vari&#225;vel entre  chaves
+(<B>{}</B>):
+
+<P>
+<PRE>
+      echo "$cont1"           # N&atilde;o exibe nada, pois n&atilde;o existe vari&aacute;vel cont1
+      echo "${cont}1"         # Exibe 01
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+1.4 Exemplos de <I>scripts shell</I></A>
+</H2>
+
+<OL>
+<LI>Comando <B>ache_arquivos</B> para mostrar todos os arquivos em um diret&#243;rio (e sub-&#225;rvore) que
+  tenham um determinado <I>string</I>:
+
+<P>
+<PRE>
+        #!/bin/bash
+        find $1 -type f -print | xargs grep -l "$2"
+</PRE>
+
+<P>
+O comando passa a ser executado da seguinte forma (ap&#243;s o devido uso de
+<B><I>chmod(1)</I></B>):
+
+<P>
+<PRE>
+          ache_arquivo ~ '^[7-9].*'
+</PRE>
+
+<P>
+</LI>
+<LI>Comando <B>insere_cliente</B> para adicionar pessoas no arquivo
+  de telefones visto em aulas anteriores:
+
+<P>
+<PRE>
+        #!/bin/bash
+        echo "$1        $2'' &gt;&gt; LabNum7/fones.txt
+        sort -o LabNum7/fones.txt LabNum7/fones.txt
+</PRE>
+
+<P>
+O comando passa a ser executado da seguinte forma (ap&#243;s o uso
+apropriado de <B><I>chmod(1)</I></B>):
+
+<P>
+<PRE>
+          insere_cliente "Arnaldo Arnoldo" 324-2345
+</PRE>
+
+<P>
+</LI>
+<LI>Comando <B>showpid</B> que mostre os PID de todos os processos
+  de um determinado usu&#225;rio:
+
+<P>
+<PRE>
+        #!/bin/bash
+        ps axu | grep "$1" | cut -c10-14
+</PRE>
+
+<P>
+O comando passa a ser executado da seguinte forma: (ap&#243;s o uso adequado
+de <B><I>chmod(1)</I></B>):
+
+<P>
+<PRE>
+          showpid fbn02
+</PRE>
+
+<P>
+</LI>
+<LI>Comando <B>killmy</B> que mata todos os meus processos:
+
+<P>
+<PRE>
+        #!/bin/bash
+        pids=`ps axu | grep "$USER" | grep -v grep | cut -c10-16`
+        kill $pids
+</PRE>
+
+<P>
+O  comando  passa  a  ser  executado  da seguinte  forma  (ap&#243;s  o  uso
+providencial de <B><I>chmod(1)</I></B>):
+
+<P>
+<PRE>
+          killmy
+</PRE>
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-11-27
+</ADDRESS>
+</BODY>
+</HTML>

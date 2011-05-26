@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 07
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 06
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>Notas de Aula # 07
+<BR>2&ordm;&nbsp;semestre 2003</H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Filtros e <I>Pipelining</I></A>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION00010010000000000000">
+Refer&#234;ncia b&#225;sica: Cap&#237;tulo 6, Se&#231;&#245;es 6.1, 6.5 e 6.6 da Apostila Linux B&#225;sico (<A
+ HREF="teoria.html#pet02a">1</A>)</A>
+</H4>
+&nbsp;
+<BR>Alguns programas em UNIX s&#227;o  constru&#237;dos para serem bastante &#250;teis com
+<I>pipelines</I>. Tais  programas, denominados <B>FILTROS</B>, l&#234;em
+dados, executam alguma opera&#231;&#227;o sobre  eles, e ent&#227;o exibem o resultado
+da opera&#231;&#227;o.
+
+<P>
+Um <B>Filtro</B> &#233; um programa que l&#234; de sua Entrada Padr&#227;o e escreve
+para sua Sa&#237;da Padr&#227;o.
+
+<P>
+
+<UL>
+<LI><B><I>grep(1)</I></B>, <B><I>egrep(1)</I></B>, <B><I>fgrep(1)</I></B>: encontra
+  padr&#245;es de <I>strings</I> em arquivos
+</LI>
+<LI><B><I>diff(1)</I></B>: encontra diferen&#231;as entre arquivos
+</LI>
+<LI><B><I>tee(1)</I></B>: l&#234; de stdin e escreve em stddout E em um arquivo
+</LI>
+<LI><B><I>head(1)</I></B>, <B><I>tail(1)</I></B>, <B><I>cat(1)</I></B>: exibe conte&#250;do de arquivos
+</LI>
+<LI><B><I>less(1)</I></B>, <B><I>more(1)</I></B>: exibe conte&#250;do de arquivos, com
+  pausa de exibi&#231;&#227;o
+</LI>
+<LI><B><I>file(1)</I></B>: exibe tipo do arquivo
+</LI>
+<LI><B><I>du(1)</I></B>: exibe o espa&#231;o ocupado por arquivos e diret&#243;rios
+</LI>
+<LI><B><I>which(1)</I></B>: exibe o caminho completo da localiza&#231;&#227;o de um
+  comando
+</LI>
+<LI><B><I>who(1)</I></B>: exibe os usu&#225;rios que est&#227;o usando o sistema no momento
+</LI>
+<LI><B><I>w(1)</I></B>: exibe os usu&#225;rios que est&#227;o usando o sistema no
+  momento e o que eles est&#227;o fazendo
+</LI>
+<LI><B><I>sort(1)</I></B>: ordena o conte&#250;do de arquivos
+</LI>
+<LI><B><I>wc(1)</I></B>: conta caracteres, palavras e linhas de arquivos
+</LI>
+<LI><B><I>colrm(1)</I></B>: remove colunas de cada linha
+</LI>
+<LI><B><I>cut(1)</I></B>: extrai partes selecionadas de cada linha de um arquivo
+</LI>
+<LI><B><I>tr(1)</I></B>: traduz ou remove um conjunto de caracteres
+</LI>
+<LI><B><I>paste(1)</I></B>: combina linhas correspondentes de arquivos
+</LI>
+<LI><B><I>uniq(1)</I></B>: remove linhas duplicadas em um arquivo ordenado
+</LI>
+<LI><B><I>pr(1)</I></B>: converte arquivos de texto de maneira adequada para
+  impress&#227;o (e.g., insere cabe&#231;alho e faz pagina&#231;&#227;o)
+</LI>
+<LI><B><I>lpr(1)</I></B>: imprime arquivos
+</LI>
+</UL>
+
+<P>
+Muitas vezes, o caracter <B>-</B> (h&#237;fen) indica entrada ou sa&#237;da
+padr&#227;o.
+
+<P>
+
+<H3><A NAME="SECTION00010100000000000000">
+Exemplos</A>
+</H3>
+
+<P>
+
+<OL>
+<LI>Como obter a lista de usu&#225;rios atualmente <I>logados</I>,
+  indicando em quantas sess&#245;es cada um est&#225; participando?
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>who</B></FONT><BR>
+    <TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">lwm01</TD>
+<TD ALIGN="LEFT">pts/1</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">17:08</TD>
+<TD ALIGN="LEFT">(enrolado.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">fao99</TD>
+<TD ALIGN="LEFT">pts/4</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:22</TD>
+<TD ALIGN="LEFT">(plic.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">mesr02</TD>
+<TD ALIGN="LEFT">pts/6</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">18:05</TD>
+<TD ALIGN="LEFT">(guardabelo.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jms99</TD>
+<TD ALIGN="LEFT">pts/5</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">17:34</TD>
+<TD ALIGN="LEFT">(pestana.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jo00</TD>
+<TD ALIGN="LEFT">pts/9</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:15</TD>
+<TD ALIGN="LEFT">(clayde.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">delgado</TD>
+<TD ALIGN="LEFT">pts/8</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">18:05</TD>
+<TD ALIGN="LEFT">(ford.inf.ufpr.br)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jo00</TD>
+<TD ALIGN="LEFT">pts/13</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:13</TD>
+<TD ALIGN="LEFT">(clayde.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">rc01</TD>
+<TD ALIGN="LEFT">pts/15</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:49</TD>
+<TD ALIGN="LEFT">(dorno.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jms99</TD>
+<TD ALIGN="LEFT">pts/17</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:50</TD>
+<TD ALIGN="LEFT">(pestana.dinf:0.0)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">rtk01</TD>
+<TD ALIGN="LEFT">pts/20</TD>
+<TD ALIGN="LEFT">Dec</TD>
+<TD ALIGN="RIGHT">4</TD>
+<TD ALIGN="LEFT">16:56</TD>
+<TD ALIGN="LEFT">(igoo.dinf:0.0)</TD>
+</TR>
+</TABLE>&nbsp;
+<BR>    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>who &nbsp;|&nbsp;cut -c1-8 &nbsp;|&nbsp;sort &nbsp;|&nbsp;uniq -c &nbsp;|&nbsp;grep 2</B></FONT><BR>
+ 
+
+<P>
+</LI>
+<LI>Como  descobrir os usu&#225;rios que  est&#227;o executando <B>emacs</B>,
+  mostrando  o nome  do usu&#225;rio  e a  hora em  que come&#231;ou  a  usar o
+  sistema?
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>w</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times"> 16:18:14 up 19 days, 22:28, 21 users,  load average: 0.27, 0.17, 0.31</FONT><BR>
+    <TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">USER</TD>
+<TD ALIGN="LEFT">TTY</TD>
+<TD ALIGN="LEFT">FROM</TD>
+<TD ALIGN="LEFT">LOGIN@</TD>
+<TD ALIGN="RIGHT">IDLE</TD>
+<TD ALIGN="RIGHT">JCPU</TD>
+<TD ALIGN="RIGHT">PCPU</TD>
+<TD ALIGN="LEFT">WHAT</TD>
+</TR>
+<TR><TD ALIGN="LEFT">gst00</TD>
+<TD ALIGN="LEFT">pts/5</TD>
+<TD ALIGN="LEFT">choogabum.dinf:0</TD>
+<TD ALIGN="LEFT">16:13</TD>
+<TD ALIGN="RIGHT">3:53</TD>
+<TD ALIGN="RIGHT">0.62s</TD>
+<TD ALIGN="RIGHT">0.01s</TD>
+<TD ALIGN="LEFT">./tf</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jo00</TD>
+<TD ALIGN="LEFT">pts/9</TD>
+<TD ALIGN="LEFT">clayde.dinf:0.0</TD>
+<TD ALIGN="LEFT">16:15</TD>
+<TD ALIGN="RIGHT">1:37</TD>
+<TD ALIGN="RIGHT">7.26s</TD>
+<TD ALIGN="RIGHT">0.03s</TD>
+<TD ALIGN="LEFT">emacs</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jo00</TD>
+<TD ALIGN="LEFT">pts/13</TD>
+<TD ALIGN="LEFT">clayde.dinf:0.0</TD>
+<TD ALIGN="LEFT">16:13</TD>
+<TD ALIGN="RIGHT">3:50</TD>
+<TD ALIGN="RIGHT">0.02s</TD>
+<TD ALIGN="RIGHT">0.02s</TD>
+<TD ALIGN="LEFT">bash</TD>
+</TR>
+<TR><TD ALIGN="LEFT">ci066</TD>
+<TD ALIGN="LEFT">pts/7</TD>
+<TD ALIGN="LEFT">seurat.inf.ufpr.</TD>
+<TD ALIGN="LEFT">16:11</TD>
+<TD ALIGN="RIGHT">1.00</TD>
+<TD ALIGN="RIGHT">0.19s</TD>
+<TD ALIGN="RIGHT">0.17s</TD>
+<TD ALIGN="LEFT">pine</TD>
+</TR>
+<TR><TD ALIGN="LEFT">jo00</TD>
+<TD ALIGN="LEFT">pts/14</TD>
+<TD ALIGN="LEFT">clayde.dinf:0.0</TD>
+<TD ALIGN="LEFT">16:13</TD>
+<TD ALIGN="RIGHT">2:24</TD>
+<TD ALIGN="RIGHT">0.02s</TD>
+<TD ALIGN="RIGHT">0.02s</TD>
+<TD ALIGN="LEFT">emacs</TD>
+</TR>
+<TR><TD ALIGN="LEFT">vp99</TD>
+<TD ALIGN="LEFT">pts/3</TD>
+<TD ALIGN="LEFT">jack.dinf:0.0</TD>
+<TD ALIGN="LEFT">16:11</TD>
+<TD ALIGN="RIGHT">3:12</TD>
+<TD ALIGN="RIGHT">0.05s</TD>
+<TD ALIGN="RIGHT">0.02s</TD>
+<TD ALIGN="LEFT">more tmp</TD>
+</TR>
+<TR><TD ALIGN="LEFT">fl01</TD>
+<TD ALIGN="LEFT">pts/0</TD>
+<TD ALIGN="LEFT">suporte3.bsi.com</TD>
+<TD ALIGN="LEFT">12:52</TD>
+<TD ALIGN="RIGHT">11:36</TD>
+<TD ALIGN="RIGHT">0.69s</TD>
+<TD ALIGN="RIGHT">0.62s</TD>
+<TD ALIGN="LEFT">./prog</TD>
+</TR>
+<TR><TD ALIGN="LEFT">crzf99</TD>
+<TD ALIGN="LEFT">pts/6</TD>
+<TD ALIGN="LEFT">shelley.inf.ufpr</TD>
+<TD ALIGN="LEFT">15:51</TD>
+<TD ALIGN="RIGHT">20:46</TD>
+<TD ALIGN="RIGHT">0.04s</TD>
+<TD ALIGN="RIGHT">0.04s</TD>
+<TD ALIGN="LEFT">-bash</TD>
+</TR>
+<TR><TD ALIGN="LEFT">....</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>&nbsp;
+<BR>    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>w -h &nbsp;|&nbsp;grep emacs &nbsp;|&nbsp;cut -c1-8,36-40</B></FONT><BR>
+  
+
+<P>
+</LI>
+<LI>Quantos arquivos tem  o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/usr/bin</FONT></B>? Como fazer para
+  efetuar a contagem e, AO MESMO TEMPO, produzir um arquivo com a lista
+  de arquivos do diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/usr/bin</FONT></B>?
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls /usr/bin &nbsp;|&nbsp;wc -l</B></FONT><BR>
+      <FONT FACE="Times New Roman,Times">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1506</FONT><BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>ls /usr/bin &nbsp;|&nbsp;tee <FONT SIZE=3>~</FONT>/bin.lst &nbsp;|&nbsp;wc -l</B></FONT><BR>
+      <FONT FACE="Times New Roman,Times">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1506</FONT><BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat <FONT SIZE=3>~</FONT>/bin.lst</B></FONT><BR>
+      <FONT FACE="Times New Roman,Times"><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">a2p</TD>
+</TR>
+<TR><TD ALIGN="LEFT">a2ps</TD>
+</TR>
+<TR><TD ALIGN="LEFT">aafire</TD>
+</TR>
+<TR><TD ALIGN="LEFT">aainfo</TD>
+</TR>
+<TR><TD ALIGN="LEFT">aalib-config</TD>
+</TR>
+<TR><TD ALIGN="LEFT">aasavefont</TD>
+</TR>
+<TR><TD ALIGN="LEFT">aatest</TD>
+</TR>
+<TR><TD ALIGN="LEFT">abxtest</TD>
+</TR>
+<TR><TD ALIGN="LEFT">....</TD>
+</TR>
+</TABLE></FONT><BR>
+    
+
+<P>
+</LI>
+<LI>Eu quero saber quem s&#227;o os campe&#245;es de espa&#231;o ocupado em meus
+  diret&#243;rios.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>du <FONT SIZE=3>~</FONT> &nbsp;|&nbsp;sort -nr</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">2444&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066</FONT><BR>
+    <FONT FACE="Times New Roman,Times">1096&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/.mozilla</FONT><BR>
+    <FONT FACE="Times New Roman,Times">1080&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/.mozilla/default</FONT><BR>
+    <FONT FACE="Times New Roman,Times">1076&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/.mozilla/default/mkc2ctou.slt</FONT><BR>
+    <FONT FACE="Times New Roman,Times">492&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/.kde</FONT><BR>
+    <FONT FACE="Times New Roman,Times">408&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/.kde/tmp-dupond</FONT><BR>
+    <FONT FACE="Times New Roman,Times">272&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/LabNum3</FONT><BR>
+    <FONT FACE="Times New Roman,Times">212&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/LabNum3/pub</FONT><BR>
+    <FONT FACE="Times New Roman,Times">168&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/home/especial/ci066/LabNum4</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT><BR>
+  
+
+<P>
+</LI>
+<LI>Se a vers&#227;o de <B><I>tar(1)</I></B> em seu sistema &#233; antiga e n&#227;o aceita
+  as op&#231;&#245;es de compacta&#231;&#227;o  <B>-z</B> ou <B>-j</B>, como fazer para
+  compactar o resultado do <B><I>tar(1)</I></B>?  Neste mesmo caso, como ler o
+  conte&#250;do de um arquivo do tipo <I>tar</I> que est&#225; compactado?
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>tar -cvf - <FONT SIZE=3>~</FONT> &nbsp;|&nbsp;gzip -c &nbsp;&gt;&nbsp;bkp.tar.gz </B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>bunzip2 -c bkp_02.tar.bz2 &nbsp;|&nbsp;tar -tvf - </B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+  
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="pet02a">1</A>
+<DD>
+PET Inform&#225;tica.
+<BR> Linux B&#225;sico.
+<BR> UFPR, Outubro 2002.
+<BR> URL <TT>http://pet.inf.ufpr.br/&nbsp;daniel/LinuxBasico.pdf</TT>.
+
+<BR>
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-11-03
+</ADDRESS>
+</BODY>
+</HTML>

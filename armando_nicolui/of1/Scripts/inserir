@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#
+# Insere uma entrada no arquivo de enderecos
+#
+
+if [[ $# -ne 2 ]]; then
+    echo "Forma de uso: `basename $0` nome numero"
+    exit 1
+fi
+
+echo "$1	$2" >> $PHONEBOOK
+
+sort -o  $PHONEBOOK  $PHONEBOOK
+
+

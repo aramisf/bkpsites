@@ -1,0 +1,46 @@
+     Bom Dia,
+
+     Nos  computadores do  DInf, quando  se edita  um NOVO  arquivo com
+EMACS e  seu conteúdo inclui  letras acentuadas e  caracteres especiais
+(especificamente aqueles  cujo valor ASCII  é maior que 127),  o editor
+exibe  a mensagem  "Select coding  system (default  utf-16-le):"  ao se
+salvar o arquivo.
+
+     O usuário NÃO DEVE ACEITAR ESTE DEFAULT DIGITANDO ENTER, pois isto
+insere  diversos  caracteres de  controle  no  arquivo (definidos  pela
+codificação UTF-16),  que via  de regra trazem  problemas se  o arquivo
+salvo é usado por outros programas, (por exemplo, compiladores).
+
+     Em resposta à mensagem "Select coding system (default utf-16-le):"
+o usuário deve digitar "iso-latin-1" (sem as aspas), seguido de ENTER.
+
+     Para se corrigir arquivos previamente  salvos com "emacs" em que o
+usuário  já  fez a  escolha  para  UTF-16,  proceda da  seguinte  forma
+(supondo, POR EXEMPLO, que se quer corrigir o arquivo "Lista01.txt"):
+
+        1. Execute a linha de comando abaixo:
+
+           cat Lista01.txt | tr -d '\377\376\000' > Lista01.txt_novo
+
+        2. Usando  "emacs",   edite  o  arquivo   "Lista01.txt_novo"  e
+           verifique  se  o conteúdo  está  coincidente  com o  arquivo
+           original (deverá estar, mas sempre é bom verificar B-)).
+
+
+     Para que em edições futuras  de NOVOS arquivos com o "emacs", este
+não  peça  para  escolher   a  codificação  "utf-16-le"  e  use  sempre
+"iso-latin-1",  coloque  as linhas  abaixo  no  arquivo ".emacs" em seu
+diretório de login:
+
+            (set-language-environment "Latin-1")
+            (setq coding-system-for-write 'latin-1)
+           
+Se  você  não tiver o  arquivo  ".emacs"  em  seu diretório  de  login,
+crie-o tendo como conteúdo a linha acima. Não se esqueça de finalizar a
+linha com um ENTER.
+
+     Abraços,
+
+
+     Prof. Armando
+

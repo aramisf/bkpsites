@@ -1,0 +1,578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>19 Estruturas</TITLE>
+<META NAME="description" CONTENT="19 Estruturas">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node20.html">
+<LINK REL="previous" HREF="notas_proc-node18.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node20.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html465"
+  HREF="notas_proc-node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html463"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html457"
+  HREF="notas_proc-node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html466"
+  HREF="notas_proc-node20.html">20 Fun&#231;&#245;es</A>
+<B>Up:</B> <A NAME="tex2html464"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html458"
+  HREF="notas_proc-node18.html">18 Strings</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html467"
+  HREF="notas_proc-node19.html#SECTION000191000000000000000">19.1 Declaração de Estruturas</A>
+<LI><A NAME="tex2html468"
+  HREF="notas_proc-node19.html#SECTION000192000000000000000">19.2 Definição de variáveis de um tipo estrutura declarado</A>
+<LI><A NAME="tex2html469"
+  HREF="notas_proc-node19.html#SECTION000193000000000000000">19.3 Acesso a membros de uma estrutura: ponto (<TT>.</TT>), o
+ operador membro de estrutura</A>
+<LI><A NAME="tex2html470"
+  HREF="notas_proc-node19.html#SECTION000194000000000000000">19.4 Operadores usados com variáveis de estrutura: valores e
+  <I>lvalues</I></A>
+<LI><A NAME="tex2html471"
+  HREF="notas_proc-node19.html#SECTION000195000000000000000">19.5 Inicialização de estruturas</A>
+<LI><A NAME="tex2html472"
+  HREF="notas_proc-node19.html#SECTION000196000000000000000">19.6 Estruturas como argumentos de função e valores de retorno</A>
+<LI><A NAME="tex2html473"
+  HREF="notas_proc-node19.html#SECTION000197000000000000000">19.7 Arrays de estruturas</A>
+<LI><A NAME="tex2html474"
+  HREF="notas_proc-node19.html#SECTION000198000000000000000">19.8 Estruturas aninhadas</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000190000000000000000">
+19 Estruturas</A>
+</H1>
+
+<P>
+A estrutura de dados  <B><I>array</I></B> &#233; usada para conter dados
+do mesmo tipo junto.  Dados  de tipos <EM>diferentes</EM> tamb&#233;m podem ser
+agregados    em    tipos    chamados    de    <B>estruturas</B>    ou
+<B>registros</B>  (tipo <TT>struct</TT> em  linguagem C).   Primeiro, o
+tipo  estrutura  &#233;  declarado  (precisamos  especificar  que  tipos  de
+vari&#225;veis ser&#227;o combinados na  estrutura), e ent&#227;o vari&#225;veis deste novo
+tipo podem  ser definidas (de  maneira similar que usamos  para definir
+vari&#225;veis do tipo <TT>int</TT> ou <TT>char</TT>).
+
+<P>
+
+<H2><A NAME="SECTION000191000000000000000">
+19.1 Declara&#231;&#227;o de Estruturas</A>
+</H2>
+
+<P>
+Uma   <I>declara&#231;&#227;o  de   estrutura</I>   <I>declara</I>  um   tipo
+<I>struct</I>.  Cada tipo  <I>struct</I> recebe  um <EM>nome</EM> (ou
+<EM>tag</EM>).  Refere-se  &#224;quele  tipo pelo  <EM>nome</EM> precedido  pela
+palavra <TT>struct</TT>.  Cada  unidade de dados  na estrutura  &#233; chamada
+<EM>membro</EM> e  possui um  <EM>nome  de membro</EM>.   Os membros  de uma
+estrutura podem ser de <I>qualquer</I> tipo. Declara&#231;&#245;es de estrutura
+n&#227;o s&#227;o  defini&#231;&#245;es. N&#227;o &#233; alocada mem&#243;ria,  simplesmente &#233; introduzida
+um novo tipo de estrutura.
+
+<P>
+Geralmente declara&#231;&#245;es  de estruturas  s&#227;o globais. Elas  s&#227;o colocadas
+pr&#243;ximas ao topo do arquivo com  o c&#243;digo fonte do programa, assim elas
+s&#227;o  vis&#237;veis por  todas  as fun&#231;&#245;es  (embora  isto dependa  de como  a
+estrutura est&#225; sendo usada).
+
+<P>
+A forma padr&#227;o de declara&#231;&#227;o de uma estrutura &#233;:
+
+<P>
+<BR>
+<BR>
+<TT>struct</TT> <EM>nome-estrutura</EM> <TT>{</TT>
+
+<P>
+<EM>declara&#231;&#227;o dos membros</EM>
+
+<P>
+<TT>}</TT> <EM>defini&#231;&#227;o de vari&#225;veis (optional)</EM>;
+
+<P>
+<BR>
+<BR>
+
+<P>
+Abaixo  se apresenta  um exemplo  de um  tipo estrutura  que  cont&#233;m um
+membro do tipo <TT>int</TT> e um outro membro do tipo <TT>char</TT>.
+
+<P>
+<PRE>
+          struct facil {
+              int num;
+              char ch;
+          };
+</PRE>
+
+<P>
+Esta declaracao cria um novo tipo chamado <TT>struct facil</TT> que cont&#233;m
+um inteiro chamado <TT>num</TT> e um caracter chamado <TT>ch</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000192000000000000000">
+19.2 Defini&#231;&#227;o de vari&#225;veis de um tipo estrutura declarado</A>
+</H2>
+
+<P>
+Como acontece com  qualquer outro tipo de dados,  vari&#225;veis de tipos de
+estruturas  s&#227;o  definidas  fornecendo o  nome  do  tipo  e o  nome  da
+vari&#225;vel.  Considere a  defini&#231;&#227;o abaixo relativa a uma  vari&#225;vel com o
+nome <TT>fac1</TT> que &#233; do tipo <TT>struct facil</TT>:
+
+<P>
+<PRE>
+          struct facil fac1;
+</PRE>
+
+<P>
+Tal  defini&#231;&#227;o  est&#225;  associada  com  a aloca&#231;&#227;o  de  mem&#243;ria:  mem&#243;ria
+suficiente  ser&#225; alocada  para guardar  um <TT>int</TT> e  um  <TT>char</TT>
+(nesta ordem). Como qualquer outra vari&#225;vel, <TT>fac1</TT> tem um nome, um
+tipo, e um endere&#231;o associados.
+
+<P>
+Vari&#225;veis de estruturas possuem tamb&#233;m valores, e como outras vari&#225;veis
+locais, se  elas n&#227;o  tem atribu&#237;das um  valor espec&#237;fico, seu  valor &#233;
+indefinido.
+
+<P>
+&#201; poss&#237;vel definir vari&#225;veis durente a declara&#231;&#227;o do tipo estrutura:
+<PRE>
+          struct facil {
+              int num;
+              char ch;
+          } fac1;
+</PRE>
+
+<P>
+Note-se que sem conflito, nomes de  membros (tais como <TT>num</TT> e <TT> ch</TT>)  podem ser usados  como nomes  de outras  vari&#225;veis independentes
+ (fora do tipo  estrutura definido) or como nomes  de membros em outros
+ tipos  estrutura.  No  entanto,  deve-se evitar  situa&#231;&#245;es  que  criem
+ confus&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION000193000000000000000">
+19.3 Acesso a membros de uma estrutura: ponto (<TT>.</TT>), o
+ operador membro de estrutura</A>
+</H2>
+
+<P>
+Dada uma vari&#225;vel de estrutura, um membro espec&#237;fico &#233; referenciado
+usando o nome da vari&#225;vel seguida de <TT>.</TT> (ponto) e pelo nome do
+membro da estrutura. Assim, as seguintes refer&#234;ncias a membros de uma
+estrutura s&#227;o v&#225;lidas:
+
+<P>
+<TT>fac1.num</TT>    se refere ao membro com nome  <TT>num</TT>
+na estrutura <TT>fac1</TT>;
+
+<P>
+<TT>fac1.ch </TT>    se refere ao membro com nome  <TT>ch</TT> 
+na estrutura <TT>fac1</TT>.
+
+<P>
+Membros de estrutura  (como <TT>fac1.num</TT>) s&#227;o vari&#225;veis,  e podem ser
+usadas como valores  (no lado direito de uma  atribui&#231;&#227;o, em express&#245;es
+como  argumentos  para  fun&#231;&#245;es),  ou como  <I>lvalues</I>  (no  lado
+esquerdo de atribui&#231;&#245;es, com operadores de incremento/decremento ou com
+o operador de  endere&#231;o (&amp;)). O exemplo abaixo  mostra alguns exemplos
+do uso de membros de estrutura:
+
+<P>
+<PRE>
+          fac1.ch = 'G';
+          fac1.num = 42;
+
+          fac1.num++;
+
+          if (fac1.ch == 'H') {
+             printf("%d\n", fac1.num);
+          }
+</PRE>
+
+<P>
+Tentar  acessar um  nome de  membro  que n&#227;o  existe causa  um erro  de
+compila&#231;&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION000194000000000000000">
+19.4 Operadores usados com vari&#225;veis de estrutura: valores e
+  <I>lvalues</I></A>
+</H2>
+
+<P>
+Uma vari&#225;vel  de estrutura pode ser  tratada como um  objeto simples no
+todo, com um  valor espec&#237;fico associado a ela  (a estrutura <TT>fac1</TT>
+tem  um valor  que agrega  valores de  todos os  seus membros).  Note a
+diferen&#231;a com <I>arrays</I>:  se <TT>arr[]</TT> &#233; um  array de tamanho 2
+definedo como  <TT>int arr[2]  = {0,1};</TT>, o  nome <TT>arr2</TT>  n&#227;o se
+refere ao  valor coletivo de  todos os elementos do  <I>array</I>. Na
+verdade, <TT>arr2</TT> &#233; um ponteiro constante e se refere ao endere&#231;o de
+mem&#243;ria onde o <I>array</I> se inicia. Al&#233;m disso <TT>arr2</TT> n&#227;o &#233; um
+<I>lvalue</I>  e n&#227;o  pode  ser mudado.  Vari&#225;veis  de estrutura  s&#227;o
+diferentes. Elas podem ser  usadas como valores e <I>lvalues</I>, mas
+com certas limita&#231;&#245;es.
+
+<P>
+<B>Os &#250;nicos  usos v&#225;lidos de  uma vari&#225;vel de estrutura  s&#227;o dos
+   dois lados de um operador  de atribui&#231;&#227;o (<TT>=</TT>), como operando do
+   operador de endere&#231;o  <TT>&amp;</TT> (obtendo o endere&#231;o  da estrutura), e
+   referenciando seus membros</B>.
+
+<P>
+De  todas  as  varia&#231;&#245;es   de  atribui&#231;&#227;o  (incluindo  o  incremento  e
+decremento) atribui&#231;&#227;o de estruturas pode ser usada APENAS com <TT>=</TT>.
+O uso  de outros operadores de  atribui&#231;&#227;o ou de  incremento causar&#225; um
+erro de  compila&#231;&#227;o A  atribui&#231;&#227;o de um  valor de estrutura  para outro
+copia <EM>todos</EM> os membros de  uma estrutura para outra. Mesmo que um
+dos membros  seja um <I>array</I>  ou outra estrutura, ela  &#233; copiada
+integralmente. As duas estruturas envolvidas na atribui&#231;&#227;o devem ser do
+mesto tipo <TT>struct</TT>.  Considere o seguinte exemplo:
+
+<P>
+<PRE>
+          struct facil {
+              int num;
+              char ch;
+          };
+
+          main()
+          {
+              struct facil fac1, fac2;
+              
+              fac1.num = 3;
+              fac1.ch = 'C';
+
+              /* Atribuindo fac1 a fac2 */
+              fac2 = fac1;
+          }
+</PRE>
+
+<P>
+Lembre-se    que   este    tipo    de   atribui&#231;&#227;o    &#233;   ilegal    com
+<I>arrays</I>. Tentar  fazer isto  com dois <I>arrays</I>  causa um
+erro  de   compila&#231;&#227;o  (uma  vez  que  nomes   de  <I>arrays</I>  s&#227;o
+ponteiros constantes).
+
+<P>
+<PRE>
+           int a[5], b[5];
+
+           /* Está errado -- Não irá compilar */
+           a = b;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000195000000000000000">
+19.5 Inicializa&#231;&#227;o de estruturas</A>
+</H2>
+
+<P>
+Vari&#225;veis de estruturas n&#227;o-inicializadas cont&#233;m valores indefinidos em
+cada  um  de seus  membros.  Como  em  outras vari&#225;veis,  vari&#225;veis  de
+estruturas   podem  ser   inicializadas  ao   serem   declaradas.  Esta
+inicializa&#231;&#227;o &#233;  an&#225;loga ao que &#233;  feito no caso  de <I>arrays</I>. O
+exemplo abaixo ilustra a inicializa&#231;&#227;o de estruturas:
+
+<P>
+<PRE>
+          struct facil {
+              int num;
+              char ch;
+          };
+
+          main()
+          {
+              struct facil fac1 = { 3, 'C' }, fac2;
+
+              fac2 = fac1;
+          }
+</PRE>
+
+<P>
+Uma lista de valores separados  por v&#237;rgula fica entre chaves (<TT>{</TT>
+and <TT>}</TT>).  Os valores de inicializa&#231;&#227;o devem  estar na mesma ordem
+dos membros na declara&#231;&#227;o da estrutura.
+
+<P>
+
+<H2><A NAME="SECTION000196000000000000000">
+19.6 Estruturas como argumentos de fun&#231;&#227;o e valores de retorno</A>
+</H2>
+
+<P>
+Como qualquer outro valor do tipo  <TT>int</TT> ou <TT>float</TT>, valores de
+estruturas podem ser passados como argumentos para fun&#231;&#245;es, e podem ser
+retornados de fun&#231;&#245;es. O exemplo abaixo ilustra tal prorpiedade:
+
+<P>
+<PRE>
+    #define LEN 50
+
+    struct endereco {
+        char rua[LEN];
+        char cidade_estado_cep[LEN];
+    };
+
+    struct endereco obtem_endereco(void);
+    void imprime_endereco(struct endereco);
+
+    struct endereco obtem_endereco(void)
+    {
+         struct endereco ender;
+
+         printf("\t Entre rua: ");
+         gets(ender.rua);
+         printf("\t Entre cidade/estado/cep: ");
+         gets(ender.cidade_estado_cep);
+
+         return ender;
+    }
+
+    void imprime_endereco(struct endereco ender)
+    {
+         printf("\t %s\n", ender.rua);
+         printf("\t %s\n", ender.cidade_estado_cep);
+    }
+
+    main()
+    {
+         struct endereco residencia;
+
+         printf("Entre seu endereco residencial:\n");
+         residencia = obtem_endereco();
+
+         printf("\nSeu endereco eh:\n");
+         imprime_endereco(residencia);
+    }
+</PRE>
+
+<P>
+No  exemplo  acima,  a  estrutura  <TT>struct  endereco</TT>  cont&#233;m  dois
+<I>arrays</I>    de    tamanho   50.    Dentro    da   fun&#231;&#227;o    <TT>obtem_endereco()</TT>, a  vari&#225;vel <TT>ender</TT>  &#233; declarada como  sendo do
+tipo <TT>struct endereco</TT>. Ap&#243;s  usar <TT>gets()</TT> para o fornecimento
+da informa&#231;&#227;o, o valor de <TT>ender</TT> &#233; retornado para <TT>main()</TT>, de
+onde a fun&#231;&#227;o  <TT>obtem_endereco()</TT> foi chamada. Este  valor &#233; ent&#227;o
+passado para a  fun&#231;&#227;o <TT>imprime_endereco()</TT>, onde o  valor de cada
+membro da estrutura &#233; exibido na tela.
+
+<P>
+Este programa pode ser comparado ao programa abaixo, que usa valores do
+tipo <TT>int</TT> no lugar de valores do tipo <TT>struct endereco</TT> (claro
+que a informa&#231;&#227;o  lida e exibida &#233; um simples valor  num&#233;rico, e n&#227;o um
+nome de rua, etc.):
+
+<P>
+<PRE>
+    int obtem_int(void);
+    void imprime_int(int);
+
+    int obtem_int(void)
+    {
+         int i;
+
+         printf("Entre valor: ");
+         scanf("%d", &amp;i);
+
+         return i;
+    }
+
+    void imprime_int(int i)
+    {
+         printf("%d\n", i);
+    }
+
+    main()
+    {
+         int valor;
+
+         valor = obtem_int();
+
+         printf("\nSeu valor:\n");
+         imprime_int(valor);
+    }
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000197000000000000000">
+19.7 Arrays de estruturas</A>
+</H2>
+
+<P>
+<I>Arrays</I>  de  estruturas s&#227;o  como  <I>arrays</I> de  qualquer
+outro  tipo. Eles  s&#227;o  referenciados  e definidos  da  mesma forma.  O
+exemplo   abaixo  &#233;   an&#225;logo  ao   exemplo  de   endere&#231;o  apresentado
+anteriormente,  exceto que  uma  quantidade de  <TT>NUM</TT> endere&#231;os  &#233;
+armazenada ao inv&#233;s de apenas um.
+
+<P>
+<PRE>
+    #define LEN 50
+    #define NUM 10
+
+    struct endereco {
+        char rua[LEN];
+        char cidade_estado_cep[LEN];
+    };
+
+    void obtem_endereco(struct endereco [], int);
+    void imprime_endereco(struct endereco);
+
+    void obtem_endereco(struct endereco aender [], int index)
+    {
+         printf("Entre rua: ");
+         gets(aender[index].rua);
+         printf("Entre cidade/estado/cep: ");
+         gets(aender[index].cidade_estado_cep);
+    }
+
+    void imprime_endereco(struct endereco ender)
+    {
+         printf("%s\n", ender.rua);
+         printf("%s\n", ender.cidade_estado_cep);
+    }
+
+    main()
+    {
+         struct endereco residencias[NUM];
+         int i;
+
+         for (i = 0; i &lt; NUM; i++) {
+             printf("Entre o endereco da pessoa %d:\n", i);
+             obtem_endereco(residencias,i);
+         }
+
+         for (i = 0; i &lt; NUM; i++) {
+             printf("endereco da pessoa %d:\n", i);
+             imprime_endereco(residencias[i]);
+         }
+    }
+</PRE>
+
+<P>
+Neste  programa,  o  array   <TT>residencias</TT>  &#233;  passado  para  <TT>obtem_endereco()</TT>, juntamente  com o indice  onde deve ser  guardado o
+novo  endere&#231;o. Depois,  cada elemento  do  array &#233;  passado para  <TT>imprime_endereco()</TT> um por vez.
+
+<P>
+Observe-se ainda  na fun&#231;&#227;o <TT>obtem_endereco()</TT> como  os membros de
+cada elemento do  array podem ser acessados.  elements  da estrutura em
+can be accessed  as well.  Por exemplo, para acessar  a rua do elemento
+<TT>residencias[0]</TT> usa-se:
+
+<P>
+<PRE>
+          printf("%s\n", residencias[0].rua);
+          printf("%s\n", residencias[0].cidade_estado_cep);
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000198000000000000000">
+19.8 Estruturas aninhadas</A>
+</H2>
+
+<P>
+Como  definido  anteriormente,  membros  de  estruturas  podem  ser  de
+qualquer  tipo. Isto  inclui outras  estruturas. Abaixo  define-se duas
+estruturas, a segunda tendo membros que s&#227;o tamb&#233;m estruturas:
+
+<P>
+<PRE>
+    #define LEN 50
+
+    struct endereco {
+        char rua[LEN];
+        char cidade_estado_cep[LEN];
+    };
+
+    struct student {
+        char id[10];
+        int idade;
+        struct endereco casa;
+        struct endereco escola;
+    };
+
+    struct student pessoa;
+</PRE>
+
+<P>
+Dadas estas defini&#231;&#245;es, pode-se potencialmente acessar os seguintes
+campos de <TT>pessoa</TT>, uma vari&#225;vel do tipo <TT>struct student</TT>:
+
+<P>
+<PRE>
+           pessoa.id
+           pessoa.casa.rua
+           pessoa.casa.cidade_estado_cep
+           pessoa.escola.rua
+           pessoa.escola.cidade_estado_cep
+</PRE>
+
+<P>
+Note o uso repetido de <TT>.</TT>  quando se acessa membros dentro de membros.
+
+<P>
+
+<P>
+<HR>
+<A NAME="tex2html465"
+  HREF="notas_proc-node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html463"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html457"
+  HREF="notas_proc-node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html466"
+  HREF="notas_proc-node20.html">20 Fun&#231;&#245;es</A>
+<B>Up:</B> <A NAME="tex2html464"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html458"
+  HREF="notas_proc-node18.html">18 Strings</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

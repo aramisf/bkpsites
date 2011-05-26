@@ -1,0 +1,1191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>20 Fun&#231;&#245;es</TITLE>
+<META NAME="description" CONTENT="20 Fun&#231;&#245;es">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node21.html">
+<LINK REL="previous" HREF="notas_proc-node19.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node21.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html483"
+  HREF="notas_proc-node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html481"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html475"
+  HREF="notas_proc-node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html484"
+  HREF="notas_proc-node21.html">21 O pré-processador</A>
+<B>Up:</B> <A NAME="tex2html482"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html476"
+  HREF="notas_proc-node19.html">19 Estruturas</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html485"
+  HREF="notas_proc-node20.html#SECTION000200100000000000000">20.0.1 Fun&#231;&#245;es: o que s&#227;o e por que us&#225;-las</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html486"
+  HREF="notas_proc-node20.html#SECTION000201000000000000000">20.1 Definindo fun&#231;&#245;es</A>
+<LI><A NAME="tex2html487"
+  HREF="notas_proc-node20.html#SECTION000202000000000000000">20.2 Fun&#231;&#245;es simples</A>
+<UL>
+<LI><A NAME="tex2html488"
+  HREF="notas_proc-node20.html#SECTION000202100000000000000">20.2.1 Argumentos</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html489"
+  HREF="notas_proc-node20.html#SECTION000203000000000000000">20.3 Fun&#231;&#245;es que retornam um valor</A>
+<LI><A NAME="tex2html490"
+  HREF="notas_proc-node20.html#SECTION000204000000000000000">20.4 Mais sobre o  <TT>return</TT></A>
+<LI><A NAME="tex2html491"
+  HREF="notas_proc-node20.html#SECTION000205000000000000000">20.5 Mais sobre Argumentos</A>
+<LI><A NAME="tex2html492"
+  HREF="notas_proc-node20.html#SECTION000206000000000000000">20.6 Chamada por valor</A>
+<LI><A NAME="tex2html493"
+  HREF="notas_proc-node20.html#SECTION000207000000000000000">20.7 Vari&#225;veis locais</A>
+<LI><A NAME="tex2html494"
+  HREF="notas_proc-node20.html#SECTION000208000000000000000">20.8 Prot&#243;tipos</A>
+<LI><A NAME="tex2html495"
+  HREF="notas_proc-node20.html#SECTION000209000000000000000">20.9 Documenta&#231;&#227;o de fun&#231;&#245;es</A>
+<LI><A NAME="tex2html496"
+  HREF="notas_proc-node20.html#SECTION0002010000000000000000">20.10 Coment&#225;rios</A>
+<UL>
+<LI><A NAME="tex2html497"
+  HREF="notas_proc-node20.html#SECTION0002010001000000000000">20.10.0.0.1 Regras para coment&#225;rio</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000200000000000000000">
+20 Fun&#231;&#245;es</A>
+</H1>
+
+<P>
+
+<H3><A NAME="SECTION000200100000000000000">
+20.0.1 Fun&#231;&#245;es: o que s&#227;o e por que us&#225;-las</A>
+</H3>
+
+<P>
+Quando queremos  resolver um problema,  em geral tentamos  dividi-lo em
+subproblemas mais  simples e relativamente  independentes, e resolvemos
+os  problemas  mais simples  um  a um.   A  linguagem  C disp&#245;e  de
+constru&#231;&#245;es  (abstra&#231;&#245;es)  que  auxiliam o  projeto  de
+programas  de  maneira <EM>top-down</EM>.   Uma  fun&#231;&#227;o cria  uma
+maneira conveniente de encapsular alguns detalhes de ``processamento'',
+ou   seja,   como   algum   resultado  &#233;   obtido.    Quando   esta
+``computa&#231;&#227;o''  &#233;  necess&#225;ria,  a fun&#231;&#227;o  &#233;
+<EM>chamada</EM>,  ou   <EM>invocada</EM>.   Desta   forma,  quando   uma
+fun&#231;&#227;o &#233; chamada o usu&#225;rio n&#227;o precisa se preocupar
+como a  computa&#231;&#227;o &#233;  realizada.  &#201; importante  saber o
+que a fun&#231;&#227;o  faz (qual o resultado da  execu&#231;&#227;o de uma
+fun&#231;&#227;o)  e tamb&#233;m  como se  usa a  fun&#231;&#227;o.  Criando
+fun&#231;&#245;es,  um   programa  C  pode  ser   estruturado  em  partes
+relativamente  independentes  que  correspondem as  subdivis&#245;es  do
+problema.
+
+<P>
+Voc&#234;  j&#225; viu algumas  fun&#231;&#245;es: <TT>printf(), scanf(),
+getchar(),  sqrt()</TT>.  Elas  s&#227;o fun&#231;&#245;es  de  uma biblioteca
+padr&#227;o (do C).  Voc&#234; n&#227;o sabe como elas foram escritas, mas
+j&#225; viu como  utiliz&#225;-las.  Ou seja, voc&#234; sabe  o <EM>nome</EM>
+das   fun&#231;&#245;es  e  quais   informa&#231;&#245;es  espec&#237;ficas
+voc&#234; deve  fornecer a  elas (valores que  devem ser  <EM>passados</EM>
+para  as   fun&#231;&#245;es)  para  que  a   fun&#231;&#227;o  produza  os
+resultados esperados.
+
+<P>
+Quando  nos referirmos  a  uma fun&#231;&#227;o  neste  texto usaremos  a
+maneira  frequentemente utilizada  que &#233;  o nome  da fun&#231;&#227;o
+seguido de <TT>()</TT>.
+
+<P>
+Tomemos  como exemplo o  programa abaixo,  que calcula  o produto  de 2
+n&#250;meros inteiros positivos apenas se ambos forem primos:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>/*----------------------------------------------------------------------
+  Verifica se 2 Numeros sao primos e multiplica um pelo outro se o forem
+  ----------------------------------------------------------------------
+ */
+
+#include &lt;stdio.h&gt;
+
+main()
+{
+  
+  int n1, n2, j;
+  int prod = 0;
+  
+  printf("\nEntre com 2 numeros inteiros: ");
+  scanf ("%d %d", &amp;n1, &amp;n2);
+ 
+
+  /* Se for indicado 1, 0 ou negativo, nao sao primos */
+  if ( n1 &gt;= 2 &amp;&amp; n2 &gt;= 2) {
+    /* Testa se n1 é primo */
+    for(j = n1 - 1; (j &gt; 1) &amp;&amp; (n1 % j != 0); j--);    
+    if( j == 1) {        /* n1 eh primo */
+      /* Testa se n2 é primo */
+      for(j = n2 - 1; (j &gt; 1) &amp;&amp; (n2 % j != 0); j--);    
+      if( j == 1)        /* n2 eh primo */
+	prod = n1 * n2;
+    }
+  }
+
+  if (prod)
+    printf("PRODUTO = %d\n", prod);
+    
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Observe que  o c&#243;digo que  verifica se um  n&#250;mero &#233; primo teve  que ser
+reproduzido  dentro do  programa  por  duas vezes  (para  testar se  os
+n&#250;meros fornecidos pelo usu&#225;rio eram primos). 
+
+<P>
+Um dos  benef&#237;cios mais  &#243;bvios de usar  fun&#231;&#245;es &#233;
+que podemos  evitar <EM>repeti&#231;&#227;o de c&#243;digo</EM>.   Em outras
+palavras, se voc&#234; quiser  executar uma opera&#231;&#227;o mais de uma
+vez,  voc&#234; pode simplesmente  escrever a  fun&#231;&#227;o uma  vez e
+utiliz&#225;-la  diversas  vezes  ao   inv&#233;s  de  escrever  o  mesmo
+c&#243;digo  v&#225;rias  vezes.    Outro  benef&#237;cio  &#233;  que  se
+voc&#234;  desejar alterar ou  corrigir alguma  coisa mais  tarde, &#233;
+mais f&#225;cil alterar em um &#250;nico lugar.
+
+<P>
+O exemplo  acima poderia  ser simplificado pela  cria&#231;&#227;o de  uma fun&#231;&#227;o
+chamada <TT>ehPrimo</TT>,  que dado um n&#250;mero <IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img67.png"
+ ALT="$n$">, d&#225;  como resultado 1 se
+este n&#250;mero &#233; primo, ou 0 (zero) se o n&#250;mero n&#227;o &#233; primo:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>int ehPrimo(unsigned int n)
+{
+  int j;
+  
+  for(j = n - 1; (j &gt; 1) &amp;&amp; (n % j != 0); j--);
+
+  if (j == 1)
+    return 1;
+  else
+    return 0;
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+O exemplo pode ser ent&#227;o alterado e simplificado com o uso da fun&#231;&#227;o
+<TT>ehPrimo()</TT>:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>/*----------------------------------------------------------------------
+  Verifica se 2 Numeros sao primos e multiplica um pelo outro se o forem
+  ----------------------------------------------------------------------
+ */
+
+#include &lt;stdio.h&gt;
+
+int ehPrimo(unsigned int n)
+{
+  int j;
+  int primo = 0;
+
+  for(j = n - 1; (j &gt; 1) &amp;&amp; (n % j != 0); j--);
+
+  if (j == 1)
+    primo = 1;
+
+  return primo;
+}
+
+
+main()
+{
+  
+  int n1, n2, j;
+  int prod = 0, ep1, ep2;
+  
+  printf("\nEntre com 2 numeros inteiros: ");
+  scanf ("%d %d", &amp;n1, &amp;n2);
+ 
+
+  /* Se for indicado 1, 0 ou negativo, nao sao primos */
+  if ( n1 &gt;= 2 &amp;&amp; n2 &gt;= 2) {
+    ep1 = ehPrimo(n1);  /* Verifica se n1 eh primo */
+    ep2 = ehPrimo(n2);  /* Verifica se n2 eh primo */
+
+    if (ep1 != 0 &amp;&amp; ep2 != 0)
+      prod = n1 * n2;
+  }
+
+  if (prod)
+    printf("PRODUTO = %d\n", prod);
+    
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Como pode  ser observado,  sejam quais forem  os 2  n&#250;meros fornecidos,
+n&#227;o  precisa   escrever  um  c&#243;digo  similar   ao  mostrado  na
+fun&#231;&#227;o <TT>ehPrimo</TT> acima  para cada n&#250;mero.Basta <TT>chamar</TT>
+a  fun&#231;&#227;o <TT>ehPrimo()</TT>, passar  os  valores necess&#225;rios
+para verificar a primalidade de cada n&#250;mero, e utilizar os resultados.
+
+<P>
+Evitar repeti&#231;&#227;o de  c&#243;digo &#233; a raz&#227;o hist&#243;rica
+que   fun&#231;&#245;es   foram   inventadas   (tamb&#233;m   chamado   de
+procedimento     ou    subrotinas     em    outras     linguagens    de
+programa&#231;&#227;o).    A   maior   motiva&#231;&#227;o  para   utilizar
+fun&#231;&#245;es    nas    linguagens    contempor&#226;neas   &#233;    a
+redu&#231;&#227;o da complexidade do  programa e melhoria da modularidade
+do programa.  Dividindo o programa em fun&#231;&#245;es, &#233; muito mais
+f&#225;cil  projetar, entender  e modificar  um programa.   Por exemplo,
+obter   a  entrada   do  programa,   realizar   as  computa&#231;&#245;es
+necess&#225;rias  e  apresentar  o  resultado ao  usu&#225;rio  pode  ser
+implementado como diferentes  fun&#231;&#245;es chamadas por <TT>main()</TT>
+nesta ordem.
+
+<P>
+Fun&#231;&#245;es  podem  ser  escritas  <EM>independentemente</EM>  uma  da
+outra.  Isto  significa que, em  geral, vari&#225;veis usadas  dentro de
+fun&#231;&#245;es    n&#227;o   s&#227;o   compartilhadas    pelas   outras
+fun&#231;&#245;es.  Assim sendo,  o comportamento da fun&#231;&#227;o &#233;
+previs&#237;vel.    Se   n&#227;o   for  assim,   duas   fun&#231;&#245;es
+completamente n&#227;o relacionadas podem alterar os dados uma da outra.
+Se  as  vari&#225;veis  s&#227;o   <EM>locais</EM>  a  uma  fun&#231;&#227;o,
+programas grandes  passam a ser  mais f&#225;ceis de serem  escritos.  A
+comunica&#231;&#227;o  entre fun&#231;&#245;es  passa a  ser  controlada -
+elas  se  comunicam  somente  atrav&#233;s  pelos  valores  passados  as
+fun&#231;&#245;es e os valores retornados.
+
+<P>
+
+<H2><A NAME="SECTION000201000000000000000">
+20.1 Definindo fun&#231;&#245;es</A>
+</H2>
+
+<P>
+Um programa C consiste de uma ou mais defini&#231;&#245;es de fun&#231;&#245;es (e
+vari&#225;veis).  H&#225; sempre uma fun&#231;&#227;o chamada <TT>main</TT>.  Outras
+fun&#231;&#245;es tamb&#233;m podem ser definidas.  Cada uma pode ser definida
+separadamente, mas nenhuma fun&#231;&#227;o pode ser definida dentro de outra
+fun&#231;&#227;o.    Abaixo, mostramos um exemplo simples de um programa que
+consiste de duas fun&#231;&#245;es: <TT>main()</TT> e <TT>alo()</TT>.  Quando
+executado, este programa imprimir&#225; a mensage <TT>Alo!</TT> tr&#234;s vezes.
+<PRE>
+#include &lt;stdio.h&gt;
+
+/* declaracao do prototipo da funcao alo() */
+void alo(void);
+
+/* definicao da funcao main() */
+main()
+{
+  int i;
+  
+  for (i = 1; i&lt;= 3; i++)
+    {
+      alo();
+    }
+}
+
+/* definicao da funcao alo() */
+void alo(void)
+{
+   printf("Alo!\n");
+}
+</PRE>
+Todas as fun&#231;&#245;es devem ser declaradas antes de serem usadas.
+As fun&#231;&#245;es da biblioteca padr&#227;o, tais como 
+<TT>printf()</TT>, <TT>scanf()</TT>  e <TT>getchar()</TT>, s&#227;o pr&#233;-definidas,
+mas memsmo assim devem ser declaradas (deve ser anunciado ao
+compilador que elas existem).  &#201; por isso que inclu&#237;mos a linha
+<code> #include &lt;stdio.h&gt;</code> no in&#237;cio do arquivo.
+
+<P>
+O formato geral da defini&#231;&#227;o de uma fun&#231;&#227;o &#233;
+
+<P>
+
+<P>
+<EM>tipo-do-resultado</EM> <EM>nome-da fun&#231;&#227;o</EM> <TT>(</TT><EM>lista-de-argumentos</EM><TT>)</TT>
+
+<P>
+<TT>{</TT>
+
+<P>
+<EM>declara&#231;&#245;es e senten&#231;as </EM>
+
+<P>
+<TT>}</TT>
+
+<P>
+
+<P>
+A primeira linha da defini&#231;&#227;o &#233; o cabe&#231;alho da fun&#231;&#227;o.  Ela t&#234;m
+tr&#234;s partes principais:  o nome da fun&#231;&#227;o, o tipo do resultado (que
+&#233; um valor) que a fun&#231;&#227;o computa e retorna, e entre par&#234;nteses
+uma lista de <EM>par&#226;metros</EM> (tamb&#233;m chamado de <EM>argumentos
+formais</EM>).  Se a fun&#231;&#227;o n&#227;o retorna nenhum valor, o tipo &#233; chamado
+de <TT>void</TT>, e esta palavra &#233; escrita no cabe&#231;alho na frente do
+nome da fun&#231;&#227;o.  Se a fun&#231;&#227;o n&#227;o tiver argumentos formais, a
+palavra <TT>void</TT> &#233; escrita no lugar da lista de argumentos formais
+entre os par&#234;nteses.  Para simplificar a exposi&#231;&#227;o, falaremos sobre
+o <EM>tipo do retorno</EM> e os <EM>argumentos formais</EM> mais tarde.  
+Eles servem para permitir que as fun&#231;&#245;es troquem
+informa&#231;&#245;es entre si. 
+
+<P>
+
+<H2><A NAME="SECTION000202000000000000000">
+20.2 Fun&#231;&#245;es simples</A>
+</H2>
+Para come&#231;ar, vamos utilizar fun&#231;&#245;es na seguinte forma:
+
+<P>
+
+<P>
+<TT>void</TT> <EM>nome-da-fun&#231;&#227;o</EM><TT>(void)</TT>
+
+<P>
+<TT>{</TT>
+
+<P>
+<EM>declara&#231;&#245;es e sente&#231;as (corpo da fun&#231;&#227;o)</EM>
+
+<P>
+<TT>}</TT>
+
+<P>
+
+<P>
+O primeiro <TT>void</TT> significa que esta fun&#231;&#227;o n&#227;o tem tipo de
+retorno (n&#227;o retorna um valor), e o segundo significa que a fun&#231;&#227;o
+n&#227;o tem argumentos (ela n&#227;o precisa de nenhuma informa&#231;&#227;o externa
+para ser executada).  Isso n&#227;o significa que a fun&#231;&#227;o n&#227;o faz
+nada.  Ela pode realizar alguma a&#231;&#227;o, como imprimir uma mensagem.  O
+exemplo abaixo mostra um programa que usa uma fun&#231;&#227;o como essa:
+<PRE>
+    void alo(void);
+
+    main()
+    {
+        alo();
+    }
+  
+    void alo(void)
+    {
+        printf("Alo.\n");
+    }
+</PRE>
+
+<P>
+Neste exemplo, o programa consiste de duas fun&#231;&#245;es, <TT>main()</TT> e
+<TT>alo()</TT>.  A ordem em que as fun&#231;&#245;es s&#227;o definidas n&#227;o &#233;
+importante, desde que <EM>prot&#243;tipos de fun&#231;&#245;es</EM> s&#227;o usadas.
+A linha
+<PRE>
+void alo(void);
+</PRE>
+no topo do programa &#233; um <EM>prot&#243;tipo de fun&#231;&#227;o</EM> para a fun&#231;&#227;o
+<TT>alo()</TT>.
+Um prot&#243;tipo &#233; usado para declarar uma fun&#231;&#227;o.
+Um prot&#243;tipo passa ao compilador informa&#231;&#245;es sobre uma fun&#231;&#227;o que
+&#233; definida dentro de um programa ``em algum lugar''.  Prot&#243;tipos
+s&#227;o sempre colocados pr&#243;ximo ao in&#237;cio do programa, antes do
+come&#231;o da defini&#231;&#227;o de fun&#231;&#245;es.
+
+<P>
+A fun&#231;&#227;o <TT>alo()</TT> imprime a mensagem <TT>Alo.</TT> quando chamada.
+A senten&#231;a <TT>printf()</TT> &#233; o corpo da fun&#231;&#227;o.  Dentro da fun&#231;&#227;o
+<TT>main()</TT> h&#225; uma <EM>chamada</EM> a fun&#231;&#227;o <TT>alo()</TT>.  A fun&#231;&#227;o
+&#233; chamada pelo seu nome seguido de <TT>()</TT> (j&#225; que a fun&#231;&#227;o <TT>alo</TT> n&#227;o tem argumentos, nenhuma express&#227;o &#233; escrita dentro dos
+par&#234;nteses).  A fun&#231;&#227;o <TT>alo()</TT> n&#227;o retorna um valor, ela &#233;
+chamada simplesmente para realizar uma a&#231;&#227;o (imprimir a mensagem).
+A chamada de fun&#231;&#227;o &#233; uma senten&#231;a v&#225;lida em C, portanto deve ser
+terminada por ponto e v&#237;rgula (<TT>;</TT>).
+<PRE>
+alo();
+</PRE>
+Outra coisa que voc&#234; deve ter notado &#233; que <TT>main()</TT> tamb&#233;m &#233;
+uma fun&#231;&#227;o.  A fun&#231;&#227;o <TT>main()</TT> n&#227;o difere em nada das demais
+fun&#231;&#245;es, com a exce&#231;&#227;o de que cont&#233;m o programa principal.  Al&#233;m
+disso, n&#227;o &#233; necess&#225;rio declarar o prot&#243;tipo da fun&#231;&#227;o <TT>main()</TT>.
+
+<P>
+
+<H3><A NAME="SECTION000202100000000000000">
+20.2.1 Argumentos</A>
+</H3>
+Nosso pr&#243;ximo exemplo pede que o usu&#225;rio digite suas iniciais,
+e ent&#227;o 
+chama a fun&#231;&#227;o <TT>cumprimenta()</TT> para imprimir a mensagem ``Ola''
+junto com as iniciais digitadas.  Estas iniciais (seus valores) s&#227;o
+passadas para a fun&#231;&#227;o <TT>cumprimenta()</TT>.  A fun&#231;&#227;o <TT>cumprimenta()</TT> &#233; definida de forma que ela imprimir&#225; a mensagem
+incluindo quaisquer iniciais passadas.
+<PRE>
+#include &lt;stdio.h&gt;
+
+void cumprimenta(char, char);
+
+main()
+{
+  char primeiro, segundo;
+
+  printf("Entre com duas iniciais (sem separacao): ");
+  primeiro = getchar();
+  segundo = getchar();
+  cumprimenta(primeiro, segundo);
+}
+
+void cumprimenta(char inic1, char inic2)
+{
+    printf("Ola, %c%c!\n",inic1,inic2);
+}
+</PRE>
+A fun&#231;&#227;o <TT>main()</TT> chama a fun&#231;&#227;o <TT>cumprimenta()</TT>;  <TT>main()</TT> passa para <TT>cumprimenta()</TT> os valores dos dois caracteres
+para serem impressos.  Veja um exemplo de execu&#231;&#227;o do programa:
+<PRE>
+Entre com duas iniciais (sem separacao): YK
+Alo, YK!
+</PRE>
+Note que h&#225; uma correspond&#234;ncia entre o n&#250;mero e tipo dos valores
+que <TT>main()</TT> passa (estes s&#227;o chamados de <EM>par&#226;metros reais</EM> ou
+<EM>argumentos reais</EM>) e os argumentos listados no cabe&#231;alho da
+fun&#231;&#227;o <TT>cumprimenta()</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000203000000000000000">
+20.3 Fun&#231;&#245;es que retornam um valor</A>
+</H2>
+
+<P>
+Fun&#231;&#245;es que n&#227;o retornam nenhum valor (como <TT>alo(), main()</TT>)
+possuem tipo <TT>void</TT>.
+
+<P>
+Al&#233;m de executarem a&#231;&#245;es (como imprimir) uma fun&#231;&#227;o tamb&#233;m pode
+<EM>retornar</EM> um valor para o programa que o chamou.  Uma fun&#231;&#227;o
+que retorna um valor tem no cabe&#231;alho o nome do tipo do resultado.
+O valor retornado pode ser de qualquer tipo, incluindo 
+<TT>int</TT>, <TT>float</TT> e
+<TT>char</TT> (&#233; claro que uma vez definida, a fun&#231;&#227;o s&#243; &#233; de um
+tipo espec&#237;fico).  Uma fun&#231;&#227;o que retorna um tipo diferente de <TT>void</TT> executa alguns c&#225;lculos, e retorna o resultado (que &#233; um
+&#250;nico valor) para quem a chamou.  A fun&#231;&#227;o chamadora pode ent&#227;o
+usar o resultado.  Para retornar um valor para a fun&#231;&#227;o chamadora, a
+fun&#231;&#227;o usa a senten&#231;a <TT>return</TT>.  
+
+<P>
+O formato da senten&#231;a <TT>return</TT> &#233; a seguinte:
+
+<P>
+
+<P>
+<TT>return</TT> <EM>express&#227;o</EM>;
+
+<P>
+A <EM>express&#227;o</EM> &#233; avaliada e o seu valor &#233; convertido ao tipo de
+retorno da fun&#231;&#227;o (o tipo da fun&#231;&#227;o &#233; dado no cabe&#231;alho da
+fun&#231;&#227;o antes do nome da fun&#231;&#227;o).
+
+<P>
+Considere o seguinte exemplo.  O programa consiste de duas fun&#231;&#245;es:
+<TT>main()</TT> e <TT>quadrado</TT>.  O programa pede que o usu&#225;rio digite
+tr&#234;s n&#250;meros e verifica se eles podem ser os lados de um tri&#226;ngulo reto.
+<PRE>
+/* programa que verifica se 3 numeros podem ser os lados de um
+ * triangulo reto.
+ */
+#include &lt;stdio.h&gt;
+
+int quadrado(int);
+
+main()
+{
+    int s1, s2, s3;
+
+    printf("Entre tres inteiros: ");
+    scanf("%d %d %d", &amp;s1, &amp;s2, &amp;s3);
+
+    if ( s1 &gt; 0 &amp;&amp; s2 &gt; 0 &amp;&amp; s3 &gt; 0 &amp;&amp; 
+           (quadrado(s1) + quadrado(s2) == quadrado(s3) ||
+            quadrado(s2) + quadrado(s3) == quadrado(s1) ||
+            quadrado(s3) + quadrado(s1) == quadrado(s2)) )
+      printf(" %d %d %d podem formar um triangulo reto\n", s1, s2, s3);
+   else
+      printf(" %d %d %d nao podem formar um triangulo reto\n",s1, s2, s3);
+}
+
+/* funcao que calcula o quadrado de um numero */
+int quadrado(int n)
+   {
+      return n * n;
+   }
+</PRE>
+Note que quando chamamos a fun&#231;&#227;o <TT>quadrado()</TT> passamos o valor
+no qual desejamos executar o c&#225;lculo, e tamb&#233;m usamos o valor
+retornado pela fun&#231;&#227;o em express&#245;es.  O valor de 
+<TT>quadrado(s1)</TT> &#233; o valor que a fun&#231;&#227;o 
+<TT>quadrado()</TT> retorna quando chamado com o valor do argumento sendo
+igual ao valor da vari&#225;vel <TT>s1</TT>.
+
+<P>
+Os valores retornados pelas chamadas de fun&#231;&#245;es podem ser usados em
+todos os lugares valores podem ser usados.
+Por exemplo,
+
+<P>
+<TT>y = quadrado(3);</TT>
+<BR>
+Aqui <TT>quadrado(3)</TT> tem o valor  <TT>9</TT>, portanto  <TT>9</TT> pode
+ser atribu&#237;do a vari&#225;vel <TT>y</TT>;
+
+<P>
+<TT>x = quadrado(3) + quadrado(4);</TT>
+<BR>
+atribuir&#225; <TT>25</TT> a vari&#225;vel  <TT>x</TT>, e
+
+<P>
+<TT>area = quadrado(tamanho);</TT>
+<BR>
+atribuir&#225; a vari&#225;vel <TT>area</TT> o valor da vari&#225;vel <TT>tamanho</TT>
+elevado ao quadrado.
+
+<P>
+
+<P>
+O pr&#243;ximo exemplo tem uma fun&#231;&#227;o chamada <TT>cinco</TT>:
+<PRE>
+     int cinco(void);
+
+     main()
+     {
+         printf("cinco = %d\n", cinco() );
+     }
+
+     int cinco(void)
+     {
+         return 5;
+     }
+</PRE>
+
+<P>
+A sa&#237;da do programa ser&#225; 
+
+<P>
+<TT>cinco = 5</TT>
+
+<P>
+porque o valor de <TT>cinco()</TT> dentro da senten&#231;a <TT>printf()</TT> 
+&#233; <TT>5</TT>.   Olhando na senten&#231;a <TT>return</TT>, <TT>5</TT> &#233; a
+express&#227;o retornada para o chamador.
+
+<P>
+Outro exemplo:
+<PRE>
+   int obtem_valor(void);
+
+   main()
+   {
+      int a, b;
+
+      a = obtem_valor();
+      b = obtem_valor();
+
+      printf("soma = %d\n", a + b);
+   }
+
+   int obtem_valor(void)
+   {
+      int valor;
+  
+      printf("Entre um valor: ");
+      scanf("%d", &amp;valor);
+
+      return valor;
+   }
+</PRE>
+Este programa obt&#233;m dois inteiros do usu&#225;rio e mostra a sua soma.
+Ele usa a fun&#231;&#227;o <TT>obtem<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">valor()</TT> que mostra uma mensagem e
+obt&#233;m o valor do usu&#225;rio.
+
+<P>
+Um exemplo de sa&#237;da deste programa &#233;:
+<PRE>
+    Entre um valor: 15
+    Entre um valor: 4
+    soma = 19
+</PRE>
+<H2><A NAME="SECTION000204000000000000000">
+20.4 Mais sobre o  <TT>return</TT></A>
+</H2>
+Quando uma fun&#231;&#227;o <TT>return</TT> &#233; executada, a fun&#231;&#227;o
+imediatamente acaba - mesmo que haja c&#243;digo na fun&#231;&#227;o ap&#243;s a
+senten&#231;a <TT>return</TT>.  A execu&#231;&#227;o do programa continua ap&#243;s o
+ponto no qual a chamada de fun&#231;&#227;o foi feita.  Senten&#231;as <TT>return</TT> podem ocorrer em qualquer lugar na fun&#231;&#227;o - n&#227;o somente no
+final.   Tamb&#233;m &#233; v&#225;lido ter mais de um  <TT>return</TT>
+dentro de uma fun&#231;&#227;o.  A &#250;nica limita&#231;&#227;o &#233; que <TT>return</TT> retorna um
+&#250;nico valor.
+
+<P>
+O seguinte exemplo mostra uma fun&#231;&#227;o (uma vers&#227;o para <TT>int</TT> da fun&#231;&#227;o
+<TT>obtem<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">valor</TT>) que pede para usu&#225;rio um valor e se o usu&#225;rio
+digitar um valor negativo, imprime uma mensagem e retorna um valor positivo.
+
+<P>
+<PRE>
+   int obtem_valor_positivo(void)
+   {
+      int valor;
+
+      printf("Entre um valor: ");
+      scanf("%d", &amp;valor);
+
+      if (valor &gt;= 0)
+         return valor;
+   
+      printf("Tornando o valor positivo...\n");
+ 
+      return -valor;
+   }
+</PRE>
+
+<P>
+Em uma fun&#231;&#227;o <TT>void</TT>, <TT>return;</TT> (s&#243; com <TT>;</TT>) pode ser
+usado para sair de uma fun&#231;&#227;o.  O exemplo seguinte, pede
+instru&#231;&#245;es ao usu&#225;rio.  Se o usu&#225;rio reponder 
+<B>nao</B>, a fun&#231;&#227;o termina.  Do contr&#225;rio, ele imprime as
+instru&#231;&#245;es e depois termina.
+<PRE>
+  void instrucoes(void)
+  {
+     int ch;
+
+     printf("Voce quer instrucos? (s/n): ");
+     ch = getchar();
+
+     /* Termina se resposta for n */
+     if (ch == 'n' || ch == 'N')
+        return;
+
+     /* Mostra instrucoes */
+     printf("As regras do jogo sao . . . ");
+       .
+       .
+       .
+     return;
+  }
+</PRE>
+
+<P>
+O <TT>return</TT> final (antes de fechar as chaves do corpo da fun&#231;&#227;o)
+na fun&#231;&#227;o &#233; opcional.  Se omitido, a fun&#231;&#227;o atingir&#225; o final da
+fun&#231;&#227;o e retornar&#225; automaticamente.  Note que o <TT>return</TT> &#233;
+opcional somente para fun&#231;&#245;es <TT>void</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000205000000000000000">
+20.5 Mais sobre Argumentos</A>
+</H2>
+
+<P>
+A comunica&#231;&#227;o entre uma fun&#231;&#227;o e o chamador pode ser nas duas
+dire&#231;&#245;es.  Argumentos podem ser usados pelo chamador para passar
+dados para a fun&#231;&#227;o.  A lista de argumentos &#233; definida
+pelo cabe&#231;alho 
+da fun&#231;&#227;o entre par&#234;nteses..  Para cada argumento voc&#234; precisa
+especificar o tipo do argumento e o nome do argumento.  
+Se houver mais de um argumento, eles  s&#227;o separados por v&#237;rgula.
+Fun&#231;&#245;es que n&#227;o possuem argumentos tem <TT>void</TT> como lista de
+argumento.   No corpo da fun&#231;&#227;o os argumentos (tamb&#233;m chamados de
+<EM>argumentos formais</EM> ou <EM>par&#226;metros formais</EM>) s&#227;o tratados
+como vari&#225;veis.  &#201; erro defini-los dentro do corpo da fun&#231;&#227;o
+porque eles j&#225; est&#227;o definidos no cabe&#231;alho.  Antes da execu&#231;&#227;o
+da fun&#231;&#227;o os valores passados pelo chamador s&#227;o atribu&#237;dos aos
+argumentos da fun&#231;&#227;o.
+
+<P>
+Considere o seguinte programa com a fun&#231;&#227;o <TT>abs()</TT> que calcula o
+valor absoluto de um n&#250;mero.
+<PRE>
+  int abs(int);
+
+  main()
+  {
+      int n;
+
+      printf("Entre um numero: ");
+      scanf("%d", &amp;n);
+
+      printf("Valor absoluto de  %d e' %d", n, abs(n));
+  }
+
+  /* Definicao da funcao abs */
+  int abs(int x)
+  {
+     if (x &lt; 0)
+        x = -x;
+
+     return x;
+  }
+</PRE>
+A fun&#231;&#227;o <TT>abs()</TT> tem um argumento do tipo <TT>int</TT>, e seu nome
+&#233; <TT>x</TT>.  Dentro da fun&#231;&#227;o, <TT>x</TT> &#233; usado como uma vari&#225;vel
+<TT>x</TT>.
+
+<P>
+Uma vez que <TT>abs()</TT> tem um &#250;nico argumento, quando ela &#233;
+chamada, h&#225; sempre um valor dentro do par&#234;nteses, como em <TT>abs(n)</TT>.  O valor de <TT>n</TT> &#233; passado para a fun&#231;&#227;o <TT>abs()</TT>, e
+antes da execu&#231;&#227;o da fun&#231;&#227;o, o valor de <TT>n</TT> &#233;
+atribu&#237;do a
+<TT>x</TT>.
+
+<P>
+Aqui est&#225; um exemplo de uma fun&#231;&#227;o que converte uma temperatura de
+Farenheit para Celsius:
+<PRE>
+   float fahr_para_cels(float f)
+   {
+       return 5.0 / 9.0 * (f - 32.0);
+   }
+</PRE>
+
+<P>
+Como voc&#234; pode ver, esta fun&#231;&#227;o tem somente um argumento do tipo
+<TT>float</TT>.  Um exemplo de chamada desta fun&#231;&#227;o poderia ser:
+
+<P>
+<code>fervura = fahr_para_cels(212.0);</code>
+
+<P>
+O resultado da fun&#231;&#227;o <TT>fahr<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">para<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">cels(212.0)</TT> &#233; atribu&#237;do a
+<TT>fervura</TT>.  Portanto, depois da execu&#231;&#227;o desta senten&#231;a,
+o valor de <TT>fervura</TT> (que &#233; do tipo <TT>float</TT>) ser&#225;
+<TT>100.0</TT>.
+
+<P>
+O exemplo seguinte possui mais de um argumento:
+<PRE>
+   float area(float largura, float altura)
+   {
+       return largura * altura;
+   }
+</PRE>
+Esta fun&#231;&#227;o possui dois argumentos do tipo <TT>float</TT>.   Para
+chamar uma fun&#231;&#227;o com mais de um argumento, os argumentos devem ser
+separados por v&#237;rgula.  A ordem em que os argumentos s&#227;o passados
+deve ser na mesma em que s&#227;o definidos.  Neste exemplo, o primeiro
+valor passado ser&#225; a largura e o segundo a altura.  Um exemplo de
+chamada seria
+
+<P>
+<TT>tamanho = area(14.0, 21.5);</TT>
+
+<P>
+Depois desta senten&#231;a, o valor de <TT>tamanho</TT> (que &#233; do tipo <TT>float</TT>) ser&#225; <TT>301.0</TT>.
+
+<P>
+Quando passar os argumentos, &#233; importante ter certeza de pass&#225;-los
+na ordem correta e que eles s&#227;o do tipo correto.   Se isso n&#227;o for
+observado, pode ocorrer erro ou aviso de compila&#231;&#227;o, ou resultados
+incorretos podem ser gerados.
+
+<P>
+Uma &#250;ltima observa&#231;&#227;o.  Os argumentos que s&#227;o passados pelo
+chamador podem ser express&#245;es em geral e n&#227;o somente constantes e
+vari&#225;vies.  Quando a fun&#231;&#227;o &#233; chamada durante a execu&#231;&#227;o do
+programa, estas express&#245;es s&#227;o avaliadas, e o valor resultante
+passado para a fun&#231;&#227;o chamada.
+
+<P>
+
+<H2><A NAME="SECTION000206000000000000000">
+20.6 Chamada por valor</A>
+</H2>
+
+<P>
+Considere novamente a fun&#231;&#227;o  <TT>quadrado()</TT>.
+Se esta fun&#231;&#227;o &#233; chamada de <TT>main()</TT> como  
+<BR>
+<P>
+
+<P>
+<TT>p = quadrado(x);</TT>
+<BR>
+<P>
+
+<P>
+somente o valor (n&#227;o o endere&#231;o) de <TT>x</TT> &#233; passado para 
+<TT>quadrado</TT>.   Por exemplo, se a vari&#225;vel tem valor 5, para a
+fun&#231;&#227;o <TT>quadrado()</TT>, <TT>quadrado(x)</TT> ou <TT>quadrado(5)</TT> s&#227;o o mesmo.
+De qualquer forma, <TT>quadrado()</TT> receber&#225; somente o valor <TT>5</TT>.
+<TT>quadrado()</TT> n&#227;o sabe se na chamada da fun&#231;&#227;o o <TT>5</TT> era uma
+constante inteira, o valor de uma vari&#225;vel do tipon <TT>int</TT>, ou
+alguma express&#227;o como
+<TT>625/25 - 4 * 5</TT>. Quando  <TT>quadrado()</TT> &#233; chamado, 
+n&#227;o interessa qual a express&#227;o entre par&#234;nteses, ela ser&#225; avaliada
+e o valor passado para 
+<TT>quadrado()</TT>.
+
+<P>
+Esta maneira de passar argumentos &#233; chamada de <EM>chamada por
+valor</EM>.  Argumentos em C s&#227;o passados por valor.  Portanto, a
+fun&#231;&#227;o chamada n&#227;o pode alterar o valor da vari&#225;vel passada pelo
+chamador como argumento, porque ela n&#227;o sabe em que endere&#231;o de
+mem&#243;ria o valor da vari&#225;vel est&#225; armazenado.
+
+<P>
+
+<H2><A NAME="SECTION000207000000000000000">
+20.7 Vari&#225;veis locais</A>
+</H2>
+Como voc&#234; provavelmente j&#225; reparou em alguns exemplos, &#233; poss&#237;vel
+definir vari&#225;veis dentro de fun&#231;&#245;es, da mesma forma que temos
+definido vari&#225;veis dentro da fun&#231;&#227;o <TT>main()</TT>.
+A declara&#231;&#227;o de vari&#225;veis &#233; feita no in&#237;cio da fun&#231;&#227;o.
+
+<P>
+Estas vari&#225;veis s&#227;o <EM>restritas</EM> a fun&#231;&#227;o dentro da qual elas
+s&#227;o definidas.  S&#243; esta fun&#231;&#227;o pode ``enxergar'' suas pr&#243;prias
+vari&#225;veis.   Por exemplo:
+<PRE>
+   void obtem_int(void);
+
+   main()
+   {
+       obtem_int();
+
+       /* **** Isto esta' errado  **** */
+       printf("Voce digitou %d\n", x);
+   }  
+
+   void obtem_int(void)
+   {
+       int x;
+ 
+       printf("Entre um valor: ");
+       scanf("%d", &amp;x);
+
+       printf("Obrigado!\n");
+   }
+</PRE>
+
+<P>
+A fun&#231;&#227;o <TT>main()</TT> usou um nome <TT>x</TT>, mas <TT>x</TT> n&#227;o &#233;
+definido dentro de <TT>main</TT>;  ele &#233; uma vari&#225;vel local a
+<TT>get<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">int()</TT>, n&#227;o a
+<TT>main()</TT>. Este programa gera erro de compila&#231;&#227;o.
+
+<P>
+Note que &#233; poss&#237;vel ter duas fun&#231;&#245;es que usam vari&#225;veis locais
+com o mesmo nome.  Cada uma delas &#233; restrita a fun&#231;&#227;o que a define e n&#227;o h&#225; conflito.   Analise o seguinte programa (ele est&#225; correto):
+<PRE>
+   int obtem_novo_int(void);
+
+   main()
+   {
+       int x;
+
+       x = obtem_novo_int();
+
+       /* ****Isto nao esta errado !! **** */
+       printf("Voce digitou %d\n", x);
+   }  
+
+   int obtem_novo_int(void)
+   {
+       int x;
+ 
+       printf("Entre um valor: ");
+       scanf("%d", &amp;x);
+
+       printf("Obrigado!\n");
+       return x;
+   }
+</PRE>
+A fun&#231;&#227;o <TT>obtem<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">novo<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">int()</TT> usa uma vari&#225;vel local
+chamada <TT>x</TT> para armazenar o valor digitado e retorna como
+resultado o valor de <TT>x</TT>.  <TT>main()</TT> usa outra vari&#225;vel local,
+tamb&#233;m chamada de <TT>x</TT> para receber o resultado retornado por
+<TT>obtem<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">novo<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">int()</TT>.   Cada fun&#231;&#227;o tem sua pr&#243;pria
+vari&#225;vel <TT>x</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000208000000000000000">
+20.8 Prot&#243;tipos</A>
+</H2>
+
+<P>
+Os prot&#243;tipos servem para dar ao compilador informa&#231;&#245;es sobre as
+fun&#231;&#245;es.     Isso para que voc&#234; possa chamar fun&#231;&#245;es antes que o
+compilador tenha a defini&#231;&#227;o (completa) das fun&#231;&#245;es.  O prot&#243;tipo
+de uma fun&#231;&#227;o &#233; id&#234;ntico ao cabe&#231;alho da fun&#231;&#227;o, mas o nome dos
+argumentos podem ser omitidos e ele &#233; terminado com uma v&#237;rgula.
+Prot&#243;tipos <EM>declaram</EM> uma fun&#231;&#227;o ao inv&#233;s de <EM>defini-las</EM>.
+O formato dos prot&#243;tipos &#233;:
+
+<P>
+
+<P>
+<EM>tipo-de-retorno</EM> <EM>nome-da-fun&#231;&#227;o</EM><TT>(</TT><EM>lista-dos-tipos-dos-argumentos</EM><TT>)</TT>;
+
+<P>
+
+<P>
+Definindo prot&#243;tipos, voc&#234; n&#227;o precisa se preocupar com a ordem em
+que define as fun&#231;&#245;es dentro do programa.
+A principal vantagem de definir prot&#243;tipos &#233; que erros de chamada de
+fun&#231;&#245;es (como chamar uma fun&#231;&#227;o com o n&#250;mero incorreto de
+argumentos, ou com argumentos de tipo errado) s&#227;o detectados pelo
+compilador.  Sem prot&#243;tipos, o compilador s&#243; saberia que h&#225; erro
+depois de encontrar a defini&#231;&#227;o da fun&#231;&#227;o.
+Em vers&#245;es antigas do compilador C, programas com tais erros
+compilariam sem erros, o que tornava a depura&#231;&#227;o de erros mais dif&#237;cil.
+
+<P>
+Abaixo, mostramos duas fun&#231;&#245;es e seus prot&#243;tipos:
+<PRE>
+   float volume(float, float, float);
+   float dinheiro(int, int, int, int);
+
+
+   float volume(float comprimento, float largura, float altura)
+   {
+       return comprimento * largura * altura;
+   }
+ 
+   float dinheiro(int c25, int c10, int c5, int c1)
+   {
+        return c25 * 0.25 + c10 * 0.10 + 
+               c5 * 0.05 + c1 * 0.01;
+   }
+</PRE>
+<H2><A NAME="SECTION000209000000000000000">
+20.9 Documenta&#231;&#227;o de fun&#231;&#245;es</A>
+</H2>
+Voc&#234; deve documentar as fun&#231;&#245;es que escreve.  Na documenta&#231;&#227;o
+voc&#234; deve especificar as seguintes informa&#231;&#245;es:
+
+<P>
+<B>A&#231;&#227;o</B> - o que a fun&#231;&#227;o faz
+
+<P>
+
+<P>
+<B>Entrada</B> - descri&#231;&#227;o dos argumentos passados para a fun&#231;&#227;o
+
+<P>
+
+<P>
+<B>Sa&#237;da</B> - descri&#231;&#227;o do valor retornado pela fun&#231;&#227;o
+
+<P>
+
+<P>
+<B>Suposi&#231;&#245;es</B> - o que voc&#234; assume ser verdade para que a
+fun&#231;&#227;o funcione apropriadamente
+
+<P>
+
+<P>
+<B>Algoritmo</B> - como o problema &#233; resolvido (m&#233;todo)
+
+<P>
+Estas informa&#231;&#245;es devem ser colocadas como coment&#225;rio antes da
+defini&#231;&#227;o da fun&#231;&#227;o.
+
+<H2><A NAME="SECTION0002010000000000000000">
+20.10 Coment&#225;rios</A>
+</H2> 
+Voc&#234; pode colocar coment&#225;rios no seu programa para documentar o que
+est&#225; fazendo.  O compilador ignora completamente o que quer esteja
+dentro de um coment&#225;rio.
+
+<P>
+Coment&#225;rios em C come&#231;am com um <TT>/*</TT> e terminam com um <TT>*/</TT>.  Alguns exemplos:
+
+<P>
+<PRE>
+    /* Este e' um comentario sem graca */
+
+    /* Este e' 
+       um comentario
+       que usa
+       diversas linhas
+     */
+
+    /* Este e'
+     * um comentario 
+     * de diversas linhas
+     * mais bonito
+     */
+</PRE>
+
+<P>
+Note que n&#227;o podemos aninhar coment&#225;rios dentro de coment&#225;rios.  Um
+coment&#225;rio termina no primeiro <TT>*/</TT> que encontrar.  O coment&#225;rio
+abaixo &#233; ilegal:
+
+<P>
+<TT>/* Este e' um comentario /* illegal */ ilegal */</TT>
+
+<P>
+
+<P>
+
+<H5><A NAME="SECTION0002010001000000000000">
+20.10.0.0.1 Regras para coment&#225;rio</A>
+</H5>  
+
+<P>
+&#201; sempre uma boa id&#233;ia colocar coment&#225;rios em seu programa das
+coisas que n&#227;o s&#227;o claras.  Isto vai ajudar quando mais tarde voc&#234;
+olhar o programa que escreveu j&#225; h&#225; algum tempo ou vai ajudar a
+entender programas escritos por outra pessoa.
+
+<P>
+Um exemplo de coment&#225;rio &#250;til:
+<PRE>
+    /* converte temperatura de farenheit para celsius */
+    celsius = (fahrenheit - 32) * 5.0 / 9.0;
+</PRE>
+
+<P>
+O coment&#225;rio deve ser escrito em portugu&#234;s e n&#227;o em C.  No exemplo abaixo
+<PRE>
+    /* usando scanf, obter valor de idade e multiplicar por 365 para
+     * obter dias */
+    scanf("%d", &amp;idade);
+    dias = idade * 365;
+</PRE>
+
+<P>
+o coment&#225;rio &#233; basicamente uma transcri&#231;&#227;o do c&#243;digo do
+programa.  Em seu lugar, um coment&#225;rio como 
+<PRE>
+    /* obtem idade e transforma em numero de dias */
+</PRE>
+
+<P>
+seria mais informativo neste ponto.
+Ou seja, voc&#234; deve comentar o c&#243;digo, e n&#227;o codificar o coment&#225;rio.
+
+<P>
+
+<P>
+Voc&#234; tamb&#233;m deve evitar coment&#225;rios in&#250;teis.  Por exemplo:
+<PRE>
+    /* Incrementa i */
+    i++;
+</PRE>
+
+<P>
+N&#227;o h&#225; necessidade de coment&#225;rios j&#225; que <TT>i++</TT> j&#225; &#233; 
+auto explicativo.
+
+<P>
+E abaixo est&#225; um exemplo de como voc&#234; deve comentar uma fun&#231;&#227;o.
+
+<P>
+<PRE>
+  /* funcao instrucoes()
+   *  acao:        mostra instrucoes do programa
+   *  entrada:     nenhuma
+   *  saida:       nenhuma
+   *  suposicoes:  nenhuma
+   *  algoritmo:   imprime as instrucoes
+   */
+  void instrucoes(void)
+  {
+     /* mostra instrucoes */
+     printf("O processo de purificacao do  Uranio-235 e' . . .  ");
+       .
+       .
+  }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html483"
+  HREF="notas_proc-node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html481"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html475"
+  HREF="notas_proc-node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html484"
+  HREF="notas_proc-node21.html">21 O pré-processador</A>
+<B>Up:</B> <A NAME="tex2html482"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html476"
+  HREF="notas_proc-node19.html">19 Estruturas</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

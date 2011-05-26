@@ -1,0 +1,17 @@
+#!/bin/bash
+
+func ()
+{
+    ## local var1
+    echo "Na funcao: $0 $1 $2"
+    var1="Dentro da funcao"
+    echo "var1: $var1"
+}
+
+var1="Fora da funcao"
+echo "var1: $var1"
+echo "$0: $1 $2"
+func arg1 arg2
+echo "var1: $var1"
+echo "$0: $1 $2"
+

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Remove uma pessoa de uma agenda de telefones.
+
+FONES="$HOME/LabNum7/telefones.txt"
+FTMP="fones.tmp"
+
+remfone ()
+{
+    if grep -v "^$1" $FONES >$FTMP
+    then
+	echo "    ==> $1 removido."
+	mv $FTMP $FONES
+    else
+	echo "Problemas com a remocao de $1."
+	rm -f  $FTMP
+    fi
+}
+
+NUMNOMES=`egrep -c "^.+ \<$1\>" $FONES`
+
+if (( $NUMNOMES == 0 ))
+then
+    echo ""
+    echo "Não foi encontrada nenhuma pessoa com sobrenome \"$1\"."
+    echo ""
+    exit 1
+else
+    IFS=$'\n'
+    for i in $(egrep "^.+ \<$1\>" $FONES)
+    do
+      echo -n "Deseja remover \"$i\" [S/n]: "
+      read
+
+      if [[ -z "${REPLY}" || "${REPLY}" == "S" || "${REPLY}" == "s" ]]
+      then
+	    remfone $i
+      fi
+    done
+fi

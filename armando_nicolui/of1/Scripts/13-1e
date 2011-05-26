@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sed -e '/VAX-VMS/c\
+    ****** Acrescentar informacao sobre ULTRIX *******' $1
+

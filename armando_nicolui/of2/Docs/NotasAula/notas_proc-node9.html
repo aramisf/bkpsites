@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9 Exemplos</TITLE>
+<META NAME="description" CONTENT="9 Exemplos">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node10.html">
+<LINK REL="previous" HREF="notas_proc-node8.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node10.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html314"
+  HREF="notas_proc-node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html312"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html306"
+  HREF="notas_proc-node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html315"
+  HREF="notas_proc-node10.html">10 A construção else-if</A>
+<B>Up:</B> <A NAME="tex2html313"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html307"
+  HREF="notas_proc-node8.html">8 Operadores Lógicos</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html316"
+  HREF="notas_proc-node9.html#SECTION00091000000000000000">9.1 IF - ELSE</A>
+<LI><A NAME="tex2html317"
+  HREF="notas_proc-node9.html#SECTION00092000000000000000">9.2 Operadores lógicos</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00090000000000000000">
+9 Exemplos</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00091000000000000000">
+9.1 IF - ELSE</A>
+</H2>
+
+<P>
+Assuma as seguintes declara&#231;&#245;oes de vari&#225;veis:
+<PRE>
+  int x = 4;
+  int y = 8;
+</PRE>
+
+<P>
+O que &#233; impresso pelos  seguintes programas ?
+
+<P>
+
+<OL>
+<LI><PRE>
+  if (y = 8)
+      if (x = 5)
+          printf( "a\n" );
+      else
+          printf( "b\n" );
+  printf( "c\n" );
+  printf( "d\n" );
+
+  ==&gt; a c d
+</PRE>
+
+<P>
+</LI>
+<LI>mude <TT>=</TT> para <TT>==</TT>
+<PRE>
+  ==&gt; b c d
+</PRE>
+
+<P>
+</LI>
+<LI>altere o programa acima para produzir a seguinte saida:
+
+<P>
+
+<UL>
+<LI>Assuma <TT>x = 5</TT> e <TT>y = 8</TT> 
+
+<OL>
+<LI><TT>a</TT>
+</LI>
+<LI><TT>a d</TT>
+</LI>
+</OL>
+</LI>
+<LI>Assuma <TT>x = 5</TT> e <TT>y = 7</TT>
+
+<OL Type="a">
+<LI><TT>b c d</TT>
+</LI>
+</OL>
+</LI>
+</UL>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00092000000000000000">
+9.2 Operadores l&#243;gicos</A>
+</H2>
+
+<P>
+O que &#233; impresso pelas seguintes senten&#231;as:
+
+<P>
+
+<OL>
+<LI>Assuma <TT>x = 5</TT> e <TT>y = 8</TT>.
+<PRE>
+   if (x == 5 &amp;&amp; y == 8)
+       printf( "a\n" );
+   else
+       printf( "b\n" );     ==&gt; a
+</PRE>
+
+<P>
+</LI>
+<LI>Assuma <TT>x = 4</TT> e <TT>y = 8</TT>.
+<PRE>
+   if (x == 5 || y == 8)
+       printf( "a\n" );
+   else
+       printf( "b\n" );     ==&gt; a
+
+
+   if !(x == 5 || y == 8)
+       printf( "a\n" );
+   else
+       printf( "b\n" );     ==&gt; b  equiv. \mbox{(x != 5 &amp;&amp; y != 8)}
+
+
+   if !(x == 5 &amp;&amp; y == 8)
+       printf( "a\n" );
+   else
+       printf( "b\n" );     ==&gt; a  equiv. \mbox{(x != 5 || y != 8)}
+</PRE>
+
+<P>
+</LI>
+<LI>Preced&#234;ncia: <TT>! &gt; <code>&amp;&amp;</code> &gt; ||</TT> 
+<BR><PRE>
+   if (x == 5 ||  y == 8 &amp;&amp; z == 10) 
+
+equiv. 
+
+   if (x == 5 || (y == 8 &amp;&amp; z == 10))
+</PRE>
+</LI>
+</OL>
+
+<P>
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

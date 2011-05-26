@@ -1,0 +1,682 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 10
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 10
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 10
+<BR>
+2&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Programa&#231;&#227;o Shell - estruturas de controle: condicionais e la&#231;os</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 <I>Scripts shell</I> e processos</A>
+</H2>
+
+<P>
+Todo processo em UNIX &#233; iniciado a partir do <I>shell</I>. Da mesma
+forma acontece com <I>scripts shell</I>.
+
+<P>
+O mecanismo que &#233; usado por UNIX se denomina <I>fork</I>,
+ esquematizado na Figura&nbsp;<A HREF="#fig:shellfork">1</A>:
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:shellfork"></A><A NAME="317"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 1:</STRONG>
+<I>Scripts shell</I> e processos.</CAPTION>
+<TR><TD><IMG
+ WIDTH="537" HEIGHT="307" ALIGN="CENTER"
+ SRC="teoria-img1.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{shellfork}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Chamamos de  <I>subshell</I> ao processo  iniciado como filho  de uma
+sess&#227;o  <I>shell</I>.  Como se  v&#234;  na  figura, todo  <I>script</I>
+<I>shell</I> &#233; executado em um <I>subshell</I>.
+
+<P>
+A  no&#231;&#227;o  de  <I>subshell</I>  &#233;  importante  para  o  tratamento  de
+vari&#225;veis de ambiente, como se ver&#225; em aulas posteriores.
+
+<P>
+Todos  os  processos originados  a  partir  de  um processo  <B>P</B>
+qualquer  s&#227;o  denominados   <B>filhos</B>  do  processo  <B>P</B>.
+Reversamente, o processo <B>P</B>  &#233; chamado de <B>pai</B> dos seus
+subprocessos.   Quando  a  op&#231;&#227;o  <B>l</B> de  <B><I>ps(1)</I></B>  &#233;  usada
+(sozinha ou  em conjunto  com outras op&#231;&#245;es)  s&#227;o apresentados  os dois
+principais identificadores de um  processo: o <B>PID</B> (Process ID)
+e o <B>PPID</B> (Parent Process ID - PID do processo pai).
+
+<P>
+<B>OBS.:</B>  Quando se  mata  um processo  qualquer,  todos os  seus
+      filhos  se tornam  &#243;rf&#227;os e  s&#227;o <I>adotados</I>  pelo processo
+      <B>1</B>.
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Comandos, Pipelines, Listas, Comandos compostos e
+      Substitui&#231;&#227;o de comandos</A>
+</H2>
+
+<P>
+Um <B>comando  simples</B> &#233; uma sequ&#234;ncia de  palavras separadas por
+espa&#231;os.  A primeira  palavra especifica  o comando  ou programa  a ser
+executado  e  as palavras  restantes  s&#227;o  passadas  ao progragem  como
+argumentos:
+<PRE>
+         ls /usr/bin
+         grep "Arnoldo" fones.txt
+</PRE>
+
+<P>
+Um comando tem sempre um  valor de retorno denominado <B>estado de
+sa&#237;da</B>,      <B><I>exit     status</I></B>      ou     simplesmente
+<B><I>status</I></B>.   Em   UNIX,  um  <I>status</I>  <B>0</B>
+(zero) significa  sucesso na  execu&#231;&#227;o do comando.   Um <I>status</I>
+diferente de  0 (zero)  indica a ocorr&#234;ncia  de alguma  anormalidade ou
+condi&#231;&#227;o de erro. Estes estados de retorno s&#227;o usados principalmente em
+controle de fluxo de programas <I>shell</I>, como veremos adiante.
+
+<P>
+O par&#226;metro especial <B>$?</B> expande o valor do <I>status</I> do
+&#250;ltimo comando executado. O  par&#226;metro <B>$!</B>  expande para o PID
+do processo executado em <I>background</I> mais recentemente.
+
+<P>
+Alguns comandos &#250;teis:
+
+<UL>
+<LI><B>wait   [<I>n</I>]</B>    espera    por   um    processo
+  terminar. <I>n</I> pode  ser um PID ou um JID.  Se <I>n</I> n&#227;o &#233;
+  fornecido,  aguarda  que  todos  os  processos filhos  terminem  e  o
+  <I>status</I> &#233;  0 (zero).  Caso contr&#225;rio, o  <I>status</I> &#233; do
+  &#250;ltimo processo ou job que se aguardava;
+
+<P>
+</LI>
+<LI><B>exit   [<I>status</I>]</B>  termina  um  <I>script</I>,
+  opcionalmente retornando um <I>status</I>.
+</LI>
+</UL>
+
+<P>
+<B><I>Pipelines</I></B>  s&#227;o  definidos como  um  ou mais  comandos
+separados por <B>&nbsp;|&nbsp;</B>:
+<PRE>
+       [!] comando1 [ | comando2 ...]
+</PRE>
+
+<P>
+A sa&#237;da padr&#227;o de <B>comando1</B> &#233; conectada &#224; entrada padr&#227;o de
+<B>comando2</B>.
+
+<P>
+O   <I>status</I>   da  execu&#231;&#227;o   de   um   <I>pipeline</I>  &#233;   o
+<I>status</I> do  &#250;ltimo comando executado.  Se o sinal  <B>!</B> &#233;
+usado,  o <I>status</I> do  <I>pipeline</I> &#233;  a nega&#231;&#227;o  l&#243;gica do
+<I>status</I> do &#250;ltimo comando executado.
+
+<P>
+<B>Lista</B>  &#233;  uma  seq&#252;&#234;ncia  de  um  ou  mais  <I>pipelines</I>
+separados pelos operadores:
+<DL>
+<DT><STRONG>;</STRONG></DT>
+<DD>(seq&#252;&#234;ncia),
+</DD>
+<DT><STRONG>&amp;&amp;</STRONG></DT>
+<DD>(AND),
+</DD>
+<DT><STRONG>&nbsp;|&nbsp;&nbsp;|&nbsp;</STRONG></DT>
+<DD>(OR),
+</DD>
+<DT><STRONG>&amp;</STRONG></DT>
+<DD>(<I>background</I>),
+</DD>
+</DL>
+  e   opcionalmente   terminada    por   <B>;</B>,   <B>&amp;</B>   ou
+<B>&lt;newline&gt;</B>.
+
+<P>
+<PRE>
+       comando1 &amp;&amp; comando2   # comando2 é executado SE, E SOMENTE
+                              # SE, comando1 retorna status 0 (zero)
+
+       comando1 || comando2   # comando2 é executado SE, E SOMENTE
+                              # SE, comando1 retorna status
+                              # DIFERENTE de 0 (zero)
+</PRE>
+
+<P>
+Os operadores <B>&amp;&amp;</B> (AND)  e <B>&nbsp;|&nbsp;&nbsp;|&nbsp;</B> (OR) t&#234;m igual
+preced&#234;ncia.  Por sua  vez,  eles t&#234;m  preced&#234;ncia  sobre <B>;</B>  e
+<B>&amp;</B> que  t&#234;m igual preced&#234;ncia  entre si.
+
+<P>
+O   <I>status</I>   de  listas   com   <B>;</B>,  <B>&amp;&amp;</B>   e
+<B>&nbsp;|&nbsp;&nbsp;|&nbsp;</B> &#233; o <I>status</I>  do &#250;ltimo comando executado na
+lista. No caso de listas  com <B>&amp;</B>, o <I>status</I> &#233; sempre 0
+(zero).
+
+<P>
+Um <B>Comando composto</B> &#233; definido por uma das seguintes formas:
+
+<P>
+<DL>
+<DT><STRONG>(lista)</STRONG></DT>
+<DD><I>lista</I> &#233; executada em
+  <I>subshell</I>. Defini&#231;&#227;o de vari&#225;veis n&#227;o s&#227;o efetivas depois que
+  o comando composto termina. O <I>status</I> &#233; o mesmo da
+  <I>lista</I>.
+
+<P>
+</DD>
+<DT><STRONG>[[  express&#227;o  ]]</STRONG></DT>
+<DD>  Retorna   um  <I>status</I>  de  0  ou  1
+              dependendo da avalia&#231;&#227;o da <B>express&#227;o condicional</B>
+              <I>express&#227;o</I>. Se o valor da express&#227;o &#233; VERDADEIRO,
+              o  <I>status</I>   &#233;  0  (zero).    Caso  contr&#225;rio,  o
+              <I>status</I>   &#233;   1   (um).   Uma   <B>express&#227;o
+              condicional</B> &#233; definida por uma s&#233;rie de operadores:
+              <DL>
+<DT><STRONG>-a arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe;
+              
+</DD>
+<DT><STRONG>-d arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe e &#233;
+                um diret&#243;rio;
+              
+</DD>
+<DT><STRONG>-f arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe e &#233;
+                um arquivo regular;
+              
+</DD>
+<DT><STRONG>-h arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe e &#233;
+                um link simb&#243;lico;
+              
+</DD>
+<DT><STRONG>-x arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe e &#233;
+                execut&#225;vel;
+              
+</DD>
+<DT><STRONG>-s arq</STRONG></DT>
+<DD>verdade se arquivo <I>arq</I> existe e
+                possui tamanho maior que 0 (zero);
+              
+</DD>
+<DT><STRONG>arq1 -nt arq2</STRONG></DT>
+<DD>verdade se arquivo <I>arq1</I> &#233;
+                mais novo que arquivo <I>arq2;</I>
+              
+</DD>
+<DT><STRONG>arq1 -ot arq2</STRONG></DT>
+<DD>verdade se arquivo <I>arq1</I> &#233;
+                mais velho que arquivo <I>arq2;</I>
+              
+</DD>
+<DT><STRONG>-z string</STRONG></DT>
+<DD>verdade se <I>string</I> possui
+                comprimento 0 (zero);
+              
+</DD>
+<DT><STRONG>-n string</STRONG></DT>
+<DD>verdade se <I>string</I> possui
+                comprimento diferente de 0 (zero);
+              
+</DD>
+<DT><STRONG>string1 == string2</STRONG></DT>
+<DD>verdade se <I>string1</I> &#233;
+                igual a <I>string2</I>. </DD>
+<DT><STRONG>string1 !=  string2</STRONG></DT>
+<DD>verdade se  <I>string1</I> &#233;
+                diferente  de  <I>string2</I>;
+
+<P>
+</DD>
+<DT><STRONG>arg1  OP  arg2</STRONG></DT>
+<DD>verdade  se  <I>arg1</I> tem  com
+                <I>arg2</I>     uma    <B>rela&#231;&#227;o    aritm&#233;tica</B>
+                estabelecida por <B>OP</B>.  <B>OP</B> pode ser:
+                <DL>
+<DT><STRONG>-eq</STRONG></DT>
+<DD>(igual),
+                
+</DD>
+<DT><STRONG>-ne</STRONG></DT>
+<DD>(diferente),
+                
+</DD>
+<DT><STRONG>-lt</STRONG></DT>
+<DD>(menor  que),
+                
+</DD>
+<DT><STRONG>-le</STRONG></DT>
+<DD>(menor ou  igual a),
+                
+</DD>
+<DT><STRONG>-gt</STRONG></DT>
+<DD>(maior que),
+                
+</DD>
+<DT><STRONG>-ge</STRONG></DT>
+<DD>(maior ou igual a).
+                
+</DD>
+</DL>
+</DD>
+</DL>
+
+<P>
+Outros operadores  podem ser vistos  em <B><I>test(1)</I></B> ou
+              na se&#231;&#227;o CONDITIONAL EXPRESSIONS em <B><I>bash(1)</I></B>.
+
+<P>
+</DD>
+<DT><STRONG>((  express&#227;o  ))</STRONG></DT>
+<DD>Retorna   um  <I>status</I>  de  0  ou  1
+              dependendo da  avalia&#231;&#227;o da <B>express&#227;o aritm&#233;tica</B>
+              entre   par&#234;nteses.    Se   o   valor  da   express&#227;o   &#233;
+              <B>diferente</B>  de 0  (zero), o  <I>status</I>  &#233; 0
+              (zero).  Caso contr&#225;rio, o <I>status</I> &#233; 1 (um).  Uma
+              <B>express&#227;o aritm&#233;tica</B> &#233; definida por uma s&#233;rie de
+              operadores:
+              <DL>
+<DD></DD>
+<DT><STRONG>! <IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\sim$"></STRONG></DT>
+<DD>nega&#231;&#227;o l&#243;gica e bit-a-bit;
+              
+</DD>
+<DT><STRONG>**</STRONG></DT>
+<DD>exponencia&#231;&#227;o;
+              
+</DD>
+<DT><STRONG>* / % </STRONG></DT>
+<DD>multiplica&#231;&#227;o, divis&#227;o e m&#243;dulo (resto de
+                divis&#227;o);
+              
+</DD>
+<DT><STRONG>- +</STRONG></DT>
+<DD>soma e subtra&#231;&#227;o;
+              </DD>
+<DT><STRONG><!-- MATH
+ $<= \quad >= \quad < \quad >$
+ -->
+<IMG
+ WIDTH="138" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$&lt;= \quad &gt;= \quad &lt; \quad &gt;$"></STRONG></DT>
+<DD>compara&#231;&#227;o aritm&#233;tica;
+              
+</DD>
+<DT><STRONG>== !=</STRONG></DT>
+<DD>igualdade e desigualdade;
+              
+</DD>
+<DT><STRONG>&amp;</STRONG></DT>
+<DD>AND bit-a-bit;
+              
+</DD>
+<DT><STRONG><B><FONT SIZE=3>^</FONT></B></STRONG></DT>
+<DD>XOR bit-a-bit;
+              
+</DD>
+<DT><STRONG>&nbsp;|&nbsp;</STRONG></DT>
+<DD>OR bit-a-bit;
+              
+</DD>
+<DT><STRONG>&amp;&amp;</STRONG></DT>
+<DD>AND l&#243;gico;
+              
+</DD>
+<DT><STRONG>&nbsp;|&nbsp;&nbsp;|&nbsp;</STRONG></DT>
+<DD>OR l&#243;gico;
+              </DD>
+<DT><STRONG>= &nbsp;&nbsp;&nbsp;&nbsp;*= &nbsp;&nbsp;&nbsp;&nbsp;/= &nbsp;&nbsp;&nbsp;&nbsp;%= &nbsp;&nbsp;&nbsp;&nbsp;+= &nbsp;&nbsp;&nbsp;&nbsp;-=
+                &nbsp;&nbsp;&nbsp;&nbsp;&amp;= &nbsp;&nbsp;&nbsp;&nbsp;^= &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;=</STRONG></DT>
+<DD>assinalamento;
+              </DD>
+</DL>
+
+<P>
+Outros  operadores podem ser  vistos na  se&#231;&#227;o ARITHMETIC
+              EVALUATION em <B><I>bash(1)</I></B>.
+</DD>
+</DL>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Expans&#227;o Aritm&#233;tica</A>
+</H2>
+
+<P>
+A  <B>Expans&#227;o Aritm&#233;tica</B>  permite a  avalia&#231;&#227;o de  uma express&#227;o
+aritm&#233;tica  e a  substitui&#231;&#227;o do  resultado como  valor de  vari&#225;vel ou
+dentro de alguma  linha de comando. O formato  para expans&#227;o aritm&#233;tica
+&#233;:
+
+<P>
+<PRE>
+               $((expressão))
+</PRE>
+
+<P>
+As express&#245;es abaixo s&#227;o portanto express&#245;es aritm&#233;ticas v&#225;lidas e t&#234;m
+todas o mesmo efeito:
+
+<P>
+<PRE>
+               CONT=$(($CONT + 1))
+               CONT=$((CONT + 1))
+               ((CONT = CONT + 1))
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+1.4 Substitui&#231;&#227;o de Comando</A>
+</H2>
+
+<P>
+A <B>Substitui&#231;&#227;o de Comando</B> permite que a sa&#237;da de um comando
+       tome o lugar do nome do comando. Existem 2 formas:
+<PRE>
+               $(command)
+       ou
+              `command`     # usando crase
+</PRE>
+
+<P>
+Quebras  de  linhas  no  in&#237;cio  ou  final  da  sa&#237;da  do  comando  s&#227;o
+descartadas. Quebras  de linhas no  meio da sa&#237;da s&#227;o  substitu&#237;das por
+espa&#231;os.
+
+<P>
+
+<H2><A NAME="SECTION00015000000000000000">
+1.5 Controle de fluxo e itera&#231;&#227;o</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>Condicional</STRONG></DT>
+<DD>&nbsp;
+<BR><PRE>
+if lista_1
+then
+    lista_A
+elif lista_2
+then 
+    lista_B
+...
+else
+    lista_else
+fi
+
+ou
+
+if lista_1 ; then lista_A ; elif  lista_2  ; then  lista_B ; else lista_else ;  fi
+</PRE>
+  Se  o  <I>status</I> de  <I>lista_1</I>  for  0 (zero),  executa
+    <I>lista_A</I>. Sen&#227;o, se o <I>status</I> de <I>lista_2</I>
+    for   0   (zero),    executa   <I>lista_B</I>.   Se   todos   os
+    <I>status</I>   forem    diferentes   de   0    (zero),   executa
+    <I>lista_else</I>.  Os  blocos  definidos  por  <B>elif</B>  e
+    <B>else</B> s&#227;o opcionais.
+
+<P>
+</DD>
+<DT><STRONG>La&#231;o <I>while</I></STRONG></DT>
+<DD>&nbsp;
+<BR><PRE>
+    while lista_1
+    do
+        lista
+    done
+ou
+    while  lista_1 ; do lista ; done
+</PRE>
+    Enquanto    o    <I>status</I>    de
+  <I>lista_1</I> for 0 (zero), executa <I>lista</I>.
+
+<P>
+</DD>
+<DT><STRONG>La&#231;o    <I>until</I></STRONG></DT>
+<DD>&nbsp;
+<BR><PRE>
+    until lista_1
+    do
+        lista
+    done
+ou
+    until  lista_1 ; do lista ; done
+</PRE>
+    Enquanto    o    <I>status</I>    de
+  <I>lista_1</I> for DIFERENTE de 0 (zero), executa <I>lista</I>.
+
+<P>
+</DD>
+<DT><STRONG>La&#231;o  <I>for</I></STRONG></DT>
+<DD>&nbsp;
+<BR><PRE>
+     for var in palavras
+     do
+        lista
+     done
+ou
+     for var in palavras ; do  lista ;  done
+</PRE>
+
+<P>
+O  termo  <I>palavras</I>  &#233;  considerado  uma  seq&#252;&#234;ncia  de  itens
+    separados  por espa&#231;o.  Um  de cada  vez,  um item  da seq&#252;&#234;ncia  &#233;
+    atribu&#237;do como  valor da  variavel <I>var</I> e  <I>lista</I> &#233;
+    executada.  O  la&#231;o termina  quando n&#227;o restam  mais itens  a serem
+    atribu&#237;dos &#224; variavel <I>var</I>
+</DD>
+</DL>
+
+<P>
+<B>Exemplo   1:</B>   Inserir   a   linha   <I>Arnoldo   Orlando
+(011)-234-4567</I>  no  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">fones.txt</FONT></B>  somente  se n&#227;o  existir
+nenhuma pessoa  de nome <I>Arnoldo</I>. Ap&#243;s a  inser&#231;&#227;o (se houver),
+deve-se ordenar <B><FONT FACE="Helvetica, Arial, sans-serif">fones.txt</FONT></B>.
+<PRE>
+     if ! grep --quiet "Arnoldo" fones.txt
+     then
+        echo "Arnoldo Orlando   011)-234-4567" &gt;&gt; fones.txt ; sort -o fones.txt fones.txt
+        exit
+     else
+         echo "Já existe um Arnoldo !!!!"
+         exit 1
+     fi
+</PRE>
+
+<P>
+Outra solu&#231;&#227;o, agora mais compacta:
+
+<P>
+<PRE>
+  ! grep --quiet "Arnoldo" fones.txt &amp;&amp; ( echo "Arnoldo Orlando  (011)-234-4567" &gt;&gt; fones.txt ; sort -o fones.txt fones.txt )
+</PRE>
+
+<P>
+Note-se o  uso dos  par&#234;nteses, obrigat&#243;rios neste  caso para  for&#231;ar a
+execu&#231;&#227;o  da seq&#252;&#234;ncia  de <B><I>echo(1)</I></B>  e <B><I>sort(1)</I></B>  somente se
+<B><I>grep(1)</I></B> n&#227;o encontra <I>Arnoldo</I>.
+
+<P>
+<B>Exemplo 2:</B>  Escreva um <I>script</I> que escreva  na tela as
+frases <B>Bom  Dia !!</B>,  <B>Boa Tarde !!</B>,  <B>Boa Noite
+!!</B>  e <B>Vai  dormir, menino  !!!</B> de  acordo com  a hora  do dia
+apresentada por <B><I>date(1)</I></B>.
+
+<P>
+<PRE>
+      #!/bin/bash
+
+      HORA=`date +"%H"`        # Também poderia ser HOME=$(date +"%H")
+
+      if [[ $HORA -ge 6 &amp;&amp; $HORA -lt 12 ]]
+      then
+           echo "Bom Dia !!!"
+      elif  [[ $HORA -ge 12 &amp;&amp; $HORA -lt 18 ]]
+      then
+          echo "Boa Tarde !!!"
+      elif  [[ $HORA -ge 18 &amp;&amp; $HORA -le 23 ]]; then
+          echo "Boa Noite !!!"
+      elif  [[ $HORA -ge 0 &amp;&amp; $HORA -lt 2 ]]; then
+          echo "Vai dormir, menino !!!"
+      else
+          echo "Por que tu bebe, nojento !!!"
+     fi
+</PRE>
+
+<P>
+<B>Exemplo  3:</B>  Mudar  para  um  diret&#243;rio  corrente  espec&#237;fico,
+SOMENTE se este  diret&#243;rio n&#227;o existir.  Neste caso,  antes de mudar de
+diret&#243;rio, ele ser criado.
+<PRE>
+     MeuDIR="${HOME}/teste"
+     [[ -d "${MeuDIR}" ]] || (mkdir ${MeuDIR} &amp;&amp; cd ${MeuDIR})
+</PRE>
+
+<P>
+Mudar  para um  diret&#243;rio corrente  espec&#237;fico,  de forma  que se  este
+diret&#243;rio n&#227;o existir, ele deve ser criado antes.
+<PRE>
+     MeuDIR="${HOME}/teste"
+     [[ -d "${MeuDIR}" ]] || mkdir ${MeuDIR} &amp;&amp; cd ${MeuDIR}
+ou
+     ([[ -d "${MeuDIR}" ]] || mkdir ${MeuDIR}) &amp;&amp; cd ${MeuDIR}
+</PRE>
+
+<P>
+<B>Exemplo 4:</B>
+<PRE>
+     #!/bin/sh
+
+     MOZILLA_HOME=/usr/local/netscape
+     WWWBROWSER="/usr/local/bin/netscape.bin -install"
+     XENVIRONMENT="/usr/lib/X11/app-defaults/Netscape-4.79"
+
+     if [[ `basename $0` = "news" ]]; then
+        SERVICE="-news news://${NNTPSERVER}"
+     else
+        SERVICE=""
+     fi
+
+     export XENVIRONMENT WWWBROWSER SERVICE MOZILLA_HOME
+
+     ${WWWBROWSER} $* ${SERVICE} &amp;
+</PRE>
+
+<P>
+<B>Exemplo 5:</B>
+<PRE>
+        read NOMES
+
+        for i in $NOMES
+        do
+             echo "$i" &gt;&gt;nomes.txt
+        done
+</PRE>
+
+<P>
+<B>Exemplo 6:</B>
+<PRE>
+        touch nomes.txt
+
+        while [[ $(wc -l nomes.txt | cut -c1-7) -lt 15 ]]; do
+
+           read -p "Indique no maximo 15 nomes: " NOMES
+
+           for i in $NOMES
+           do
+               echo "$i" &gt;&gt;nomes.txt
+           done
+        done
+</PRE>
+
+<P>
+<B>Exemplo 7:</B>
+<PRE>
+    if [[ "${SET_WALLPAPER}" = "no" ]]
+    then
+        for i in Esetroot xsetroot
+        do
+          cmd=$(which $i)
+          if [[ -x $cmd ]]; then
+             XSETROOT="$cmd"
+             if [[ "${cmd}" = "Esetroot" ]]; then
+                 XSETROOT_OPT="/usr/local/Graphics/Backgrounds/BlueStone.xpm"
+             else
+                 XSETROOT_OPT="-solid grey"
+             fi
+             break
+          fi
+        done
+        ${XSETROOT} ${XSETROOT_OPT}
+        exit
+    fi
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-12-04
+</ADDRESS>
+</BODY>
+</HTML>

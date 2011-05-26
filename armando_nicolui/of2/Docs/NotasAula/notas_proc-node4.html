@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4 Mais sobre tipos: conversão implícita e explícita</TITLE>
+<META NAME="description" CONTENT="4 Mais sobre tipos: conversão implícita e explícita">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node5.html">
+<LINK REL="previous" HREF="notas_proc-node3.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node5.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html253"
+  HREF="notas_proc-node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html251"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html245"
+  HREF="notas_proc-node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html254"
+  HREF="notas_proc-node5.html">5 Comandos de entrada</A>
+<B>Up:</B> <A NAME="tex2html252"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html246"
+  HREF="notas_proc-node3.html">3 Expressões como valores</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html255"
+  HREF="notas_proc-node4.html#SECTION00041000000000000000">4.1 Conversão de tipos</A>
+<LI><A NAME="tex2html256"
+  HREF="notas_proc-node4.html#SECTION00042000000000000000">4.2 Modificadores de tipos</A>
+<LI><A NAME="tex2html257"
+  HREF="notas_proc-node4.html#SECTION00043000000000000000">4.3 <EM>Cast</EM> de tipos</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00040000000000000000">
+4 Mais sobre tipos: convers&#227;o impl&#237;cita e expl&#237;cita</A>
+</H1>
+
+<P>
+Express&#245;es n&#227;o tem somente um valor, mas tamb&#233;m tem um tipo
+associado.
+
+<P>
+
+<P>
+Se   ambos  os   operandos  de   uma   opera&#231;&#227;o  aritm&#233;tica
+bin&#225;ria s&#227;o do  mesmo tipo, o resultado ter&#225;  o mesmo tipo.
+Por exemplo:
+
+<P>
+
+<P>
+<TT>3 + 5     </TT> &#233; <TT>8</TT>, e o tipo &#233;  <TT>int</TT>
+
+<P>
+<TT>3.5 + 2.25</TT> &#233;  <TT>5.75</TT>, e o tipo &#233; <TT>double</TT>
+
+<P>
+
+<P>
+O &#250;nico  comportamento n&#227;o &#243;bvio &#233; a  da divis&#227;o de
+inteiros:
+
+<P>
+
+<P>
+<TT>30 / 5</TT> &#233; <TT>6</TT>
+
+<P>
+<TT>31 / 5</TT> &#233; <TT>6</TT>
+
+<P>
+<TT>29 / 5</TT> &#233; <TT>5</TT>
+
+<P>
+<TT>3 / 5 </TT> &#233; <TT>0</TT>
+
+<P>
+
+<P>
+Lembre-se  de evitar  escrever algo  como <TT>1&nbsp;/&nbsp;2&nbsp;*&nbsp;x</TT> significando
+<IMG
+ WIDTH="25" HEIGHT="40" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img17.png"
+ ALT="$\frac{1}{2}x$">.   Voc&#234;  sempre  obter&#225;  o  valor <TT>0</TT>  porque  <TT>1&nbsp;/&nbsp;2&nbsp;*&nbsp;x</TT> &#233; <TT>(1&nbsp;/&nbsp;2)&nbsp;*&nbsp;x</TT> que &#233; <TT>0&nbsp;*&nbsp;x</TT> que  &#233; <TT>0</TT>.  Para
+obter o resultado desejado, voc&#234; poderia escrever <TT>1.0&nbsp;/&nbsp;2.0&nbsp;*&nbsp;x</TT>.
+
+<P>
+
+<H2><A NAME="SECTION00041000000000000000">
+4.1 Convers&#227;o de tipos</A>
+</H2>
+
+<P>
+Valores podem ser convertidos de  um tipo para outro implicitamente, da
+forma j&#225; comentada nas  aulas feito pelo compilador, ou explicitamente,
+usando um operador chamado <EM>type casting</EM>.
+
+<P>
+Em  express&#245;es envolvendo  operadores bin&#225;rios  com operandos  de tipos
+diferentes, os valores dos operandos  s&#227;o convertidos para o mesmo tipo
+antes da opera&#231;&#227;o ser  executada: tipos mais simples s&#227;o ``promovidos''
+para tipos mais  complexos.  Portanto, o resultado da  avalia&#231;&#227;o de uma
+express&#227;o com  operandos de  tipos diferentes ser&#225;  o tipo  do operando
+mais  complexo.   Os tipos  em  C  s&#227;o (do  mais  simples  para o  mais
+complexo):
+
+<P>
+<PRE>
+char &lt; int &lt; long &lt; float &lt; double
+</PRE>
+
+<P>
+O sinal de <TT>&lt;</TT> significa que  o tipo da esquerda &#233; promovido para o
+tipo  da direita,  e o  resultado  ser&#225; do  tipo mais  a direita.   Por
+exemplo:
+
+<P>
+
+<P>
+<TT>3.5 + 1</TT> &#233; <TT>4.5</TT>
+
+<P>
+<TT>4 * 2.5</TT> &#233; <TT>10.0</TT>
+
+<P>
+
+<P>
+Esta regra estende-se  para express&#245;es envolvendo m&#250;ltiplos operadores,
+mas  voc&#234; deve  se  lembrar  que a  preced&#234;ncia  e associatividade  dos
+operadores  pode influenciar  no  resultado.  Vejamos o exemplo abaixo:
+<PRE>
+main() 
+{
+  int a, b;
+  
+  printf("Entre uma fracao (numerador e denominador): ")
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  printf("A fracao em decimal e  %f\n", 1.0 * a / b);
+}
+</PRE>
+
+<P>
+Multiplicando por  <TT>1.0</TT> assegura que o  resultado da multiplica&#231;&#227;o
+de <TT>1.0</TT> por <TT>a</TT> ser&#225;  do tipo real,  e portanto, a  regra de
+convers&#227;o autom&#225;tica evitar&#225; que  o resultado da divis&#227;o seja truncado.
+Note  que se tiv&#233;ssemos  primeiro feito  a divis&#227;o  <TT>a/b</TT>  e depois
+multiplicado por  <TT>1.0</TT>, embora  o tipo da express&#227;o  <TT>a/b*1.0</TT>
+seja  do tipo <TT>double</TT>, o  valor da  express&#227;o seria  diferente do
+valor de <TT>1.0 * a/b</TT>. Por que ?
+
+<P>
+Em atribui&#231;&#245;es, o valor da  express&#227;o do lado direito &#233; convertido para
+o tipo  da vari&#225;vel do lado  esquerdo da atribui&#231;&#227;o.   Isto pode causar
+promo&#231;&#227;o ou  ``rebaixamento'' de tipo.  O  ``rebaixamento'' pode causar
+perda de precis&#227;o ou mesmo resultar em valores errados.
+
+<P>
+Em opera&#231;&#245;es  de atribui&#231;&#227;o,  atribuir um <TT>int</TT> em um  <TT>float</TT>
+causar&#225; a  convers&#227;o apropriada, e atribuir  um <TT>float</TT>  em um <TT>int</TT> causar&#225; truncamento.  Por exemplo:
+
+<P>
+
+<P>
+<TT>float a = 3;   </TT> &#233; equivalente a <TT>a = 3.0</TT>
+
+<P>
+<TT>int a = 3.1415;</TT> &#233; equivalente a  <TT>a = 3</TT> (truncado)
+
+<P>
+
+<P>
+Basicamente, se o  valor da express&#227;o do lado  direito da atribui&#231;&#227;o &#233;
+de  um tipo  que  n&#227;o  cabe no  tamanho  do tipo  da  vari&#225;vel do  lado
+esquerdo, resultados errados e n&#227;o esperados podem ocorrer.
+
+<P>
+
+<H2><A NAME="SECTION00042000000000000000">
+4.2 Modificadores de tipos</A>
+</H2>
+
+<P>
+Os  tipos  de   dados  b&#225;sicos  em  C  podem   estar  acompanhados  por
+modificadores  na  declara&#231;&#227;o  de  vari&#225;veis. Tais  modificadores  s&#227;o:
+<B>long</B>, <B>short</B>,  <B>signed</B> e <B>unsigned</B>. Os
+dois  primeiros t&#234;m  impacto no  tamanho (n&#250;mero  de bits)  usados para
+representar um  valor e os  dois &#250;ltimos indicam  se o tipo  ser&#225; usado
+para representar valores negativos e positivos (<B>signed</B>) ou sem
+este modificador) ou apenas positivos (<B>unsigned</B>).
+
+<P>
+A Tabela&nbsp;<A HREF="#tab:modtipos">2</A> mostra uma lista completa de todos os tipos
+de dados em C, com e sem modificadores:
+&nbsp;
+<BR>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="1538"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 2:</STRONG>
+Modificadores de Tipos de Dados</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Modificador</TD>
+<TD ALIGN="CENTER">Tamanho em bits</TD>
+<TD ALIGN="LEFT">Faixa de valores</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">char</TD>
+<TD ALIGN="CENTER">8</TD>
+<TD ALIGN="LEFT">-127 a 127</TD>
+</TR>
+<TR><TD ALIGN="LEFT">unsigned char</TD>
+<TD ALIGN="CENTER">8</TD>
+<TD ALIGN="LEFT">0 a 255</TD>
+</TR>
+<TR><TD ALIGN="LEFT">int</TD>
+<TD ALIGN="CENTER">16</TD>
+<TD ALIGN="LEFT">-32767 a 32767</TD>
+</TR>
+<TR><TD ALIGN="LEFT">unsigned int</TD>
+<TD ALIGN="CENTER">16</TD>
+<TD ALIGN="LEFT">0 a 65535</TD>
+</TR>
+<TR><TD ALIGN="LEFT">short int</TD>
+<TD ALIGN="CENTER">16</TD>
+<TD ALIGN="LEFT">-32767 a 32767</TD>
+</TR>
+<TR><TD ALIGN="LEFT">unsigned short int</TD>
+<TD ALIGN="CENTER">16</TD>
+<TD ALIGN="LEFT">0 a 65535</TD>
+</TR>
+<TR><TD ALIGN="LEFT">long int</TD>
+<TD ALIGN="CENTER">32</TD>
+<TD ALIGN="LEFT">-2147483647 a 2147483647</TD>
+</TR>
+<TR><TD ALIGN="LEFT">unsigned long int</TD>
+<TD ALIGN="CENTER">32</TD>
+<TD ALIGN="LEFT">0 a 4294967295</TD>
+</TR>
+<TR><TD ALIGN="LEFT">float</TD>
+<TD ALIGN="CENTER">32</TD>
+<TD ALIGN="LEFT">Mantissa de 6 d&#237;gitos</TD>
+</TR>
+<TR><TD ALIGN="LEFT">double</TD>
+<TD ALIGN="CENTER">64</TD>
+<TD ALIGN="LEFT">Mantissa de 10 d&#237;gitos</TD>
+</TR>
+<TR><TD ALIGN="LEFT">long double</TD>
+<TD ALIGN="CENTER">80</TD>
+<TD ALIGN="LEFT">Mantissa de 10 d&#237;gitos</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:modtipos"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H2><A NAME="SECTION00043000000000000000">
+4.3 <EM>Cast</EM> de tipos</A>
+</H2>
+
+<P>
+O C  tem um operador  para alterar o  tipo de um  valor explicitamente.
+Este operador  &#233; chamado  de <EM>cast</EM>.   Executando um <EM>cast</EM> de
+tipos, o valor da express&#227;o &#233;  for&#231;ado a ser de um tipo particular, n&#227;o
+importando a regra de convers&#227;o de tipos.
+
+<P>
+O formato do <EM>cast</EM> de tipos &#233;:
+
+<P>
+
+<P>
+<TT>(</TT><IMG
+ WIDTH="47" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img18.png"
+ ALT="$nome$">-<IMG
+ WIDTH="22" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img19.png"
+ ALT="$do$">-<IMG
+ WIDTH="34" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img20.png"
+ ALT="$tipo$"><TT>)</TT><IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$">
+
+<P>
+
+<P>
+O par&#234;nteses N&#195;O &#233; opcional na express&#227;o acima.
+
+<P>
+Podemos usar o <EM>cast</EM> de tipos da seguinte forma:
+
+<P>
+<PRE>
+   int fahr = 5;
+   float cels;
+
+   printf("Valor = %f\n", (float)fahr);
+   cels = (float)5 / 9 * (fahr - 32);
+   printf("celsius = %d\n", (int)cels);
+</PRE>
+
+<P>
+Agora  que  conhecemos  o  operador  de  <EM>cast</EM>  de  tipo  podemos
+reescrever o programa que faz a convers&#227;o de fra&#231;&#227;o para decimal.
+<PRE>
+main() 
+{
+  int a, b;
+  
+  printf("Entre com uma fracao (numerador e denominador): ")
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  printf("A fracao em decimal e  %f\n", (float) a / b);
+}
+</PRE>
+
+<P>
+O <EM>cast</EM> de tipo tem a maior preced&#234;ncia poss&#237;vel, portanto podemos
+fazer o  <EM>cast</EM>  de <TT>a</TT>  ou de  <TT>b</TT> para  ser do  tipo <TT>float</TT>, e n&#227;o h&#225; necessidade  de par&#234;nteses extra.  No exemplo acima, o
+<EM>cast</EM> causa  o valor da vari&#225;vel <TT>a</TT>  ser convertido para <TT>float</TT>, mas n&#227;o causa mudan&#231;a no  tipo da vari&#225;vel <TT>a</TT>.  O tipo das
+vari&#225;veis &#233; definido uma vez na declara&#231;&#227;o e n&#227;o pode ser alterado.
+
+<P>
+<HR>
+<A NAME="tex2html253"
+  HREF="notas_proc-node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html251"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html245"
+  HREF="notas_proc-node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html254"
+  HREF="notas_proc-node5.html">5 Comandos de entrada</A>
+<B>Up:</B> <A NAME="tex2html252"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html246"
+  HREF="notas_proc-node3.html">3 Expressões como valores</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

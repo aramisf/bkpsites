@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>30 Argumentos de linha de comando: a função main</TITLE>
+<META NAME="description" CONTENT="30 Argumentos de linha de comando: a função main">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node31.html">
+<LINK REL="previous" HREF="notas_proc-node29.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node31.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html626"
+  HREF="notas_proc-node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html624"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html618"
+  HREF="notas_proc-node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html627"
+  HREF="notas_proc-node31.html">31 Alocação dinâmica de</A>
+<B>Up:</B> <A NAME="tex2html625"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html619"
+  HREF="notas_proc-node29.html">29 Arrays de ponteiros</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000300000000000000000">
+30 Argumentos de linha de comando: a fun&#231;&#227;o <TT>main</TT></A>
+</H1>
+
+<P>
+Uma aplica&#231;&#227;o de <I>arrays</I>  de ponteiros surge de imediato quando
+voc&#234; deseja acessar os argumentos  digitados para seu programa na linha
+de comando.
+
+<P>
+Para isto, a fun&#231;&#227;o <TT>main</TT> manipula dois argumentos quando o
+programa inicia a execu&#231;&#227;o:
+<PRE>
+            main (int argc, char *argv[])
+            {
+               .....
+            }
+</PRE>
+
+<P>
+O primeiro argumento, denominado <TT>argc</TT> por conven&#231;&#227;o, representa o
+n&#250;mero de argumentos digitados na linha de comando, incluindo o nome do
+programa  na  linha  de  comando,   que  &#233;  definido  como  o  primeiro
+argumento. Desta forma o valor de  <TT>argc</TT> &#233; sempre maior ou igual a
+1 (um).
+
+<P>
+Em UNIX,  um argumento &#233;  considerado como uma sequ&#234;ncia  de caracteres
+at&#233; a primeira  ocorr&#234;ncia do caracter de espa&#231;amento,  que pode ser um
+espa&#231;o em branco, tab ou  o caracter de mudan&#231;a de linha<A NAME="tex2html13"
+  HREF="notas_proc-footnode.html#foot10414"><SUP>4</SUP></A>.
+
+<P>
+O segundo argumento de <TT>main</TT> &#233; o <I>array</I> de ponteiros para
+caracteres chamado  <TT>argv</TT>, por  conven&#231;&#227;o. O primeiro  ponteiro em
+<TT>argv</TT>,  <TT>argv[0]</TT>,  aponta   para  o  nome  do  programa  em
+execu&#231;&#227;o.  Os elementos  sucessivos do  <I>array</I>,  <TT>argv[1]</TT>,
+<TT>argv[2]</TT>, ...,  <TT>argv[argc  - 1]</TT>,  cont&#233;m ponteiros  para os
+argumentos digitados na linha de comando ap&#243;s o nome do programa.
+
+<P>
+Como um exemplo, considere a execu&#231;&#227;o do programa chamado <TT>  nroff</TT>. Se a linha de comando abaixo &#233; digitada:
+<PRE>
+               nroff -mm -TXR memo1
+</PRE>
+
+<P>
+ent&#227;o o  valor de <TT>argc</TT>  ser&#225; 4 (o  nome do programa mais  os tr&#234;s
+argumentos  que  se   seguem),  e  o  argumento  <TT>argv</TT>  ser&#225;  um
+<I>array</I> de ponteiros para  caracteres. O primeiro elemento deste
+<I>array</I>  aponta  para   o  <I>string</I>  <B>"nroff"</B>,  o
+segundo  para   <B>-mm"</B>,  o  terceiro   para  <B>-TXR"</B>  e
+finalmente   o   quarto   elemento   aponta  para   o   <I>string</I>
+<B>"memo1"</B>. Isto pode ser melhor visualizado na Figura
+<A HREF="#fig:cmdline">3</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:cmdline"></A><A NAME="10440"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 3:</STRONG>
+Argumentos na linha de comando</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">  <IMG
+ WIDTH="599" HEIGHT="311" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img84.png"
+ ALT="\includegraphics[scale=0.8]{cmdline}">
+  </DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<HR>
+<A NAME="tex2html626"
+  HREF="notas_proc-node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html624"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html618"
+  HREF="notas_proc-node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html627"
+  HREF="notas_proc-node31.html">31 Alocação dinâmica de</A>
+<B>Up:</B> <A NAME="tex2html625"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html619"
+  HREF="notas_proc-node29.html">29 Arrays de ponteiros</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

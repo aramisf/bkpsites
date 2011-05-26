@@ -1,0 +1,35 @@
+#!/bin/bash
+
+NUMNOMES=`egrep -c "\<$1	" Arquivos/telefones.txt`
+
+IFS=$'\n'
+
+NOMES=$(egrep "\<$1	" Arquivos/telefones.txt)
+
+if [[ $NUMNOMES -eq 0 ]]; then
+    echo ""
+    echo "Não foi encontrada nenhuma pessoa com sobrenome \"$1\"."
+    echo ""
+    exit 1
+elif [[ $NUMNOMES -eq 1 ]]; then
+    grep -v "$1" Arquivos/telefones.txt >tmp
+    mv tmp Arquivos/telefones.txt
+    echo ""
+    echo "$1 removido."
+    echo ""
+    exit 0
+else
+    for i in $NOMES
+    do
+      echo -n "Deseja remover \"$i\" [S/n]: "
+      read
+
+      if [[ "${REPLY}" == S || "${REPLY}" == s ]]; then
+	    grep -v "$i" Arquivos/telefones.txt >tmp
+	    mv tmp Arquivos/telefones.txt
+	    echo "	==> $i removido."
+      fi
+    done
+    exit 0
+fi
+

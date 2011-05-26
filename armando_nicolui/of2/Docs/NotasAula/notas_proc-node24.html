@@ -1,0 +1,506 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>24 Mais sobre funções: Quando return não é
+suficiente</TITLE>
+<META NAME="description" CONTENT="24 Mais sobre funções: Quando return não é
+suficiente">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node25.html">
+<LINK REL="previous" HREF="notas_proc-node23.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node25.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html543"
+  HREF="notas_proc-node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html541"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html535"
+  HREF="notas_proc-node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html544"
+  HREF="notas_proc-node25.html">25 Entrada e Saída</A>
+<B>Up:</B> <A NAME="tex2html542"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html536"
+  HREF="notas_proc-node23.html">23 Ativação de função</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html545"
+  HREF="notas_proc-node24.html#SECTION000241000000000000000">24.1 Usando ponteiros</A>
+<LI><A NAME="tex2html546"
+  HREF="notas_proc-node24.html#SECTION000242000000000000000">24.2 O operador de endereço (<TT>&amp;</TT>)</A>
+<LI><A NAME="tex2html547"
+  HREF="notas_proc-node24.html#SECTION000243000000000000000">24.3 Tipo ponteiro</A>
+<LI><A NAME="tex2html548"
+  HREF="notas_proc-node24.html#SECTION000244000000000000000">24.4 O operador de dereferência: <TT>*</TT></A>
+<LI><A NAME="tex2html549"
+  HREF="notas_proc-node24.html#SECTION000245000000000000000">24.5 Ponteiros como argumentos de funções</A>
+<LI><A NAME="tex2html550"
+  HREF="notas_proc-node24.html#SECTION000246000000000000000">24.6 Precedência de operadores</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000240000000000000000">
+24 Mais sobre fun&#231;&#245;es: Quando <TT>return</TT> n&#227;o &#233;
+suficiente</A>
+</H1>
+
+<P>
+Considere  o  programa  abaixo  que  pede  ao  usu&#225;rio  dois  inteiros,
+armazena-os em duas vari&#225;veis, troca seus valores, e os imprime.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int a, b, temp;
+  
+  printf("Entre dois numeros: ");
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  printf("Voce entrou %d e %d\n", a, b);    
+  
+  /* Troca a com b */
+  temp = a;
+  a = b;
+  b = temp;
+  
+  printf("Trocados, eles sao %d e %d\n", a, b);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Aqui est&#225; um exemplo de execu&#231;&#227;o do programa:
+
+<P>
+<PRE>
+     Entre dois numeros: 3 5
+     Voce entrou 3 e 5
+     Trocados, eles sao 5 e 3
+</PRE>
+
+<P>
+O seguinte trecho do programa  executa a troca de valores das vari&#225;veis
+<TT>a</TT> e <TT>b</TT>:
+
+<P>
+<PRE>
+    temp = a;
+    a = b;
+    b = temp;
+</PRE>
+
+<P>
+
+&#201;  poss&#237;vel escrever  uma fun&#231;&#227;o  que executa  esta opera&#231;&#227;o  de troca?
+Considere a tentativa abaixo de escrever esta fun&#231;&#227;o:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+void troca(int, int);
+
+void troca(int x, int y)
+{
+    int temp;
+
+    temp = x;
+    x = y;
+    y = temp;
+}
+
+main(void)
+{
+    int a, b;
+
+    printf("Entre dois numeros: ");
+    scanf("%d %d", &amp;a, &amp;b);
+
+    printf("Voce entrou com %d e %d\n", a, b);    
+
+    /* Troca a e b */
+    troca(a, b);
+    
+    printf("Trocados, eles sao %d e %d\n", a, b);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Se voc&#234; executar este programa, ver&#225; que ele <B>n&#227;o</B> funciona:
+
+<P>
+<PRE>
+     Entre dois numeros: 3 5
+     Voce entrou 3 e 5
+     Trocados, eles sao 3 e 5
+</PRE>
+
+<P>
+Como voc&#234; j&#225; viu nas notas  anteriores, em C os argumentos s&#227;o passados
+<B>por valor</B>.  Uma  vez que  somente os  valores das  vari&#225;veis s&#227;o
+passados, n&#227;o &#233; poss&#237;vel para a fun&#231;&#227;o <TT>troca()</TT> alterar os valores
+de <TT>a</TT> e  <TT>b</TT> porque  <TT>troca()</TT>  n&#227;o sabe onde  na mem&#243;ria
+estas  vari&#225;veis  est&#227;o armazenadas.   Al&#233;m  disso,  <TT>troca()</TT>  n&#227;o
+poderia ser  escrito usando a  senten&#231;a <TT>return</TT> porque  s&#243; podemos
+retornar um valor (n&#227;o dois) atrav&#233;s da senten&#231;a <TT>return</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000241000000000000000">
+24.1 Usando ponteiros</A>
+</H2>
+
+<P>
+A solu&#231;&#227;o para o problema acima &#233; ao inv&#233;s de passar os valores de <TT>a</TT> e <TT>b</TT>, passar o endere&#231;o das vari&#225;veis <TT>a</TT> e <TT>b</TT>.  Desta
+forma,  <TT>troca()</TT>  saberia  em que  endere&#231;o  de mem&#243;ria  escrever,
+portanto poderia alterar os valores de <TT>a</TT> e <TT>b</TT>.
+
+<P>
+Lembre-se que em C a cada vari&#225;vel est&#225; associado: (i) um nome; (ii) um
+tipo;  (iii) um  valor;  e (iv)  um  endere&#231;o.  Assuma  que existam  as
+seguintes defini&#231;&#245;es de vari&#225;veis.
+
+<P>
+<PRE>
+    int i = 5;
+    char c = 'G';
+</PRE>
+
+<P>
+Na mem&#243;ria, eles podem estar armazenados da forma abaixo:
+
+<P>
+
+<DIV ALIGN="CENTER">
+  <DIV ALIGN="CENTER">  <IMG
+ WIDTH="205" HEIGHT="266" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img82.png"
+ ALT="\includegraphics[scale=0.5]{ptr1}">
+</DIV>
+</DIV>
+
+<P>
+A vari&#225;vel inteira <TT>i</TT> est&#225; armazenada no endere&#231;o <TT>1342</TT>.  Ela
+usa dois  bytes de mem&#243;ria (quando um  objeto usa mais de  um byte, seu
+endere&#231;o &#233; onde ele come&#231;a - neste caso, <TT>1342</TT> e n&#227;o <TT>1343</TT>).
+A vari&#225;vel do tipo <TT>char</TT>  <TT>c</TT> est&#225; armazenada no endere&#231;o <TT>1346</TT> e usa  um byte de mem&#243;ria.  O compilador &#233;  que controla do local
+de armazenamento destas vari&#225;veis em mem&#243;ria.
+
+<P>
+
+<H2><A NAME="SECTION000242000000000000000">
+24.2 O operador de endere&#231;o (<TT>&amp;</TT>)</A>
+</H2>
+
+<P>
+N&#243;s podemos usar  o operador de endere&#231;o para  determinar o endere&#231;o de
+uma objeto na mem&#243;ria.  Este operador s&#243; pode ser usado com ``lvalues''
+(objetos que  podem estar no lado  esquerdo de uma  atribui&#231;&#227;o, como no
+caso  de  vari&#225;veis) porque  ``lvalues''  tem  um  endere&#231;o alocado  na
+mem&#243;ria.
+
+<P>
+Por exemplo,  no exemplo acima,  poder&#237;amos usar o operador  de endre&#231;o
+como nas express&#245;es abaixo:
+
+<P>
+<code>&amp;i</code>   tem valor <TT>1342</TT>
+
+<P>
+<code>&amp;c</code>   tem valor <TT>1346</TT>
+
+<P>
+
+<H2><A NAME="SECTION000243000000000000000">
+24.3 Tipo ponteiro</A>
+</H2> 
+
+<P>
+Em C, uma vari&#225;vel que cont&#233;m  um endere&#231;o de mem&#243;ria &#233; uma vari&#225;vel do
+tipo ponteiro.   Um valor,  que &#233;  um endere&#231;o (como  <TT>&amp;a</TT>)  &#233; um
+valor  de  ponteiro.   Quando  um  ponteiro (a  vari&#225;vel)  cont&#233;m  um
+determinado endre&#231;o,  dizemos que ele  <EM>aponta</EM> para o  endere&#231;o de
+mem&#243;ria (ou se  este endere&#231;o de mem&#243;ria for  associado a uma vari&#225;vel,
+dizemos que ele aponta para esta vari&#225;vel).
+
+<P>
+H&#225; um  tipo distinto de  ponteiro para cada  tipo b&#225;sico C  (como <TT>int</TT>, <TT>char</TT> e <TT>float</TT>).   &#201; verdade que todos os endere&#231;os tem
+o mesmo  tamanho (em Turbo  C s&#227;o 2  bytes), mas n&#243;s  tamb&#233;m precisamos
+saber algo  sobre o  que &#233; armazenado  no endere&#231;o de  mem&#243;ria apontado
+(quantos bytes  ocupa e  como os bytes  devem ser  interpretados).  Por
+exemplo,  um tipo  ponteiro  usado para  ``apontar''  para inteiros  &#233;
+chamado <EM>ponteiro para  int</EM> e  isso &#233; denotado  por um  <TT>*</TT>.
+Vari&#225;veis  do  tipo  ponteiro  para  int  s&#227;o  usados  para  armazenar
+endere&#231;os de mem&#243;ria que contem valores do tipo <TT>int</TT>.
+
+<P>
+Por  exemplo, dadas  as defini&#231;&#245;es  de  <TT>i</TT>  e <TT>c</TT> acima,  n&#243;s
+podemos definir duas novas vari&#225;veis <TT>pi</TT> e <TT>pc</TT>, ambos do tipo
+ponteiro.
+<PRE>
+        int *pi;
+        char *pc;
+</PRE>
+Nesta  defini&#231;&#227;o  n&#227;o  inicializamos  as vari&#225;veis  com  nenhum  valor.
+Podemos inicializ&#225;-las com:
+<PRE>
+        pi = &amp;i;
+        pc = &amp;c;
+</PRE>
+Depois destas  atribui&#231;&#245;es, o valor de  <TT>pi</TT> seria <TT>1342</TT>, e o
+valor de <TT>pc</TT> seria <TT>1346</TT>.
+
+<P>
+Note que nesta  defini&#231;&#227;o da vari&#225;vel <TT>int *pi</TT>, <TT>pi</TT> &#233; o nome
+da vari&#225;vel  e <TT>int *</TT>  &#233; o tipo  de <TT>pi</TT> (ponteiro  para <TT>int</TT>).
+
+<P>
+
+<H2><A NAME="SECTION000244000000000000000">
+24.4 O operador de derefer&#234;ncia: <TT>*</TT></A>
+</H2>
+
+<P>
+Quando um ponteiro aponta para um endere&#231;o de mem&#243;ria, a opera&#231;&#227;o para
+acessar o conte&#250;do  do endere&#231;o apontado &#233; chamado  de derefer&#234;ncia.  O
+operador un&#225;rio  <TT>*</TT> &#233; usado  para fazer a  derefer&#234;ncia.  Note que
+este  uso do  s&#237;mbolo <TT>*</TT> n&#227;o  tem  nada a  ver com  o s&#237;mbolo  de
+multiplica&#231;&#227;o.   Usando os exemplos  anteriores, <TT>*pi</TT> &#233;  o objeto
+apontado por <TT>pi</TT>.
+
+<P>
+<code>*pi</code>   tem valor <TT>5</TT>
+
+<P>
+<code>*pc</code>    tem valor <TT>'G'</TT>
+
+<P>
+Como  um pointer  dereferenciado (tais  como  <TT>*pi</TT>  ou <TT>*pc</TT>)
+refere-se a um objeto na mem&#243;ria, ele pode ser usado n&#227;o s&#243; como valor,
+mas  tamb&#233;m  como  um   ``lvalue''.   Isto  significa  que  um  pointer
+dereferenciado pode ser usado no lado esquerdo de uma atribui&#231;&#227;o.  Veja
+alguns exemplos:
+
+<P>
+<PRE>
+        printf("Valor= %d, Char = %c\n", *pi, *pc);
+        *pi = *pi + 5;
+        *pc = 'H';
+</PRE>
+<TT>*pi</TT> no lado esquerdo do  <TT>=</TT> refere-se ao endere&#231;o de mem&#243;ria
+para o  qual <TT>pi</TT> aponta.  <TT>*pi</TT> no  lado direito do  <TT>=</TT>
+refere-se ao  valor armazenado  no endere&#231;o apontado  por <TT>pi</TT>.  A
+senten&#231;a  <TT>*pi  =  *pi +  5;</TT> faz  com  que o  valor armazenado  no
+endere&#231;o apontado por <TT>pi</TT>  seja incrementado de <TT>5</TT>.  Note que
+o valor de <TT>*pi</TT> muda, n&#227;o o valor de <TT>pi</TT>.
+
+<P>
+Neste exemplo, os valores das vari&#225;veis  <TT>i</TT> e <TT>c</TT> poderiam ter
+sido alterados sem a utiliza&#231;&#227;o de ponteiros da seguinte forma:
+<PRE>
+        printf("Valor = %d, Char = %c\n", i, c);
+        i = i + 5;
+        c = 'H';
+</PRE>
+
+<P>
+Os  exemplos  acima  ilustram  como  uma  vari&#225;vel  pode  ser  acessada
+diretamente  (atrav&#233;s do  seu  nome) ou  indiretamente  (atrav&#233;s de  um
+ponteiro apontando para o endere&#231;o da vari&#225;vel).
+
+<P>
+
+<H2><A NAME="SECTION000245000000000000000">
+24.5 Ponteiros como argumentos de fun&#231;&#245;es</A>
+</H2>
+
+<P>
+Nos exemplos acima, pode parecer  que ponteiros n&#227;o s&#227;o &#250;teis, j&#225; que
+tudo que fizemos pode ser feito sem usar ponteiros.  Agora, considere
+novamente o exemplo da fun&#231;&#227;o <TT>troca()</TT>.  Quando <TT>a</TT> e <TT>b</TT>
+s&#227;o passados  como argumentos para  <TT>troca()</TT>, na  verdade, somente
+seus valores  s&#227;o passados.  A fun&#231;&#227;o  n&#227;o podia alterar  os valores de
+<TT>a</TT> e <TT>b</TT> porque ela n&#227;o conhece os endere&#231;os de <TT>a</TT> e <TT>b</TT>.  Mas  se ponteiros  para <TT>a</TT> e <TT>b</TT> forem  passados como
+argumentos ao inv&#233;s de <TT>a</TT>  e <TT>b</TT>, a fun&#231;&#227;o <TT>troca()</TT> seria
+capaz de  alterar seus  valores; ela saberia  ent&#227;o em que  endere&#231;o de
+mem&#243;ria escrever.   Na verdade, a fun&#231;&#227;o  n&#227;o sabe que  os endere&#231;os de
+mem&#243;ria s&#227;o associados com <TT>a</TT>  e <TT>b</TT>, mas ela pode modificar o
+conte&#250;do destes  endere&#231;os.  Portanto,  passando um ponteiro  para uma
+vari&#225;vel  (ao inv&#233;s  da vari&#225;vel),  habilitamos  a fun&#231;&#227;o  a alterar  o
+conte&#250;do destas vari&#225;veis da fun&#231;&#227;o chamadora.
+
+<P>
+Uma vez  que endere&#231;os de vari&#225;veis  s&#227;o do tipo ponteiro,  a lista de
+par&#226;metros formais da fun&#231;&#227;o deve refletir isso.  A defini&#231;&#227;o da fun&#231;&#227;o
+<TT>troca()</TT>  deveria ser  alterada, e a  lista de  par&#226;metros formais
+deve ter  argumentos n&#227;o do tipo  <TT>int</TT>, mas  ponteiros para <TT>int</TT>, ou  seja, <TT>int *</TT>.   Quando chamamos a  fun&#231;&#227;o <TT>troca()</TT>,
+n&#243;s n&#227;o  passamos como par&#226;metros reais <TT>a</TT> e <TT>b</TT>,  que s&#227;o do
+tipo <TT>int</TT>, mas <TT>&amp;a</TT> e <TT>&amp;b</TT>, que s&#227;o do tipo <TT>int *</TT>.
+Dentro da fun&#231;&#227;o  <TT>troca()</TT> dever&#225; haver mudan&#231;as  tamb&#233;m.  Uma vez
+que  agora  os  par&#226;metros  formais  s&#227;o  ponteiros,  o  operador  de
+derefer&#234;ncia, <TT>*</TT>, deve ser  usado para acessar os objetos.  Assim,
+a fun&#231;&#227;o <TT>troca()</TT> &#233; capaz de  alterar os valores de <TT>a</TT> e <TT>b</TT> ``remotamente''.
+
+<P>
+O  programa abaixo  &#233; a  vers&#227;o correta  do problema  enunciado  para a
+fun&#231;&#227;o <TT>troca()</TT>:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+void troca(int *, int *);
+
+/* function troca(px, py)
+ *  acao:        troca os valores inteiros apontados por px e py
+ *  entrada:     apontadores px e py
+ *  saida:       valor de  *px e *py trocados
+ *  suposicoes:  px e py sao apontadores validos
+ *  algoritmo:   primeiro guarda o primeiro valor em um temporario e troca
+ */
+void troca(int *px, int *py)
+{
+    int temp;
+
+    temp = *px;
+    *px = *py;
+    *py = temp;
+}
+
+main(void)
+{
+    int a, b;
+
+    printf("Entre dois numeros: ");
+    scanf("%d %d", &amp;a, &amp;b);
+
+    printf("Voce entrou com %d e %d\n", a, b);    
+
+    /* Troca a e b -- passa enderecos */
+    troca(&amp;a, &amp;b);
+    
+    printf("Trocados, eles sao %d e %d\n", a, b);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+A sa&#237;da deste programa &#233;:
+<PRE>
+     Entre dois numeros: 3 5
+     Voce entrou com  3 e 5
+     Trocados, eles sao 5 e 3
+</PRE>
+
+<P>
+Basicamente, se  a fun&#231;&#227;o precisa alterar  o valor de  uma vari&#225;vels da
+fun&#231;&#227;o chamadora,  ent&#227;o pssamos o endere&#231;o da  vari&#225;vel como par&#226;metro
+real, e escrevemos  a fun&#231;&#227;o de acordo, ou seja,  com um ponteiro como
+par&#226;metro formal.
+
+<P>
+
+<H2><A NAME="SECTION000246000000000000000">
+24.6 Preced&#234;ncia de operadores</A>
+</H2>
+
+<P>
+A preced&#234;ncia  dos operadores <TT>*</TT> e <TT>&amp;</TT> &#233; alta, a  mesma que
+outros operadores un&#225;rios.   A tabela <A HREF="#tab:precedencia-2">5</A> apresenta a
+preced&#234;ncia de todos os operadores vistos at&#233; agora.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="9050"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 5:</STRONG>
+Preced&#234;ncia e associatividade de operadores</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Operador</TD>
+<TD ALIGN="LEFT">Associatividade</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>()</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>!  -  ++  --  * &amp; (cast)</code> (un&#225;rios)</TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>*  /  %</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>+  -</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&lt;  &lt;=  &gt;  &gt;=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>==  !=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&amp;&amp;</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>||</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>=  +=  -=  *=  /=  %=</code></TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+</TABLE>
+  
+  <A NAME="tab:precedencia-2"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+<HR>
+<A NAME="tex2html543"
+  HREF="notas_proc-node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html541"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html535"
+  HREF="notas_proc-node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html544"
+  HREF="notas_proc-node25.html">25 Entrada e Saída</A>
+<B>Up:</B> <A NAME="tex2html542"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html536"
+  HREF="notas_proc-node23.html">23 Ativação de função</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

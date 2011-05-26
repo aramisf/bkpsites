@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 13
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 13
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 13
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Laborat&#243;rio 13</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+Programa&#231;&#227;o <I>shell</I>, <B><I>sed(1)</I></B> e <B><I>expr(1)</I></B></A>
+</H2>
+
+<P>
+Crie  <I>scripts  shell</I>  que  sejam solu&#231;&#227;o  para  os  exerc&#237;cios
+abaixo.  ATEN&#199;&#195;O: cada <I>script</I> deve ser executado como se fosse
+um comando normal do UNIX.
+
+<P>
+
+<OL>
+<LI>Na frase  <B>O gato preto foi ca&#231;ado  pelo cachorro marrom</B>,
+  substitua a palavra <B>preto</B> por <B>branco</B>.
+
+<P>
+</LI>
+<LI>O script  recebe 2 (dois) argumentos: um  arquivo e uma express&#227;o
+  regular. Usando apenas <B><I>sed(1)</I></B>, o script deve mostrar APENAS as
+  linhas  do arquivo que  cont&#233;m o  padr&#227;o representado  pela express&#227;o
+  regular.
+
+<P>
+<B>DICA:</B> veja a op&#231;&#227;o <B>-n</B> em <B><I>sed(1)</I></B>.
+
+<P>
+</LI>
+<LI>Dado um  arquivo como argumento do script,  existem 3 maneiras de
+  mostrar    apenas    as   10    (dez)    primeiras   linhas    usando
+  <B><I>sed(1)</I></B>. Ache estas 3 solu&#231;&#245;es.
+
+<P>
+</LI>
+<LI>Dado um arquivo como  argumento do script, remova todas as linhas
+  que tenham a palavra <I>debug</I>.
+
+<P>
+</LI>
+<LI>Dado um arquivo como  argumento do script, remova todas as linhas
+  que tenham  a palavra  <I>debug</I> e mostre  apenas as  linhas que
+  contenham  a  palavra  <I>teste</I>  (mas que,  evidentemente,  n&#227;o
+  contenham <I>debug</I>).
+
+<P>
+Este script  pode ser  resolvido usando-se apenas  <B><I>grep(1)</I></B> ou,
+  alternativamente,   usando-se   apenas   <B><I>sed(1)</I></B>   apenas   uma
+  vez. Encontre  estas duas solu&#231;&#245;es. Em seguida  responda: neste caso,
+  qual a vantagem em se usar a solu&#231;&#227;o com <B><I>sed(1)</I></B>?
+
+<P>
+</LI>
+<LI>Usando  <B><I>sed(1)</I></B>, em combina&#231;&#227;o  ou n&#227;o com  outros comandos
+  UNIX,  conte todos  os caracteres  ALFAB&#201;TICOS de  um <I>string</I>
+  passado como argumento.
+
+<P>
+</LI>
+<LI>Usando   <B><I>expr(1)</I></B>,  conte   todos  os  caracteres   de  um
+  <I>string</I> passado como argumento.
+
+<P>
+</LI>
+<!--
+<LI>Dado uma  frase qualquer com 4 palavras ou  mais, como se poderia
+  isolar  a 3<SUP>a</SUP> palavra  usando-se <B><I>expr(1)</I></B>?
+  Voc&#234; consegue uma  forma mais elegante de resolver  o problema usando
+  qualquer outro comando Unix?
+
+<P>
+<B>NOTA:</B>   Por  <I>elegante</I>  entenda-se   mais  otimizado
+  poss&#237;vel e com um n&#250;mero m&#237;nimo de comandos e/ou <I>loops</I>.
+
+<P>
+</LI>
+<LI>Altere o <I>script</I> do <A NAME="tex2html1"
+  HREF="../Scripts/11-4">Exemplo
+    11-4</A>
+de forma que:
+  
+<UL>
+<LI>Defina-se um  valor  default para  a  vari&#225;vel PHONEBOOK  no
+    <I>script</I>, sendo que se o usu&#225;rio define um valor para esta
+    vari&#225;vel antes de executar o <I>script</I>, vale a defini&#231;&#227;o do
+    usu&#225;rio;
+</LI>
+<LI>Verifica  se existe um  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">.fone</FONT></B> no  diret&#243;rio de
+    <I>login</I> do  usu&#225;rio. Se existir, este  arquivo deve conter
+    um  valor v&#225;lido (a  ser verificado  pelo <I>script</I>)  a ser
+    assinalado &#224; vari&#225;vel PHONEBOOK
+</LI>
+<LI>Fa&#231;a com que uma vez executada uma op&#231;&#227;o do menu, o programa
+    volte a exibir o menu.  Acrescente uma nova op&#231;&#227;o <B>Sair do
+      programa</B>   que,   se    escolhida,   causa   a   termina&#231;&#227;o   do
+    <I>script</I>.
+  
+</LI>
+</UL>
+</LI>
+-->
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+Conclus&#245;es</A>
+</H2>
+
+<P>
+ASSUNTOS DAS PR&#211;XIMAS AULAS:
+
+<P>
+
+<UL>
+<LI>Revis&#227;o Geral
+</LI>
+<LI>Exerc&#237;cios
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-01-26
+</ADDRESS>
+</BODY>
+</HTML>

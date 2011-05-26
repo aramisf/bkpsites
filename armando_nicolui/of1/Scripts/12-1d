@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Maximo de dois inteiros.
+
+EQUAL=0            # Se os dois argumentos forem iguais.
+
+max2 ()             # Retorna o maior de dois numeros
+{                   # Nota: numeros comparados devem ser menores que 257.
+    if [[ -z "$2" ]]; then
+	echo "Sao necessarios dois argumentos." >&2
+	exit 1
+    fi
+
+    if [[ $1 -eq $2 ]]; then
+	echo "Os dois numeros sao iguais." >&2
+	exit 0
+    elif [[ $1 -gt $2 ]];then
+	return $1
+    else
+	return $2
+    fi
+}
+
+## max2 33 34
+max2 $1 $2
+
+echo "O maior dos dois numeros eh $?."
+  
+exit 0

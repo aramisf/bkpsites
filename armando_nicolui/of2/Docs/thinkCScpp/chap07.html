@@ -1,0 +1,410 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 7: Strings and things</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap08.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap06.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 7</h2>
+
+<h1>Strings and things</h1>
+
+
+<a name=1></a><br>
+<h3>7.1 Containers for strings</h3>
+
+<p>We have seen five types of values---booleans, characters, integers, floating-point numbers and strings---but only four types of variables---<span class=code><span class=keyword>bool</span></span>, <span class=code><span class=keyword>char</span></span>, <span class=code><span class=keyword>int</span></span> and <span class=code><span class=keyword>double</span></span>.  So far we have no way to store a string in a variable or perform operations on strings.</p>
+
+<p>In fact, there are several kinds of variables in C++ that can store strings.  One is a basic type that is part of the C++ language, sometimes called "a native C string."  The syntax for C strings is a bit ugly, and using them requires some concepts we have not covered yet, so for the most part we are going to avoid them.</p>
+
+<p>The string type we are going to use is called <span class=code>pstring</span>, which is an open-source alternative to a type created specifically for the Computer Science AP Exam.  The pclasses, as the entire group of open-source classes are called, can be found in the appendix section of this book. You can also visit their homepage at <a href="http://www.ibiblio.org/obp/pclasses/">http://www.ibiblio.org/obp/pclasses/</a>.</p>
+
+<p>You might be wondering what is meant by <b>class</b>.  It will be a few more chapters before I can give a complete definition, but for now a class is a collection of functions that defines the operations we can perform on some type.  The <span class=code>pstring</span> class contains all the functions that apply to <span class=code>pstring</span>s.</p>
+
+<p>Unfortunately, it is not possible to avoid C strings altogether. In a few places in this chapter I will warn you about some problems you might run into using <span class=code>pstring</span>s instead of C strings.</p>
+
+<a name=2></a><br>
+<h3>7.2 <span class=code>pstring</span> variables</h3>
+
+<p>You can create a variable with type <span class=code>pstring</span> in the usual ways:</p>
+
+
+<span class=code>&nbsp; pstring first;
+<br>&nbsp; first = <span class=quote>"Hello, "</span>;
+<br>&nbsp; pstring second = <span class=quote>"world."</span>;
+<br></span><p>The first line creates an <span class=code>pstring</span> without giving it a value. The second line assigns it the string value <span class=code><span class=quote>"Hello."</span></span> The third line is a combined declaration and assignment, also called an initialization.</p>
+
+<p>Normally when string values like <span class=code><span class=quote>"Hello, "</span></span> or <span class=code><span class=quote>"world."</span></span> appear, they are treated as C strings.  In this case, when we assign them to an <span class=code>pstring</span> variable, they are converted automatically to <span class=code>pstring</span> values.</p>
+
+<p>We can output strings in the usual way:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; first &lt;&lt; second &lt;&lt; endl;
+<br></span><p>In order to compile this code, you will have to include the header file for the <span class=code>pstring</span> class, and you will have to add the file <span class=code>pstring.cpp</span> to the list of files you want to compile.  The details of how to do this depend on your programming environment.</p>
+
+<p>Before proceeding, you should type in the program above and make sure you can compile and run it.</p>
+
+<a name=3></a><br>
+<h3>7.3 Extracting characters from a string</h3>
+
+<p>Strings are called "strings" because they are made up of a sequence, or string, of characters.  The first operation we are going to perform on a string is to extract one of the characters.  C++ uses square brackets (<span class=code>[</span> and <span class=code>]</span>) for this operation:</p>
+
+
+<span class=code>&nbsp; pstring fruit = <span class=quote>"banana"</span>;
+<br>&nbsp; <span class=keyword>char</span> letter = fruit[1];
+<br>&nbsp; cout &lt;&lt; letter &lt;&lt; endl;
+<br></span><p>The expression <span class=code>fruit[1]</span> indicates that I want character number 1 from the string named <span class=code>fruit</span>.  The result is stored in a <span class=code><span class=keyword>char</span></span> named <span class=code>letter</span>.  When I output the value of <span class=code>letter</span>, I get a surprise:</p>
+
+
+<span class=code>a
+<br></span><p><span class=code>a</span> is not the first letter of <span class=code><span class=quote>"banana"</span></span>.  Unless you are a computer scientist.  For perverse reasons, computer scientists always start counting from zero.  The 0th letter ("zeroeth") of <span class=code><span class=quote>"banana"</span></span> is <span class=code>b</span>.  The 1th letter ("oneth") is <span class=code>a</span> and the 2th ("twoeth") letter is <span class=code>n</span>.</p>
+
+<p>If you want the the zereoth letter of a string, you have to put zero in the square brackets:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>char</span> letter = fruit[0];
+<br></span><a name=4></a><br>
+<h3>7.4 Length</h3>
+
+<p>To find the length of a string (number of characters), we can use the <span class=code>length</span> function.  The syntax for calling this function is a little different from what we've seen before:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> length;
+<br>&nbsp; length = fruit.length();
+<br></span><p>To describe this function call, we would say that we are <b>invoking</b> the length function on the string named <span class=code>fruit</span>.  This vocabulary may seem strange, but we will see many more examples where we invoke a function on an object.  The syntax for function invocation is called "dot notation," because the dot (period) separates the name of the object, <span class=code>fruit</span>, from the name of the function, <span class=code>length</span>.</p>
+
+<p><span class=code>length</span> takes no arguments, as indicated by the empty parentheses <span class=code>()</span>.  The return value is an integer, in this case 6.  Notice that it is legal to have a variable with the same name as a function.</p>
+
+<p>To find the last letter of a string, you might be tempted to try something like</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> length = fruit.length();
+<br>&nbsp; <span class=keyword>char</span> last = fruit[length];&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG!!
+</span><br></span><p>That won't work.  The reason is that there is no 6th letter in <span class=code><span class=quote>"banana"</span></span>.  Since we started counting at 0, the 6 letters are numbered from 0 to 5.  To get the last character, you have to subtract 1 from <span class=code>length</span>.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> length = fruit.length();
+<br>&nbsp; <span class=keyword>char</span> last = fruit[length-1];
+<br></span><a name=5></a><br>
+<h3>7.5 Traversal</h3>
+
+<p>A common thing to do with a string is start at the beginning, select each character in turn, do something to it, and continue until the end.  This pattern of processing is called a <b>traversal</b>.  A natural way to encode a traversal is with a <span class=code><span class=keyword>while</span></span> statement:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> index = 0;
+<br>&nbsp; <span class=keyword>while</span> (index &lt; fruit.length()) {
+<br>&nbsp; &nbsp; <span class=keyword>char</span> letter = fruit[index];
+<br>&nbsp; &nbsp; cout &lt;&lt; letter &lt;&lt; endl;
+<br>&nbsp; &nbsp; index = index + 1;
+<br>&nbsp; }
+<br></span><p>This loop traverses the string and outputs each letter on a line by itself.  Notice that the condition is <span class=code>index &lt; fruit.length()</span>, which means that when <span class=code>index</span> is equal to the length of the string, the condition is false and the body of the loop is not executed. The last character we access is the one with the index <span class=code>fruit.length()-1</span>.</p>
+
+
+
+<p>The name of the loop variable is <span class=code>index</span>.  An <b>index</b> is a variable or value used to specify one member of an ordered set, in this case the set of characters in the string.  The index indicates (hence the name) which one you want.  The set has to be ordered so that each letter has an index and each index refers to a single character.</p>
+
+<p>As an exercise, write a function that takes an <span class=code>pstring</span> as an argument and that outputs the letters backwards, all on one line.</p>
+
+<a name=6></a><br>
+<h3>7.6 A run-time error</h3>
+
+<p>Way back in <a href="chap01.htm#3">Section 1.3</a> I talked about run-time errors, which are errors that don't appear until a program has started running.</p>
+
+<p>So far, you probably haven't seen many run-time errors, because we haven't been doing many things that can cause one.  Well, now we are. If you use the <span class=code>[]</span> operator and you provide an index that is negative or greater than <span class=code>length-1</span>, you will get a run-time error and a message something like this:</p>
+
+
+<span class=code>index out of range: 6, string: banana
+<br></span><p>Try it in your development environment and see how it looks.</p>
+
+<a name=7></a><br>
+<h3>7.7 The <span class=code>find</span> function</h3>
+
+<p>The <span class=code>pstring</span> class provides several other functions that you can invoke on strings.  The <span class=code>find</span> function is like the opposite the <span class=code>[]</span> operator.  Instead of taking an index and extracting the character at that index, <span class=code>find</span> takes a character and finds the index where that character appears.</p>
+
+
+<span class=code>&nbsp; pstring fruit = <span class=quote>"banana"</span>;
+<br>&nbsp; <span class=keyword>int</span> index = fruit.find(<span class=quote>'a'</span>);
+<br></span><p>This example finds the index of the letter <span class=code><span class=quote>'a'</span></span> in the string. In this case, the letter appears three times, so it is not obvious what <span class=code>find</span> should do.  According to the documentation, it returns the index of the <i>first</i> appearance, so the result is 1.  If the given letter does not appear in the string, <span class=code>find</span> returns -1.</p>
+
+<p>In addition, there is a version of <span class=code>find</span> that takes another <span class=code>pstring</span> as an argument and that finds the index where the substring appears in the string.  For example,</p>
+
+
+<span class=code>&nbsp; pstring fruit = <span class=quote>"banana"</span>;
+<br>&nbsp; <span class=keyword>int</span> index = fruit.find(<span class=quote>"nan"</span>);
+<br></span><p>This example returns the value 2.</p>
+
+<p>You should remember from <a href="chap05.htm#4">Section 5.4</a> that there can be more than one function with the same name, as long as they take a different number of parameters or different types.  In this case, C++ knows which version of <span class=code>find</span> to invoke by looking at the type of the argument we provide.</p>
+
+<a name=8></a><br>
+<h3>7.8 Our own version of <span class=code>find</span></h3>
+
+<p>If we are looking for a letter in an <span class=code>pstring</span>, we may not want to start at the beginning of the string.  One way to generalize the <span class=code>find</span> function is to write a version that takes an additional parameter---the index where we should start looking.  Here is an implementation of this function.</p>
+
+
+<span class=code><span class=keyword>int</span> find (pstring s, <span class=keyword>char</span> c, <span class=keyword>int</span> i)
+<br>{
+<br>&nbsp; <span class=keyword>while</span> (i&lt;s.length()) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (s[i] == c) <span class=keyword>return</span> i;
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> -1;
+<br>}
+<br></span><p>Instead of invoking this function on an <span class=code>pstring</span>, like the first version of <span class=code>find</span>, we have to pass the <span class=code>pstring</span> as the first argument.  The other arguments are the character we are looking for and the index where we should start.</p>
+
+<a name=9></a><br>
+<h3>7.9 Looping and counting</h3>
+
+<p>The following program counts the number of times the letter <span class=code><span class=quote>'a'</span></span> appears in a string:</p>
+
+
+<span class=code>&nbsp; pstring fruit = <span class=quote>"banana"</span>;
+<br>&nbsp; <span class=keyword>int</span> length = fruit.length();
+<br>&nbsp; <span class=keyword>int</span> count = 0;
+<br>
+<br>&nbsp; <span class=keyword>int</span> index = 0;
+<br>&nbsp; <span class=keyword>while</span> (index &lt; length) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (fruit[index] == <span class=quote>'a'</span>) {
+<br>&nbsp; &nbsp; &nbsp; count = count + 1;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; index = index + 1;
+<br>&nbsp; }
+<br>&nbsp; cout &lt;&lt; count &lt;&lt; endl;
+<br></span><p>This program demonstrates a common idiom, called a <b>counter</b>.  The variable <span class=code>count</span> is initialized to zero and then incremented each time we find an <span class=code><span class=quote>'a'</span></span>.  (To <b>increment</b> is to increase by one; it is the opposite of <b>decrement</b>, and unrelated to <b>excrement</b>, which is a noun.)  When we exit the loop, <span class=code>count</span> contains the result: the total number of a's.</p>
+
+
+
+<p>As an exercise, encapsulate this code in a function named <span class=code>countLetters</span>, and generalize it so that it accepts the string and the letter as arguments.</p>
+
+
+
+<p>As a second exercise, rewrite this function so that instead of traversing the string, it uses the version of <span class=code>find</span> we wrote in the previous section.</p>
+
+<a name=10></a><br>
+<h3>7.10 Increment and decrement operators</h3>
+
+<p>Incrementing and decrementing are such common operations that C++ provides special operators for them.  The <span class=code>++</span> operator adds one to the current value of an <span class=code><span class=keyword>int</span></span>, <span class=code><span class=keyword>char</span></span> or <span class=code><span class=keyword>double</span></span>, and <span class=code>--</span> subtracts one.  Neither operator works on <span class=code>pstring</span>s, and neither <i>should</i> be used on <span class=code><span class=keyword>bool</span></span>s.</p>
+
+<p>Technically, it is legal to increment a variable and use it in an expression at the same time.  For example, you might see something like:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; i++ &lt;&lt; endl;
+<br></span><p>Looking at this, it is not clear whether the increment will take effect before or after the value is displayed.  Because expressions like this tend to be confusing, I would discourage you from using them.  In fact, to discourage you even more, I'm not going to tell you what the result is.  If you really want to know, you can try it.</p>
+
+<p>Using the increment operators, we can rewrite the letter-counter:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> index = 0;
+<br>&nbsp; <span class=keyword>while</span> (index &lt; length) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (fruit[index] == <span class=quote>'a'</span>) {
+<br>&nbsp; &nbsp; &nbsp; count++;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; index++;
+<br>&nbsp; }
+<br></span><p>It is a common error to write something like</p>
+
+
+<span class=code>&nbsp; index = index++;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG!!
+</span><br></span><p>Unfortunately, this is syntactically legal, so the compiler will not warn you.  The effect of this statement is to leave the value of <span class=code>index</span> unchanged.  This is often a difficult bug to track down.</p>
+
+<p>Remember, you can write <span class=code>index = index +1;</span>, or you can write <span class=code>index++;</span>, but you shouldn't mix them.</p>
+
+<a name=11></a><br>
+<h3>7.11 String concatenation</h3>
+
+<p>Interestingly, the <span class=code>+</span> operator can be used on strings; it performs string <b>concatenation</b>.  To concatenate means to join the two operands end to end.  For example:</p>
+
+
+<span class=code>&nbsp; pstring fruit = <span class=quote>"banana"</span>;
+<br>&nbsp; pstring bakedGood = <span class=quote>" nut bread"</span>;
+<br>&nbsp; pstring dessert = fruit + bakedGood;
+<br>&nbsp; cout &lt;&lt; dessert &lt;&lt; endl;
+<br></span><p>The output of this program is <span class=code>banana nut bread</span>.</p>
+
+<p>Unfortunately, the <span class=code>+</span> operator does not work on native C strings, so you cannot write something like</p>
+
+
+<span class=code>&nbsp; pstring dessert = <span class=quote>"banana"</span> + <span class=quote>" nut bread"</span>;
+<br></span><p>because both operands are C strings.  As long as one of the operands is an <span class=code>pstring</span>, though, C++ will automatically convert the other.</p>
+
+<p>It is also possible to concatenate a character onto the beginning or end of an <span class=code>pstring</span>.  In the following example, we will use concatenation and character arithmetic to output an abecedarian series.</p>
+
+<p>"Abecedarian" refers to a series or list in which the elements appear in alphabetical order.  For example, in Robert McCloskey's book <i>Make Way for Ducklings</i>, the names of the ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack.  Here is a loop that outputs these names in order:</p>
+
+
+<span class=code>&nbsp; pstring suffix = <span class=quote>"ack"</span>;
+<br>
+<br>&nbsp; <span class=keyword>char</span> letter = <span class=quote>'J'</span>;
+<br>&nbsp; <span class=keyword>while</span> (letter &lt;= <span class=quote>'Q'</span>) {
+<br>&nbsp; &nbsp; cout &lt;&lt; letter + suffix &lt;&lt; endl;
+<br>&nbsp; &nbsp; letter++;
+<br>&nbsp; }
+<br></span><p>The output of this program is:</p>
+
+
+<span class=code>Jack
+<br>Kack
+<br>Lack
+<br>Mack
+<br>Nack
+<br>Oack
+<br>Pack
+<br>Qack
+<br></span><p>Of course, that's not quite right because I've misspelled "Ouack" and "Quack."  As an exercise, modify the program to correct this error.</p>
+
+<p>Again, be careful to use string concatenation only with <span class=code>pstring</span>s and not with native C strings.  Unfortunately, an expression like <span class=code>letter + <span class=quote>"ack"</span></span> is syntactically legal in C++, although it produces a very strange result, at least in my development environment.</p>
+
+<a name=12></a><br>
+<h3>7.12 <span class=code>pstring</span>s are mutable</h3>
+
+<p>You can change the letters in an <span class=code>pstring</span> one at a time using the <span class=code>[]</span> operator on the left side of an assignment. For example,</p>
+
+
+<span class=code>&nbsp; pstring greeting = <span class=quote>"Hello, world!"</span>;
+<br>&nbsp; greeting[0] = <span class=quote>'J'</span>;
+<br>&nbsp; cout &lt;&lt; greeting &lt;&lt; endl;
+<br></span><p>produces the output <span class=code>Jello, world!</span>.</p>
+
+<a name=13></a><br>
+<h3>7.13 <span class=code>pstring</span>s are comparable</h3>
+
+<p>All the comparison operators that work on <span class=code><span class=keyword>int</span></span>s and <span class=code><span class=keyword>double</span></span>s also work on <span class=code>pstrings</span>.  For example, if you want to know if two strings are equal:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (word == <span class=quote>"banana"</span>) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Yes, we have no bananas!"</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>The other comparison operations are useful for putting words in alphabetical order.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (word &lt; <span class=quote>"banana"</span>) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Your word, "</span> &lt;&lt; word &lt;&lt; <span class=quote>", comes before banana."</span> &lt;&lt; endl;
+<br>&nbsp; } <span class=keyword>else if</span> (word &gt; <span class=quote>"banana"</span>) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Your word, "</span> &lt;&lt; word &lt;&lt; <span class=quote>", comes after banana."</span> &lt;&lt; endl;
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"Yes, we have no bananas!"</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>You should be aware, though, that the <span class=code>pstring</span> class does not handle upper and lower case letters the same way that people do.  All the upper case letters come before all the lower case letters.  As a result,</p>
+
+
+<span class=code>Your word, Zebra, comes before banana.
+<br></span><p>A common way to address this problem is to convert strings to a standard format, like all lower-case, before performing the comparison.  The next sections explains how.  I will not address the more difficult problem, which is making the program realize that zebras are not fruit.</p>
+
+<a name=14></a><br>
+<h3>7.14 Character classification</h3>
+
+<p>It is often useful to examine a character and test whether it is upper or lower case, or whether it is a character or a digit.  C++ provides a library of functions that perform this kind of character classification.  In order to use these functions, you have to include the header file <span class=code>ctype.h</span>.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>char</span> letter = <span class=quote>'a'</span>;
+<br>&nbsp; <span class=keyword>if</span> (isalpha(letter)) {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"The character "</span> &lt;&lt; letter &lt;&lt; <span class=quote>" is a letter."</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>You might expect the return value from <span class=code>isalpha</span> to be a <span class=code><span class=keyword>bool</span></span>, but for reasons I don't even want to think about, it is actually an integer that is 0 if the argument is not a letter, and some non-zero value if it is.</p>
+
+<p>This oddity is not as inconvenient as it seems, because it is legal to use this kind of integer in a conditional, as shown in the example.  The value 0 is treated as <span class=code><span class=keyword>false</span></span>, and all non-zero values are treated as <span class=code><span class=keyword>true</span></span>.</p>
+
+<p>Technically, this sort of thing should not be allowed---integers are not the same thing as boolean values.  Nevertheless, the C++ habit of converting automatically between types can be useful.</p>
+
+<p>Other character classification functions include <span class=code>isdigit</span>, which identifies the digits 0 through 9, and <span class=code>isspace</span>, which identifies all kinds of "white" space, including spaces, tabs, newlines, and a few others.  There are also <span class=code>isupper</span> and <span class=code>islower</span>, which distinguish upper and lower case letters.</p>
+
+<p>Finally, there are two functions that convert letters from one case to the other, called <span class=code>toupper</span> and <span class=code>tolower</span>.  Both take a single character as a parameter and return a (possibly converted) character.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>char</span> letter = <span class=quote>'a'</span>;
+<br>&nbsp; letter = toupper (letter);
+<br>&nbsp; cout &lt;&lt; letter &lt;&lt; endl;
+<br></span><p>The output of this code is <span class=code>A</span>.</p>
+
+<p>As an exercise, use the character classification and conversion library to write functions named <span class=code>pstringToUpper</span> and <span class=code>pstringToLower</span> that take a single <span class=code>pstring</span> as a parameter, and that modify the string by converting all the letters to upper or lower case.  The return type should be <span class=code><span class=keyword>void</span></span>.</p>
+
+<a name=15></a><br>
+<h3>7.15 Other <span class=code>pstring</span> functions</h3>
+
+<p>This chapter does not cover all the <span class=code>pstring</span> functions. Two additional ones, <span class=code>c_str</span> and <span class=code>substr</span>, are covered in <a href="chap23.htm#2">Section 23.2</a> and <a href="chap23.htm#4">Section 23.4</a>.</p>
+
+<a name=16></a><br>
+<h3>7.16 Glossary</h3>
+
+<dl>
+
+<dt>object</dt>
+<dd>A collection of related data that comes with a set of functions that operate on it.  The objects we have used so far are the <span class=code>cout</span> object provided by the system, and <span class=code>pstring</span>s.</dd>
+
+<dt>index</dt>
+<dd>A variable or value used to select one of the members of an ordered set, like a character from a string.</dd>
+
+<dt>traverse</dt>
+<dd>To iterate through all the elements of a set performing a similar operation on each.</dd>
+
+<dt>counter</dt>
+<dd>A variable used to count something, usually initialized to zero and then incremented.</dd>
+
+<dt>increment</dt>
+<dd>Increase the value of a variable by one. The increment operator in C++ is <span class=code>++</span>.  In fact, that's why C++ is called C++, because it is meant to be one better than C.</dd>
+
+<dt>decrement</dt>
+<dd>Decrease the value of a variable by one. The decrement operator in C++ is <span class=code>--</span>.</dd>
+
+<dt>concatenate</dt>
+<dd>To join two operands end-to-end.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap08.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap06.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

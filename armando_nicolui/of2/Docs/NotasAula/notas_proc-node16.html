@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16 Arrays Multidimensionais</TITLE>
+<META NAME="description" CONTENT="16 Arrays Multidimensionais">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node17.html">
+<LINK REL="previous" HREF="notas_proc-node15.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node17.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html425"
+  HREF="notas_proc-node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html423"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html417"
+  HREF="notas_proc-node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html426"
+  HREF="notas_proc-node17.html">17 Array de Caracteres</A>
+<B>Up:</B> <A NAME="tex2html424"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html418"
+  HREF="notas_proc-node15.html">15 Arrays</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html427"
+  HREF="notas_proc-node16.html#SECTION000161000000000000000">16.1 Inicializa&#231;&#227;o</A>
+<LI><A NAME="tex2html428"
+  HREF="notas_proc-node16.html#SECTION000162000000000000000">16.2 Arrays Multidimensionais - arrays de arrays</A>
+<LI><A NAME="tex2html429"
+  HREF="notas_proc-node16.html#SECTION000163000000000000000">16.3 Arrays Multidimensionais como argumento para
+fun&#231;&#245;es</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000160000000000000000">
+16 Arrays Multidimensionais</A>
+</H1>
+
+<P>
+Nas notas de aula anterior, apresentamos arrays unidimensionais.  Em
+C, &#233; poss&#237;vel tamb&#233;m definir arrays de dimens&#245;es maiores.  Eles
+s&#227;o arrays de arrays.  Um array de duas dimens&#245;es podem ser
+imaginado como uma matriz (ou uma tabela).
+
+<P>
+Como voc&#234; deve ter imaginado, para definir e acessar arrays de
+dimens&#245;es maiores, usamos colchetes adicionais (<code>[</code> e
+<code>]</code>).  Por exemplo:
+
+<P>
+<PRE>
+      int tabela[3][5];
+</PRE>
+
+<P>
+Define um array bidimensional chamado <TT>tabela</TT> que &#233; uma matriz 3
+por 5 de valores do tipo <TT>int</TT> (15 valores no total).  Os &#237;ndices
+da primeira dimens&#227;o v&#227;o de 0 a 2, e os &#237;ndices da segunda
+dimens&#227;o v&#227;o de 0 a 4.
+
+<P>
+Abaixo apresentamos um programa que imprime os elementos de um array
+bidimensional. 
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;       
+#define ALTURA 5
+#define LARGURA 5
+
+main()
+{
+   int x;                            /* numero da coluna */
+   int y;                            /* numero da linha */
+   char matriz [ALTURA] [LARGURA];   /* array 2-D [num_lins, num_cols] */
+ 
+
+   /* preenche a matriz com pontos  */
+
+   for(y=0; y&lt;ALTURA; y++)
+     for(x=0; x&lt;LARGURA; x++)
+        matriz[y][x] = '.';
+
+   /* Imprime a matriz com pontos e a coordenada escolhida com X */
+
+   printf("\nEntre coordenadas na forma y,x (2,4).\n");
+   printf("Use valores negativos para sair do programa.\n");
+
+   while (1){
+      printf("Coordenadas: ");
+      scanf("%d,%d", &amp;y, &amp;x);    
+      if (x &gt;= 0 &amp;&amp; y &gt;= 0){
+         matriz[y][x]='X';          /* coloca X no elemento escolhido */
+         for(y=0; y&lt;ALTURA; y++){   /* imprime o array todo */
+            for(x=0; x&lt;LARGURA; x++)
+                printf("%c ", matriz[y][x] );
+            printf("\n\n");
+         }
+         printf("\n");
+      }
+      else
+         break;
+   }
+}
+</PRE>
+Neste exemplo, <TT>matriz</TT> &#233; um array bidimensional.  Ela tem
+n&#250;mero de elementos igual a 
+<TT>ALTURAxLARGURA</TT>, sendo cada elemento do tipo <TT>int</TT>.
+
+<P>
+O exemplo abaixo preenche os elementos de um array bidimensional com
+os valores que representam a taboada e imprime a matriz.
+
+<P>
+<PRE>
+/* Exemplo de array 2-D - taboada */
+
+#include &lt;stdio.h&gt;
+#define LIN 10
+#define COL 10
+
+main()
+{
+   int x;                          /* numero da coluna */
+   int y;                          /* numero da linha  */
+   int  tabela[LIN] [COL];          /* tabela de taboada  */
+ 
+   /* preenche a tabela */
+
+   for (y=0; y &lt; LIN; y++)
+       for(x=0; x &lt; COL; x++)
+           tabela[y][x] = y*x;
+
+   printf("\n         Tabela de Multiplicacao\n");
+
+   /* Imprime o numero das colunas */
+
+   printf("%6d", 0);
+   for (x=1; x &lt; COL; x++)
+       printf("%3d", x);
+   printf("\n");
+
+   /* Imprime uma linha horizontal */
+   printf("   ");
+   for (x=0; x &lt; 3*COL; x++)
+       printf("-");
+   printf("\n");
+
+   /* Imprime as linhas da tablea.
+      Cada linha a precedida pelo indice de linha e uma barra vertical */
+    
+   for (y=0; y &lt; LIN; y++) {
+       printf("%2d|", y);
+       for(x=0; x &lt; COL; x++)
+           printf("%3d", tabela[y][x]);
+       printf("\n");
+   }
+
+}
+</PRE>
+A sa&#237;da do programa &#233;:
+<PRE>
+         Tabela de Multiplicacao
+     0  1  2  3  4  5  6  7  8  9
+   ------------------------------
+ 0|  0  0  0  0  0  0  0  0  0  0
+ 1|  0  1  2  3  4  5  6  7  8  9
+ 2|  0  2  4  6  8 10 12 14 16 18
+ 3|  0  3  6  9 12 15 18 21 24 27
+ 4|  0  4  8 12 16 20 24 28 32 36
+ 5|  0  5 10 15 20 25 30 35 40 45
+ 6|  0  6 12 18 24 30 36 42 48 54
+ 7|  0  7 14 21 28 35 42 49 56 63
+ 8|  0  8 16 24 32 40 48 56 64 72
+ 9|  0  9 18 27 36 45 54 63 72 81
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000161000000000000000">
+16.1 Inicializa&#231;&#227;o</A>
+</H2>
+Arrays multidimensionais podem ser inicializados usando listas
+aninhadas de elementos entre chaves.  Por exemplo, um array
+bidimensional <TT>tabela</TT> com tr&#234;s linhas e duas colunas pode ser
+inicializado da seguinte forma:
+<PRE>
+double tabela[3][2] = { {1.0,  0.0},      /* linha 0 */
+                        {-7.8, 1.3},      /* linha 1 */
+                        {6.5,  0.0}       /* linha 2 */
+                      };
+</PRE>
+Quando o array &#233; inicializado, o tamanho da primeira dimens&#227;o pode
+ser omitido.  A defini&#231;&#227;o de array abaixo &#233; equivalente a dada anteriormente.
+<PRE>
+double tabela[][2] = { {1.0,  0.0},      /* linha 0 */
+                       {-7.8, 1.3},      /* linha 1 */
+                       {6.5,  0.0}       /* linha 2 */
+                     };
+</PRE>
+<H2><A NAME="SECTION000162000000000000000">
+16.2 Arrays Multidimensionais - arrays de arrays</A>
+</H2>
+
+<P>
+O formato da defini&#231;&#227;o de um array de dimens&#227;o k, onde o n&#250;mero de
+elementos em cada dimens&#227;o &#233; <!-- MATH
+ $n_0, n_1, \ldots, n_{k-1}$
+ -->
+<IMG
+ WIDTH="123" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img50.png"
+ ALT="$n_0, n_1, \ldots, n_{k-1}$">,
+respectivamente, &#233;:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+nome\verb+_+tipo \  nome\verb+_+array[n_0][n_1]...[n_{k-1}];
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="303" HEIGHT="31" BORDER="0"
+ SRC="notas_proc-img51.png"
+ ALT="\begin{displaymath}
+nome\verb+_+tipo \ nome\verb+_+array[n_0][n_1]...[n_{k-1}];
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Isto define um array chamado <IMG
+ WIDTH="100" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img52.png"
+ ALT="$nome\_array$"> consistindo de um total de 
+<!-- MATH
+ $n_0\times n_1\times\ldots\times n_{k-1}$
+ -->
+<IMG
+ WIDTH="161" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img53.png"
+ ALT="$n_0\times n_1\times\ldots\times n_{k-1}$"> elementos, sendo cada
+elemento do tipo <!-- MATH
+ $nome\verb+_+tipo$
+ -->
+<IMG
+ WIDTH="87" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img54.png"
+ ALT="$nome\verb+_+tipo$">. 
+
+<P>
+Arrays multidimensionais s&#227;o armazenados de forma que o &#250;ltimo subscrito 
+varia mais rapidamente.  Por exemplo, os elementos do array
+<PRE>
+int tabela[2][3];
+</PRE>
+s&#227;o armazenados (em endere&#231;os consecutivos de mem&#243;ria) como
+<PRE>
+tabela[0][0], tabela[0][1], tabela[0][2], tabela[1][0], tabela[1][1], tabela[1][2].
+</PRE>
+Um array de dimens&#227;o k, onde o n&#250;mero de elementos em cada dimens&#227;o &#233;
+<!-- MATH
+ $n_0,n_1,\ldots,\ldots,n_{k-1}$
+ -->
+<IMG
+ WIDTH="154" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img55.png"
+ ALT="$n_0,n_1,\ldots,\ldots,n_{k-1}$">, respectivamente, pode ser imaginado
+como um array de dimens&#227;o <IMG
+ WIDTH="22" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img56.png"
+ ALT="$n_0$"> cujos elementos s&#227;o arrays de
+dimens&#227;o <IMG
+ WIDTH="44" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img57.png"
+ ALT="$k-1$">.
+
+<P>
+Por exemplo, o array bidimensional <TT>tabela</TT>, com 20 elementos do
+tipo <TT>int</TT>
+
+<P>
+<PRE>
+int tabela[4][5] = { {13, 15, 17, 19, 21},
+                     {20, 22, 24, 26, 28},
+                     {31, 33, 35, 37, 39},
+                     {40, 42, 44, 46, 48} };
+</PRE>
+pode ser imaginado como um array unidimensional de 4 elementos do tipo
+<TT>int[]</TT>, ou seja, arrays de <TT>int</TT>;
+cada um dos 4 elementos &#233; um array de 5 elementos do tipo <TT>int</TT>:
+<PRE>
+tabela[0]  ---&gt; {13, 15, 17, 19, 21}
+tabela[1]  ---&gt; {20, 22, 24, 26, 28}
+tabela[2]  ---&gt; {31, 33, 35, 37, 39}
+tabela[3]  ---&gt; {40, 42, 44, 46, 48}
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000163000000000000000">
+16.3 Arrays Multidimensionais como argumento para
+fun&#231;&#245;es</A>
+</H2>
+Quando o par&#226;metro formal de uma fun&#231;&#227;o &#233; um array
+multidimensional (um array com dimens&#227;o maior que um), todas as
+dimens&#245;es deste array, exceto a primeira, precisa ser explicitamente
+especificada no cabe&#231;alho e prot&#243;tipo da fun&#231;&#227;o.
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+tipo\verb+_+do\verb+_+resultado \ \, nome\verb+_+da\verb+_+funcao\,(\, nome\verb+_+do\verb+_+tipo \
+\,nome\verb+_+do\verb+_+array[\ ][n_1]...[n_{k-1}],... ...\, )
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="688" HEIGHT="31" BORDER="0"
+ SRC="notas_proc-img58.png"
+ ALT="\begin{displaymath}
+tipo\verb+_+do\verb+_+resultado \ \, nome\verb+_+da\verb+_+f...
+...\,nome\verb+_+do\verb+_+array[\ ][n_1]...[n_{k-1}],... ...\, )
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Quando uma fun&#231;&#227;o com um par&#226;metro formal do tipo array &#233; chamada,
+na chamada da fun&#231;&#227;o <B>somente</B> o nome do array &#233; passado como
+par&#226;metro real.  O tipo (e portanto a dimens&#227;o) do array passado
+como par&#226;metro real deve ser consistente com o tipo (e portanto a
+dimens&#227;o) do array que &#233; o par&#226;metro formal.  O programa
+abaixo mostra o
+exemplo da tabela de multiplica&#231;&#227;o escrita usando fun&#231;&#245;es.
+
+<P>
+<PRE>
+/* Exemplo de array 2-D - tabela de multiplicacao */
+
+#include &lt;stdio.h&gt;
+#define LIN 10
+#define COL 10
+
+void inicializa_arr (int arr[][COL], int);
+void imprime_arr (int arr[][COL], int);
+
+main()
+{
+   int  tabela[LIN] [COL];   
+ 
+   inicializa_arr(tabela, LIN);
+
+   printf("\n         Tabela de Multiplicacao\n");
+
+   imprime_arr(tabela, LIN);
+}
+
+/* Inicializa o array com a tabela de multiplicacao */
+
+void inicializa_arr (int arr[][COL], int nLIN)
+{
+   int x;                          /* numero da coluna */
+   int y;                          /* numero da linha */    
+
+   /* preenche o array */
+
+   for (y=0; y &lt; nlin; y++)
+       for(x=0; x &lt; COL; x++)
+           arr[y][x] = y*x;
+}
+
+/* imprime um array LIN x COL */
+
+void imprime_arr(int arr[][COL], int nlin)
+{
+   int x;                          /* numero da coluna */
+   int y;                          /* numero da linha */    
+
+   /* imprime o numero das colunas */
+
+   printf("%6d", 0);
+   for (x=1; x &lt; COL; x++)
+       printf("%3d", x);
+   printf("\n");
+
+
+   /* imprime uma linha horizontal */
+   printf("   ");
+   for (x=0; x &lt; 3*COL; x++)
+       printf("_");
+   printf("\n");
+
+   /* imprime as linhas do array.  cada linha e' precedida
+      pelo numero da linha e uma barra vertical */
+    
+   for (y=0; y &lt; nlin; y++) {
+       printf("%2d|", y);
+       for(x=0; x &lt; COL; x++)
+           printf("%3d", arr[y][x]);
+       printf("\n");
+   }
+}
+</PRE>
+
+<P>
+Outro exemplo com fun&#231;oes de manipula&#231;&#227;o de arrays bidimensionais:
+
+<P>
+<PRE>
+/* funcoes com argumentos tipo array 2-D */
+#include &lt;stdio.h&gt;       
+#define ALTURA 5
+#define LARGURA 5
+
+void seleciona_elem    (int [][LARGURA], int);
+void pontos       (int [][LARGURA], int);
+void imprime_matriz  (int [][LARGURA], int);
+void marca_triang (int [][LARGURA], int);
+void flip       (int [][LARGURA], int);
+void espera_entrada(void);
+
+/**** DEFINICAO DE FUNCOES ********/
+
+/* funcao que preenche uma matriz nlin X LARGURA com pontos */
+void pontos( int matriz[][LARGURA], int nlin)
+{
+   int x,y;
+
+   for(y=0; y&lt;nlin; y++)
+     for(x=0; x&lt;LARGURA; x++)
+        matriz[y][x] = '.';
+
+}
+</PRE>
+
+<P>
+<PRE>
+/* funcao que preenche os elementos selecionados da matriz com um
+ * quadrado e imprime a matriz
+ */
+void seleciona_elem(int matriz[][LARGURA], int nlin)
+{
+   int x, y;
+
+   printf("\nEntre com as coordenadas na forma y,x (2,4).\n");
+   printf("Use numeros negativos para terminar.\n");
+
+   while (1)              
+      {
+      printf("Coordenadas: ");
+      scanf("%d,%d", &amp;y, &amp;x);    
+      if (x &gt;= 0 &amp;&amp; y &gt;= 0)
+         {
+         matriz[y][x]='\xB1';            /* preenche o elemento com quadrado */
+         imprime_matriz(matriz, nlin);   /* imprime a matriz */
+         }
+      else
+         break;
+      }  
+ }
+
+/* funcao que marca todos os elementos abaixo da diagonal principal de
+ * um array nlin X LARGURA com quadrados
+ */
+void marca_triang(int matriz[][LARGURA], int nlin)
+{
+  int x, y;
+
+  printf("Triangulo\n");
+  pontos(matriz, nlin);
+  for (y = 0; y &lt; nlin; y++)
+    for (x = 0; x &lt;= y; x++)
+      matriz[y][x] = '\xB1';
+}
+</PRE>
+
+<P>
+<PRE>
+/* funcao que imprime um array 2-D nlin X LARGURA */
+void imprime_matriz(int matriz[][LARGURA], int nlin)
+{
+  int x,y;
+
+  for(y=0; y&lt;nlin; y++)
+	{
+	for(x=0; x&lt;LARGURA; x++)
+	   printf("%c ", matriz[y][x] );
+	printf("\n\n");
+	}
+  printf("\n");
+}
+
+/* funcao que flipa um array ao longo da diagonal principal */
+void flip(int matriz[][LARGURA], int nlin)
+{
+  int x, y;
+  int temp;
+
+  printf("Flipado ao longo da diagonal principal.\n");
+  for (y = 0; y &lt; nlin; y++)
+    for (x = 0; x &lt;= y; x++){
+      temp = matriz[y][x];
+      matriz[y][x] = matriz[x][y];
+      matriz[x][y] = temp;
+    }
+}
+</PRE>
+
+<P>
+<PRE>
+/* funcao que espera ate que uma tecla seja digitada */
+void espera_entrada( void ) {
+   getchar(); }
+
+/********** MAIN ************/
+
+/* alguns exemplos de chamadas de funcoes com argumentos array 2-D */
+main()
+{
+   int matriz [ALTURA] [LARGURA];
+
+   pontos(matriz, ALTURA);
+   seleciona_elem(matriz, ALTURA);
+   espera_entrada();
+
+   flip(matriz, ALTURA);
+   imprime_matriz(matriz,ALTURA);
+   espera_entrada();
+
+   marca_triang( matriz, ALTURA);
+   imprime_matriz( matriz, ALTURA);
+   espera_entrada();
+
+   flip( matriz, ALTURA);
+   imprime_matriz(matriz, ALTURA);
+   espera_entrada();
+}
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html425"
+  HREF="notas_proc-node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html423"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html417"
+  HREF="notas_proc-node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html426"
+  HREF="notas_proc-node17.html">17 Array de Caracteres</A>
+<B>Up:</B> <A NAME="tex2html424"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html418"
+  HREF="notas_proc-node15.html">15 Arrays</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

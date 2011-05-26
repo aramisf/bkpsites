@@ -1,0 +1,435 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 19: Stacks</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap20.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap18.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 19</h2>
+
+<h1>Stacks</h1>
+
+
+<a name=1></a><br>
+<h3>19.1 Abstract data types</h3>
+
+<p>The data types we have looked at so far are all concrete, in the sense that we have completely specified how they are implemented. For example, the <span class=code>Card</span> class represents a card using two integers.  As I discussed at the time, that is not the only way to represent a card; there are many alternative implementations.</p>
+
+<p>An <b>abstract data type</b>, or ADT, specifies a set of operations (or methods) and the semantics of the operations (what they do) but it does not not specify the implementation of the operations.  That's what makes it abstract.</p>
+
+<p>Why is that useful?</p>
+
+<ul>
+
+<li>It simplifies the task of specifying an algorithm if you can denote the operations you need without having to think at the same time about how the operations are performed.</li>
+
+<li>Since there are usually many ways to implement an ADT, it might be useful to write an algorithm that can be used with any of the possible implementations.</li>
+
+<li>Well-known ADTs, like the <span class=code>Stack</span> ADT in this chapter, are often implemented in standard libraries so they can be written once and used by many programmers.</li>
+
+<li>The operations on ADTs provide a common high-level language for specifying and talking about algorithms.</li>
+
+</ul>
+
+<p>When we talk about ADTs, we often distinguish the code that uses the ADT, called the <b>client</b> code, from the code that implements the ADT, called <b>provider</b> code because it provides a standard set of services.</p>
+
+
+
+<a name=2></a><br>
+<h3>19.2 The Stack ADT</h3>
+
+<p>In this chapter we will look at one common ADT, the stack.  A stack is a collection, meaning that it is a data structure that contains multiple elements.  Other collections we have seen include arrays and lists.</p>
+
+<p>As I said, an ADT is defined by the operations you can perform on it.  Stacks can perform only the following operations:</p>
+
+<dl>
+
+<dt>constructor</dt>
+<dd>Create a new, empty stack.</dd>
+
+<dt><span class=code>push</span></dt>
+<dd>Add a new item to the stack.</dd>
+
+<dt><span class=code>pop</span></dt>
+<dd>Remove and return an item from the stack.  The item that is returned is always the last one that was added.</dd>
+
+<dt><span class=code>empty</span></dt>
+<dd>Check whether the stack is empty.</dd>
+
+</dl>
+
+<p>A stack is sometimes called a "last in, first out," or LIFO data structure, because the last item added is the first to be removed.</p>
+
+<a name=3></a><br>
+<h3>19.3 The pstack Class</h3>
+
+<p>Although we have the pclasses that provide for a class called <span class=code>pstack</span> that implements the Stack ADT.  You should make some effort to keep these two things---the ADT and the pclass implementation---straight.</p>
+
+<p>Then the syntax for constructing a new <span class=code>pstack</span> is</p>
+
+
+<span class=code>&nbsp; &nbsp; pstack stack;
+<br></span><p>Initially the stack is empty, as we can confirm with the <span class=code>empty</span> method, which returns a <span class=code>boolean</span>:</p>
+
+
+<span class=code>&nbsp; &nbsp; cout &lt;&lt; stack.empty ();
+<br></span><p>A stack is a generic data structure, which means that we can add any type of item to it.  In the pclass implementation, though, we can only add object types.  For our first example, we'll use <span class=code>Node</span> objects, as defined in the previous chapter. Let's start by creating and printing a short list.</p>
+
+
+<span class=code>&nbsp; &nbsp; LinkedList list;
+<br>&nbsp; &nbsp; list.addFirst (3);
+<br>&nbsp; &nbsp; list.addFirst (2);
+<br>&nbsp; &nbsp; list.addFirst (1);
+<br>&nbsp; &nbsp; list.print ();
+<br></span><p>The output is <span class=code>(1, 2, 3)</span>.  To put a <span class=code>Node</span> object onto the stack, use the <span class=code>push</span> method:</p>
+
+
+<span class=code>&nbsp; &nbsp; pstack.push (node);
+<br></span><p>The following loop traverses the list and pushes all the nodes onto the stack:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>for</span> (Node *node = list.head; node != null; node = node-&gt;next) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; pstack.push (node);
+<br>&nbsp; &nbsp; }
+<br></span><p>We can remove an element from the stack with the overloaded <span class=code>pop</span> method.</p>
+
+
+<span class=code>&nbsp; &nbsp; pstack.pop ();
+<br>&nbsp; &nbsp; <span class=comment>//&nbsp; or
+</span><br>&nbsp; &nbsp; pstack.pop (itemType &item);
+<br></span><p>The return type from <span class=code>pop</span> is <span class=code><span class=keyword>void</span></span>.  That's because the stack implementation doesn't need to keep the item around because it is to be removed from the stack.</p>
+
+<p>The following loop is a common idiom for popping all the elements from a stack, stopping when it is empty:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>while</span> (!pstack.empty ()) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; pstack.top() &lt;&lt; <span class=quote>' '</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; pstack.pop();
+<br>&nbsp; &nbsp; }
+<br>
+<br></span><p>The output is <span class=code>3 2 1</span>.  In other words, we just used a stack to print the elements of a list backwards!  Granted, it's not the standard format for printing a list, but using a stack it was remarkably easy to do.</p>
+
+<p>You should compare this code to the implementations of <span class=code>printBackward</span> in the previous chapter.  There is a natural parallel between the recursive version of <span class=code>printBackward</span> and the stack algorithm here.  The difference is that <span class=code>printBackward</span> uses the run-time stack to keep track of the nodes while it traverses the list, and then prints them on the way back from the recursion.  The stack algorithm does the same thing, just using a <span class=code>pstack</span> object instead of the run-time stack.</p>
+
+<a name=4></a><br>
+<h3>19.4 Postfix expressions</h3>
+
+<p>In most programming languages, mathematical expressions are written with the operator between the two operands, as in <span class=code>1+2</span>.  This format is called <b>infix</b>.  An alternate format used by some calculators is called <b>postfix</b>.  In postfix, the operator follows the operands, as in <span class=code>1 2+</span>.</p>
+
+<p>The reason postfix is sometimes useful is that there is a natural way to evaluate a postfix expression using a stack.</p>
+
+<ul>
+
+<li>Starting at the beginning of the expression, get one term (operator or operand) at a time.</li>
+
+<ul>
+
+<li>If the term is an operand, push it on the stack.</li>
+
+<li>If the term is an operator, pop two operands off the stack, perform the operation on them, and push the result back on the stack.</li>
+
+</ul>
+
+<li>When we get to the end of the expression, there should be exactly one operand left on the stack.  That operand is the result.</li>
+
+</ul>
+
+<p>As an exercise, apply this algorithm to the expression <span class=code>1 2 + 3 *</span>.</p>
+
+<p>This example demonstrates one of the advantages of postfix: there is no need to use parentheses to control the order of operations.  To get the same result in infix, we would have to write <span class=code>(1 + 2) * 3</span>. As an exercise, write a postfix expression that is equivalent to <span class=code>1 + 2 * 3</span>?</p>
+
+<a name=5></a><br>
+<h3>19.5 Parsing</h3>
+
+<p>In order to implement the algorithm from the previous section, we need to be able to traverse a string and break it into operands and operators.  This process is an example of <b>parsing</b></p>
+
+<p>If we were to break the string up into smaller parts, we would need a specific character to use as a boundary between the chucks.  A character that marks a boundary is called a <b>delimiter</b>.</p>
+
+<p>So let's quickly build a parsing function that will store the various chunks of a <span class=code>pstring</span> into a <span class=code>pvector&lt;pstring&gt;</span>.</p>
+
+
+<span class=code>pvector&lt;pstring&gt; parse(pstring string, <span class=keyword>char</span> delim) {
+<br>
+<br>&nbsp; pvector&lt;pstring&gt; stringParsed;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (string.length() == 0)
+<br>&nbsp; &nbsp; <span class=keyword>return</span> stringParsed.resize(0);
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0, j = 0; i &lt; string.length(); i++)
+<br>&nbsp; {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (string[i] != delim || string[i] != <span class=quote>'\n'</span>)
+<br>&nbsp; &nbsp; &nbsp; stringParsed[j] += string[i];
+<br>&nbsp; &nbsp; <span class=keyword>else</span>
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; cout &lt;&lt; stringParsed[j] &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; j++;
+<br>&nbsp; &nbsp; &nbsp; stringParsed.resize(j+1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br>
+<br>&nbsp; <span class=keyword>return</span> stringParsed;
+<br>}
+<br></span><p>The function above accepts a <span class=code>pstring</span> to be parsed and a <span class=code><span class=keyword>char</span></span> to be used as a delimiter, so that whenever the <span class=code>delim</span> character appears in the string, the chunk is saved as a new <span class=code>pstring</span> element in the <span class=code>pvector&lt;pstring&gt;</span>.</p>
+
+<p>Passing a string through the function with a space delimiter would look like this:</p>
+
+
+<span class=code>&nbsp; pstring string = <span class=quote>"Here are four tokens."</span>;
+<br>
+<br>&nbsp; pvector&lt;pstring&gt; = parse(string, <span class=quote>' '</span>);
+<br></span><p>The output of the parser is:</p>
+
+
+<span class=code>Here
+<br>are
+<br>four
+<br>tokens.
+<br></span><p>For parsing expressions, we have the option of specifying additional characters that will be used as delimiters:</p>
+
+
+<span class=code><span class=keyword>bool</span> checkDelim(<span class=keyword>char</span> ch, pstring delim) {
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; delim.length(); i++)
+<br>&nbsp; {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (ch == delim[i])
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>return true</span>;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return false</span>;
+<br>}
+<br>
+<br>pvector&lt;pstring&gt; parse(pstring string, pstring delim) {
+<br>
+<br>&nbsp; pvector&lt;pstring&gt; stringParsed;
+<br>
+<br>&nbsp; <span class=keyword>if</span> (string.length() == 0)
+<br>&nbsp; &nbsp; <span class=keyword>return</span> stringParsed.resize(0);
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0, j = 0; i &lt; string.length(); i++)
+<br>&nbsp; {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (!checkDelim(string[i], delim) || string[i] != <span class=quote>'\n'</span>)
+<br>&nbsp; &nbsp; &nbsp; stringParsed[j] += string[i];
+<br>&nbsp; &nbsp; <span class=keyword>else</span>
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; cout &lt;&lt; stringParsed[j] &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; j++;
+<br>&nbsp; &nbsp; &nbsp; stringParsed.resize(j+1);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br>
+<br>&nbsp; <span class=keyword>return</span> stringParsed;
+<br>}
+<br></span><p>An example of using the above functions can be seen below:Using the above functions would</p>
+
+
+<span class=code>&nbsp; &nbsp; pstring string = <span class=quote>"11 22+33*"</span>;
+<br>&nbsp; &nbsp; pstring delim = <span class=quote>" +-*/"</span>;
+<br>&nbsp; &nbsp; pvector&lt;pstring&gt; stringParsed = parse(string, delim);
+<br></span><p>The new function <span class=code>checkDelim</span> checks for whether or not a given <span class=code><span class=keyword>char</span></span> is a delimiter.  Now the output is:</p>
+
+
+<span class=code>11
+<br>22
+<br>33
+<br></span><a name=6></a><br>
+<h3>19.6 Implementing ADTs</h3>
+
+<p>One of the fundamental goals of an ADT is to separate the interests of the provider, who writes the code that implements the ADT, and the client, who uses the ADT. The provider only has to worry about whether the implementation is correct---in accord with the specification of the ADT---and not how it will be used.</p>
+
+<p>Conversely, the client <i>assumes</i> that the implementation of the ADT is correct and doesn't worry about the details.  When you are using one of Java's built-in classes, you have the luxury of thinking exclusively as a client.</p>
+
+<p>When you implement an ADT, on the other hand, you also have to write client code to test it.  In that case, you sometimes have to think carefully about which role you are playing at a given instant.</p>
+
+<p>In the next few sections we will switch gears and look at one way of implementing the Stack ADT, using an array.  Start thinking like a provider.</p>
+
+<a name=7></a><br>
+<h3>19.7 Array implementation of the Stack ADT</h3>
+
+<p>The instance variables for this implementation is a templated array, which is why we will use the <span class=code>pvector</span> class.  It will contain the items on the stack, and an integer index which will keep track of the next available space in the array. Initially, the array is empty and the index is <span class=code>0</span>.</p>
+
+<p>To add an element to the stack (<span class=code>push</span>), we'll copy a reference to it onto the stack and increment the index. To remove an element (<span class=code>pop</span>) we have to decrement the index first and then copy the element out.</p>
+
+<p>Here is the class definition:</p>
+
+
+<span class=code><span class=keyword>class</span> Stack {
+<br>
+<br>&nbsp; &nbsp; pvector&lt;ITEMTYPE&gt; array;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> index;
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>
+<br>&nbsp; &nbsp; &nbsp; Stack () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array.resize(128);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index = 0;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>};
+<br></span><p>The above code contains the type <span class=code>ITEMTYPE</span> which is essentially just a quick way of saying, "INSERT DATATYPE HERE" because pvectors are templated and can handle various types.  <span class=code>ITEMTYPE</span> is not in actuality a type, just so you know.  In the future, you can replace <span class=code>ITEMTYPE</span> with any other data type, class, or struct.</p>
+
+<p>As usual, once we have chosen the instance variables, it is a mechanical process to write a constructor. For now, the default size is 128 items.  Later we will consider better ways of handling this.</p>
+
+<p>Checking for an empty stack is trivial.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>bool</span> empty () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> array.length() == 0;
+<br>&nbsp; &nbsp; }
+<br></span><p>It it important to remember, though, that the number of elements in the stack is not the same as the size of the array.  Initially the size is 128, but the number of elements is 0.</p>
+
+<p>The implementations of <span class=code>push</span> and <span class=code>pop</span> follow naturally from the specification.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> push (ITEMTYPE item) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[index] = item;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index++;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; ITEMTYPE pop () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index--;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> array[index];
+<br>&nbsp; &nbsp; }
+<br></span><p>To test these methods, we can take advantage of the client code we used to exercise <span class=code>pstack</span>.</p>
+
+<p>If everything goes according to plan, the program should work without any additional changes.  Again, one of the strengths of using an ADT is that you can change implementations without changing client code.</p>
+
+<a name=8></a><br>
+<h3>19.8 Resizing arrays</h3>
+
+<p>A weakness of this implementation is that it chooses an arbitrary size for the array when the <span class=code>Stack</span> is created.  If the user pushes more than 128 items onto the stack, it will cause an <span class=code>ArrayIndexOutOfBounds</span> exception.</p>
+
+
+
+<p>An alternative is to let the client code specify the size of the array.  This alleviates the problem, but it requires the client to know ahead of time how many items are needed, and that is not always possible.</p>
+
+<p>A better solution is to check whether the array is full and make it bigger when necessary.  Since we have no idea how big the array needs to be, it is a reasonable strategy to start with a small size and increase the size by 1 each time it overflows.</p>
+
+<p>Here's the improved version of <span class=code>push</span>:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> push (ITEMTYPE item) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (full()) resize ();
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// at this point we can prove that index &lt; array.length
+</span><br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[index] = item;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index++;
+<br>&nbsp; &nbsp; }
+<br></span><p>Before putting the new item in the array, we check if the array is full.  If so, we invoke <span class=code>resize</span>.  After the <span class=code><span class=keyword>if</span></span> statement, we know that either (1) there was room in the array, or (2) the array has been resized and there is room.  If <span class=code>full</span> and <span class=code>resize</span> are correct, then we can prove that <span class=code>index &lt; array.length</span>, and therefore the next statement cannot cause an exception.</p>
+
+<p>Now all we have to do is implement <span class=code>full</span> and <span class=code>resize</span>.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>private</span>:
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>bool</span> full () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> index == (array.length()-1);
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>void</span> resize () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array.resize(array.length()+1);
+<br>&nbsp; &nbsp; &nbsp; }
+<br></span><p>Both methods are declared <span class=code><span class=keyword>private</span></span>, which means that they cannot be invoked from another class, only from within this one.  This is acceptable, since there is no reason for client code to use these functions, and desirable, since it enforces the boundary between the implementation and the client.</p>
+
+
+
+<p>The implementation of <span class=code>full</span> is trivial; it just checks whether the index has gone beyond the range of valid indices.</p>
+
+<p>The implementation of <span class=code>resize</span> is straightforward, with the caveat that it assumes that the old array is full.  In other words, that assumption is a precondition of this method.  It is easy to see that this precondition is satisfied, since the only way <span class=code>resize</span> is invoked is if <span class=code>full</span> returns true, which can only happen if <span class=code>index == array.length</span>.</p>
+
+<p>At the end of <span class=code>resize</span>, we replace the old array with the new one (causing the old to be garbage collected).  The new <span class=code>array.length</span> is twice as big as the old, and <span class=code>index</span> hasn't changed, so now it must be true that <span class=code>index &lt; array.length</span>.  This assertion is a <b>postcondition</b> of <span class=code>resize</span>: something that must be true when the method is complete (as long as its preconditions were satisfied).</p>
+
+<p>Preconditions, postconditions, and invariants are useful tools for analyzing programs and demonstrating their correctness. In this example I have demonstrated a programming style that facilitates program analysis and a style of documentation that helps demonstrate correctness.</p>
+
+
+
+<a name=9></a><br>
+<h3>19.9 Glossary</h3>
+
+<dl>
+
+<dt>abstract data type (ADT)</dt>
+<dd>A data type (usually a collection of objects) that is defined by a set of operations, but that can be implemented in a variety of ways.</dd>
+
+<dt>client</dt>
+<dd>A program that uses an ADT (or the person who wrote the program).</dd>
+
+<dt>provider</dt>
+<dd>The code that implements an ADT (or the person who wrote it).</dd>
+
+<dt><span class=code><span class=keyword>private</span></span></dt>
+<dd>A Java keyword that indicates that a method or instance variable cannot be accessed from outside the current class definition.</dd>
+
+<dt>infix</dt>
+<dd>A way of writing mathematical expressions with the operators between the operands.</dd>
+
+<dt>postfix</dt>
+<dd>A way of writing mathematical expressions with the operators after the operands.</dd>
+
+<dt>parse</dt>
+<dd>To read a string of characters or tokens and analyze their grammatical structure.</dd>
+
+<dt>delimiter</dt>
+<dd>A character that is used to separate tokens, like the punctuation in a natural language.</dd>
+
+<dt>predicate</dt>
+<dd>A mathematical statement that is either true or false.</dd>
+
+<dt>postcondition</dt>
+<dd>A predicate that must be true at the end of a method (provided that the preconditions were true at the beginning).</dd>
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap20.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap18.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

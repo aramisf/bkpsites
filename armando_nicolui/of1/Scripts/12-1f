@@ -1,0 +1,15 @@
+#!/bin/bash
+
+encontra_pessoa_em_lista()
+{
+  # Se /etc/passwd tem permissao de leitura, define NUM_LINHAS com numero de linhas.
+  # Retorno eh o status da execucao da expressao.
+  # O string eh atribuido a uma variavel nao-local.
+  [[ -r /etc/passwd ]] && USUARIO=`grep $1 Arquivos/telefones.txt`
+}
+
+if encontra_pessoa_em_lista $1; then
+  echo "$USUARIO"
+else
+  echo "Nao eh possivel encontrar $1."
+fi  

@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 12
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 12
+">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 12
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Programa&#231;&#227;o Shell - Fun&#231;&#245;es e <I>Arrays</I>.</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Fun&#231;&#245;es</A>
+</H2>
+
+<P>
+Uma <B>Fun&#231;&#227;o</B> &#233;  um tipo de <I>script-dentro-de-um-script</I> e
+&#233;  usado para definir  um c&#243;digo  <I>shell</I> atrav&#233;s  de um  nome e
+armazenar esta defini&#231;&#227;o na mem&#243;ria de execu&#231;&#227;o do <I>shell</I>, para
+ser executado depois. &#201; an&#225;logo ao conceito de fun&#231;&#245;es e sub-rotinas em
+linguagens de programa&#231;&#227;o como C e Java.
+
+<P>
+Para definir uma fun&#231;&#227;o pode-se usar uma das duas formas abaixo:
+<PRE>
+          function &lt;nome&gt;
+          {
+              &lt; comandos shell &gt;
+          }
+
+OU
+          &lt;nome&gt; ()
+          {
+              &lt; comandos shell &gt;
+          }
+</PRE>
+
+<P>
+A defini&#231;&#227;o de uma fun&#231;&#227;o deve acontecer ANTES da primeira vez em que &#233;
+usada.
+
+<P>
+Para remover a defini&#231;&#227;o de uma fun&#231;&#227;o usa-se o comando embutido
+<B>unset -f &lt;nome&gt;</B>.
+
+<P>
+Para   listar  as   fun&#231;&#245;es   definidas  usa-se   o  comando   embutido
+<B>declare -f</B>,  o que faz com  que sejam mostrados  n&#227;o apenas os
+nomes mas as defini&#231;&#245;es  de todas as fun&#231;&#245;es. Usando-se <B>declare
+-f <I>nome1</I> <I>nome2</I> ...</B> &#233; mostrado o nome e defini&#231;&#227;o das
+fun&#231;&#245;es indicados como argumentos  ap&#243;s a op&#231;&#227;o <B>-f</B>.  O comando
+<B>declare&nbsp;&nbsp;-F</B> mostra apenas os nomes das fun&#231;&#245;es.
+
+<P>
+Para executar uma fun&#231;&#227;o, basta  digitar seu nome seguido de argumentos
+(se for o caso), da mesma forma que se executam <I>scripts shell</I>.
+
+<P>
+Ao ser invocada,  uma fun&#231;&#227;o N&#195;O EXECUTA em  um processo separado (como
+<I>scripts  shell</I>).  Ela  atua  mais  como o  efeito  do  comando
+<B>source</B>.
+
+<P>
+Se  uma   fun&#231;&#227;o  tem  o  mesmo   nome  que  um  comando   UNIX  ou  um
+<I>script</I>, a  fun&#231;&#227;o tem  preced&#234;ncia. Na verdade,  a preced&#234;ncia
+para execu&#231;&#227;o de um comando em <B><I>bash(1)</I></B> &#233;:
+
+<OL>
+<LI>Aliases;
+</LI>
+<LI>Palavras   chaves  tais  como   <B>function</B>,  <B>if</B>,
+  <B>for</B>, <B>while</B>, etc.;
+</LI>
+<LI>Fun&#231;&#245;es;
+</LI>
+<LI>Comandos embutidos como <B>cd</B> e <B>shift</B>;
+</LI>
+<LI><I>Scripts  shell</I>  e  programas execut&#225;veis,  pelos  quais
+  <B><I>bash(1)</I></B>   procura  nos   diret&#243;rios   indicados  na   vari&#225;vel
+  <B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B>.
+</LI>
+</OL>
+
+<P>
+
+<H3><A NAME="SECTION00011100000000000000">
+Vari&#225;veis e Argumentos em Fun&#231;&#245;es</A>
+</H3>
+
+<P>
+Fun&#231;&#245;es podem ter argumentos, que  s&#227;o referenciados da mesma forma que
+argumentos em um <I>script</I>.
+
+<P>
+<PRE>
+           #!/bin/bash
+
+           func ()
+           {
+              echo "Na Funcao: $0 $1 $2"
+              var1="Na Funcao"
+              echo "var1: $var1"
+           }
+
+           var1="Fora da Funcao"
+           echo "var1: $var1"
+           echo "$0: $1 $2"
+           func arg1 arg2
+           echo "var1: $var1"
+           echo "$0: $1 $2"
+</PRE>
+
+<P>
+No exemplo acima, a vari&#225;vel <B><FONT FACE="Helvetica, Arial, sans-serif">var1</FONT></B>  &#233; a mesma para a fun&#231;&#227;o e para
+o <I>script</I>.   Isto quer dizer que qualquer  vari&#225;vel definida no
+<I>script</I>  exportada   ou  n&#227;o  &#233;   reconhecida  pelas  fun&#231;&#245;es
+definidas  neste <I>script</I>,  e se  uma fun&#231;&#227;o  altera o  valor da
+vari&#225;vel, a  altera&#231;&#227;o &#233; conhecida  no <I>script</I>, fora  da fun&#231;&#227;o
+(Figura&nbsp;<A HREF="#fig:funcvars">1</A>).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:funcvars"></A><A NAME="134"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 1:</STRONG>
+Vari&#225;veis e argumentos em Fun&#231;&#245;es</CAPTION>
+<TR><TD><IMG
+ WIDTH="574" HEIGHT="459" ALIGN="CENTER"
+ SRC="teoria-img1.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{funcvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Caso a fun&#231;&#227;o queira definir uma vari&#225;vel local com o mesmo nome de uma
+vari&#225;vel   j&#225;   definida,  usa-se   a   palavra  chave   <B>local</B>
+(Figura&nbsp;<A HREF="#fig:funclocalvars">2</A>):
+
+<P>
+<PRE>
+           func ()
+           {
+              local var1
+              echo "Na Funcao: $0 $1 $2"
+              var1="Na Funcao"
+              echo "var1: $var1"
+           }
+</PRE>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:funclocalvars"></A><A NAME="146"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 2:</STRONG>
+Vari&#225;veis locais em Fun&#231;&#245;es</CAPTION>
+<TR><TD><IMG
+ WIDTH="574" HEIGHT="500" ALIGN="CENTER"
+ SRC="teoria-img2.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{funclocalvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H3><A NAME="SECTION00011200000000000000">
+O comando <B>return</B></A>
+</H3>
+
+<P>
+O comando  <B>return</B> est&#225;  para uma fun&#231;&#227;o  assim como  o comando
+<B>exit</B>  est&#225; para  um <I>script</I>.  <B>return</B>  &#233; usado
+para  terminar   a  execu&#231;&#227;o  de   uma  fun&#231;&#227;o,  fazendo  com   que  um
+<I>script</I> continue  a ser  executado a partir  do ponto em  que a
+fun&#231;&#227;o foi chamada. O <I>script</I> ainda pode usar o <I>status</I>
+de retorno de uma fun&#231;&#227;o (par&#226;metro especial <B>$?</B>).
+
+<P>
+Assim, o  comando <B>return</B>  (como <B>exit</B>) pode  ser usado
+com um  argumento num&#233;rico, indicando um <I>status</I>  de retorno da
+fun&#231;&#227;o.
+
+<P>
+<PRE>
+           #!/bin/bash
+
+           func ()
+           {
+              local var1=5
+              var1=$((var1 + $1 - $2))
+              if [[ $var1 -gt 10 ]]; then
+                 return
+              else
+                 return $var1
+              fi
+           }
+
+           var1="10"
+           echo "var1 = $var1"
+           func arg1 arg2
+           echo "func = $?"
+</PRE>
+
+<P>
+O  maior n&#250;mero  inteiro  positivo  que uma  fun&#231;&#227;o  pode retornar  com
+<B>return</B>  &#233;  256.  O  comando  <B>return</B> est&#225;  intimamente
+ligado ao conceito de  <I>status</I> de sa&#237;da (<I>exit status</I>),
+que  possui  esta limita&#231;&#227;o.   No  entanto,  existem  v&#225;rias formas  de
+contornar  este problema  em situa&#231;&#245;es  em  que se  deseja retornar  um
+inteiro    maior    que   256    ou    mesmo   <I>strings</I>.     Os
+<A NAME="tex2html3"
+  HREF="../exemplos_12/">Exemplos   12-4</A>
+mostram   alguns
+destes truques.
+
+<P>
+
+<H3><A NAME="SECTION00011300000000000000">
+Utilidade de fun&#231;&#245;es</A>
+</H3>
+
+<P>
+Fun&#231;&#245;es s&#227;o &#250;teis em tr&#234;s casos:
+
+<OL>
+<LI>Quando   um  <I>script</I>   usa   um   conjunto  grande   de
+  <I>scripts shell</I> externos, a  execu&#231;&#227;o pode ficar lenta, pois a
+  cada  <I>script</I>  chamado, um  novo  processo  &#233;  criado e  isto
+  aumenta o  tempo total  de execu&#231;&#227;o. Com  fun&#231;&#245;es, a execu&#231;&#227;o  &#233; mais
+  r&#225;pida, pois a defini&#231;&#227;o j&#225; est&#225; em mem&#243;ria e n&#227;o existe a cria&#231;&#227;o de
+  novos processos;
+</LI>
+<LI>No caso  de  <I>scripts shell</I>  muito  extensos, permite  a
+  modulariza&#231;&#227;o do c&#243;digo, o que &#233; uma pr&#225;tica sempre saud&#225;vel;
+</LI>
+<LI>&#201; uma alternativa ao uso de <B>aliases</B>, quando se quer
+  passar argumentos. Devemos lembrar que <B>aliases</B> em
+  <B><I>bash(1)</I></B> n&#227;o permitem a passagem de argumentos.
+
+<P>
+<PRE>
+          alias  emacs="emacs &amp;"
+          emacs trab.txt            # emacs começa com arquivo vazio
+                                    # e não abre o arquivo indicado
+
+          emacs ()                  # Agora Sim !!!
+          {
+             command emacs $* &amp;
+          }
+</PRE>
+
+<P>
+No exemplo  anterior, o comando embutido  <B>command</B> indica que
+  deve ser  usado o programa  execut&#225;vel externo <B>emacs</B>  (a ser
+  localizado em um dos diret&#243;rios em <B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B>).
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Vari&#225;veis de Ambiente: <I>Arrays</I></A>
+</H2>
+
+<P>
+&#201; poss&#237;vel definir <I>Arrays</I> unidimensionais em <B><I>bash(1)</I></B>.Um
+<I>array</I>  &#233; criado  automaticamente  se uma  vari&#225;vel &#233;  definida
+atrav&#233;s da sintaxe abaixo:
+
+<P>
+<PRE>
+       nome[indice]=valor
+</PRE>
+
+<P>
+Por exemplo:
+
+<P>
+<PRE>
+      clientes[2]=Armando
+      clientes[0]=Arnoldo
+      clientes[10]=Ornitônio
+</PRE>
+
+<P>
+O &#237;ndice &#233; tratado como uma EXPRESS&#195;O ARITM&#201;TICA que deve ser maior ou
+igual a 0 (zero)
+
+<P>
+Outra forma de definir <I>arrays</I> &#233;:
+<PRE>
+      nome=(valor_1 ...  valor_n)
+</PRE>
+onde <I>valor_n</I> &#233; da forma <B>[indice=]valor</B>.
+
+<P>
+Assim, no exemplo abaixo, o elemento <B>0</B> de <B><FONT FACE="Helvetica, Arial, sans-serif">clientes</FONT></B> &#233;
+<I>orlando</I>, o elemento 15 &#233; <I>pedro</I>, o elemento 3 &#233;
+<I>carlos</I> e o elemento 4 &#233; <I>alice</I>.
+<PRE>
+      clientes=(orlando [15]=pedro [3]=carlos alice)
+</PRE>
+
+<P>
+Para acessar o valor de um elemento do <I>array</I>, usa-se:
+<PRE>
+      ${nome[indice]}
+</PRE>
+Note-se o uso OBRIGAT&#211;RIO de chaves (<B>{&nbsp;&nbsp;}</B>).
+
+<P>
+Pode-se usar os como &#237;ndices os caracteres <B>@</B> e <B>*</B>. Seu
+uso como &#237;ndice  retorna todos os valores j&#225;  assinalados ao <I>array</I> como
+palavras separadas.
+
+<P>
+Quando  a refer&#234;ncia  ao <I>array</I>  est&#225;  entre aspas  (e.g., "nome[*]"  ou
+"nome[@]"),  usar o  &#237;ndice <B>*</B>  expande a  refer&#234;ncia  para uma
+&#250;nica palavra composta de todos os  elementos do <I>array</I>. O uso de &#237;ndice
+<B>@</B> expande os elementos do <I>array</I> em palavras separadas.
+
+<P>
+O  comprimento   de  qualquer  elemento   do  <I>array</I>  se   encontra  com
+<B>${#nome[indice]}</B>.  No  exemplo abaixo,  <B>${#nome[5]}</B>
+tem  valor 5  e <B>${#nome[@]}</B>  tem valor  4  (pois inicialmente
+foram definidos apenas 4 valores).
+<PRE>
+     clientes=(orlando [5]=pedro [3]=carlos alice)
+</PRE>
+
+<P>
+Para se eliminar a defini&#231;&#227;o de um <I>array</I> usa-se o comando
+<B>unset</B>:
+<PRE>
+     unset  clientes[5]   # destroi o elemento 5 do array
+     unset  clientes      # destroi o array
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Mais sobre par&#226;metros especiais</A>
+</H2>
+
+<P>
+At&#233; agora foi visto que para expandir uma vari&#225;vel ou par&#226;metro, usa-se
+<B>$</B> antes  do nome da vari&#225;vel ou  par&#226;metro. Existem expans&#245;es
+especiais  de  par&#226;metros que  podem  simplificar  e  tornar o  uso  de
+vari&#225;veis   mais   flex&#237;vel.    Tais   expans&#245;es   s&#227;o   mostradas   na
+tabela&nbsp;<A HREF="#tab:parametros">1</A>.  Outras  formas   de  expans&#227;o  podem  ser
+encontradas  na  se&#231;&#227;o  <B>EXPANSION  -  Parameter  Expansion</B>  de
+<B><I>bash(1)</I></B>.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="272"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Expans&#227;o de par&#226;metros e vari&#225;veis</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT"><B>Par&#226;metro</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=170><B>Descri&#231;&#227;o</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>Exemplo</B></TH>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>substitui o valor de par&#226;metro</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>${10}, $NOME</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter:-word}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Se o par&#226;metro for nulo ou n&#227;o estiver
+     definido, <B>word</B> &#233; expandido como valor da express&#227;o. Caso
+     contr&#225;rio, o valor de <B>parameter</B> &#233; expandido.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>NOME=</B> <B>echo
+    ${NOME:-Arnaldo}</B>&nbsp;Arnaldo <B>NOME=Orlando</B>
+    <B>echo ${NOME:-Arnaldo}</B>&nbsp;    Orlando</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter:+word}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Se o par&#226;metro for nulo ou n&#227;o estiver
+     definido, nada &#233; substitu&#237;do. Caso contr&#225;rio, a expans&#227;o de
+     <B>word</B> &#233; substitu&#237;da.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>NOME=</B> <B>echo
+    "@${NOME:+Arnaldo}@"</B>&nbsp;@@
+    <B>NOME=Orlando</B> 
+    <B>echo @${NOME:+Arnaldo}@</B>&nbsp;    @Arnaldo@</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter:=word}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Se o par&#226;metro for nulo ou n&#227;o estiver
+     definido, a expans&#227;o de <B>word</B> &#233; assinalada como valor de
+     <B>parameter</B>. O valor de <B>parameter</B> &#233; ent&#227;o
+     substitu&#237;do. Par&#226;metros posicionais (argumentos de comando) e
+     par&#226;metros especiais n&#227;o podem ser definidos desta forma.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>NOME=</B> <B>echo
+    ${NOME:=Arnaldo}"</B>&nbsp;    Arnaldo <B>echo $NOME"</B>&nbsp;Arnaldo</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${#parameter}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>comprimento em caracteres do valor de <B>parameter</B>.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter%word}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Se o padr&#227;o indicado em <B>word</B>
+     coincide com a parte final do valor de <B>parameter</B>, ent&#227;o o
+     menor padr&#227;o que coincide com <B>word</B> &#233; retirado do valor de
+     <B>parameter</B>. O resultado &#233; o valor final da express&#227;o.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>FILE=/usr/local/teste.txt.old</B> <B>echo ${FILE%.*}</B>&nbsp;/usr/local/teste.txt</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">${parameter%%word}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Se o padr&#227;o indicado em <B>word</B>
+     coincide com a parte final do valor de <B>parameter</B>, ent&#227;o o
+     maior padr&#227;o que coincide com <B>word</B> &#233; retirado do valor de
+     <B>parameter</B>. O resultado &#233; o valor final da express&#227;o.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>FILE=/usr/local/teste.txt.old</B> <B>echo ${FILE%%.*}</B>&nbsp;/usr/local/teste</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:parametros"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00013100000000000000">
+1.3.1 Vari&#225;vel IFS</A>
+</H3>
+
+<P>
+A vari&#225;vel de ambiente  IFS (<I>Internal Field Separator</I>) &#233; usada
+pelo <I>shell</I> para definir os caracteres usados como separador de
+palavras ap&#243;s uma expans&#227;o de  valores de vari&#225;veis ou linha de comando
+(com  a  constru&#231;&#227;o  <B>$(comando)</B>).  Ela tamb&#233;m  &#233;  usada  para
+dividir linhas em palavras com o comando interno <B>read</B>.
+
+<P>
+O       valor       <I>default</I>       desta      vari&#225;vel       &#233;
+<B><!-- MATH
+ $<espaço><tab><newline>$
+ -->
+<IMG
+ WIDTH="242" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$&lt;espaço&gt;&lt;tab&gt;&lt;newline&gt;$"></B>.   Ela no  entanto pode  ser alterada
+para considerar  outros caracteres  como separadores. A  altera&#231;&#227;o deve
+ser   feita  como  indicado   abaixo,  usando   um  caso   especial  de
+<I>quoting</I>   (veja    a   se&#231;&#227;o   <B>QUOTING</B>    no   manual
+<I>on-line</I> de <B><I>bash(1)</I></B> para maiores detalhes):
+
+<P>
+<PRE>
+    IFS=$'\n'    # define somente &lt;newline&gt; como separador
+    IFS=$' \t'   # define espaço e tabulação como separadores
+    IFS=$' \t\n' # define espaço, tab e newline como separadores (default)
+</PRE>
+
+<P>
+Veja  a se&#231;&#227;o  <B>Word  Splitting</B> no  manual <I>on-line</I>  de
+<B><I>bash(1)</I></B> para maiores detalhes.
+
+<P>
+Veja o <I>script</I> 8 do exemplo 1 na se&#231;&#227;o de Exemplos.
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Exemplos</A>
+</H1>
+
+<P>
+Exemplos      podem      ser      encontrados      no      link      de
+<A NAME="tex2html5"
+  HREF="../exemplos_12/">Exemplos</A>
+na p&#225;gina da disciplina.
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-06-17
+</ADDRESS>
+</BODY>
+</HTML>

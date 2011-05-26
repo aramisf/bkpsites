@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 11
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 11
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 11
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+<P ALIGN="CENTER"><STRONG>6 de agosto de 2003</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Laborat&#243;rio 11</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+Programa&#231;&#227;o <I>shell</I> - express&#245;es aritm&#233;ticas, leitura de dados, vari&#225;veis de ambiente.</A>
+</H2>
+
+<P>
+Crie  <I>scripts shell</I> que implementem uma  solu&#231;&#227;o para os
+exerc&#237;cios abaixo.
+
+<P>
+<B>ATEN&#199;&#195;O:</B> Cada <I>script</I> deve ser
+executado como se fosse um comando normal do UNIX.
+
+<P>
+
+<OL>
+<LI>Para os usu&#225;rios ainda logados,  mostre na tela o n&#250;mero de horas
+  e  minutos  que este  usu&#225;rio  est&#225;  <I>logado</I>  no sistema.   O
+  usu&#225;rio  &#233;   indicado  pelo   seu  <I>login</I>  no   argumento  do
+  <I>script</I>.    Se  o   usu&#225;rio  n&#227;o   est&#225;   <I>logado</I>,  o
+  <I>script</I> deve mostrar na tela uma mensagem indicando tal fato.
+
+<P>
+<B>DICA:</B> Use <B><I>last(1)</I></B>, <B><I>date(1)</I></B> (op&#231;&#245;es <B>-d</B>
+  e   formato   <B>%s</B>)    e   express&#245;es   aritm&#233;ticas   (se&#231;&#245;es
+  <B>Arithmetic  Expansion</B>  e  <B>ARITHMETIC EVALUATION</B>  em
+  <B><I>bash(1)</I></B>).
+
+<P>
+<I><B><A NAME="tex2html1"
+  HREF="../Scripts/lab_11-01">Solu&#231;&#227;o.</A></B></I>
+
+<P>
+</LI>
+<LI>O  <I>script</I> deve  ler cada linha  de um  arquivo (indicado
+  como argumento) e  escrever a linha de volta  para STDOUT, seguida de
+  uma linha  em branco  extra. Isto  tem o efeito  de criar  linhas com
+  espa&#231;o duplo.
+
+<P>
+Inclua  todo o  c&#243;digo necess&#225;rio  para testar  se  o <I>script</I>
+  recebe o  argumento (um arquivo) na  linha de comando e  se o arquivo
+  especificado existe, antes de executar a tarefa propriamente dita.
+
+<P>
+Uma vez funcionando o <I>script</I>, altere-o de forma que o n&#250;mero
+  de linhas  em branco  a serem inseridas  &#233; definida pela  vari&#225;vel de
+  ambiente <B><FONT FACE="Helvetica, Arial, sans-serif">ESPACO</FONT></B>.
+
+<P>
+Finalmente, altere o  <I>script</I> de forma que quando  o valor de
+  ESPACO for 1 (um), o <I>script</I> remove todas as linhas em branco
+  do arquivo especificado.
+
+<P>
+<I><B><A NAME="tex2html2"
+  HREF="../Scripts/lab_11-02A">Solu&#231;&#227;o 1.</A></B></I> 
+<BR>  <I><B><A NAME="tex2html3"
+  HREF="../Scripts/lab_11-02B">Solu&#231;&#227;o 2.</A></B></I> 
+<BR>  <I><B><A NAME="tex2html4"
+  HREF="../Scripts/lab_11-02C">Solu&#231;&#227;o 3.</A></B></I> 
+<BR>  <I><B><A NAME="tex2html5"
+  HREF="../Scripts/lab_11-02D">Solu&#231;&#227;o 4.</A></B></I>
+
+<P>
+</LI>
+<LI>O <I>script</I> deve ecoar a si mesmo para STDOUT, mas de tr&#225;s
+  para frente, linha por linha.
+
+<P>
+<B>DICAS:</B> O que siginifica o par&#226;metro especial <B>$0</B>?
+  Pense em como <B><I>tail(1)</I></B>, <B><I>head(1)</I></B> e <B><I>basename(1)</I></B>
+  podem ser &#250;teis.
+
+<P>
+<I><B><A NAME="tex2html6"
+  HREF="../Scripts/lab_11-03">Solu&#231;&#227;o.</A></B></I>
+
+<P>
+</LI>
+<LI>Dada uma lista de arquivos como argumento, o <I>script</I> deve
+  verificar o tipo de cada arquivo (usando <B><I>file(1)</I></B>) pelo tipo de
+  compress&#227;o   usado   nele.    A   partir   da&#237;,   o   <I>script</I>
+  automaticamente   chama  o   comando   de  descompress&#227;o   apropriado
+  (<B><I>gunzip(1)</I></B>, <B><I>bunzip2(1)</I></B>,  <B><I>unzip(1)</I></B>).
+
+<P>
+Se  o arquivo  n&#227;o estiver  comprimido, o  <I>script</I>  emite uma
+  mensagem de aviso, mas n&#227;o efetua nenhuma a&#231;&#227;o sobre o dito arquivo.
+
+<P>
+Fa&#231;a      uma      vers&#227;o      deste      <I>script</I>      usando
+  <B>if&nbsp;...&nbsp;elif&nbsp;...&nbsp;fi</B> e outra usando <B>case&nbsp;...&nbsp;esac</B>.
+
+<P>
+<I><B><A NAME="tex2html7"
+  HREF="../Scripts/lab_11-04A">Solu&#231;&#227;o 1.</A></B></I>
+<BR>  <I><B><A NAME="tex2html8"
+  HREF="../Scripts/lab_11-04B">Solu&#231;&#227;o 2.</A></B></I>
+
+<P>
+</LI>
+<LI>Encontre  todos os arquivos  regulares com tamanho maior  que 100
+  Kbytes  a  partir de  seu  diret&#243;rio  de  <I>login</I>.  Para  cada
+  arquivo  encontrado,   d&#234;  ao  usu&#225;rio   a  op&#231;&#227;o  de   remov&#234;-lo  ou
+  comprimi-lo. Escreva  em um arquivo  (e.g., Removidos.log) o  nome de
+  todos os arquivos removidos e a data de remo&#231;&#227;o.
+
+<P>
+<I><B><A NAME="tex2html9"
+  HREF="../Scripts/lab_11-05">Solu&#231;&#227;o.</A></B></I>
+
+<P>
+</LI>
+<LI>Ache o  maior n&#250;mero  dentre  3 (tr&#234;s)  n&#250;meros fornecidos  como
+  argumentos do <I>script</I>. Uma mensagem de erro deve ser mostrada
+  se houver quantidade insuficiente de argumentos.
+
+<P>
+<I><B><A NAME="tex2html10"
+  HREF="../Scripts/lab_11-06">Solu&#231;&#227;o.</A></B></I>
+
+<P>
+</LI>
+<LI>Execute as opera&#231;&#245;es matem&#225;ticas b&#225;sicas:
+  <DL>
+<DT><STRONG>+</STRONG></DT>
+<DD>Adi&#231;&#227;o
+  
+</DD>
+<DT><STRONG>-</STRONG></DT>
+<DD>Subtra&#231;&#227;o
+  
+</DD>
+<DT><STRONG>x</STRONG></DT>
+<DD>Multiplica&#231;&#227;o
+  
+</DD>
+<DT><STRONG>/</STRONG></DT>
+<DD>Divis&#227;o
+  
+</DD>
+<DT><STRONG><B><FONT SIZE=3>^</FONT></B></STRONG></DT>
+<DD>Exponencia&#231;&#227;o
+  
+</DD>
+</DL>
+
+<P>
+Supondo  que  o nome  do  <I>script</I>  &#233;  <B><FONT FACE="Helvetica, Arial, sans-serif">conta</FONT></B>, ele  deve
+  ser usado  da seguinte  forma:
+
+<P>
+<PRE>
+         conta 20 / 3
+         conta 34 x 6
+</PRE>
+
+<P>
+O  <I>script</I> deve  tamb&#233;m testar  se h&#225;  argumentos suficientes
+  para executar a  opera&#231;&#227;o. Use <B>case ...  esac</B>  como parte da
+  solu&#231;&#227;o.
+
+<P>
+<I><B><A NAME="tex2html11"
+  HREF="../Scripts/lab_11-07A">Solu&#231;&#227;o 1.</A></B></I> 
+<BR>  <I><B><A NAME="tex2html12"
+  HREF="../Scripts/lab_11-07B">Solu&#231;&#227;o 2.</A></B></I> 
+<BR>
+<P>
+</LI>
+<LI>Usando  <B><I>mail(1)</I></B>, gerencie  uma lista simples  de endere&#231;os
+  eletr&#244;nicos.  O <I>script</I> automaticamente  envia um  arquivo de
+  texto  espec&#237;fico para  todos os  endere&#231;os que  constam da  lista de
+  endere&#231;os, que est&#225;  em outro arquivo espec&#237;fico. Tanto  o arquivo de
+  texto como  o arquivo  com a lista  de endere&#231;os devem  ser indicados
+  como argumentos do <I>script</I>.
+
+<P>
+<B>DICA:  </B>   A  forma  b&#225;sica   de  uso  de   <B><I>mail(1)</I></B>  &#233;
+  <B>mail&nbsp;&nbsp;[-s&nbsp;assunto]&nbsp;end_eletr&#244;nico&nbsp;&nbsp;&lt;arquivo_com_mensagem</B>:
+<PRE>
+            mail delgado@inf.ufpr.br &lt;mensagem.txt
+            mail -s "Aviso de Concurso" delgado@inf.ufpr.br &lt;mensagem.txt
+</PRE>
+
+<P>
+<I><B><A NAME="tex2html11"
+  HREF="../Scripts/lab_11-08">Solu&#231;&#227;o.</A></B></I> 
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+Conclus&#245;es</A>
+</H2>
+
+<P>
+ASSUNTOS DAS PR&#211;XIMAS AULAS:
+
+<P>
+
+<UL>
+<LI>Arrays e par&#226;metros condicionais;
+</LI>
+<LI>Fun&#231;&#245;es em <B><I>bash(1)</I></B>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-06-28
+</ADDRESS>
+</BODY>
+</HTML>

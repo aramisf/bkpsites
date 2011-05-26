@@ -1,0 +1,29 @@
+#!/bin/bash
+
+for file 
+do
+ 
+  # Do nome do arquivo, extrai a extensao (.*) 
+  # e acrescenta o sufixo ".ppm"
+  interfile="${file%.*}.ppm"
+ 
+  # Do nome do arquivo, extrai a extensao (.*) 
+  # e acrescenta o sufixo ".gif"
+  outfile="${file%.*}.gif"
+
+  case $file in
+      *.gif | *.GIF) continue ;;  # passa para a iteracao seguinte, isto eh
+                                  # processa o arquivo seguinte na linha de comando
+      *.pcx | *.PCX) pcxtoppm $file > $interfile ;;
+      *.jpg | *.JPG) djpeg $file > $interfile ;;
+     *.tif | *.tiff) tifftopnm $file > $interfile ;;
+              *.xpm) xpmtoppm $file > $interfile ;;
+                  *) echo "`basename $0`: $file com formato desconhecido."
+	             exit 1 ;;
+  esac
+
+  # Processa a conversao para .gif
+  ppmquant -quiet 256 $interfile | ppmtogif -quiet > $outfile
+  rm $interfile
+
+done

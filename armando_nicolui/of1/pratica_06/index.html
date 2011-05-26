@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 06
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 08
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 06
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Laborat&#243;rio 06</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+Controle de Processos em UNIX</A>
+</H2>
+
+<P>
+
+<OL>
+<!--
+  <LI><A NAME="item:sessao"></A>  A  partir  de  uma  sess&#227;o  <I>shell</I>,
+  execute   o  comando   <B><I>tty(1)</I></B>  para   determinar  o   nome  de
+  identifica&#231;&#227;o   do   terminal   associado   &#224;  sess&#227;o.   Anote   esta
+  identifica&#231;&#227;o.
+</LI>
+-->
+  <LI><A  NAME="item:sessao">Em uma  sess&atilde;o <I>shell</I>,  verifique com
+       <B><I>ps(1)</I></B>  quais s&#227;o  TODOS os  seus  processos em
+       execu&#231;&#227;o no momento.
+</LI>
+<LI>Na  mesma sess&#227;o  <I>shell</I> usada  item anterior,  inicie em
+     <I>background</I>  2 (dois)  processos  <B><I>emacs(1)</I></B> e  3
+     (tr&#234;s) processos <B><I>xterm(1)</I></B>. Fa&#231;a isto em uma
+     &#250;nica linha de comando.
+<P>
+<B>ATEN&#199;&#195;O:</B> Ao executar  <B><I>emacs(1)</I></B>, use como argumento um
+  nome de  arquivo qualquer. Ao  executar <B><I>xterm(1)</I></B>, use  a op&#231;&#227;o
+  <B>-title</B>  para definir  um  t&#237;tulo diferenciado  para
+  cada     janela      associada.     Uma     vez      em     execu&#231;&#227;o,
+  <I>minimize/iconifique</I> cada janela <B>emacs</B>.
+</LI>
+<!--
+<LI>Em  cada   <B>xterm</B>  iniciado   no  item   anterior,  use
+  <B><I>tty(1)</I></B> para determinar a identifica&#231;&#227;o de cada terminal. Anote
+  estas identifica&#231;&#245;es.
+</LI>
+-->
+<LI>Na    mesma   sess&#227;o    <I>shell</I>   usada    no    item   <A
+     HREF="#item:sessao">1</A>, verifique  com <B><I>ps(1)</I></B> quais
+     s&#227;o   TODOS  os  seus   processos  em   execu&#231;&#227;o  no
+     momento.   Em   seguida,   execute   os  comandos   <B>jobs</B>   e
+     <B>jobs&nbsp;&nbsp;-l</B>.   Observe  a  diferen&#231;a   entre  os
+     resultados   e  diga:   que   informa&#231;&#245;es  adicionais   a
+     op&#231;&#227;o <B>-l</B> do comando <B>jobs</B> fornece?
+</LI>
+<LI>Em uma das sess&#245;es <I>shell</I>, execute a linha de comando
+  abaixo:
+<PRE>
+             xterm ; cat ; emacs &amp;
+</PRE>
+  Explique:
+  
+<OL type="a">
+<LI>Porque  o   comando   <B>emacs</B>  n&#227;o   &#233;  executado   em
+    <I>background</I> logo  que voc&#234; finaliza a linha  de comando com
+    um <IMG
+ WIDTH="85" HEIGHT="23" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="\enter">?
+</LI>
+<LI>Em que momento <B>emacs</B> ser&#225; executado?
+</LI>
+<LI>Como terminar a execu&#231;&#227;o do comando <B>xterm</B> PERMANECENDO
+    na sess&#227;o onde voc&#234; executou a linha de comando?
+</LI>
+<LI>Terminado  o   processo   <B>xterm</B>,  <B><I>cat(1)</I></B>   &#233;
+    executado.  SUSPENDA o processo  associado a <B>cat</B> e execute
+    <B>jobs&nbsp;&nbsp;-l</B>.  Explique   o  que  significam   as  informa&#231;&#245;es
+    exibidas.
+  
+</LI>
+</OL>
+</LI>
+<LI>Em cada  uma das  sess&#245;es <I>shell</I>,  execute  um processo
+  <B>emacs</B> em <I>background</I> e outro em <I>foreground</I>. 
+  Use apenas 1 (uma) linha de comando.
+</LI>
+<LI>A partir da situa&#231;&#227;o  estabelecida no item anterior, fa&#231;a com que
+  todos  os processos <B>emacs</B>  que est&#227;o  em <I>foreground</I>
+  passem para <I>background</I>.
+</LI>
+<LI>Neste ponto,  TODOS  os processos  associados a  <B><I>emacs(1)</I></B>
+  devem  estar em  <I>background</I>.  Fa&#231;a com  que  em cada  sess&#227;o
+  <I>shell</I>  volte   a  existir  um   processo  <B>emacs</B>  em
+  <I>foreground</I>.
+</LI>
+<LI>A partir de uma  sess&#227;o <I>shell</I> qualquer, TERMINE TODOS os
+     processos  (exceto  <B>bash</B>)  iniciados  em  alguma  OUTRA  das
+     sess&#245;es <I>shell</I> ativas no momento.
+
+<P>
+<B>DICA:</B> Use <B><I>ps(1)</I></B>  e a informa&#231;&#227;o fornecida
+     por <B><I>tty(1)</I></B> para  identificar a janela <B>xterm</B> de
+     interesse e seus respectivos processos.
+</LI>
+<LI>Termine todos os seus processos que estejam associados ao comando
+  <B>emacs</B>, usando <B><I>kill(1)</I></B>.
+</LI>
+<LI>Termine todos os seus processos que estejam associados ao comando
+  <B>xterm</B>,   EXCETO   aquele   associado   &#224;   primeira   sess&#227;o
+  <I>shell</I>  iniciada  no   item  <A  HREF="#item:sessao">1</A>.  Use
+     <B><I>kill(1)</I></B>.
+</LI>
+<LI>Como  verificar quais processos  est&#227;o ocupando mais que  50% de
+  CPU, incrementando suas prioridades em 10?
+
+<P>
+<B>DICA:</B> Ver <B><I>ps(1)</I></B> e <B><I>renice(1)</I></B>.
+</LI>
+<LI>Defina um alias que  ao ser executado, termine todos os processos
+  associados  com o navegador  WEB que  voc&#234; usa  e em  seguida execute
+  <I>logout</I> do sistema.
+</LI>
+<LI>Ao  produzir  um  trabalho  para  as  disciplinas  do  DINF  nos
+  computadores   do   LabINF,   voc&#234;   colocou   um   processo   em
+     execu&#231;&#227;o  e  por  algum motivo  ign&#243;bil,  escabroso,
+     enigm&#225;tico  e psicom&#225;tico, sua  sess&#227;o <I>shell</I>,
+     bem  como  sua  intera&#231;&#227;o   com  o  ambiente  de  janelas
+     simplesmente <I>travaram</I>.  Qual  deve ser seu procedimento para
+     fazer  seu terminal  voltar  ao normal  ANTES DA  SOLU&#199;&#195;O
+     DERRADEIRA  DE REINICIAR  O COMPUTADOR?   Lembre que  voc&#234; tem
+     v&#225;rios terminais ao seu lado no LabINF.
+<P>
+<B>DICAS:</B>   Pense  primeiro  em   quais  processos   voc&#234;  deve
+  investigar e qual a ordem em que voc&#234; deve termin&#225;-los.
+
+<P>
+<B>NOTA:</B> O  comando <B><I>ssh(1)</I></B> pode ser usado  para, a partir
+  de uma sess&#227;o <I>shell</I>  iniciada por um outro usu&#225;rio, permitir
+  que   voc&#234;   inicie   uma   sess&#227;o  <I>shell</I>   com   seu
+     <I>login</I>. 
+     <!--
+Como alternativa sempre existe  o comando <B><I>ssh(1)</I></B> com a -->
+     <!--op&#231;&#227;o <B>-l</B>. 
+     -->
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+Conclus&#245;es</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>ASSUNTOS DAS PR&#211;XIMAS AULAS:
+  
+<UL>
+<LI><I>Scripts shell</I>;
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-08-25
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# O maior valor positivo que uma funcao pode retornar eh 256.
+
+return_test ()         # Retorna o que eh passado como argumento.
+{
+  return $1
+}
+
+return_test 27         # OK
+echo $?                # Retorna 27.
+  
+return_test 256        # Ainda OK
+echo $?                # Retorna 256.
+
+return_test 257        # Erro!
+echo $?                # Retorna 1 (codigo de retorno para erro)
+
+return_test -151896    # Numeros negativos grandes funcionam, mas nao como se espera.
+echo $?                # Retorna o ultimo byte do valor -151896.
+
+exit 0

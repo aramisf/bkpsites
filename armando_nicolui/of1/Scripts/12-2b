@@ -1,0 +1,39 @@
+#!/bin/bash
+
+CMD=`basename $0`
+
+# tr(1) eh usado para remover espacos em branco 
+# antes e depois de dígitos numéricos retornados por wc(1).
+LINHAS=`cat $CMD | wc -l | tr -d ' '`
+CARACTERES=`cat $CMD | wc -c | tr -d ' '`
+
+## expr(1) tambem pode ser usado para remover espacos em branco 
+## antes e depois de dígitos numéricos retornados por wc(1).
+## LINHAS=`expr match $(cat $CMD | wc -l ) ' *\([0-9]*\) *'`
+## CARACTERES=`expr match $(cat $CMD | wc -c) ' *\([0-9]*\) *'`
+
+#
+# Inverte o arquivo, linha a linha
+#
+for (( i = 1 ; i <= $LINHAS ; i++ )); do
+    tail -${i} $CMD | head -1
+done >$CMD.linhas
+
+#
+# Inverte o arquivo, caracter a caracter
+#
+for (( i = 1; i <= $CARACTERES; i++ )); do
+    tail -c ${i} $CMD | head -c 1
+done >$CMD.chars
+
+#
+# Inverte o arquivo, palavra a palavra
+#
+PALS=`cat $CMD`
+PALAVRAS=""
+
+for i in $PALS ; do
+    PALAVRAS="$i ${PALAVRAS}"
+done
+
+echo $PALAVRAS >$CMD.words

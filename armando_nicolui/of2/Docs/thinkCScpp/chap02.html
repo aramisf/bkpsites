@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 2: Variables and types</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap03.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap01.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 2</h2>
+
+<h1>Variables and types</h1>
+
+
+<a name=1></a><br>
+<h3>2.1 More output</h3>
+
+<p>As I mentioned in the last chapter, you can put as many statements as you want in <span class=code>main</span>.  For example, to output more than one line:</p>
+
+
+<span class=code>#include &lt;iostream.h&gt;
+<br>
+<br><span class=comment>// main: generate some simple output
+</span><br>
+<br><span class=keyword>void</span> main ()
+<br>{
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Hello, world."</span> &lt;&lt; endl;&nbsp; &nbsp; &nbsp;<span class=comment>// output one line
+</span><br>&nbsp; cout &lt;&lt; <span class=quote>"How are you?"</span> &lt;&lt; endl;&nbsp; &nbsp; &nbsp; <span class=comment>// output another
+</span><br>}
+<br></span><p>As you can see, it is legal to put comments at the end of a line, as well as on a line by themselves.</p>
+
+
+
+<p>The phrases that appear in quotation marks are called <b>strings</b>, because they are made up of a sequence (string) of letters.  Actually, strings can contain any combination of letters, numbers, punctuation marks, and other special characters.</p>
+
+
+
+<p>Often it is useful to display the output from multiple output statements all on one line.  You can do this by leaving out the first <span class=code>endl</span>:</p>
+
+
+<span class=code><span class=keyword>void</span> main ()
+<br>{
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Goodbye, "</span>;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"cruel world!"</span> &lt;&lt; endl;
+<br>}
+<br></span><p>In this case the output appears on a single line as <span class=code>Goodbye, cruel world!</span>.  Notice that there is a space between the word "Goodbye," and the second quotation mark. This space appears in the output, so it affects the behavior of the program.</p>
+
+<p>Spaces that appear outside of quotation marks generally do not affect the behavior of the program.  For example, I could have written:</p>
+
+
+<span class=code><span class=keyword>void</span> main ()
+<br>{
+<br>cout&lt;&lt;<span class=quote>"Goodbye, "</span>;
+<br>cout&lt;&lt;<span class=quote>"cruel world!"</span>&lt;&lt;endl;
+<br>}
+<br></span><p>This program would compile and run just as well as the original. The breaks at the ends of lines (newlines) do not affect the program's behavior either, so I could have written:</p>
+
+
+<span class=code><span class=keyword>void</span> main(){cout&lt;&lt;<span class=quote>"Goodbye, "</span>;cout&lt;&lt;<span class=quote>"cruel world!"</span>&lt;&lt;endl;}
+<br></span><p>That would work, too, although you have probably noticed that the program is getting harder and harder to read.  Newlines and spaces are useful for organizing your program visually, making it easier to read the program and locate syntax errors.</p>
+
+<a name=2></a><br>
+<h3>2.2 Values</h3>
+
+<p>A value is one of the fundamental things---like a letter or a number---that a program manipulates.  The only values we have manipulated so far are the string values we have been outputting, like <span class=code><span class=quote>"Hello, world."</span></span>.  You (and the compiler) can identify string values because they are enclosed in quotation marks.</p>
+
+<p>There are other kinds of values, including integers and characters. An integer is a whole number like 1 or 17.  You can output integer values the same way you output strings:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; 17 &lt;&lt; endl;
+<br></span><p>A character value is a letter or digit or punctuation mark enclosed in single quotes, like <span class=code><span class=quote>'a'</span></span> or <span class=code><span class=quote>'5'</span></span>. You can output character values the same way:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; <span class=quote>'}'</span> &lt;&lt; endl;
+<br></span><p>This example outputs a single close squiggly-brace on a line by itself.</p>
+
+<p>It is easy to confuse different types of values, like <span class=code><span class=quote>"5"</span></span>, <span class=code><span class=quote>'5'</span></span> and <span class=code>5</span>, but if you pay attention to the punctuation, it should be clear that the first is a string, the second is a character and the third is an integer.  The reason this distinction is important should become clear soon.</p>
+
+<a name=3></a><br>
+<h3>2.3 Variables</h3>
+
+<p>One of the most powerful features of a programming language is the ability to manipulate <b>variables</b>.  A variable is a named location that stores a value.</p>
+
+<p>Just as there are different types of values (integer, character, etc.), there are different types of variables.  When you create a new variable, you have to declare what type it is.  For example, the character type in C++ is called <span class=code><span class=keyword>char</span></span>.  The following statement creates a new variable named <span class=code>fred</span> that has type <span class=code><span class=keyword>char</span></span>.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>char</span> fred;
+<br></span><p>This kind of statement is called a <b>declaration</b>.</p>
+
+<p>The type of a variable determines what kind of values it can store.  A <span class=code><span class=keyword>char</span></span> variable can contain characters, and it should come as no surprise that <span class=code><span class=keyword>int</span></span> variables can store integers.</p>
+
+<p>There are several types in C++ that can store string values, but we are going to skip that for now (see <a href="chap07.html">Chapter 7</a>).</p>
+
+
+
+<p>To create an integer variable, the syntax is</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> bob;
+<br></span><p>where <span class=code>bob</span> is the arbitrary name you made up for the variable.  In general, you will want to make up variable names that indicate what you plan to do with the variable.  For example, if you saw these variable declarations:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>char</span> firstLetter;
+<br>&nbsp; &nbsp; <span class=keyword>char</span> lastLetter;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> hour, minute;
+<br></span><p>you could probably make a good guess at what values would be stored in them.  This example also demonstrates the syntax for declaring multiple variables with the same type: <span class=code>hour</span> and <span class=code>second</span> are both integers (<span class=code><span class=keyword>int</span></span> type).</p>
+
+<a name=4></a><br>
+<h3>2.4 Assignment</h3>
+
+<p>Now that we have created some variables, we would like to store values in them.  We do that with an <b>assignment statement</b>.</p>
+
+
+<span class=code>&nbsp; &nbsp; firstLetter = <span class=quote>'a'</span>;&nbsp; &nbsp;<span class=comment>// give firstLetter the value 'a'
+</span><br>&nbsp; &nbsp; hour = 11;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// assign the value 11 to hour
+</span><br>&nbsp; &nbsp; minute = 59;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// set minute to 59
+</span><br></span><p>This example shows three assignments, and the comments show three different ways people sometimes talk about assignment statements.  The vocabulary can be confusing here, but the idea is straightforward:</p>
+
+<ul>
+
+<li>When you declare a variable, you create a named storage location.</li>
+
+<li>When you make an assignment to a variable, you give it a value.</li>
+
+</ul>
+
+<p>A common way to represent variables on paper is to draw a box with the name of the variable on the outside and the value of the variable on the inside.  This kind of figure is called a <b>state diagram</b> because is shows what state each of the variables is in (you can think of it as the variable's "state of mind"). This diagram shows the effect of the three assignment statements:</p>
+
+<p align="center"><img src="images/assign.png"></p>
+
+<p>I sometimes use different shapes to indicate different variable types.  These shapes should help remind you that one of the rules in C++ is that a variable has to have the same type as the value you assign it.  For example, you cannot store a string in an <span class=code><span class=keyword>int</span></span> variable.  The following statement generates a compiler error.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> hour;
+<br>&nbsp; hour = <span class=quote>"Hello."</span>;&nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG !!
+</span><br></span><p>This rule is sometimes a source of confusion, because there are many ways that you can convert values from one type to another, and C++ sometimes converts things automatically.  But for now you should remember that as a general rule variables and values have the same type, and we'll talk about special cases later.</p>
+
+<p>Another source of confusion is that some strings <i>look</i> like integers, but they are not.  For example, the string <span class=code><span class=quote>"123"</span></span>, which is made up of the characters <span class=code>1</span>, <span class=code>2</span> and <span class=code>3</span>, is not the same thing as the <i>number</i> <span class=code>123</span>. This assignment is illegal:</p>
+
+
+<span class=code>&nbsp; minute = <span class=quote>"59"</span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// WRONG!
+</span><br></span><a name=5></a><br>
+<h3>2.5 Outputting variables</h3>
+
+<p>You can output the value of a variable using the same commands we used to output simple values.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>char</span> colon;
+<br>
+<br>&nbsp; hour = 11;
+<br>&nbsp; minute = 59;
+<br>&nbsp; colon = <span class=quote>':'</span>;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"The current time is "</span>;
+<br>&nbsp; cout &lt;&lt; hour;
+<br>&nbsp; cout &lt;&lt; colon;
+<br>&nbsp; cout &lt;&lt; minute;
+<br>&nbsp; cout &lt;&lt; endl;
+<br></span><p>This program creates two integer variables named <span class=code>hour</span> and <span class=code>minute</span>, and a character variable named <span class=code>colon</span>.  It assigns appropriate values to each of the variables and then uses a series of output statements to generate the following:</p>
+
+
+<span class=code>The current time is 11:59
+<br></span><p>When we talk about "outputting a variable," we mean outputting the <i>value</i> of the variable.  To output the <i>name</i> of a variable, you have to put it in quotes.  For example: <span class=code>cout &lt;&lt; <span class=quote>"hour"</span>;</span></p>
+
+<p>As we have seen before, you can include more than one value in a single output statement, which can make the previous program more concise:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; <span class=keyword>char</span> colon;
+<br>
+<br>&nbsp; hour = 11;
+<br>&nbsp; minute = 59;
+<br>&nbsp; colon = <span class=quote>':'</span>;
+<br>
+<br>&nbsp; cout &lt;&lt; <span class=quote>"The current time is "</span> &lt;&lt; hour &lt;&lt; colon &lt;&lt; minute &lt;&lt; endl;
+<br></span><p>On one line, this program outputs a string, two integers, a character, and the special value <span class=code>endl</span>.  Very impressive!</p>
+
+<a name=6></a><br>
+<h3>2.6 Keywords</h3>
+
+<p>A few sections ago, I said that you can make up any name you want for your variables, but that's not quite true.  There are certain words that are reserved in C++ because they are used by the compiler to parse the structure of your program, and if you use them as variable names, it will get confused. These words, called <b>keywords</b>, include <span class=code><span class=keyword>int</span></span>, <span class=code><span class=keyword>char</span></span>, <span class=code><span class=keyword>void</span></span>, <span class=code><span class=keyword>return</span></span> and many more.</p>
+
+<p>The complete list of keywords is included in the C++ Standard, which is the official language definition adopted by the the International Organization for Standardization (ISO) on September 1, 1998.  You can download a copy electronically from</p>
+
+
+<p><a href="http://www.ansi.org/">http://www.ansi.org/</a></p><p>Rather than memorize the list, I would suggest that you take advantage of a feature provided in many development environments: code highlighting.  As you type, different parts of your program should appear in different colors.  For example, keywords might be blue, strings red, and other code black.  If you type a variable name and it turns blue, watch out!  You might get some strange behavior from the compiler.</p>
+
+<a name=7></a><br>
+<h3>2.7 Operators</h3>
+
+<p><b>Operators</b> are special symbols that are used to represent simple computations like addition and multiplication.  Most of the operators in C++ do exactly what you would expect them to do, because they are common mathematical symbols.  For example, the operator for adding two integers is <span class=code>+</span>.</p>
+
+<p>The following are all legal C++ expressions whose meaning is more or less obvious:</p>
+
+
+<span class=code>1+1&nbsp; &nbsp; &nbsp; &nbsp; hour-1&nbsp; &nbsp; &nbsp; &nbsp;hour*60 + minute&nbsp; &nbsp; &nbsp;minute/60
+<br></span><p>Expressions can contain both variables names and integer values.  In each case the name of the variable is replaced with its value before the computation is performed.</p>
+
+
+
+<p>Addition, subtraction and multiplication all do what you expect, but you might be surprised by division.  For example, the following program:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> hour, minute;
+<br>&nbsp; hour = 11;
+<br>&nbsp; minute = 59;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Number of minutes since midnight: "</span>;
+<br>&nbsp; cout &lt;&lt; hour*60 + minute &lt;&lt; endl;
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Fraction of the hour that has passed: "</span>;
+<br>&nbsp; cout &lt;&lt; minute/60 &lt;&lt; endl;
+<br></span><p>would generate the following output:</p>
+
+
+<span class=code>Number of minutes since midnight: 719
+<br>Fraction of the hour that has passed: 0
+<br></span><p>The first line is what we expected, but the second line is odd.  The value of the variable <span class=code>minute</span> is 59, and 59 divided by 60 is 0.98333, not 0.  The reason for the discrepancy is that C++ is performing <b>integer division</b>.</p>
+
+
+
+<p>When both of the <b>operands</b> are integers (operands are the things operators operate on), the result must also be an integer, and by definition integer division always rounds <i>down</i>, even in cases like this where the next integer is so close.</p>
+
+<p>A possible alternative in this case is to calculate a percentage rather than a fraction:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; <span class=quote>"Percentage of the hour that has passed: "</span>;
+<br>&nbsp; cout &lt;&lt; minute*100/60 &lt;&lt; endl;
+<br></span><p>The result is:</p>
+
+
+<span class=code>Percentage of the hour that has passed: 98
+<br></span><p>Again the result is rounded down, but at least now the answer is approximately correct.  In order to get an even more accurate answer, we could use a different type of variable, called floating-point, that is capable of storing fractional values. We'll get to that in the next chapter.</p>
+
+<a name=8></a><br>
+<h3>2.8 Order of operations</h3>
+
+<p>When more than one operator appears in an expression the order of evaluation depends on the rules of <b>precedence</b>.  A complete explanation of precedence can get complicated, but just to get you started:</p>
+
+<ul>
+
+<li>Multiplication and division happen before addition and subtraction.  So <span class=code>2*3-1</span> yields 5, not 4, and <span class=code>2/3-1</span> yields -1, not 1 (remember that in integer division <span class=code>2/3</span> is 0).</li>
+
+<li>If the operators have the same precedence they are evaluated from left to right.  So in the expression <span class=code>minute*100/60</span>, the multiplication happens first, yielding <span class=code>5900/60</span>, which in turn yields <span class=code>98</span>.  If the operations had gone from right to left, the result would be <span class=code>59*1</span> which is <span class=code>59</span>, which is wrong.</li>
+
+<li>Any time you want to override the rules of precedence (or you are not sure what they are) you can use parentheses.  Expressions in parentheses are evaluated first, so <span class=code>2 * (3-1)</span> is 4. You can also use parentheses to make an expression easier to read, as in <span class=code>(minute * 100) / 60</span>, even though it doesn't change the result.</li>
+
+</ul>
+
+<a name=9></a><br>
+<h3>2.9 Operators for characters</h3>
+
+<p>Interestingly, the same mathematical operations that work on integers also work on characters.  For example,</p>
+
+
+<span class=code>&nbsp; <span class=keyword>char</span> letter;
+<br>&nbsp; letter = <span class=quote>'a'</span> + 1;
+<br>&nbsp; cout &lt;&lt; letter &lt;&lt; endl;
+<br></span><p>outputs the letter <span class=code>b</span>.  Although it is syntactically legal to multiply characters, it is almost never useful to do it.</p>
+
+<p>Earlier I said that you can only assign integer values to integer variables and character values to character variables, but that is not completely true.  In some cases, C++ converts automatically between types.  For example, the following is legal.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> number;
+<br>&nbsp; number = <span class=quote>'a'</span>;
+<br>&nbsp; cout &lt;&lt; number &lt;&lt; endl;
+<br></span><p>The result is 97, which is the number that is used internally by C++ to represent the letter <span class=code><span class=quote>'a'</span></span>.  However, it is generally a good idea to treat characters as characters, and integers as integers, and only convert from one to the other if there is a good reason.</p>
+
+<p>Automatic type conversion is an example of a common problem in designing a programming language, which is that there is a conflict between <b>formalism</b>, which is the requirement that formal languages should have simple rules with few exceptions, and <b>convenience</b>, which is the requirement that programming languages be easy to use in practice.</p>
+
+<p>More often than not, convenience wins, which is usually good for expert programmers, who are spared from rigorous but unwieldy formalism, but bad for beginning programmers, who are often baffled by the complexity of the rules and the number of exceptions.  In this book I have tried to simplify things by emphasizing the rules and omitting many of the exceptions.</p>
+
+<a name=10></a><br>
+<h3>2.10 Composition</h3>
+
+<p>So far we have looked at the elements of a programming language---variables, expressions, and statements---in isolation, without talking about how to combine them.</p>
+
+<p>One of the most useful features of programming languages is their ability to take small building blocks and <b>compose</b> them.  For example, we know how to multiply integers and we know how to output values; it turns out we can do both at the same time:</p>
+
+
+<span class=code>&nbsp; &nbsp; cout &lt;&lt; 17 * 3;
+<br></span><p>Actually, I shouldn't say "at the same time," since in reality the multiplication has to happen before the output, but the point is that any expression, involving numbers, characters, and variables, can be used inside an output statement.  We've already seen one example:</p>
+
+
+<span class=code>&nbsp; cout &lt;&lt; hour*60 + minute &lt;&lt; endl;
+<br></span><p>You can also put arbitrary expressions on the right-hand side of an assignment statement:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> percentage;
+<br>&nbsp; percentage = (minute * 100) / 60;
+<br></span><p>This ability may not seem so impressive now, but we will see other examples where composition makes it possible to express complex computations neatly and concisely.</p>
+
+<p>WARNING: There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a <i>variable</i> name, not an expression. That's because the left side indicates the storage location where the result will go.  Expressions do not represent storage locations, only values.  So the following is illegal:  <span class=code>minute+1 = hour;</span>.</p>
+
+<a name=11></a><br>
+<h3>2.11 Glossary</h3>
+
+<dl>
+
+<dt>variable</dt>
+<dd>A named storage location for values.  All variables have a type, which determines which values it can store.</dd>
+
+<dt>value</dt>
+<dd>A letter, or number, or other thing that can be stored in a variable.</dd>
+
+<dt>type</dt>
+<dd>A set of values.  The types we have seen are integers (<span class=code><span class=keyword>int</span></span> in C++) and characters (<span class=code><span class=keyword>char</span></span> in C++).</dd>
+
+<dt>keyword</dt>
+<dd>A reserved word that is used by the compiler to parse programs.  Examples we have seen include <span class=code><span class=keyword>int</span></span>, <span class=code><span class=keyword>void</span></span> and <span class=code>endl</span>.</dd>
+
+<dt>statement</dt>
+<dd>A line of code that represents a command or action.  So far, the statements we have seen are declarations, assignments, and output statements.</dd>
+
+<dt>declaration</dt>
+<dd>A statement that creates a new variable and determines its type.</dd>
+
+<dt>assignment</dt>
+<dd>A statement that assigns a value to a variable.</dd>
+
+<dt>expression</dt>
+<dd>A combination of variables, operators and values that represents a single result value.  Expressions also have types, as determined by their operators and operands.</dd>
+
+<dt>operator</dt>
+<dd>A special symbol that represents a simple computation like addition or multiplication.</dd>
+
+<dt>operand</dt>
+<dd>One of the values on which an operator operates.</dd>
+
+<dt>precedence</dt>
+<dd>The order in which operations are evaluated.</dd>
+
+<dt>composition</dt>
+<dd>The ability to combine simple expressions and statements into compound statements and expressions in order to represent complex computations concisely.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap03.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap01.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

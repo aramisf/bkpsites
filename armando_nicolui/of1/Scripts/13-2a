@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ `expr match $STRING 'sim\|SIM\|Sim\|s'` -gt 0 ]]; then
+     echo "OCORRE !!!"
+else
+     echo "NAO OCORRE !!!"
+fi

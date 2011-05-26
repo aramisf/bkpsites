@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>31 Alocação dinâmica de memória</TITLE>
+<META NAME="description" CONTENT="31 Alocação dinâmica de memória">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node32.html">
+<LINK REL="previous" HREF="notas_proc-node30.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node32.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html636"
+  HREF="notas_proc-node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html634"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html628"
+  HREF="notas_proc-node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html637"
+  HREF="notas_proc-node32.html">Bibliografia</A>
+<B>Up:</B> <A NAME="tex2html635"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html629"
+  HREF="notas_proc-node30.html">30 Argumentos de linha</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html638"
+  HREF="notas_proc-node31.html#SECTION000311000000000000000">31.1 <TT>malloc</TT> e <TT>calloc</TT></A>
+<LI><A NAME="tex2html639"
+  HREF="notas_proc-node31.html#SECTION000312000000000000000">31.2 <TT>realloc</TT></A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000310000000000000000">
+31 Aloca&#231;&#227;o din&#226;mica de mem&#243;ria</A>
+</H1>
+
+<P>
+Quando voc&#234; declara um <I>array</I> em um programa C, voc&#234; deve
+informar quantos elementos devem  ser reservados para este
+<I>array</I>. Se voc&#234; conhece este n&#250;mero <I>a priori</I>, tudo
+est&#225; bem.
+
+<P>
+No entanto,  o tamanho de  um <I>array</I> pode ser  desconhecido por
+uma s&#233;rie de  fatores. Por exemplo, se voc&#234; deseja  ler todas as linhas
+de um  arquivo e armazen&#225;-los em  um <I>array</I> de  seu programa, o
+tamanho de  mem&#243;ria necess&#225;rio  depender&#225; do tamanho  do arquivo.  E se
+este  tamanho variar  muito de  um arquivo  para outro,  voc&#234;  ter&#225; que
+reservar  espa&#231;o suficiente para  acomodar o  maior tamanho  de arquivo
+poss&#237;vel, o que  &#233; um desperd&#237;cio se seu programa  vai lidar com muitos
+arquivos  de tamanho  reduzido  e apenas  alguns  arquivos com  tamanho
+grande.
+
+<P>
+Definir um  tamanho m&#225;ximo  para o suas  estruturas de dados  aumenta o
+tamanho de seu  programa. Em um ambiente multitarefa  como UNIXeste seu
+programa estar&#225; competingo por espa&#231;o livre de mem&#243;ria. Se seu programa
+aloca espa&#231;o  desnecessariamente, isto  quer dizer que  menos processos
+poder&#227;o  ocupar a mem&#243;ria  para serem  executados. Portanto,  durante a
+ger&#234;ncia  do  processo  de  sua  tarefa  pelo  sistema  operacional,  a
+trasnfer&#234;ncia  do  programa  do  disco  para  a  mem&#243;ria  e  vice-versa
+(processo conhecido como <I>swapping</I>), ir&#225; demorar mais.
+
+<P>
+Para permitir que o espa&#231;o para estruturas de dados de um programa
+possam ser alocados durante a execu&#231;&#227;o do mesmo &#233; que a linguagem C
+define fun&#231;&#245;es de biblioteca chamadas <B>fun&#231;&#245;es de aloca&#231;&#227;o
+  din&#226;mica de mem&#243;ria</B>.
+
+<P>
+Estas fun&#231;&#245;es s&#227;o:
+<PRE>
+          #include &lt;stdlib.h&gt;
+
+          void *malloc (int tamanho)
+          void *calloc (int numero_elementos, int tamanho_elemento)
+          void *realloc (void *area_alocada, int novo_tamanho)
+          void free (void *area_alocada)
+</PRE>
+
+<P>
+As  fun&#231;&#245;es <TT>malloc()</TT> e  <TT>calloc()</TT> s&#227;o  usadas para  alocar
+espa&#231;o para seus  dados uma vez que voc&#234;  determinou quanto espa&#231;o voc&#234;
+precisa. E se  sua estimativa se revela muito  grande ou muito pequena,
+voc&#234;  pode mudar  o  tamanho deste  espa&#231;o  alocado com  a fun&#231;&#227;o  <TT>realloc</TT>. Finalmente, uma vez que  o programa terminou de usar o espa&#231;o
+alocado,  a fun&#231;&#227;o  <TT>free</TT>  pode ser  usada para  liberar  o espa&#231;o
+previamente  alocado.  Observe-se  a  diretiva  <B>#include</B>  que
+necess&#225;ria para o uso das fun&#231;&#245;es de aloca&#231;&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION000311000000000000000">
+31.1 <TT>malloc</TT> e <TT>calloc</TT></A>
+</H2>
+
+<P>
+As fun&#231;&#245;es <TT>malloc</TT> e <TT>calloc</TT> alocam  espa&#231;o de mem&#243;ria. <TT>  malloc</TT> recebe como  argumento o n&#250;mero de bytes  a ser alocado. <TT>  calloc</TT> recebe como  primeiro argumento o n&#250;mero de  elementos a aser
+  alocado.  O segundo  argumento  indica  o tamanho  em  bytes de  cada
+  elemento. <TT>calloc</TT> garante que  o espa&#231;o alocado  &#233; inicializado
+  com zeros, enquanto que <TT>malloc</TT> n&#227;o.
+
+<P>
+Estas duas  fun&#231;&#245;es retornam  um ponteiro para  a nova &#225;rea  alocada. O
+tipo do  ponteiro por conven&#231;&#227;o  &#233; <TT>char  *</TT>. Caso o  ponteiro seja
+usado para apontar para outro  tipo qualquer, um <I>cast</I> no valor
+retornado deve ser usado. Observe o exemplo abaixo:
+
+<P>
+<PRE>
+       #include &lt;stdlib.h&gt;
+
+       char buf[30],
+            *memchar;
+       int *memint, i;
+
+       ....
+
+       memchar = malloc (sizeof(buf));  
+
+       if (memchar == NULL) {
+          printf ("Erro em alocacao de memoria\n");
+          exit (1);
+       }
+       else {
+           memcpy (memchar, buf, sizeof(buf));  /* copia o conteúdo de
+                                                 * buf para memchar
+                                                 */
+       }
+
+       memint = (int *) calloc (1, sizeof(int));  
+
+       if (memint == NULL) {
+          printf ("Erro em alocacao de inteiros\n");
+          exit (1);
+       }
+       else {
+             i = 0;
+             do {
+                 scanf("%d", memint + i);
+
+                 if (memint[i]) {
+                   memint = (int *) realloc (memint, (i + 2) * sizeof(int));
+
+                   if (memint == NULL)
+                      break;
+                 }
+             } while (memint[i++]);          
+       }
+</PRE>
+
+<P>
+Oberve  no exemplo  acima o  uso de  <I>cast</I> na  chamada  de <TT>calloc</TT>.   Como  o ponteiro  retornado  ser&#225;  usado  para apontar  para
+inteiros,  o retorno  da fun&#231;&#227;o  deve ser  convertido de  acordo  com o
+<I>cast</I>.
+
+<P>
+Quando n&#227;o h&#225; sucesso na aloca&#231;&#227;o de mem&#243;ria, as fun&#231;&#245;es <TT>malloc</TT> e
+<TT>calloc</TT> retornam  um ponteiro  nulo, representado  pela constante
+<B>NULL</B>.   Assim, toda  vez que  um programa  usa  estas fun&#231;&#245;es,
+deve-se testar  o valor  retornado para verificar  se houve  sucesso na
+aloca&#231;&#227;o. &#201; o que acontece no  exemplo acima ao se testar os valores de
+<TT>memchar</TT> e  <TT>memint</TT> imediatamente ap&#243;s a  chamada das fun&#231;&#245;es
+de aloca&#231;&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION000312000000000000000">
+31.2 <TT>realloc</TT></A>
+</H2>
+
+<P>
+A fun&#231;&#227;o  <TT>realloc</TT>  &#233; usada para  redimensionar um  espa&#231;o alocado
+previamente com  <TT>malloc</TT> ou  <TT>calloc</TT>. Seus argumentos  s&#227;o um
+ponteiro  para o  IN&#205;CIO  de uma  &#225;rea  previamente alocada,  e o  novo
+tamanho, que pode ser maior ou menor que o tamanho original.
+
+<P>
+<TT>realloc</TT> retorna  um ponteiro  para  a nova  &#225;rea alocada.   Este
+ponteiro  pode ser igual  ao ponteiro  original se  o novo  tamanho for
+menor que o tamanho original, e diferente do ponteiro original se o novo
+tamanho  for maior  que o  tamanho  original. Neste  &#250;ltimo caso,  <TT>realloc</TT> copia os dados da &#225;rea original para a nova &#225;rea.
+
+<P>
+O &#250;ltimo bloco <TT>else</TT> no  exemplo da se&#231;&#227;o anterior &#233; um exemplo de
+uso da fun&#231;&#227;o <TT>realloc</TT>.  Neste bloco, usa-se a fun&#231;&#227;o<TT>realloc</TT>
+para  aumentar   de  1  (um)  o  tamanho   do  <I>array</I>  din&#226;mico
+representado por <TT>memint</TT>.
+
+<P>
+
+<P>
+
+<HR>
+<A NAME="tex2html636"
+  HREF="notas_proc-node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html634"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html628"
+  HREF="notas_proc-node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html637"
+  HREF="notas_proc-node32.html">Bibliografia</A>
+<B>Up:</B> <A NAME="tex2html635"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html629"
+  HREF="notas_proc-node30.html">30 Argumentos de linha</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+NUMNOMES=`grep '\<'$1'	' Arquivos/telefones.txt | wc -l`
+
+EXIT_STATUS=0
+
+echo ""
+
+if [[ $NUMNOMES -eq 0 ]]; then
+    echo "Não foi encontrada nenhuma pessoa com sobrenome \"$1\"."
+    EXIT_STATUS=1
+elif [[ $NUMNOMES -eq 1 ]]; then
+    grep -v "$1" Arquivos/telefones.txt >tmp
+    mv tmp Arquivos/telefones.txt
+    echo "$1 removido."
+    EXIT_STATUS=0
+else
+    grep '\<'$1'	' Arquivos/telefones.txt | cut -f1 |
+    while read NOME
+    do
+      echo -n "Deseja remover \"$NOME\" [S/n]: "
+      read </dev/tty
+
+      if [[ "${REPLY}" == S || "${REPLY}" == s ]]; then
+	    grep -v "$NOME" Arquivos/telefones.txt >tmp
+	    mv tmp Arquivos/telefones.txt
+	    EXIT_STATUS=0
+	    echo "$NOME removido."
+      fi
+    done
+fi
+
+echo ""
+exit $EXIT_STATUS
+

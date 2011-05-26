@@ -1,0 +1,612 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 11
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 11
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 11
+<BR>
+2&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Programa&#231;&#227;o Shell - leitura de dados, vari&#225;veis de ambiente.</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Leitura de Dados</A>
+</H2>
+
+<P>
+Como  visto  na aula  anterior,  o  comando  interno <B>read</B>  de
+<B><I>bash(1)</I></B> &#233;  usado para ler  <I>strings</I> do teclado.  A forma
+b&#225;sica para <B>read</B> &#233;:
+
+<P>
+<PRE>
+      read [-t timeout] [-p prompt] [-s] [var1] [var2] ...
+</PRE>
+
+<P>
+onde:
+<DL>
+<DT><STRONG>-p <I>prompt</I> </STRONG></DT>
+<DD>mostra <I>prompt</I> em STDERR sem mudar
+  linha, antes de efetivamente efetuar a leitura;
+</DD>
+<DT><STRONG>-t <I>timeout</I> </STRONG></DT>
+<DD>se decorridos <I>timeout</I> segundos n&#227;o
+  h&#225; entrada de dados para <B>read</B>, este termina com falha (i.e.,
+  <I>status</I> n&#227;o &#233; 0 (zero));
+</DD>
+<DT><STRONG>-s </STRONG></DT>
+<DD>caracteres n&#227;o s&#227;o ecoados ao serem digitados
+  (<I>silent mode</I>).
+</DD>
+</DL>
+
+<P>
+Dos  dados digitados,  cada palavra  &#233;  assinalada como  valor de  cada
+Vari&#225;vel de Ambiente  especificada (i.e., <I>var1</I>, <I>var2</I>,
+etc.). Se n&#227;o s&#227;o fornecidas vari&#225;veis, o valor &#233; assinalado &#224; vari&#225;vel
+<B><FONT FACE="Helvetica, Arial, sans-serif">REPLY</FONT></B>.
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>read -p "Indique Nome, Idade e Endereco: " NOME IDADE END</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">Indique Nome, Idade e Endereco: Armando 18 Rua dos Alfeneiros, 25</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $NOME</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">Armando</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $IDADE</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">18</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $END</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">Rua dos Alfeneiros, 25</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+Mais detalhes  sobre o comando interno <B>read</B>  podem ser vistos
+na se&#231;&#227;o <B>SHELL BUILTIN  COMMANDS</B> do manual <I>on-line</I> de
+<B><I>bash(1)</I></B>.
+
+<P>
+
+<H3><A NAME="SECTION00011100000000000000">
+1.1.1 Lendo dados de arquivos</A>
+</H3>
+
+<P>
+O  comando  <B>read</B> pode  tamb&#233;m  ser  tamb&#233;m  usado par  ler  de
+arquivos, redirecionando-se STDIN ou usando-se <I>pipeline</I>.
+
+<P>
+<PRE>
+        read FONE &lt; fones.txt
+</PRE>
+
+<P>
+<B>OBS.:</B> O uso de redirecionamento de STDIN com <B>read</B> n&#227;o
+funciona em vers&#245;es de UNIX anteriores a System V Release 2.
+
+<P>
+O   exemplo    acima   l&#234;   apenas    1   (uma)   linha    do   arquivo
+<B><FONT FACE="Helvetica, Arial, sans-serif">fones.txt</FONT></B>.  caso se  queira  ler v&#225;rias  linhas  em seq&#252;&#234;ncia  e
+efetuar alguma opera&#231;&#227;o sobre cada uma, o exemplo acima n&#227;o funciona. A
+solu&#231;&#227;o &#233; mostrada abaixo:
+
+<P>
+<PRE>
+        cat fones.txt |
+        while read ; do
+           echo $REPLY
+        done
+</PRE>
+
+<P>
+Neste caso, o nome do arquivo de  onde se l&#234; est&#225; evidente no in&#237;cio do
+<I>pipeline</I>, evitando confus&#245;es.
+
+<P>
+<B>NOTA:</B>   Pode-se   alterar    a   solu&#231;&#227;o   acima   para   usar
+redirecionamento, embora  n&#227;o seja recomendado, pois o  nome do arquivo
+fica pouco evidente no c&#243;digo do <I>script</I>:
+
+<P>
+<PRE>
+        while read ; do
+           echo $REPLY
+        done &lt; fones.txt
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 Vari&#225;veis Locais e Exportadas</A>
+</H2>
+
+<P>
+Suponha o <I>script</I> <B><FONT FACE="Helvetica, Arial, sans-serif">varecho</FONT></B>, que apenas mostre o valor de
+uma vari&#225;vel de ambiente <B><FONT FACE="Helvetica, Arial, sans-serif">x</FONT></B>:
+
+<P>
+
+       <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho</B></FONT>
+<BR>
+       <FONT FACE="Times New Roman,Times">echo ''VAR = :$x:''</FONT>
+<BR>
+       <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>x=100</B></FONT>
+<BR>
+       <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho</B></FONT>
+<BR>
+       <FONT FACE="Times New Roman,Times">VAR = ::</FONT>
+<BR>
+       <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+Como   se  v&#234;   acima,   <B><FONT FACE="Helvetica, Arial, sans-serif">varecho</FONT></B>  n&#227;o   conhecia   o  valor   de
+<B><FONT FACE="Helvetica, Arial, sans-serif">x</FONT></B>. Assim, seu valor na  execu&#231;&#227;o do <I>script</I> &#233; nulo e nada
+&#233;  mostrado.   Dizemos que  a  vari&#225;vel  <B><FONT FACE="Helvetica, Arial, sans-serif">x</FONT></B>  que foi  definida  no
+<I>shell</I>  de  <I>login</I> &#233;  uma  vari&#225;vel <B>local</B>.  Da
+mesma  forma,   a  vari&#225;vel  <B><FONT FACE="Helvetica, Arial, sans-serif">x</FONT></B>  definida   no  <I>script</I>  &#233;
+<B>local</B> em rela&#231;&#227;o &#224; execu&#231;&#227;o do <I>script</I>.
+
+<P>
+Outro exemplo:
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho2</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x=50</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''VAR = :$x:''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>x=100</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho2</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">VAR = :50:</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo ''$x''</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">100</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+Note-se que o <I>script</I> <B><FONT FACE="Helvetica, Arial, sans-serif">varecho2</FONT></B> n&#227;o mudou o valor de
+<B><FONT FACE="Helvetica, Arial, sans-serif">x</FONT></B> no <I>shell</I> de <I>login</I>.
+
+<P>
+Este  comportamento &#233;  devido ao  fato que  <I>scripts  shell</I> s&#227;o
+executados como <I>subshells</I> (processos diferentes). Toda vez que
+um  <I>subshell</I>  &#233;  iniciado,  ele  &#233; executado  em  um  ambiente
+totalmente   novo,   com  seu   pr&#243;prio   conjunto   de  vari&#225;veis   de
+ambiente.  <B>Um   <I>subshell</I>  n&#227;o  tem   conhecimento  de
+vari&#225;veis locais que foram definidas pelo <I>subshell</I> pai</B>
+(Figura <A HREF="#fig:localvars">1</A>).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:localvars"></A><A NAME="366"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 1:</STRONG>
+Vari&#225;veis locais e <I>subshells</I></CAPTION>
+<TR><TD><IMG
+ WIDTH="492" HEIGHT="404" ALIGN="CENTER"
+ SRC="teoria-img1.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{localvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Quando um <I>script</I> termina, o <I>subshell</I> tamb&#233;m termina,
+<B>juntamente com quaisquer vari&#225;veis definidas</B>.
+
+<P>
+A forma usada para tornar o valor de uma vari&#225;vel conhecida a um
+<I>subshell</I> &#233; <B>exportando</B> seu valor atrav&#233;s do comando
+interno de <B><I>bash(1)</I></B>, <B>export</B>:
+
+<P>
+<PRE>
+       z="Arnoldo"
+       x=100
+       export x z
+
+       export y=200
+</PRE>
+
+<P>
+Observe o exemplo abaixo:
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho3</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''Y = :$y:''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''X = :$x:''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>x=100</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>y=10</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho3</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">Y = ::</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">X = ::</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>export y</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho3</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">Y = :10:</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">X = ::</FONT>
+<BR>
+
+
+<P>
+Sempre que um <I>subshell</I> &#233; iniciado, uma <B>c&#243;pia</B> da lista
+de  vari&#225;veis exportadas  &#233;  passada ao  <I>subshell</I>, enquanto  a
+lista de vari&#225;veis locais n&#227;o o &#233; (Figura <A HREF="#fig:exportvars">2</A>).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:exportvars"></A><A NAME="215"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 2:</STRONG>
+Vari&#225;veis locais e exportadas</CAPTION>
+<TR><TD><IMG
+ WIDTH="852" HEIGHT="332" ALIGN="CENTER"
+ SRC="teoria-img2.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{exportvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+O  que acontece se  o <I>subshell</I>  muda o  valor de  uma vari&#225;vel
+exportada? A  mudan&#231;a vai ser refletida  no processo pai?  A resposta &#224;
+&#250;ltima pergunta &#233;  N&#195;O. <B>N&#227;o h&#225; maneira de mudar  o valor de uma
+vari&#225;vel em um <I>shell</I> pai a partir de um <I>subshell</I></B>:
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x=50</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">y=5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>x=100</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>y=10</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>export y</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo ''$x  $y''</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">100 10</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+A vari&#225;vel <B><FONT FACE="Helvetica, Arial, sans-serif">y</FONT></B> criada em  <B><FONT FACE="Helvetica, Arial, sans-serif">varecho4</FONT></B> &#233; local e n&#227;o se confunde
+com a vari&#225;vel <B><FONT FACE="Helvetica, Arial, sans-serif">y</FONT></B> exportada pelo <I>shell</I> de <I>login</I>
+(Figura <A HREF="#fig:chexportvars">3</A>).
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:chexportvars"></A><A NAME="242"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 3:</STRONG>
+Mudan&#231;a de valor em exportadas</CAPTION>
+<TR><TD><IMG
+ WIDTH="853" HEIGHT="332" ALIGN="CENTER"
+ SRC="teoria-img3.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{chexportvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Por outro lado, toda vari&#225;vel  que &#233; exportada, ele permanece exportada
+para     todos    os     <I>subshells</I>     subsequentes    (Figura
+<A HREF="#fig:subexportvars">4</A>).
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x=50</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">y=5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">z=1</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">export z</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">varecho5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho5</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''x = $x''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''y = $y''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">echo ''z = $z''</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>x=100</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>y=10</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>export y</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x = </FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">y = 10</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">z = 1</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:subexportvars"></A><A NAME="270"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 4:</STRONG>
+Exportando vari&#225;veis atrav&#233;s de subshells</CAPTION>
+<TR><TD><IMG
+ WIDTH="855" HEIGHT="468" ALIGN="CENTER"
+ SRC="teoria-img4.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{subexportvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:reexportvars"></A><A NAME="278"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 5:</STRONG>
+Exportando vari&#225;veis atrav&#233;s de subshells</CAPTION>
+<TR><TD><IMG
+ WIDTH="855" HEIGHT="468" ALIGN="CENTER"
+ SRC="teoria-img5.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{reexportvars}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Se, no exemplo acima,  o <I>script</I> <B><FONT FACE="Helvetica, Arial, sans-serif">varecho4</FONT></B> exportasse sua
+vari&#225;vel  <B><FONT FACE="Helvetica, Arial, sans-serif">y</FONT></B>, ent&#227;o  a mudan&#231;a  em  seu valor  seria refletida  em
+<B><FONT FACE="Helvetica, Arial, sans-serif">varecho5</FONT></B> (Figura <A HREF="#fig:reexportvars">5</A>):
+
+<P>
+
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x=50</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">y=5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">z=1</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">export z y</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">varecho5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>varecho4</B></FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">x = </FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">y = 5</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">z = 1</FONT>
+<BR>
+      <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+Finalmente,   para  que  as   mudan&#231;as  em   vari&#225;veis  feitas   em  um
+<I>script</I> tenham efeito  no <I>shell</I> (ou <I>subshell</I>)
+corrente,  usa-se  o comando  interno  de <B><I>bash(1)</I></B> <B>.</B>   ou
+<B>source</B>.
+
+<P>
+
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>cat vars</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">LIVRO=''/home/prof/delga/livro''</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">DOCS=''/home/prof/delga/documentos''</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">CAL=''/home/prof/delga/calendar''</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>vars</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">&nbsp;</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>source vars</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>echo $LIVRO</B></FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">/home/prof/delga/livro</FONT>
+<BR>
+  <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+
+<H3><A NAME="SECTION00012100000000000000">
+SUM&#193;RIO</A>
+</H3>
+
+<OL>
+<LI>Qualquer vari&#225;vel  que n&#227;o  &#233; exportada  &#233;  uma <B>vari&#225;vel
+    local</B> cuja exist&#234;ncia n&#227;o ser&#225; conhecida por <I>subshells</I>;
+</LI>
+<LI>Vari&#225;veis exportadas e seus  valores s&#227;o copiados para o ambiente
+  de   um   <I>subshell</I>  onde   eles   podem   ser  acessados   e
+  alterados. Contudo,  tais mudan&#231;as n&#227;o  se refletem nas  vari&#225;veis do
+  <I>shell</I> pai (Figura <A HREF="#fig:chexportvars">3</A>);
+</LI>
+<LI>Se um <I>subshell</I>  N&#195;O exporta uma vari&#225;vel expl&#237;citamente,
+  mudan&#231;as  no valor  desta  afetam  uma vari&#225;vel  local,  mesmo que  a
+  vari&#225;vel  tenha  sido exportada  por  um  <I>shell</I> pai  (Figura
+  <A HREF="#fig:subexportvars">4</A>).     Se    o   <I>subshell</I>    exportar
+  explicitamente  a vari&#225;vel,  ent&#227;o  mudan&#231;as em  seu  valor afetam  a
+  vari&#225;vel exportada pelo <I>shell</I> pai, mas apenas para subshells
+  subseq&#252;entes (Figura <A HREF="#fig:reexportvars">5</A>);
+</LI>
+<LI>Vari&#225;veis exportadas ret&#234;m esta caracter&#237;stica n&#227;o apenas para um
+  <I>subshell</I>  direto,  mas   para  todos  os  <I>subshells</I>
+  iniciados   a   partir  daquele   (e   assim   por  diante)   (Figura
+  <A HREF="#fig:subexportvars">4</A>);
+</LI>
+<LI>Uma vari&#225;vel  pode ser  exportada em  qualquer momento  antes ou
+  depois de ter seu valor alterado ou definido;
+</LI>
+<LI>Para  que as mudan&#231;as  em vari&#225;veis feitas em  um <I>script</I>
+  tenham  efeito  no  <I>shell</I> (ou  <I>subshell</I>)  corrente,
+  usa-se   o   comando   interno   de  <B><I>bash(1)</I></B>   <B>.</B>   ou
+  <B>source</B>.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Controle de fluxo e itera&#231;&#227;o</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>Sele&#231;&#227;o <I>case</I></STRONG></DT>
+<DD>&nbsp;
+<BR><PRE>
+case expressao in
+   padrao_1a [ | padrao_1b ... ]) lista_1 ;;
+   padrao_2a [ | padrao_2b ... ]) lista_2 ;;
+   padrao_3a [ | padrao_3b ... ]) lista_3 ;;
+   padrao_4a [ | padrao_4b ... ]) lista_4 ;;
+   ...
+   [ *) lista_default  ;; ]
+esac
+
+case palavra in pattern [ | pattern ] ... ) lista ;; ] ... esac
+</PRE>
+  Se o  valor da <I>express&#227;o</I> for igual  a <I>padr&#227;o_1a</I> OU
+  <I>padr&#227;o_1b</I>, executa <I>lista_1</I>.  Sen&#227;o, se o valor da
+  <I>express&#227;o</I>    for     igual    a    <I>padr&#227;o_2a</I>    OU
+  <I>padr&#227;o_2b</I>,     executa    <I>lista_2</I>,     e    assim
+  sucessivamente.    O   padr&#227;o   <B>*</B>  representa   a   execu&#231;&#227;o
+  <I>default</I>. &#201;  equivalente a um <B>else</B>.  Ap&#243;s a execu&#231;&#227;o
+  de qualquer lista, o comando seguinte ao bloco <B>case...esac</B> &#233;
+  executado.
+
+<P>
+</DD>
+<DT><STRONG><I>break</I></STRONG></DT>
+<DD>termina  a execu&#231;&#227;o  de  um  la&#231;o, executando  o
+    primeiro comando AP&#211;S o bloco que define o la&#231;o.
+</DD>
+<DT><STRONG><I>continue</I></STRONG></DT>
+<DD>interrompe uma itera&#231;&#227;o de um la&#231;o, passando
+    para a pr&#243;xima itera&#231;&#227;o.
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Exemplos</A>
+</H1>
+
+<P>
+Exemplos      podem      ser      encontrados      no      link      de
+<A NAME="tex2html6"
+  HREF="../exemplos_11/">Exemplos</A>
+na   p&#225;gina   HTML   da
+disciplina.
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-01-26
+</ADDRESS>
+</BODY>
+</HTML>

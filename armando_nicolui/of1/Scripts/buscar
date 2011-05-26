@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#
+# Procura alguem no arquivo de enderecos
+#
+
+if [[ $# -ne 1 ]]; then
+    echo "Forma de uso: `basename $0` nome"
+    exit 1
+fi
+
+nome="$1"
+
+if ! grep "$nome" $PHONEBOOK ; then
+    echo "$nome nao foi encontrado."
+    exit 2
+fi
+

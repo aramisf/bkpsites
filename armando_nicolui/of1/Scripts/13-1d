@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sed -e '/SunOS/a\
+    DICA: Procure no manual da Sun.\
+          Veja também em bash(1).' $1

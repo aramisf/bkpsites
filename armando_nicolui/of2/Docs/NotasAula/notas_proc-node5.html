@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5 Comandos de entrada e saída: getchar() e putchar()</TITLE>
+<META NAME="description" CONTENT="5 Comandos de entrada e saída: getchar() e putchar()">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node6.html">
+<LINK REL="previous" HREF="notas_proc-node4.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node6.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html266"
+  HREF="notas_proc-node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html264"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html258"
+  HREF="notas_proc-node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html267"
+  HREF="notas_proc-node6.html">6 Ordem sequencial de</A>
+<B>Up:</B> <A NAME="tex2html265"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html259"
+  HREF="notas_proc-node4.html">4 Mais sobre tipos:</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00050000000000000000">
+5 Comandos de entrada e sa&#237;da: getchar() e 
+    putchar()</A>
+</H1>
+
+<P>
+Vamos discutir algumas fun&#231;&#245;es de entrada de dados (diferente do 
+scanf()).  A entrada de texto &#233; considerada como um <EM>fluxo</EM> de
+caratecteres.  Um <EM>fluxo texto</EM> &#233; uma sequ&#234;ncia de caracteres
+dividida em linhas; cada linha consiste de zero ou mais caracteres
+seguido do caractere de nova linha (<code>\</code>n).  Como
+programador, voc&#234; n&#227;o quer se preocupar em como as linhas s&#227;o
+representadas fora do programa.  Quem faz isso por voc&#234; s&#227;o fun&#231;&#245;es de
+uma biblioteca padr&#227;o.
+
+<P>
+Suponha que voc&#234; queira ler um &#250;nico caractere, mas n&#227;o quer usar o
+scanf().  Isso  pode ser feito usando a  fun&#231;&#227;o getchar(). A
+fun&#231;&#227;o putchar()  aceita um argumento de entrada,  cujo valor ser&#225;
+impresso como caracter:
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+main()
+{
+   char ch;
+
+   printf("Digite algum caracter: ");
+
+   ch = getchar();
+
+   printf("\n A tecla pressionada eh %c.\n", ch);
+
+}
+</PRE>
+
+<P>
+O Resultado deste programa na tela &#233;:
+<PRE>
+   Digite algum caracter: A
+    A tecla pressionada eh A.
+</PRE>
+
+<P>
+Outro exemplo:
+<PRE>
+#include &lt;stdio.h&gt;
+
+main()
+{
+   char ch;
+
+   printf("Digite outro caracter: ");
+
+   ch = getchar();
+
+   putchar(ch);
+
+}
+</PRE>
+
+<P>
+O Resultado deste programa na tela &#233;:
+<PRE>
+   Digite outro caracter: B
+   B
+</PRE>
+
+<P>
+
+<P>
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

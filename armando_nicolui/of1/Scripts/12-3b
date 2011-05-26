@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Formata o texto de um poema
+
+# Linhas do poema.
+Linha[1]="O mar eh verde,"
+Linha[2]="o ceu, azul celeste."
+Linha[3]="E a coisa que mais odeio,"
+Linha[4]="Eh uma poesia"
+Linha[5]="Sem Rima."
+
+# Autoria
+Autoria[1]=" Arnoldo Arlindo"
+Autoria[2]="\"Vida sem rima alguma\""
+
+for indice in 1 2 3 4 5    # Cinco linhas
+do
+  printf "     %s\n" "${Linha[indice]}"
+done
+
+for indice in 1 2          # Duas linhas de autoria.
+do
+  printf "          %s\n" "${Autoria[indice]}"
+done
+
+exit 0
+

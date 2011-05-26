@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]; then
+    echo "Forma de uso: `basename $0` sobrenome"
+    exit 1
+fi
+
+NUMNOMES=$(grep '\<'$1'	' Arquivos/telefones.txt | wc -l)
+
+EXIT_STATUS=0
+
+echo ""
+
+if [[ $NUMNOMES -eq 0 ]]; then
+    echo "Não foi encontrada nenhuma pessoa com sobrenome \"$1\"."
+    EXIT_STATUS=1
+else
+    EXIT_STATUS=1
+
+    grep '\<'$1'	' Arquivos/telefones.txt | cut -f1 |
+    while read NOME
+    do
+      if respsim "Deseja remover \"$NOME\""; then
+	    grep -v "$NOME" Arquivos/telefones.txt | cat > Arquivos/telefones.txt
+	    EXIT_STATUS=0
+	    echo "	==> $NOME removido."
+      fi
+    done
+
+fi
+
+if [[ $EXIT_STATUS -ne 0 ]]; then
+    echo "Não foi removida nenhuma pessoa com sobrenome \"$1\"."
+fi
+echo ""
+exit $EXIT_STATUS
+

@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3 Expressões como valores</TITLE>
+<META NAME="description" CONTENT="3 Expressões como valores">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node4.html">
+<LINK REL="previous" HREF="notas_proc-node2.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node4.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html238"
+  HREF="notas_proc-node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html236"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html230"
+  HREF="notas_proc-node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html239"
+  HREF="notas_proc-node4.html">4 Mais sobre tipos:</A>
+<B>Up:</B> <A NAME="tex2html237"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="notas_proc-node2.html">2 Opera&#231;&#245;es Aritm&#233;ticas e</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html240"
+  HREF="notas_proc-node3.html#SECTION00031000000000000000">3.1 Expressões aritméticas, relacionais e lógicas</A>
+<LI><A NAME="tex2html241"
+  HREF="notas_proc-node3.html#SECTION00032000000000000000">3.2 Expressões envolvendo o operador de atribuição (<TT>=</TT>)</A>
+<UL>
+<LI><A NAME="tex2html242"
+  HREF="notas_proc-node3.html#SECTION00032100000000000000">3.2.1 Operadores de atribuição aritmética</A>
+<LI><A NAME="tex2html243"
+  HREF="notas_proc-node3.html#SECTION00032200000000000000">3.2.2 Operadores de incremento e decremento</A>
+<LI><A NAME="tex2html244"
+  HREF="notas_proc-node3.html#SECTION00032300000000000000">3.2.3 Ambiguidade em certas expressões</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Express&#245;es como valores</A>
+</H1>
+
+<P>
+Em C, todas as express&#245;es s&#227;o avaliadas.  O resultado da avalia&#231;&#227;o &#233; um
+valor e pode ser usado em quaisquer lugares.
+
+<P>
+
+<H2><A NAME="SECTION00031000000000000000">
+3.1 Express&#245;es aritm&#233;ticas, relacionais e l&#243;gicas</A>
+</H2>
+
+<P>
+Como   voc&#234;  j&#225;   sabe,  express&#245;es   usando   operadores  aritm&#233;ticos,
+relacionais e  l&#243;gicos<A NAME="tex2html2"
+  HREF="notas_proc-footnode.html#foot1579"><SUP>1</SUP></A>  s&#227;o avaliados.  O valor resultante &#233; um
+n&#250;mero.  Para os operadores relacionais e l&#243;gicos, este n&#250;mero pode ser
+0 (que significa falso) ou 1 (que significa verdadeiro).  Por exemplo:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><TT>3 + 5 * 4 % (2 + 8)</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem valor 3;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>3 &lt; 5</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem valor 1;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>x + 1</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem valor igual ao valor da vari&#225;vel <TT>x</TT> mais um;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>(x &lt;  1) || (x &gt; 4)</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem valor 1  quando o valor da vari&#225;vel
+<TT>x</TT> &#233;  fora do intervalo [1,4],  e 0 quando <TT>x</TT>  est&#225; dentro do intervalo.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION00032000000000000000">
+3.2 Express&#245;es envolvendo o operador de atribui&#231;&#227;o (<TT>=</TT>)</A>
+</H2>
+
+<P>
+O formato do operador de atribui&#231;&#227;o &#233;:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+lvalue = expressao
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="asignexp"></A><IMG
+ WIDTH="148" HEIGHT="30" BORDER="0"
+ SRC="notas_proc-img14.png"
+ ALT="\begin{displaymath}
+lvalue = expressao
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(1)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Um <IMG
+ WIDTH="52" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img15.png"
+ ALT="$lvalue$"> (do ingl&#234;s ``left-hand-side value'' - valor a esquerda)
+&#233;  um valor  que  se refere  a  um endere&#231;o  na mem&#243;ria  do
+computador.  At&#233; agora, o  &#250;nico ``lvalue'' v&#225;lido visto no
+curso   &#233;  o   nome  de   uma  vari&#225;vel.    A  maneira   que  a
+atribui&#231;&#227;o funciona  &#233; a seguinte: a  express&#227;o do lado
+direito &#233; avaliada, e o  valor &#233; copiado para o endere&#231;o da
+mem&#243;ria associada  ao ``lvalue''.  O  tipo do objeto  do ``lvalue''
+determina como o valor da <IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$"> &#233; armazenada na mem&#243;ria.
+
+<P>
+Express&#245;es   de  atribui&#231;&#227;o,  assim   como  express&#245;es,
+t&#234;m  valor.  O  valor  de uma  express&#227;o de  atribui&#231;&#227;o
+&#233; dado pelo valor da express&#227;o do lado direito do <TT>=</TT>.  Por
+exemplo:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><TT>x = 3  </TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem valor <TT>3</TT>;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>x = y+1</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>tem o valor da express&#227;o <TT>y+1</TT>.</TD>
+</TR>
+</TABLE>
+
+<P>
+Como  consequ&#234;ncia do  fato que  atribui&#231;&#245;es serem  express&#245;es  que s&#227;o
+associadas da direita para esquerda, podemos escrever senten&#231;as como:
+
+<P>
+
+<P>
+<TT>i = j = k = 0;</TT>
+
+<P>
+
+<P>
+Que, usando  par&#234;nteses, &#233;  equivalente a <TT>i&nbsp;=&nbsp;(j&nbsp;=&nbsp;(k&nbsp;=&nbsp;0))</TT>.  Ou
+seja, primeiro o valor 0 &#233; atribu&#237;do  a <TT>k</TT>, o valor de <TT>k&nbsp;=&nbsp;0</TT>
+(que &#233; zero) &#233; atribu&#237;do a <TT>j</TT>  e o valor de <TT>j = (k&nbsp;=&nbsp;0)</TT> (que
+tamb&#233;m &#233; zero) &#233; atribu&#237;do a <TT>i</TT>.
+
+<P>
+Uma caracter&#237;stica muito  peculiar de C &#233; que  express&#245;es de atribui&#231;&#227;o
+podem ser usados em qualquer lugar  que um valor pode ser usado.  Por&#233;m
+voc&#234; deve saber  que us&#225;-lo dentro de outros  comandos produz um efeito
+colateral que  &#233; alterar o valor  da vari&#225;vel na  mem&#243;ria.  Portanto, a
+execu&#231;&#227;o de:
+
+<P>
+<PRE>
+    int quadrado, n = 2;
+
+    printf("Quadrado de %d eh menor que 50? %d \n", n, (quadrado = n * n) &lt; 50);
+</PRE>
+
+<P>
+causa n&#227;o apenas  que o valor <TT>4</TT> seja  impresso, como a avalia&#231;&#227;o
+ da express&#227;o relacional dentro do  printf() faz com que o n&#250;mero
+ <TT>4</TT> seja  copiado  para o  endere&#231;o  de mem&#243;ria  associado com  a
+ vari&#225;vel  <TT>quadrado</TT>.  Note  que &#233;  necess&#225;rio usar  par&#234;nteses em
+ <TT>quadrado&nbsp;=&nbsp;n&nbsp;*&nbsp;n</TT> j&#225;  que <TT>=</TT> tem  menor preced&#234;ncia  que o
+ operador relacional <TT>&lt;</TT>.
+
+<P>
+Agora compare o exemplo anterior com o pr&#243;ximo, no qual o valor <TT>4</TT>
+&#233; impresso, mas sem nenhum efeito colateral:
+
+<P>
+<PRE>
+    int quadrado, n = 2;
+
+    printf("Quadrado de %d eh menor que 50? %d \n", n, n * n &lt; 50);
+</PRE>
+
+<P>
+Note que agora  n&#227;o h&#225; necessidade de par&#234;nteses  para a express&#227;o <TT>n&nbsp;*&nbsp;n</TT> porque  <TT>* </TT> tem maior preced&#234;ncia que o operador relacional
+<TT>&lt;</TT>.
+
+<P>
+
+<H3><A NAME="SECTION00032100000000000000">
+3.2.1 Operadores de atribui&#231;&#227;o aritm&#233;tica</A>
+</H3>
+
+<P>
+Como  foi discutido  em  classe, estes  comandos de  atribui&#231;&#227;o
+funcionam de forma similar que o comando de atribui&#231;&#227;o.  O lado
+esquerdo  da  express&#227;o deve  ser  um  <EM>lvalue</EM>.  O  valor  da
+express&#227;o de atribui&#231;&#227;o aritm&#233;tica &#233; igual ao valor
+da senten&#231;a de atribui&#231;&#227;o correspondente.  Por exemplo:
+
+<P>
+<TT>x += 3    </TT> &#233; igual a  <TT>x = x + 3</TT> e tem valor <TT>x + 3</TT>
+
+<P>
+<TT>x *= y + 1</TT> &#233;  igual a <TT>x = x * (y + 1)</TT> e tem valor
+<TT>x * (y + 1)</TT>
+
+<P>
+
+<H3><A NAME="SECTION00032200000000000000">
+3.2.2 Operadores de incremento e decremento</A>
+</H3>
+
+<P>
+J&#225; que  incremento e  decremento s&#227;o formas  de atribui&#231;&#227;o,  o operando
+deve ser  um <EM>lvalue</EM>.  O  valor de uma express&#227;o  de incremento ou
+decremento depende se  o operador &#233; usado na nota&#231;&#227;o  PR&#233; ou P&#243;S fixada
+(<TT>x++, ++x, x--, --x</TT>).  Se for
+pr&#233;-fixada, o  valor da express&#227;o &#233;  o novo valor ap&#243;s  o incremento ou
+decremento.  Se for  p&#243;s-fixada, o valor da express&#227;o  &#233; o valor antigo
+(antes  do   incremento  ou  decremento).   Por  exemplo   no  caso  de
+incremento, a express&#227;o:
+
+<P>
+<TT>x++</TT> tem o valor de  <TT>x</TT>
+
+<P>
+<TT>++x</TT> tem o valor de  <TT>x + 1</TT>
+
+<P>
+Note que n&#227;o importando a nota&#231;&#227;o usada, o valor de <TT>x</TT> (o conte&#250;do
+do  endere&#231;o de  mem&#243;ria associada  a <TT>x</TT>) ser&#225;  <TT>x  +  1</TT>.  A
+diferen&#231;a  est&#225;  no valor  das  express&#245;es  <TT>x++</TT> e  <TT>++x</TT>, n&#227;o  no valor de <TT>x</TT>  (em ambos os casos  o valor de
+<TT>x</TT> ser&#225; incrementada de um).
+
+<P>
+
+<H3><A NAME="SECTION00032300000000000000">
+3.2.3 Ambiguidade em certas express&#245;es</A>
+</H3>
+
+<P>
+&#192;s vezes, problemas podem acontecer  devido o fato que C n&#227;o especifica
+a ordem de avalia&#231;&#227;o dos operadores em uma opera&#231;&#227;o bin&#225;ria.  Em outras
+palavras, em express&#245;es como <TT>a&nbsp;+&nbsp;b</TT> ou <TT>a &lt; b</TT>, n&#227;o h&#225; maneira
+de saber se o valor de <TT>a</TT> ser&#225; avaliado antes ou depois de <TT>b</TT>
+(pense em <TT>a</TT> e <TT>b</TT> como sendo qualquer express&#227;o, n&#227;o somente
+vari&#225;veis.)   Qual deles ser&#225;  avaliado primeiro  &#233; particular  de cada
+compilador, e diferentes compiladores  em m&#225;quinas diferentes podem ter
+resultados diferentes.   Portanto, se a avalia&#231;&#227;o de  um dos operadores
+pode  alterar  o  valor  do  outro,  o  resultado  pode  ser  diferente
+dependendo da ordem de avalia&#231;&#227;o.  Portanto, em express&#245;es do tipo <TT>x  +  x++</TT>, o  valor  pode  diferir  dependendo do  compilador
+utilizado.  Isto  porque n&#227;o sabemos quando exatamente  o incremento de
+<TT>x</TT> ocorre.  Outros maus  exemplos: <TT>y = x + x--</TT>
+e  <TT>x  =  x++</TT>.   De forma  geral,  para evitar  este
+problema, n&#227;o utilize sente&#231;as como estas.
+
+<P>
+<HR>
+<A NAME="tex2html238"
+  HREF="notas_proc-node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html236"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html230"
+  HREF="notas_proc-node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html239"
+  HREF="notas_proc-node4.html">4 Mais sobre tipos:</A>
+<B>Up:</B> <A NAME="tex2html237"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="notas_proc-node2.html">2 Opera&#231;&#245;es Aritm&#233;ticas e</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 12
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 12
+">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 12
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Exemplos 12</A>
+</H1>
+
+<P>
+Clique <A NAME="tex2html19"
+  HREF="../Scripts/">aqui</A>
+para ter acesso a todos os
+<I>scripts shell</I> usados como exemplos na disciplina.
+
+<P>
+
+<OL>
+<LI>Fun&#231;&#245;es.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html1"
+  HREF="../Scripts/12-1a"><I>Script</I> 1 - fun&#231;&#227;o com vari&#225;vel
+        global e local;</A>
+</LI>
+<LI><A NAME="tex2html2"
+  HREF="../Scripts/12-1b"><I>Script</I> 2 - comando <B>return</B>;</A>
+</LI>
+<LI><A NAME="tex2html3"
+  HREF="../Scripts/12-1c"><I>Script</I> 3 - retornando inteiros;</A>
+</LI>
+<LI><A NAME="tex2html4"
+  HREF="../Scripts/12-1d"><I>Script</I> 4 - retornando inteiros
+        menores que 256;</A>
+</LI>
+<LI><A NAME="tex2html5"
+  HREF="../Scripts/12-1e"><I>Script</I> 5 - ``retornando'' inteiros
+        maiores que 256;</A>
+</LI>
+<LI><A NAME="tex2html6"
+  HREF="../Scripts/12-1f"><I>Script</I> 6 - ``retornando'' valores
+        n&#227;o-num&#233;ricos;</A>
+</LI>
+<LI><A NAME="tex2html7"
+  HREF="../Scripts/12-1g"><I>Script</I> 7 - Passando e recebendo
+        <I>arrays</I> em fun&#231;&#245;es;</A>
+</LI>
+<LI><A NAME="tex2html8"
+  HREF="../Scripts/12-5"><I>Script</I> 8 - Uso de fun&#231;&#245;es e
+        vari&#225;vel <B><FONT FACE="Helvetica, Arial, sans-serif">IFS</FONT></B>.</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Uso de <I>arrays</I>.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html9"
+  HREF="../Scripts/12-3a"><I>Script</I> 1;</A>
+</LI>
+<LI><A NAME="tex2html10"
+  HREF="../Scripts/12-3b"><I>Script</I> 2;</A>
+</LI>
+<LI><A NAME="tex2html11"
+  HREF="../Scripts/12-3c"><I>Script</I> 3;</A>
+</LI>
+<LI><A NAME="tex2html12"
+  HREF="../Scripts/12-3d"><I>Script</I> 4.</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Uso de  <I>arrays</I>. O <I>script</I> deve ecoar  a si mesmo
+  de tr&#225;s para frente: linha  por linha, caracter a caracter, e palavra
+  por palavra.   Cada tipo  de revers&#227;o deve  ser ecoada  para arquivos
+  diferentes.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html13"
+  HREF="../Scripts/12-2a"><I>Script</I> 1 - usando <B><I>tail(1)</I></B>
+        e <B><I>head(1)</I></B>;</A>
+</LI>
+<LI><A NAME="tex2html14"
+  HREF="../Scripts/12-2b"><I>Script</I> 2 - usando <B><I>tr(1)</I></B> e 
+        variante de <B>for</B> (ver <B><I>bash(1)</I></B>);</A>
+</LI>
+<LI><A NAME="tex2html15"
+  HREF="../Scripts/12-2c"><I>Script</I> 3 - usando
+        <I>arrays</I> e vari&#225;vel <B><FONT FACE="Helvetica, Arial, sans-serif">IFS</FONT></B>.</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Uso de <I>arrays</I>. Carregando o conte&#250;do de um arquivo em um
+  <I>array</I>,  sem usar  vari&#225;vel  <B><FONT FACE="Helvetica, Arial, sans-serif">IFS</FONT></B>. Observe-se  o uso  de
+  <B><I>tr(1)</I></B>.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html16"
+  HREF="../Scripts/12-4"><I>Script</I> 1;</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Uso de par&#226;metros especiais. O exemplo apresentado &#233; um trecho
+  do <I>script</I> <B><FONT FACE="Helvetica, Arial, sans-serif">.xsession</FONT></B> que &#233; executado pelo X11 toda vez
+  que ele &#233; iniciado. A id&#233;ia &#233; que determinadas vari&#225;veis definem
+  programas e diret&#243;rios usados pelos programas do usu&#225;rio. Se estas
+  vari&#225;veis n&#227;o forem definidas e exportadas previamente (por exemplo,
+  nos arquivos <B><FONT FACE="Helvetica, Arial, sans-serif">.bashrc</FONT></B> ou <B><FONT FACE="Helvetica, Arial, sans-serif">.bash_profile</FONT></B>), elas possuem um
+  valor default.
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html17"
+  HREF="../Scripts/xsession"><I>Script</I> .xsession.</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Uso de  par&#226;metros especiais.  Dado um  conjunto de  arquivos de
+  imagens  em   diversos  formatos  (e.g.,  JPEG,   PCX,  TIFF,  etc.),
+  converta-os para o formato GIF.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html18"
+  HREF="../Scripts/11-2"><I>Script</I></A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+</OL>
+
+<P>
+Clique <A NAME="tex2html20"
+  HREF="../Scripts/">aqui</A>
+para ter acesso a todos os
+<I>scripts shell</I> usados como exemplos na disciplina.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-06-17
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,1035 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15 Arrays</TITLE>
+<META NAME="description" CONTENT="15 Arrays">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node16.html">
+<LINK REL="previous" HREF="notas_proc-node14.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node16.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html402"
+  HREF="notas_proc-node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html400"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html394"
+  HREF="notas_proc-node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html403"
+  HREF="notas_proc-node16.html">16 Arrays Multidimensionais</A>
+<B>Up:</B> <A NAME="tex2html401"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html395"
+  HREF="notas_proc-node14.html">14 Tipo Enumerado</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html404"
+  HREF="notas_proc-node15.html#SECTION000151000000000000000">15.1 Definindo arrays e acessando seus elementos</A>
+<LI><A NAME="tex2html405"
+  HREF="notas_proc-node15.html#SECTION000152000000000000000">15.2 Inicialização de arrays</A>
+<LI><A NAME="tex2html406"
+  HREF="notas_proc-node15.html#SECTION000153000000000000000">15.3 Verificação de Limite</A>
+<LI><A NAME="tex2html407"
+  HREF="notas_proc-node15.html#SECTION000154000000000000000">15.4 Arrays como argumentos</A>
+<LI><A NAME="tex2html408"
+  HREF="notas_proc-node15.html#SECTION000155000000000000000">15.5 Exemplo: pesquisa linear de um array</A>
+<UL>
+<LI><A NAME="tex2html409"
+  HREF="notas_proc-node15.html#SECTION000155100000000000000">15.5.1 O Problema</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html410"
+  HREF="notas_proc-node15.html#SECTION000156000000000000000">15.6 Exemplo: somar os elementos de dois arrays</A>
+<UL>
+<LI><A NAME="tex2html411"
+  HREF="notas_proc-node15.html#SECTION000156100000000000000">15.6.1 O Problema</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html412"
+  HREF="notas_proc-node15.html#SECTION000157000000000000000">15.7 Exemplo: ordenar um array</A>
+<UL>
+<LI><A NAME="tex2html413"
+  HREF="notas_proc-node15.html#SECTION000157100000000000000">15.7.1 Bubble sort</A>
+<LI><A NAME="tex2html414"
+  HREF="notas_proc-node15.html#SECTION000157200000000000000">15.7.2 Algoritmo</A>
+<LI><A NAME="tex2html415"
+  HREF="notas_proc-node15.html#SECTION000157300000000000000">15.7.3 Protótipo da função e definição</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html416"
+  HREF="notas_proc-node15.html#SECTION000158000000000000000">15.8 Comentários Finais</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000150000000000000000">
+15 Arrays</A>
+</H1>
+
+<P>
+Considere o seguinte programa.  Este programa pede ao usu&#225;rio notas
+de 4 estudantes, calcula a m&#233;dia e imprime as notas e a m&#233;dia.
+<PRE>
+   main()
+   {
+      int nota0, nota1, nota2, nota3;
+      int  media;
+
+      printf("Entre a nota do estudante 0: ");
+      scanf("%d", &amp;nota0);
+      printf("Entre a nota do estudante 1: ");
+      scanf("%d", &amp;nota1);
+      printf("Entre a nota do estudante 2: ");
+      scanf("%d", &amp;nota2);
+      printf("Entre a nota do estudante 3: ");
+      scanf("%d", &amp;nota3);
+
+      media = (nota0 + nota1 + nota2 + nota3) / 4;
+
+      printf("Notas:  %d %d %d %d\n", gr0, gr1, gr2, gr3);
+      printf("Media: %d\n", media);
+   }
+</PRE>
+
+<P>
+Este programa &#233; bem simples, mas ele tem um problema.  O que acontece
+se o n&#250;mero de estudantes aumentar ?  O programa ficaria muito maior
+(e feio !!).  Imagine o mesmo programa se existissem 100 estudantes.
+
+<P>
+O que precisamos &#233; uma abstra&#231;&#227;o de dados para agrupar dados
+relacionados.  Este &#233; o objetivo de <EM>arrays</EM> em C.  
+
+<P>
+Um <EM>array</EM> &#233; uma cole&#231;&#227;o de um ou mais objetos, do mesmo tipo,
+armazenados em endere&#231;os adjacentes de mem&#243;ria.  Cada objeto &#233;
+chamado de <EM>elemento</EM> do array.  Da mesma forma  que para
+vari&#225;veis simples, damos um nome ao array.  O tamanho do array &#233; o seu
+n&#250;mero de elementos.  Cada elemento do array &#233; numerado, usando um
+inteiro chamado de <EM>&#237;ndice</EM>.    Em C, a numera&#231;&#227;o come&#231;a com
+<TT>0</TT> e aumenta de um em um.  Assim, o &#250;ltimo &#237;ndice &#233; igual ao
+n&#250;mero de elementos do array menos um.
+
+<P>
+Por exemplo, podemos definir um array <TT>nota</TT> de tamanho <TT>100</TT>
+para armazenar as notas dos cem estudantes:
+
+<P>
+<PRE>
+  int nota[100];
+</PRE>
+Quando o compilador encontra esta defini&#231;&#227;o, ele aloca 
+200 bytes consecutivos de mem&#243;ria (dois bytes - referente a cada
+<TT>int</TT> - para cada nota).  Cada nota pode ser acessada dando o
+nome do array e o &#237;ndice entre colchetes: como <TT>nota[0]</TT> (para a
+primeira nota), <TT>nota[1]</TT> para a segunda nota, e assim por
+diantes, at&#233; a &#250;ltima nota, <TT>nota[99]</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000151000000000000000">
+15.1 Definindo arrays e acessando seus elementos</A>
+</H2> 
+
+<P>
+A defini&#231;&#227;o de arrays &#233; muito parecida com a defini&#231;&#227;o de
+vari&#225;veis.  A &#250;nica diferen&#231;a &#233; que em array &#233; necess&#225;rio
+especificar seu tamanho (quantos elementos ele tem).
+
+<P>
+Os colchetes <TT>[</TT> e <TT>]</TT> s&#227;o usados na defini&#231;&#227;o do
+tamanho, como mostra os exemplos a seguir:
+<PRE>
+        int total[5];
+
+        float tamanho[42];
+</PRE>
+
+<P>
+O primeiro exemplo &#233; um array de <TT>5</TT> inteiros (o tipo <TT>int</TT>)
+com o nome <TT>total</TT>.  Como a numera&#231;&#227;o de arrays come&#231;a com <TT>0</TT>, os elementos da array s&#227;o numerados 
+<TT>0</TT>, <TT>1</TT>, <TT>2</TT>, <TT>3</TT> e <TT>4</TT>.
+
+<P>
+O segundo exemplo &#233; um array de <TT>42</TT> elementos do tipo <TT>float</TT> com &#237;ndices de <TT>0</TT> a <TT>41</TT>.
+
+<P>
+Cada elemento do array <TT>total</TT> &#233; do tipo inteiro e pode ser usado
+do mesmo jeito que qualquer vari&#225;vel inteira.  Para nos referirmos a
+um elemento do array, usamos colchetes tamb&#233;m
+(<TT>[</TT> e <TT>]</TT>).
+O valor dentro dos colchetes pode ser qualquer express&#227;o do tipo <B>inteiro</B>.  Quando um array &#233; definido, armazenamento suficiente
+(bytes cont&#237;nuos na mem&#243;ria) s&#227;o alocados para conter todos os
+elementos do array.  
+
+<P>
+O nome do array representa um endere&#231;o de mem&#243;ria<A NAME="tex2html9"
+  HREF="notas_proc-footnode.html#foot4614"><SUP>2</SUP></A> constante que
+aponta  para o in&#237;cio  do espa&#231;o  de armazenamento  (o primeiro  byte do
+bloco de  bytes).  O  array, como um  todo, n&#227;o  tem um valor,  mas cada
+elemento individual tem um valor.
+
+<P>
+Note na tabela de preced&#234;ncia abaixo que <TT>[ ]</TT> tem preced&#234;ncia maior
+que todos os demais operadores.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Operador</TD>
+<TD ALIGN="LEFT">Associatividade</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>()  []  -&gt;  .</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>!  -  ++  --  *  \&</code></TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>*  /  %</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>+  -</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&lt;  &lt;=  &gt;  &gt;=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>==  !=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&amp;&amp;</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>||</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>=  +=  -=  *=  /=  %=</code></TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>,</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Verifique se voc&#234; entende as senten&#231;as do programa abaixo.
+<PRE>
+         int i, x, sala, total[5];
+         float area;
+         float tamanho[42];
+ 
+         x = total[3];
+
+         i = 4;
+
+         total[i] = total[i-1] + total[i-2];
+
+         total[4]++;
+
+         tamanho[17] = 2.71828;
+
+         sala = 3;
+
+         area = tamanho[sala] * tamanho[sala];
+
+         scanf("%f", &amp;tamanho[41]);
+</PRE>
+
+<P>
+Agora, podermos reescrever o programa que calcula a m&#233;dia de uma
+classe de 4 alunos:
+
+<P>
+<PRE>
+   main()
+   {
+      int indice, nota[4], total = 0;
+
+      for (indice = 0; indice &lt; 4; indice++) {
+         printf("Entre a nota do estudante %d: ", indice);
+         scanf("%d", &amp;nota[indice]);
+      }
+
+      printf("Notas:  ");
+      for (indice = 0; indice &lt; 4; indice++) {
+         printf("%d ", nota[indice]);
+         total += nota[indice];
+      }
+      printf("\nMedia: %d\n", total/4 );
+   }
+</PRE>
+
+<P>
+Sample output:
+<PRE>
+   Entre a nota do estudante 0: 93
+   Entre a nota do estudante 1: 85
+   Entre a nota do estudante 2: 74
+   Entre a nota do estudante 3: 100
+   Notas:  93 85 74 100
+   Media: 88
+</PRE>
+
+<P>
+O programa &#233; consideravelmente mais curto.
+Note que um <TT>&amp;</TT> ainda precede o elemento do array passado para o 
+<TT>scanf()</TT>.  N&#227;o &#233; necess&#225;rio usar par&#234;nteses porque <TT>[]</TT>
+tem maior preced&#234;ncia que <TT>&amp;</TT>.
+
+<P>
+O &#250;nico problema &#233; que ainda n&#227;o &#233; f&#225;cil modificar o programa
+para cem alunos porque <TT>4</TT> est&#225; em v&#225;rios pontos do programa.
+N&#243;s podemos usar o 
+<code>#define</code> para manter o tamanho do array como uma constante
+simb&#243;lica ao inv&#233;s de utilizar uma constante num&#233;rica.
+
+<P>
+<PRE>
+   #define ESTUDANTES 4
+
+   main()
+   {
+      int nota[ESTUDANTES], indice, total = 0;
+
+
+      for (indice = 0; indice &lt; ESTUDANTES; indice++) {
+         printf("Entre a nota do estudante %d: ",indice);
+         scanf("%d", &amp;nota[indice]);
+      }
+      printf("Grades:  ");
+      for (indice = 0; indice &lt; ESTUDANTES; indice++) {
+         printf("%d ", nota[indice]);
+         total += nota[indice];
+      }
+      printf("\nAverage: %d\n", total / ESTUDANTES );
+   }
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000152000000000000000">
+15.2 Inicializa&#231;&#227;o de arrays</A>
+</H2>
+
+<P>
+Os arrays podem ser inicializados quando s&#227;o definidos.  Se o array
+n&#227;o for inicializado, ent&#227;o ele contem ``lixo''.
+
+<P>
+Para inicializar um array, um valor para cada elemento deve ser
+especificado.  Estes valores devem estar entre chaves
+(<TT>{</TT> e <TT>}</TT>) e s&#227;o separados por v&#237;rgula
+(<TT>,</TT>).  Alguns exemplos:
+
+<P>
+<PRE>
+      int valor[4] = { 1, 42, -13, 273 };
+
+      /* o tamanho do array pode ser omitido */
+      int peso[] = { 153, 135, 170 };
+</PRE>
+
+<P>
+No primeiro exemplo, <TT>valor</TT> &#233; um array de 4 inteiros onde
+<TT>valor[0]</TT> e' <TT>1</TT>,
+<TT>valor[1]</TT> e' <TT>42</TT>,
+<TT>valor[2]</TT> e' <TT>-13</TT>, e
+<TT>valor[3]</TT> e' <TT>273</TT>.
+
+<P>
+Note que no segundo exemplo, o tamanho do array foi omitido.  Neste
+caso, o compilador calcula o tamanho como sendo o n&#250;mero de elementos
+listados.  Quando um array &#233; definido, se ele n&#227;o for inicializado,
+o tamanho do array deve ser especificado.  Se o array for
+inicializado, o tamanho pode ser omitido.  O segundo exemplo acima &#233;
+equivalente a
+<PRE>
+      int peso[3] = { 153, 135, 170 };
+</PRE>
+
+<P>
+Se o tamanho n&#227;o for omitido, o n&#250;mero de elementos presentes n&#227;o
+deve exceder o tamanho.  Se exceder, o compilador gerar&#225; uma mensagem
+de erro.  Se houver menos elementos na lista de inicializa&#231;&#227;o,
+ent&#227;o os elementos dados s&#227;o usados para inicializar os primeiros
+elementos do array.  Qualquer elemento n&#227;o inicializado conter&#225; lixo.
+
+<P>
+Note que este tipo de inicializa&#231;&#227;o s&#243; &#233; v&#225;lido no contexto onde
+o array &#233; definido.  Uma senten&#231;a como a seguinte produzir&#225; um erro
+do compilador, uma vez que arrays s&#243; podem ser inicializados quando definidos.
+<PRE>
+      int erro[5];
+
+      erro = { 2, 4, 6, 8, 10 };      /* ISTO ESTA' ERRADO */
+</PRE>
+
+<P>
+H&#225; mais uma restri&#231;&#227;o na inicializa&#231;&#227;o de um array.  Os valores
+devem ser todos constantes - nenhuma vari&#225;vel ou express&#227;o &#233; permitida.
+O seguinte trecho de programa produz um erro porque um dos
+valores de inicializa&#231;&#227;o &#233; uma vari&#225;vel:
+<PRE>
+      int x = 21;
+      int yy[3] = { 1, 2, x };   /* ISTO ESTA' ERRADO */
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000153000000000000000">
+15.3 Verifica&#231;&#227;o de Limite</A>
+</H2> 
+Quando um array &#233; definido, &#233; alocado espa&#231;o em mem&#243;ria para
+conter todos os elementos do array (n&#227;o mais).  O tamanho do array &#233;
+dado explicitamente escrevendo o tamanho, ou implicitamente,
+inicializando o array.  Embora arrays tenham tamanhos espec&#237;ficos,
+&#233; poss&#237;vel que um programa tente acessar endere&#231;os de mem&#243;ria de
+elementos fict&#237;cios, ou seja, endere&#231;os de mem&#243;ria que n&#227;o
+pertencem ao array.  Isto acontece quando usamos um &#237;ndice que n&#227;o
+esteja entre <TT>0</TT> e <TT>n-1</TT> para um array de tamanho <TT>n</TT>.  O
+compilador n&#227;o gera nenhum aviso quando isto acontece.  Quando
+executamos um acesso ``fora dos limites'' do array, o resultado pode
+ser desastroso.  Isto siginifica que o programa pode n&#227;o fazer nada,
+cancelar a execu&#231;&#227;o, travar o computador, entrar em um loop
+infinito, etc.
+
+<P>
+Se voc&#234; executar uma atribui&#231;&#227;o a um elemento do array fora do seu
+limite, voc&#234; estar&#225; escrevendo em um endere&#231;o de mem&#243;ria que pode
+conter algo importante, destruindo-o.  Em geral, erros como estes s&#227;o
+dif&#237;ceis de encontrar, j&#225; que o programa pode at&#233; executar, s&#243; que
+faz algo ``estranho''.  Se voc&#234; estiver usando o Turbo C++, voc&#234;
+poder&#225; ver uma mensagem como ``Esta aplica&#231;&#227;o violou a integridade
+do sistema devido a execu&#231;&#227;o de uma instru&#231;&#227;o inv&#225;lida e ser&#225;
+cancelada.''.   N&#227;o entre em p&#226;nico !!  Voc&#234; ter&#225; que reinicializar
+o seu computador e examinar o seu programa cuidadosamente para achar
+acessos a array fora do seu limite.
+&#233; claro que ao reinicializar o seu computador, voc&#234; perder&#225; todo
+o seu trabalho se n&#227;o tiver salvado antes.  <B>MORAL:</B>  depois que
+seu programa compilar com sucesso, salve o seu programa em disco antes
+de execut&#225;-lo.
+
+<P>
+Por exemplo, considere o seguinte programa:
+
+<P>
+<PRE>
+    main()
+    {
+        int ops[10], i;
+
+        /* Acesso fora dos limites quando i = 10 */
+        for (i = 0; i &lt;= 10; i++)
+            ops[i] = 0;
+    }
+</PRE>
+
+<P>
+Este programa conta de <TT>0</TT> a <TT>10</TT>, inicializando cada elemento
+do array com <TT>0</TT>.  O problema ocorre quando <TT>i</TT> tem o valor
+<TT>10</TT>.  Neste ponto, o programa coloca <TT>0</TT> em <TT>ops[10]</TT>.
+Isto pode produzir resultados indefinidos (e desastrosos) embora o
+compilador n&#227;o gere nenhum erro.
+
+<P>
+
+<H2><A NAME="SECTION000154000000000000000">
+15.4 Arrays como argumentos</A>
+</H2>
+
+<P>
+Para passar um array como argumento (com todos os seus elementos)
+passamos o nome do array.
+Considere o exemplo abaixo.
+
+<P>
+<PRE>
+   #define TAMANHO 5
+
+   int array_max(int []);  
+
+   main()
+   {
+      int i, valor[TAMANHO];
+
+      for (i = 0; i &lt; TAMANHO; i++) {
+          printf("Entre um inteiro: ");
+          scanf("%d", &amp;valor[i]);
+      }
+      printf("O maior e' %d\n", array_max(valor));
+   }
+
+   /* funcao array_max(a)
+    *  acao:      acha o maior inteiro de um array de TAMANHO elementos
+    *  entrada:   array a de inteiros      
+    *  saida:     o maior valor do array   
+    *  suposicoes: a tem TAMANHO elementos
+    *  algoritmo:  inicializa max com o primeiro elemento do array; em
+    *              uma repeticao compara o max com todos os elementos
+    *              do array em ordem e muda o valor de max quando um
+    *              elemento do array for maior que o max ja' encontrado.
+    */
+   int array_max(int a[])
+   {
+      int i, max;
+
+      /* Achar o maior valor do array */
+      max = a[0];
+      for (i = 1; i &lt; TAMANHO; i++) {
+          if (max &lt; a[i])
+             max = a[i];
+      }
+      return max;
+   }
+</PRE>
+
+<P>
+Aqui est&#225; um exemplo de execu&#231;&#227;o deste programa
+<PRE>
+   Entre um inteiro: 73
+   Entre um inteiro: 85
+   Entre um inteiro: 42
+   Entre um inteiro: -103
+   Entre um inteiro: 15
+   O maior e' 85
+</PRE>
+
+<P>
+Em  <TT>main()</TT> a chamada para  <TT>array<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">max()</TT> tem <TT>valor</TT> como seu argumento, que &#233; copiado para o par&#226;metro formal
+<TT>a</TT>, que &#233; um array de inteiros.  Note que o tamanho n&#227;o foi
+especificado, somente o nome do array, <TT>a</TT>.  Por&#233;m &#233; tamb&#233;m
+correto incluir o tamanho (isto &#233; uma quest&#227;o de estilo - escolha o
+que voc&#234; preferir):
+<PRE>
+   int array_max(int a[TAMANHO])
+   {
+     ...
+   }
+</PRE>
+
+<P>
+A inclus&#227;o do tamanho de um array unidimensional na defini&#231;&#227;o da
+fun&#231;&#227;o &#233; somente por raz&#245;es de legibilidade (para arrays
+multi-dimensionais, todas as dimens&#245;es exceto a primeira deve ser
+especificada).  
+
+<P>
+At&#233; este ponto, parece que n&#227;o h&#225; diferen&#231;a entre passar uma
+vari&#225;vel simples e um array como argumento para uma fun&#231;&#227;o.  Mas
+h&#225; uma diferen&#231;a fundamental: <B>QUANDO PASSAMOS O ARRAY COMO
+ARGUMENTO, ALTERA&#199;&#213;ES NO ARRAY FEITAS DENTRO DA FUN&#199;&#195;O
+ALTERAM O CONTE&#218;DO DO ARRAY PASSADO COMO PAR&#194;METRO REAL</B>.
+
+<P>
+Note que isto n&#227;o acontece quando uma vari&#225;vel simples &#233; passada
+como argumento.  Considere o exemplo seguinte:
+<PRE>
+void troca_a( int a );
+void troca_vet( int vet[] );
+
+main(){
+   int x = 10;
+   int v[] = {30, 40, 50};
+
+   troca_a( x );
+   printf("x=%d \n ", x);
+   troca_vet( v );
+   printf( "v[0]=%d v[1]=%d v[2]=%d", v[0], v[1], v[2] );
+}
+
+void troca_a( int a ){
+   a = 20;
+}
+
+void troca_vet( int vet[] ){
+   vet[0] = 60;
+   vet[1] = 70;
+   vet[2] = 80;
+}
+</PRE>
+
+<P>
+A sa&#237;da deste programa &#233;:  
+<PRE>
+x=10 
+v[0]=60 v[1]=70 v[2]=80
+</PRE>
+
+<P>
+O valor da vari&#225;vel <TT>x</TT> do programa principal n&#227;o se altera
+porque como j&#225; vimos nas notas de aula 7, quando a fun&#231;&#227;o <TT>troca_a</TT> &#233; chamada, o valor do argumento real <TT>x</TT> &#233; avaliado,
+que &#233; <TT>10</TT>, este valor &#233; copiado para o par&#226;metro formal <TT>a</TT> da fun&#231;&#227;o <TT>troca_a</TT> e a fun&#231;&#227;o ent&#227;o &#233; executada.  O
+par&#226;metro <TT>a</TT> da fun&#231;&#227;o &#233; tratada como vari&#225;vel local,
+portanto quando atribu&#237;mos <TT>20</TT> a <TT>a</TT>, estamos atribuindo
+<TT>20</TT> a uma vari&#225;vel local.  Terminada a fun&#231;&#227;o, a execu&#231;&#227;o
+retorna ao programa principal, que imprime o valor de <TT>x</TT>, que
+n&#227;o foi alterado, ou seja, imprime <TT>x=10</TT>.
+
+<P>
+Quando a fun&#231;&#227;o <TT>troca_vet</TT> &#233; chamada, o array <TT>v</TT> &#233;
+passado como argumento e ``copiado'' para o par&#226;metro formal <TT>vet</TT>.  A fun&#231;&#227;o &#233; ent&#227;o executada, e os elementos do array
+s&#227;o alterados para <TT>60, 70, 80</TT>.  Como mencionado anteriormente,
+quando passamos um array como par&#226;metro, as altera&#231;&#245;es feitas no
+array dentro da fun&#231;&#227;o alteram o array passado como par&#226;metro.
+Portanto, quando a fun&#231;&#227;o termina e a execu&#231;&#227;o continua no
+programa principal com a impress&#227;o dos valores dos elementos de <TT>v</TT>, ser&#225; impresso <TT>60, 70, 80</TT>, os novos valores alterados de
+dentro da fun&#231;&#227;o <TT>troca_vet</TT>.
+
+<P>
+Vamos entender por que quando passamos s&#243; o nome do array como
+argumento as altera&#231;&#245;es afetam o array passado como par&#226;metro real.
+Como j&#225; mencionamos anteriormente, quando um array &#233; definido, como
+<TT>v</TT> no programa principal acima, &#233; alocado espa&#231;o suficiente na
+mem&#243;ria para conter todos os elementos do array.  Na ilustra&#231;&#227;o
+abaixo, s&#227;o alocados 6 bytes de mem&#243;ria a partir do endere&#231;o <TT>1342</TT> para conter o array.  O array como um todo n&#227;o tem um valor,
+mas cada elemento do array tem (neste caso, foram inicializados com
+<TT>30, 40, 60</TT>).  O nome do array, na verdade, cont&#233;m o endere&#231;o
+onde come&#231;a o array, neste caso, o endere&#231;o <TT>1342</TT>.
+
+<P>
+Portanto, quando passamos o nome do array como argumento para uma
+fun&#231;&#227;o estamos na realidade passando como argumento o endere&#231;o de
+mem&#243;ria onde come&#231;a o array.   No exemplo anterior, <TT>1342</TT> &#233;
+passado como argumento para o par&#226;metro formal <TT>vet</TT> da fun&#231;&#227;o
+<TT>troca_vet</TT>.  Portanto, da mesma forma que no caso da vari&#225;vel
+simples, o valor de <TT>v</TT>, que &#233; o endere&#231;o <TT>1342</TT>, &#233; copiado
+para o par&#226;metro <TT>vet</TT> de <TT>troca_vet</TT>.  Ent&#227;o, quando a
+fun&#231;&#227;o <TT>troca_vet</TT> &#233; executada, 
+<TT>vet</TT> &#233; um array de elementos do tipo <TT>int</TT> que
+come&#231;a  no endere&#231;o <TT>1342</TT>.  Quando atribu&#237;mos o valor <TT>60</TT>
+a <TT>vet[0]</TT>, estamos atribuindo <TT>60</TT> ao primeiro elemento do
+array que come&#231;a no endere&#231;o <TT>1342</TT>.  Como este &#233; o mesmo
+endere&#231;o onde come&#231;a o array <TT>v</TT> do programa principal, quando a
+fun&#231;&#227;o <TT>troca_vet</TT> termina, o array <TT>v</TT> ``enxergar&#225;'' o
+valor dos elementos do array que come&#231;a no endere&#231;o <TT>1342</TT>, que
+foram alterados pela fun&#231;&#227;o.
+
+<P>
+
+<DIV ALIGN="CENTER">
+  <DIV ALIGN="CENTER">  <IMG
+ WIDTH="247" HEIGHT="266" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img49.png"
+ ALT="\includegraphics[scale=0.5]{ptrarr}">
+</DIV>
+</DIV>
+
+<P>
+Quando passamos vari&#225;veis simples como argumento para uma fun&#231;&#227;o
+estamos passando somente o valor da vari&#225;vel, portanto, de dentro da
+fun&#231;&#227;o n&#227;o &#233; poss&#237;vel saber qual o endere&#231;o da vari&#225;vel para
+poder alter&#225;-la.
+
+<P>
+Lembre-se que o endere&#231;o s&#243; &#233; passado para a fun&#231;&#227;o  quando
+passamos o array <B>COMO UM 
+TODO</B> (ou seja, o nome do array, sem ser indexado por um elemento).  
+Se passarmos como argumento apenas um elemento do array, o
+comportamento &#233; o mesmo que se pass&#225;ssemos uma vari&#225;vel simples.
+Ou seja, o nome do array indexado por um valor entre colchetes
+refere-se ao valor do elemento do array, enquanto o nome do array
+sozinho refere-se ao endere&#231;o onde come&#231;a o array.
+Assim, no programa abaixo:
+
+<P>
+<PRE>
+void troca_elem( int elem );
+void troca_vet( int vet[] );
+
+main(){
+   int v[] = {30, 40, 50};
+
+   troca_elem( v[0] );
+   printf("v[0]=%d \n ", v[0]);
+   troca_vet( v );
+   printf( "v[0]=%d v[1]=%d v[2]=%d", v[0], v[1], v[2] );
+}
+
+void troca_elem( int elem ){
+   elem = 20;
+}
+
+void troca_vet( int vet[] ){
+   vet[0] = 60;
+   vet[1] = 70;
+   vet[2] = 80;
+}
+</PRE>
+
+<P>
+A sa&#237;da do programa &#233;:  
+<PRE>
+v[0]=30 
+v[0]=60 v[1]=70 v[2]=80
+</PRE>
+
+<P>
+Outro exemplo: a fun&#231;&#227;o <TT>inicializaArray</TT> abaixo inicializa
+todos os elementos do array <TT>valor</TT> com um valor passado como
+argumento pelo programa principal.  
+<PRE>
+   #define TAMANHO 30
+
+   /* Prototype */
+   void inicializaArray(int [], int);
+
+   main()
+   {
+      int valor[TAMANHO];
+  
+      /* Inicializa todos os elementos do array com 42 */
+      inicializaArray(valor, 42);
+
+      /* O resto do programa principal */
+        .
+        .
+        .
+   }
+
+   /* funcao inicializaArray(a, k)
+    *  acao:        inicializa todos os elementos de a com k
+    *  entrada:     array de inteiros a, inteiro k
+    *  saida:       nenhum
+    *  suposicoes:  a tem TAMANHO elementos
+    *  algoritmo:   uma repeticao for, inicializando um elemento a
+    *               cada repeticao
+    */
+   void inicializaArray(int a[], k)
+   {
+      int i;
+
+      for (i = 0; i &lt; TAMANHO; i++)
+        a[i] = k;
+   }
+</PRE>
+
+<P>
+Como as altera&#231;&#245;es feitas por
+<TT>inicializaArray</TT> s&#227;o vistas do programa principal, depois da
+fun&#231;&#227;o <TT>inicializaArray</TT> ser executada, no programa principal
+todos os elementos do array <TT>valor</TT> ter&#227;o o valor <TT>42</TT>.
+
+<P>
+
+<H2><A NAME="SECTION000155000000000000000">
+15.5 Exemplo: pesquisa linear de um array</A>
+</H2>
+
+<P>
+Pesquisar (procurar) em um array um determinado valor (chamado de <EM>chave</EM>) &#233; um problema muito comum em programa&#231;&#227;o.  Ele tem diversas
+aplica&#231;&#245;es.  Por exemplo, podemos pesquisar um array de notas para
+verificar se algum aluno tirou <TT>100</TT> na prova.  H&#225; diversos
+algoritmos de pesquisa: cada um com suas vantagens e desvantagens.
+Nestas notas de aula, discutiremos um algoritmo simples, chamado de
+<EM>pesquisa linear</EM>.  A pesquisa &#233; feita usando uma repeti&#231;&#227;o e
+examinando cada elemento do array a cada repeti&#231;&#227;o e comparando o
+elemento com a chave que buscamos.  A pesquisa termina quando um
+elemento do array que ``casa'' com a chave &#233; encontrada, ou quando o
+array todo &#233; percorrido e a chave procurada n&#227;o &#233; encontrada.
+
+<P>
+
+<H3><A NAME="SECTION000155100000000000000">
+15.5.1 O Problema</A>
+</H3>
+Escreva uma fun&#231;&#227;o <TT>pesquisa<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">linear</TT> que tem como argumento
+de entrada: um array de inteiros a ser pesquisado, o tamanho do array,
+e uma chave (um valor inteiro) a ser procurado.    A fun&#231;&#227;o retorna
+um inteiro:  o &#237;ndice do elemento do array (se a chave for achada) ou
+<TT>-1</TT> caso contr&#225;rio.
+
+<OL>
+<LI>Prot&#243;tipo:
+<PRE>
+int pesquisa_linear(int [], int, int);
+</PRE>
+</LI>
+<LI>Defini&#231;&#227;o:
+<PRE>
+#define NAO_ACHOU -1
+
+/* Procura uma chave em um array
+ * entrada: array a ser pesquisado (arr ), tamanho do array (tam),
+ *          chave a ser procurada (chave)
+ * saida: o indice do elemento que e' igual a chave ou -1 caso nao ache
+ * suposicao: nao assume que o array esteja ordenado
+ */
+int pesquisa_linear(int arr[], int tam, int chave)
+{
+  int i;    
+
+  for (i = tamanho - 1; i &gt;= 0; i--) {
+      if (arr[i] == chave)
+         return i;
+      }
+  return NAO_ACHOU;
+}
+</PRE>
+</LI>
+</OL>
+<H2><A NAME="SECTION000156000000000000000">
+15.6 Exemplo: somar os elementos de dois arrays</A>
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION000156100000000000000">
+15.6.1 O Problema</A>
+</H3>
+Escrever uma fun&#231;&#227;o que some dois arrays de <TT>floats</TT>, do mesmo
+tamanho.  Dar o resultado em um terceiro array.
+
+<OL>
+<LI>Prot&#243;tipo:
+<PRE>
+  void soma_array( float [], float [], float [], int );
+</PRE>
+
+<P>
+</LI>
+<LI>Defini&#231;&#227;o de <TT>soma<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">array()</TT>:
+
+<P>
+<PRE>
+  void soma_array( float arr1[], float arr2[], float arr3[], int tam )
+  {
+     int i;
+
+     for (i = 0; i &lt; tam; i++)
+         arr3[i] = arr1[i] + arr2[i];
+  }
+</PRE>
+</LI>
+</OL>
+<H2><A NAME="SECTION000157000000000000000">
+15.7 Exemplo: ordenar um array</A>
+</H2>
+Um outro programa muito popular com arrays &#233; orden&#225;-lo de acordo com
+algum crit&#233;rio.  Por exemplo, um array de inteiros pode ser ordenado
+em ordem crescente ou decrescente.  O algoritmo chamado <EM>Bubble
+sort</EM> &#233; bastante simples (por&#233;m n&#227;o muito eficiente) de ordena&#231;&#227;o.
+
+<P>
+Basicamente, o algoritmo funciona da seguinte forma:
+
+<UL>
+<LI>na primeira passagem sobre o array:
+come&#231;ando do &#250;ltimo elemento do array at&#233; o segundo elemento,
+compare o valor de cada elemento com o valor do elemento anterior a
+ele.  Se os elementos comparados estiverem fora de ordem, trocar os
+seus valores.  Depois que esta primeira passada terminar, o que
+acontece &#233; que o menor elemento do array torna-se o primeiro elemento
+do array.
+</LI>
+<LI>na segunda passagem pelo array:
+come&#231;ando com o &#250;ltimo elemento do array at&#233; o terceiro elemento,
+compare o valor de cada elemento com o valor do elemento anterior a
+ele.  Se os dois elementos comparados estiverem fora de ordem, trocar
+os seus valores.  Depois que esta passagem sobre o array terminar, o
+segundo menor elemento do array ser&#225; o segundo elemento do array.
+</LI>
+<LI>repetir a passagem sobre o array de maneira similar at&#233; que a
+&#250;ltima passagem ser&#225; simplesmente uma compara&#231;&#227;o dos valores do
+&#250;ltimo elemento com o elemento anterior.
+</LI>
+</UL>
+Por exemplo, se come&#231;armos com um array:
+<TT>9 8 7 6 5 4 3 2 1</TT>,
+(o primeiro elemento &#233; <TT>9</TT> e o &#250;ltimo elemento &#233; <TT>1</TT>)
+isto &#233; o que aocntece com os elementos do array depois de cada
+passagem sobre ele (e troca de valores adjacentes):
+<PRE>
+passagem   conteudo do array depois da passagem
+~~~~       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 --&gt;       1  9  8  7  6  5  4  3  2
+
+2 --&gt;       1  2  9  8  7  6  5  4  3
+
+3 --&gt;       1  2  3  9  8  7  6  5  4
+
+4 --&gt;       1  2  3  4  9  8  7  6  5
+
+5 --&gt;       1  2  3  4  5  9  8  7  6
+
+6 --&gt;       1  2  3  4  5  6  9  8  7
+
+7 --&gt;       1  2  3  4  5  6  7  9  8
+
+8 --&gt;       1  2  3  4  5  6  7  8  9
+</PRE>
+Note que mesmo que se come&#231;&#225;ssemos com um array ordenado de 9
+elementos, ainda assim o algoritmo dado faz 8 passagens sobre o
+array.  Para melhorar isso, n&#243;s apresentamos uma vers&#227;o melhorada do
+<EM>Bubble sort</EM>.
+
+<P>
+A id&#233;ia &#233; a seguinte.  Antes de come&#231;ar cada passagem,
+inicializamos uma vari&#225;vel <TT>ordenado</TT> com 1.  Se durante a
+passagem uma troca de valores ocorrer, trocamos o valor da vari&#225;vel
+para 0.  Assim, se depois da passagem, o valor da vari&#225;vel continuar
+sendo 1, isso significa que nenhuma troca ocorreu e que o array est&#225;
+ordenado. 
+
+<H3><A NAME="SECTION000157100000000000000">
+15.7.1 Bubble sort</A>
+</H3>
+
+<P>
+
+<H3><A NAME="SECTION000157200000000000000">
+15.7.2 Algoritmo</A>
+</H3>
+Enquanto o array nao estiver ordenado
+
+<OL>
+<LI>inicializar <TT>ordenado</TT> com  1
+</LI>
+<LI>comparar pares adjacentes do array
+<BR>
+troque seus valores se estiver fora de ordem
+<BR>     <TT>ordenado</TT> = 0.
+</LI>
+</OL>
+<H3><A NAME="SECTION000157300000000000000">
+15.7.3 Prot&#243;tipo da fun&#231;&#227;o e defini&#231;&#227;o</A>
+</H3>
+
+<OL>
+<LI>Prot&#243;tipo
+<PRE>
+void bubble_sort(int [], int);
+</PRE>
+</LI>
+<LI>Definicao
+<PRE>
+/* Uma funcao que ordena um array de inteiros usando o algoritmo de
+ * Bubble sort.
+ * Entrada:  array a ser ordenado -- lista[]
+ *           tamanho do array -- tam
+ */
+void bubble_sort(int lista[], int tam)
+{
+  int ordenado,       /* se 1 depois da passagem o array esta' ordenado */
+      elem_final = 1, /* em uma passagem, elementos do ultimo ate' elem_final
+                         sao comparados com o elemento anterior */
+      i,j,
+      temp;
+  
+  /* enquanto o array nao estiver ordenado, fazer uma passagem sobre ele */
+  do {
+     ordenado = 1;  /* assume que array esta' ordenado */
+
+     /* Examina o array do ultimo elemento ate elem_final.  Compara
+        cada elemento com o anteior e troca seus valores se estiver
+        fora de ordem.  */
+
+     for (i = tam - 1; i &gt;= elem_final; i--) {
+         
+         if (lista[i] &lt; lista[i - 1]) {  /* troca os elementos de i e i-1 */
+            temp = lista[i];
+            lista[i] = lista[i - 1];
+            lista[i - 1] = temp;
+            ordenado = 0;         /* marca como nao ordenado */
+         }
+     }
+
+     elem_final++;
+
+     } while (!ordenado);
+}
+</PRE>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION000158000000000000000">
+15.8 Coment&#225;rios Finais</A>
+</H2>
+
+<P>
+Neste curso, um dos &#250;nicos lugares que veremos o nome do array sem
+estar indexado &#233; quando passamos o array (como um todo) para uma
+fun&#231;&#227;o.    Para outras finalidades, veremos sempre o array
+indexado.  Por exemplo, o seguinte trecho de programa est&#225; errado:
+
+<P>
+<PRE>
+  main(){
+    int arr1[4] = {10, 20, 30, 40};
+    int arr2[4];
+
+    arr2 = arr1;       /* ERRADO: copia arr1 em arr2 */
+                       /* tem que copiar elemento por elemento */
+
+    if( arr1 == arr2 ) /* ERRADO: nao podemos comparar arrays inteiros */ 
+      printf(``X'');   /* tem que comparar elemento por elemento */
+}
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<A NAME="tex2html402"
+  HREF="notas_proc-node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html400"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html394"
+  HREF="notas_proc-node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html403"
+  HREF="notas_proc-node16.html">16 Arrays Multidimensionais</A>
+<B>Up:</B> <A NAME="tex2html401"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html395"
+  HREF="notas_proc-node14.html">14 Tipo Enumerado</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

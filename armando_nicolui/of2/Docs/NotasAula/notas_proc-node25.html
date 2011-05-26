@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>25 Entrada e Saída Padrão</TITLE>
+<META NAME="description" CONTENT="25 Entrada e Saída Padrão">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node26.html">
+<LINK REL="previous" HREF="notas_proc-node24.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node26.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html559"
+  HREF="notas_proc-node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html557"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html551"
+  HREF="notas_proc-node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html560"
+  HREF="notas_proc-node26.html">26 Arquivos</A>
+<B>Up:</B> <A NAME="tex2html558"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html552"
+  HREF="notas_proc-node24.html">24 Mais sobre funções:</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000250000000000000000">
+25 Entrada e Sa&#237;da Padr&#227;o</A>
+</H1>
+
+<P>
+A forma com que um programa em C&nbsp;se comunica com o mundo externo &#233;
+atrav&#233;s de entrada e sa&#237;da de dados: o usu&#225;rio fornece dados via
+teclado e o promrama imprime mensagens na tela. Todos os programas
+vistos at&#233; agora l&#234;em suas entradas do teclado e produzem suas sa&#237;das
+na tela.
+
+<P>
+Em C&nbsp;toda entrada e sa&#237;da &#233; feita com <I>streams</I> (seq&#252;&#234;ncias)
+de caracteres organizadas em linhas. Cada linha consiste de zero ou
+mais caracteres e termina com o caracter de final de linha. Pode haver
+at&#233; 254 caracteres em uma linha (incluindo o caracter de final de
+linha). Quando um programa inicia, o sistema operacional
+automaticamente define quem &#233; a <B>entrada padr&#227;o</B> (geralmente o
+teclado) e quem &#233; a <B>sa&#237;da padr&#227;o</B> (geralmente a tela).
+
+<P>
+As facilidades de entrada e sa&#237;da n&#227;o fazem parte da linguagem C&nbsp;. O
+que existe &#233; uma biblioteca padr&#227;o de fun&#231;&#245;es para manipular a
+transfer&#234;ncia de dadosentre programa e os dispositivos
+(<I>devices</I>) de sa&#237;da e entrada padr&#227;o. Algumas destas fun&#231;&#245;es
+s&#227;o: <TT>scanf(), printf(), getchar(), puts(),
+gets()</TT>.  Estas fun&#231;&#245;es s&#227;o declaradas no arquivo <TT>&lt;stdio.h&gt;</TT>. Existem fun&#231;&#245;es &#250;teis para convers&#227;o e teste de caracteres
+declaradas no arquivo <TT>&lt;ctype.h&gt;</TT>.
+
+<P>
+As fun&#231;&#245;es de entrada e sa&#237;da operam sobre <I>streams</I> de
+caracteres. Toda vez que uma fun&#231;&#227;o se entrada &#233; chamada (por exemplo,
+<TT>getchar(), scanf()</TT>) ela verifica pela pr&#243;xima entrada dispon&#237;vel
+na entrada padr&#227;o (por exemplo, texto digitado no teclado). Cada vez
+que uma fun&#231;&#227;o de sa&#237;da &#233; chamada, ela entrega o dado para a sa&#237;da
+padr&#227;o (por exemplo, a tela).
+
+<P>
+As fun&#231;&#245;es para leitura da entrada padr&#227;o e para escrita na sa&#237;da padr&#227;o
+que t&#234;m sido usadas at&#233; agora s&#227;o:
+
+<P>
+
+<OL>
+<LI><B>Entrada e sa&#237;da de caracteres:</B>
+<PRE>
+int getchar( void );
+int putchar( int );
+</PRE>
+
+<P>
+</LI>
+<LI><B>Entrada e sa&#237;da de <I>strings</I>:</B>
+<PRE>
+char *gets(char *);
+int puts( char *);
+</PRE>
+
+<P>
+</LI>
+<LI><B>Entrada e sa&#237;da formatada:</B>
+<PRE>
+int scanf(char *format, arg1, arg2, ... );
+int printf(char *format, arg1, arg2, ... );
+</PRE>
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html559"
+  HREF="notas_proc-node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html557"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html551"
+  HREF="notas_proc-node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html560"
+  HREF="notas_proc-node26.html">26 Arquivos</A>
+<B>Up:</B> <A NAME="tex2html558"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html552"
+  HREF="notas_proc-node24.html">24 Mais sobre funções:</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 13
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 13
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 13
+<BR>
+2&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Filtros avan&#231;ados: <B><I>sed(1)</I></B> (<I>Stream Editor</I>)</A>
+</H1>
+
+<P>
+<B><I>sed(1)</I></B> &#233; um dos comandos  mais usados no processamento de textos
+em UNIX. Este  comando permite a aplica&#231;&#227;o de  transforma&#231;&#245;es sobre uma
+entrada   vinda  de  um   arquivo,  de   um  <I>pipeline</I>   ou  de
+STDIN. <B><I>sed(1)</I></B>  n&#227;o &#233; um  editor interativo como  <B><I>vi(1)</I></B> ou
+<B><I>emacs(1)</I></B>.
+
+<P>
+A  sintaxe geral  de  <B><I>sed(1)</I></B> &#233;:  <B>sed -e  comando_edi&#231;&#227;o
+[arquivo]</B> onde  <B>comando_edi&#231;&#227;o</B> &#233;  aplicado em cada  linha do
+arquivo especificado. Se nenhum arquivo &#233; indicado, <B><I>sed(1)</I></B> l&#234; os
+dados de STDIN. Esta express&#227;o apresenta o seguinte formato:
+
+<P>
+<PRE>
+         [endereço-1, [endereço-2]] função [argumento]
+</PRE>
+
+<P>
+A por&#231;&#227;o  <B>endere&#231;o-1, [endere&#231;o-2]</B> pode tanto  indicar a linha
+onde    <B>fun&#231;&#227;o</B>   ser&#225;    aplicada,   quanto    uma   express&#227;o
+regular.    <B>endere&#231;o-1</B>    indica    a    linha    inicial    e
+<B>endere&#231;o-2</B> a linha final. Por exemplo, o endere&#231;o <B>1,5</B>
+indica que a fun&#231;&#227;o ser&#225; aplicada da 1<SUP>a</SUP> linha at&#233;
+a 5<SUP>a</SUP>.
+
+<P>
+<B>fun&#231;&#227;o  [argumento]</B> representa a  a&#231;&#227;o que ser&#225;  aplicada em
+cada linha  que corresponda ao  endere&#231;o especificado. Se o  endere&#231;o &#233;
+omitido, <B>fun&#231;&#227;o</B> &#233; apllicada em todas as linhas.
+
+<P>
+As   principais    fun&#231;&#245;es   de   <B><I>sed(1)</I></B>    s&#227;o   mostradas   na
+Tabela&nbsp;<A HREF="#tab:sedcmds">1</A>:
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="163"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Comandos de <B><I>sed(1)</I></B></CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="CENTER"><B>Fun&#231;&#227;o</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=99><B>Descri&#231;&#227;o</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=99><B>Formato</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=198><B>Exemplo</B></TH>
+</TR>
+<TR><TD ALIGN="CENTER">s</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Substitui&#231;&#227;o</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>s/antigo/novo[/flags]&nbsp;o caracter
+    <B>/</B> pode ser substitu&#237;do por qualquer outro caracter.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed
+    -e 's/unix/Unix/g' teoria.txt&nbsp;sed -e
+    's#/usr/local#/usr/share/bin#g' web.sh</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">d</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Remo&#231;&#227;o</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>d</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '1,5d' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">q</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Termina execu&#231;&#227;o</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>q</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Windows/q' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">p</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Imprime a linha</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>p</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Windows/p' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">a</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Insere texto ap&#243;s linha atual</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>a<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$"> texto</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Windows/a<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">&nbsp;MS-Windows' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">i</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Insere texto antes de linha atual</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>i<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$"> texto</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Windows/i<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">&nbsp;MS-Windows' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">c</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Troca linha atual pelo texto especificado</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>c<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$"> texto</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Windows/c<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">&nbsp;MS-Windows' teoria.txt</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER">r</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>Insere conte&#250;do de arquivo ap&#243;s linha atual</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=99>r arquivo</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>sed -e '/Unix/r novotexto.txt' teoria.txt</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:sedcmds"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Manipula&#231;&#227;o de <I>strings</I>: <B><I>expr(1)</I></B></A>
+</H1>
+
+<P>
+<B><I>expr(1)</I></B> &#233; um programa usado em programa&#231;&#227;o <I>shell</I> para a
+execu&#231;&#227;o de express&#245;es aritm&#233;ticas,  antes do advento de <B><I>bash(1)</I></B>
+e <B><I>ksh(1)</I></B>. Ele tamb&#233;m  &#233; &#250;til para executar opera&#231;&#245;es aritm&#233;ticas
+em  <I>scripts  shell</I>  que  pretendam  ser  executados  tando  em
+<B><I>bash(1)</I></B> quanto em Bourne <I>shell</I> (<B><I>sh(1)</I></B>).
+
+<P>
+No   entanto,   este  comando   permanece   &#250;til   na  manipula&#231;&#227;o   de
+<I>strings</I>.    As   principais    formas   de    manipula&#231;&#227;o   de
+<I>strings</I>     com     <B><I>expr(1)</I></B>     s&#227;o    mostradas     na
+tabela&nbsp;<A HREF="#tab:exprcmds">2</A>.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="166"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 2:</STRONG>
+Manipula&#231;&#227;o de <I>strings</I> com <B><I>expr(1)</I></B></CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT"><B>Fun&#231;&#227;o</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>Descri&#231;&#227;o</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=142><B>Exemplo</B></TH>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">match STRING REGEXP</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>Procura em STRING pela express&#227;o regular REGEXP. Retorna o n&#250;mero de caracteres em STRING que coincidem com REGEXP. Se REGEXP usa uma sub-express&#227;o limitada por <B><IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">(&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\backslash$">)</B>, retorna a parte de STRING que coincide com o padr&#227;o dentro da sub-express&#227;o.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>expr&nbsp;&nbsp;match&nbsp;&nbsp;$NOME"&nbsp;&nbsp;'[a-z].*'</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">substr STRING POS LENGTH</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>Extrai LENGTH caracteres de STRING, come&#231;ando da posi&#231;&#227;o POS (para primeiro caracter, POS=1)</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>expr&nbsp;&nbsp;substr&nbsp;&nbsp;$NOME"&nbsp;&nbsp;3&nbsp;&nbsp;4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">index STRING CHARS</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&#237;ndice em STRING onde qualquer um dos caracteres em CHARS ocorre primeiro. Retorna 0 (zero) se n&#227;o acha caracteres.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>expr&nbsp;&nbsp;index&nbsp;&nbsp;Cardoso&nbsp;&nbsp;cdCD</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">length STRING</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>comprimento do <I>string</I>.</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>expr&nbsp;&nbsp;length&nbsp;&nbsp;$NOME</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:exprcmds"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Exemplos</A>
+</H1>
+
+<P>
+Exemplos      podem      ser      encontrados      no      link      de
+<A NAME="tex2html3"
+  HREF="../exemplos_13/">Exemplos</A>
+na p&#225;gina HTML da disciplina.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2004-01-26
+</ADDRESS>
+</BODY>
+</HTML>

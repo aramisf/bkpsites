@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12 A sentença break</TITLE>
+<META NAME="description" CONTENT="12 A sentença break">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node13.html">
+<LINK REL="previous" HREF="notas_proc-node11.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node13.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html348"
+  HREF="notas_proc-node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html346"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html340"
+  HREF="notas_proc-node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html349"
+  HREF="notas_proc-node13.html">13 Estruturas de Repetição</A>
+<B>Up:</B> <A NAME="tex2html347"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html341"
+  HREF="notas_proc-node11.html">11 A sentença switch</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html350"
+  HREF="notas_proc-node12.html#SECTION000120010000000000000">Exemplo 11:</A>
+<LI><A NAME="tex2html351"
+  HREF="notas_proc-node12.html#SECTION000120020000000000000">Exercício 2:</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000120000000000000000">
+12 A senten&#231;a <TT>break</TT></A>
+</H1> 
+
+<P>
+O <TT>break</TT> faz com  que todas as  senten&#231;as que o seguem  dentro da
+mesma  senten&#231;a <TT>switch</TT> sejam  ignorados.  Ou  seja,  colocando a
+senten&#231;a <TT>break</TT> no final de uma senten&#231;a <TT>case</TT> faz com que as
+senten&#231;as que seguem os  <TT>case</TT>s subsequentes n&#227;o sejam executadas.
+Em geral, &#233; este o comportamento desejado quando se usa o <TT>switch</TT>,
+e  <TT>case</TT>s  sem o  <TT>break</TT> no  final s&#227;o  de pouca  utilidade.
+Portanto, o  uso de senten&#231;as  <TT>case</TT> sem  o <TT>break</TT>  devem ser
+evitados e quando utilizados devem ser comentados ao lado com algo como
+<TT>/* continua proxima sentenca - sem break */</TT>.
+
+<P>
+Com a senten&#231;a <TT>break</TT> o diagrama de fluxo fica:
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="728" HEIGHT="319" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img38.png"
+ ALT="\includegraphics[scale=0.85]{break}"></DIV>
+
+<P>
+
+<P>
+Note  a similaridade  com  o diagrama  da  senten&#231;a <TT>else-if</TT> e  a
+diferen&#231;a com o diagrama da senten&#231;a <TT>switch</TT> acima.
+
+<P>
+O  pr&#243;ximo programa  tem  a  mesma fun&#231;&#227;o  de  calculadora do  programa
+anterior, por&#233;m utilizando a senten&#231;a <TT>switch</TT>.
+
+<P>
+
+<H4><A NAME="SECTION000120010000000000000">
+Exemplo 11:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  float num1, num2;
+  char op;
+  
+  printf("Entre com numero operador numero:\n");
+  scanf("%f %c %f", &amp;num1, &amp;op, &amp;num2);
+  
+  switch (op) {
+  case '+':
+    printf(" = %.2f", num1 + num2);
+    break;
+  case '-':
+    printf(" = %.2f", num1 - num2);
+    break;
+  case '*':
+    printf(" = %.2f", num1 * num2);
+    break;
+  case '/':
+    printf(" = %.2f", num1 / num2);
+    break;
+  default:
+    printf(" Operador invalido.");
+    break;
+  }
+  printf("\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Como mencionado anteriormente, &#233;  poss&#237;vel n&#227;o colocar nenhuma senten&#231;a
+seguindo um  <TT>case</TT>.   Isso &#233; &#250;til  quando diversas  senten&#231;as <TT>case</TT> (diversas constantes) t&#234;m a mesma a&#231;&#227;o.
+
+<P>
+Por exemplo, podemos modificar o  programa acima para aceitar <TT>x</TT> e
+<TT>X</TT>  para multiplica&#231;&#227;o e  <code>\</code> para divis&#227;o.  O  programa fica
+ent&#227;o:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  float num1, num2;
+  char op;
+  
+  printf("Entre com numero operador numero:\n");
+  scanf("%f %c %f", &amp;num1, &amp;op, &amp;num2);
+  
+  switch (op) {
+  case '+':
+    printf(" = %.2f", num1 + num2);
+    break;
+  case '-':
+    printf(" = %.2f", num1 - num2);
+    break;
+  case '*':
+  case 'x':
+  case 'X':
+    printf(" = %.2f", num1 * num2);
+    break;
+  case '/':
+  case '\\':
+    printf(" = %.2f", num1 / num2);
+    break;
+  default:
+    printf(" Operador invalido.");
+    break;
+  }
+  printf("\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H4><A NAME="SECTION000120020000000000000">
+Exerc&#237;cio 2:</A>
+</H4> Ler mes e ano e imprimir o numero de dias do
+mes no ano digitado.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main() {
+  int mes, ano, numDias;
+  
+  printf("Entre com mes e ano (mm aa):");
+  scanf( "%d %d", &amp;mes, &amp;ano);
+  if( mes &lt; 1 || mes &gt; 12 || ano &lt; 0 || ano &gt; 99 )
+    printf("mes ou ano invalido\n");
+  else {
+    switch( mes ){
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:  
+      numDias = 31;
+      break;
+    case 2: 
+      if( ano % 4 == 0 )
+	numDias = 29;
+      else 
+	numDias = 28;
+      break;
+    default:
+      numDias = 30;
+    } 
+    printf("%2d/%2d tem %d dias\n", mes, ano, numDias);
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<HR>
+<A NAME="tex2html348"
+  HREF="notas_proc-node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html346"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html340"
+  HREF="notas_proc-node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html349"
+  HREF="notas_proc-node13.html">13 Estruturas de Repetição</A>
+<B>Up:</B> <A NAME="tex2html347"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html341"
+  HREF="notas_proc-node11.html">11 A sentença switch</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

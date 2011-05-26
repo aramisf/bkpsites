@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Declarando um array sem especificar seu tamanho
+declare -a cores
+
+echo "Entre suas cores favoritas (separadas por espaco):"
+
+read -a cores    # Entre pelo menos 3 cores para demonstrar as operacoes abaixo
+                  #      -a: Opcao especial do comando 'read' 
+                  #          permite assinalar os elementos lidos pelo comando
+                  #          aos elementos de um array
+
+echo
+
+# Sintaxe especial para obter o numero de elementos em um array
+#     conta_elementos=${#cores[*]} também funciona.
+#
+conta_elementos=${#cores[@]}
+
+indice=0
+
+# Lista todos os elementos do array.
+while [[ $indice -lt $conta_elementos ]]
+do    
+  echo ${cores[$indice]}
+  indice=$((indice + 1))
+done
+
+# Acima, cada elemento do array é exibido em uma linha separada.
+# Se isto nao eh desejado, use  echo -n "${cores[$indice]} "
+#
+# Fazendo a mesma coisa com um loop "for":
+#   for i in "${cores[@]}"
+#   do
+#     echo "$i"
+#   done
+#
+
+echo
+
+# Novamente, lista todos os elementos do array, mas com um metodo mais elegante
+echo ${cores[@]}          # echo ${cores[*]} tambem funciona.
+
+echo
+
+# O comando "unset" remove os elementos de um array ou o array todo.
+unset cores[1]              # Remove 2o. elemento do array.
+                            # O mesmo efeito que executar   cores[1]=
+echo  ${cores[@]}           # Lista o array novamente, sem o 2o. elemento.
+
+unset cores                 # Remove o array inteiro.
+                            #    unset cores[*] e
+                            #    unset cores[@]  tambem sao equivalentes.
+echo; echo -n "Cores OK."			   
+echo ${cores[@]}            # Lista o array de novo, mas agora ele estah vazio.
+
+exit 0

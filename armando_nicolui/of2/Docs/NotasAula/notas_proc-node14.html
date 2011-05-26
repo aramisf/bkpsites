@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>14 Tipo Enumerado</TITLE>
+<META NAME="description" CONTENT="14 Tipo Enumerado">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node15.html">
+<LINK REL="previous" HREF="notas_proc-node13.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node15.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html392"
+  HREF="notas_proc-node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html390"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html384"
+  HREF="notas_proc-node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html393"
+  HREF="notas_proc-node15.html">15 Arrays</A>
+<B>Up:</B> <A NAME="tex2html391"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html385"
+  HREF="notas_proc-node13.html">13 Estruturas de Repetição</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000140000000000000000">
+14 Tipo Enumerado</A>
+</H1>
+
+<P>
+Em muitos programas, vari&#225;veis do tipo <TT>int</TT> s&#227;o utilizadas n&#227;o
+por suas propriedades num&#233;ricas, mas para representar uma escolha
+dentre um pequeno n&#250;mero de alternativas.  Por exemplo:
+
+<P>
+<PRE>
+  int sexo;  /* masculino = 1
+                feminino = 2 */
+  int cor;   /* vermelho = 1
+                amarelo = 2
+                verde = 3    */
+</PRE>
+
+<P>
+A utiliza&#231;&#227;o de c&#243;digos para representar os valores que uma
+vari&#225;vel poder&#225; assumir, certamente compromete a clareza da
+estrutura de dados do programa, tornando sua l&#243;gica obscura e
+inconsistente.  Por exemplo:
+
+<P>
+<PRE>
+  cor = 3;
+  if( sexo == 2 ) ...
+  cor = cor + sexo;
+  for( cor = 1; cor &lt; 10; cor ++ )...
+</PRE>
+
+<P>
+Um tipo enumerado permite definir uma lista de valores que uma
+vari&#225;vel deste tipo poder&#225; assumir.  A defini&#231;&#227;o de um tipo
+enumerado &#233; feita da seguinte forma:
+
+<P>
+<DIV ALIGN="CENTER">
+<TT>enum</TT> <!-- MATH
+ $Nome\_do\_tipo$
+ -->
+<IMG
+ WIDTH="117" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img43.png"
+ ALT="$Nome\_do\_tipo$"> { <IMG
+ WIDTH="52" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img44.png"
+ ALT="$valor_1$">, <IMG
+ WIDTH="52" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img45.png"
+ ALT="$valor_2$">, <IMG
+ WIDTH="25" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img46.png"
+ ALT="$\ldots$">,
+  <IMG
+ WIDTH="54" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img47.png"
+ ALT="$valor_n$"> };
+
+</DIV>
+
+<P>
+Exemplos de defini&#231;&#227;o de tipos enumerados:
+
+<P>
+<PRE>
+enum TpCores {VERMELHO, AMARELO, VERDE};
+enum TpDias {SEG, TER, QUA, QUI, SEX, SAB, DOM};
+enum TpSexos {MASCULINO, FEMININO};
+</PRE>
+
+<P>
+Vari&#225;veis destes tipos s&#227;o definidas da seguinte forma:
+<PRE>
+enum TpCores var1, var2;
+enum TpDias  var3;
+</PRE>
+
+<P>
+Agora, &#233; poss&#237;vel dar valores a estas vari&#225;veis, por exemplo:
+<PRE>
+  var1 = AMARELO;       
+  var3 = QUI;
+</PRE>
+
+<P>
+&#233; um erro usar valores n&#227;o definidos na declara&#231;&#227;o do
+tipo.  A express&#227;o <TT>var2 = AZUL;</TT> causa erro de compila&#231;&#227;o.
+
+<P>
+Internamente, o compilador trata vari&#225;veis enumeradas como inteiros.
+Cada valor na lista de valores poss&#237;veis corresponde a um inteiro,
+come&#231;ando com 0 (zero).  Portanto, no exemplo <TT>enum TpCores</TT>,
+<TT>VERMELHO</TT> &#233; armazenado como <TT>0</TT>, <TT>AMARELO</TT> &#233; armazenado
+como <TT>1</TT>, e <TT>VERDE</TT> &#233; armazenado como <TT>2</TT>.
+
+<P>
+
+<P>
+<B>Utiliza&#231;&#227;o de tipos enumerados</B>
+
+<P>
+Vari&#225;veis de tipos enumerados s&#227;o geralmente usados para clarificar
+a opera&#231;&#227;o do programa.  Considere o seguinte trecho de programa que codifica
+dias da semana como inteiros (sendo <TT>sabado = 5</TT> e <TT>domingo =
+6</TT>) para verificar se o dia do pagamento cai no final de semana e
+altera a dia para a segunda-feira seguinte.
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+/* prototipo da funcao que dada a data, retorna o dia da semana.
+   seg=0, ter=1, qua=2, qui=3, sex=4, sab=5, dom=6 */
+
+int diaDaSemana( int dia, int mes, int ano );
+
+main(){
+   int diaPgto, mesPgto, anoPgto;
+   int diaSem;
+
+   printf("Entre com a data de pagamento (dd mm aa): ");
+   scanf("%d %d %d", &amp;diaPgto, &amp;mesPgto, &amp;anoPgto);
+   diaSem = diaDaSemana( diaPgto, mesPgto, anoPgto );
+   if( diaSem == 5 )
+     diaPgto = diaPgto + 2;
+   else if( diaSem == 6 )
+     diaPgto++;
+   printf("Data do pagamento: %d/%d/%d\n", diaPgto, mesPgto,
+   anoPgto);
+}
+</PRE>
+
+<P>
+Este programa ficaria mais leg&#237;vel se ao inv&#233;s de codificar os dias
+da semana como inteiros e colocar a codifica&#231;&#227;o como coment&#225;rio,
+utilizar tipos enumerados.  O programa ficaria ent&#227;o
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+enum TpSemana {SEG, TER, QUA, QUI, SEX, SAB, DOM};
+
+/* prototipo da funcao que dada a data, retorna o dia da semana */
+enum TpSemana  diaDaSemana( int dia, int mes, int ano );
+
+main(){
+   int diaPgto, mesPgto, anoPgto;
+   int diaSem;
+
+   printf("Entre com a data de pagamento (dd mm aa): ");
+   scanf("%d %d %d", &amp;diaPgto, &amp;mesPgto, &amp;anoPgto);
+   diaSem = diaDaSemana( diaPgto, mesPgto, anoPgto );
+   if( diaSem == SAB )
+     diaPgto = diaPgto + 2;
+   else if( diaSem == DOM )
+     diaPgto++;
+   printf("Data do pagamento: %d/%d/%d\n", diaPgto, mesPgto, anoPgto);
+}
+</PRE>
+
+<P>
+Note que a fun&#231;&#227;o <TT>diaDaSemana</TT> agora retorna apenas um dos
+valores da lista <TT>SEG, TER, QUA, QUI, SEX, SAB, DOM</TT> e portanto,
+no programa principal ao inv&#233;s de testar se o <TT>diaSem == 5</TT>
+podemos escrever <TT>diaSem == SAB</TT>, o que torna o programa muito
+mais leg&#237;vel. 
+
+<P>
+<HR>
+<A NAME="tex2html392"
+  HREF="notas_proc-node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html390"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html384"
+  HREF="notas_proc-node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html393"
+  HREF="notas_proc-node15.html">15 Arrays</A>
+<B>Up:</B> <A NAME="tex2html391"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html385"
+  HREF="notas_proc-node13.html">13 Estruturas de Repetição</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

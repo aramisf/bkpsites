@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "SED 01"
+sed -e 's#MS-WORD#UNIX/OpenOffice#g' -e 's#UNIX#Windows#g' $1
+
+echo "SED 02"
+sed -e 's#UNIX#Windows#g' -e 's#MS-WORD#UNIX/OpenOffice#g' $1
+    

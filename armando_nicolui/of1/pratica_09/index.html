@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 09
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 09
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 09
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Laborat&#243;rio 09</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+Preliminares</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Copie  o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7</FONT></B>  para seu diret&#243;rio
+  de <I>login</I>.
+
+<P>
+</LI>
+<LI>Crie o  diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/bin</FONT></B>. A partir de  agora, todos os
+  <I>scripts shell</I> produzidos  nesta disciplina devem ser criados
+  neste diret&#243;rio.
+
+<P>
+</LI>
+<LI>No arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>,  altere o valor da vari&#225;vel de
+  ambiente <B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B> de  modo que o diret&#243;rio criado  no item anterior
+  seja o primeiro diret&#243;rio a ser investigado na busca por um comando.
+
+<P>
+</LI>
+<LI>Inicie outra  sess&#227;o de <I>shell</I> e verifique  se o valor de
+  <B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B> est&#225; correto.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+Programa&#231;&#227;o <I>shell</I> - <I>scripts</I></A>
+</H2>
+
+<P>
+Crie  <I>scripts shell</I> que implementem uma  solu&#231;&#227;o para os
+exerc&#237;cios abaixo.
+
+<P>
+<B>ATEN&#199;&#195;O:</B> Cada <I>script</I> deve ser
+executado como se fosse um comando normal do UNIX.
+
+<P>
+
+<OL>
+<LI>Dado um  nome (n&#227;o  &#233;  <I>login</I>) de  usu&#225;rio passado  como
+  argumento, imprima uma frase indicando qual o caminho completo de seu
+  diret&#243;rio de <I>login</I>.
+
+<P>
+</LI>
+<LI>Verifique  se   um  usu&#225;rio,   cujo  <I>login</I>   &#233;  obtido
+  interativamente, est&#225; <I>logado</I>.
+
+<P>
+</LI>
+<LI><A NAME="item:1"></A>  Remova do arquivo  <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum7/telefones.txt</FONT></B> a
+  pessoa  cujo  sobrenome  &#233;   obtido  do  usu&#225;rio  interativamente.  O
+  <I>script</I> deve exibir um <I>prompt</I> indicando ao usu&#225;rio o
+  momento em que este sobrenome deve ser fornecido.
+
+<P>
+<B>DICA:</B>   Lembre-se  do   comando  interno   <B>read</B>  em
+  <B><I>bash(1)</I></B>. 
+
+<P>
+</LI>
+<LI>Termine todos os seus  processos que estejam associados a um nome
+  de comando, passado como argumento.
+
+<P>
+<B>DICA:</B> Nas  aulas anteriores j&#225; vimos como  capturar a STDOUT
+  de um comando para ser inserida  dentro de uma linha de comando. Para
+  isto,  usa-se  <B>$(<I>comando</I>)</B>  ou <B>crase</B>  como
+  delimitador:
+
+<P>
+<PRE>
+          CMDS=`ls ~/bin`
+          ls -l `cat ~/arqs.txt`
+          kill $(ps xu | egrep mozilla | cut -c10-14)
+</PRE>
+
+<P>
+<B>ATEN&#199;&#195;O:</B> Neste exerc&#237;cio, &#233; proibido usar <B><I>killall(1)</I></B>.
+
+<P>
+</LI>
+<LI>Fa&#231;a um  <I>script</I> <I>shell</I> chamado <B><FONT FACE="Helvetica, Arial, sans-serif">fim_sessao</FONT></B>
+  que:<A NAME="exerc:endsession"></A>  
+<OL type="a">
+<LI>Termina todos os  SEUS processos  associados ao  seu navegador
+    predileto (e.g., firefox) e  ao seu editor preferido (e.g., emacs);
+</LI>
+<LI>Remove    os     arquivos    da     cache     do    firefox
+    (e.g., &nbsp;/.mozilla/firefox/*.default/Cache/*);
+</LI>
+<LI>Remove    o    historico    de    navega&#231;&#227;o    do    firefox
+    (e.g., &nbsp;/.mozilla/firefox/*.default/history.*);
+
+<P>
+</LI>
+<LI>Remove  arquivos tempor&#225;rios: <B><FONT FACE="Helvetica, Arial, sans-serif">core</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">*.<FONT SIZE=3>~</FONT>*</FONT></B> e
+    <B><FONT FACE="Helvetica, Arial, sans-serif">*.bak</FONT></B>;
+  
+</LI>
+</OL>
+
+<P>
+</LI>
+<LI>Altere o  alias criado no exerc&#237;cio 14 do  Laborat&#243;rio 8 para que
+  antes   de   efetuar   <I>logout</I>,   chame   o   <I>script</I>
+  <B><FONT FACE="Helvetica, Arial, sans-serif">fim_sessao</FONT></B> criado no exerc&#237;cio <A HREF="#exerc:endsession">5</A>.
+
+<P>
+</LI>
+<LI>Execute o  exerc&#237;cio <A HREF="#item:1">3</A>  em  <I>background</I>. Como
+  fazer  para o <I>script</I>  concluir adequadamente?  Que altera&#231;&#227;o
+  deve ser feita neste <I>script</I> para que o sobrenome da pessoa a
+  ser removida seja fornecido como argumento na linha de comando?
+
+<P>
+</LI>
+<LI>Acrescente   ao  <I>script</I>  <B><FONT FACE="Helvetica, Arial, sans-serif">fim_sessao</FONT></B>   criado  no
+  exerc&#237;cio  <A HREF="#exerc:endsession">5</A> a gera&#231;&#227;o  de um  relat&#243;rio chamado
+  <B><FONT FACE="Helvetica, Arial, sans-serif">Espaco.log</FONT></B> que cont&#233;m uma lista com todos os diret&#243;rios de sua
+  &#225;rea juntamente  com o  espa&#231;o ocupado por  cada um. Esta  lista deve
+  estar ordenada por  tamanho. N&#227;o se esque&#231;a de  incluir os diret&#243;rios
+  cujo nome come&#231;a com um <B>ponto</B> (e.g., .mozilla).
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+Conclus&#245;es</A>
+</H2>
+
+<P>
+ASSUNTOS DAS PR&#211;XIMAS AULAS:
+
+<P>
+
+<UL>
+<LI><I>Status</I> de retorno de processos;
+</LI>
+<LI>Controle de fluxo e intera&#231;&#227;o em <I>scripts shell</I>;
+</LI>
+<LI>Redirecionamento de E/S para <B><FONT FACE="Helvetica, Arial, sans-serif">/dev/null</FONT></B>: quando isto &#233; &#250;til;
+</LI>
+<LI>Opera&#231;&#245;es aritm&#233;ticas e l&#243;gicas.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-12-01
+</ADDRESS>
+</BODY>
+</HTML>

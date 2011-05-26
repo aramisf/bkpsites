@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 20: Queues and Priority Queues</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap21.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap19.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 20</h2>
+
+<h1>Queues and Priority Queues</h1>
+
+
+<p>This chapter presents two ADTs: Queues and Priority Queues. In real life a <b>queue</b> is a line of customers waiting for service of some kind.  In most cases, the first customer in line is the next customer to be served.  There are exceptions, though.  For example, at airports customers whose flight is leaving imminently are sometimes taken from the middle of the queue.  Also, at supermarkets a polite customer might let someone with only a few items go first.</p>
+
+<p>The rule that determines who goes next is called a <b>queueing discipline</b>.  The simplest queueing discipline is called <b>FIFO</b>, for "first-in-first-out."  The most general queueing discipline is <b>priority queueing</b>, in which each customer is assigned a priority, and the customer with the highest priority goes first, regardless of the order of arrival.  The reason I say this is the most general discipline is that the priority can be based on anything: what time a flight leaves, how many groceries the customer has, or how important the customer is. Of course, not all queueing disciplines are "fair," but fairness is in the eye of the beholder.</p>
+
+<p>The Queue ADT and the Priority Queue ADT have the same set of operations and their interfaces are the same.  The difference is in the semantics of the operations: a Queue uses the FIFO policy, and a Priority Queue (as the name suggests) uses the priority queueing policy.</p>
+
+<p>As with most ADTs, there are a number of ways to implement queues Since a queue is a collection of items, we can use any of the basic mechanisms for storing collections: arrays, lists, or vectors. Our choice among them will be based in part on their performance--- how long it takes to perform the operations we want to perform--- and partly on ease of implementation.</p>
+
+
+
+<a name=1></a><br>
+<h3>20.1 The queue ADT</h3>
+
+<p>The queue ADT is defined by the following operations:</p>
+
+<dl>
+
+<dt>constructor</dt>
+<dd>Create a new, empty queue.</dd>
+
+<dt><span class=code>insert</span></dt>
+<dd>Add a new item to the queue.</dd>
+
+<dt><span class=code>remove</span></dt>
+<dd>Remove and return an item from the queue.  The item that is returned is the first one that was added.</dd>
+
+<dt><span class=code>empty</span></dt>
+<dd>Check whether the queue is empty.</dd>
+
+</dl>
+
+<p>To demonstrate a queue implementation, I will take advantage of the <span class=code>LinkedList</span> class from <a href="chap18.html">Chapter 18</a>.  Also, I will assume that we have a class named <span class=code>Customer</span> that defines all the information about each customer, and the operations we can perform on customers.</p>
+
+<p>As far as our implementation goes, it does not matter what kind of object is in the <span class=code>Queue</span>, so we can make it generic.  Here is what the implementation looks like.</p>
+
+
+<span class=code><span class=keyword>class</span> Queue {
+<br>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>
+<br>&nbsp; &nbsp; &nbsp; LinkedList list;
+<br>
+<br>&nbsp; &nbsp; &nbsp; Queue () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; list = <span class=keyword>new</span> List ();
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>bool</span> empty () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> list.empty ();
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>void</span> insert (Node* node) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; list.addLast (node);
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; Node* remove () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> list.removeFirst ();
+<br>&nbsp; &nbsp; &nbsp; }
+<br>};
+<br></span><p>A queue object contains a single instance variable, which is the list that implements it.  For each of the other methods, all we have to do is invoke one of the methods from the <span class=code>LinkedList</span> class.</p>
+
+<a name=2></a><br>
+<h3>20.2 Veneer</h3>
+
+<p>An implementation like this is called a <b>veneer</b>.  In real life, veneer is a thin coating of good quality wood used in furniture-making to hide lower quality wood underneath. Computer scientists use this metaphor to describe a small piece of code that hides the details of an implementation and provides a simpler, or more standard, interface.</p>
+
+<p>This example demonstrates one of the nice things about a veneer, which is that it is easy to implement, and one of the dangers of using a veneer, which is the <b>performance hazard</b>!</p>
+
+<p>Normally when we invoke a method we are not concerned with the details of its implementation.  But there is one "detail" we might want to know---the performance characteristics of the method.  How long does it take, as a function of the number of items in the list?</p>
+
+<p>First let's look at <span class=code>removeFirst</span>.</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp;Node* removeFirst () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node* result = head;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (head != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; head = head-&gt;next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> result;
+<br>&nbsp; &nbsp; }
+<br></span><p>There are no loops or function calls here, so that suggests that the run time of this method is the same every time.  Such a method is called a <b>constant time</b> operation. In reality, the method might be slightly faster when the list is empty, since it skips the body of the conditional, but that difference is not significant.</p>
+
+
+
+<p>The performance of <span class=code>addLast</span> is very different.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> addLast (Node* node) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// special case: empty list
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (head == null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; head = node;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; node-&gt;next = null;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node* last;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span> (last = head; last-&gt;next != null; last = last-&gt;next) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// traverse the list to find the last node
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; last-&gt;next = node;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; node-&gt;next = null;
+<br>&nbsp; &nbsp; }
+<br></span><p>The first conditional handles the special case of adding a new node to an empty list.  In this case, again, the run time does not depend on the length of the list.  In the general case, though, we have to traverse the list to find the last element so we can make it refer to the new node.</p>
+
+<p>This traversal takes time proportional to the length of the list.  Since the run time is a linear function of the length, we would say that this method is <b>linear time</b>.  Compared to constant time, that's very bad.</p>
+
+
+
+<a name=3></a><br>
+<h3>20.3 Linked Queue</h3>
+
+<p>We would like an implementation of the Queue ADT that can perform all operations in constant time.  One way to accomplish that is to implement a <b>linked queue</b>, which is similar to a linked list in the sense that it is made up of zero or more linked <span class=code>Node</span> objects.  The difference is that the queue maintains a reference to both the first and the last node, as shown in the figure.</p>
+
+<p align="center"><img src="images/queue1.png"></p>
+
+<p>Here's what a linked <span class=code>Queue</span> implementation looks like:</p>
+
+
+<span class=code><span class=keyword>class</span> Queue {
+<br>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>&nbsp; &nbsp; &nbsp; &nbsp;Node *first, *last;
+<br>
+<br>&nbsp; &nbsp; Queue () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; first = null;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; last = null;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; boolean empty () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> first == null;
+<br>&nbsp; &nbsp; }
+<br>};
+<br></span><p>So far it is straightforward.  In an empty queue, both <span class=code>first</span> and <span class=code>last</span> are null.  To check whether a list is empty, we only have to check one of them.</p>
+
+<p><span class=code>insert</span> is a little more complicated because we have to deal with several special cases.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> insert (Node* node) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node* node = <span class=keyword>new</span> Node (node-&gt;cargo, null);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (last != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; last-&gt;next = node;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; last = node;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (first == null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; first = last;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br></span><p>The first condition checks to make sure that <span class=code>last</span> refers to a node; if it does then we have to make it refer to the new node.</p>
+
+<p>The second condition deals with the special case where the list was initially empty.  In this case both <span class=code>first</span> and <span class=code>last</span> refer to the new node.</p>
+
+<p><span class=code>remove</span> also deals with several special cases.</p>
+
+
+<span class=code>&nbsp; &nbsp; Node* remove () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Node* result = first;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (first != null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; first = first.next;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (first == null) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; last = null;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> result;
+<br>&nbsp; &nbsp; }
+<br></span><p>The first condition checks whether there were any nodes in the queue.  If so, we have to copy the <span class=code>next</span> node into <span class=code>first</span>.  The second condition deals with the special case that the list is now empty, in which case we have to make <span class=code>last</span> null.</p>
+
+<p>As an exercise, draw diagrams showing both operations in both the normal case and in the special cases, and convince yourself that they are correct.</p>
+
+<p>Clearly, this implementation is more complicated than the veneer implementation, and it is more difficult to demonstrate that it is correct.  The advantage is that we have achieved the goal: both <span class=code>insert</span> and <span class=code>remove</span> are constant time.</p>
+
+<a name=4></a><br>
+<h3>20.4 Circular buffer</h3>
+
+<p>Another common implementation of a queue is a <b>circular buffer</b>.  "Buffer" is a general name for a temporary storage location, although it often refers to an array, as it does in this case.  What it means to say a buffer is "circular" should become clear in a minute.</p>
+
+<p>The implementation of a circular buffer is similar to the array implementation of a stack, as in <a href="chap19.htm#7">Section 19.7</a>.  The queue items are stored in an array, and we use indices to keep track of where we are in the array.  In the stack implementation, there was a single index that pointed to the next available space. In the queue implementation, there are two indices: <span class=code>first</span> points to the space in the array that contains the first customer in line and <span class=code>next</span> points to the next available space.</p>
+
+<p>The following figure shows a queue with two items (represented by dots).</p>
+
+<p align="center"><img src="images/queue2.png"></p>
+
+<p>There are two ways to think of the variables <span class=code>first</span> and <span class=code>last</span>.  Literally, they are integers, and their values are shown in boxes on the right.  Abstractly, though, they are indices of the array, and so they are often drawn as arrows pointing to locations in the array.  The arrow representation is convenient, but you should remember that the indices are not references; they are just integers.</p>
+
+<p>Here is an incomplete array implementation of a queue:</p>
+
+
+<span class=code><span class=keyword>class</span> Queue {
+<br>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>
+<br>&nbsp; &nbsp; &nbsp; pvector&lt;Node&gt; array;
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>int</span> first, next;
+<br>
+<br>&nbsp; &nbsp; &nbsp; Queue () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array.resize (128);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; first = 0;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; next = 0;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>bool</span> empty () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> first == next;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br></span><p>The instance variables and the constructor are straightforward, although again we have the problem that we have to choose an arbitrary size for the array.  Later we will solve that problem, as we did with the stack, by resizing the array if it gets full.</p>
+
+<p>The implementation of <span class=code>empty</span> is a little surprising.  You might have thought that <span class=code>first == 0</span> would indicate an empty queue, but that neglects the fact that the head of the queue is not necessarily at the beginning of the array.  Instead, we know that the queue is empty if <span class=code>head</span> equals <span class=code>next</span>, in which case there are no items left.  Once we see the implementation of <span class=code>insert</span> and <span class=code>remove</span>, that situation will more more sense.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> insert (Node node) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[next] = node;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; next++;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; Node remove () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; first++;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> array[first-1];
+<br>&nbsp; &nbsp; }
+<br></span><p><span class=code>insert</span> looks very much like <span class=code>push</span> in <a href="chap19.htm#7">Section 19.7</a>; it puts the new item in the next available space and then increments the index.</p>
+
+<p><span class=code>remove</span> is similar.  It takes the first item from the queue and then increments <span class=code>first</span> so it refers to the new head of the queue. The following figure shows what the queue looks like after both items have been removed.</p>
+
+<p align="center"><img src="images/queue3.png"></p>
+
+<p>It is always true that <span class=code>next</span> points to an available space. If <span class=code>first</span> catches up with <span class=code>next</span> and points to the same space, then <span class=code>first</span> is referring to an "empty" location, and the queue is empty.  I put "empty" in quotation marks because it is possible that the location that <span class=code>first</span> points to actually contains a value (we do nothing to ensure that empty locations contain <span class=code>null</span>); on the other hand, since we know the queue is empty, we will never read this location, so we can think of it, abstractly, as empty.</p>
+
+<p>As an exercise, fix <span class=code>remove</span> so that it returns <span class=code>null</span> if the queue is empty.</p>
+
+<p>The next problem with this implementation is that eventually it will run out of space.  When we add an item we increment <span class=code>next</span> and when we remove an item we increment <span class=code>first</span>, but we never decrement either.  What happens when we get to the end of the array?</p>
+
+<p>The following figure shows the queue after we add four more items:</p>
+
+<p align="center"><img src="images/queue4.png"></p>
+
+<p>The array is now full.  There is no "next available space," so there is nowhere for <span class=code>next</span> to point.  One possibility is that we could resize the array, as we did with the stack implementation.  But in that case the array would keep getting bigger regardless of how many items were actually in queue.  A better solution is to wrap around to the beginning of the array and reuse the spaces there.  This "wrap around" is the reason this implementation is called a circular buffer.</p>
+
+<p>One way to wrap the index around is to add a special case whenever we increment an index:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; next++;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (next == array.length()) next = 0;
+<br></span><p>A fancy alternative is to use the modulus operator:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; next = (next + 1) % array.length();
+<br></span><p>Either way, we have one last problem to solve.  How do we know if the queue is <i>really</i> full, meaning that we cannot insert another item?  The following figure shows what the queue looks like when it is "full."</p>
+
+<p align="center"><img src="images/queue5.png"></p>
+
+<p>There is still one empty space in the array, but the queue is full because if we insert another item, then we have to increment <span class=code>next</span> such that <span class=code>next == first</span>, and in that case it would appear that the queue was empty!</p>
+
+<p>To avoid that, we sacrifice one space in the array.  So how can we tell if the queue is full?</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> ((next + 1) % array.length == first)
+<br></span><p>And what should we do if the array is full?  In that case resizing the array is probably the only option.</p>
+
+<p>As an exercise, put together all the code from this section and write an implementation of a queue using a circular buffer that resizes itself when necessary.</p>
+
+<a name=5></a><br>
+<h3>20.5 Priority queue</h3>
+
+<p>The Priority Queue ADT has the same interface as the Queue ADT, but different semantics.  The interface is:</p>
+
+<dl>
+
+<dt>constructor</dt>
+<dd>Create a new, empty queue.</dd>
+
+<dt><span class=code>insert</span></dt>
+<dd>Add a new item to the queue.</dd>
+
+<dt><span class=code>remove</span></dt>
+<dd>Remove and return an item from the queue.  The item that is returned is the one with the highest priority.</dd>
+
+<dt><span class=code>empty</span></dt>
+<dd>Check whether the queue is empty.</dd>
+
+</dl>
+
+<p>The semantic difference is that the item that is removed from the queue is not necessarily the first one that was added.  Rather, it is whatever item in the queue has the highest priority. What the priorities are, and how they compare to each other, are not specified by the Priority Queue implementation.  It depends on what the items are that are in the queue.</p>
+
+<p>For example, if the items in the queue have names, we might choose them in alphabetical order.  If they are bowling scores, we might choose from highest to lowest, but if they are golf scores, we would go from lowest to highest.</p>
+
+
+
+<p>So we face a new problem.  We would like an implementation of Priority Queue that is generic---it should work with any kind of object---but at the same time the code that implements Priority Queue needs to have the ability to compare the objects it contains.</p>
+
+<p>We have seen a way to implement generic data structures using <span class=code>Node</span>, but that does not solve this problem, because there is no way to compare <span class=code>Node</span> unless we know what type the cargo is.  So basically, to implement a priority queue, we will have to create compare functions that will compare the cargo of the nodes.</p>
+
+<a name=6></a><br>
+<h3>20.6 Array implementation of Priority Queue</h3>
+
+<p>In the implementation of the Priority Queue, every time we specify the type of the items in the queue, we specify the type of the cargo. For example, the instance variables are an array of <span class=code>Node</span> and an integer:</p>
+
+
+<span class=code><span class=keyword>class</span> PriorityQueue {
+<br>&nbsp; &nbsp; <span class=keyword>private</span>:
+<br>&nbsp; &nbsp; &nbsp; &nbsp;pvector&lt;Node&gt; array;
+<br>&nbsp; &nbsp; &nbsp; &nbsp;<span class=keyword>int</span> index;
+<br>};
+<br></span><p>As usual, <span class=code>index</span> is the index of the next available location in the array.  The instance variables are declared <span class=code><span class=keyword>private</span></span> so that other classes cannot have direct access to them.</p>
+
+<p>The constructor and <span class=code>empty</span> are similar to what we have seen before.  I chose the initial size for the array arbitrarily.</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>public</span>:
+<br>&nbsp; &nbsp; &nbsp; PriorityQueue () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array.resize(16);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index = 0;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>bool</span> empty () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> index == 0;
+<br>&nbsp; &nbsp; &nbsp; }
+<br></span><p><span class=code>insert</span> is similar to <span class=code>push</span>:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>void</span> insert (Node item) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (index == array.length()) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; resize ();
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[index] = item;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; index++;
+<br>&nbsp; &nbsp; }
+<br></span><p>I omitted the implementation of <span class=code>resize</span>. The only substantial method in the class is <span class=code>remove</span>, which has to traverse the array to find and remove the largest item:</p>
+
+
+<span class=code>&nbsp; &nbsp; Node remove () {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (index == 0) <span class=keyword>return</span> null;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> maxIndex = 0;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// find the index of the item with the highest priority
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i=1; i&lt;index; i++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (array[i].cargo &gt; array[maxIndex].cargo) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; maxIndex = i;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// move the last item into the empty slot
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; index--;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; array[maxIndex] = array[index];
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> array[maxIndex];
+<br>&nbsp; &nbsp;}
+<br></span><p>As we traverse the array, <span class=code>maxIndex</span> keeps track of the index of the largest element we have seen so far.  What it means to be the "largest" is determined by <span class=code>&gt;</span>.</p>
+
+<a name=7></a><br>
+<h3>20.7 The <span class=code>Golfer</span> class</h3>
+
+<p>As an example of something with an unusual definition of "highest" priority, we'll use golfers:</p>
+
+
+<span class=code><span class=keyword>class</span> Golfer {
+<br>
+<br>&nbsp; <span class=keyword>public</span>:
+<br>
+<br>&nbsp; &nbsp; pstring name;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> score;
+<br>
+<br>&nbsp; &nbsp; Golfer (pstring name, <span class=keyword>int</span> score) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>this</span>-&gt;name = name;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>this</span>-&gt;score = score;
+<br>&nbsp; &nbsp; }
+<br>}
+<br></span><p>The class definition and the constructor are pretty much the same as always.</p>
+
+<p>Since priority queues require some comparisons, we'll have to write a function <span class=code>compareTo</span>.  So let's write one:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>int</span> compareTo (Golfer g1, Golfer g2) {
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> a = g1.score;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> b = g2.score;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// for golfers, low is good!
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (a&lt;b) <span class=keyword>return</span> 1;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (a&gt;b) <span class=keyword>return</span> -1;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> 0;
+<br>&nbsp; &nbsp; }
+<br></span><p>Finally, we can create some golfers:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; Golfer* tiger = <span class=keyword>new</span> Golfer (<span class=quote>"Tiger Woods"</span>, 61);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Golfer* phil = <span class=keyword>new</span> Golfer (<span class=quote>"Phil Mickelson"</span>, 72);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Golfer* hal = <span class=keyword>new</span> Golfer (<span class=quote>"Hal Sutton"</span>, 69);
+<br></span><p>And put them in the queue:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; pq.insert (tiger);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; pq.insert (phil);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; pq.insert (hal);
+<br></span><p>When we pull them out:</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>while</span> (!pq.empty ()) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; golfer = pq.remove ();
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; golfer-&gt;name &lt;&lt; <span class=quote>' '</span> &lt;&lt; golfer-&gt;score;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br></span><p>They appear in descending order (for golfers):</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; &nbsp; Tiger Woods 61
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Hal Sutton 69
+<br>&nbsp; &nbsp; &nbsp; &nbsp; Phil Mickelson 72
+<br></span><p>Ok, so now that we've got a priority queue done for golfers...FORE!!!</p>
+
+<a name=8></a><br>
+<h3>20.8 Glossary</h3>
+
+<dl>
+
+<dt>queue</dt>
+<dd>An ordered set of objects waiting for a service of some kind.</dd>
+
+<dt>queueing discipline</dt>
+<dd>The rules that determine which member of a queue is removed next.</dd>
+
+<dt>FIFO</dt>
+<dd>"first in, first out," a queueing discipline in which the first member to arrive is the first to be removed.</dd>
+
+<dt>priority queue</dt>
+<dd>A queueing discipline in which each member has a priority determined by external factors. The member with the highest priority is the first to be removed.</dd>
+
+<dt>Priority Queue</dt>
+<dd>An ADT that defines the operations one might perform on a priority queue.</dd>
+
+<dt>veneer</dt>
+<dd>A class definition that implements an ADT with method definitions that are invocations of other methods, sometimes with simple transformations.  The veneer does no significant work, but it improves or standardizes the interface seen by the client.</dd>
+
+<dt>performance hazard</dt>
+<dd>A danger associated with a veneer that some of the methods might be implemented inefficiently in a way that is not apparent to the client.</dd>
+
+<dt>constant time</dt>
+<dd>An operation whose run time does not depend on the size of the data structure.</dd>
+
+<dt>linear time</dt>
+<dd>An operation whose run time is a linear function of the size of the data structure.</dd>
+
+<dt>linked queue</dt>
+<dd>An implementation of a queue using a linked list and references to the first and last nodes.</dd>
+
+<dt>circular buffer</dt>
+<dd>An implementation of a queue using an array and indices of the first element and the next available space.</dd>
+
+<dt>abstract class</dt>
+<dd>A set of classes.  The abstract class specification lists the requirements a class must satisfy to be included in the set.</dd>
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap21.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap19.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

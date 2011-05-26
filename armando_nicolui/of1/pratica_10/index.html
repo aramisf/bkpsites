@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 10
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 10
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 10
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Laborat&#243;rio 10</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+Preliminares</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Copie  o diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7</FONT></B>  para seu diret&#243;rio
+  de <I>login</I>.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+Programa&#231;&#227;o <I>shell</I> - estruturas de controle: condicionais e la&#231;os</A>
+</H2>
+
+<P>
+Crie  <I>scripts shell</I> que implementem uma  solu&#231;&#227;o para os
+exerc&#237;cios abaixo.
+
+<P>
+<B>ATEN&#199;&#195;O:</B> Cada <I>script</I> deve ser
+executado como se fosse um comando normal do UNIX.
+
+<P>
+
+<OL>
+<LI>Retorne  um  <I>status</I>  de  0 (zero)  se  o  argumento  do
+  <I>script</I> for <B>sim</B> ou  <B>yes</B> e 1 caso contr&#225;rio.
+  Considere  neste exerc&#237;cio que  as variantes  <B>s</B>, <B>S</B>,
+  <B>SIM</B>,  <B>Sim</B>,  <B>y</B>,  <B>Y</B>,  <B>YES</B>,
+  <B>Yes</B> s&#227;o todas aceitas como <B>sim</B>.
+
+<P>
+<A NAME="tex2html1"
+  HREF="../Scripts/lab_10-01"><B>Solu&#231;&#227;o</B></A>
+<P>
+</LI>
+<LI>Remova  do arquivo  de telefones do  Laborat&#243;rio 7 a  pessoa cujo
+  sobrenome  &#233; passado  como  argumento do  <I>script</I>.  Caso  n&#227;o
+  exista pessoa com o  sobrenome indicado, o <I>script</I> se encerra
+  com  <I>status</I> 1 (um),  avisando antes  ao usu&#225;rio.   Caso haja
+  mais  de uma  pessoa com  o mesmo  sobrenome, o  <I>script</I> deve
+  obter do usu&#225;rio confirma&#231;&#227;o de remo&#231;&#227;o para cada pessoa encontrada.
+
+<P>
+<B>Solu&#231;&#245;es:</B> <A NAME="tex2html2"
+  HREF="../Scripts/lab_10-02">1</A>, <A NAME="tex2html3"
+  HREF="../Scripts/lab_10-02A">2</A>, <A NAME="tex2html4"
+  HREF="../Scripts/lab_10-02B">3</A>, <A NAME="tex2html5"
+  HREF="../Scripts/lab_10-02C">4</A>
+<P>
+</LI>
+<LI>Liste  os usu&#225;rios logados h&#225; mais  de 1 (um) dia.  Se n&#227;o houver
+  usu&#225;rios nestas condi&#231;&#245;es, exiba uma mensagem indicando tal situa&#231;&#227;o.
+
+<P>
+<B>DICA:</B>   Verifique  como   <B><I>date(1)</I></B>,  <B><I>who(1)</I></B>,
+     <B><I>last(1)</I></B> ou <B><I>w(1)</I></B> e <B><I>grep(1)</I></B> podem ser &#250;teis.
+
+<P>
+<B>Solu&#231;&#245;es:</B> <A NAME="tex2html6"
+  HREF="../Scripts/lab_10-03A">1</A>, <A NAME="tex2html7"
+  HREF="../Scripts/lab_10-03B">2</A>, <A NAME="tex2html8"
+  HREF="../Scripts/lab_10-03C">3</A>
+<P>
+</LI>
+<LI>Liste os usu&#225;rios <I>logados</I> por um tempo menor ou igual ao
+  &#250;nico  argumento num&#233;rico  do <I>script</I>.   Este  argumento pode
+  indicar  dias  (sufixo  <B>d</B>),  horas  (sufixo  <B>h</B>)  ou
+  minutos  (sufixo  <B>m</B>).   Caso  nenhum sufixo  seja  usado,  o
+  argumento indica o tempo em horas.
+
+<P>
+Por exemplo, o argumento  <B>10d</B> indica 10 dias, <B>3h</B> ou
+  simplesmente  <B>3</B> indica  3  horas, e  <B>20m</B> indica  20
+  minutos.
+
+<P>
+<B>DICA:</B>  Use  <B><I>date(1)</I></B>  (op&#231;&#245;es  <B>-d</B>  e  formato
+  <B>%s</B>)  e  express&#245;es  aritm&#233;ticas (se&#231;&#245;es  <B>Arithmetic
+  Expansion</B> e <B>ARITHMETIC EVALUATION</B> em <B><I>bash(1)</I></B>).
+
+<P>
+<B>Solu&#231;&#245;es:</B> <A NAME="tex2html9"
+  HREF="../Scripts/lab_10-04A">1</A>,
+
+<A NAME="tex2html10"
+  HREF="../Scripts/lab_10-04B">2</A>,
+
+<A NAME="tex2html11"
+  HREF="../Scripts/lab_10-04C">3</A>,
+
+<A NAME="tex2html12"
+  HREF="../Scripts/lab_10-04D">4</A>,
+
+<A NAME="tex2html13"
+  HREF="../Scripts/lab_10-04E">5</A>
+<P>
+</LI>
+<LI>Para os usu&#225;rios ainda logados,  mostre na tela o n&#250;mero de horas
+  e  minutos  que este  usu&#225;rio  est&#225;  <I>logado</I>  no sistema.   O
+  usu&#225;rio  &#233;   indicado  pelo   seu  <I>login</I>  no   argumento  do
+  <I>script</I>.    Se  o   usu&#225;rio  n&#227;o   est&#225;   <I>logado</I>,  o
+  <I>script</I> deve mostrar na tela uma mensagem indicando tal fato.
+
+<P>
+<B>DICA:</B> Use <B><I>w(1)</I></B> ou <B><I>who(1)</I></B>.
+
+<P>
+<B>Solu&#231;&#245;es:</B> <A NAME="tex2html14"
+  HREF="../Scripts/lab_10-05A">1</A>, <A NAME="tex2html15"
+  HREF="../Scripts/lab_10-05B">2</A>
+<P>
+</LI>
+<LI>Renomeie  um   arquivo  indicado   no  1<SUP>o</SUP>
+  argumento de forma a remover  do final do nome original os caracteres
+  indicados   no  2<SUP>o</SUP>  argumento.    Por  exemplo,
+  <B>comando&nbsp;&nbsp;teste1teste&nbsp;&nbsp;teste</B>   deve    renomear   o   arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif">teste1teste</FONT></B>  para  <B><FONT FACE="Helvetica, Arial, sans-serif">teste1</FONT></B>. Se  o  arquivo n&#227;o  existir,
+  exiba  uma mensagem  indicando tal  fato  SEM EXECUTAR  o comando  de
+  renomea&#231;&#227;o.
+
+<P>
+<B>DICA:</B>   N&#227;o    use   <B><I>basename(1)</I></B>.   Veja    a   se&#231;&#227;o
+  <B>Parameter Expansion</B> em <B><I>bash(1)</I></B>.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+Conclus&#245;es</A>
+</H2>
+
+<P>
+ASSUNTOS DAS PR&#211;XIMAS AULAS:
+
+<P>
+
+<UL>
+<LI>Express&#245;es aritm&#233;ticas.
+</LI>
+<LI>Novas estruturas de controle de fluxo: <B>case...esac</B>
+</LI>
+<LI>Escopo de vari&#225;veis de ambiente. Mecanismos de <I>source</I>;
+</LI>
+<LI>Lendo arquivos
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-06-07
+</ADDRESS>
+</BODY>
+</HTML>

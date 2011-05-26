@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Linguagem C - Notas de Aula</TITLE>
+<META NAME="description" CONTENT="Linguagem C - Notas de Aula">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node1.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html15"
+  HREF="notas_proc-node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev_g.png">   <BR>
+<B> Next:</B> <A NAME="tex2html16"
+  HREF="notas_proc-node1.html">1 Programas C&nbsp;</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<P>
+<H1 ALIGN="CENTER">Linguagem C - Notas de Aula</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof<SUP>a</SUP>. Carmem Hara e Prof. Wagner Zola</STRONG></P>
+<P ALIGN="CENTER"><I> <FONT SIZE="-1">Revis&#227;o: Prof. Armando Luiz N. Delgado</FONT></I></P>
+<P ALIGN="CENTER"><STRONG>Agosto 2003</STRONG></P>
+</DIV>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL>
+<LI><A NAME="tex2html17"
+  HREF="notas_proc-node1.html">1 Programas C&nbsp;</A>
+<UL>
+<LI><A NAME="tex2html18"
+  HREF="notas_proc-node1.html#SECTION00011000000000000000">1.1 Senteças: simples e compostas</A>
+<LI><A NAME="tex2html19"
+  HREF="notas_proc-node1.html#SECTION00012000000000000000">1.2 Variáveis em C&nbsp;</A>
+<LI><A NAME="tex2html20"
+  HREF="notas_proc-node1.html#SECTION00013000000000000000">1.3 Definição de Variável em C&nbsp;</A>
+<LI><A NAME="tex2html21"
+  HREF="notas_proc-node1.html#SECTION00014000000000000000">1.4 Constantes</A>
+<LI><A NAME="tex2html22"
+  HREF="notas_proc-node1.html#SECTION00015000000000000000">1.5 Caracteres Constantes</A>
+<LI><A NAME="tex2html23"
+  HREF="notas_proc-node1.html#SECTION00016000000000000000">1.6 Entrada e Saída</A>
+<LI><A NAME="tex2html24"
+  HREF="notas_proc-node1.html#SECTION00017000000000000000">1.7 Exibindo informações na tela: printf()</A>
+<LI><A NAME="tex2html25"
+  HREF="notas_proc-node1.html#SECTION00018000000000000000">1.8 Lendo informação: scanf()</A>
+<LI><A NAME="tex2html26"
+  HREF="notas_proc-node1.html#SECTION00019000000000000000">1.9 Algoritmo X Programa</A>
+<UL>
+<LI><A NAME="tex2html27"
+  HREF="notas_proc-node1.html#SECTION00019010000000000000">Programa em C&nbsp;</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html28"
+  HREF="notas_proc-node2.html">2 Opera&#231;&#245;es  Aritm&#233;ticas e Express&#245;es.
+<BR>
+Opera&#231;&#245;es Relacionais.</A>
+<UL>
+<LI><A NAME="tex2html29"
+  HREF="notas_proc-node2.html#SECTION00021000000000000000">2.1 Opera&#231;&#245;es  Aritm&#233;ticas</A>
+<UL>
+<LI><A NAME="tex2html30"
+  HREF="notas_proc-node2.html#SECTION00021100000000000000">2.1.1 Preced&#234;ncia de Operadores</A>
+<LI><A NAME="tex2html31"
+  HREF="notas_proc-node2.html#SECTION00021200000000000000">2.1.2 A Opera&#231;&#227;o de Resto (%)</A>
+<LI><A NAME="tex2html32"
+  HREF="notas_proc-node2.html#SECTION00021300000000000000">2.1.3 Express&#245;es e Vari&#225;veis</A>
+</UL>
+<LI><A NAME="tex2html33"
+  HREF="notas_proc-node2.html#SECTION00022000000000000000">2.2 Opera&#231;&#227;o de Atribui&#231;&#227;o Aritm&#233;tica</A>
+<UL>
+<LI><A NAME="tex2html34"
+  HREF="notas_proc-node2.html#SECTION00022100000000000000">2.2.1 Operador de Incremento</A>
+</UL>
+<LI><A NAME="tex2html35"
+  HREF="notas_proc-node2.html#SECTION00023000000000000000">2.3 Operadores Relacionais</A>
+<UL>
+<LI><A NAME="tex2html36"
+  HREF="notas_proc-node2.html#SECTION00023100000000000000">2.3.1 Preced&#234;ncia dos operadores relacionais</A>
+</UL>
+<LI><A NAME="tex2html37"
+  HREF="notas_proc-node2.html#SECTION00024000000000000000">2.4 Revis&#227;o de Express&#245;es:</A>
+<LI><A NAME="tex2html38"
+  HREF="notas_proc-node2.html#SECTION00025000000000000000">2.5 Exemplo de programas</A>
+<LI><A NAME="tex2html39"
+  HREF="notas_proc-node2.html#SECTION00026000000000000000">2.6 Preced&#234;ncia e associatividade de operadores</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html40"
+  HREF="notas_proc-node3.html">3 Expressões como valores</A>
+<UL>
+<LI><A NAME="tex2html41"
+  HREF="notas_proc-node3.html#SECTION00031000000000000000">3.1 Expressões aritméticas, relacionais e lógicas</A>
+<LI><A NAME="tex2html42"
+  HREF="notas_proc-node3.html#SECTION00032000000000000000">3.2 Expressões envolvendo o operador de atribuição (<TT>=</TT>)</A>
+<UL>
+<LI><A NAME="tex2html43"
+  HREF="notas_proc-node3.html#SECTION00032100000000000000">3.2.1 Operadores de atribuição aritmética</A>
+<LI><A NAME="tex2html44"
+  HREF="notas_proc-node3.html#SECTION00032200000000000000">3.2.2 Operadores de incremento e decremento</A>
+<LI><A NAME="tex2html45"
+  HREF="notas_proc-node3.html#SECTION00032300000000000000">3.2.3 Ambiguidade em certas expressões</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html46"
+  HREF="notas_proc-node4.html">4 Mais sobre tipos: conversão implícita e explícita</A>
+<UL>
+<LI><A NAME="tex2html47"
+  HREF="notas_proc-node4.html#SECTION00041000000000000000">4.1 Conversão de tipos</A>
+<LI><A NAME="tex2html48"
+  HREF="notas_proc-node4.html#SECTION00042000000000000000">4.2 Modificadores de tipos</A>
+<LI><A NAME="tex2html49"
+  HREF="notas_proc-node4.html#SECTION00043000000000000000">4.3 <EM>Cast</EM> de tipos</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html50"
+  HREF="notas_proc-node5.html">5 Comandos de entrada e saída: getchar() e 
+    putchar()</A>
+<LI><A NAME="tex2html51"
+  HREF="notas_proc-node6.html">6 Ordem sequencial de execução de sentenças 
+<BR>
+o comando condicional: <TT>if</TT> and <TT>if - else</TT></A>
+<UL>
+<LI><A NAME="tex2html52"
+  HREF="notas_proc-node6.html#SECTION00060010000000000000">Exemplo 1:</A>
+<LI><A NAME="tex2html53"
+  HREF="notas_proc-node6.html#SECTION00060020000000000000">Exemplo 2:</A>
+<LI><A NAME="tex2html54"
+  HREF="notas_proc-node6.html#SECTION00060030000000000000">Exemplo 3:</A>
+<LI><A NAME="tex2html55"
+  HREF="notas_proc-node6.html#SECTION00060040000000000000">Exemplo 4:</A>
+<LI><A NAME="tex2html56"
+  HREF="notas_proc-node6.html#SECTION00061000000000000000">6.1 Um erro comum</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html57"
+  HREF="notas_proc-node7.html">7 Aninhando senteças <TT>if</TT> e <TT>if-else</TT></A>
+<UL>
+<LI><A NAME="tex2html58"
+  HREF="notas_proc-node7.html#SECTION00071000000000000000">7.1 A ambigüidade do  <TT>else</TT></A>
+<UL>
+<LI><A NAME="tex2html59"
+  HREF="notas_proc-node7.html#SECTION00071010000000000000">Regra de associação:</A>
+<LI><A NAME="tex2html60"
+  HREF="notas_proc-node7.html#SECTION00071020000000000000">Exercício 1:</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html61"
+  HREF="notas_proc-node8.html">8 Operadores Lógicos</A>
+<LI><A NAME="tex2html62"
+  HREF="notas_proc-node9.html">9 Exemplos</A>
+<UL>
+<LI><A NAME="tex2html63"
+  HREF="notas_proc-node9.html#SECTION00091000000000000000">9.1 IF - ELSE</A>
+<LI><A NAME="tex2html64"
+  HREF="notas_proc-node9.html#SECTION00092000000000000000">9.2 Operadores lógicos</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html65"
+  HREF="notas_proc-node10.html">10 A construção  <TT>else-if</TT></A>
+<UL>
+<LI><A NAME="tex2html66"
+  HREF="notas_proc-node10.html#SECTION000100010000000000000">Exemplo 9:</A>
+<LI><A NAME="tex2html67"
+  HREF="notas_proc-node10.html#SECTION000100020000000000000">Exemplo 10:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html68"
+  HREF="notas_proc-node11.html">11 A sentença <TT>switch</TT></A>
+<LI><A NAME="tex2html69"
+  HREF="notas_proc-node12.html">12 A sentença <TT>break</TT></A>
+<UL>
+<LI><A NAME="tex2html70"
+  HREF="notas_proc-node12.html#SECTION000120010000000000000">Exemplo 11:</A>
+<LI><A NAME="tex2html71"
+  HREF="notas_proc-node12.html#SECTION000120020000000000000">Exercício 2:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html72"
+  HREF="notas_proc-node13.html">13 Estruturas de Repetição</A>
+<UL>
+<LI><A NAME="tex2html73"
+  HREF="notas_proc-node13.html#SECTION000131000000000000000">13.1 O comando de repetição while</A>
+<UL>
+<LI><A NAME="tex2html74"
+  HREF="notas_proc-node13.html#SECTION000131010000000000000">Exemplo 1:</A>
+</UL>
+<LI><A NAME="tex2html75"
+  HREF="notas_proc-node13.html#SECTION000132000000000000000">13.2 A Estrutura de Repetição do...while</A>
+<UL>
+<LI><A NAME="tex2html76"
+  HREF="notas_proc-node13.html#SECTION000132010000000000000">Exemplo 2:</A>
+</UL>
+<LI><A NAME="tex2html77"
+  HREF="notas_proc-node13.html#SECTION000133000000000000000">13.3 A Extrutura de Repetição for</A>
+<UL>
+<LI><A NAME="tex2html78"
+  HREF="notas_proc-node13.html#SECTION000133100000000000000">13.3.1 Diversas sentenças dentro de um laço</A>
+<UL>
+<LI><A NAME="tex2html79"
+  HREF="notas_proc-node13.html#SECTION000133110000000000000">Exemplo 3:</A>
+<LI><A NAME="tex2html80"
+  HREF="notas_proc-node13.html#SECTION000133120000000000000">Exemplo 4:</A>
+</UL>
+<LI><A NAME="tex2html81"
+  HREF="notas_proc-node13.html#SECTION000133200000000000000">13.3.2 Laços aninhados</A>
+<UL>
+<LI><A NAME="tex2html82"
+  HREF="notas_proc-node13.html#SECTION000133210000000000000">Exemplo 5:</A>
+<LI><A NAME="tex2html83"
+  HREF="notas_proc-node13.html#SECTION000133220000000000000">Exemplo 6:</A>
+<LI><A NAME="tex2html84"
+  HREF="notas_proc-node13.html#SECTION000133230000000000000">Exemplo 7:</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html85"
+  HREF="notas_proc-node13.html#SECTION000134000000000000000">13.4 Estilo de formatação para estruturas de repetição</A>
+<UL>
+<LI><A NAME="tex2html86"
+  HREF="notas_proc-node13.html#SECTION000134100000000000000">13.4.1 Colocação das chaves</A>
+<LI><A NAME="tex2html87"
+  HREF="notas_proc-node13.html#SECTION000134200000000000000">13.4.2 Necessidade ou não das chaves</A>
+<LI><A NAME="tex2html88"
+  HREF="notas_proc-node13.html#SECTION000134300000000000000">13.4.3 Uso de espaço em branco</A>
+</UL>
+<LI><A NAME="tex2html89"
+  HREF="notas_proc-node13.html#SECTION000135000000000000000">13.5 Lendo o teclado</A>
+<UL>
+<LI><A NAME="tex2html90"
+  HREF="notas_proc-node13.html#SECTION000135100000000000000">13.5.1 Lendo o teclado usando  getchar()</A>
+<LI><A NAME="tex2html91"
+  HREF="notas_proc-node13.html#SECTION000135200000000000000">13.5.2 Marcando o final da entrada</A>
+<LI><A NAME="tex2html92"
+  HREF="notas_proc-node13.html#SECTION000135300000000000000">13.5.3 Lendo o teclado usando getch() e getche()</A>
+<LI><A NAME="tex2html93"
+  HREF="notas_proc-node13.html#SECTION000135400000000000000">13.5.4 Para evitar problemas com a entrada...</A>
+</UL>
+<LI><A NAME="tex2html94"
+  HREF="notas_proc-node13.html#SECTION000136000000000000000">13.6 Usando while e for</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html95"
+  HREF="notas_proc-node14.html">14 Tipo Enumerado</A>
+<LI><A NAME="tex2html96"
+  HREF="notas_proc-node15.html">15 Arrays</A>
+<UL>
+<LI><A NAME="tex2html97"
+  HREF="notas_proc-node15.html#SECTION000151000000000000000">15.1 Definindo arrays e acessando seus elementos</A>
+<LI><A NAME="tex2html98"
+  HREF="notas_proc-node15.html#SECTION000152000000000000000">15.2 Inicialização de arrays</A>
+<LI><A NAME="tex2html99"
+  HREF="notas_proc-node15.html#SECTION000153000000000000000">15.3 Verificação de Limite</A>
+<LI><A NAME="tex2html100"
+  HREF="notas_proc-node15.html#SECTION000154000000000000000">15.4 Arrays como argumentos</A>
+<LI><A NAME="tex2html101"
+  HREF="notas_proc-node15.html#SECTION000155000000000000000">15.5 Exemplo: pesquisa linear de um array</A>
+<UL>
+<LI><A NAME="tex2html102"
+  HREF="notas_proc-node15.html#SECTION000155100000000000000">15.5.1 O Problema</A>
+</UL>
+<LI><A NAME="tex2html103"
+  HREF="notas_proc-node15.html#SECTION000156000000000000000">15.6 Exemplo: somar os elementos de dois arrays</A>
+<UL>
+<LI><A NAME="tex2html104"
+  HREF="notas_proc-node15.html#SECTION000156100000000000000">15.6.1 O Problema</A>
+</UL>
+<LI><A NAME="tex2html105"
+  HREF="notas_proc-node15.html#SECTION000157000000000000000">15.7 Exemplo: ordenar um array</A>
+<UL>
+<LI><A NAME="tex2html106"
+  HREF="notas_proc-node15.html#SECTION000157100000000000000">15.7.1 Bubble sort</A>
+<LI><A NAME="tex2html107"
+  HREF="notas_proc-node15.html#SECTION000157200000000000000">15.7.2 Algoritmo</A>
+<LI><A NAME="tex2html108"
+  HREF="notas_proc-node15.html#SECTION000157300000000000000">15.7.3 Protótipo da função e definição</A>
+</UL>
+<LI><A NAME="tex2html109"
+  HREF="notas_proc-node15.html#SECTION000158000000000000000">15.8 Comentários Finais</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html110"
+  HREF="notas_proc-node16.html">16 Arrays Multidimensionais</A>
+<UL>
+<LI><A NAME="tex2html111"
+  HREF="notas_proc-node16.html#SECTION000161000000000000000">16.1 Inicializa&#231;&#227;o</A>
+<LI><A NAME="tex2html112"
+  HREF="notas_proc-node16.html#SECTION000162000000000000000">16.2 Arrays Multidimensionais - arrays de arrays</A>
+<LI><A NAME="tex2html113"
+  HREF="notas_proc-node16.html#SECTION000163000000000000000">16.3 Arrays Multidimensionais como argumento para
+fun&#231;&#245;es</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html114"
+  HREF="notas_proc-node17.html">17 Array de Caracteres</A>
+<LI><A NAME="tex2html115"
+  HREF="notas_proc-node18.html">18 Strings</A>
+<UL>
+<LI><A NAME="tex2html116"
+  HREF="notas_proc-node18.html#SECTION000181000000000000000">18.1 Imprimindo strings com <TT>puts()</TT> e <TT>printf()</TT></A>
+<LI><A NAME="tex2html117"
+  HREF="notas_proc-node18.html#SECTION000182000000000000000">18.2 Lendo strings do teclado com <TT>gets()</TT> e <TT>scanf()</TT></A>
+<LI><A NAME="tex2html118"
+  HREF="notas_proc-node18.html#SECTION000183000000000000000">18.3 Array de Strings</A>
+<LI><A NAME="tex2html119"
+  HREF="notas_proc-node18.html#SECTION000184000000000000000">18.4 Fun&#231;&#245;es de String</A>
+<UL>
+<LI><A NAME="tex2html120"
+  HREF="notas_proc-node18.html#SECTION000184100000000000000">18.4.1 A fun&#231;&#227;o <TT>strlen()</TT></A>
+<LI><A NAME="tex2html121"
+  HREF="notas_proc-node18.html#SECTION000184200000000000000">18.4.2 A fun&#231;&#227;o <TT>strcmp()</TT> </A>
+<LI><A NAME="tex2html122"
+  HREF="notas_proc-node18.html#SECTION000184300000000000000">18.4.3 A fun&#231;&#227;o <TT>strcpy()</TT></A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html123"
+  HREF="notas_proc-node19.html">19 Estruturas</A>
+<UL>
+<LI><A NAME="tex2html124"
+  HREF="notas_proc-node19.html#SECTION000191000000000000000">19.1 Declaração de Estruturas</A>
+<LI><A NAME="tex2html125"
+  HREF="notas_proc-node19.html#SECTION000192000000000000000">19.2 Definição de variáveis de um tipo estrutura declarado</A>
+<LI><A NAME="tex2html126"
+  HREF="notas_proc-node19.html#SECTION000193000000000000000">19.3 Acesso a membros de uma estrutura: ponto (<TT>.</TT>), o
+ operador membro de estrutura</A>
+<LI><A NAME="tex2html127"
+  HREF="notas_proc-node19.html#SECTION000194000000000000000">19.4 Operadores usados com variáveis de estrutura: valores e
+  <I>lvalues</I></A>
+<LI><A NAME="tex2html128"
+  HREF="notas_proc-node19.html#SECTION000195000000000000000">19.5 Inicialização de estruturas</A>
+<LI><A NAME="tex2html129"
+  HREF="notas_proc-node19.html#SECTION000196000000000000000">19.6 Estruturas como argumentos de função e valores de retorno</A>
+<LI><A NAME="tex2html130"
+  HREF="notas_proc-node19.html#SECTION000197000000000000000">19.7 Arrays de estruturas</A>
+<LI><A NAME="tex2html131"
+  HREF="notas_proc-node19.html#SECTION000198000000000000000">19.8 Estruturas aninhadas</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html132"
+  HREF="notas_proc-node20.html">20 Fun&#231;&#245;es</A>
+<UL>
+<LI><A NAME="tex2html133"
+  HREF="notas_proc-node20.html#SECTION000200100000000000000">20.0.1 Fun&#231;&#245;es: o que s&#227;o e por que us&#225;-las</A>
+<LI><A NAME="tex2html134"
+  HREF="notas_proc-node20.html#SECTION000201000000000000000">20.1 Definindo fun&#231;&#245;es</A>
+<LI><A NAME="tex2html135"
+  HREF="notas_proc-node20.html#SECTION000202000000000000000">20.2 Fun&#231;&#245;es simples</A>
+<UL>
+<LI><A NAME="tex2html136"
+  HREF="notas_proc-node20.html#SECTION000202100000000000000">20.2.1 Argumentos</A>
+</UL>
+<LI><A NAME="tex2html137"
+  HREF="notas_proc-node20.html#SECTION000203000000000000000">20.3 Fun&#231;&#245;es que retornam um valor</A>
+<LI><A NAME="tex2html138"
+  HREF="notas_proc-node20.html#SECTION000204000000000000000">20.4 Mais sobre o  <TT>return</TT></A>
+<LI><A NAME="tex2html139"
+  HREF="notas_proc-node20.html#SECTION000205000000000000000">20.5 Mais sobre Argumentos</A>
+<LI><A NAME="tex2html140"
+  HREF="notas_proc-node20.html#SECTION000206000000000000000">20.6 Chamada por valor</A>
+<LI><A NAME="tex2html141"
+  HREF="notas_proc-node20.html#SECTION000207000000000000000">20.7 Vari&#225;veis locais</A>
+<LI><A NAME="tex2html142"
+  HREF="notas_proc-node20.html#SECTION000208000000000000000">20.8 Prot&#243;tipos</A>
+<LI><A NAME="tex2html143"
+  HREF="notas_proc-node20.html#SECTION000209000000000000000">20.9 Documenta&#231;&#227;o de fun&#231;&#245;es</A>
+<LI><A NAME="tex2html144"
+  HREF="notas_proc-node20.html#SECTION0002010000000000000000">20.10 Coment&#225;rios</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html145"
+  HREF="notas_proc-node21.html">21 O pré-processador</A>
+<UL>
+<LI><A NAME="tex2html146"
+  HREF="notas_proc-node21.html#SECTION000211000000000000000">21.1 A diretiva <TT>#define</TT></A>
+<LI><A NAME="tex2html147"
+  HREF="notas_proc-node21.html#SECTION000212000000000000000">21.2 A diretiva  <TT>#include</TT></A>
+<LI><A NAME="tex2html148"
+  HREF="notas_proc-node21.html#SECTION000213000000000000000">21.3 Comentários</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html149"
+  HREF="notas_proc-node22.html">22 Mais sobre funções</A>
+<UL>
+<LI><A NAME="tex2html150"
+  HREF="notas_proc-node22.html#SECTION000220010000000000000">Variáveis Locais</A>
+<LI><A NAME="tex2html151"
+  HREF="notas_proc-node22.html#SECTION000220020000000000000">Variáveis Globais</A>
+<LI><A NAME="tex2html152"
+  HREF="notas_proc-node22.html#SECTION000220030000000000000">Escopo de Variáveis</A>
+<LI><A NAME="tex2html153"
+  HREF="notas_proc-node22.html#SECTION000221000000000000000">22.1 Outro exemplo</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html154"
+  HREF="notas_proc-node23.html">23 Ativação de função</A>
+<LI><A NAME="tex2html155"
+  HREF="notas_proc-node24.html">24 Mais sobre funções: Quando <TT>return</TT> não é
+suficiente</A>
+<UL>
+<LI><A NAME="tex2html156"
+  HREF="notas_proc-node24.html#SECTION000241000000000000000">24.1 Usando ponteiros</A>
+<LI><A NAME="tex2html157"
+  HREF="notas_proc-node24.html#SECTION000242000000000000000">24.2 O operador de endereço (<TT>&amp;</TT>)</A>
+<LI><A NAME="tex2html158"
+  HREF="notas_proc-node24.html#SECTION000243000000000000000">24.3 Tipo ponteiro</A>
+<LI><A NAME="tex2html159"
+  HREF="notas_proc-node24.html#SECTION000244000000000000000">24.4 O operador de dereferência: <TT>*</TT></A>
+<LI><A NAME="tex2html160"
+  HREF="notas_proc-node24.html#SECTION000245000000000000000">24.5 Ponteiros como argumentos de funções</A>
+<LI><A NAME="tex2html161"
+  HREF="notas_proc-node24.html#SECTION000246000000000000000">24.6 Precedência de operadores</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html162"
+  HREF="notas_proc-node25.html">25 Entrada e Saída Padrão</A>
+<LI><A NAME="tex2html163"
+  HREF="notas_proc-node26.html">26 Arquivos</A>
+<UL>
+<LI><A NAME="tex2html164"
+  HREF="notas_proc-node26.html#SECTION000261000000000000000">26.1 Acessando um arquivo: <TT>FILE *</TT>, <B><FONT FACE="Helvetica, Arial, sans-serif">fopen()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fclose()</FONT></B></A>
+<LI><A NAME="tex2html165"
+  HREF="notas_proc-node26.html#SECTION000262000000000000000">26.2 Processando arquivos de texto</A>
+<UL>
+<LI><A NAME="tex2html166"
+  HREF="notas_proc-node26.html#SECTION000262100000000000000">26.2.1 Entrada e saída de caracteres</A>
+<LI><A NAME="tex2html167"
+  HREF="notas_proc-node26.html#SECTION000262200000000000000">26.2.2 Entrada e saída de <I>strings</I></A>
+<LI><A NAME="tex2html168"
+  HREF="notas_proc-node26.html#SECTION000262300000000000000">26.2.3 Entrada e saída formatada: <B><FONT FACE="Helvetica, Arial, sans-serif">fscanf()</FONT></B>, <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B></A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html169"
+  HREF="notas_proc-node27.html">27 Ponteiros</A>
+<UL>
+<LI><A NAME="tex2html170"
+  HREF="notas_proc-node27.html#SECTION000271000000000000000">27.1 O operador de endereço (<TT>&amp;</TT>)</A>
+<LI><A NAME="tex2html171"
+  HREF="notas_proc-node27.html#SECTION000272000000000000000">27.2 Tipo ponteiro</A>
+<LI><A NAME="tex2html172"
+  HREF="notas_proc-node27.html#SECTION000273000000000000000">27.3 O operador de dereferência: <TT>*</TT></A>
+<LI><A NAME="tex2html173"
+  HREF="notas_proc-node27.html#SECTION000274000000000000000">27.4 Atribuições envolvendo ponteiros</A>
+<LI><A NAME="tex2html174"
+  HREF="notas_proc-node27.html#SECTION000275000000000000000">27.5 Aritmética de ponteiros</A>
+<LI><A NAME="tex2html175"
+  HREF="notas_proc-node27.html#SECTION000276000000000000000">27.6 Ponteiros e <I>Arrays</I></A>
+<LI><A NAME="tex2html176"
+  HREF="notas_proc-node27.html#SECTION000277000000000000000">27.7 Ponteiros e Estruturas</A>
+<UL>
+<LI><A NAME="tex2html177"
+  HREF="notas_proc-node27.html#SECTION000277100000000000000">27.7.1 Acesso a membros de estrutura via ponteiro: O operador
+ <TT>-&gt;</TT></A>
+</UL>
+<LI><A NAME="tex2html178"
+  HREF="notas_proc-node27.html#SECTION000278000000000000000">27.8 Ponteiros como argumentos de funções</A>
+<UL>
+<LI><A NAME="tex2html179"
+  HREF="notas_proc-node27.html#SECTION000278100000000000000">27.8.1 <I>Arrays</I> como argumentos de funções</A>
+<LI><A NAME="tex2html180"
+  HREF="notas_proc-node27.html#SECTION000278200000000000000">27.8.2 Ponteiros para estruturas como argumentos de funções</A>
+</UL>
+<LI><A NAME="tex2html181"
+  HREF="notas_proc-node27.html#SECTION000279000000000000000">27.9 Precedência de operadores</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html182"
+  HREF="notas_proc-node28.html">28 <I>Strings</I> e Ponteiros</A>
+<LI><A NAME="tex2html183"
+  HREF="notas_proc-node29.html">29 <I>Arrays</I> de ponteiros</A>
+<LI><A NAME="tex2html184"
+  HREF="notas_proc-node30.html">30 Argumentos de linha de comando: a função <TT>main</TT></A>
+<LI><A NAME="tex2html185"
+  HREF="notas_proc-node31.html">31 Alocação dinâmica de memória</A>
+<UL>
+<LI><A NAME="tex2html186"
+  HREF="notas_proc-node31.html#SECTION000311000000000000000">31.1 <TT>malloc</TT> e <TT>calloc</TT></A>
+<LI><A NAME="tex2html187"
+  HREF="notas_proc-node31.html#SECTION000312000000000000000">31.2 <TT>realloc</TT></A>
+</UL>
+<BR>
+<LI><A NAME="tex2html188"
+  HREF="notas_proc-node32.html">Bibliografia</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

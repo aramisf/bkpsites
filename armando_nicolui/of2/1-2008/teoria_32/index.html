@@ -1,0 +1,477 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI067 - Oficina de Computa&#231;&#227;o Notas de Aula # 32</TITLE>
+<META NAME="description" CONTENT="CI067 - Oficina de Computa&#231;&#227;o Notas de Aula # 32">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+<H1 ALIGN="CENTER">CI067 - Oficina de Computa&#231;&#227;o 
+<BR>Notas de Aula # 32</H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Projeto</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+1.1 Sem surpresas, minimizar acoplamento e maximizar coes&#227;o.</A>
+</H2>
+Estas tr&#234;s diretivas resumem as regras que v&#234;m em seguida.
+
+<P>
+<B>Sem surpresas</B>  &#233; uma regra evidente: Uma  interface de usu&#225;rio
+deve  atuar da maneira  &#243;bvia. Uma  fun&#231;&#227;o ou  uma vari&#225;vel  deve fazer
+aquilo que seu nome indica.
+
+<P>
+<B>Acoplamento</B>  envolve   a  conex&#227;o  entre   dois  programas  ou
+elementos de  interface de usu&#225;rio.  Quando um elemento muda,  tudo que
+est&#225;  acoplado   a  ele  deve   sofrer  mudan&#231;as  em  maior   ou  menor
+grau. Acoplamento &#233; fonte de  surpresas (``Eu mudei uma coisinha aqui e
+de repente aquela  outra coisinha l&#225; parou de  funcionar''). &#201; evidente
+que se n&#227;o houver algum acoplamento, o programa n&#227;o faz nada. Portanto,
+&#233;  necess&#225;rio ter  muito  claro  as rela&#231;&#245;es  de  acoplamento entre  os
+diversos  m&#243;dulos   de  um  programa  para  que   sua  manuten&#231;&#227;o  seja
+controlada. No  entanto, deve-se  minimizar as rela&#231;&#245;es  de acoplamento
+tanto quanto poss&#237;vel.
+
+<P>
+Em linguagem C  a minimiza&#231;&#227;o de acoplamento &#233;  feita pela defini&#231;&#227;o de
+m&#243;dulos. As  fun&#231;&#245;es em um m&#243;dulo  est&#227;o acopladas umas  &#224;s outras, mas
+com exce&#231;&#227;o de uma ou outra  fun&#231;&#227;o de interface, elas n&#227;o se comunicam
+com    outros   m&#243;dulos.    Em   linguagem    C,   usa-se    a   classe
+<I><B>static</B></I>  para  restringir  o   uso  de  uma  fun&#231;&#227;o  e
+vari&#225;veis a um m&#243;dulo.
+
+<P>
+<B>Coes&#227;o</B> &#233;  o oposto de  acoplamento: Elementos agrupados  em um
+m&#243;dulo devem  estar relacionados  funcionalmente (itens em  um di&#225;logo,
+fun&#231;&#245;es  em um  m&#243;dulo).  Falta  de coes&#227;o  tamb&#233;m  gera surpresas.  Um
+conjunto de op&#231;&#245;es de menus que  n&#227;o tem uma rela&#231;&#227;o funcional clara ou
+a falta  de coes&#227;o modular  faz com que  se perca tempo  procurando por
+declara&#231;c&#245;es de fun&#231;&#245;es em 15 arquivos diferentes, gerando problemas de
+manuten&#231;&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+1.2 N&#227;o resolva problemas que n&#227;o existem. Resolva apenas um
+  problema espec&#237;fico, n&#227;o o caso geral.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+1.3 Uma interface de usu&#225;rio n&#227;o deve parecer um  programa de
+  computador (Princ&#237;pio da Transpar&#234;ncia).</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+1.4 N&#227;o confunda facilidade de aprendizado com facilidade de
+  uso.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00015000000000000000">
+1.5 Se voc&#234; n&#227;o pode dizer algo em Portugu&#234;s, voc&#234; n&#227;o pode
+  diz&#234;-lo em C.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00016000000000000000">
+1.6 Fa&#231;a os coment&#225;rios primeiro.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00017000000000000000">
+1.7 Leia o c&#243;digo.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00018000000000000000">
+1.8 Decomponha problemas complexos em tarefas pequenas.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00019000000000000000">
+1.9 Use toda a linguagem. Use a ferramenta apropriada para a
+  tarefa.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000110000000000000000">
+1.10 Pense sobre o problema antes de resolv&#234;-lo.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000111000000000000000">
+1.11 Envolva o usu&#225;rio no processo de desenvolvimento. O cliente
+est&#225; sempre certo.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000112000000000000000">
+1.12 Pequeno &#233; Bom (Grande == Lento).</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000113000000000000000">
+1.13 Ao alterar o programa, n&#227;o cause preju&#237;zo.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000114000000000000000">
+1.14 Edite seu c&#243;digo. Um  Programa deve ser escrito pelo menos 2
+  v&#234;zes.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000115000000000000000">
+1.15 N&#227;o se programa de forma isolada.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000116000000000000000">
+1.16 Escreva o c&#243;digo tendo Manuten&#231;&#227;o em mente.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000117000000000000000">
+1.17 Efici&#234;ncia &#233; bom, mas conforme o contexto.</A>
+</H2>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Formata&#231;&#227;o e Documenta&#231;&#227;o</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00021000000000000000">
+2.1 C&#243;digo n&#227;o comentado tem valor ZERO.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00022000000000000000">
+2.2 Coment&#225;rios devem ser senten&#231;as.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00023000000000000000">
+2.3 Um coment&#225;rio n&#227;o deve exprimir o &#243;bvio.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00024000000000000000">
+2.4 Um coment&#225;rio deve ter informa&#231;&#227;o necess&#225;ria apenas para
+  manuten&#231;&#227;o.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00025000000000000000">
+2.5 Coment&#225;rios devem ser feitos em blocos.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00026000000000000000">
+2.6 Coment&#225;rios devem estar alinhados verticalmente.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00027000000000000000">
+2.7 N&#227;o coloque coment&#225;rios entre o nome da fun&#231;&#227;o e a chave
+  que inicia o corpo da fun&#231;&#227;o.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00028000000000000000">
+2.8 Documenta&#231;&#227;o de fun&#231;&#245;es</A>
+</H2>
+
+<P>
+Voc&#234; deve documentar as fun&#231;&#245;es que escreve.  Na documenta&#231;&#227;o voc&#234; deve
+especificar as seguintes informa&#231;&#245;es:
+
+<P>
+<DL>
+<DT><STRONG>A&#231;&#227;o</STRONG></DT>
+<DD>- o que a fun&#231;&#227;o faz;
+</DD>
+<DT><STRONG>Entrada</STRONG></DT>
+<DD>- descri&#231;&#227;o dos argumentos passados para a fun&#231;&#227;o;
+</DD>
+<DT><STRONG>Sa&#237;da</STRONG></DT>
+<DD>- descri&#231;&#227;o do valor retornado pela fun&#231;&#227;o;
+</DD>
+<DT><STRONG>Suposi&#231;&#245;es</STRONG></DT>
+<DD>- o que voc&#234; assume ser verdade para que a fun&#231;&#227;o
+  funcione apropriadamente;
+</DD>
+<DT><STRONG>Algoritmo</STRONG></DT>
+<DD>- como o problema &#233; resolvido (m&#233;todo);
+</DD>
+</DL>
+
+<P>
+Estas informa&#231;&#245;es devem ser colocadas como coment&#225;rio antes
+da defini&#231;&#227;o da fun&#231;&#227;o.
+
+<P>
+Exemplo:
+<PRE>
+  /* Funcao instrucoes()
+   *  Acao:        mostra instrucoes do programa
+   *  Entrada:     nenhuma
+   *  Saida:       nenhuma
+   *  Suposicoes:  nenhuma
+   *  Algoritmo:   imprime as instrucoes
+   */
+
+   void instrucoes ()
+   {
+      .....
+   }
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00029000000000000000">
+2.9 Marque o final de estruturas de controle longas com algo razo&#225;vel.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000210000000000000000">
+2.10 Use apenas uma senten&#231;a por linha.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000211000000000000000">
+2.11 Todo o c&#243;digo deve ser imprim&#237;vel. Sem linhas longas.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000212000000000000000">
+2.12 Use indenta&#231;&#227;o adequada em seu c&#243;digo.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000213000000000000000">
+2.13 Coment&#225;rios devem estar no mesmo n&#237;vel de indenta&#231;&#227;o do
+  c&#243;digo associado.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000214000000000000000">
+2.14 Use chaves quando o corpo de um bloco tem mais de uma linha
+(com ou sem coment&#225;rios)</A>
+</H2>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Nomes e Identificadores</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00031000000000000000">
+3.1 Nomes devem ser palavras comuns em Ingles ou Portugues,
+  descritivas do que a fun&#231;&#227;o, vari&#225;vel ou argumento faz.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00032000000000000000">
+3.2 N&#227;o produza abrevia&#231;&#245;es cifradas.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00033000000000000000">
+3.3 Nomes de Constantes e Macros devem ser CAPITALIZADAS</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00034000000000000000">
+3.4 N&#227;o capitalizar nomes criados com <I>typedef</I>.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00035000000000000000">
+3.5 Evite s&#237;mbolos desnecess&#225;rios.</A>
+</H2>
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+4 Codifica&#231;&#227;o</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00041000000000000000">
+4.1 Uma fun&#231;&#227;o deve fazer apenas uma tarefa.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00042000000000000000">
+4.2 C&#243;digo usado mais que uma vez deve ser colocado em uma
+  fun&#231;&#227;o.</A>
+</H2> 
+
+<P>
+
+<H2><A NAME="SECTION00043000000000000000">
+4.3 Uma fun&#231;&#227;o deve ter apenas um ponto de sa&#237;da.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00044000000000000000">
+4.4 Sempre coloque <I>return</I> no n&#237;vel mais externo da
+  fun&#231;&#227;o.</A>
+</H2> 
+
+<P>
+
+<H2><A NAME="SECTION00045000000000000000">
+4.5 Sempre cheque c&#243;digos de erro de fun&#231;&#245;es.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00046000000000000000">
+4.6 Evite vari&#225;veis tempor&#225;rias.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION00047000000000000000">
+4.7 Coloque aloca&#231;&#227;o e libera&#231;&#227;o de mem&#243;ria no mesmo
+  local/fun&#231;&#227;o.</A>
+</H2> 
+
+<P>
+
+<H2><A NAME="SECTION00048000000000000000">
+4.8 Uma mensagenm de erro deve indicar ao usu&#225;rio o que &#233;
+  correto.</A>
+</H2> 
+
+<P>
+
+<H2><A NAME="SECTION00049000000000000000">
+4.9 N&#227;o imprima mensagens de erro se o erro &#233; recuper&#225;vel.</A>
+</H2>
+
+<P>
+
+<H2><A NAME="SECTION000410000000000000000">
+4.10 Use <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B> ou <B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B> para exibir
+  mensagens de erro n&#227;o recuper&#225;veis.</A>
+</H2>
+
+<P>
+Sempre que poss&#237;vel,  exiba mensagens de erro em  uma sa&#237;da separada do
+local  (tela ou  janela)  onde  s&#227;o exibidas  as  mensagens normais  do
+programa.
+
+<P>
+Em UNIX,  o melhor  lugar para mensagens  de erro  &#233; a Sa&#237;da  Padr&#227;o de
+Erros (STDERR). Em um programa em C, usa-se as fun&#231;&#245;es <B><FONT FACE="Helvetica, Arial, sans-serif">fprintf()</FONT></B>
+ou <B><FONT FACE="Helvetica, Arial, sans-serif">fputs()</FONT></B> para imprimir <I>strings</I> em STDERR:
+<PRE>
+      fprintf(stderr, "Erro ao atribuir valor %d à variável A\n", A);
+      fputs(stderr, "Erro de alocacao de memoria\n");
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION000411000000000000000">
+4.11 Mensagens de depura&#231;&#227;o devem ser compiladas
+  condicionalmente. Uso de #ifdef e op&#231;&#227;o -D do compilador</A>
+</H2>
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="holub95">1</A>
+<DD>
+Allen&nbsp;I. Holub.
+<BR> <I>Enough Rope to Shoot Yourself in the Foot: rules for C and C++
+  programming</I>.
+<BR> McGraw-Hill, 1995.
+
+<BR>
+<P>
+</DL>
+
+
+<P>
+<BR> <HR>
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-09-21</I>
+</ADDRESS>
+</BODY>
+</HTML>

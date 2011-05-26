@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 22: Heap</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap23.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap21.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 22</h2>
+
+<h1>Heap</h1>
+
+
+<a name=1></a><br>
+<h3>22.1 The Heap</h3>
+
+<p>A heap is a special kind of tree that happens to be an efficient implementation of a priority queue.  This figure shows the relationships among the data structures in this chapter.</p>
+
+<p align="center"><img src="images/heap_adt.png"></p>
+
+<p>Ordinarily we try to maintain as much distance as possible between an ADT and its implementation, but in the case of the Heap, this barrier breaks down a little.  The reason is that we are interested in the performance of the operations we implement. For each implementation there are some operations that are easy to implement and efficient, and others that are clumsy and slow.</p>
+
+<p>It turns out that the array implementation of a tree works particularly well as an implementation of a Heap.  The operations the array performs well are exactly the operations we need to implement a Heap.</p>
+
+<p>To understand this relationship, we will proceed in a few steps. First, we need to develop ways of comparing the performance of various implementations.  Next, we will look at the operations Heaps perform.  Finally, we will compare the Heap implementation of a Priority Queue to the others (arrays and lists) and see why the Heap is considered particularly efficient.</p>
+
+<a name=2></a><br>
+<h3>22.2 Performance analysis</h3>
+
+<p>When we compare algorithms, we would like to have a way to tell when one is faster than another, or takes less space, or uses less of some other resource.  It is hard to answer those questions in detail, because the time and space used by an algorithm depend on the implementation of the algorithm, the particular problem being solved, and the hardware the program runs on.</p>
+
+<p>The objective of this section is to develop a way of talking about performance that is independent of all of those things, and only depends on the algorithm itself.  To start, we will focus on run time; later we will talk about other resources.</p>
+
+<p>Our decisions are guided by a series of constraints:</p>
+
+<ol>
+
+<li>First, the performance of an algorithm depends on the hardware it runs on, so we usually don't talk about run time in absolute terms like seconds.  Instead, we usually count the number of abstract operations the algorithm performs.</li>
+
+<li>Second, performance often depends on the particular problem we are trying to solve -- some problems are easier than others.  To compare algorithms, we usually focus on either the worst-case scenario or an average (or common) case.</li>
+
+<li>Third, performance depends on the size of the problem (usually, but not always, the number of elements in a collection). We address this dependence explicitly by expressing run time as a function of problem size.</li>
+
+<li>Finally, performance depends on details of the implementation like object allocation overhead and method invocation overhead.  We usually ignore these details because they don't affect the rate at which the number of abstract operations increases with problem size.</li>
+
+</ol>
+
+<p>To make this process more concrete, consider two algorithms we have already seen for sorting an array of integers.  The first is <b>selection sort</b>, which we saw in <a href="chap13.htm#7">Section 13.7</a>. Here is the pseudocode we used there.</p>
+
+
+<span class=code>&nbsp; &nbsp; selectionsort (array) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i=0; i&lt;array.length(); i++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// find the lowest item at or to the right of i
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// swap the ith item and the lowest item
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br></span><p>To perform the operations specified in the pseudocode, we wrote helper methods named <span class=code>findLowest()</span> and <span class=code>swap</span>.  In <b>pseudocode</b>, <span class=code>findLowest()</span> looks like this</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=comment>// find the index of the lowest item between
+</span><br>&nbsp; &nbsp; <span class=comment>// i and the end of the array
+</span><br>
+<br>&nbsp; &nbsp; findLowest (array, i) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// lowest contains the index of the lowest item so far
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; lowest = i;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> j=i+1; j&lt;array.length(); j++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// compare the jth item to the lowest item so far
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// if the jth item is lower, replace lowest with j
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> lowest;
+<br>&nbsp; &nbsp; }
+<br></span><p>And <span class=code>swap</span> looks like this:</p>
+
+
+<span class=code>&nbsp; &nbsp; swap (i, j) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// store a reference to the ith card in temp
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// make the ith element of the array refer to the jth card
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// make the jth element of the array refer to temp
+</span><br>&nbsp; &nbsp; }
+<br></span><p>To analyze the performance of this algorithm, the first step is to decide what operations to count.  Obviously, the program does a lot of things: it increments <span class=code>i</span>, compares it to the length of the deck, it searches for the largest element of the array, etc.  It is not obvious what the right thing is to count.</p>
+
+
+
+<p>It turns out that a good choice is the number of times we compare two items.  Many other choices would yield the same result in the end, but this is easy to do and we will find that it allows us to compare most easily with other sort algorithms.</p>
+
+<p>The next step is to define the "problem size."  In this case it is natural to choose the size of the array, which we'll call <tt>n</tt>.</p>
+
+<p>Finally, we would like to derive an expression that tells us how many abstract operations (specifically, comparisons) we have to do, as a function of <tt>n</tt>.</p>
+
+
+
+<p>We start by analyzing the helper methods.  <span class=code>swap</span> copies several references, but it doesn't perform any comparisons, so we ignore the time spent performing swaps. <span class=code>findLowest</span> starts at <span class=code>i</span> and traverses the array, comparing each item to <span class=code>lowest</span>.  The number of items we look at is <tt>n-i</tt>, so the total number of comparisons is <tt>n-i-1</tt>.</p>
+
+<p>Next we consider how many times <span class=code>findLowest</span> gets invoked and what the value of <tt>i</tt> is each time.  The last time it is invoked, <tt>i</tt> is <tt>n-2</tt> so the number of comparisons is 1.  The previous iteration performs 2 comparisons, and so on.  During the first iteration, <tt>i</tt> is <tt>0</tt> and the number of comparisons is <tt>n-1</tt>.</p>
+
+<p>So the total number of comparisons is <tt>1 + 2 + &middot;&middot;&middot; + n-1</tt>. This sum is equal to <tt>n<sup>2</sup>/2 - n/2</tt>.  To describe this algorithm, we would typically ignore the lower order term (<tt>n/2</tt>) and say that the total amount of work is proportional to <tt>n<sup>2</sup></tt>.  Since the leading order term is quadratic, we might also say that this algorithm is <b>quadratic time</b>.</p>
+
+
+
+<a name=3></a><br>
+<h3>22.3 Analysis of mergesort</h3>
+
+<p>In <a href="chap13.htm#10">Section 13.10</a> I claimed that mergesort takes time that is proportional to <tt>n log n</tt>, but I didn't explain how or why.  Now I will.</p>
+
+<p>Again, we start by looking at pseudocode for the algorithm. For mergesort, it's</p>
+
+
+<span class=code>&nbsp; mergeSort (array) {
+<br>&nbsp; &nbsp; <span class=comment>// find the midpoint of the array
+</span><br>&nbsp; &nbsp; <span class=comment>// divide the array into two halves
+</span><br>&nbsp; &nbsp; <span class=comment>// sort the halves recursively
+</span><br>&nbsp; &nbsp; <span class=comment>// merge the two halves and return the result
+</span><br>&nbsp; }
+<br></span><p>At each level of the recursion, we split the array in half, make two recursive calls, and then merge the halves.  Graphically, the process looks like this:</p>
+
+<p align="center"><img src="images/mergetree.png"></p>
+
+<p>Each line in the diagram is a level of the recursion.  At the top, a single array divides into two halves.  At the bottom, <tt>n</tt> arrays (with one element each) are merged into <tt>n/2</tt> arrays (with 2 elements each).</p>
+
+
+
+<p>The first two columns of the table show the number of arrays at each level and the number of items in each array.  The third column shows the number of merges that take place at each level of recursion.  The next column is the one that takes the most thought: it shows the number of comparisons each merge performs.</p>
+
+
+
+<p>If you look at the pseudocode (or your implementation) of merge, you should convince yourself that in the worst case it takes <tt>m-1</tt> comparisons, where <tt>m</tt> is the total number items being merged.</p>
+
+<p>The next step is to multiply the number of merges at each level by the amount of work (comparisons) per merge.  The result is the total work at each level.  At this point we take advantage of a small trick.  We know that in the end we are only interested in the leading-order term in the result, so we can go ahead and ignore the <tt>-1</tt> term in the comparisons per merge.  If we do that, then the total work at each level is simply <tt>n</tt>.</p>
+
+<p>Next we need to know the number of levels as a function of <tt>n</tt>.  Well, we start with an array of <tt>n</tt> items and divide it in half until it gets to 1.  That's the same as starting at 1 and multiplying by 2 until we get to <tt>n</tt>.  In other words, we want to know how many times we have to multiply 2 by itself before we get to <tt>n</tt>.  The answer is that the number of levels, <tt>l</tt>, is the logarithm, base 2, of <tt>n</tt>.</p>
+
+<p>Finally, we multiply the amount of work per level, <tt>n</tt>, by the number of levels, <tt>log<sub>2</sub> n</tt> to get <tt>n log<sub>2</sub> n</tt>, as promised. There isn't a good name for this functional form; most of the time people just say, "en log en."</p>
+
+<p>It might not be obvious at first that <tt>n log<sub>2</sub> n</tt> is better than <tt>n<sup>2</sup></tt>, but for large values of <tt>n</tt>, it is. As an exercise, write a program that prints <tt>n log<sub>2</sub> n</tt> and <tt>n<sup>2</sup></tt> for a range of values of <tt>n</tt>.</p>
+
+<a name=4></a><br>
+<h3>22.4 Overhead</h3>
+
+<p>Performance analysis takes a lot of handwaving.  First we ignored most of the operations the program performs and counted only comparisons. Then we decided to consider only worst case performance.  During the analysis we took the liberty of rounding a few things off, and when we finished, we casually discarded the lower-order terms.</p>
+
+<p>When we interpret the results of this analysis, we have to keep all this hand-waving in mind.  Because mergesort is <tt>n log<sub>2</sub> n</tt>, we consider it a better algorithm than selection sort, but that doesn't mean that mergesort is <i>always</i> faster.  It just means that eventually, if we sort bigger and bigger arrays, mergesort will win.</p>
+
+<p>How long that takes depends on the details of the implementation, including the additional work, besides the comparisons we counted, that each algorithm performs.  This extra work is sometimes called <b>overhead</b>.  It doesn't affect the performance analysis, but it does affect the run time of the algorithm.</p>
+
+<p>For example, our implementation of mergesort actually allocates subarrays before making the recursive calls and then lets them get garbage collected after they are merged.  Looking again at the diagram of mergesort, we can see that the total amount of space that gets allocated is proportional to <tt>n log<sub>2</sub> n</tt>, and the total number of objects that get allocated is about <tt>2n</tt>.  All that allocating takes time.</p>
+
+<p>Even so, it is most often true that a bad implementation of a good algorithm is better than a good implementation of a bad algorithm. The reason is that for large values of <tt>n</tt> the good algorithm is better and for small values of <tt>n</tt> it doesn't matter because both algorithms are good enough.</p>
+
+<p>As an exercise, write a program that prints values of <tt>1000 n log<sub>2</sub> n</tt> and <tt>n<sup>2</sup></tt> for a range of values of <tt>n</tt>.  For what value of <tt>n</tt> are they equal?</p>
+
+<a name=5></a><br>
+<h3>22.5 Priority Queue implementations</h3>
+
+<p>In <a href="chap20.html">Chapter 20</a> we looked at an implementation of a Priority Queue based on an array.  The items in the array are unsorted, so it is easy to add a new item (at the end), but harder to remove an item, because we have to search for the item with the highest priority.</p>
+
+<p>An alternative is an implementation based on a sorted list. In this case when we insert a new item we traverse the list and put the new item in the right spot.  This implementation takes advantage of a property of lists, which is that it is easy to insert a new node into the middle.  Similarly, removing the item with the highest priority is easy, provided that we keep it at the beginning of the list.</p>
+
+<p>Performance analysis of these operations is straightforward. Adding an item to the end of an array or removing a node from the beginning of a list takes the same amount of time regardless of the number of items.  So both operations are constant time.</p>
+
+
+
+<p>Any time we traverse an array or list, performing a constant-time operation on each element, the run time is proportional to the number of items.  Thus, removing something from the array and adding something to the list are both linear time.</p>
+
+
+
+<p>So how long does it take to insert and then remove <tt>n</tt> items from a Priority Queue?  For the array implementation, <tt>n</tt> insertions takes time proportional to <tt>n</tt>, but the removals take longer.  The first removal has to traverse all <tt>n</tt> items; the second has to traverse <tt>n-1</tt>, and so on, until the last removal, which only has to look at 1 item.  Thus, the total time is <tt>1 + 2 + &middot;&middot;&middot; + n</tt>, which is (still) <tt>n<sup>2</sup>/2 - n/2</tt>. So the total for the insertions and the removals is the sum of a linear function and a quadratic function.  The leading term of the result is quadratic.</p>
+
+<p>The analysis of the list implementation is similar.  The first insertion doesn't require any traversal, but after that we have to traverse at least part of the list each time we insert a new item.  In general we don't know how much of the list we will have to traverse, since it depends on the data and what order they are inserted, but we can assume that on average we have to traverse half of the list.  Unfortunately, even traversing half of the list is still a linear operation.</p>
+
+<p>So, once again, to insert and remove <tt>n</tt> items takes time proportional to <tt>n<sup>2</sup></tt>.  Thus, based on this analysis we cannot say which implementation is better; both the array and the list yield quadratic run times.</p>
+
+<p>If we implement a Priority Queue using a heap, we can perform both insertions and removals in time proportional to <tt>log n</tt>.  Thus the total time for <tt>n</tt> items is <tt>n log n</tt>, which is better than <tt>n<sup>2</sup></tt>.  That's why, at the beginning of the chapter, I said that a heap is a particularly efficient implementation of a Priority Queue.</p>
+
+<a name=6></a><br>
+<h3>22.6 Definition of a Heap</h3>
+
+<p>A heap is a special kind of tree.  It has two properties that are not generally true for other trees:</p>
+
+<dl>
+
+<dt>completeness</dt>
+<dd>The tree is complete, which means that nodes are added from top to bottom, left to right, without leaving any spaces.</dd>
+
+<dt>heapness</dt>
+<dd>The item in the tree with the highest priority is at the top of the tree, and the same is true for every subtree.</dd>
+
+</dl>
+
+<p>Both of these properties bear a little explaining. This figure shows a number of trees that are considered complete or not complete:</p>
+
+<p align="center"><img src="images/tree4.png"></p>
+
+<p>An empty tree is also considered complete.  We can define completeness more rigorously by comparing the height of the subtrees.  Recall that the <b>height</b> of a tree is the number of levels.</p>
+
+
+
+<p>Starting at the root, if the tree is complete, then the height of the left subtree and the height of the right subtree should be equal, or the left subtree may be taller by one. In any other case, the tree cannot be complete.</p>
+
+<p>Furthermore, if the tree is complete, then the height relationship between the subtrees has to be true for every node in the tree.</p>
+
+<p>It is natural to write these rules as a recursive method:</p>
+
+
+<span class=code>&nbsp; &nbsp; <span class=keyword>int</span> height(Tree* head)
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>if</span>(head==null) <span class=keyword>return</span> 0;
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>int</span> right = height(head-&gt;right), left = height(head-&gt;left);
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>if</span>(right &gt; left) <span class=keyword>return</span> right + 1;
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>return</span> left + 1;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; <span class=keyword>bool</span> isComplete (Tree *tree) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// the null tree is complete
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (tree == null) <span class=keyword>return true</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> leftHeight = height (tree-&gt;left);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> rightHeight = height (tree-&gt;right);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>int</span> diff = leftHeight - rightHeight
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// check the root node
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (diff &lt; 0 || diff &gt; 1) <span class=keyword>return false</span>;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// check the children
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (!isComplete (tree-&gt;left)) <span class=keyword>return false</span>;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> isComplete (tree-&gt;right);
+<br>&nbsp; &nbsp; }
+<br></span><p>For this example I used the linked implementation of a tree.  As an exercise, write the same method for the array implementation. Also as an exercise, write the <span class=code>height</span> method.  The height of a <span class=code>null</span> tree is 0 and the height of a leaf node is 1.</p>
+
+
+
+<p>The <b>heap property</b> is similarly recursive.  In order for a tree to be a heap, the largest value in the tree has to be at the root, <i>and</i> the same has to be true for each subtree. As another exercise, write a method that checks whether a tree has the heap property.</p>
+
+<a name=7></a><br>
+<h3>22.7 Heap <b>remove</b></h3>
+
+<p>It might seem odd that we are going to remove things from the heap before we insert any, but I think removal is easier to explain.</p>
+
+<p>At first glance, we might think that removing an item from the heap is a constant time operation, since the item with the highest priority is always at the root.  The problem is that once we remove the root node, we are left with something that is no longer a heap.  Before we can return the result, we have to restore the heap property.  We call this operation <span class=code>reheapify</span>.</p>
+
+<p>The situation is shown in the following figure:</p>
+
+<p align="center"><img src="images/tree5.png"></p>
+
+<p>The root node has priority <span class=code>r</span> and two subtrees, A and B. The value at the root of Subtree A is <span class=code>a</span> and the value at the root of Subtree B is <span class=code>b</span>.</p>
+
+<p>We assume that before we remove <span class=code>r</span> from the tree, the tree is a heap.  That implies that <span class=code>r</span> is the largest value in the heap and that <span class=code>a</span> and <span class=code>b</span> are the largest values in their respective subtrees.</p>
+
+<p>Once we remove <span class=code>r</span>, we have to make the resulting tree a heap again.  In other words we need to make sure it has the properties of completeness and heapness.</p>
+
+<p>The best way to ensure completeness is to remove the bottom-most, right-most node, which we'll call <span class=code>c</span> and put its value at the root.  In a general tree implementation, we would have to traverse the tree to find this node, but in the array implementation, we can find it in constant time because it is always the last (non-null) element of the array.</p>
+
+<p>Of course, the chances are that the last value is not the highest, so putting it at the root breaks the heapness property.  Fortunately it is easy to restore.  We know that the largest value in the heap is either <span class=code>a</span> or <span class=code>b</span>.  Therefore we can select whichever is larger and swap it with the value at the root.</p>
+
+<p>Arbitrarily, let's say that <span class=code>b</span> is larger.  Since we know it is the highest value left in the heap, we can put it at the root and put <span class=code>c</span> at the top of Subtree B.  Now the situation looks like this:</p>
+
+<p align="center"><img src="images/tree6.png"></p>
+
+<p>Again, <span class=code>c</span> is the value we copied from the last entry in the array and <span class=code>b</span> is the highest value left in the heap.  Since we haven't changed Subtree A at all, we know that it is still a heap.  The only problem is that we don't know if Subtree B is a heap, since we just stuck a (probably low) value at its root.</p>
+
+
+
+<p>Wouldn't it be nice if we had a method that could <span class=code>reheapify</span> Subtree B?  Wait... we do!</p>
+
+<a name=8></a><br>
+<h3>22.8 Heap <span class=code>insert</span></h3>
+
+<p>Inserting a new item in a heap is a similar operation, except that instead of trickling a value down from the top, we trickle it up from the bottom.</p>
+
+<p>Again, to guarantee completeness, we add the new element at the bottom-most, rightmost position in the tree, which is the next available space in the array.</p>
+
+<p>Then to restore the heap property, we compare the new value with its neighbors.  The situation looks like this:</p>
+
+<p align="center"><img src="images/tree7.png"></p>
+
+<p>The new value is <span class=code>c</span>.  We can restore the heap property of this subtree by comparing <span class=code>c</span> to <span class=code>a</span>. If <span class=code>c</span> is smaller, then the heap property is satisfied. If <span class=code>c</span> is larger, then we swap <span class=code>c</span> and <span class=code>a</span>.  The swap satisfies the heap property because we know that <span class=code>c</span> must also be bigger than <span class=code>b</span>, because <span class=code>c &gt; a</span> and <span class=code>a &gt; b</span>.</p>
+
+<p>Now that the subtree is reheapified, we can work our way up the tree until we reach the root.</p>
+
+<a name=9></a><br>
+<h3>22.9 Performance of heaps</h3>
+
+<p>For both insert and remove, we perform a constant time operation to do the actual insertion and removal, but then we have to reheapify the tree.  In one case we start at the root and work our way down, comparing items and then recursively reheapifying one of the subtrees.  In the other case we start at a leaf and work our way up, again comparing elements at each level of the tree.</p>
+
+<p>As usual, there are several operations we might want to count, like comparisons and swaps.  Either choice would work; the real issue is the number of levels of the tree we examine and how much work we do at each level.  In both cases we keep examining levels of the tree until we restore the heap property, which means we might only visit one, or in the worst case we might have to visit them all.  Let's consider the worst case.</p>
+
+<p>At each level, we perform only constant time operations like comparisons and swaps.  So the total amount of work is proportional to the number of levels in the tree, a.k.a. the height.</p>
+
+<p>So we might say that these operations are linear with respect to the height of the tree, but the "problem size" we are interested in is not height, it's the number of items in the heap.</p>
+
+<p>As a function of <tt>n</tt>, the height of the tree is <tt>log<sub>2</sub> n</tt>. This is not true for all trees, but it is true for complete trees.  To see why, think of the number of nodes on each level of the tree.  The first level contains 1, the second contains 2, the third contains 4, and so on.  The <tt>i</tt>th level contains <tt>2<sup>i</sup></tt> nodes, and the total number in all levels up to <tt>i</tt> is <tt>2<sup>i</sup> - 1</tt>.  In other words, <tt>2<sup>h</sup> = n</tt>, which means that <tt>h = log<sub>2</sub> n</tt>.</p>
+
+
+
+<p>Thus, both insertion and removal take <b>logarithmic</b> time. To insert and remove <tt>n</tt> items takes time proportional to <tt>n log<sub>2</sub> n</tt>.</p>
+
+<a name=10></a><br>
+<h3>22.10 Heapsort</h3>
+
+<p>The result of the previous section suggests yet another algorithm for sorting.  Given <tt>n</tt> items, we insert them into a Heap and then remove them.  Because of the Heap semantics, they come out in order.  We have already shown that this algorithm, which is called <b>heapsort</b>, takes time proportional to <tt>n log<sub>2</sub> n</tt>, which is better than selection sort and the same as mergesort.</p>
+
+<p>As the value of <tt>n</tt> gets large, we expect heapsort to be faster than selection sort, but performance analysis gives us no way to know whether it will be faster than mergesort.  We would say that the two algorithms have the same <b>order of growth</b> because they grow with the same functional form.  Another way to say the same thing is that they belong to the same <b>complexity class</b>.</p>
+
+
+
+<p>Complexity classes are sometimes written in "big-O notation". For example, <tt><big><i>O</i></big>(n<sup>2</sup>)</tt>, pronounced "oh of en squared" is the set of all functions that grow no faster than <tt>n<sup>2</sup></tt> for large values of <tt>n</tt>.  To say that an algorithm is <tt><big><i>O</i></big>(n<sup>2</sup>)</tt> is the same as saying that it is quadratic.  The other complexity classes we have seen, in decreasing order of performance, are:</p>
+
+
+
+<table align=center>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(1)</tt></td><td style="padding-right: 8;">constant time<br></td></tr>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(log n)</tt></td><td style="padding-right: 8;">logarithmic<br></td></tr>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(n)</tt></td><td style="padding-right: 8;">linear<br></td></tr>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(n log n)</tt></td><td style="padding-right: 8;">"en log en"<br></td></tr>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(n<sup>2</sup>)</tt></td><td style="padding-right: 8;">quadratic<br></td></tr>
+<tr><td style="padding-right: 8;"><tt><big><i>O</i></big>(2<sup>n</sup>)</tt></td><td style="padding-right: 8;">exponential</td></tr>
+</table>
+
+
+<p>So far none of the algorithms we have looked at are <b>exponential</b>. For large values of <tt>n</tt>, these algorithms quickly become impractical. Nevertheless, the phrase "exponential growth" appears frequently in even non-technical language.  It is frequently misused so I wanted to include its technical meaning.</p>
+
+<p>People often use "exponential" to describe any curve that is increasing and accelerating (that is, one that has positive slope and curvature).  Of course, there are many other curves that fit this description, including quadratic functions (and higher-order polynomials) and even functions as undramatic as <tt>n log n</tt>.  Most of these curves do not have the (often detrimental) explosive behavior of exponentials.</p>
+
+<p>As an exercise, compare the behavior of <tt>1000 n<sup>2</sup></tt> and <tt>2<sup>n</sup></tt> as the value of <tt>n</tt> increases.</p>
+
+<a name=11></a><br>
+<h3>22.11 Glossary</h3>
+
+<dl>
+
+<dt>selection sort</dt>
+<dd>The simple sorting algorithm in <a href="chap13.htm#7">Section 13.7</a>.</dd>
+
+<dt>mergesort</dt>
+<dd>A better sorting algorithm from <a href="chap13.htm#10">Section 13.10</a>.</dd>
+
+<dt>heapsort</dt>
+<dd>Yet another sorting algorithm.</dd>
+
+<dt>complexity class</dt>
+<dd>A set of algorithms whose performance (usually run time) has the same order of growth.</dd>
+
+<dt>order of growth</dt>
+<dd>A set of functions with the same leading-order term, and therefore the same qualitative behavior for large values of <tt>n</tt>.</dd>
+
+<dt>overhead</dt>
+<dd>Additional time or resources consumed by a programming performing operations other than the abstract operations considered in performance analysis.</dd>
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap23.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap21.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

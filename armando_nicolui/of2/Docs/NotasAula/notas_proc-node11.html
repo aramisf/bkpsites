@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11 A sentença switch</TITLE>
+<META NAME="description" CONTENT="11 A sentença switch">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node12.html">
+<LINK REL="previous" HREF="notas_proc-node10.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node12.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html338"
+  HREF="notas_proc-node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html336"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html330"
+  HREF="notas_proc-node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html339"
+  HREF="notas_proc-node12.html">12 A sentença break</A>
+<B>Up:</B> <A NAME="tex2html337"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html331"
+  HREF="notas_proc-node10.html">10 A construção else-if</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000110000000000000000">
+11 A senten&#231;a <TT>switch</TT></A>
+</H1>
+
+<P>
+A senten&#231;a  <TT>switch</TT> &#233;  outra maneira de fazer  decis&#245;es m&#250;ltiplas.
+Ele pode ser usado para testar se uma dada express&#227;o &#233; igual a um valor
+constante e, dependendo do valor, tomar determinadas a&#231;&#245;es.
+
+<P>
+O formato da senten&#231;a <TT>switch</TT> &#233;:
+
+<P>
+<TT>switch</TT> (<EM>expressao</EM>) <TT>{</TT>
+
+<P>
+<TT>case</TT> <EM>expressao-constante 1</EM><TT>:</TT>
+
+<P>
+<EM>sentencas 1</EM>
+
+<P>
+<TT>case</TT> <EM>expressao-constante 2</EM><TT>:</TT>
+
+<P>
+<EM>sentencas 2</EM>
+
+<P>
+<IMG
+ WIDTH="9" HEIGHT="58" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img31.png"
+ ALT="$\vdots$">
+
+<P>
+<TT>default:</TT>
+
+<P>
+<EM>sentencas n</EM>
+
+<P>
+<TT>}</TT>
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="728" HEIGHT="318" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img37.png"
+ ALT="\includegraphics[scale=0.85]{switch}"></DIV>
+
+<P>
+A senten&#231;a <TT>switch</TT> primeiro  avalia a <EM>express&#227;o</EM>.  Se o valor
+da express&#227;o for  igual a uma das <EM>express&#245;es constantes</EM>, as <EM>senten&#231;as</EM> que seguem o <TT>case</TT>  s&#227;o executados.  Se o valor da <EM>express&#227;o</EM> n&#227;o  for igual  a nenhuma das  constantes, as  senten&#231;as que
+seguem <TT>default</TT> s&#227;o executadas.
+
+<P>
+As <EM>senten&#231;as</EM>  que seguem o <TT>case</TT>  s&#227;o simplesmente uma lista
+de senten&#231;as.   Esta lista  pode conter  mais de uma  senten&#231;a e  n&#227;o &#233;
+necess&#225;rio coloc&#225;-las entre  chaves (<TT>{</TT> e <TT>}</TT>).  A lista de
+senten&#231;as tamb&#233;m pode ser vazia,  isto &#233;, voc&#234; pode n&#227;o colocar nenhuma
+senten&#231;a seguindo o <TT>case</TT>.
+
+<P>
+Tamb&#233;m n&#227;o &#233; obrigat&#243;rio colocar o  <TT>default</TT>.  S&#243; o use quando for
+necess&#225;rio.
+
+<P>
+Note no  diagrama acima que TODAS  as senten&#231;as que  seguem a constante
+com  o valor  igual  ao da  express&#227;o  ser&#227;o executados.   Para que  se
+execute APENAS as  senten&#231;as que seguem o <TT>case</TT>  que seja igual ao
+valor da express&#227;o precisamos usar  a senten&#231;a <TT>break</TT>, que veremos
+em seguida.
+
+<P>
+<HR>
+<A NAME="tex2html338"
+  HREF="notas_proc-node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html336"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html330"
+  HREF="notas_proc-node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html339"
+  HREF="notas_proc-node12.html">12 A sentença break</A>
+<B>Up:</B> <A NAME="tex2html337"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html331"
+  HREF="notas_proc-node10.html">10 A construção else-if</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

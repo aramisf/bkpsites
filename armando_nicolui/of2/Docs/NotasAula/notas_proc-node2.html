@@ -1,0 +1,712 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2 Opera&#231;&#245;es Aritm&#233;ticas e Express&#245;es.
+Opera&#231;&#245;es Relacionais.</TITLE>
+<META NAME="description" CONTENT="2 Opera&#231;&#245;es Aritm&#233;ticas e Express&#245;es.
+Opera&#231;&#245;es Relacionais.">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node3.html">
+<LINK REL="previous" HREF="notas_proc-node1.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node3.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html217"
+  HREF="notas_proc-node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html215"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html209"
+  HREF="notas_proc-node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html218"
+  HREF="notas_proc-node3.html">3 Expressões como valores</A>
+<B>Up:</B> <A NAME="tex2html216"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html210"
+  HREF="notas_proc-node1.html">1 Programas C&nbsp;</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html219"
+  HREF="notas_proc-node2.html#SECTION00021000000000000000">2.1 Opera&#231;&#245;es  Aritm&#233;ticas</A>
+<UL>
+<LI><A NAME="tex2html220"
+  HREF="notas_proc-node2.html#SECTION00021100000000000000">2.1.1 Preced&#234;ncia de Operadores</A>
+<LI><A NAME="tex2html221"
+  HREF="notas_proc-node2.html#SECTION00021200000000000000">2.1.2 A Opera&#231;&#227;o de Resto (%)</A>
+<LI><A NAME="tex2html222"
+  HREF="notas_proc-node2.html#SECTION00021300000000000000">2.1.3 Express&#245;es e Vari&#225;veis</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html223"
+  HREF="notas_proc-node2.html#SECTION00022000000000000000">2.2 Opera&#231;&#227;o de Atribui&#231;&#227;o Aritm&#233;tica</A>
+<UL>
+<LI><A NAME="tex2html224"
+  HREF="notas_proc-node2.html#SECTION00022100000000000000">2.2.1 Operador de Incremento</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html225"
+  HREF="notas_proc-node2.html#SECTION00023000000000000000">2.3 Operadores Relacionais</A>
+<UL>
+<LI><A NAME="tex2html226"
+  HREF="notas_proc-node2.html#SECTION00023100000000000000">2.3.1 Preced&#234;ncia dos operadores relacionais</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html227"
+  HREF="notas_proc-node2.html#SECTION00024000000000000000">2.4 Revis&#227;o de Express&#245;es:</A>
+<LI><A NAME="tex2html228"
+  HREF="notas_proc-node2.html#SECTION00025000000000000000">2.5 Exemplo de programas</A>
+<LI><A NAME="tex2html229"
+  HREF="notas_proc-node2.html#SECTION00026000000000000000">2.6 Preced&#234;ncia e associatividade de operadores</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Opera&#231;&#245;es  Aritm&#233;ticas e Express&#245;es.
+<BR>
+Opera&#231;&#245;es Relacionais.</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00021000000000000000">
+2.1 Opera&#231;&#245;es  Aritm&#233;ticas</A>
+</H2>
+
+<P>
+Em  C, n&#243;s  podemos executar  opera&#231;&#245;es  aritm&#233;ticas usando
+vari&#225;veis  e  constantes.   Algumas opera&#231;&#245;es  mais  comuns
+s&#227;o:
+<DL>
+<DT><STRONG>+</STRONG></DT>
+<DD>adi&#231;&#227;o
+</DD>
+<DT><STRONG>-</STRONG></DT>
+<DD>subtra&#231;&#227;o
+</DD>
+<DT><STRONG>*</STRONG></DT>
+<DD>multiplica&#231;&#227;o
+</DD>
+<DT><STRONG>/</STRONG></DT>
+<DD>divis&#227;o
+</DD>
+<DT><STRONG>%</STRONG></DT>
+<DD>resto (m&#243;dulo)
+</DD>
+</DL>
+
+<P>
+Estas  opera&#231;&#245;es  podem ser  usadas  como  mostram os  exemplos
+abaixo, assumindo que as vari&#225;veis necess&#225;rias j&#225; est&#227;o
+declaradas:
+
+<P>
+<PRE>
+     celsius = (fahrenheit - 32) * 5.0 / 9.0;
+
+     forca =  massa * aceleracao;
+
+     i = i + 1;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00021100000000000000">
+2.1.1 Preced&#234;ncia de Operadores</A>
+</H3> 
+
+<P>
+Em C, assim como em &#225;lgebra, h&#225; uma ordem de preced&#234;ncia de
+operadores.
+
+<P>
+Assim,  em <!-- MATH
+ $(2  +  x)(3x^{2} +  1)$
+ -->
+<IMG
+ WIDTH="128" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img7.png"
+ ALT="$(2 + x)(3x^{2} + 1)$">,  express&#245;es em  par&#234;ntesis
+s&#227;o   avaliadas  primeiro,   seguidos   por  exponencia&#231;&#227;o,
+multiplica&#231;&#227;o, divis&#227;o, adi&#231;&#227;o e subtra&#231;&#227;o.
+
+<P>
+Da  mesma  forma, em  C,  express&#245;es  entre par&#234;ntesis  s&#227;o
+executadas primeiro, seguidas de <TT>*</TT>, <TT>/</TT> and <TT>%</TT> (que tem
+todos a mesma  preced&#234;ncia), seguido de <TT>+</TT>  and <TT>-</TT> (ambos
+com a mesma preced&#234;ncia).
+
+<P>
+Quando  opera&#231;&#245;es adjacentes  t&#234;m a  mesma preced&#234;ncia,
+elas s&#227;o associadas da esquerda para  a direita.  Assim, <TT>a * b
+/ c * d % e</TT> &#233; o mesmo que <TT>((((a * b) / c) * d) % e)</TT>.
+
+<P>
+
+<H3><A NAME="SECTION00021200000000000000">
+2.1.2 A Opera&#231;&#227;o de Resto (%)</A>
+</H3>  
+
+<P>
+Esta opera&#231;&#227;o &#233; usada  quando queremos encontrar o resto da
+divis&#227;o de dois inteiros.  Por  exemplo, 22 dividido por 5 &#233; 4,
+com resto 2 (<!-- MATH
+ $4 \times 5 + 2 = 22$
+ -->
+<IMG
+ WIDTH="114" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img8.png"
+ ALT="$4 \times 5 + 2 = 22$">).
+
+<P>
+Em C, a express&#227;o <TT>22 % 5</TT> ter&#225; valor <TT>2</TT>.
+
+<P>
+Note  que <TT>%</TT> s&#243;  pode  ser utilizados  entre dois  inteiros.
+Usando  ele com  um  operando do  tipo  <TT>float</TT>  causa  um erro  de
+compila&#231;&#227;o (como em <TT>22.3 % 5</TT>).
+
+<P>
+
+<H3><A NAME="SECTION00021300000000000000">
+2.1.3 Express&#245;es e Vari&#225;veis</A>
+</H3>  
+
+<P>
+Express&#245;es  aritm&#233;ticas podem  ser  usadas na  maior parte  dos
+lugares em que uma vari&#225;vel pode ser usada.
+
+<P>
+O exemplo seguinte &#233; v&#225;lido:
+
+<P>
+<PRE>
+     int raio = 3 * 5 + 1;
+
+     printf("circunferencia = %f\n", 2 * 3.14 * raio);
+</PRE>
+
+<P>
+Exemplos de lugares onde  uma express&#227;o aritm&#233;tica N&#195;O pode
+ser usada incluem:
+
+<P>
+<PRE>
+     int yucky + 2 = 5;
+
+     scanf("%d", &amp;(oops * 5))
+</PRE>
+
+<P>
+Este exemplo &#233; ilegal e causar&#225; erro de compila&#231;&#227;o.
+
+<P>
+
+<H2><A NAME="SECTION00022000000000000000">
+2.2 Opera&#231;&#227;o de Atribui&#231;&#227;o Aritm&#233;tica</A>
+</H2>
+
+<P>
+&#201; freq&#252;ente em programas C express&#245;es do tipo:
+
+<P>
+<PRE>
+    tudo  = tudo + parte;
+
+    tamanho = tamanho * 2.5;
+
+    x = x * (y + 1);
+
+    j = j - 1;
+</PRE>
+
+<P>
+C fornece operadores adicionais que  podem ser usados para tornar estes
+tipos de atribui&#231;&#245;es mais curtos.
+
+<P>
+H&#225; um operadorador de atribui&#231;&#227;o para cada opera&#231;&#227;o
+aritm&#233;tica listada anteriormente:
+<DL>
+<DT><STRONG>+=</STRONG></DT>
+<DD>opera&#231;&#227;o de atribui&#231;&#227;o de adi&#231;&#227;o
+</DD>
+<DT><STRONG>-=</STRONG></DT>
+<DD>opera&#231;&#227;o de atribui&#231;&#227;o de subtra&#231;&#227;o
+</DD>
+<DT><STRONG>*=</STRONG></DT>
+<DD>opera&#231;&#227;o de atribui&#231;&#227;o de
+  multiplica&#231;&#227;o 
+</DD>
+<DT><STRONG>/=</STRONG></DT>
+<DD>opera&#231;&#227;o de atribui&#231;&#227;o de divis&#227;o
+</DD>
+<DT><STRONG>%=</STRONG></DT>
+<DD>opera&#231;&#227;o de atribui&#231;&#227;o de resto
+</DD>
+</DL>
+
+<P>
+Cada  uma dessas  opera&#231;&#245;es  podem ser  usadas  para tornar  as
+express&#245;es anteriores mais curtas:
+
+<P>
+<PRE>
+    tudo += parte;
+
+    tamanho *= 2.5;
+
+    x *= y + 1;
+
+    j -= 1;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00022100000000000000">
+2.2.1 Operador de Incremento</A>
+</H3>  
+
+<P>
+H&#225;  alguns operadores em  C que  s&#227;o equivalentes  as seguintes
+express&#245;es (que s&#227;o bastante comuns em programas):
+<PRE>
+   k = k + 1;
+
+   j = j - 1;
+</PRE>
+
+<P>
+Estes   operadores  adicionais,   que   s&#227;o  <TT>++</TT>  and   <TT>- -</TT>,  podem ser usados  para encurtar  as opera&#231;&#245;es
+acima:
+<PRE>
+   k++;
+
+   j--;
+</PRE>
+
+<P>
+Estes  operadores tamb&#233;m  podem  ser colocados  depois  do nome  da
+vari&#225;vel:
+<PRE>
+   ++k;
+
+   --j;
+</PRE>
+
+<P>
+O  fato do  operador  de incremento  ser  colocado antes  ou depois  da
+vari&#225;vel n&#227;o altera o efeito  da opera&#231;&#227;o - o valor da
+vari&#225;vel &#233; incrementada ou decrementada de um.  A diferen&#231;a
+entre os dois casos &#233; QUANDO a vari&#225;vel &#233; incrementada.  Na
+express&#227;o  <TT>k++</TT>, o  valor de  <TT>k</TT>  &#233; primeiro  usado e
+ent&#227;o   &#233;    incrementada   -   isto    &#233;   chamado   <EM>p&#243;s-incremento</EM>.   Na  express&#227;o   <TT>++k</TT>,  <TT>k</TT>  &#233;
+incrementado primeiro,  e ent&#227;o o valor  (o novo valor)  de <TT>k</TT>
+&#233; usado - isso &#233; chamado <EM>pr&#233;-incremento</EM>.
+
+<P>
+A diferen&#231;a &#233; ilustrada nos seguintes exemplos:
+<PRE>
+   main()
+   {
+      int k = 5;
+
+      printf("k = %d\n", k);
+      printf("k = %d\n", k++);
+      printf("k = %d\n", k);
+   }
+</PRE>
+
+<P>
+O programa acima (que usa p&#243;s-incremento) imprimir&#225; o seguinte:
+
+<P>
+<TT>k = 5</TT>
+
+<P>
+<TT>k = 5</TT>
+
+<P>
+<TT>k = 6</TT>
+
+<P>
+A segunda linha impressa com o valor  de <TT>k</TT> &#233; <TT>5</TT> porque o
+valor de  <TT>k++</TT>  era <TT>5</TT>, e <TT>k</TT> &#233;  <TT>6</TT>  depois da
+impress&#227;o.
+
+<P>
+
+<P>
+Para o programa:
+
+<P>
+<PRE>
+   main()
+   {
+      int k = 5;
+
+      printf("k = %d\n", k);
+      printf("k = %d\n", ++k);
+      printf("k = %d\n", k);
+   }
+</PRE>
+
+<P>
+O programa, que usa pr&#233;-incremento, ter&#225; a seguinte sa&#237;da:
+
+<P>
+<TT>k = 5</TT>
+
+<P>
+<TT>k = 6</TT>
+
+<P>
+<TT>k = 6</TT>
+
+<P>
+A segunda  linha impressa  &#233; <TT>6</TT> porque o  valor de  <TT>++k</TT>
+&#233; <TT>6</TT>.
+
+<P>
+
+<P>
+Os  operadores  de  atribui&#231;&#227;o  n&#227;o podem  ser  usados  com
+express&#245;es aritm&#233;ticas.  Por exemplo, as express&#245;es
+<PRE>
+    (ack + 2)++;
+
+    (nope + 3) += 5;
+</PRE>
+
+<P>
+resultar&#227;o em erros de compila&#231;&#227;o.
+
+<P>
+
+<P>
+Finalmente, quando usar o operador  de incremento em um <TT>printf()</TT>,
+tome cuidado para n&#227;o fazer o seguinte:
+<PRE>
+    printf("%d %d\n", ++uhoh, uhoh * 2);
+</PRE>
+
+<P>
+Embora  isso  seja perfeitamente  legal  em  C,  os resultados  n&#227;o
+s&#227;o  garantidados que  sejam consistentes.   A raz&#227;o  para isso
+&#233; que n&#227;o  h&#225; garantia que os argumentos  do <TT>printf()</TT>
+sejam  avaliados  em  uma  determinada  ordem.   O  resultado  do  <TT>printf()</TT> ser&#225; diferente dependendo  se <TT>++uhoh</TT> &#233; avaliado
+primeiro ou depois de <TT>uhoh * 2</TT>.
+
+<P>
+A solu&#231;&#227;o para este problema &#233; escrever o seguinte:
+<PRE>
+    ++uhoh;
+    printf("%d  %d\n", uhoh, uhoh * 2);
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00023000000000000000">
+2.3 Operadores Relacionais</A>
+</H2>  
+
+<P>
+Em   C,  h&#225;  operadores   que  podem   ser  usados   para  comparar
+express&#245;es: os operadores relacionais.
+
+<P>
+H&#225; seis operadores relacionais em C:
+<DL>
+<DT><STRONG><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img1.png"
+ ALT="$&lt;$"></STRONG></DT>
+<DD>menor que
+</DD>
+<DT><STRONG><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img2.png"
+ ALT="$&gt;$"></STRONG></DT>
+<DD>maior que
+</DD>
+<DT><STRONG><IMG
+ WIDTH="32" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img9.png"
+ ALT="$&lt;=$"></STRONG></DT>
+<DD>menor ou igual que (<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img10.png"
+ ALT="$\leq$">)
+</DD>
+<DT><STRONG><IMG
+ WIDTH="32" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img11.png"
+ ALT="$&gt;=$"></STRONG></DT>
+<DD>maior ou igual que (<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img12.png"
+ ALT="$\geq$">)
+</DD>
+<DT><STRONG>==</STRONG></DT>
+<DD>igual a
+</DD>
+<DT><STRONG>!=</STRONG></DT>
+<DD>n&#227;o igual a (<IMG
+ WIDTH="18" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img13.png"
+ ALT="$\not=$">)
+</DD>
+</DL>
+
+<P>
+Os  resultados deste operadores  &#233; <TT>0</TT> (correspondendo  a <EM>falso</EM>), ou <TT>1</TT>  (correspondendo a <EM>verdadeiro</EM>).  Valores como
+esses s&#227;o chamados valores  <EM>booleanos</EM>.  Algumas linguagens de
+programa&#231;&#227;o como  Pascal tem  um tipo de  vari&#225;vel distinto
+para valores booleanos.   Este n&#227;o &#233; o caso  do C, onde valores
+booleanos  s&#227;o armazenados  como  vari&#225;veis num&#233;ricas  tais
+como o <TT>int</TT>.
+
+<P>
+Considere o seguinte programa:
+<PRE>
+   main()
+   {
+       int idade;
+
+       idade = 17;
+       printf("Pode tirar carteira de motorista? %d\n", idade &gt;= 18);
+       idade = 35;
+       printf("Pode tirar carteira de motorista? %d\n", idade &gt;= 18);
+   }
+</PRE>
+
+<P>
+A sa&#237;da deste programa ser&#225;:
+<PRE>
+     Pode tirar carteira de motorista? 0
+     Pode tirar carteira de motorista? 1
+</PRE>
+
+<P>
+Na primeira  linha, <TT>idade</TT> &#233;  <TT>17</TT>.  Logo, <TT>17 &gt;= 18</TT>
+&#233; falso, que &#233; <TT>0</TT>.
+
+<P>
+Depois disso, <TT>idade</TT> &#233; <TT>35</TT>.  Logo, <TT>35 &gt;= 18</TT> &#233;
+verdadeiro, que &#233; <TT>1</TT>.
+
+<P>
+Note tamb&#233;m que o operador  de igualdade &#233; escrito com ``sinais
+de igual  duplo'', <TT>==</TT>, n&#227;o  <TT>=</TT>.  Tenha  cuidado com esta
+diferen&#231;a, j&#225; que colocar <TT>=</TT> no lugar de <TT>==</TT> n&#227;o
+&#233; um erro sint&#225;tico  (n&#227;o gera erro de compila&#231;&#227;o),
+e n&#227;o significa o que voc&#234; espera.
+
+<P>
+
+<H3><A NAME="SECTION00023100000000000000">
+2.3.1 Preced&#234;ncia dos operadores relacionais</A>
+</H3>  
+
+<P>
+Operadores aritm&#233;ticos tem  preced&#234;ncia maior que os operadores
+relacionais.  Por exemplo, a express&#227;o <TT>3  + 5 &lt; 6 * 2</TT> &#233; o
+mesmo que <TT>(3 + 5) &lt; (6 * 2)</TT>.
+
+<P>
+Se  por  alguma  raz&#227;o  voc&#234;   quer  que  o  resultado  do  uma
+opera&#231;&#227;o relacional em  uma express&#227;o aritm&#233;tica, &#233;
+necess&#225;rio usar par&#234;ntesis.   Por exemplo, a express&#227;o <TT>score +  (score == 0)</TT> ser&#225;  sempre igual ao valor  de <TT>score</TT>,
+exceto quando o valor de <TT>score</TT> seja <TT>0</TT>.  Neste caso, o valor
+da express&#227;o &#233; <TT>1</TT> (porque <TT>(score == 0)</TT> &#233; igual a
+1).
+
+<P>
+Uma observa&#231;&#227;o sobre valores booleanos - embora voc&#234; possa
+assumir que o valor de uma opera&#231;&#227;o relacional &#233; <TT>0</TT> ou
+<TT>1</TT>   em  C,  <B>qualquer  valor  diferente   de  zero  &#233;
+considerado  verdadeiro</B>.  Falaremos  sobre isso  mais tarde  durante o
+curso.
+
+<P>
+
+<H2><A NAME="SECTION00024000000000000000">
+2.4 Revis&#227;o de Express&#245;es:</A>
+</H2>
+
+<P>
+O que &#233; impresso pelos seguintes programas:
+
+<P>
+<PRE>
+  #include &lt;stdio.h&gt;
+
+  main() {
+    int score = 5;
+
+    printf(``%d'', 5 + 10 * 5 % 6);        ==&gt; 7
+    printf(``%d'', 10 / 4);                ==&gt; 2
+    printf(``%f'', 10.0 / 4.0);            ==&gt; 2.5
+    printf(``%c'', 'A' + 1);               ==&gt; B
+    printf(``%d'', score + (score == 0));  ==&gt; 5
+  }
+</PRE>
+
+<P>
+<PRE>
+  #include &lt;stdio.h&gt;
+
+  main() {
+    int n1, n2, n3;
+
+    printf(``Entre com um numero inteiro: ``);
+    scanf(``%d'', &amp;n1);
+    n1 += n1 * 10;
+    n2 = n1 / 5;
+    n3 = n2 % 5 * 7;
+    n2 *= n3-- % 4;
+    printf(``%d %d %d'', n2, n3, n2 != n3 + 21);
+  }
+</PRE>
+
+<P>
+Como &#233; a seguinte express&#227;o completamente parentizada ?
+
+<P>
+<PRE>
+  a * b / c + 30 &gt;= 45 + d * 3 ++e == 10
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00025000000000000000">
+2.5 Exemplo de programas</A>
+</H2>
+
+<P>
+<B>Exemplo 1:</B>  escreva um programa que leia um n&#250;mero inteiro e imprima 0 
+se o n&#250;mero for par e 1 se o n&#250;mero for &#237;mpar.
+
+<P>
+<PRE>
+  #include &lt;stdio.h&gt;
+
+  main() {
+    int numero;
+
+    printf(``Entre com um numero inteiro: ``);
+    scanf(``%d'', &amp;numero);
+    printf(``\nPar? %d\n'', numero % 2 );
+  }
+</PRE>
+
+<P>
+<B>Exemplo 2:</B>  escreva um programa que leia 3 n&#250;meros inteiros e calcule a 
+soma, m&#233;dia, e produto.
+
+<P>
+<PRE>
+#include &lt;stdio.h&gt;
+
+main() {
+    int n1, n2, n3;
+    int soma;
+
+    printf( "Entre com 3 numeros inteiros: ");
+    scanf( "%d %d %d",&amp;n1, &amp;n2, &amp;n3);
+    soma = n1 + n2 + n3;
+    printf( "Soma = %d\n", soma );
+    printf( "Media = %8.2f\n", soma / 3.0 );
+    printf( "Produto = %d\n", n1 * n2 * n3 );
+}
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00026000000000000000">
+2.6 Preced&#234;ncia e associatividade de operadores</A>
+</H2>
+&nbsp;
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Operador</TD>
+<TD ALIGN="LEFT">Associatividade</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>()</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>++  -- &amp;</code> (un&#225;rios)</TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>*  /  %</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>+  -</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>&lt;  &lt;=  &gt;  &gt;=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>==  !=</code></TD>
+<TD ALIGN="LEFT">esquerda para direita</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>=  +=  -=  *=  /=  %=</code></TD>
+<TD ALIGN="LEFT">direita para esquerda</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+<HR>
+<A NAME="tex2html217"
+  HREF="notas_proc-node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html215"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html209"
+  HREF="notas_proc-node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html218"
+  HREF="notas_proc-node3.html">3 Expressões como valores</A>
+<B>Up:</B> <A NAME="tex2html216"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html210"
+  HREF="notas_proc-node1.html">1 Programas C&nbsp;</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

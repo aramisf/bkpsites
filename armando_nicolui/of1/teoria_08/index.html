@@ -1,0 +1,752 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 08
+1&ordm;&nbsp;semestre 2006</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 08
+1&ordm;&nbsp;semestre 2006">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 08
+<BR>
+1&ordm;&nbsp;semestre 2006</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Express&#245;es Regulares B&#225;sicas: <B><I>grep(1)</I></B></A>
+</H1>
+
+<P>
+Uma EXPRESS&#195;O  REGULAR &#233;  uma forma compacta  de especificar  um padr&#227;o
+gen&#233;rico  de caracteres.   Existem muitos  filtros em  UNIX,  tais como
+<B><I>grep(1)</I></B>,  <B><I>sed(1)</I></B>, <B><I>awk(1)</I></B>  e <B><I>vi(1)</I></B>  que usam
+tanto padr&#245;es exatos quanto express&#245;es regulares.
+
+<P>
+Por exemplo,  pode-se usar <B><I>grep(1)</I></B> para encontrar  em um arquivo
+por todas  as linhas  que tenham  a letra ``H'',  seguida de  um n&#250;mero
+qualquer de letras min&#250;sculas, seguida da letra ``m''.
+
+<P>
+EXPRESS&#213;ES  REGULARES  s&#227;o  parte  integrante  de  sistemas  UNIX  e  &#233;
+EXTREMAMENTE IMPORTANTE aprender como us&#225;-las.
+
+<P>
+Dentro  de uma express&#227;o  regular, certos  s&#237;mbolos tem  um significado
+especial,   conforme  mostrado  na   tabela&nbsp;<A HREF="#tab:regexpress">1</A>.  Mais
+s&#237;mbolos com siginificado especial podem ser encontrado na se&#231;&#227;o REGULAR
+EXPRESSIONS no manual <I>on-line</I> de <B><I>grep(1)</I></B>.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="116"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 1:</STRONG>
+Sum&#225;rio de s&#237;mbolos usados em Express&#245;es Regulares</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="CENTER"><B>S&#237;mbolo</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=397><B>Significado</B></TH>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\cdot$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>qualquer caracter simples, exceto quebra de linha (<I>newline</I>)</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\ast$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>zero ou mais ocorr&#234;ncias do caracter precedente</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><B><FONT SIZE=3>^</FONT></B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>in&#237;cio de uma linha</TD>
+</TR>
+<TR><TD ALIGN="CENTER">$</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>final de uma linha</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>in&#237;cio de uma palavra</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>final de uma palavra</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>um, e apenas um  dos caracteres indicados pelos colchetes</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$"><B><FONT SIZE=3>^</FONT></B>&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>quaisquer caracteres que n&#227;o estejam entre os indicados pelos colchetes</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\backslash$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>toma o caracter seguinte literalmente</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img8.png"
+ ALT="$[[$">:alnum:<IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img9.png"
+ ALT="$]]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">0-9A-Za-z<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img8.png"
+ ALT="$[[$">:alpha:<IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img9.png"
+ ALT="$]]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">A-Za-z<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img8.png"
+ ALT="$[[$">:digit:<IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img9.png"
+ ALT="$]]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">0-9<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">a-d<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">abcd<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">a-dP-T<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">abcdPQRST<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$"><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$">a<B><FONT SIZE=3>^</FONT></B><IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$[$">-<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$]$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>um dos caracteres: <B>a</B>, <B><B><FONT SIZE=3>^</FONT></B></B>, <B>]</B>, <B>[</B>  ou
+    <B><FONT SIZE=3>-</FONT></B>. O s&#237;mbolo <B><B><FONT SIZE=3>^</FONT></B></B> perde seu significado especial se n&#227;o est&#225; no
+    in&#237;cio da express&#227;o entre colchetes. O s&#237;mbolo <B><FONT SIZE=3>-</FONT></B> perde seu significado
+    especial se &#233; o &#250;ltimo caracter da express&#227;o entre colchetes. O
+    s&#237;mbolo <B>]</B> perde seu significado se &#233; o primeiro caracter
+    da express&#227;o entre colchetes.</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:regexpress"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Express&#245;es Regulares Extendidas: <B><I>egrep(1)</I></B></A>
+</H1>
+
+<P>
+<B><I>egrep(1)</I></B> &#233;  um outro comando bastante usado  no processamento de
+textos em UNIX.
+
+<P>
+<B><I>egrep(1)</I></B> &#233;  uma forma alternativa de  <B><I>grep(1)</I></B> que utiliza
+EXPRESS&#213;ES REGULARES EXTENDIDAS  (ERE's), em contraponto com EXPRESS&#213;ES
+REGULARES B&#193;SICAS (BRE's) usadas por <B><I>grep(1)</I></B>.
+
+<P>
+Dentro  de  uma  ERE,  certos  s&#237;mbolos tem  um  significado  especial,
+conforme  mostrado na  tabela&nbsp;<A HREF="#tab:eregexpress">2</A>.  Mais  s&#237;mbolos com
+siginificado especial podem ser encontrados na se&#231;&#227;o REGULAR EXPRESSIONS
+no manual <I>on-line</I> de <B><I>grep(1)</I></B>/<B><I>egrep(1)</I></B>.
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER"><A NAME="139"></A>
+<TABLE>
+<CAPTION><STRONG>Tabela 2:</STRONG>
+Sum&#225;rio de s&#237;mbolos usados em Express&#245;es Regulares Extendidas</CAPTION>
+<TR><TD>  <DIV ALIGN="CENTER">  <TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="CENTER"><B>S&#237;mbolo</B></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=397><B>Significado</B></TH>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\ast$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>zero ou mais ocorr&#234;ncias do elemento precedente</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img10.png"
+ ALT="$+$"></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>um ou mais ocorr&#234;ncias do elemento precedente</TD>
+</TR>
+<TR><TD ALIGN="CENTER">?</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>elemento precedente &#233; opcional, isto &#233;, pode n&#227;o ocorrer
+               ou ocorrer apenas uma vez</TD>
+</TR>
+<TR><TD ALIGN="CENTER">{n}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>o elemento precedente ocorre exatamente <B>n</B> vezes</TD>
+</TR>
+<TR><TD ALIGN="CENTER">{n,}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>o elemento precedente ocorre <B>n</B> ou mais vezes</TD>
+</TR>
+<TR><TD ALIGN="CENTER">{n,m}</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>o elemento precedente ocorre no m&#237;nimo <B>n</B> vezes e no
+               m&#225;ximo <B>m</B> vezes.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;|&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>combina 2 ERE's. A RE resultante &#233; verdadeira para
+               qualquer <I>string</I> que corresponda a uma das
+               sub-express&#245;es</TD>
+</TR>
+<TR><TD ALIGN="CENTER">(&nbsp;&nbsp;&nbsp;)</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=397>agrupa RE's para for&#231;ar preced&#234;ncia entre operadores
+               ou para definir um elemento mais complexo que
+               um caracter, sobre o qual pode ser aplicado algum dos
+               operadores previamente definidos.</TD>
+</TR>
+</TABLE>
+    
+    <A NAME="tab:eregexpress"></A></DIV></TD></TR>
+</TABLE>
+</DIV><P></P>
+<BR>
+
+<P>
+
+<H4><A NAME="SECTION00020010000000000000">
+OBSERVA&#199;&#213;ES:</A>
+</H4>
+
+<P>
+
+<UL>
+<LI>Observe a diferen&#231;a do significado dos s&#237;mbolos <B><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\ast$"></B> e
+  <B><IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img10.png"
+ ALT="$+$"></B>: Em BRE's, estes s&#237;mbolos se aplicam ao CARACTER
+  precedente; em ERE's eles se aplicam ao ELEMENTO, que pode ser um
+  caracter OU uma express&#227;o agrupada por par&#234;nteses.
+
+<P>
+</LI>
+<LI>Com BRE's  (comando  <B><I>grep(1)</I></B>), os  s&#237;mbolos especiais  da
+  tabela <A HREF="#tab:regexpress">1</A>  (exceto <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\ast$">) em  express&#245;es regulares
+  devem ser precedidos por <B><IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\backslash$"></B>.
+
+<P>
+Com ERE's (comando <B><I>egrep(1)</I></B>), n&#227;o se usa <B><IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\backslash$"></B>
+  nestes s&#237;mbolos especiais.
+
+<P>
+</LI>
+<LI>Operadores  de  repeti&#231;&#227;o (<B>?</B>,  <B>+</B>,  <B>*</B>,
+  <B>{&nbsp;&nbsp;}</B>) t&#234;m  preced&#234;ncia sobre concaten&#231;&#227;o de  RE's, que t&#234;m
+  preced&#234;ncia sobre operador de altern&#226;ncia (<B>&nbsp;|&nbsp;</B>).
+</LI>
+</UL>
+
+<P>
+<!--
+<H1><A NAME="SECTION00030000000000000000">
+3 Exemplos</A>
+</H1>
+
+<P>
+
+<OL>
+<LI>Considere   o  texto  abaixo,  parte  do   conte&#250;do  do  arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</FONT></B>:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+Eu vi que havia um pinheiro
+entre a janela e o mar: por quanto tempo o dinheiro
+iria isto deixar?
+Pinheiro, s&oacute;brio pinheiro,
+&eacute; tempo de navegar.
+
+Balan&ccedil;a as folhas, sacode
+teu porte esguio, natural,
+presta aten&ccedil;&atilde;o para o mote
+da destrui&ccedil;&atilde;o geral;
+balan&ccedil;a que ainda podes
+do vento colher o sal.
+
+Espalha o perfume doce
+da terra de onde tu vens,
+como se ainda fosses
+senhor dos ares que tens,
+mas reconhece, acabou-se
+a era dos tr&ecirc;s vintens.
+
+Vintens
+O que s&atilde;o m&iacute;seros vintens.
+Que olhar mais ganancioso.
+Quisera que desse moedas em um pinheirozito.
+vintens, nada mais que m&iacute;seros vintens
+Prefiro dar uma olhada
+Nas frondosas galhadas.
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+
+<OL>
+<LI>Mostre as linhas que contenham o <I>string</I> <B>vintens</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; vintens&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">a era dos tr&#234;s vintens.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">O que s&#227;o m&#237;seros vintens.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">vintens, nada mais que m&#237;seros vintens</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; -i vintens&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">a era dos tr&#234;s vintens.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Vintens</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">O que s&#227;o m&#237;seros vintens.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">vintens, nada mais que m&#237;seros vintens</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que contenham o <I>string</I> <B>nheiro</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; nheiro&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Eu vi que havia um pinheiro</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">entre a janela e o mar: por quanto tempo o dinheiro</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Pinheiro, s&#243;brio pinheiro,</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+
+
+<P>
+</LI>
+<LI>Mostre as linhas que contenham o <I>string</I> <B>lha</B> ou
+  <B>lhas</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'lhas*'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Espalha o perfume doce</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Prefiro dar uma olhada</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Nas frondosas galhadas.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que contenham palavras TERMINADAS em
+  <B>lha</B> ou  <B>lhas</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'lha<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$">'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Espalha o perfume doce</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>&nbsp;</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'lha.<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$">'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Que olhar mais ganancioso.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; 'lha.?'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Espalha o perfume doce</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Que olhar mais ganancioso.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Prefiro dar uma olhada</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Nas frondosas galhadas.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'lhas*<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$">'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Espalha o perfume doce</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; 'lhas?<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$">'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Espalha o perfume doce</FONT>
+<BR>
+   
+
+<P>
+</LI>
+<LI>Mostre as linhas que contenham as palavras <B>pinheiro</B> ou
+  <B>Pinheiro</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$">[Pp]inheiro<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\backslash&gt;$">'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Eu vi que havia um pinheiro</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Pinheiro, s&#243;brio pinheiro,</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que comecem com <B>Balan&#231;a</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '<B><FONT SIZE=3>^</FONT></B>Balan&#231;a'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que terminem com <B>ode</B> ou <B>odes</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'odes*$'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">Balan&#231;a as folhas, sacode</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">balan&#231;a que ainda podes</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que terminem com <B>ens</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; 'ens.$'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">da terra de onde tu vens,</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">senhor dos ares que tens,</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">a era dos tr&#234;s vintens.</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">vintens</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">O que s&#227;o m&#237;seros vintens.</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Mostre as linhas que tenham APENAS o <I>string</I>
+  <B>vintens</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '<B><FONT SIZE=3>^</FONT></B>vintens$'&nbsp; <FONT SIZE=3>~</FONT>ci066/Arquivos/da_janela.txt</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">vintens</FONT>
+<BR>
+  
+
+<P>
+OBS.: A express&#227;o regular acima  seleciona linhas que tenham APENAS o
+       <I>string</I> <B>vintens</B>.  A linha <B>vintens, nada
+       mais que m&#237;seros vintens</B> N&#195;O SER&#193; selecionada pelo comando.
+
+<P>
+O  motivo &#233;  que  <B><I>grep(1)</I></B> procura  por  uma seq&#252;&#234;ncia  de
+       caracteres  que  coincida com  o  padr&#227;o  indicado na  express&#227;o
+       regular.   A express&#227;o  <I>'<B><FONT SIZE=3>^</FONT></B>vintens$'</I> diz  que a
+       sequ&#234;ncia de caracteres a ser encontrada (<B>vintens</B>) deve
+       ser  precedida de in&#237;cio  de linha  e sucedida  por um  final de
+       linha.
+
+<P>
+A primeira ocorr&#234;ncia de <B>vintens</B> &#233; precedida por in&#237;cio
+       de linha,  mas n&#227;o &#233; sucedida  por final de  linha, portanto n&#227;o
+       corresponde  &#224;  express&#227;o regular.   Da  mesma  forma a  segunda
+       ocorr&#234;ncia de <B>vintens</B> &#233;  sucedida por fim de linha, mas
+       n&#227;o &#233; precedida por um  in&#237;cio de linha e tamb&#233;m n&#227;o corresponde
+       &#224; express&#227;o regular.
+
+<P>
+Na verdade,  temos 2 ocorr&#234;ncias da  palavra <B>vintens</B> na
+       linha,  mas  s&#227;o  2  <I>strings</I> distintos.   A  l&#243;gica  de
+       processamento de <B><I>grep(1)</I></B> n&#227;o &#233; visual ou sem&#226;ntica.  Este
+       comando processa  cada linha como uma seq&#252;&#234;ncia  de caracteres e
+       procura  sequencialmente  na   linha  pelo  padr&#227;o  indicado  na
+       express&#227;o regular.
+
+<P>
+</LI>
+</OL>
+
+<P>
+</LI>
+<LI>Encontrar linhas em <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/texto.lst</FONT></B> que tenham palavras
+  come&#231;adas por <B>H</B> seguida 3 letras ou mais.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$">H[a-zA-Z][a-zA-Z][a-zA-Z][a-zA-Z]*'&nbsp; <FONT SIZE=3>~</FONT>/texto.lst</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; '<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$">H[a-zA-Z][a-zA-Z][a-zA-Z]+'&nbsp; <FONT SIZE=3>~</FONT>/texto.lst</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; '<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$">H[a-zA-Z]{3,}'&nbsp; <FONT SIZE=3>~</FONT>/texto.lst</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '<IMG
+ WIDTH="31" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\backslash&lt;$">H[a-zA-Z]<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\backslash$">{3,<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\backslash$">}'&nbsp; <FONT SIZE=3>~</FONT>/texto.lst</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Encontrar linhas do arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/senhas</FONT></B> que tenham zero
+  ou mais caracteres entre <B>:</B>.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; ':.*:'&nbsp; <FONT SIZE=3>~</FONT>/senhas</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; ':.*:'&nbsp; <FONT SIZE=3>~</FONT>/senhas</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">...</FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Procure por redirecionamentos de  sa&#237;da ou entrada em seu arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '&gt;'&nbsp; <FONT SIZE=3>~</FONT>/.bashrc</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times"><I>mostra apenas linhas com redirecionamento de sa&#237;da <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img11.png"
+ ALT="$&gt;$"></I></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>egrep&nbsp;&nbsp; '<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img11.png"
+ ALT="$&gt;$"> &nbsp;|&nbsp;<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img12.png"
+ ALT="$&lt;$">'&nbsp; <FONT SIZE=3>~</FONT>/.bashrc</B></FONT>
+<BR>
+  
+
+<P>
+</LI>
+<LI>Procure em  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum7/words</FONT></B>  por palavras  que
+  tenham  as  letras  <B>a</B>, <B>e</B>,  <B>i</B>,  <B>o</B>,
+  <B>u</B>,  nesta ordem.   Elas  n&#227;o precisam  estar adjacentes,  mas
+  devem estar nesta ordem.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '[<B><FONT SIZE=3>^</FONT></B>eiou]*a[<B><FONT SIZE=3>^</FONT></B>iou]*e[<B><FONT SIZE=3>^</FONT></B>aou]*i[<B><FONT SIZE=3>^</FONT></B>aeu]*o[<B><FONT SIZE=3>^</FONT></B>aei]*u'&nbsp; <FONT SIZE=3>~</FONT>ci066/LabNum7/words</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">....</FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>grep&nbsp;&nbsp; '[<B><FONT SIZE=3>^</FONT></B>eiou]*a[<B><FONT SIZE=3>^</FONT></B>iou]*e[<B><FONT SIZE=3>^</FONT></B>ou]*i[<B><FONT SIZE=3>^</FONT></B>u]*o[a-zA-Z]*u'&nbsp; <FONT SIZE=3>~</FONT>ci066/LabNum7/words</B></FONT>
+<BR>
+    <FONT FACE="Times New Roman,Times">....</FONT>
+<BR>
+  
+
+<P>
+</LI>
+</OL>
+-->
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-11-10
+</ADDRESS>
+</BODY>
+</HTML>

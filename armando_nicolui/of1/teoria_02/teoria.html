@@ -1,0 +1,433 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 02
+2&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 02
+2&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>Notas de Aula # 02
+<BR>2&ordm;&nbsp;semestre 2003</H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Documenta&#231;&#227;o em Linux</A>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION00010010000000000000">
+Refer&#234;ncia b&#225;sica: Cap&#237;tulo 4 da Apostila Linux B&#225;sico
+  (<A
+ HREF="teoria.html#pet02a">1</A>)</A>
+</H4>
+&nbsp;
+<BR>
+<P>
+Existem duas classes de documenta&#231;&#227;o em Linux.
+
+<P>
+A  primeira  classe  cont&#233;m  documenta&#231;&#227;o referente  a  esclarecimentos
+gerais  e  de  instala&#231;&#227;o  dos  diversos programas  existentes  em  uma
+distribui&#231;&#227;o  Linux. Esta documenta&#231;&#227;o  est&#225;, geralmente,  no diret&#243;rio
+<B><FONT FACE="Helvetica, Arial, sans-serif">/usr/doc</FONT></B>. Geralmente s&#227;o mais &#250;teis aos administradores.
+
+<P>
+A  outra  classe, a  mais  importante,  cont&#233;m  as p&#225;ginas  de  manuais
+<I>on-line</I>  do UNIX.  Esta  documenta&#231;&#227;o &#233;  acess&#237;vel atrav&#233;s  do
+comando <B>man</B> e  cont&#233;m a descri&#231;&#227;o e forma  de uso dos diversos
+programas existentes em uma distribui&#231;&#227;o Unix/Linux.
+
+<P>
+O manual  <I>on-line</I> se  organiza em 9  se&#231;&#245;es (numeradas de  1 a
+9). Cada  se&#231;&#227;o agrupa manuais  referentes a um assunto  espec&#237;fico. As
+se&#231;&#245;es s&#227;o:
+
+<P>
+
+<OL>
+<LI>Programas execut&#225;veis e comandos shell
+</LI>
+<LI>Chamadas de Sistema - <I>System calls</I> - fun&#231;&#245;es para
+  programa&#231;&#227;o, disponibilizadas pelo <I>kernel</I>.
+</LI>
+<LI>Bibliotecas do Sistema - <I>Library calls</I> - fun&#231;&#245;es
+  diversas para programa&#231;&#227;o.
+</LI>
+<LI>Arquivos Especiais - geralmente encontrados no diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/dev</FONT></B>.
+</LI>
+<LI>Formatos de arquivos e conven&#231;&#245;es (e.g. /etc/passwd)
+</LI>
+<LI>Jogos
+</LI>
+<LI>Macros e conven&#231;&#245;es gerais (e.g. man(7), groff(7)).
+</LI>
+<LI>Comandos para Administra&#231;&#227;o do Sistema - geralmente utilizados
+  apenas pelo Administrador do Sistema <I>root</I>
+</LI>
+<LI>Rotinas do <I>Kernel</I> [N&#227;o &#233; padr&#227;o]
+</LI>
+</OL>
+
+<P>
+Eventualmente,  pode  existir uma  se&#231;&#227;o  adicional  de novas  p&#225;ginas,
+denominada Se&#231;&#227;o <B>n</B>.
+
+<P>
+Os   principais   comandos   para   acesso  &#224;s   p&#225;ginas   de   manuais
+<I>on-line</I> s&#227;o:
+
+<UL>
+<LI><B>man</B> acessa uma p&#225;gina de manual espec&#237;fica.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>man man</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>man 1 man</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>man 7 man</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>man 7 ascii</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>man 3 string</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+  
+
+<P>
+O comportamento <I>default</I>  do comando <B>man</B> &#233; consultar
+  as   p&#225;ginas   da   Se&#231;&#227;o   1   -  Programas   e   Comandos   (e.g.,
+  <B>man&nbsp;ls</B>&nbsp;=&nbsp;<B>man&nbsp;1&nbsp;ls</B>).
+
+<P>
+<B>ATEN&#199;&#195;O:</B>  Daqui  para   frente,  ser&#225;  utilizada  a  nota&#231;&#227;o
+  <B>comando(se&#231;&#227;o)</B> para se referir ao manual <I>on-line</I> do
+  <B>comando</B> que est&#225; na <B>se&#231;&#227;o</B> indicada.
+
+<P>
+Por exemplo,  se for  pedido para se  usar <B><I>ls(1)</I></B>, o
+  aluno dever&#225;  usar o comando  <B>man ls</B> para descobrir  sobre a
+  forma  de  uso e  op&#231;&#245;es  do  comando  <B>ls</B> para  resolver  um
+  determinado problema.
+
+<P>
+</LI>
+<LI><B>whatis</B>  busca por palavra  chave em todo o  conjunto de
+  manuais.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>whatis date</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">date (1) - print or set the system date and time</FONT><BR>
+  
+
+<P>
+</LI>
+<LI><B>apropos</B> busca por <I>string</I> em todo o conjunto de
+  manuais.
+
+<P>
+
+    <FONT FACE="Times New Roman,Times">ci066@dupond:<FONT SIZE=3>~</FONT>$&nbsp;<B>apropos date</B></FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+    <FONT FACE="Times New Roman,Times">autoreconf (1)    - update configure scripts</FONT><BR>
+    <FONT FACE="Times New Roman,Times">autoreconf2.13 (1)   - update configure scripts</FONT><BR>
+    <FONT FACE="Times New Roman,Times">autoupdate (1)       - updates an old configure.in file to version 2</FONT><BR>
+    <FONT FACE="Times New Roman,Times">autoupdate2.13 (1)   - updates an old configure.in file to version 2</FONT><BR>
+    <FONT FACE="Times New Roman,Times">cal (1)              - displays a calendar and the date of easter</FONT><BR>
+    <FONT FACE="Times New Roman,Times">catman (8)           - create or update the pre-formatted manual pages</FONT><BR>
+    <FONT FACE="Times New Roman,Times">chpasswd (8)         - update password file in batch</FONT><BR>
+    <FONT FACE="Times New Roman,Times">date (1)             - print or set the system date and time</FONT><BR>
+    <FONT FACE="Times New Roman,Times">ddate (1)            - converts Gregorian dates to Discordian dates</FONT><BR>
+    <FONT FACE="Times New Roman,Times">doupdate (3ncurses)  - refresh curses windows and lines</FONT><BR>
+    <FONT FACE="Times New Roman,Times">...</FONT><BR>
+  
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 Arquivos e &#193;rvores de Diret&#243;rios</A>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION00020010000000000000">
+Refer&#234;ncia b&#225;sica: Cap&#237;tulos 3 e 8 da Apostila Linux B&#225;sico
+  (<A
+ HREF="teoria.html#pet02a">1</A>)</A>
+</H4>
+
+<P>
+
+<UL>
+<LI>Arquivos: nota&#231;&#227;o, nomes (nomes com espa&#231;os, caracteres
+  acentuados, arquivos ocultos, substitui&#231;&#227;o de metacaracteres, aspas,
+  ap&#243;strofos e barra invertida, etc.)
+</LI>
+<LI>Diret&#243;rios
+  
+<UL>
+<LI>caminhos absolutos e relativos
+</LI>
+<LI>Nota&#231;&#227;o: <B><IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\cdot$"></B>,  <B><IMG
+ WIDTH="14" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\cdot\cdot$"></B> ,
+    <B><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\sim$"></B> e <B>$HOME</B>
+</LI>
+<LI>&#193;rvore de diret&#243;rios Linux (/usr, /bin, /etc, ...)
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00021000000000000000">
+2.1 Comandos B&#225;sicos</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Impress&#227;o de arquivos: lpr, impressora default
+</LI>
+<LI>Manipula&#231;&#227;o de diret&#243;rios: cd, pwd, mkdir, rmdir, ls
+</LI>
+<LI>Navega&#231;&#227;o rotativa em diret&#243;rios: <B><I>pushd(1)</I></B>, <B><I>popd(1)</I></B> e <B><I>dirs(1)</I></B>
+  <DL>
+<DT><STRONG>dirs <!-- MATH
+ $\lbrack  -clpv \rbrack \lbrack  +\textit{k} \rbrack \lbrack
+    -\textit{k}  \rbrack$
+ -->
+<IMG
+ WIDTH="120" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\lbrack -clpv \rbrack \lbrack +\textit{k} \rbrack \lbrack
+-\textit{k} \rbrack$"></STRONG></DT>
+<DD>Sem op&#231;&#245;es,  mostra  o  conte&#250;do  da pilha  dos
+    diret&#243;rios. Os  elementos da  pilha s&#227;o mostrados  em uma  &#250;nica linha,
+    separados  por espa&#231;os.   Diret&#243;rios s&#227;o  acrescentados &#224;  pilha  com o
+    comando  <B>pushd</B>; o  comando <B>popd</B>  remove  elementos da
+    pilha.
+    <DL>
+<DT><STRONG>+<I>k</I></STRONG></DT>
+<DD>Exibe o <I>k</I>-&#233;simo elemento da lista exibida
+      por <B>dirs</B> sem argumentos,  contando da esquerda e iniciando
+      com 0 (zero).
+    
+</DD>
+<DT><STRONG>-<I>k</I></STRONG></DT>
+<DD>Exibe o <I>k</I>-&#233;simo elemento da lista exibida
+      por <B>dirs</B>  sem argumentos, contando da  direita e iniciando
+      com 0 (zero).
+    
+</DD>
+<DT><STRONG>-c</STRONG></DT>
+<DD>Limpa a pilha de diret&#243;rios.
+    
+</DD>
+<DT><STRONG>-l</STRONG></DT>
+<DD>Produz  uma lista em que caracteres  especiais como <FONT SIZE=3>~</FONT>
+      s&#227;o expandidos.
+    
+</DD>
+<DT><STRONG>-p</STRONG></DT>
+<DD>Mostra a pilha de diret&#243;rios com um elemento por linha.
+    
+</DD>
+<DT><STRONG>-v</STRONG></DT>
+<DD>Mostra  a pilha  de diret&#243;rios com  um elemento  por linha,
+      sendo que no  in&#237;cio de cada linha &#233; indicado  o &#237;ndice do elemento
+      na pilha.
+    
+</DD>
+</DL>
+  
+</DD>
+<DT><STRONG>pushd  <!-- MATH
+ $\lbrack  -n  \rbrack  \lbrack  dir\rbrack$
+ -->
+<IMG
+ WIDTH="71" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$\lbrack -n \rbrack \lbrack dir\rbrack$"></STRONG></DT>
+<DD>&nbsp;  
+</DD>
+<DT><STRONG>pushd
+    <!-- MATH
+ $\lbrack  -n \rbrack  \lbrack -\textit{k}  \rbrack  \lbrack -\textit{k}
+    \rbrack$
+ -->
+<IMG
+ WIDTH="100" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$\lbrack -n \rbrack \lbrack -\textit{k} \rbrack \lbrack -\textit{k}
+\rbrack$"></STRONG></DT>
+<DD>Acrescenta  um diret&#243;rio ao  topo da pilha de  diret&#243;rios, ou
+    ``rotaciona'' a pilha fazendo que o diret&#243;rio no topo da pilha se torne
+    o diret&#243;rio corrente. Sem argumentos,  troca os dois diret&#243;rios do topo
+    da pilha. Os argumentos podem ser:
+    <DL>
+<DT><STRONG>+<I>k</I></STRONG></DT>
+<DD>Rotaciona a pilha  de forma que o <I>k</I>-&#233;simo
+      diret&#243;rio  (contando a  partir da  esquerda da  lista  mostrada por
+      <B>dirs</B>, iniciando em zero) fique no topo da pilha.
+    
+</DD>
+<DT><STRONG>-<I>k</I></STRONG></DT>
+<DD>Rotaciona a pilha  de forma que o <I>k</I>-&#233;simo
+      diret&#243;rio  (contando a  partir  da direita  da  lista mostrada  por
+      <B>dirs</B>, iniciando em zero) fique no topo da pilha.
+    
+</DD>
+<DT><STRONG>-n</STRONG></DT>
+<DD>Manipula apenas a pilha, n&#227;o efetuando a troca de diret&#243;rio
+      corrente.
+    
+</DD>
+<DT><STRONG>dir</STRONG></DT>
+<DD>Acrescenta  <I>dir</I> ao  topo da pilha  de diret&#243;rios,
+      tornando-o o diret&#243;rio corrente.
+    
+</DD>
+</DL>
+
+<P>
+Se o comando <B>pushd</B> &#233; bem sucedido, um comando <B>dirs</B>
+    &#233; executado em seguida, mostrando assim o estado da pilha de
+    diret&#243;rios.
+
+<P>
+</DD>
+<DT><STRONG>popd  <!-- MATH
+ $\lbrack  -n \rbrack  \lbrack  -\textit{k} \rbrack  \lbrack
+    -\textit{k}  \rbrack$
+ -->
+<IMG
+ WIDTH="100" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$\lbrack -n \rbrack \lbrack -\textit{k} \rbrack \lbrack -\textit{k}
+\rbrack$"></STRONG></DT>
+<DD>Remove  elementos  da pilha  de diret&#243;rios.  Sem
+    argumentos, remove  o elemento do  topo da pilha e  executa <B>cd</B>
+    para o novo elemento no topo da pilha.  Os argumentos podem ser:
+    <DL>
+<DT><STRONG>+<I>k</I></STRONG></DT>
+<DD>Remove  o  <I>k</I>&#233;simo  elemento  contando  a
+      partir da  esquerda da lista mostrada  por <B>dirs</B>, iniciando
+      em zero. Por exemplo:  <I>popd&nbsp;+0</I> remove o primeiro elemento,
+      <I>popd&nbsp;+1</I> o segundo.
+    
+</DD>
+<DT><STRONG>+<I>k</I></STRONG></DT>
+<DD>Remove  o <I>k</I>&#233;simo  elemento contando  a
+      partir da direita da lista mostrada por <B>dirs</B>, iniciando em
+      zero. Por  exemplo: <I>popd&nbsp;-0</I>  remove o &#250;ltimo  diret&#243;rio na
+      pilha, <I>popd&nbsp;-1</I> o anterior ao &#250;ltimo.
+    
+</DD>
+<DT><STRONG>-n</STRONG></DT>
+<DD>Manipula apenas a pilha, n&#227;o efetuando a troca de diret&#243;rio
+      corrente.
+    
+</DD>
+</DL>
+
+<P>
+Se o comando <B>popd</B> &#233; bem sucedido, um comando <B>dirs</B> &#233;
+    executado  em   seguida,  mostrando  assim  o  estado   da  pilha  de
+    diret&#243;rios.
+  
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>Manipula&#231;&#227;o de arquivos: cp, mv, rm
+</LI>
+<LI>Caracteres especiais: <IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img1.png"
+ ALT="$\sim$"> &nbsp;&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$\cdot$"> &nbsp;&nbsp;&nbsp;&nbsp;<IMG
+ WIDTH="14" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img3.png"
+ ALT="$\cdot\cdot$">
+</LI>
+<LI>Copiar arquivos em disquete nos Laborat&#243;rios do DInf: ftp,
+  <A NAME="tex2html1"
+  HREF="../../../FAQS-DINF/floppy-drives">FAQ sobre disquete</A>
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Conclus&#245;es</A>
+</H1>
+Trazer disquetes para a proxima aula
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="pet02a">1</A>
+<DD>
+PET Inform&#225;tica.
+<BR> Linux B&#225;sico.
+<BR> UFPR, Outubro 2002.
+<BR> URL <TT>http://pet.inf.ufpr.br/&nbsp;daniel/LinuxBasico.pdf</TT>.
+
+<BR>
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-10-21
+</ADDRESS>
+</BODY>
+</HTML>

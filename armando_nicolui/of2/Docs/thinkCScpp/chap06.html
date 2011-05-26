@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 6: Iteration</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap07.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap05.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 6</h2>
+
+<h1>Iteration</h1>
+
+
+<a name=1></a><br>
+<h3>6.1 Multiple assignment</h3>
+
+<p>I haven't said much about it, but it is legal in C++ to make more than one assignment to the same variable.  The effect of the second assignment is to replace the old value of the variable with a new value.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> fred = 5;
+<br>&nbsp; cout &lt;&lt; fred;
+<br>&nbsp; fred = 7;
+<br>&nbsp; cout &lt;&lt; fred;
+<br></span><p>The output of this program is <span class=code>57</span>, because the first time we print <span class=code>fred</span> his value is 5, and the second time his value is 7.</p>
+
+<p>This kind of <b>multiple assignment</b> is the reason I described variables as a <i>container</i> for values.  When you assign a value to a variable, you change the contents of the container, as shown in the figure:</p>
+
+<p align="center"><img src="images/assign2.png"></p>
+
+<p>When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality.  Because C++ uses the <span class=code>=</span> symbol for assignment, it is tempting to interpret a statement like <span class=code>a = b</span> as a statement of equality.  It is not!</p>
+
+<p>First of all, equality is commutative, and assignment is not. For example, in mathematics if <tt>a = 7</tt> then <tt>7 = a</tt>.  But in C++ the statement <span class=code>a = 7;</span> is legal, and <span class=code>7 = a;</span> is not.</p>
+
+<p>Furthermore, in mathematics, a statement of equality is true for all time.  If <tt>a = b</tt> now, then <tt>a</tt> will always equal <tt>b</tt>. In C++, an assignment statement can make two variables equal, but they don't have to stay that way!</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> a = 5;
+<br>&nbsp; <span class=keyword>int</span> b = a;&nbsp; &nbsp; &nbsp;<span class=comment>// a and b are now equal
+</span><br>&nbsp; a = 3;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// a and b are no longer equal
+</span><br></span><p>The third line changes the value of <span class=code>a</span> but it does not change the value of <span class=code>b</span>, and so they are no longer equal. In many programming languages an alternate symbol is used for assignment, such as <span class=code>&lt;-</span> or <span class=code>:=</span>, in order to avoid confusion.</p>
+
+<p>Although multiple assignment is frequently useful, you should use it with caution.  If the values of variables are changing constantly in different parts of the program, it can make the code difficult to read and debug.</p>
+
+<a name=2></a><br>
+<h3>6.2 Iteration</h3>
+
+<p>One of the things computers are often used for is the automation of repetitive tasks.  Repeating identical or similar tasks without making errors is something that computers do well and people do poorly.</p>
+
+<p>We have seen programs that use recursion to perform repetition, such as <span class=code>nLines</span> and <span class=code>countdown</span>.  This type of repetition is called <b>iteration</b>, and C++ provides several language features that make it easier to write iterative programs.</p>
+
+<p>The two features we are going to look at are the <span class=code><span class=keyword>while</span></span> statement and the <span class=code><span class=keyword>for</span></span> statement.</p>
+
+<a name=3></a><br>
+<h3>6.3 The <span class=code><span class=keyword>while</span></span> statement</h3>
+
+<p>Using a <span class=code><span class=keyword>while</span></span> statement, we can rewrite <span class=code>countdown</span>:</p>
+
+
+<span class=code><span class=keyword>void</span> countdown (<span class=keyword>int</span> n) {
+<br>&nbsp; <span class=keyword>while</span> (n &gt; 0) {
+<br>&nbsp; &nbsp; cout &lt;&lt; n &lt;&lt; endl;
+<br>&nbsp; &nbsp; n = n-1;
+<br>&nbsp; }
+<br>&nbsp; cout &lt;&lt; <span class=quote>"Blastoff!"</span> &lt;&lt; endl;
+<br>}
+<br></span><p>You can almost read a <span class=code><span class=keyword>while</span></span> statement as if it were English.  What this means is, "While <span class=code>n</span> is greater than zero, continue displaying the value of <span class=code>n</span> and then reducing the value of <span class=code>n</span> by 1.  When you get to zero, output the word `Blastoff!"'</p>
+
+<p>More formally, the flow of execution for a <span class=code><span class=keyword>while</span></span> statement is as follows:</p>
+
+<ol>
+
+<li>Evaluate the condition in parentheses, yielding <span class=code><span class=keyword>true</span></span> or <span class=code><span class=keyword>false</span></span>.</li>
+
+<li>If the condition is false, exit the <span class=code><span class=keyword>while</span></span> statement and continue execution at the next statement.</li>
+
+<li>If the condition is true, execute each of the statements between the squiggly-braces, and then go back to step 1.</li>
+
+</ol>
+
+<p>This type of flow is called a <b>loop</b> because the third step loops back around to the top.  Notice that if the condition is false the first time through the loop, the statements inside the loop are never executed.  The statements inside the loop are called the <b>body</b> of the loop.</p>
+
+
+
+<p>The body of the loop should change the value of one or more variables so that, eventually, the condition becomes false and the loop terminates.  Otherwise the loop will repeat forever, which is called an <b>infinite loop</b>.  An endless source of amusement for computer scientists is the observation that the directions on shampoo, "Lather, rinse, repeat," are an infinite loop.</p>
+
+<p>In the case of <span class=code>countdown</span>, we can prove that the loop will terminate because we know that the value of <span class=code>n</span> is finite, and we can see that the value of <span class=code>n</span> gets smaller each time through the loop (each <b>iteration</b>), so eventually we have to get to zero.  In other cases it is not so easy to tell:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>void</span> sequence (<span class=keyword>int</span> n) {
+<br>&nbsp; &nbsp; <span class=keyword>while</span> (n != 1) {
+<br>&nbsp; &nbsp; &nbsp; cout &lt;&lt; n &lt;&lt; endl;
+<br>&nbsp; &nbsp; &nbsp; <span class=keyword>if</span> (n%2 == 0) {&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// n is even
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; n = n / 2;
+<br>&nbsp; &nbsp; &nbsp; } <span class=keyword>else</span> {&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class=comment>// n is odd
+</span><br>&nbsp; &nbsp; &nbsp; &nbsp; n = n*3 + 1;
+<br>&nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br></span><p>The condition for this loop is <span class=code>n != 1</span>, so the loop will continue until <span class=code>n</span> is 1, which will make the condition false.</p>
+
+<p>At each iteration, the program outputs the value of <span class=code>n</span> and then checks whether it is even or odd.  If it is even, the value of <span class=code>n</span> is divided by two.  If it is odd, the value is replaced by <tt>3n+1</tt>.  For example, if the starting value (the argument passed to <span class=code>sequence</span>) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.</p>
+
+<p>Since <span class=code>n</span> sometimes increases and sometimes decreases, there is no obvious proof that <span class=code>n</span> will ever reach 1, or that the program will terminate.  For some particular values of <span class=code>n</span>, we can prove termination.  For example, if the starting value is a power of two, then the value of <span class=code>n</span> will be even every time through the loop, until we get to 1.  The previous example ends with such a sequence, starting with 16.</p>
+
+<p>Particular values aside, the interesting question is whether we can prove that this program terminates for <i>all</i> values of n. So far, no one has been able to prove it <i>or</i> disprove it!</p>
+
+<a name=4></a><br>
+<h3>6.4 Tables</h3>
+
+<p>One of the things loops are good for is generating tabular data.  For example, before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand. To make that easier, there were books containing long tables where you could find the values of various functions. Creating these tables was slow and boring, and the result tended to be full of errors.</p>
+
+<p>When computers appeared on the scene, one of the initial reactions was, "This is great!  We can use the computers to generate the tables, so there will be no errors."  That turned out to be true (mostly), but shortsighted.  Soon thereafter computers and calculators were so pervasive that the tables became obsolete.</p>
+
+<p>Well, almost.  It turns out that for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation.  In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division.</p>
+
+
+
+<p>Although a "log table" is not as useful as it once was, it still makes a good example of iteration.  The following program outputs a sequence of values in the left column and their logarithms in the right column:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> x = 1.0;
+<br>&nbsp; <span class=keyword>while</span> (x &lt; 10.0) {
+<br>&nbsp; &nbsp; cout &lt;&lt; x &lt;&lt; <span class=quote>"\t"</span> &lt;&lt; log(x) &lt;&lt; <span class=quote>"\n"</span>;
+<br>&nbsp; &nbsp; x = x + 1.0;
+<br>&nbsp; }
+<br></span><p>The sequence \verb+\t+ represents a <b>tab</b> character. The sequence \verb+\n+ represents a newline character.  These sequences can be included anywhere in a string, although in these examples the sequence is the whole string.</p>
+
+<p>A tab character causes the cursor to shift to the right until it reaches one of the <b>tab stops</b>, which are normally every eight characters.  As we will see in a minute, tabs are useful for making columns of text line up.</p>
+
+<p>A newline character has exactly the same effect as <span class=code>endl</span>; it causes the cursor to move on to the next line.  Usually if a newline character appears by itself, I use <span class=code>endl</span>, but if it appears as part of a string, I use \verb+\n+.</p>
+
+<p>The output of this program is</p>
+
+
+<span class=code>1&nbsp; &nbsp; &nbsp; 0
+<br>2&nbsp; &nbsp; &nbsp; 0.693147
+<br>3&nbsp; &nbsp; &nbsp; 1.09861
+<br>4&nbsp; &nbsp; &nbsp; 1.38629
+<br>5&nbsp; &nbsp; &nbsp; 1.60944
+<br>6&nbsp; &nbsp; &nbsp; 1.79176
+<br>7&nbsp; &nbsp; &nbsp; 1.94591
+<br>8&nbsp; &nbsp; &nbsp; 2.07944
+<br>9&nbsp; &nbsp; &nbsp; 2.19722
+<br></span><p>If these values seem odd, remember that the <span class=code>log</span> function uses base <tt>e</tt>.  Since powers of two are so important in computer science, we often want to find logarithms with respect to base 2.  To do that, we can use the following formula:</p>
+
+<p>\[ \log_2 x = \frac {log_e x}{log_e 2} \]</p>
+
+<p>Changing the output statement to</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; cout &lt;&lt; x &lt;&lt; <span class=quote>"\t"</span> &lt;&lt; log(x) / log(2.0) &lt;&lt; endl;
+<br></span><p>yields</p>
+
+
+<span class=code>1&nbsp; &nbsp; &nbsp; 0
+<br>2&nbsp; &nbsp; &nbsp; 1
+<br>3&nbsp; &nbsp; &nbsp; 1.58496
+<br>4&nbsp; &nbsp; &nbsp; 2
+<br>5&nbsp; &nbsp; &nbsp; 2.32193
+<br>6&nbsp; &nbsp; &nbsp; 2.58496
+<br>7&nbsp; &nbsp; &nbsp; 2.80735
+<br>8&nbsp; &nbsp; &nbsp; 3
+<br>9&nbsp; &nbsp; &nbsp; 3.16993
+<br></span><p>We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2 are round numbers.  If we wanted to find the logarithms of other powers of two, we could modify the program like this:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>double</span> x = 1.0;
+<br>&nbsp; <span class=keyword>while</span> (x &lt; 100.0) {
+<br>&nbsp; &nbsp; cout &lt;&lt; x &lt;&lt; <span class=quote>"\t"</span> &lt;&lt; log(x) / log(2.0) &lt;&lt; endl;
+<br>&nbsp; &nbsp; x = x * 2.0;
+<br>&nbsp; }
+<br></span><p>Now instead of adding something to <span class=code>x</span> each time through the loop, which yields an arithmetic sequence, we multiply <span class=code>x</span> by something, yielding a <b>geometric</b> sequence. The result is:</p>
+
+
+<span class=code>1&nbsp; &nbsp; &nbsp; 0
+<br>2&nbsp; &nbsp; &nbsp; 1
+<br>4&nbsp; &nbsp; &nbsp; 2
+<br>8&nbsp; &nbsp; &nbsp; 3
+<br>16&nbsp; &nbsp; &nbsp;4
+<br>32&nbsp; &nbsp; &nbsp;5
+<br>64&nbsp; &nbsp; &nbsp;6
+<br></span><p>Because we are using tab characters between the columns, the position of the second column does not depend on the number of digits in the first column.</p>
+
+<p>Log tables may not be useful any more, but for computer scientists, knowing the powers of two is!  As an exercise, modify this program so that it outputs the powers of two up to 65536 (that's <tt>2<sup>16</sup></tt>).  Print it out and memorize it.</p>
+
+<a name=5></a><br>
+<h3>6.5 Two-dimensional tables</h3>
+
+<p>A two-dimensional table is a table where you choose a row and a column and read the value at the intersection.  A multiplication table is a good example.  Let's say you wanted to print a multiplication table for the values from 1 to 6.</p>
+
+<p>A good way to start is to write a simple loop that prints the multiples of 2, all on one line.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= 6) {
+<br>&nbsp; &nbsp; cout &lt;&lt; 2*i &lt;&lt; <span class=quote>"&nbsp; &nbsp;"</span>;
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>&nbsp; cout &lt;&lt; endl;
+<br></span><p>The first line initializes a variable named <span class=code>i</span>, which is going to act as a counter, or <b>loop variable</b>.  As the loop executes, the value of <span class=code>i</span> increases from 1 to 6, and then when <span class=code>i</span> is 7, the loop terminates.  Each time through the loop, we print the value <span class=code>2*i</span> followed by three spaces.  By omitting the <span class=code>endl</span> from the first output statement, we get all the output on a single line.</p>
+
+
+
+<p>The output of this program is:</p>
+
+
+<span class=code>2&nbsp; &nbsp;4&nbsp; &nbsp;6&nbsp; &nbsp;8&nbsp; &nbsp;10&nbsp; &nbsp;12
+<br></span><p>So far, so good.  The next step is to <b>encapsulate</b> and <b>generalize</b>.</p>
+
+<a name=6></a><br>
+<h3>6.6 Encapsulation and generalization</h3>
+
+<p>Encapsulation usually means taking a piece of code and wrapping it up in a function, allowing you to take advantage of all the things functions are good for.  We have seen two examples of encapsulation, when we wrote <span class=code>printParity</span> in <a href="chap04.htm#3">Section 4.3</a> and <span class=code>isSingleDigit</span> in <a href="chap05.htm#8">Section 5.8</a>.</p>
+
+<p>Generalization means taking something specific, like printing multiples of 2, and making it more general, like printing the multiples of any integer.</p>
+
+
+
+<p>Here's a function that encapsulates the loop from the previous section and generalizes it to print multiples of <span class=code>n</span>.</p>
+
+
+<span class=code><span class=keyword>void</span> printMultiples (<span class=keyword>int</span> n)
+<br>{
+<br>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= 6) {
+<br>&nbsp; &nbsp; cout &lt;&lt; n*i &lt;&lt; <span class=quote>"&nbsp; &nbsp;"</span>;
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>&nbsp; cout &lt;&lt; endl;
+<br>}
+<br></span><p>To encapsulate, all I had to do was add the first line, which declares the name, parameter, and return type.  To generalize, all I had to do was replace the value 2 with the parameter <span class=code>n</span>.</p>
+
+<p>If we call this function with the argument 2, we get the same output as before.  With argument 3, the output is:</p>
+
+
+<span class=code>3&nbsp; &nbsp;6&nbsp; &nbsp;9&nbsp; &nbsp;12&nbsp; &nbsp;15&nbsp; &nbsp;18
+<br></span><p>and with argument 4, the output is</p>
+
+
+<span class=code>4&nbsp; &nbsp;8&nbsp; &nbsp;12&nbsp; &nbsp;16&nbsp; &nbsp;20&nbsp; &nbsp;24
+<br></span><p>By now you can probably guess how we are going to print a multiplication table: we'll call <span class=code>printMultiples</span> repeatedly with different arguments.  In fact, we are going to use another loop to iterate through the rows.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= 6) {
+<br>&nbsp; &nbsp; printMultiples (i);
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br></span><p>First of all, notice how similar this loop is to the one inside <span class=code>printMultiples</span>.  All I did was replace the print statement with a function call.</p>
+
+<p>The output of this program is</p>
+
+
+<span class=code>1&nbsp; &nbsp;2&nbsp; &nbsp;3&nbsp; &nbsp;4&nbsp; &nbsp;5&nbsp; &nbsp;6
+<br>2&nbsp; &nbsp;4&nbsp; &nbsp;6&nbsp; &nbsp;8&nbsp; &nbsp;10&nbsp; &nbsp;12
+<br>3&nbsp; &nbsp;6&nbsp; &nbsp;9&nbsp; &nbsp;12&nbsp; &nbsp;15&nbsp; &nbsp;18
+<br>4&nbsp; &nbsp;8&nbsp; &nbsp;12&nbsp; &nbsp;16&nbsp; &nbsp;20&nbsp; &nbsp;24
+<br>5&nbsp; &nbsp;10&nbsp; &nbsp;15&nbsp; &nbsp;20&nbsp; &nbsp;25&nbsp; &nbsp;30
+<br>6&nbsp; &nbsp;12&nbsp; &nbsp;18&nbsp; &nbsp;24&nbsp; &nbsp;30&nbsp; &nbsp;36
+<br></span><p>which is a (slightly sloppy) multiplication table.  If the sloppiness bothers you, try replacing the spaces between columns with tab characters and see what you get.</p>
+
+<a name=7></a><br>
+<h3>6.7 Functions</h3>
+
+<p>In the last section I mentioned "all the things functions are good for."  About this time, you might be wondering what exactly those things are.  Here are some of the reasons functions are useful:</p>
+
+<ul>
+
+<li>By giving a name to a sequence of statements, you make your program easier to read and debug.</li>
+
+<li>Dividing a long program into functions allows you to separate parts of the program, debug them in isolation, and then compose them into a whole.</li>
+
+<li>Functions facilitate both recursion and iteration.</li>
+
+<li>Well-designed functions are often useful for many programs. Once you write and debug one, you can reuse it.</li>
+
+</ul>
+
+<a name=8></a><br>
+<h3>6.8 More encapsulation</h3>
+
+<p>To demonstrate encapsulation again, I'll take the code from the previous section and wrap it up in a function:</p>
+
+
+<span class=code><span class=keyword>void</span> printMultTable () {
+<br>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= 6) {
+<br>&nbsp; &nbsp; printMultiples (i);
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>The process I am demonstrating is a common development plan.  You develop code gradually by adding lines to <span class=code>main</span> or someplace else, and then when you get it working, you extract it and wrap it up in a function.</p>
+
+<p>The reason this is useful is that you sometimes don't know when you start writing exactly how to divide the program into functions.  This approach lets you design as you go along.</p>
+
+<a name=9></a><br>
+<h3>6.9 Local variables</h3>
+
+<p>About this time, you might be wondering how we can use the same variable <span class=code>i</span> in both <span class=code>printMultiples</span> and <span class=code>printMultTable</span>.  Didn't I say that you can only declare a variable once?  And doesn't it cause problems when one of the functions changes the value of the variable?</p>
+
+<p>The answer to both questions is "no," because the <span class=code>i</span> in <span class=code>printMultiples</span> and the <span class=code>i</span> in <span class=code>printMultTable</span> are <i>not the same variable</i>.  They have the same name, but they do not refer to the same storage location, and changing the value of one of them has no effect on the other.</p>
+
+
+
+<p>Remember that variables that are declared inside a function definition are local.  You cannot access a local variable from outside its "home" function, and you are free to have multiple variables with the same name, as long as they are not in the same function.</p>
+
+<p>The stack diagram for this program shows clearly that the two variables named <span class=code>i</span> are not in the same storage location. They can have different values, and changing one does not affect the other.</p>
+
+<p align="center"><img src="images/stack4.png"></p>
+
+<p>Notice that the value of the parameter <span class=code>n</span> in <span class=code>printMultiples</span> has to be the same as the value of <span class=code>i</span> in <span class=code>printMultTable</span>.  On the other hand, the value of <span class=code>i</span> in <span class=code>printMultiple</span> goes from 1 up to <span class=code>n</span>.  In the diagram, it happens to be 3. The next time through the loop it will be 4.</p>
+
+<p>It is often a good idea to use different variable names in different functions, to avoid confusion, but there are good reasons to reuse names.  For example, it is common to use the names <span class=code>i</span>, <span class=code>j</span> and <span class=code>k</span> as loop variables. If you avoid using them in one function just because you used them somewhere else, you will probably make the program harder to read.</p>
+
+
+
+<a name=10></a><br>
+<h3>6.10 More generalization</h3>
+
+<p>As another example of generalization, imagine you wanted a program that would print a multiplication table of any size, not just the 6x6 table.  You could add a parameter to <span class=code>printMultTable</span>:</p>
+
+
+<span class=code><span class=keyword>void</span> printMultTable (<span class=keyword>int</span> high) {
+<br>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= high) {
+<br>&nbsp; &nbsp; printMultiples (i);
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>I replaced the value 6 with the parameter <span class=code>high</span>.  If I call <span class=code>printMultTable</span> with the argument 7, I get</p>
+
+
+<span class=code>1&nbsp; &nbsp;2&nbsp; &nbsp;3&nbsp; &nbsp;4&nbsp; &nbsp;5&nbsp; &nbsp;6
+<br>2&nbsp; &nbsp;4&nbsp; &nbsp;6&nbsp; &nbsp;8&nbsp; &nbsp;10&nbsp; &nbsp;12
+<br>3&nbsp; &nbsp;6&nbsp; &nbsp;9&nbsp; &nbsp;12&nbsp; &nbsp;15&nbsp; &nbsp;18
+<br>4&nbsp; &nbsp;8&nbsp; &nbsp;12&nbsp; &nbsp;16&nbsp; &nbsp;20&nbsp; &nbsp;24
+<br>5&nbsp; &nbsp;10&nbsp; &nbsp;15&nbsp; &nbsp;20&nbsp; &nbsp;25&nbsp; &nbsp;30
+<br>6&nbsp; &nbsp;12&nbsp; &nbsp;18&nbsp; &nbsp;24&nbsp; &nbsp;30&nbsp; &nbsp;36
+<br>7&nbsp; &nbsp;14&nbsp; &nbsp;21&nbsp; &nbsp;28&nbsp; &nbsp;35&nbsp; &nbsp;42
+<br></span><p>which is fine, except that I probably want the table to be square (same number of rows and columns), which means I have to add another parameter to <span class=code>printMultiples</span>, to specify how many columns the table should have.</p>
+
+<p>Just to be annoying, I will also call this parameter <span class=code>high</span>, demonstrating that different functions can have parameters with the same name (just like local variables):</p>
+
+
+<span class=code><span class=keyword>void</span> printMultiples (<span class=keyword>int</span> n, <span class=keyword>int</span> high) {
+<br>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= high) {
+<br>&nbsp; &nbsp; cout &lt;&lt; n*i &lt;&lt; <span class=quote>"&nbsp; &nbsp;"</span>;
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>&nbsp; cout &lt;&lt; endl;
+<br>}
+<br>
+<br><span class=keyword>void</span> printMultTable (<span class=keyword>int</span> high) {
+<br>&nbsp; <span class=keyword>int</span> i = 1;
+<br>&nbsp; <span class=keyword>while</span> (i &lt;= high) {
+<br>&nbsp; &nbsp; printMultiples (i, high);
+<br>&nbsp; &nbsp; i = i + 1;
+<br>&nbsp; }
+<br>}
+<br></span><p>Notice that when I added a new parameter, I had to change the first line of the function (the interface or prototype), and I also had to change the place where the function is called in <span class=code>printMultTable</span>. As expected, this program generates a square 7x7 table:</p>
+
+
+<span class=code>1&nbsp; &nbsp;2&nbsp; &nbsp;3&nbsp; &nbsp;4&nbsp; &nbsp;5&nbsp; &nbsp;6&nbsp; &nbsp;7
+<br>2&nbsp; &nbsp;4&nbsp; &nbsp;6&nbsp; &nbsp;8&nbsp; &nbsp;10&nbsp; &nbsp;12&nbsp; &nbsp;14
+<br>3&nbsp; &nbsp;6&nbsp; &nbsp;9&nbsp; &nbsp;12&nbsp; &nbsp;15&nbsp; &nbsp;18&nbsp; &nbsp;21
+<br>4&nbsp; &nbsp;8&nbsp; &nbsp;12&nbsp; &nbsp;16&nbsp; &nbsp;20&nbsp; &nbsp;24&nbsp; &nbsp;28
+<br>5&nbsp; &nbsp;10&nbsp; &nbsp;15&nbsp; &nbsp;20&nbsp; &nbsp;25&nbsp; &nbsp;30&nbsp; &nbsp;35
+<br>6&nbsp; &nbsp;12&nbsp; &nbsp;18&nbsp; &nbsp;24&nbsp; &nbsp;30&nbsp; &nbsp;36&nbsp; &nbsp;42
+<br>7&nbsp; &nbsp;14&nbsp; &nbsp;21&nbsp; &nbsp;28&nbsp; &nbsp;35&nbsp; &nbsp;42&nbsp; &nbsp;49
+<br></span><p>When you generalize a function appropriately, you often find that the resulting program has capabilities you did not intend. For example, you might notice that the multiplication table is symmetric, because <tt>ab = ba</tt>, so all the entries in the table appear twice.  You could save ink by printing only half the table.  To do that, you only have to change one line of <span class=code>printMultTable</span>.  Change</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; printMultiples (i, high);
+<br></span><p>to</p>
+
+
+<span class=code>&nbsp; &nbsp; &nbsp; printMultiples (i, i);
+<br></span><p>and you get</p>
+
+
+<span class=code>1
+<br>2&nbsp; &nbsp;4
+<br>3&nbsp; &nbsp;6&nbsp; &nbsp;9
+<br>4&nbsp; &nbsp;8&nbsp; &nbsp;12&nbsp; &nbsp;16
+<br>5&nbsp; &nbsp;10&nbsp; &nbsp;15&nbsp; &nbsp;20&nbsp; &nbsp;25
+<br>6&nbsp; &nbsp;12&nbsp; &nbsp;18&nbsp; &nbsp;24&nbsp; &nbsp;30&nbsp; &nbsp;36
+<br>7&nbsp; &nbsp;14&nbsp; &nbsp;21&nbsp; &nbsp;28&nbsp; &nbsp;35&nbsp; &nbsp;42&nbsp; &nbsp;49
+<br></span><p>I'll leave it up to you to figure out how it works.</p>
+
+<a name=11></a><br>
+<h3>6.11 Glossary</h3>
+
+<dl>
+
+<dt>loop</dt>
+<dd>A statement that executes repeatedly while a condition is true or until some condition is satisfied.</dd>
+
+<dt>infinite loop</dt>
+<dd>A loop whose condition is always true.</dd>
+
+<dt>body</dt>
+<dd>The statements inside the loop.</dd>
+
+<dt>iteration</dt>
+<dd>One pass through (execution of) the body of the loop, including the evaluation of the condition.</dd>
+
+<dt>tab</dt>
+<dd>A special character, written as </dd>\verb+\t+ in C++, that causes the cursor to move to the next tab stop on the current line.
+
+<dt>encapsulate</dt>
+<dd>To divide a large complex program into components (like functions) and isolate the components from each other (for example, by using local variables).</dd>
+
+<dt>local variable</dt>
+<dd>A variable that is declared inside a function and that exists only within that function.  Local variables cannot be accessed from outside their home function, and do not interfere with any other functions.</dd>
+
+<dt>generalize</dt>
+<dd>To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).  Generalization makes code more versatile, more likely to be reused, and sometimes even easier to write.</dd>
+
+<dt>development plan</dt>
+<dd>A process for developing a program. In this chapter, I demonstrated a style of development based on developing code to do simple, specific things, and then encapsulating and generalizing.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap07.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap05.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

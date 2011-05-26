@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Chapter 13: Objects of Vectors</title>
+
+<style type="text/css">
+<!--
+body {background-color: white; color: black;}
+a {background-color: white; color: blue; text-decoration: underline;}
+a:hover {text-decoration: none;}
+td.head,td.headcenter {background-color: #99ccff; color: black;}
+td.headcenter {width: 100%; text-align: center;}
+img {border-style: none;}
+-->
+</style>
+
+
+<style type="text/css">
+<!--
+.code {font-family: Courier; font-size: 85%;}
+.keyword {color: #0000ff;}
+.comment {color: #008000;}
+.quote {color: #ff0000;}
+.function {color: #0000ff;}
+-->
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap14.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap12.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+
+<h2>Chapter 13</h2>
+
+<h1>Objects of Vectors</h1>
+
+
+<a name=1></a><br>
+<h3>13.1 Enumerated types</h3>
+
+<p>In the previous chapter I talked about mappings between real-world values like rank and suit, and internal representations like integers and strings.  Although we created a mapping between ranks and integers, and between suits and integers, I pointed out that the mapping itself does not appear as part of the program.</p>
+
+<p>Actually, C++ provides a feature called and <b>enumerated type</b> that makes it possible to (1) include a mapping as part of the program, and (2) define the set of values that make up the mapping.  For example, here is the definition of the enumerated types <span class=code>Suit</span> and <span class=code>Rank</span>:</p>
+
+
+<span class=code><span class=keyword>enum</span> Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
+<br>
+<br><span class=keyword>enum</span> Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE,
+<br>TEN, JACK, QUEEN, KING };
+<br></span><p>By default, the first value in the enumerated type maps to 0, the second to 1, and so on.  Within the <span class=code>Suit</span> type, the value <span class=code>CLUBS</span> is represented by the integer 0, <span class=code>DIAMONDS</span> is represented by 1, etc.</p>
+
+<p>The definition of <span class=code>Rank</span> overrides the default mapping and specifies that <span class=code>ACE</span> should be represented by the integer 1. The other values follow in the usual way.</p>
+
+<p>Once we have defined these types, we can use them anywhere.  For example, the instance variables <span class=code>rank</span> and <span class=code>suit</span> are can be declared with type <span class=code>Rank</span> and <span class=code>Suit</span>:</p>
+
+
+<span class=code><span class=keyword>struct</span> Card
+<br>{
+<br>&nbsp; Rank rank;
+<br>&nbsp; Suit suit;
+<br>
+<br>&nbsp; Card (Suit s, Rank r);
+<br>};
+<br></span><p>That the types of the parameters for the constructor have changed, too.  Now, to create a card, we can use the values from the enumerated type as arguments:</p>
+
+
+<span class=code>&nbsp; Card card (DIAMONDS, JACK);
+<br></span><p>By convention, the values in enumerated types have names with all capital letters.  This code is much clearer than the alternative using integers:</p>
+
+
+<span class=code>&nbsp; Card card (1, 11);
+<br></span><p>Because we know that the values in the enumerated types are represented as integers, we can use them as indices for a vector. Therefore the old <span class=code>print</span> function will work without modification.  We have to make some changes in <span class=code>buildDeck</span>, though:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>int</span> index = 0;
+<br>&nbsp; <span class=keyword>for</span> (Suit suit = CLUBS; suit &lt;= SPADES; suit = Suit(suit+1)) {
+<br>&nbsp; &nbsp; <span class=keyword>for</span> (Rank rank = ACE; rank &lt;= KING; rank = Rank(rank+1)) {
+<br>&nbsp; &nbsp; &nbsp; deck[index].suit = suit;
+<br>&nbsp; &nbsp; &nbsp; deck[index].rank = rank;
+<br>&nbsp; &nbsp; &nbsp; index++;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br></span><p>In some ways, using enumerated types makes this code more readable, but there is one complication.  Strictly speaking, we are not allowed to do arithmetic with enumerated types, so <span class=code>suit++</span> is not legal.  On the other hand, in the expression <span class=code>suit+1</span>, C++ automatically converts the enumerated type to integer.  Then we can take the result and typecast it back to the enumerated type:</p>
+
+
+<span class=code>&nbsp; suit = Suit(suit+1);
+<br>&nbsp; rank = Rank(rank+1);
+<br></span><p>Actually, there is a better way to do this---we can define the <span class=code>++</span> operator for enumerated types---but that is beyond the scope of this book.</p>
+
+<a name=2></a><br>
+<h3>13.2 <span class=code><span class=keyword>switch</span></span> statement</h3>
+
+<p>It's hard to mention enumerated types without mentioning <span class=code><span class=keyword>switch</span></span> statements, because they often go hand in hand.  A <span class=code><span class=keyword>switch</span></span> statement is an alternative to a chained conditional that is syntactically prettier and often more efficient.  It looks like this:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>switch</span> (symbol) {
+<br>&nbsp; <span class=keyword>case</span> <span class=quote>'+'</span>:
+<br>&nbsp; &nbsp; perform_addition ();
+<br>&nbsp; &nbsp; <span class=keyword>break</span>;
+<br>&nbsp; <span class=keyword>case</span> <span class=quote>'*'</span>:
+<br>&nbsp; &nbsp; perform_multiplication ();
+<br>&nbsp; &nbsp; <span class=keyword>break</span>;
+<br>&nbsp; <span class=keyword>default</span>:
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"I only know how to perform addition and multiplication"</span> &lt;&lt; endl;
+<br>&nbsp; &nbsp; <span class=keyword>break</span>;
+<br>&nbsp; }
+<br></span><p>This <span class=code><span class=keyword>switch</span></span> statement is equivalent to the following chained conditional:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>if</span> (symbol == <span class=quote>'+'</span>) {
+<br>&nbsp; &nbsp; perform_addition ();
+<br>&nbsp; } <span class=keyword>else if</span> (symbol == <span class=quote>'*'</span>) {
+<br>&nbsp; &nbsp; perform_multiplication ();
+<br>&nbsp; } <span class=keyword>else</span> {
+<br>&nbsp; &nbsp; cout &lt;&lt; <span class=quote>"I only know how to perform addition and multiplication"</span> &lt;&lt; endl;
+<br>&nbsp; }
+<br></span><p>The <span class=code><span class=keyword>break</span></span> statements are necessary in each branch in a <span class=code><span class=keyword>switch</span></span> statement because otherwise the flow of execution "falls through" to the next case.  Without the <span class=code><span class=keyword>break</span></span> statements, the symbol <span class=code>+</span> would make the program perform addition, and then perform multiplication, and then print the error message. Occasionally this feature is useful, but most of the time it is a source of errors when people forget the <span class=code><span class=keyword>break</span></span> statements.</p>
+
+
+
+<p><span class=code><span class=keyword>switch</span></span> statements work with integers, characters, and enumerated \mbox{types}.  For example, to convert a <span class=code>Suit</span> to the corresponding string, we could use something like:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>switch</span> (suit) {
+<br>&nbsp; <span class=keyword>case</span> CLUBS:&nbsp; &nbsp; &nbsp;<span class=keyword>return</span> <span class=quote>"Clubs"</span>;
+<br>&nbsp; <span class=keyword>case</span> DIAMONDS:&nbsp; <span class=keyword>return</span> <span class=quote>"Diamonds"</span>;
+<br>&nbsp; <span class=keyword>case</span> HEARTS:&nbsp; &nbsp; <span class=keyword>return</span> <span class=quote>"Hearts"</span>;
+<br>&nbsp; <span class=keyword>case</span> SPADES:&nbsp; &nbsp; <span class=keyword>return</span> <span class=quote>"Spades"</span>;
+<br>&nbsp; <span class=keyword>default</span>:&nbsp; &nbsp; &nbsp; &nbsp; <span class=keyword>return</span> <span class=quote>"Not a valid suit"</span>;
+<br>&nbsp; }
+<br></span><p>In this case we don't need <span class=code><span class=keyword>break</span></span> statements because the <span class=code><span class=keyword>return</span></span> statements cause the flow of execution to return to the caller instead of falling through to the next case.</p>
+
+
+
+<p>In general it is good style to include a <span class=code><span class=keyword>default</span></span> case in every <span class=code><span class=keyword>switch</span></span> statement, to handle errors or unexpected values.</p>
+
+<a name=3></a><br>
+<h3>13.3 Decks</h3>
+
+<p>In the previous chapter, we worked with a vector of objects, but I also mentioned that it is possible to have an object that contains a vector as an instance variable.  In this chapter I am going to create a new object, called a <span class=code>Deck</span>, that contains a vector of <span class=code>Card</span>s.</p>
+
+
+
+<p>The structure definition looks like this</p>
+
+
+<span class=code><span class=keyword>struct</span> Deck {
+<br>&nbsp; pvector&lt;Card&gt; cards;
+<br>
+<br>&nbsp; Deck (<span class=keyword>int</span> n);
+<br>};
+<br>
+<br>Deck::Deck (<span class=keyword>int</span> size)
+<br>{
+<br>&nbsp; pvector&lt;Card&gt; temp (size);
+<br>&nbsp; cards = temp;
+<br>}
+<br></span><p>The name of the instance variable is <span class=code>cards</span> to help distinguish the <span class=code>Deck</span> object from the vector of <span class=code>Card</span>s that it contains.</p>
+
+
+
+<p>For now there is only one constructor.  It creates a local variable named <span class=code>temp</span>, which it initializes by invoking the constructor for the <span class=code>pvector</span> class, passing the size as a parameter. Then it copies the vector from <span class=code>temp</span> into the instance variable <span class=code>cards</span>.</p>
+
+<p>Now we can create a deck of cards like this:</p>
+
+
+<span class=code>&nbsp; Deck deck (52);
+<br></span><p>Here is a state diagram showing what a <span class=code>Deck</span> object looks like:</p>
+
+
+
+<p align="center"><img src="images/deckobject.png"></p>
+
+<p>The object named <span class=code>deck</span> has a single instance variable named <span class=code>cards</span>, which is a vector of <span class=code>Card</span> objects.  To access the cards in a deck we have to compose the syntax for accessing an instance variable and the syntax for selecting an element from an array.  For example, the expression <span class=code>deck.cards[i]</span> is the ith card in the deck, and <span class=code>deck.cards[i].suit</span> is its suit. The following loop</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;52; i++) {
+<br>&nbsp; &nbsp; deck.cards[i].print();
+<br>&nbsp; }
+<br></span><p>demonstrates how to traverse the deck and output each card.</p>
+
+<a name=4></a><br>
+<h3>13.4 Another constructor</h3>
+
+<p>Now that we have a <span class=code>Deck</span> object, it would be useful to initialize the cards in it.  From the previous chapter we have a function called <span class=code>buildDeck</span> that we could use (with a few adaptations), but it might be more natural to write a second <span class=code>Deck</span> constructor.</p>
+
+
+
+
+<span class=code>Deck::Deck ()
+<br>{
+<br>&nbsp; pvector&lt;Card&gt; temp (52);
+<br>&nbsp; cards = temp;
+<br>
+<br>&nbsp; <span class=keyword>int</span> i = 0;
+<br>&nbsp; <span class=keyword>for</span> (Suit suit = CLUBS; suit &lt;= SPADES; suit = Suit(suit+1)) {
+<br>&nbsp; &nbsp; <span class=keyword>for</span> (Rank rank = ACE; rank &lt;= KING; rank = Rank(rank+1)) {
+<br>&nbsp; &nbsp; &nbsp; cards[i].suit = suit;
+<br>&nbsp; &nbsp; &nbsp; cards[i].rank = rank;
+<br>&nbsp; &nbsp; &nbsp; i++;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br>}
+<br></span><p>Notice how similar this function is to <span class=code>buildDeck</span>, except that we had to change the syntax to make it a constructor. Now we can create a standard 52-card deck with the simple declaration <span class=code>Deck deck;</span></p>
+
+<a name=5></a><br>
+<h3>13.5 <span class=code>Deck</span> member functions</h3>
+
+<p>Now that we have a <span class=code>Deck</span> object, it makes sense to put all the functions that pertain to <span class=code>Deck</span>s in the <span class=code>Deck</span> structure definition.  Looking at the functions we have written so far, one obvious candidate is <span class=code>printDeck</span> (<a href="chap12.htm#7">Section 12.7</a>). Here's how it looks, rewritten as a <span class=code>Deck</span> member function:</p>
+
+
+
+
+<span class=code><span class=keyword>void</span> Deck::print () <span class=keyword>const</span> {
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; cards.length(); i++) {
+<br>&nbsp; &nbsp; cards[i].print ();
+<br>&nbsp; }
+<br>}
+<br></span><p>As usual, we can refer to the instance variables of the current object without using dot notation.</p>
+
+<p>For some of the other functions, it is not obvious whether they should be member functions of <span class=code>Card</span>, member functions of <span class=code>Deck</span>, or nonmember functions that take <span class=code>Card</span>s and <span class=code>Deck</span>s as parameters. For example, the version of <span class=code>find</span> in the previous chapter takes a <span class=code>Card</span> and a <span class=code>Deck</span> as arguments, but you could reasonably make it a member function of either type.  As an exercise, rewrite <span class=code>find</span> as a <span class=code>Deck</span> member function that takes a <span class=code>Card</span> as a parameter.</p>
+
+<p>Writing <span class=code>find</span> as a <span class=code>Card</span> member function is a little tricky.  Here's my version:</p>
+
+
+<span class=code><span class=keyword>int</span> Card::find (<span class=keyword>const</span> Deck& deck) <span class=keyword>const</span> {
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i &lt; deck.cards.length(); i++) {
+<br>&nbsp; &nbsp; <span class=keyword>if</span> (equals (deck.cards[i], *<span class=keyword>this</span>)) <span class=keyword>return</span> i;
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> -1;
+<br>}
+<br></span><p>The first trick is that we have to use the keyword <span class=code><span class=keyword>this</span></span> to refer to the <span class=code>Card</span> the function is invoked on.</p>
+
+
+
+<p>The second trick is that C++ does not make it easy to write structure definitions that refer to each other.  The problem is that when the compiler is reading the first structure definition, it doesn't know about the second one yet.</p>
+
+<p>One solution is to declare <span class=code>Deck</span> before <span class=code>Card</span> and then define <span class=code>Deck</span> afterwards:</p>
+
+
+<span class=code><span class=comment>// declare that Deck is a structure, without defining it
+</span><br><span class=keyword>struct</span> Deck;
+<br>
+<br><span class=comment>// that way we can refer to it in the definition of Card
+</span><br><span class=keyword>struct</span> Card
+<br>{
+<br>&nbsp; <span class=keyword>int</span> suit, rank;
+<br>
+<br>&nbsp; Card ();
+<br>&nbsp; Card (<span class=keyword>int</span> s, <span class=keyword>int</span> r);
+<br>
+<br>&nbsp; <span class=keyword>void</span> print () <span class=keyword>const</span>;
+<br>&nbsp; <span class=keyword>bool</span> isGreater (<span class=keyword>const</span> Card& c2) <span class=keyword>const</span>;
+<br>&nbsp; <span class=keyword>int</span> find (<span class=keyword>const</span> Deck& deck) <span class=keyword>const</span>;
+<br>};
+<br>
+<br><span class=comment>// and then later we provide the definition of Deck
+</span><br><span class=keyword>struct</span> Deck {
+<br>&nbsp; pvector&lt;Card&gt; cards;
+<br>
+<br>&nbsp; Deck ();
+<br>&nbsp; Deck (<span class=keyword>int</span> n);
+<br>&nbsp; <span class=keyword>void</span> print () <span class=keyword>const</span>;
+<br>&nbsp; <span class=keyword>int</span> find (<span class=keyword>const</span> Card& card) <span class=keyword>const</span>;
+<br>};
+<br></span><a name=6></a><br>
+<h3>13.6 Shuffling</h3>
+
+<p>For most card games you need to be able to shuffle the deck; that is, put the cards in a random order.  In <a href="chap10.htm#5">Section 10.5</a> we saw how to generate random numbers, but it is not obvious how to use them to shuffle a deck.</p>
+
+<p>One possibility is to model the way humans shuffle, which is usually by dividing the deck in two and then reassembling the deck by choosing alternately from each deck.  Since humans usually don't shuffle perfectly, after about 7 iterations the order of the deck is pretty well randomized.  But a computer program would have the annoying property of doing a perfect shuffle every time, which is not really very random.  In fact, after 8 perfect shuffles, you would find the deck back in the same order you started in.  For a discussion of that claim, see <a href="http://www.wiskit.com/marilyn/craig.html">http://www.wiskit.com/marilyn/craig.html</a> or do a web search with the keywords "perfect shuffle."</p>
+
+<p>A better shuffling algorithm is to traverse the deck one card at a time, and at each iteration choose two cards and swap them.</p>
+
+
+
+<p>Here is an outline of how this algorithm works.  To sketch the program, I am using a combination of C++ statements and English words that is sometimes called <b>pseudocode</b>:</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i=0; i&lt;cards.length(); i++) {
+<br>&nbsp; &nbsp; <span class=comment>// choose a random number between i and cards.length()
+</span><br>&nbsp; &nbsp; <span class=comment>// swap the ith card and the randomly-chosen card
+</span><br>&nbsp; }
+<br></span><p>The nice thing about using pseudocode is that it often makes it clear what functions you are going to need.  In this case, we need something like <span class=code>randomInt</span>, which chooses a random integer between the parameters <span class=code>low</span> and <span class=code>high</span>, and <span class=code>swapCards</span> which takes two indices and switches the cards at the indicated positions.</p>
+
+
+
+<p>You can probably figure out how to write <span class=code>randomInt</span> by looking at <a href="chap10.htm#5">Section 10.5</a>, although you will have to be careful about possibly generating indices that are out of range.</p>
+
+
+
+<p>You can also figure out <span class=code>swapCards</span> yourself. I will leave the remaining implementation of these functions as an exercise to the reader.</p>
+
+<a name=7></a><br>
+<h3>13.7 Sorting</h3>
+
+<p>Now that we have messed up the deck, we need a way to put it back in order.  Ironically, there is an algorithm for sorting that is very similar to the algorithm for shuffling.</p>
+
+<p>Again, we are going to traverse the deck and at each location choose another card and swap.  The only difference is that this time instead of choosing the other card at random, we are going to find the lowest card remaining in the deck.</p>
+
+<p>By "remaining in the deck," I mean cards that are at or to the right of the index <span class=code>i</span>.</p>
+
+
+<span class=code>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i=0; i&lt;cards.length(); i++) {
+<br>&nbsp; &nbsp; <span class=comment>// find the lowest card at or to the right of i
+</span><br>&nbsp; &nbsp; <span class=comment>// swap the ith card and the lowest card
+</span><br>&nbsp; }
+<br></span><p>Again, the pseudocode helps with the design of the <b>helper functions</b>.  In this case we can use <span class=code>swapCards</span> again, so we only need one new one, called <span class=code>findLowestCard</span>, that takes a vector of cards and an index where it should start looking.</p>
+
+<p>This process, using pseudocode to figure out what helper functions are needed, is sometimes called <b>top-down design</b>, in contrast to the bottom-up design I discussed in <a href="chap10.htm#8">Section 10.8</a>.</p>
+
+
+
+<p>Once again, I am going to leave the implementation up to the reader.</p>
+
+<a name=8></a><br>
+<h3>13.8 Subdecks</h3>
+
+<p>How should we represent a hand or some other subset of a full deck? One easy choice is to make a <span class=code>Deck</span> object that has fewer than 52 cards.</p>
+
+<p>We might want a function, <span class=code>subdeck</span>, that takes a vector of cards and a range of indices, and that returns a new vector of cards that contains the specified subset of the deck:</p>
+
+
+<span class=code>Deck Deck::subdeck (<span class=keyword>int</span> low, <span class=keyword>int</span> high) <span class=keyword>const</span> {
+<br>&nbsp; Deck sub (high-low+1);
+<br>
+<br>&nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> i = 0; i&lt;sub.cards.length(); i++) {
+<br>&nbsp; &nbsp; sub.cards[i] = cards[low+i];
+<br>&nbsp; }
+<br>&nbsp; <span class=keyword>return</span> sub;
+<br>}
+<br></span><p>To create the local variable named <span class=code>subdeck</span> we are using the <span class=code>Deck</span> constructor that takes the size of the deck as an argument and that does not initialize the cards.  The cards get initialized when they are copied from the original deck.</p>
+
+<p>The length of the subdeck is <span class=code>high-low+1</span> because both the low card and high card are included.  This sort of computation can be confusing, and lead to "off-by-one" errors.  Drawing a picture is usually the best way to avoid them.</p>
+
+
+
+<p>As an exercise, write a version of <span class=code>findBisect</span> that takes a subdeck as an argument, rather than a deck and an index range.  Which version is more error-prone?  Which version do you think is more efficient?</p>
+
+<a name=9></a><br>
+<h3>13.9 Shuffling and dealing</h3>
+
+<p>In <a href="chap13.htm#6">Section 13.6</a> I wrote pseudocode for a shuffling algorithm. Assuming that we have a function called <span class=code>shuffleDeck</span> that takes a deck as an argument and shuffles it, we can create and shuffle a deck:</p>
+
+
+<span class=code>&nbsp; Deck deck;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// create a standard 52-card deck
+</span><br>&nbsp; deck.shuffle ();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class=comment>// shuffle it
+</span><br></span><p>Then, to deal out several hands, we can use <span class=code>subdeck</span>:</p>
+
+
+<span class=code>&nbsp; Deck hand1 = deck.subdeck (0, 4);
+<br>&nbsp; Deck hand2 = deck.subdeck (5, 9);
+<br>&nbsp; Deck pack = deck.subdeck (10, 51);
+<br></span><p>This code puts the first 5 cards in one hand, the next 5 cards in the other, and the rest into the pack.</p>
+
+<p>When you thought about dealing, did you think we should give out one card at a time to each player in the round-robin style that is common in real card games?  I thought about it, but then realized that it is unnecessary for a computer program.  The round-robin convention is intended to mitigate imperfect shuffling and make it more difficult for the dealer to cheat.  Neither of these is an issue for a computer.</p>
+
+<p>This example is a useful reminder of one of the dangers of engineering metaphors: sometimes we impose restrictions on computers that are unnecessary, or expect capabilities that are lacking, because we unthinkingly extend a metaphor past its breaking point.  Beware of misleading analogies.</p>
+
+<a name=10></a><br>
+<h3>13.10 Mergesort</h3>
+
+<p>In <a href="chap13.htm#7">Section 13.7</a>, we saw a simple sorting algorithm that turns out not to be very efficient.  In order to sort <tt>n</tt> items, it has to traverse the vector <tt>n</tt> times, and each traversal takes an amount of time that is proportional to <tt>n</tt>.  The total time, therefore, is proportional to <tt>n<sup>2</sup></tt>.</p>
+
+<p>In this section I will sketch a more efficient algorithm called <b>mergesort</b>.  To sort <tt>n</tt> items, mergesort takes time proportional to <tt>n log n</tt>.  That may not seem impressive, but as <tt>n</tt> gets big, the difference between <tt>n<sup>2</sup></tt> and <tt>n log n</tt> can be enormous.  Try out a few values of <tt>n</tt> and see.</p>
+
+<p>The basic idea behind mergesort is this: if you have two subdecks, each of which has been sorted, it is easy (and fast) to merge them into a single, sorted deck.  Try this out with a deck of cards:</p>
+
+<ol>
+
+<li>Form two subdecks with about 10 cards each and sort them so that when they are face up the lowest cards are on top.  Place both decks face up in front of you.</li>
+
+<li>Compare the top card from each deck and choose the lower one.  Flip it over and add it to the merged deck.</li>
+
+<li>Repeat step two until one of the decks is empty. Then take the remaining cards and add them to the merged deck.</li>
+
+</ol>
+
+<p>The result should be a single sorted deck.  Here's what this looks like in pseudocode:</p>
+
+
+<span class=code>&nbsp; Deck merge (<span class=keyword>const</span> Deck& d1, <span class=keyword>const</span> Deck& d2) {
+<br>&nbsp; &nbsp; <span class=comment>// create a new deck big enough for all the cards
+</span><br>&nbsp; &nbsp; Deck result (d1.cards.length() + d2.cards.length());
+<br>
+<br>&nbsp; &nbsp; <span class=comment>// use the index i to keep track of where we are in
+</span><br>&nbsp; &nbsp; <span class=comment>// the first deck, and the index j for the second deck
+</span><br>&nbsp; &nbsp; <span class=keyword>int</span> i = 0;
+<br>&nbsp; &nbsp; <span class=keyword>int</span> j = 0;
+<br>
+<br>&nbsp; &nbsp; <span class=comment>// the index k traverses the result deck
+</span><br>&nbsp; &nbsp; <span class=keyword>for</span> (<span class=keyword>int</span> k = 0; k&lt;result.cards.length(); k++) {
+<br>
+<br>&nbsp; &nbsp; &nbsp; <span class=comment>// if d1 is empty, d2 wins; if d2 is empty, d1 wins;
+</span><br>&nbsp; &nbsp; &nbsp; <span class=comment>// otherwise, compare the two cards
+</span><br>
+<br>&nbsp; &nbsp; &nbsp; <span class=comment>// add the winner to the new deck
+</span><br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; <span class=keyword>return</span> result;
+<br>&nbsp; }
+<br></span><p>I chose to make <span class=code>merge</span> a nonmember function because the two arguments are symmetric.</p>
+
+<p>The best way to test <span class=code>merge</span> is to build and shuffle a deck, use subdeck to form two (small) hands, and then use the sort routine from the previous chapter to sort the two halves.  Then you can pass the two halves to <span class=code>merge</span> to see if it works.</p>
+
+
+
+<p>If you can get that working, try a simple implementation of <span class=code>mergeSort</span>:</p>
+
+
+<span class=code>Deck Deck::mergeSort () <span class=keyword>const</span> {
+<br>&nbsp; <span class=comment>// find the midpoint of the deck
+</span><br>&nbsp; <span class=comment>// divide the deck into two subdecks
+</span><br>&nbsp; <span class=comment>// sort the subdecks using sort
+</span><br>&nbsp; <span class=comment>// merge the two halves and return the result
+</span><br>}
+<br></span><p>Notice that the current object is declared <span class=code><span class=keyword>const</span></span> because <span class=code>mergeSort</span> does not modify it.  Instead, it creates and returns a new <span class=code>Deck</span> object.</p>
+
+<p>If you get that version working, the real fun begins!  The magical thing about mergesort is that it is recursive.  At the point where you sort the subdecks, why should you invoke the old, slow version of <span class=code>sort</span>?  Why not invoke the spiffy new <span class=code>mergeSort</span> you are in the process of writing?</p>
+
+
+
+<p>Not only is that a good idea, it is <i>necessary</i> in order to achieve the performance advantage I promised.  In order to make it work, though, you have to add a base case so that it doesn't recurse forever.  A simple base case is a subdeck with 0 or 1 cards.  If <span class=code>mergesort</span> receives such a small subdeck, it can return it unmodified, since it is already sorted.</p>
+
+<p>The recursive version of <span class=code>mergesort</span> should look something like this:</p>
+
+
+<span class=code>Deck Deck::mergeSort (Deck deck) <span class=keyword>const</span> {
+<br>&nbsp; <span class=comment>// if the deck is 0 or 1 cards, return it
+</span><br>
+<br>&nbsp; <span class=comment>// find the midpoint of the deck
+</span><br>&nbsp; <span class=comment>// divide the deck into two subdecks
+</span><br>&nbsp; <span class=comment>// sort the subdecks using mergesort
+</span><br>&nbsp; <span class=comment>// merge the two halves and return the result
+</span><br>}
+<br></span><p>As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the "leap of faith."  I have deliberately constructed this example to encourage you to make the leap of faith.</p>
+
+
+
+<p>When you were using <span class=code>sort</span> to sort the subdecks, you didn't feel compelled to follow the flow of execution, right?  You just assumed that the <span class=code>sort</span> function would work because you already debugged it.  Well, all you did to make <span class=code>mergeSort</span> recursive was replace one sort algorithm with another.  There is no reason to read the program differently.</p>
+
+<p>Well, actually you have to give some thought to getting the base case right and making sure that you reach it eventually, but other than that, writing the recursive version should be no problem.  Good luck!</p>
+
+<a name=11></a><br>
+<h3>13.11 Glossary</h3>
+
+<dl>
+
+<dt>pseudocode</dt>
+<dd>A way of designing programs by writing rough drafts in a combination of English and C++.</dd>
+
+<dt>helper function</dt>
+<dd>Often a small function that does not do anything enormously useful by itself, but which helps another, more useful, function.</dd>
+
+<dt>bottom-up design</dt>
+<dd>A method of program development that uses pseudocode to sketch solutions to large problems and design the interfaces of helper functions.</dd>
+
+<dt>mergesort</dt>
+<dd>An algorithm for sorting a collection of values.  Mergesort is faster than the simple algorithm in the previous chapter, especially for large collections.</dd>
+
+
+
+</dl>
+
+<p>
+<hr>
+<table width="100%" cellpadding="0" cellspacing="2" border="0">
+  <tr>
+    <td width="20" class=head><a href="chap14.html"><img border="0" alt="Next" src="images/next.png"></a></td>
+    <td width="20" class=head><a href="index.html"><img border="0" alt="Up" src="images/up.png"></a></td>
+    <td width="20" class=head><a href="chap12.html"><img border="0" alt="Previous" src="images/prev.png"></a></td>
+    <td width="100%" class=headcenter><img border="0" alt="Hi" src="images/headertitle.png"></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+    <td width="20" class=head><a href="dex.html"><img border="0" alt="Index" src="images/index.png"></a></td>
+    <td width="20" class=head><img border="0" alt="" src="images/blank.png"></td>
+  </tr>
+</table>
+<hr>
+
+</body>
+</html>

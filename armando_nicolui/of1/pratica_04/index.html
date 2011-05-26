@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 04
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Laborat&#243;rio 04
+">
+<META NAME="keywords" CONTENT="pratica">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pratica.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Laborat&#243;rio 04
+<BR></H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00001000000000000000">
+Manipula&#231;&#227;o de arquivos - Compress&#227;o e Backup  de
+  Arquivos  em UNIX</A>
+</H2>
+
+<P>
+
+<OL>
+<LI>Copie   para  seu   diret&#243;rio  de  <I>login</I>   o  diret&#243;rio
+  <B><FONT FACE="Helvetica, Arial, sans-serif">LabNum5</FONT></B>  (incluindo  a  sub&#225;rvore)  que est&#225;  no  diret&#243;rio  de
+  <I>login</I> do usu&#225;rio <I>ci066</I>.
+
+<P>
+</LI>
+<LI>Comprima todos  os arquivos  de <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/LabNum5</FONT></B>  em diante
+  usando  <B><I>gzip(1)</I></B>.    Em  seguida,  fa&#231;a   a  compress&#227;o  usando
+  <B><I>zip(1)</I></B>.
+
+<P>
+</LI>
+<LI><A NAME="item:tarbkp"></A>  Fa&#231;a um  <I>backup</I>  de  sua &#225;rea  com
+  <B><I>tar(1)</I></B>. O arquivo resultante da execu&#231;&#227;o de <B><I>tar(1)</I></B> deve
+  ser colocado no diret&#243;rio <B><FONT FACE="Helvetica, Arial, sans-serif">/tmp</FONT></B>.
+
+<P>
+</LI>
+<LI><A NAME="item:tarbzip"></A> No  item <A HREF="#item:tarbkp">3</A>,  como  pode ser
+  feita uma compacta&#231;&#227;o  com <B><I>bzip2(1)</I></B>, utilizando-se o mecanismo
+  de <I>pipeline</I>?
+
+<P>
+<B>DICA:</B> Como redirecionar o  resultado de <B><I>tar(1)</I></B> para a
+  sa&#237;da padr&#227;o? Como <B><I>bzip2(1)</I></B> usa a entrada padr&#227;o?
+
+<P>
+</LI>
+<LI><A NAME="item:targzip"></A>  Qual a  op&#231;&#227;o do comando  <B><I>tar(1)</I></B> que
+  compacta o arquivo  final em formato <B><I>gzip(1)</I></B>?  E  qual a op&#231;&#227;o
+  para o tar compactar em formato <B><I>bzip2(1)</I></B>?
+
+<P>
+</LI>
+<LI><A NAME="item:zip"></A>  Repita o item <A HREF="#item:tarbkp">3</A>  usando agora o
+  comando <B><I>zip(1)</I></B>.
+
+<P>
+</LI>
+<LI>Verifique   o   tamanho   dos  arquivos   gerados   nos   itens
+  <A HREF="#item:tarbkp">3</A> a <A HREF="#item:zip">6</A>. Salve cada um deles em disquete.
+
+<P>
+<B>DICA:</B> Se o tamanho do  arquivo f&#244;r maior que a capacidade de
+  um disquete, lembre-se do comando <B><I>split(1)</I></B>.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION00002000000000000000">
+Personaliza&#231;&#227;o da &#193;rea do Usu&#225;rio</A>
+</H2>
+
+<P>
+
+<OL>
+<LI><A NAME="item:aliasDIR"></A>  Utilizando   o   comando  <B>alias</B>
+  INTERATIVAMENTE,  crie  o  alias   <B>dir</B>  de  forma  que  seja
+  equivalente     &#224;    execu&#231;&#227;o     do     programa    <B>ls
+  --color=auto -Fa</B>.
+
+<P>
+Liste  os  arquivos  de  seu   diret&#243;rio  de  login  usando  o  alias
+  <B>dir</B> como um comando, SEM QUAISQUER OP&#199;&#213;ES DE COMANDO.
+
+<P>
+</LI>
+<LI><A NAME="item:aliasCOPY"></A> Da mesma forma, crie o alias <B>copy</B>
+  equivalente &#224; execu&#231;&#227;o de <B>cp -rd</B>.
+
+<P>
+Copie  o arquivo  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>ci066/LabNum4</FONT></B> para  seu  diret&#243;rio de
+  <I>login</I>,  usando o  alias <B>copy</B>  como um  comando, SEM
+  QUAISQUER  OP&#199;&#213;ES.  Lembre-se  que  voc&#234; est&#225;  na verdade  executando
+  <B><I>cp(1)</I></B> com algumas op&#231;&#245;es j&#225; definidas.
+
+<P>
+</LI>
+<LI><A NAME="item:addCOPYDIR"></A> Usando  seu editor predileto, altere o
+  arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B> de forma  a incluir as duas defini&#231;&#245;es
+  de   <I>aliases</I>   feitas   nos  &#237;tens   <A HREF="#item:aliasDIR">1</A>   e
+  <A HREF="#item:aliasCOPY">2</A>.
+
+<P>
+</LI>
+<LI>Crie um arquivo de texto qualquer usando seu editor predileto. Quais as
+  permiss&#245;es  de  acesso  deste  arquivo?  Qual  a  m&#225;scara  de
+  permiss&#245;es <I>default</I>?
+
+<P>
+</LI>
+<LI><A NAME="item:addUMASK"></A>  Como  deve  ser  o comando  que  muda  as
+  permiss&#245;es <I>default</I> de forma  que em qualquer arquivo criado,
+  as permiss&#245;es para Grupo e Outros excluam Escrita e Execu&#231;&#227;o (isto &#233;,
+  Grupo e Outros devem ter  APENAS permiss&#227;o de leitura). As permiss&#245;es
+  para Propriet&#225;rio devem ser todas garantidas.
+
+<P>
+</LI>
+<LI>Acrescente  ao arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B> o  comando que voc&#234;
+  definiu  no item  <A HREF="#item:addUMASK">5</A>, de  forma a  definir  uma nova
+  m&#225;scara  de permiss&#245;es  padr&#227;o toda  vez  que voc&#234;  abrir uma  janela
+  <I>shell</I> ou efetuar <I>login</I>.
+
+<P>
+</LI>
+<LI>Feitas as altera&#231;&#245;es  indicadas nos &#237;tens <A HREF="#item:addCOPYDIR">3</A> e
+  <A HREF="#item:addUMASK">5</A>, salve o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>.
+
+<P>
+</LI>
+<LI>Abra  uma  nova   janela  <I>shell</I>.   Usando  os  comandos
+  <B>alias</B>  e <B>umask</B>  (ambos  sem argumentos),  verifique
+  nesta  nova  sess&#227;o  <I>shell</I>  se  as  novas  altera&#231;&#245;es  foram
+  efetivadas.
+
+<P>
+</LI>
+<LI><A NAME="item:novosALIASES"></A>Acrescente       no       arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B> os seguintes aliases:
+  
+<UL>
+<LI>rm <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> rm -i
+</LI>
+<LI>ll <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> ls -la --color=auto
+</LI>
+<LI>del <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> rm -i
+</LI>
+<LI>pg <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> less
+</LI>
+<LI>la <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> ls -a -F
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI><A NAME="item:novoPROMPT"></A>Ainda  no arquivo  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>
+  altere  o seu  <I>prompt</I>  de  forma que  ele  sempre exiba  seu
+  <I>login</I>  seguido  de  <B>:</B>  seguido da  parte  final  do
+  diret&#243;rio corrente (muitas  vezes conhecida como <I>basename</I> de
+  um diret&#243;rio).
+
+<P>
+<B>DICA</B>: Consulte o  manual <I>on-line</I> de <B><I>bash(1)</I></B>,
+                Se&#231;&#227;o <B>PROPMPTING</B>.
+
+<P>
+</LI>
+<LI>Feitas as  altera&#231;&#245;es indicadas nos &#237;tens <A HREF="#item:novosALIASES">9</A>
+  e <A HREF="#item:novoPROMPT">10</A>, salve  o arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>.  Em
+  seguida, abra uma nova  janela <I>shell</I> para verificar o efeito
+  das altera&#231;&#245;es.
+
+<P>
+</LI>
+<LI><A NAME="item:3"></A>  Acrescente a execu&#231;&#227;o  de um comando ao  final de
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bash_logout</FONT></B>  que   encontre  em  seu   diret&#243;rio  de
+  <I>login</I> (e toda sua sub&#225;rvore de diret&#243;rios) todos os arquivos
+  terminados  do  tipo  <B><FONT FACE="Helvetica, Arial, sans-serif">*.bak</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">*%</FONT></B>,  <B><FONT FACE="Helvetica, Arial, sans-serif">*<FONT SIZE=3>~</FONT>&nbsp;</FONT></B>  e
+  <B><FONT FACE="Helvetica, Arial, sans-serif">core</FONT></B> e os REMOVA, SEM D&#211; NEM PIEDADE.
+
+<P>
+<B>DICA</B>: Use         o         comando
+                 <B><I>find(1)</I></B>.  Primeiro fa&#231;a  um teste  SEM REMOVER,
+                 mas     imprimindo     na     tela     os     arquivos
+                 selecionados. Quando voc&#234; tiver certeza que somente os
+                 arquivos    desejados   est&#227;o    sendo   selecionados,
+                 acrescente a op&#231;&#227;o do <B><I>find(1)</I></B> que procede com a
+                 remo&#231;&#227;o.
+
+<P>
+</LI>
+<LI>Acrescente   a   execu&#231;&#227;o   de   um   comando   ao   final   de
+  <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bash_logout</FONT></B> que  encontre em seu  diret&#243;rio de login
+  (e toda  sua sub&#225;rvore de  diret&#243;rios) todos os arquivos  que possuem
+  permiss&#227;o de  Execu&#231;&#227;o e/ou  Escrita para Outros.   Para cada  um dos
+  arquivos encontrados:
+  
+<UL>
+<LI>Se o arquivo for  DIRET&#211;RIO, definir permiss&#227;o de Execu&#231;&#227;o para
+    Grupo e  Outros, mas  retirar a permiss&#227;o  de Escrita e  Leitura de
+    Grupo e Outros;
+</LI>
+<LI>Se o  arquivo N&#195;O for diret&#243;rio, retirar  permiss&#227;o de Escrita
+    e Execu&#231;&#227;o para Outros e para Grupo.
+  
+</LI>
+</UL>
+
+<P>
+<B>DICA</B>: Veja a dica do item <A HREF="#item:3">12</A>
+
+<P>
+</LI>
+<LI>Salve  todos os  arquivos  que  voc&#234;  estiver editando  e  torne
+  efetivas  as  altera&#231;&#245;es  feitas   at&#233;  agora  em  seus  arquivos  de
+  personaliza&#231;&#227;o.
+
+<P>
+</LI>
+<LI><B>Vari&#225;veis de Ambiente.</B> No arquivo <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.bashrc</FONT></B>
+  acrescente AO FINAL DO ARQUIVO  a defini&#231;&#227;o das vari&#225;veis de ambiente
+  abaixo na forma indicada.  TODAS as vari&#225;veis devem ser exportadas.
+  
+<UL>
+<LI><B><FONT FACE="Helvetica, Arial, sans-serif">MAIL</FONT></B>  <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> nome  de  seu  arquivo  de entrada  de
+    e-mails   (o   mesmo   arquivo   que  voc&#234;   indicou   no   arquivo
+    <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/.qmail</FONT></B>)
+</LI>
+<LI><B><FONT FACE="Helvetica, Arial, sans-serif">EDITOR</FONT></B> <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> emacs (ou seu editor predileto)
+</LI>
+<LI><B><FONT FACE="Helvetica, Arial, sans-serif">VISUAL</FONT></B> <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> valor  da  vari&#225;vel  EDITOR 
+</LI>
+<LI><B><FONT FACE="Helvetica, Arial, sans-serif">PATH</FONT></B> <!-- MATH
+ $\Longrightarrow$
+ -->
+<IMG
+ WIDTH="32" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="pratica-img1.png"
+ ALT="$\Longrightarrow$"> deve  incluir o diret&#243;rio
+    <B><FONT FACE="Helvetica, Arial, sans-serif"><FONT SIZE=3>~</FONT>/bin</FONT></B> antes do valor corrente (atual) de PATH
+  
+</LI>
+</UL>
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Conclus&#245;es</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>ASSUNTOS DA PR&#211;XIMA SEMANA:
+
+<UL>
+<LI>Entrada e sa&#237;da padr&#227;o em UNIX. Redirecionamento;
+</LI>
+<LI>Pipelining
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-08-25
+</ADDRESS>
+</BODY>
+</HTML>

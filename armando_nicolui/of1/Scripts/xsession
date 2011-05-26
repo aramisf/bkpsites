@@ -1,0 +1,115 @@
+#!/bin/bash
+#
+
+if [[ ${#DISPLAY} -eq 0 ]]; then
+    XHOST=${XHOST:-`hostname`}
+    DISPLAY="${XHOST}:0.0"
+fi
+
+XHOST=${XHOST:-"`echo ${DISPLAY} | awk -F: '{print $1}' -`"}
+XHOST=${XHOST:-`hostname`}
+
+export DISPLAY XHOST
+
+cmd=`basename $0`
+cmddir=`dirname $0`
+
+exec >${cmddir}/${cmd}_${DISPLAY}.log 2>&1
+
+TMPDIR="/tmp"
+
+HOSTNAME=${HOSTNAME:-`hostname`}
+XMAILHOST=${XMAILHOST:-"fradim"}
+MAILPRG=${MAILPRG:-"Xbuffy"}
+MAILPRG_OPT=${MAILPRG_OPT:-""}
+EXECMAILTOOL=${EXECMAILTOOL:-"yes"}
+WWWPRG=${WWWPRG:-"netscape"}
+WWWPRG_OPT=${WWWPRG_OPT:-"-height 735 -width 1020"}
+EXECWWWTOOL=${EXECWWWTOOL:-"yes"}
+
+XCLOCK_OPT="-chime -hd yellow -bg black -fg yellow -hl SkyBlue1"
+XHOME="/usr/X11R6"
+
+XWINMGR=${XWINMGR:-"wmaker"}
+OPTWMGR=${OPTWMGR:-""}
+XLIBDIR=${XLIBDIR:-"${XHOME}/lib/X11"}
+XINITDIR=${XINITDIR:-"${XLIBDIR}/xinit"}
+XBINDIR=${XBINDIR:-"${XHOME}/bin"}
+XRESDIR=${XRESDIR:-"${XLIBDIR}"}
+
+XSETROOT=${XSETROOT:-"${HOME}/bin/Xsetroot"}
+KILLXPROC=${KILLXPROC:-"${HOME}/bin/killxproc"}
+KILLROOTIMG=${KILLROOTIMG:-"${HOME}/bin/killrootimg"}
+ACTSCRSAVER=${ACTSCRSAVER:-"${XINITDIR}/actscrsaver"}
+DEACTSCRSAVER=${DEACTSCRSAVER:-"${XINITDIR}/deactscrsaver"}
+
+XAPPLRESDIR=${XAPPLRESDIR:-"${XRESDIR}/app-defaults"}
+XFILESEARCHPATH="${XAPPLRESDIR}:${XFILESEARCHPATH}"
+
+export ACTSCRSAVER DACTSCRSAVER XSETROOT XSETROOTOPT XWINMGR OPTWMGR
+export XHOME XLIBDIR XBINDIR XRESDIR XINITDIR
+export XFILESEARCHPATH XAPPLRESDIR
+export XCLOCK_OPT HOSTNAME
+export XMAILHOST KILLXPROC KILLROOTIMG
+export TMPDIR
+export MAILPRG MAILPRG_OPT EXECMAILTOOL
+export WWWPRG WWWPRG_OPT EXECWWWTOOL
+
+userresources1=$HOME/.Xresources
+userresources2=$HOME/.Xdefaults
+usermodmap=$HOME/.Xmodmap
+hostmodmap=$HOME/.Xmodmap_${XHOST}
+sysresources=$XRESDIR/Xresources
+sysmodmap=${XHOME}/lib/X11/Xmodmap
+
+# merge in defaults and keymaps
+
+if [[ -f $sysresources ]]; then
+    xrdb -load $sysresources
+fi
+
+if [[ -f $sysmodmap ]]; then
+    xmodmap $sysmodmap
+fi
+
+if [[ -f $userresources1 ]]; then
+    xrdb -merge $userresources1
+elif [[ -f $userresources2 ]]; then
+    xrdb -merge $userresources2
+fi
+
+if [[ -f $usermodmap ]]; then
+    xmodmap $usermodmap
+fi
+
+if [[ -f $hostmodmap ]]; then
+    xmodmap $hostmodmap
+fi
+
+source ${HOME}/.profile
+
+${XSETROOT} &
+
+if [[ -f ${HOME}/.xwindows-init ]]; then
+	. ${HOME}/.xwindows-init
+elif [[ -f ${XINITDIR}/xwindows-init ]]; then
+	. ${XINITDIR}/xwindows-init
+else
+	xclock ${XCLOCK_OPT} -geometry 100x100-0-0 &
+        xterm ${XTERM_OPT} -geometry 80x32+0+0 &
+fi
+
+if [[ -x ${ACTSCRSAVER} ]]; then
+	${ACTSCRSAVER} &
+fi
+
+${XWINMGR} ${OPTWMGR}
+
+if [[ -x ${DEACTSCRSAVER} ]]; then
+	${DEACTSCRSAVER}
+fi
+
+if [[ -x ${KILLROOTIMG} ]]; then
+    ${KILLROOTIMG} >/dev/null 2>&1
+fi
+

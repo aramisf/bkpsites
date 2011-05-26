@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#
+# Remove uma pessoa do arquivo de telefones
+#
+
+if [[ $# -ne 1 ]]; then
+    echo "Forma de uso: `basename $0` nome"
+    exit 1
+fi
+
+# Encontra a quantidade de entradas que coincidem com nome
+
+NUMNOMES=$(grep '\<'"$1" $PHONEBOOK | wc -l)
+
+EXIT_STATUS=0
+
+echo ""
+
+if [[ $NUMNOMES -eq 0 ]]; then
+    echo "Não foi encontrada nenhuma pessoa com chamada \"$1\"."
+    EXIT_STATUS=1
+else
+    grep '\<'"$1" $PHONEBOOK | cut -f1 |
+    while read NOME
+    do
+      if respsim "Deseja remover \"$NOME\""; then
+	    grep -v "$NOME" $PHONEBOOK | cat > $PHONEBOOK
+	    echo "	==> $NOME removido."
+      fi
+    done
+fi
+
+if [[ $EXIT_STATUS -ne 0 ]]; then
+    echo "\"$1\" não foi removido da lista telefonica."
+fi
+
+echo ""
+exit $EXIT_STATUS
+

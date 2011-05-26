@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7 Aninhando senteças if e if-else</TITLE>
+<META NAME="description" CONTENT="7 Aninhando senteças if e if-else">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node8.html">
+<LINK REL="previous" HREF="notas_proc-node6.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node8.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html291"
+  HREF="notas_proc-node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html289"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html283"
+  HREF="notas_proc-node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html292"
+  HREF="notas_proc-node8.html">8 Operadores Lógicos</A>
+<B>Up:</B> <A NAME="tex2html290"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html284"
+  HREF="notas_proc-node6.html">6 Ordem sequencial de</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html293"
+  HREF="notas_proc-node7.html#SECTION00071000000000000000">7.1 A ambigüidade do  <TT>else</TT></A>
+<UL>
+<LI><A NAME="tex2html294"
+  HREF="notas_proc-node7.html#SECTION00071010000000000000">Regra de associação:</A>
+<LI><A NAME="tex2html295"
+  HREF="notas_proc-node7.html#SECTION00071020000000000000">Exercício 1:</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00070000000000000000">
+7 Aninhando sente&#231;as <TT>if</TT> e <TT>if-else</TT></A>
+</H1> 
+
+<P>
+Como era  de se  esperar, &#233; poss&#237;vel  colocar uma  senten&#231;a condicional
+dentro  de outra.   Por  exemplo, se  quisermos  imprimir uma  mensagem
+apropriada caso um n&#250;mero seja positivo ou negativo e par ou &#237;mpar, n&#243;s
+poder&#237;amos escrever o seguinte:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num;
+  
+  /* Obtem um numero do usuario */
+  printf("Entre com um inteiro: ");
+  scanf("%d", &amp;num);
+  
+  /* Imprime uma mensagem dizendo se o numero e positivo ou
+     negativo, positivo ou negativo. */
+  if (num &gt;= 0) {
+    if (num % 2 == 0)
+      printf("O numero e par e positivo\n");
+    else
+      printf("O numero e impar e positivo\n");      
+  }
+  else {
+    if (num % 2 == 0)
+      printf("O numero e par e negativo\n");
+    else
+      printf("O numero e impar e negativo\n");      
+  }
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H2><A NAME="SECTION00071000000000000000">
+7.1 A ambig&#252;idade do  <TT>else</TT></A>
+</H2> 
+
+<P>
+O aninhamento  de senten&#231;as <TT>if-else</TT>  sem usar chaves  (<TT>{</TT> e
+<TT>}</TT>) para  delimitar o  bloco de  sente&#231;as a  ser  executado pode
+trazer efeitos indesejados.
+
+<P>
+H&#225; uma  regra simples  para determinar qual  <TT>if</TT> est&#225;  associado a
+qual <TT>else</TT>.
+
+<P>
+
+<H4><A NAME="SECTION00071010000000000000">
+Regra de associa&#231;&#227;o:</A>
+</H4>
+Um <TT>else</TT> est&#225; associado com  a &#250;ltima ocorr&#234;ncia do  <TT>if</TT> sem
+<TT>else</TT>.
+
+<P>
+O exemplo seguinte est&#225; errado porque  associa o <TT>else</TT> ao <TT>if</TT>
+"incorreto":
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num;
+  
+  /* Obtem um numero do usuario */
+  printf("Entre com o numero de peras: ");
+  scanf("%d", &amp;num);
+  
+  /* Imprime uma mensagem dizendo se o numero de peras e 0 ou 1
+     (*** isto esta' errado !!  ***) */
+  if (num != 0)
+    if (num == 1)
+      printf("Voce tem uma pera.\n");
+  else
+    printf("Voce nao tem nenhuma pera.\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Neste exemplo, o  <TT>if</TT> tem o seguinte  significado, segundo a regra
+de associa&#231;&#227;o:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num;
+  
+  /* Obtem um numero do usuario */
+  printf("Entre com o numero de peras: ");
+  scanf("%d", &amp;num);
+  
+  /* Como a sentenca if e' vista pelo compilador */
+  if (num != 0)
+    if (num == 1)
+      printf("Voce tem uma pera.\n");
+    else
+      printf("Voce nao tem nenhuma pera.\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Para  evitar este  problema, chaves  (<TT>{</TT>  e <TT>}</TT>)  devem ser
+usadas  para tirar  a ambiguidade.   O  exemplo abaixo  mostra como  as
+chaves podem ser inseridas para corrigir o programa acima.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num;
+  
+  /* Obtem um numero do usuario */
+  printf("Entre com o numero de peras: ");
+  scanf("%d", &amp;num);
+  
+  /* Como corrigir o problema (este programa funciona) */
+  if (num != 0) {
+    if (num == 1)
+      printf("Voce tem uma pera.\n");
+  }  else
+    printf("Voce nao tem nenhuma pera.\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H4><A NAME="SECTION00071020000000000000">
+Exerc&#237;cio 1:</A>
+</H4>
+  Fa&#231;a um programa que leia 3 n&#250;meros e imprima o maior.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void) 
+{
+  int a, b, c, maior;
+
+  printf("Entre com os tres numeros: ");
+  scanf("%d %d %d", &amp;a, &amp;b, &amp;c);
+  
+  if (a &gt; b)
+    maior = a;
+  else
+    maior = b;
+
+  if (maior &lt; c)
+    maior = c;
+
+  printf("O Maior numero eh %d\n", maior);
+
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<HR>
+<A NAME="tex2html291"
+  HREF="notas_proc-node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html289"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html283"
+  HREF="notas_proc-node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html292"
+  HREF="notas_proc-node8.html">8 Operadores Lógicos</A>
+<B>Up:</B> <A NAME="tex2html290"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html284"
+  HREF="notas_proc-node6.html">6 Ordem sequencial de</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+nome_arq=arq_exemplo
+
+#            cat arq_exemplo
+#
+#            1 a b c
+#            2 d e fg
+
+
+declare -a array_1
+
+array_1=( `cat "$nome_arq" | tr '\n' ' '`)  # Carrega conteudo de
+                                            # $nome_arq em array_1.
+                                            #      lista arquivo para STDOUT
+                                            #      muda <linefeeds> no arquivo para espacos (ver tr(1)).
+
+echo ${array_1[@]}            # Lista o array
+                              #     1 a b c 2 d e fg
+                              #     
+                              #     Cada palavra no arquivo foi atribuida
+                              #     a um elemento do array
+
+contagem_elementos=${#array_1[*]}
+echo $contagem_elementos          # 8 elementos
+

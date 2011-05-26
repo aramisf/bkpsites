@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Passando um array para uma funcao e...
+#   "retornando" um array da funcao.
+
+
+Pass_Array ()
+{
+  local passed_array   # variavel local
+
+  #  Lista todos os elementos do novo array
+  #   definido dentro da funcao.
+  passed_array=( `echo "$1"` )
+  echo "${passed_array[@]}"
+}
+
+
+array_original=( elemento_1 elemento_2 elemento_3 elemento_4 elemento_5 )
+
+echo
+#  Lista todos os elementos do array original.
+echo "array_original = ${array_original[@]}"
+
+
+# Este eh o truque que permite passar um array para uma funcao
+# **********************************
+#  Define uma variavel com todos os elementos do array original
+#
+#  Note que tentar apenas passar o proprio array nao funciona.
+## argumento=`echo ${array_original[@]}`
+argumento="${array_original[*]}"
+# **********************************
+
+# Este eh o truque que permite recuperar um array "retornado" por uma funcao
+# *****************************************
+# Atribui a saída 'echoada' pela funcao a uma variavel do tipo array.
+## array_retornado=( `Pass_Array "$argumento"` )
+array_retornado=( `Pass_Array "$argumento"` )
+# *****************************************
+
+echo "array_retornado = ${array_retornado[@]}"
+
+echo "============================================================="
+
+#  Agora, tentando novamente, listando o array de fora da funcao.
+Pass_Array "$argumento"
+
+# A funcao lista o array, mas...
+#  acessar o array de fora da funcao nao eh possivel,
+#  pois o array eh local.
+echo "Array passed_array (dentro da funcao Pass_Array) = ${passed_array[@]}"
+
+echo
+
+exit 0

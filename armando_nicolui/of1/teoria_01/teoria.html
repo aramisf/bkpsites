@@ -1,0 +1,655 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 01
+</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 01
+">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>Notas de Aula # 01
+<BR></H1><DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+1 Apresenta&#231;&#227;o da Disciplina</A>
+</H1>
+
+<P>
+
+<OL>
+<LI>Ementa, objetivos,  bibliografia b&#225;sica e informa&#231;&#245;es importantes
+  quanto ao  uso dos recursos  computacionais dos laborat&#243;rios  do DInf
+  podem  ser   encontrados  na  <A NAME="tex2html1"
+  HREF="http://www.inf.ufpr.br/~nicolui/UFPR/Graduacao/CI066">p&#225;gina   web  da
+  disciplina</A>;
+</LI>
+<LI>Na            p&#225;gina           referente            ao
+
+<A NAME="tex2html2"
+  HREF="http://www.inf.ufpr.br/~nicolui/UFPR/Graduacao/CI066/2-2004">1&ordm;&nbsp;semestre 2004</A>
+constam:   Conte&#250;do
+  program&#225;tico, crit&#233;rios  de avalia&#231;&#227;o,  di&#225;rio de notas  e frequ&#234;ncia
+  dos alunos, e acesso ao material did&#225;tico;
+</LI>
+<LI>Hor&#225;rios     de    atendimento     a     alunos    s&#227;o
+  encontrados na <A NAME="tex2html3"
+  HREF="http://www.inf.ufpr.br/~nicolui/contact.html">p&#225;gina do professor da
+  disciplina</A>; 
+</LI>
+<LI>O aluno deve sempre consultar a se&#231;&#227;o <B>AVISOS IMPORTANTES</B>
+
+ao             final             da             p&#225;gina             do
+  <A NAME="tex2html4"
+  HREF="http://www.inf.ufpr.br/~nicolui/UFPR/Graduacao/CI066/2-2004">1&ordm;&nbsp;semestre 2004</A>.  L&#225;  estar&#225; o Di&#225;rio
+
+de  Notas  e  Freq&#252;&#234;ncia,  bem  como outras  not&#237;cias  e  observa&#231;&#245;es
+  relacionadas ao andamento da disciplina no semestre.
+</LI>
+</OL>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+2 IN&#205;CIO - Introdu&#231;&#227;o ao Sistema UNIX</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>Sistema operacional <B>multiusu&#225;rio</B> e
+  <B>multitarefas</B>;
+</LI>
+<LI>Diversos desenvolvedores ou distribuidores:
+  
+<UL>
+<LI>AT&amp;T - UNIX System V
+</LI>
+<LI>Universidade de Berkley - UNIX BSD
+</LI>
+<LI>IBM AIX
+</LI>
+<LI>HP-UX
+</LI>
+<LI>SunOS
+</LI>
+<LI>Linux
+    
+<UL>
+<LI>Slackware
+</LI>
+<LI>Debian
+</LI>
+<LI>Conectiva
+</LI>
+<LI>Red Hat
+</LI>
+<LI>Mandrake
+</LI>
+<LI>Suse
+    
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<P>
+</LI>
+<LI>Arquitetura geral (Figura&nbsp;<A HREF="#fig:arquiteturaUNIX">1</A>):
+  
+<DIV ALIGN="CENTER"><A NAME="fig:arquiteturaUNIX"></A><A NAME="121"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 1:</STRONG>
+Organiza&#231;&#227;o em Camadas do UNIX</CAPTION>
+<TR><TD><IMG
+ WIDTH="481" HEIGHT="481" ALIGN="CENTER"
+ SRC="teoria-img1.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.6]{arquiteturaUNIX}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+</LI>
+<LI><B>Shell</B>: respons&#225;vel pela intera&#231;&#227;o entre usu&#225;rio e
+  sistema operacional;
+  
+<UL>
+<LI>Interface com usu&#225;rio &#233; textual;
+</LI>
+<LI>Principais tarefas:
+    
+<UL>
+<LI>Exame da linha de comando;
+</LI>
+<LI>Programa ou Comando X Atribui&#231;&#227;o de valores:
+      
+<UL>
+<LI>Vari&#225;veis de Ambiente (PATH, MANPATH, etc.);
+</LI>
+<LI>Redirecionamentos de entrada e sa&#237;da;
+</LI>
+<LI>Verifica&#231;&#227;o de permiss&#245;es de acesso e execu&#231;&#227;o;
+      
+</LI>
+</UL>
+</LI>
+<LI>Substitui&#231;&#227;o de <B>metacaracteres</B>;
+</LI>
+<LI>Passar a linha de comando para o <I>kernel</I> para que
+    este efetivamente providencie a execu&#231;&#227;o do programa (Processos).
+    
+</LI>
+</UL>
+</LI>
+<LI>Tipos de Shell:
+    
+<UL>
+<LI>Bourne shell  (comando <B>sh</B>);
+</LI>
+<LI>C shell  (comando <B>csh</B>);
+</LI>
+<LI>Bourne-again shell  (comando <B>bash</B>);
+</LI>
+<LI>Korn shell  (comando <B>ksh</B>);
+    
+</LI>
+</UL>
+
+<P>
+Esta disciplina usar&#225; o <B>bash</B>, que &#233; padr&#227;o em
+    distribui&#231;&#245;es Linux;
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Comandos em Unix</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>Programa = comando;
+</LI>
+<LI>Estrutura geral:
+<PRE>
+           &lt;nome&gt;   &lt;opcoes&gt;   &lt;argumentos&gt;
+</PRE>
+
+<P>
+Exemplos:
+<PRE>
+            ls -l /usr/lib
+            date
+            grep Lili carta.txt
+            awk -f prog.awk  lista.txt
+</PRE>
+
+<P>
+Op&#231;&#245;es podem ter seus pr&#243;prios argumentos;
+
+<P>
+</LI>
+<LI>Interpreta&#231;&#227;o dos argumentos &#233; feita pelo programa;
+</LI>
+<LI>Expans&#227;o dos <B>Meta-caracteres</B> &#233; feita pelo Shell
+  <B>antes da execu&#231;&#227;o do programa</B>.
+
+<P>
+<B>*</B>     Zero (0) ou mais caracteres
+
+<P>
+<B>[&nbsp;&nbsp;]</B>  Um (1) caracter, dentre os indicados entre colchetes
+
+<P>
+<B>?</B>  Exatamente um (1) caracter (qualquer um)
+
+<P>
+Exemplos:
+<PRE>
+             ls a*.[0-9]    - mostra uma lista de todos os arquivos
+                              cujo nome começa com letra "a" e termina
+                              com o sufixo formado por "." (ponto)
+                              seguido de um dígito de 0 (zero) a 9
+                              (nove)
+
+             cp [a-z]* /home/delgado/tmp  - copia para o diretório
+                                            "tmp" todos os arquivos
+                                            cujo nome começa com uma
+                                            letra minúscula
+
+             rm [adf]*     - remove todos os arquivos cujo nome começa
+                                            com uma das letras
+                                            indicadas ("a", "d" ou "f")
+</PRE>
+
+<P>
+</LI>
+<LI>Comandos B&#225;sicos:
+  <DL>
+<DT><STRONG>ls</STRONG></DT>
+<DD>- mostra rela&#231;&#227;o dos arquivos em um diret&#243;rio;
+  
+</DD>
+<DT><STRONG>cat</STRONG></DT>
+<DD>- mostra conte&#250;do de um arquivo, sem pausa;
+  
+</DD>
+<DT><STRONG>more, less</STRONG></DT>
+<DD>- mostra conte&#250;do de um arquivo, com pausa;
+  
+</DD>
+<DT><STRONG>man</STRONG></DT>
+<DD>- mostra texto de ajuda sobre diversos comandos do
+    sistema;
+  
+</DD>
+<DT><STRONG>rm</STRONG></DT>
+<DD>- remove arquivos. ATEN&#199;&#195;O NO USO DE META-CARACTERES;
+  
+</DD>
+<DT><STRONG>mkdir</STRONG></DT>
+<DD>- cria diret&#243;rio ou sub-&#225;rvore de diret&#243;rios;
+  
+</DD>
+<DT><STRONG>cd</STRONG></DT>
+<DD>- muda o diret&#243;rio corrente;
+  
+</DD>
+<DT><STRONG>cp</STRONG></DT>
+<DD>- copia um arquivo para outro diret&#243;rio;
+  
+</DD>
+<DT><STRONG>passwd</STRONG></DT>
+<DD>- muda a senha de acesso ao sistema.
+  
+</DD>
+</DL>
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+4 Usando o Sistema UNIX</A>
+</H1>
+
+<P>
+Os computadores do DInf utilizam o Linux, mais especificamente a
+distribui&#231;&#227;o <A NAME="tex2html6"
+  HREF="http://www.debian.org/">Debian 3.0
+  ``woody''</A>.
+
+<P>
+
+<H2><A NAME="SECTION00041000000000000000">
+4.1 Acesso ao Sistema</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Conta + Senha  =  <I>Login</I>
+</LI>
+<LI>Ambiente do Usu&#225;rio ap&#243;s o procedimento de <I>login</I>:
+  
+<UL>
+<LI>Diret&#243;rio HOME (tamb&#233;m conhecido por diret&#243;rio de
+    <I>login</I>);
+</LI>
+<LI>Configura&#231;&#227;o do ambiente do usu&#225;rio: execu&#231;&#227;o do comando
+    <FONT FACE="Helvetica, Arial, sans-serif"><B><FONT SIZE=3>~</FONT>ci066/bin/configuser ci066</B></FONT>
+</LI>
+<LI><I>Prompt</I> indica ao usu&#225;rio que sistema est&#225; pronto para
+    executar comandos;
+  
+</LI>
+</UL>
+</LI>
+<LI>Escolha de Senha:
+  
+<UL>
+<LI>6 a 8 caracteres;
+</LI>
+<LI>Pelo menos 2 d&#237;gitos;
+</LI>
+<LI>Bom ter letras MAI&#218;SCULAS e min&#250;sculas;
+</LI>
+<LI>Evitar senhas &#243;bvias
+    
+<UL>
+<LI>datas;
+</LI>
+<LI>nomes de entes queridos (m&#227;e, namorada, cachorro, nome que
+      voc&#234; usa para se referir a sua sogra, etc.);
+</LI>
+<LI>combina&#231;&#245;es &#243;bvias de palavras;
+</LI>
+<LI>qualquer nome ou n&#250;mero que possa estar publicamente ligado a
+      sua  pessoa (e.g, seu pr&#243;prio nome, seu <I>username</I>, n&#250;mero de
+      matr&#237;cula na UFPR, R.G.);
+</LI>
+<LI>palavras que  possam  ser encontradas  em dicion&#225;rios.
+    
+</LI>
+</UL>
+</LI>
+<LI>Aconselha-se:
+    
+<UL>
+<LI>utilizar a combina&#231;&#227;o de n&#250;meros e letras mai&#250;sculas e
+    min&#250;sculas;      
+</LI>
+<LI>utilizar caracteres especiais no meio da senha; por exemplo:
+
+<P>
+<DIV ALIGN="CENTER">
+<B>al#30/92</B></DIV>
+
+<P>
+</LI>
+<LI>utilizar abreviatura de frases f&#225;ceis para voc&#234; lembrar, como 
+      por exemplo:
+
+<P>
+<DIV ALIGN="CENTER">
+<B>E</B>u <B>c</B>hutei <B>M</B>inha <B>s</B>ogra <B>e</B>m
+        <B>1987</B>.<B>====<IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img2.png"
+ ALT="$&gt;$"> EcMse1987</B></DIV>
+</LI>
+</UL>
+</LI>
+<LI>Trocar senhas periodicamente com o comando <B>passwd</B>;
+</LI>
+<LI>QUAISQUER PROBLEMAS COM O ACESSO &#192; CONTA DEVEM SER ENCAMINHADOS
+    AO SUPORTE DO LABORAT&#211;RIO, com a Srta. Andrea (Sala 13, Gabinete
+    dos Professores).
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00042000000000000000">
+4.2 Navegadores Web</A>
+</H2>
+
+<P>
+Os  sistemas  do  DInf possuem  v&#225;rios  navegadores (<I>web
+  browsers</I>) instalados:
+  
+<UL>
+<LI>Mozilla 1.7.x: ativado pelo comando <B>mozilla</B>;
+</LI>
+<LI>Firefox1.0.x: ativado pelo comando <B>firefox</B>
+</LI>
+<LI>Gnome Galeon: ativado pelo comando <B>galeon</B>.
+  
+</LI>
+</UL>
+
+<P>
+Recomenda-se  ENFATICAMENTE que  o aluno  use o  <B>Firefox</B>
+  como seu navegador durante esta disciplina.
+
+<P>
+
+<H2><A NAME="SECTION00043000000000000000">
+4.3 Editor de Texto - Emacs</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Princ&#237;pios b&#225;sicos:
+  
+<UL>
+<LI><I>Buffers</I> e arquivos
+</LI>
+<LI>Tela do Emacs (Figura&nbsp;<A HREF="#fig:telaEMACS">2</A>)
+    
+<DIV ALIGN="CENTER"><A NAME="fig:telaEMACS"></A><A NAME="204"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 2:</STRONG>
+Tela do editor EMACS</CAPTION>
+<TR><TD><IMG
+ WIDTH="780" HEIGHT="544" ALIGN="CENTER"
+ SRC="teoria-img3.png"
+ ALT="\begin{figure}\begin{center}
+\includegraphics[scale=0.8]{telaEMACS}
+\end{center} \end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+</LI>
+</UL>
+</LI>
+<LI>Opera&#231;&#245;es b&#225;sicas:
+  
+<UL>
+<LI>Teclas <B>Ctrl</B> (nota&#231;&#227;o: <B>C-</B>) e <B>ESC</B>
+  (nota&#231;&#227;o: <B>M-</B> ou <B>Meta-</B>)
+</LI>
+<LI>Apagar caracter &#224; esquerda do cursor de texto: <I>BACKSPACE</I> 
+</LI>
+<LI>Apagar caracter sob o cursor de texto: <I>Ctrl-d</I> 
+</LI>
+<LI>Apagar todos os caracteres desde sob o cursor de texto at&#233; o final da linha: <I>Ctrl-k</I> 
+</LI>
+<LI>Desfazer opera&#231;&#227;o anterior (<I>Undo</I>): <I>Ctrl-_</I> 
+</LI>
+<LI>Salvar TODOS os <I>buffers</I> e terminar o programa:
+    <I>Ctrl-x Ctrl-c</I> 
+</LI>
+<LI>Salvar, mas continuar editando:
+    
+<UL>
+<LI><I>Ctrl-x Ctrl-s</I>: salva <I>buffer</I> corrente
+</LI>
+<LI><I>Ctrl-x S</I>: salva TODOS os <I>buffers</I>, com
+      confirma&#231;&#227;o
+    
+</LI>
+</UL>
+</LI>
+<LI>Teclas de dire&#231;&#227;o (<IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img4.png"
+ ALT="$\rightarrow$">, <IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="teoria-img5.png"
+ ALT="$\leftarrow$">,
+    <IMG
+ WIDTH="13" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img6.png"
+ ALT="$\uparrow$">, <IMG
+ WIDTH="13" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="teoria-img7.png"
+ ALT="$\downarrow$">): posiciona cursor de texto no
+    <I>buffer</I> corrente
+</LI>
+<LI>Cancela um comando emacs: <I>Ctrl-g</I>
+</LI>
+<LI>Busca incremental: <I>Ctrl-s</I> e <I>Ctrl-r</I>
+</LI>
+<LI>Abre um arquivo em um novo <I>buffer</I>: <I>Ctrl-x Ctrl-f</I> 
+    e <I>Ctrl-x 4 f</I> 
+</LI>
+<LI>Posiciona cursor de texto no in&#237;cio da linha:  <I>Ctrl-a</I> 
+</LI>
+<LI>Posiciona cursor de texto ao final da linha:  <I>Ctrl-e</I> 
+</LI>
+<LI><I>Chaveia</I> a posi&#231;&#227;o do cursor de texto entre janelas
+    internas do emacs:  <I>Ctrl-x o</I> 
+</LI>
+<LI><I>Chaveia</I> a posi&#231;&#227;o do cursor de texto entre <I>buffers</I>
+    do emacs:  <I>Ctrl-x b</I> 
+</LI>
+<LI>Busca incremental:<I>Ctrl-s</I> (para frente) e <I>Ctrl-r</I> (para tr&#225;s)
+</LI>
+<LI>Busca e substitui&#231;&#227;o: <I>M-%</I>
+</LI>
+<LI>Marcar bloco: Usar mouse para marcar bloco (an&#225;logo ao Word)
+</LI>
+<LI>Apagar bloco: <I>Ctrl-w</I>
+</LI>
+<LI>Copiar bloco: <I>M-w</I>
+</LI>
+<LI><I>Paste</I>: <I>Ctrl-y</I>
+</LI>
+<LI>OUTROS COMANDOS PARA EDI&#199;&#195;O, CONSULTAR REFER&#202;NCIAS
+    (<A
+ HREF="teoria.html#cameron96">1</A>) e (<A
+ HREF="teoria.html#pet02b">2</A>).
+  
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00044000000000000000">
+4.4 Correio Eletr&#244;nico - Configura&#231;&#227;o e Ferramentas</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Mailbox: configura&#231;&#227;o
+  
+<UL>
+<LI>Arquivo <I>$HOME/Mailbox</I> (default)
+</LI>
+<LI>H&#225; formas de se mudar este local: Configura&#231;&#227;o de ambiente
+  (pr&#243;ximas  aulas) E arquivo <I>$HOME/.forward</I>
+  
+</LI>
+</UL>
+</LI>
+<LI>Redirecionamento de mensagens
+  
+<UL>
+<LI>Arquivo <I>$HOME/.forward</I>
+</LI>
+<LI>Permiss&#227;o de leitura e escrita APENAS para <I>propriet&#225;rio
+      (owner)</I>
+</LI>
+<LI>Cont&#233;m endere&#231;os eletr&#244;nicos para onde mensagem deve ser
+    redirecionada (1 endere&#231;o por linha).
+    arquivo.
+</LI>
+</UL>
+</LI>
+<LI>Web Mail
+  
+<UL>
+<LI>CONFIGURA&#199;&#195;O:
+    
+<UL>
+<LI>Acessar s&#237;tio <B><TT><A NAME="tex2html8"
+  HREF="http://www.inf.ufpr.br/mail">http://www.inf.ufpr.br/mail</A></TT></B>
+</LI>
+<LI>Usar <I>login</I> e senha do
+      sistema. <B><FONT FACE="Helvetica, Arial, sans-serif">ATEN&#199;&#195;O:</FONT></B> Escolher
+      <B><FONT FACE="Helvetica, Arial, sans-serif">C3SL</FONT></B> como servidor de mensagens.
+</LI>
+<LI>As mensagens novas que chegam sempre v&#227;o estar em
+      <B>$HOME/Mailbox</B>.
+    
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+</LI>
+</UL>
+
+<P>
+Comando para configura&#231;&#227;o de Redirecionamento e Mailbox:
+<FONT FACE="Helvetica, Arial, sans-serif"><B><FONT SIZE=3>~</FONT>ci066/bin/configmail</B></FONT> (executado tamb&#233;m quando
+se executa o comando <FONT FACE="Helvetica, Arial, sans-serif"><B><FONT SIZE=3>~</FONT>ci066/bin/configuser</B></FONT>).
+
+<P>
+
+<H1><A NAME="SECTION00050000000000000000">
+5 Conclus&#227;o</A>
+</H1>
+
+<P>
+Entrega aos alunos das senhas de acesso aos computadores do LabInfo.
+
+<P>
+
+<P>
+<H2><A NAME="SECTIONREF">Bibliografia</A>
+</H2>
+
+<DL COMPACT>
+<DT><A NAME="cameron96">1</A>
+<DD>
+D.&nbsp;Cameron, B.&nbsp;Rosenblatt, and E.&nbsp;Raymond.
+<BR> <EM>Learning GNU Emacs</EM>.
+<BR> O'Reilly &amp; Associates, 2nd edition edition, 1996.
+
+<BR>
+<P>
+<DT><A NAME="pet02b">2</A>
+<DD>
+PET Inform&#225;tica.
+<BR> Linux Avan&#231;ado.
+<BR> UFPR, Outubro 2002.
+<BR> URL <TT>http://pet.inf.ufpr.br/&nbsp;daniel/download/linuxii.pdf</TT>.
+
+<BR>
+<P>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2005-08-15
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6 Ordem sequencial de execução de sentenças o comando condicional: if and if - else</TITLE>
+<META NAME="description" CONTENT="6 Ordem sequencial de execução de sentenças o comando condicional: if and if - else">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node7.html">
+<LINK REL="previous" HREF="notas_proc-node5.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node7.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html276"
+  HREF="notas_proc-node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html274"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html268"
+  HREF="notas_proc-node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html277"
+  HREF="notas_proc-node7.html">7 Aninhando senteças if</A>
+<B>Up:</B> <A NAME="tex2html275"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html269"
+  HREF="notas_proc-node5.html">5 Comandos de entrada</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html278"
+  HREF="notas_proc-node6.html#SECTION00060010000000000000">Exemplo 1:</A>
+<LI><A NAME="tex2html279"
+  HREF="notas_proc-node6.html#SECTION00060020000000000000">Exemplo 2:</A>
+<LI><A NAME="tex2html280"
+  HREF="notas_proc-node6.html#SECTION00060030000000000000">Exemplo 3:</A>
+<LI><A NAME="tex2html281"
+  HREF="notas_proc-node6.html#SECTION00060040000000000000">Exemplo 4:</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html282"
+  HREF="notas_proc-node6.html#SECTION00061000000000000000">6.1 Um erro comum</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00060000000000000000">
+6 Ordem sequencial de execu&#231;&#227;o de senten&#231;as 
+<BR>
+o comando condicional: <TT>if</TT> and <TT>if - else</TT></A>
+</H1>
+
+<P>
+A execu&#231;&#227;o de um programa C come&#231;a com a fun&#231;&#227;o <TT>main()</TT>.  Em todos
+os  exemplos  que vimos  at&#233;  este  momento,  senten&#231;as s&#227;o  executadas
+sequencialmente.  A  ordem sequencial de execu&#231;&#227;o de  sente&#231;as pode ser
+alterada se  certas condi&#231;&#245;es forem  satisfeitas durante a  execu&#231;&#227;o do
+programa.  Isto &#233; chamado <EM>desvio condicional</EM>.
+
+<P>
+Todas  as linguagens  de programa&#231;&#227;o  oferecem comandos  para  o desvio
+condicional.  O  mais simples  &#233; a sente&#231;a  <TT>if</TT>.  Em C, ele  tem o
+formato:
+
+<P>
+<TT>if</TT> (<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$">)
+
+<P>
+<IMG
+ WIDTH="73" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img21.png"
+ ALT="$sentenca$">
+
+<P>
+Quando uma senten&#231;a <TT>if</TT> &#233; encontrada em um programa,
+
+<OL>
+<LI>O teste na <IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$"> em par&#234;nteses &#233; avaliada.
+</LI>
+<LI>Se o valor da express&#227;o de teste for DIFERENTE de zero, a <EM>    senten&#231;a</EM> que segue a express&#227;o de teste &#233; executada.
+</LI>
+</OL>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="2374"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 1:</STRONG>
+O comando <TT>if</TT></CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="155" HEIGHT="274" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img22.png"
+ ALT="\includegraphics[scale=1.0]{if}"></DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Considere  o seguinte  exemplo que  converte uma  fra&#231;&#227;o  digitada pelo
+usu&#225;rio (numerador e denominador) em decimal e imprime o resultado:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void) 
+{
+  int a, b;
+  
+  printf("Entre com uma  fracao (numerador and denominador): ");
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  printf("A fracao em decimal eh %f\n", 1.0 * a / b);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+No exemplo acima, escrevemos  <TT>1.0 * a / b</TT>, j&#225;  que <TT>a</TT> e <TT>b</TT> s&#227;o  do tipo  <TT>int</TT>, e  portanto <TT>a / b</TT>  &#233; uma  divis&#227;o de
+inteiros  e  a parte  fracional  do  resultado  seria truncado,  o  que
+certamente n&#227;o &#233; o que desejamos.
+
+<P>
+Voce v&#234; algo errado neste programa ?  Uma coisa a ser notada &#233; que se o
+usu&#225;rio digitar um denominador igual a  <TT>0</TT>, n&#243;s teremos um erro de
+execu&#231;&#227;o, j&#225; que o programa  tentaria executar uma divis&#227;o por zero.  O
+que  &#233; necess&#225;rio fazer  &#233; testar  se o  denominador &#233;  igual a  zero e
+dividir s&#243; no caso dele for diferente de zero.  Poder&#237;amos reescrever o
+programa acima da seguinte forma:
+
+<P>
+
+<H4><A NAME="SECTION00060010000000000000">
+Exemplo 1:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void) 
+{
+  int a, b;
+  
+  printf("Entre com uma  fracao (numerador e denominador): ");
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  if (b != 0)
+    printf("A fracao em decimal eh %f\n", 1.0 * a / b);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H4><A NAME="SECTION00060020000000000000">
+Exemplo 2:</A>
+</H4>
+Programa que  l&#234; dois  n&#250;meros e  ordena o par  caso o  primeiro n&#250;mero
+digitado for maior que o segundo.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main() {
+  int num1, num2, aux;
+  
+  printf("Entre com dois numeros inteiros: ");
+  scanf("%d %d", &amp;num1, &amp;num2);
+
+  if (num1 &gt; num2) {
+    aux = num1;
+    num1 = num2;
+    num2 = aux;
+    printf("Trocou \n");
+  }
+
+  printf("Os numeros ordenados: %d %d\n", num1, num2);
+
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+O programa do  Exemplo 1 acima ficaria ainda melhor se  ao inv&#233;s de n&#227;o
+fazer nada no caso do denominador ser zero, imprimirmos uma mensagem de
+erro ao usu&#225;rio, explicando o que h&#225; de errado.
+
+<P>
+A senten&#231;a  em C  que permite  fazermos isso &#233;  o <TT>if -  else</TT>.  O
+formato do <TT>if-else</TT> &#233;:
+
+<P>
+
+<P>
+<TT>if</TT> (<IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$">)
+
+<P>
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img23.png"
+ ALT="$sentenca_{1}$">
+
+<P>
+<TT>else</TT>
+
+<P>
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img24.png"
+ ALT="$sentenca_{2}$">
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig-if-else"></A><A NAME="2376"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figura 2:</STRONG>
+O comando <TT>if-else</TT></CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="275" HEIGHT="295" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img25.png"
+ ALT="\includegraphics[scale=1.0]{if-else}"></DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Primeiro,  a  <IMG
+ WIDTH="82" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img16.png"
+ ALT="$expressao$"> (que  usualmente  chamamos  de  condi&#231;&#227;o)  &#233;
+avaliada.  Caso a condi&#231;&#227;o seja verdadeira (o que &#233; equivalente a dizer
+que o valor  &#233; diferente de zero), entao  a <IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img23.png"
+ ALT="$sentenca_{1}$"> &#233; executada.
+Caso contr&#225;rio, a <IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img24.png"
+ ALT="$sentenca_{2}$"> &#233; executada.
+
+<P>
+Note  que uma <EM>senten&#231;a</EM> pode  ser simples  ou composta.   Se voc&#234;
+quiser  agrupar diversas  senten&#231;as  para serem  executadas, voc&#234;  pode
+coloc&#225;-las entre chaves (<TT>{</TT> e <TT>}</TT>).
+
+<P>
+Por hora,  vamos continuar  com nosso exemplo  simples e  torn&#225;-lo mais
+explicativo:
+
+<P>
+
+<H4><A NAME="SECTION00060030000000000000">
+Exemplo 3:</A>
+</H4>
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void) 
+{
+  int a, b;
+  
+  printf("Entre com uma fracao (numerador and denominador): ");
+  scanf("%d %d", &amp;a, &amp;b);
+  
+  if (b != 0) 
+    printf("A fracao decimal e  %f\n", 1.0 * a / b);
+  else 
+    printf("Erro: denominador zero!\n");
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H4><A NAME="SECTION00060040000000000000">
+Exemplo 4:</A>
+</H4>
+Considere agora o exemplo j&#225; visto que pede que um usu&#225;rio entre com um
+n&#250;mero e  verifique se  o n&#250;mero  &#233; par.  Por&#233;m  agora, queremos  que o
+programa imprima ``o numero e par'' ou ``o numero e impar''.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+main(void)
+{
+  int num;
+  
+  /* obtem um numero do usuario */
+  printf("Entre com um inteiro: ");
+  scanf("%d", &amp;num);
+      
+  /* imprime uma mensagem dizendo se o numero e par ou impar */
+  if (num % 2 == 0)
+    printf("O numero e par.\n");
+  else
+    printf("O numero e impar.\n");      
+
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+
+<H2><A NAME="SECTION00061000000000000000">
+6.1 Um erro comum</A>
+</H2>
+
+<P>
+&#201; muito frequente utilizar o operador relacional <TT>==</TT> em express&#245;es
+condicionais da senten&#231;a <TT>if</TT>. Por exemplo:
+<PRE>
+    int  saldo = 2000;
+
+    if (saldo == 1)
+       printf("Voce esta quebrado! \n");
+    else 
+       printf("Seu saldo e %d\n", saldo);
+</PRE>
+
+<P>
+Como a senten&#231;a <TT>saldo = 2000 </TT> inicializa o valor da vari&#225;vel <TT>saldo</TT> com <TT>2000</TT>, a express&#227;o   <TT>saldo == 1 </TT>  tem valor <TT>0</TT>.  Portanto,  a sente&#231;a que  segue o <TT>else</TT> ser&#225; executada,  e a
+mensagem 
+<BR>
+<P>
+<TT>Seu saldo  e 2000</TT>
+<BR>
+<P>
+
+<P>
+ser&#225; impressa.
+
+<P>
+Agora, suponha  que, devido a um  erro, voc&#234; tenha colocado  <TT>=</TT> ao
+inv&#233;s de <TT>==</TT>:
+<PRE>
+    int saldo = 2000;
+
+    if (saldo = 1)
+       printf("Voce esta quebrado! \n");
+    else 
+       printf("Seu saldo e %d\n", saldo);
+</PRE>
+
+<P>
+Agora, a express&#227;o   <TT>saldo =  1 </TT> tem valor <TT>1</TT>.  Portanto, a
+senten&#231;a que  segue o <TT>if</TT> ser&#225; executada,  e a mensagem  
+<BR>
+<P>
+<TT>Voce  esta quebrado!</TT>
+<BR>
+<P>
+ser&#225; impressa.  Al&#233;m disso, a atribui&#231;&#227;o causar&#225; um efeito colateral, e
+alterar&#225; o valor de <TT>saldo</TT> para <TT>1</TT>.
+
+<P>
+Tal uso  do operador de atribui&#231;&#227;o  n&#227;o &#233; ilegal, e  n&#227;o ser&#225; detectado
+pelo compilador  como erro.  Portanto, <EM>tome cuidado com  o uso de
+atribui&#231;&#227;o no  lugar de igualdade</EM>.   Tal erro &#233;  muito comum, e  n&#227;o &#233;
+f&#225;cil de achar.
+
+<P>
+Como regra geral, N&#195;O utilize atribui&#231;&#245;es dentro de outras senten&#231;as.
+
+<P>
+<HR>
+<A NAME="tex2html276"
+  HREF="notas_proc-node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html274"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html268"
+  HREF="notas_proc-node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html277"
+  HREF="notas_proc-node7.html">7 Aninhando senteças if</A>
+<B>Up:</B> <A NAME="tex2html275"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html269"
+  HREF="notas_proc-node5.html">5 Comandos de entrada</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

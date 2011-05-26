@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in `find ~ -type f -print`; do
+    sed -e 's/Tibiriça \& Cia./Gomes \& Gomez Ltda./g' $i >$i.new
+    mv $i $i.org
+    mv $i.new $i
+done

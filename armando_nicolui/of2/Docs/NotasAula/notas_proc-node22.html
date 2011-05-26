@@ -1,0 +1,791 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>22 Mais sobre funções</TITLE>
+<META NAME="description" CONTENT="22 Mais sobre funções">
+<META NAME="keywords" CONTENT="notas_proc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="notas_proc.css">
+
+<LINK REL="next" HREF="notas_proc-node23.html">
+<LINK REL="previous" HREF="notas_proc-node21.html">
+<LINK REL="up" HREF="notas_proc.html">
+<LINK REL="next" HREF="notas_proc-node23.html">
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<A NAME="tex2html519"
+  HREF="notas_proc-node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html517"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html511"
+  HREF="notas_proc-node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html520"
+  HREF="notas_proc-node23.html">23 Ativação de função</A>
+<B>Up:</B> <A NAME="tex2html518"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html512"
+  HREF="notas_proc-node21.html">21 O pré-processador</A>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsec&ccedil;&otilde;es</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html521"
+  HREF="notas_proc-node22.html#SECTION000220010000000000000">Variáveis Locais</A>
+<LI><A NAME="tex2html522"
+  HREF="notas_proc-node22.html#SECTION000220020000000000000">Variáveis Globais</A>
+<LI><A NAME="tex2html523"
+  HREF="notas_proc-node22.html#SECTION000220030000000000000">Escopo de Variáveis</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html524"
+  HREF="notas_proc-node22.html#SECTION000221000000000000000">22.1 Outro exemplo</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION000220000000000000000">
+22 Mais sobre fun&#231;&#245;es</A>
+</H1>
+
+<P>
+A &#234;nfase  aqui ser&#225; em como  fun&#231;&#245;es funcionam.  O  que acontece quando
+uma fun&#231;&#227;o &#233; chamada ?  A que vari&#225;vel um nome est&#225; se referenciando?
+
+<P>
+O tratamento em tempo de execu&#231;&#227;o de um nome de vari&#225;vel em C &#233; simples:
+um nome de vari&#225;vel &#233; ou  uma vari&#225;vel local (a fun&#231;&#227;o) ou uma vari&#225;vel
+global (definida fora de qualquer fun&#231;&#227;o).
+
+<P>
+Em C,  todas as fun&#231;&#245;es tem  que ser definidas.  Para  cada fun&#231;&#227;o deve
+ser  definido um  prot&#243;tipo.  O  prot&#243;tipo &#233;  escrito fora  de qualquer
+fun&#231;&#227;o.   Desta forma,  nomes de  fun&#231;&#245;es  s&#227;o vis&#237;veis  para todas  as
+outras fun&#231;&#245;es  que podem  ent&#227;o invoc&#225;-las.  A  fun&#231;&#227;o <TT>main()</TT> &#233;
+especial: &#233; onde  a execu&#231;&#227;o do programa come&#231;a, e  o prot&#243;tipo de <TT>main()</TT> pode ser omitido.
+
+<P>
+Uma defini&#231;&#227;o de fun&#231;&#227;o consiste de quatro partes:
+
+<OL>
+<LI>o nome da fun&#231;&#227;o;
+</LI>
+<LI>a lista  de par&#226;metros formais (argumentos) com  seus nomes e
+  tipos.   Se n&#227;o  houver argumentos,  a palavra  <TT>void</TT>  &#233; escrita
+  entre os par&#234;nteses.
+</LI>
+<LI>o tipo do resultado que a fun&#231;&#227;o retorna atrav&#233;s da senten&#231;a <TT>  return</TT>  ou  <TT>void</TT>  se  a  fun&#231;&#227;o  n&#227;o  retorna  nenhum  valor.
+  Lembre-se que  somente um valor  pode ser retornado por  uma senten&#231;a
+  <TT>return</TT>.
+</LI>
+<LI>o corpo da fun&#231;&#227;o, que  &#233; uma senten&#231;a composta (come&#231;a e termina
+  com  chaves (<code>{  }</code>) contendo  defini&#231;&#227;o de  vari&#225;veis  e outras
+  senten&#231;as.  Em C, n&#227;o se pode definir uma fun&#231;&#227;o dentro de outra.
+</LI>
+</OL>
+
+<P>
+Para fun&#231;&#245;es com argumentos: uma fun&#231;&#227;o &#233; chamada dando o seu
+nome e uma lista de argumentos (express&#245;es que s&#227;o avaliadas e cujos
+valores s&#227;o atribu&#237;dos para os correspondentes par&#226;metros formais
+da fun&#231;&#227;o).  
+
+<P>
+Por exemplo, suponha que <TT>triang<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">area()</TT> e <TT>circ<IMG
+ WIDTH="6" HEIGHT="1" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img48.png"
+ ALT="\und">
+area()</TT> sejam fun&#231;&#245;es que calculam a &#225;rea de tri&#226;ngulos e
+c&#237;rculos, respectivamente.  Seus prot&#243;tipos s&#227;o:
+
+<P>
+<PRE>
+float triang_area(float , float);
+float circ_area(float);
+</PRE>
+
+<P>
+Estas fun&#231;&#245;es podem chamadas de dentro de outras fun&#231;&#245;es.  Os
+argumentos reais com os quais elas s&#227;o chamadas podem ser express&#245;es
+constantes, or vari&#225;veis locais, ou qualquer express&#227;o cuja
+avalia&#231;&#227;o resulte em valores do tipo <TT>float</TT> (inteiros s&#227;o
+convertidos para <TT>float</TT> da mesma forma que ocorre com
+atribui&#231;&#227;o de inteiros para vari&#225;veis do tipo <TT>float</TT>).
+Alguns exemplos de chamadas:
+<PRE>
+float  area2, area3, area4, area5, base, altura, raio;
+
+printf("area do triangulo = ", triang_area(0.03, 1.25));
+base = 0.03;
+altura = 1.25;
+area2 = triang_area(base, altura);
+area3 = triang_area(1.6, altura);
+area4 = triang_area( 0.03 + base, 2 * altura);
+raio = base + altura;
+area5 = triang_area(raio, circ_area(raio));
+</PRE>
+
+<P>
+A &#250;ltima  senten&#231;a do  exemplo acima atribui  a vari&#225;vel <TT>area5</TT> a
+&#225;rea de  um tri&#226;ngulo cuja base  &#233; igual ao valor  da vari&#225;vel <TT>raio</TT> e a altura &#233; igual a area de um c&#237;rculo de raio igual ao valor da
+vari&#225;vel <TT>raio</TT>.
+
+<P>
+Quando um programa &#233; executado, somente uma &#250;nica fun&#231;&#227;o tem o controle
+em determinado momento.  Falaremos mais sobre o que acontece quando uma
+fun&#231;&#227;o &#233; chamada mais tarde nestas notas de aula.
+
+<P>
+
+<H4><A NAME="SECTION000220010000000000000">
+Vari&#225;veis Locais</A>
+</H4>
+<B>Vari&#225;veis  que s&#227;o  definidas dentro de  uma fun&#231;&#227;o  s&#227;o vari&#225;veis
+locais  desta  fun&#231;&#227;o.   Par&#226;metros   formais  de  uma  fun&#231;&#227;o  s&#227;o
+vari&#225;veis locais da fun&#231;&#227;o.</B>   Vari&#225;veis locais s&#227;o privativas a fun&#231;&#227;o
+na  qual s&#227;o  definidas.   Somente esta  fun&#231;&#227;o  pode enxerg&#225;-las  (ela
+conhece  o  endere&#231;o  das vari&#225;veis  e  pode  usar  e modificar  o  seu
+conte&#250;do).  Nenhuma outra fun&#231;&#227;o pode acessar vari&#225;veis locais de outra
+fun&#231;&#227;o sem permiss&#227;o (uma fun&#231;&#227;o pode acessar vari&#225;veis locais de outra
+se  esta passar o  endere&#231;o da  vari&#225;vel local  como argumento  - este
+assunto ser&#225; tratado em notas de  aula futuras).  O fato de cada fun&#231;&#227;o
+manter  vari&#225;veis locais ``escondidas''  do resto  do mundo  torna mais
+f&#225;cil a tarefa de  escrever programas estruturados e modulares.  Quando
+voc&#234; est&#225; escrevendo uma fun&#231;&#227;o, voc&#234; pode dar as suas vari&#225;veis locais
+o  nome que  quiser.  Voc&#234;  tamb&#233;m n&#227;o  precisa se  preocupar  se outra
+pessoa escrevendo outra fun&#231;&#227;o ter&#225; acesso ou altera vari&#225;veis locais a
+sua fun&#231;&#227;o.
+
+<P>
+<B>Vari&#225;veis locais  que s&#227;o  definidas dentro  da fun&#231;&#227;o  devem ser
+inicializadas com algum valor  antes de serem usadas.</B>  Caso contr&#225;rio,
+o seu valor &#233; indefinido.
+
+<P>
+J&#225; que par&#226;metros formais  (argumentos) s&#227;o vari&#225;veis locais da fun&#231;&#227;o,
+eles podem ser usados no corpo da fun&#231;&#227;o.  Eles n&#227;o devem ser definidos
+dentro da  fun&#231;&#227;o (sua defini&#231;&#227;o j&#225;  est&#225; no cabe&#231;alho  da fun&#231;&#227;o).  Os
+par&#226;metros formais  n&#227;o precisam  ser inicializados.  Seus  valores s&#227;o
+fornecidos pelo chamador da fun&#231;&#227;o atrav&#233;s dos argumentos reais.
+
+<P>
+Considere o seguinte exemplo:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>/*****************************************************************
+ * Um programa que calcula a area de triangulos e circulos.
+ * A base, altura e raio sao fornecidos pelo usuario.
+ * A saida do programa e a area do triangulo e circulo.
+ *****************************************************************/
+
+#include &lt;stdio.h&gt;
+
+#define PI 3.1415
+
+/*******************
+    prototipos 
+*******************/
+float triang_area(float, float);
+float circ_area(float);
+
+/*******************
+definicao de funcoes
+*******************/
+
+main(void)
+{
+  /* definicao das variaveis locais */
+  float   base, altura, raio;
+  
+  /* dialogo de entrada */
+  printf("\nEntre com a base e altura do triangulo: ");
+  scanf("%f %f", &amp;base, &amp;altura);
+  printf("\nEntre com o raio do circulo: ");
+  scanf("%f", &amp;raio);
+  
+  /* chama as funcoes e imprime o resultado */
+  printf("Area do triagulo com base e altura %f e %f = %f\n",
+	 base, altura, triang_area(base, altura));
+  printf("Area do circulo com raio %f = %f\n", raio, circ_area(raio));
+}
+
+/*****************************************************************
+ * funcao: triang_area
+ * calcula a area de um triangulo dada a base e altura
+ * Entrada: base e altura do triangulo
+ * Saida: area do triangulo
+ *****************************************************************/
+float triang_area(float base, float alt)
+{
+  return 0.5*base*alt;
+}
+
+/*****************************************************************
+ * funcao: circ_area
+ * calcula a area de um circulo dado o raio
+ * Entrada: raio do circulo
+ * Saida: area do circulo
+ *****************************************************************/
+float circ_area(float r)
+{
+  return PI*r*r;
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Este  programa   C  consiste  de  tr&#234;s  fun&#231;&#245;es,   <TT>main()</TT>,  <TT>triang_area()</TT>,  e  <TT>circ_area()</TT>.   <TT>main()</TT> tem  vari&#225;veis
+locais chamadas  <TT>base, altura</TT> e <TT>raio</TT>; <TT>triang_area()</TT>
+tem como  vari&#225;veis locai  seus par&#226;metros formais,  <TT>base</TT>  e <TT>alt</TT>; <TT>circ_area()</TT> tem como vari&#225;vel local  seu par&#226;metro formal
+<TT>r</TT>.
+
+<P>
+Em geral, uma vari&#225;vel local s&#243;  existe durante a execu&#231;&#227;o da fun&#231;&#227;o na
+qual  ela est&#225; definida.   Portanto, vari&#225;veis  locais existem  desde o
+momento  que a  fun&#231;&#227;o  &#233;  chamada at&#233;  o  momento em  que  a fun&#231;&#227;o  &#233;
+completada.  Tais vari&#225;veis s&#227;o chamadas de <TT>automatic</TT>.  Em C, uma
+vari&#225;vel pode  ser definida como  sendo <TT>static</TT>.  Neste  caso, uma
+vari&#225;vel local n&#227;o &#233; vis&#237;vel de fora  do corpo da fun&#231;&#227;o, mas ela n&#227;o &#233;
+destru&#237;da no final da fun&#231;&#227;o  como vari&#225;veis autom&#225;ticas s&#227;o.  Cada vez
+que a  fun&#231;&#227;o &#233; chamada, o valor  das vari&#225;veis <EM>static</EM>  &#233; o valor
+final da vari&#225;vel da chamada anterior.
+
+<P>
+
+<H4><A NAME="SECTION000220020000000000000">
+Vari&#225;veis Globais</A>
+</H4>  
+
+<P>
+At&#233; este momento, todas as  vari&#225;veis que vimos s&#227;o definidas dentro de
+fun&#231;&#245;es (no  corpo da fun&#231;&#227;o  ou como par&#226;metros formais).   &#233; poss&#237;vel
+tamb&#233;m definir  vari&#225;veis <EM>fora</EM>  das fun&#231;&#245;es.  Tais  vari&#225;veis s&#227;o
+chamadas de  <EM>vari&#225;veis globais</EM>  ou <EM>externas</EM>.  O  formato da
+defini&#231;&#227;o  de vari&#225;veis  globais &#233;  o mesmo  da defini&#231;&#227;o  de vari&#225;veis
+locais.   A  &#250;nica  diferen&#231;a  &#233;  <EM>onde</EM>  a  vari&#225;vel  &#233;  definida:
+vari&#225;veis globais s&#227;o definidas  fora de qualquer fun&#231;&#227;o.  Ao contr&#225;rio
+das vari&#225;veis locais,  vari&#225;veis globais podem ser vistas  por todas as
+fun&#231;&#245;es definidas ap&#243;s a defini&#231;&#227;o das vari&#225;veis globais.
+
+<P>
+N&#243;s temos usado declara&#231;&#245;es ``globais'' este tempo todo - por exemplo,
+as declara&#231;&#245;es de  prot&#243;tipos de fun&#231;&#245;es.  Elas s&#227;o  declaradas fora de
+qualquer fun&#231;&#227;o e  podem ser vistas por qualquer  fun&#231;&#227;o que est&#227;o ap&#243;s
+sua declara&#231;&#227;o.
+
+<P>
+No exemplo seguinte, uma vari&#225;vel <TT>saldo</TT> que &#233; atualizada por tr&#234;s
+fun&#231;&#245;es  diferentes  &#233; definida  como  uma  vari&#225;vel  global.  As  tr&#234;s
+fun&#231;&#245;es que a atualizam n&#227;o chamam uma a outra.
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>/*****************************************************************
+ * Caixa eletronico simples
+ * o saldo e o valor a ser alterado e entrado pelo usuario
+ * a saida do programa e' o saldo atualizado, incluindo juros
+ *****************************************************************/
+
+#include &lt;stdio.h&gt;
+
+#define JUROS 0.07
+
+/*******************
+    prototipos 
+*******************/
+void credito(float);
+void debito(float);
+void juros(void);
+
+/*******************
+      globais
+ *******************/
+float saldo;  /* saldo atual;
+	       * Alterada em: credito(), debito(), juros(), main()
+	       * Lida em:    
+	       */
+
+
+/***********************
+  definicao de funcoes
+ ***********************/
+
+main(void)
+{
+   float valor;                       /* valor a ser  depositado/retirado  */
+
+   printf("Entre com o saldo atual: ");
+   scanf("%f",&amp;saldo);
+   printf("Deposito: ");
+   scanf("%f", &amp;valor);
+   credito(valor);
+   printf("Retirada: ");
+   scanf("%f", &amp;valor);
+   debito(valor);
+   juros();                         
+   printf("Juros 7%%.\n");
+   printf("Saldo = :  %.2f\n ", saldo);
+}
+
+/*****************************************************************
+ * Deposita um valor; atualiza a variavel global saldo
+ * Entrada: valor a ser depositado
+ * Saida: nenhum
+ *****************************************************************/
+void credito(float val)
+{
+   saldo += val;
+}
+
+/*****************************************************************
+ * Debita um valor; atualiza a variavel global saldo
+ * Entrada: valor a ser debitado
+ * Saida: nenhum
+ *****************************************************************/
+void debito(float val)
+{
+   saldo -= val;
+}
+
+/*****************************************************************
+ * Acumula juros; atualiza a variavel global saldo; juros: RATE
+ * Entrada: nenhuma
+ * Saida: nenhuma
+ *****************************************************************/
+void juros(void)
+{
+  saldo += (saldo * JUROS);
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Um exemplo de execu&#231;&#227;o do programa:
+
+<P>
+<PRE>
+        Entre com o saldo atual: 1000
+        Deposito: 200
+        Retirada: 80
+        Juros 7%.
+        Saldo =  1198.40
+</PRE>
+
+<P>
+Vari&#225;veis globais devem ser  usadas <B>SOMENTE</B> quando muitas fun&#231;&#245;es
+usam muito as mesmas vari&#225;veis.  No entanto, o uso de vari&#225;veis globais
+&#233; perigoso (e  n&#227;o recomendado) porque a modularidade  do programa pode
+ser afetada.   Uma vari&#225;vel global pode  ser alterada de  dentro de uma
+fun&#231;&#227;o, e esta altera&#231;&#227;o pode influir no resultado de uma outra fun&#231;&#227;o,
+tornando-a incorreta  (em um exemplo dado  posteriormente nestas notas,
+duas chamadas  a fun&#231;&#227;o  <TT>soma_y()</TT> com  o mesmo  argumento (zero)
+produz resultados diferentes, <TT>100</TT> e <TT>300</TT>).
+
+<P>
+Quando vari&#225;veis  globais s&#227;o  utilizadas, deve ser  dado a  elas nomes
+descritivos e um breve coment&#225;rio qual a finalidade da vari&#225;vel e quais
+fun&#231;&#245;es a acessam.
+
+<P>
+Neste curso,  voc&#234; utilizar&#225; vari&#225;veis globais SOMENTE  QUANDO FOR DADO
+PERMISS&#227;O PARA  FAZ&#234;-LO.  Caso  contr&#225;rio, n&#227;o &#233;  permitido utiliz&#225;-las
+(ou seja, ser&#227;o descontados pontos).
+
+<P>
+
+<H4><A NAME="SECTION000220030000000000000">
+Escopo de Vari&#225;veis</A>
+</H4>  
+
+<P>
+Como j&#225; discutimos anteriormente, uma vari&#225;vel &#233; uma abstra&#231;&#227;o de dados
+que n&#243;s  usamos em um programa.   A vari&#225;vel representa  um endere&#231;o de
+mem&#243;ria  onde  os  valores  s&#227;o  armazenados.  Durante  a  execu&#231;&#227;o  do
+programa,  valores  diferentes poder  ser  armazenados neste  endere&#231;o.
+Quando uma vari&#225;vel &#233; definida, o  nome da vari&#225;vel &#233; ``atrelada'' a um
+endere&#231;o espec&#237;fico na mem&#243;ria.  At&#233;  este momento, j&#225; discutimos o que
+&#233;  o  nome  de  uma  vari&#225;vel,  seu  endere&#231;o,  tipo  e  valor.   Outra
+caracter&#237;stica que apresentaresmo agora &#233;  o <TT>escopo</TT>.  O escopo de
+uma  vari&#225;vel refere-se  a parte  do programa  onde podemos  utilizar a
+vari&#225;vel.  Em  outras, palavras, uma  vari&#225;vel &#233; ``vis&#237;vel''  dentro do
+seu escopo.
+
+<P>
+O escopo de uma  vari&#225;vel local &#233; a fun&#231;&#227;o na qual  ela &#233; definida.  Os
+par&#226;metros  formais de uma  fun&#231;&#227;o tamb&#233;m  s&#227;o tratados  como vari&#225;veis
+locais.
+
+<P>
+O  escopo de  uma vari&#225;vel  global  &#233; a  por&#231;&#227;o do  programa depois  da
+defini&#231;&#227;o da vari&#225;vel global (a partir do ponto onde ela &#233; definida at&#233;
+o final  do programa).
+
+<P>
+Se o nome de uma vari&#225;vel global &#233; id&#234;ntico a uma vari&#225;vel local de uma
+fun&#231;&#227;o, ent&#227;o  dentro desta  fun&#231;&#227;o em particular,  o nome  refere-se a
+vari&#225;vel local.  (Embora tais  conflitos devem ser evitados para evitar
+confus&#227;o).
+
+<P>
+Por exemplo, considere o seguinte programa:
+<PRE>
+int valor = 3;    /* definicao da variavel global */
+
+main()
+{
+   /* definicao local de  valor */
+   int valor = 4;
+   printf("%d\n", valor);
+}
+</PRE>
+
+<P>
+A sa&#237;da do programa acima ser&#225; <TT>4</TT> j&#225; que <TT>valor</TT> refere-se
+a defini&#231;&#227;o local.
+
+<P>
+Considere outro exemplo:
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>#include &lt;stdio.h&gt;
+
+int soma_y(int);
+int soma_yy(int);
+int y = 100;      /* variavel global  */
+
+main(void)
+{
+  int z = 0;      /* variavel local */
+
+  printf("%d\n", soma_y(z));
+  printf("%d\n", soma_yy(z));
+  printf("%d\n", soma_y(z));
+}
+
+int soma_y(int x)
+{
+  return x + y;   /* x e' variavel local, y e' global */
+}
+
+int soma_yy(int x)
+{
+  y = 300;        /* y e' variavel global */
+  return x + y;   /* x e' variavel local  */
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Vamos seguir  a execu&#231;&#227;o deste  programa.  Primeiro, a  vari&#225;vel global
+<TT>y</TT> &#233;  criada e inicializada com 100.  Ent&#227;o,  a execu&#231;&#227;o da fun&#231;&#227;o
+<TT>main()</TT> comeca: &#233; alocado  espa&#231;o na mem&#243;ria para a vari&#225;vel local
+<TT>z</TT>.  Esta  vari&#225;vel  &#233;  inicializada com  <TT>0</TT>.  Considere  a
+primeira senten&#231;a <TT>printf()</TT>:
+
+<P>
+<PRE>
+printf("%d\n", soma_y(z));
+</PRE>
+
+<P>
+Esta &#233; uma chamada para a fun&#231;&#227;o da biblioteca padr&#227;o <TT>printf()</TT>.
+Os par&#226;metros reais desta chamada s&#227;o o string <code>"%d\n"</code> e a
+express&#227;o <code>soma_y(z)</code>.  A &#250;ltima express&#227;o  &#233; a chamada  da fun&#231;&#227;o
+<TT>soma_y()</TT>.  O valor desta  express&#227;o &#233; o resultado  retornado por
+<TT>soma_y()</TT>.  Qual o resultado?   A fun&#231;&#227;o <TT>soma_y</TT>  &#233; chamada
+com o  par&#226;metro real <TT>z</TT>.   Como <TT>z =  0</TT>, este &#233;  o valor que
+ser&#225; passado  para a fun&#231;&#227;o <TT>soma_y</TT>;  o <TT>0</TT> &#233;  copiado para o
+par&#226;metro formal <TT>x</TT>  da fun&#231;&#227;o <TT>soma_y()</TT>.  Portanto, durante
+a  excu&#231;&#227;o da primeira  chamada a  fun&#231;&#227;o <TT>soma_y()</TT>, o  valor da
+express&#227;o <TT>x + y</TT> ser&#225; <TT>0 + 100</TT>, que &#233; 100.  Portanto, o valor
+da primeira chamada  <TT>soma_ y(z)</TT> &#233; <TT>100</TT>,  e este n&#250;mero ser&#225;
+impresso  com  o  primeiro  <TT>printf()</TT>  em  <TT>main()</TT>.   Agora
+considere a segunda sente&#231;a:
+
+<P>
+<PRE>
+printf("%d\n", soma_yy(z));
+</PRE>
+
+<P>
+Quando  a fun&#231;&#227;o <code>soma_yy(z)</code>  &#233; chamada,  o valor  de <TT>z</TT> (a
+vari&#225;vel local <TT>z</TT>) ainda &#233; <TT>0</TT>, portanto  novamente <TT>0</TT> &#233;
+copiado para o  par&#226;metro formal <TT>int x</TT>  da fun&#231;&#227;o <TT>soma_yy</TT>.
+Quando a  execu,a&#227;o de  <TT>soma_yy()</TT> come&#231;a,  ela primeiro  troca o
+valor da vari&#225;vel global <TT>y</TT> para <TT>300</TT> e ent&#227;o retorna o valor
+de <TT>x + y</TT>,  que neste caso  &#233; <TT>0  + 300</TT>.  Portanto,  o valor
+desta  chamada a  <TT>soma_yy(z)</TT>  &#233; <TT>300</TT>, e  este  n&#250;mero ser&#225;
+impresso  pelo segundo <TT>printf()</TT> em  <TT>main()</TT>.
+<BR>
+Por &#250;ltimo,
+considere a terceira sente&#231;a:
+
+<P>
+<PRE>
+printf("%d\n", soma_y(z));
+</PRE>
+
+<P>
+Quando a fun&#231;&#227;o <code>soma_y(z)</code> &#233; chamada,  o valor de <TT>z</TT> ainda &#233;
+<TT>0</TT>, portanto,  <TT>0</TT> &#233; copiada para o  par&#226;metro formal <TT>int
+x</TT> da fun&#231;&#227;o <TT>soma_y()</TT>.  Quando <TT>soma_ y()</TT> &#233; executada pela
+segunda vez, a  vari&#225;vel global <TT>y</TT> foi  modificada para <TT>300</TT>,
+portanto o valor de <TT>x + y</TT>  &#233; <TT>0 + 300</TT>.  Portanto, o valor da
+chamada <TT>soma_yy(z)</TT> &#233; <TT>300</TT>, e este n&#250;mero ser&#225; impresso pelo
+terceiro <TT>printf()</TT> em <TT>main()</TT>.
+
+<P>
+Portanto, a sa&#237;da da execu&#231;&#227;o deste programa ser&#225;
+<PRE>
+    100
+    300
+    300
+</PRE>
+
+<P>
+Neste exemplo, o escopo da vari&#225;vel global <TT>y</TT> &#233; o programa todo.
+
+<P>
+O escopo da  vari&#225;vel local <TT>z</TT>, definida dentro de  <TT>maio</TT> &#233; o
+corpo da  fun&#231;&#227;o <TT>main</TT>.  O  escopo do par&#226;metro formal  <TT>x</TT> da
+fun&#231;&#227;o <code>soma_y</code> &#233; o corpo de <code>soma_y</code>.  O escopo do par&#226;metro
+formal <TT>x</TT> da fun&#231;&#227;o <code>soma_yy</code> &#233; o corpo de <code>soma_yy</code>.
+
+<P>
+
+<H2><A NAME="SECTION000221000000000000000">
+22.1 Outro exemplo</A>
+</H2>
+
+<P>
+Aqui  apresentamos um  exemplo  de uma  fun&#231;&#227;o  mais complicada.   Esta
+fun&#231;&#227;o  calcula a  ``raiz  quadrada  inteira'' de  um  n&#250;mero (o  maior
+inteiro menor ou igual a raiz quadrada do n&#250;mero).
+
+<P>
+Este programa usa o algoritmo ``divide e calcula m&#233;dia'' (uma aplica&#231;&#227;o
+do m&#233;todo de Newton).  Ele executa o seguinte:
+
+<P>
+Dado <IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img69.png"
+ ALT="$x$">, achar <IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img70.png"
+ ALT="$\sqrt{x}$"> computando sucessivamente
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+a_{n} = \left\{
+  \begin{array}{cl}
+    1 & \mbox{se $n = 0$} \\
+    \frac{\frac{x}{a_{n-1}} + a_{n-1}}{2} & \mbox{caso contrário}
+  \end{array}
+\mbox{\ \ para todo $n\ \epsilon\ \cal N$}
+\right.
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="384" HEIGHT="59" BORDER="0"
+ SRC="notas_proc-img71.png"
+ ALT="\begin{displaymath}
+a_{n} = \left\{
+\begin{array}{cl}
+1 &amp; \mbox{se $n = 0$} \\...
+... \end{array}\mbox{\ \ para todo $n\ \epsilon\ \cal N$}
+\right.
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+Os valores de <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img72.png"
+ ALT="$a_{n}$"> convergem para <IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img70.png"
+ ALT="$\sqrt{x}$"> a medida que <IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img67.png"
+ ALT="$n$">
+cresce.
+
+<P>
+
+<P>
+Para achar a raiz quadrada inteira, este algoritmo &#233; repetido at&#233; que
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+a_{n}^{2} \leq x < (a_{n}+1)^{2}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="143" HEIGHT="31" BORDER="0"
+ SRC="notas_proc-img73.png"
+ ALT="\begin{displaymath}a_{n}^{2} \leq x &lt; (a_{n}+1)^{2}\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+Por exemplo, para achar a raiz quadrada inteira de <IMG
+ WIDTH="22" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img74.png"
+ ALT="$42$"> (usando divis&#227;o
+inteira que trunca a parte fracional do n&#250;mero)
+
+<P>
+
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img75.png"
+ ALT="$a_{0} = 1$">, <!-- MATH
+ $a_{1} = (42/1+1)/2  = 21$
+ -->
+<IMG
+ WIDTH="181" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img76.png"
+ ALT="$a_{1} = (42/1+1)/2 = 21$">, <!-- MATH
+ $a_{2} =  (42/21+21)/2 = 11$
+ -->
+<IMG
+ WIDTH="198" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img77.png"
+ ALT="$a_{2} = (42/21+21)/2 = 11$">,
+<!-- MATH
+ $a_{3} = (42/11+11)/2 = 7$
+ -->
+<IMG
+ WIDTH="190" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img78.png"
+ ALT="$a_{3} = (42/11+11)/2 = 7$">, <!-- MATH
+ $a_{4} = (42/7+7)/2 = 6$
+ -->
+<IMG
+ WIDTH="172" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img79.png"
+ ALT="$a_{4} = (42/7+7)/2 = 6$">.
+
+<P>
+Uma vez que <!-- MATH
+ $a_{4}^{2}  = 6^{2} = 36 \leq 42 <  (a_{4}+1)^{2} = 7^{2} =
+49$
+ -->
+<IMG
+ WIDTH="313" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="notas_proc-img80.png"
+ ALT="$a_{4}^{2} = 6^{2} = 36 \leq 42 &lt; (a_{4}+1)^{2} = 7^{2} =
+49$">, o processo termina e a resposta &#233; <IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="notas_proc-img81.png"
+ ALT="$6$">.
+
+<P>
+(N&#227;o  &#233; necess&#225;rio  voc&#234; entender  por que  este algoritmo  funciona -
+portanto n&#227;o se preocupe se n&#227;o conseguir entend&#234;-lo)
+
+<P>
+<BLOCKQUOTE><BLOCKQUOTE><PRE>int raizInteira(int);          /* prototipo */
+
+/**************************************************************
+ * function: raizInteira(x)
+ *  acao:        dado x, retorna a raiz quadrada inteira de x
+ *  in:          inteiro positivo x
+ *  out:         raiz quadrada inteira de x
+ *  suposicoes:  x &gt;= 0
+ *  algoritmo:   metodo de dividr e calcular media:  comecando com 
+ *               um palpite de 1, o proximo palpite e' calculado como
+ *               (x/palpite_ant + palpite_ant)/2.  Isso e' repetido
+ *               ate' que palpite^2 &lt;= x &lt; (palpite+1)^2
+ ***************************************************************/
+int raizInteira(int x)
+{
+    int palpite = 1;
+
+    /* Continue ate' que o  palpite esteja correto */
+    while (!(x &gt;= palpite*palpite  &amp;&amp;  x &lt; (palpite+1)*(palpite+1))) {
+        /* Calcula proximo palpite */
+        palpite = (x/palpite + palpite) / 2;
+    }
+    return palpite;
+}
+</PRE></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+Note  que usando  a lei  de DeMorgan,  podemos re-escrever  a express&#227;o
+teste do <TT>while</TT> em uma forma equivalente:
+
+<P>
+<PRE>
+     x &lt; palpite * palpite || x &gt;= (palpite + 1) * (palpite + 1)
+</PRE>
+
+<P>
+Deve estar claro  neste ponto a diferenca entre  a&#231;&#227;o e algoritmo.  Uma
+pessoa que  quer usar esta fun&#231;&#227;o  precisa saber somente a  a&#231;&#227;o, n&#227;o o
+algoritmo.  &#233; tamb&#233;m importante  especificar os dados que s&#227;o esperados
+pela fun&#231;&#227;o  e retornados por  ela para outras pessoas  poderem us&#225;-la.
+As suposi&#231;&#245;es devem  esclarecer as restri&#231;&#245;es da fun&#231;&#227;o  sobre quando a
+fun&#231;&#227;o  pode falhar  ou produzir  resultados errados.   Neste  caso, um
+n&#250;mero  negativo  produziria um  erro,  j&#225;  que  n&#250;meros negativos  n&#227;o
+possuem raiz quadrada.
+
+<P>
+N&#227;o  h&#225; necessidade  de  ir em  muitos  detalhes em  qualquer parte  da
+documenta&#231;&#227;o da  fun&#231;&#227;o.  Embora ela deva  conter informa&#231;&#227;o suficiente
+para  que  algu&#233;m  (que  n&#227;o  possa ver  o  c&#243;digo)  saber  utiliz&#225;-la.
+Detalhes sobre implementa&#231;&#227;o e detalhes menores sobre o algoritmo devem
+ser colocados como coment&#225;rios no pr&#243;prio c&#243;digo.
+
+<P>
+<HR>
+<A NAME="tex2html519"
+  HREF="notas_proc-node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html517"
+  HREF="notas_proc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html511"
+  HREF="notas_proc-node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html520"
+  HREF="notas_proc-node23.html">23 Ativação de função</A>
+<B>Up:</B> <A NAME="tex2html518"
+  HREF="notas_proc.html">Linguagem C - Notas</A>
+<B> Previous:</B> <A NAME="tex2html512"
+  HREF="notas_proc-node21.html">21 O pré-processador</A>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Armando Luiz Nicolini Delgado <BR>
+2007-08-09</I>
+</ADDRESS>
+</BODY>
+</HTML>

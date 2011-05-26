@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 11
+1&ordm;&nbsp;semestre 2003</TITLE>
+<META NAME="description" CONTENT="CI066 - Oficina de Programa&#231;&#227;o Notas de Aula # 11
+1&ordm;&nbsp;semestre 2003">
+<META NAME="keywords" CONTENT="teoria">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="teoria.css">
+
+</HEAD>
+
+<BODY  BACKGROUND = lightblue_01.jpg >
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">CI066 - Oficina de Programa&#231;&#227;o 
+<BR>
+Notas de Aula # 11
+<BR>
+1&ordm;&nbsp;semestre 2003</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Prof. Armando Luiz N. Delgado</STRONG></P>
+<P ALIGN="CENTER"><STRONG>30 de julho de 2003</STRONG></P>
+</DIV>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Exemplos 11</A>
+</H1>
+
+<P>
+Clique <A NAME="tex2html15"
+  HREF="../Scripts/">aqui</A>
+para ter acesso a todos os
+<I>scripts shell</I> usados como exemplos na disciplina.
+
+<P>
+
+<OL>
+<LI>Remova do arquivo  <B><FONT FACE="Helvetica, Arial, sans-serif">telefones.txt</FONT></B> a pessoa cujo sobrenome &#233;
+  passado como  argumento do  <I>script</I>.  Caso n&#227;o  exista pessoa
+  com  o   sobrenome  indicado,   o  <I>script</I>  se   encerra  com
+  <I>status</I> 1 (um), avisando antes ao usu&#225;rio.  Caso haja mais de
+  uma pessoa  com o  mesmo sobrenome, o  <I>script</I> deve  obter do
+  usu&#225;rio confirma&#231;&#227;o de remo&#231;&#227;o para cada pessoa encontrada.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html1"
+  HREF="../Scripts/11-1a"><I>Script</I> 1</A>
+</LI>
+<LI><A NAME="tex2html2"
+  HREF="../Scripts/11-1b"><I>Script</I> 2</A>
+</LI>
+<LI><A NAME="tex2html3"
+  HREF="../Scripts/11-1c"><I>Script</I> 3</A>
+</LI>
+<LI><A NAME="tex2html4"
+  HREF="../Scripts/respsim"><I>Script</I> respsim</A>
+</LI>
+<LI><A NAME="tex2html5"
+  HREF="../Scripts/Arquivos/telefones.txt">Arquivo
+        <B><FONT FACE="Helvetica, Arial, sans-serif">telefones.txt</FONT></B></A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Dado um conjunto de arquivos de imagens em diversos formatos
+  (e.g., JPEG, PCX, TIFF, etc.), converta-os para o formato GIF.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html6"
+  HREF="../Scripts/11-2"><I>Script</I></A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>O <I>script</I> deve tentar copiar um arquivo para um diret&#243;rio
+  e,  se falhar,  aguarda 5  segundos e  tenta de  novo, at&#233;  que tenha
+  sucesso.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html7"
+  HREF="../Scripts/11-3a"><I>Script</I> 1</A>
+</LI>
+<LI><A NAME="tex2html8"
+  HREF="../Scripts/11-3b"><I>Script</I> 2</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>Cadastramento, remo&#231;&#227;o e busca de pessoas em um arquivo de
+  telefones.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html9"
+  HREF="../Scripts/11-4"><I>Script</I></A>
+</LI>
+<LI><A NAME="tex2html10"
+  HREF="../Scripts/inserir"><I>Script</I> inserir</A>
+</LI>
+<LI><A NAME="tex2html11"
+  HREF="../Scripts/remover"><I>Script</I> remover</A>
+</LI>
+<LI><A NAME="tex2html12"
+  HREF="../Scripts/buscar"><I>Script</I> buscar</A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>O usu&#225;rio digita o comando:
+<PRE>
+   11-5 arq1 arq2
+</PRE>
+
+<P>
+Para cada linha digitada pelo usu&#225;rio, o <I>script</I> a processa da
+  seguinte forma:
+
+<P>
+Uma linha com pelo menos 1 (uma) letra &#233; acrescentada ao arquivo
+  <B><FONT FACE="Helvetica, Arial, sans-serif">arq1</FONT></B>; qualquer linha com pelo menos 1 (um) d&#237;gito e nenhuma
+  letra &#233; incorporada ao arquivo <B><FONT FACE="Helvetica, Arial, sans-serif">arq2</FONT></B>. Todas as outras linhas
+  s&#227;o desprezadas.
+
+<P>
+O usu&#225;rio termina o comando digitando <I>CTRL-D</I>.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html13"
+  HREF="../Scripts/11-5"><I>Script</I></A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+<LI>O  comando deve tomar  1 ou mais  arquivos como argumento.  Se um
+  arquivo  existe, ele  altera  sua  data de  modifica&#231;&#227;o  para a  data
+  corrente.  Se  o  arquivo  n&#227;o  existe,  um  novo  arquivo  deve  ser
+  criado.   Este  <I>script</I>   &#233;   similar  &#224;   a&#231;&#227;o  do   comando
+  <B><I>touch(1)</I></B>
+
+<P>
+Se a op&#231;&#227;o -c &#233; fornecida na linha de comando, ent&#227;o o
+  arquivo n&#227;o &#233; criado caso ele n&#227;o exista.
+
+<P>
+<FONT FACE="Helvetica, Arial, sans-serif">
+    
+<UL>
+<LI><A NAME="tex2html14"
+  HREF="../Scripts/11-6"><I>Script</I></A>
+</LI>
+</UL></FONT>
+
+<P>
+</LI>
+</OL>
+
+<P>
+Clique <A NAME="tex2html16"
+  HREF="../Scripts/">aqui</A>
+para ter acesso a todos os
+<I>scripts shell</I> usados como exemplos na disciplina.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Armando Luiz Nicolini Delgado
+2003-08-01
+</ADDRESS>
+</BODY>
+</HTML>

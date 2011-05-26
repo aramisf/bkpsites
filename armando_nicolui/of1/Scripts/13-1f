@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed -e '5,10s/conspiraram/concordaram/g' $1
+
